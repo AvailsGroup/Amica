@@ -2,8 +2,11 @@
 <html lang="ja">
 
 <%= javascript_pack_tag 'home/index' %>
-<link rel="stylesheet" type="text/css" href="home.scss">
+<link rel="stylesheet" type="text/css" href="app/assets/stylesheets/home/top.scss">
 <body>
+<header>
+<a href="about.html.erb" class="aboutLink" ><span>アプリについて</span></a>
+</header>
 
 <div class="top">
   <div class="title">
@@ -17,7 +20,8 @@
   </div>
 
   <div class="buttons">
-
+    <a href="/users/sign_up" class="btn btn--orange"><span>新規登録</span></a>
+    <a href="/users/sign_in" class="btn btn--orange"><span>ログイン</span></a>
   </div>
 </div>
 
