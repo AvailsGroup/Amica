@@ -106,3 +106,20 @@ a.btn--orange:hover {
   color: #fff;
   background: #f56500;
 }
+
+.header-right{
+  width: 100%;
+  height: auto;
+  border-bottom: solid 2px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+.aboutLink{
+  font-size: 1.6rem;
+  top: 0px;
+  color: #FFF
+}
