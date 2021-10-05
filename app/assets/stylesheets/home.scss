@@ -1,0 +1,38 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+html {
+  display: table;
+  width: 100%;
+  height: 100%;
+  background-image: image-url("background.jpg");
+  background-size: cover;
+  font-family: 'Kiwi Maru', serif;
+}
+
+body {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 50px;
+  background: #e0e0e0;
+  box-shadow:  20px 20px 60px #bebebe,
+  -20px -20px 60px #ffffff;
+}
+
+.title-image{
+  display: none;
+}
+
+.title-text{
+  opacity: 0;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
