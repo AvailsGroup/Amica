@@ -107,7 +107,8 @@ a.btn--orange:hover {
   background: #f56500;
 }
 
-.header-right{
+.header{
+  background-color: #037394;
   width: 100%;
   height: auto;
   border-bottom: solid 2px;
@@ -118,8 +119,15 @@ a.btn--orange:hover {
   text-align: right;
 }
 
-.aboutLink{
+.Link{
+  padding-right: 15px;
+  text-decoration: none;
   font-size: 1.6rem;
   top: 0px;
   color: #FFF
+}
+
+.Link:hover{
+ background-color: #2083c8;
+  color: #FFFFFF;
 }
