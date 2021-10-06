@@ -1,20 +1,9 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-html {
-  display: table;
-  width: 100%;
-  height: 100%;
-  background-image: image-url("background.jpg");
-  background-size: cover;
-  font-family: 'Kiwi Maru', serif;
-}
 
-body {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-}
+
+
 
 img {
   max-width: 100%;
@@ -44,15 +33,7 @@ img {
   box-sizing: inherit;
 }
 
-html {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  font-size: 62.5%;
-}
 
-body {
-  padding: 30px;
-}
 
 .buttons{
   opacity: 0;
@@ -65,11 +46,7 @@ body {
   box-sizing: inherit;
 }
 
-html {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  font-size: 62.5%;
-}
+
 
 .btn,
 a.btn,

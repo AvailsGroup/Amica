@@ -1,2 +1,24 @@
-<h1>Home#contact</h1>
-<p>Find me in app/views/home/contact.html.erb</p>
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/html">
+<%= stylesheet_link_tag 'about', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<body>
+
+<%= flash.now[:notice] %>
+
+<header>
+
+</header>
+
+<section>
+  <span class="big">お問い合わせ</span>
+  <form method="POST" action="avails2022@gmail.com" enctype="text/plain">
+    Email　　　　<input type="email" size="30"><br>
+    問い合わせ内容<input type="text-box" size="100" rows="5"><br>
+
+    <input type="submit" value="送信"><input type="reset" value="クリア">
+  </form>
+</section>
+
+</body>
+</html>
