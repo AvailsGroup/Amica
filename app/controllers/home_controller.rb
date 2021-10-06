@@ -8,5 +8,7 @@ class HomeController < ApplicationController
   end
 
   def contact
+    render layout: 'home'
+    flash.now[:notice] = 'test'
   end
 end
