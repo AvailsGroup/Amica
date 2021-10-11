@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "/about" => 'home#about'
   get "/contact" => 'home#contact'
 
+
   get 'pages/index'
   get 'pages/show'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'
