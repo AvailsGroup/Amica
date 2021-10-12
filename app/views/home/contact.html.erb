@@ -14,13 +14,14 @@
 <section class="ask">
   <span class="big">お問い合わせ</span>
   <div class="medium">
-    <form method="POST" action="avails2022@gmail.com" enctype="text/plain">
+
+    <%= form_tag("/test/mail") do %>
       名前<input type="name" name="name" size="30%" >
-      Email<input type="email" name="email_add" size="30%" ><br>
-      問い合わせ内容<br><textarea name="inquiry" placeholder="こちらにお問い合わせ内容を入力してください。"></textarea><br>
+      Email<input type="email" name="email" size="30%" ><br>
+      問い合わせ内容<br><textarea name="content" placeholder="こちらにお問い合わせ内容を入力してください。"></textarea><br>
 
       <input type="submit" value="送信"><input type="reset" value="クリア">
-    </form>
+      <% end %>
   </div>
 </section>
 
