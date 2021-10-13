@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  get 'test/mail'
   devise_for :users
   get "/"=>'home#top'
   get "/about" => 'home#about'
-  get "/contact" => 'home#contact'
-  post '/test/mail', to: 'test#mail'
+  get "/contact" => 'maller#new'
+  post 'maller/create', to: 'maller#create'
+
 
   get 'pages/index'
   get 'pages/show'
