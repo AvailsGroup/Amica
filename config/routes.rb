@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  resources :maller
   get "/"=>'home#top'
   get "/about" => 'home#about'
   get "/contact" => 'maller#new'
