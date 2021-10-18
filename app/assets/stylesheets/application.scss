@@ -13,3 +13,23 @@
  *= require_self
  */
 
+html{
+  font-family: 'Kiwi Maru', serif;
+}
+
+header{
+  background-color: #037394;
+  width: 100%;
+  height: auto;
+  border-bottom: solid 2px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: right;
+
+}
+
+a{
+  text-decoration:none;
+}
