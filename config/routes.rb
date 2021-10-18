@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
+  resources :maller
   get "/"=>'home#top'
   get "/about" => 'home#about'
-  get "/contact" => 'home#contact'
+  get "/contact" => 'maller#new'
+  post 'maller/create', to: 'maller#create'
+
 
   get 'pages/index'
   get 'pages/show'

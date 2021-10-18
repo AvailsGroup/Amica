@@ -5,8 +5,9 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <title>Amica</title>
+  <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-  <%= stylesheet_link_tag 'top', media: 'all', 'data-turbolinks-track': 'reload' %>
+
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,11 +17,14 @@
 
 <body>
 <header>
+
   <div class="header buttons">
+    <a href="/" class="Link"><span>TOP</span></a>
     <a href="/about" class="Link"><span>アプリについて</span></a>
     <a href="/contact" class="Link"><span>contact</span></a>
   </div>
 </header>
+<a href="/"><%= image_tag "header_icon.png", alt: "header_icon", class: "header_icon" %></a>
 <%= yield %>
 </body>
 

@@ -1,0 +1,69 @@
+html {
+  background-image: image-url("background.jpg");
+  background-size: cover;
+  font-family: 'Kiwi Maru', serif;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 62.5%;
+  display: table;
+  width: 100%;
+  height: 100%;
+
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+body {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 30px;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+header{
+  background-color: #037394;
+  width: 100%;
+  height: auto;
+  border-bottom: solid 2px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+.header_icon{
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  position: fixed ;
+  top: 0;
+  left: 0;
+  max-width: 8%;
+  max-height: 8%;
+  border: solid #212529 2px;
+}
+
+.Link{
+  padding-right: 15px;
+  text-decoration: none;
+  font-size: 1.6rem;
+  top: 0;
+  color: #FFF
+}
+
+.Link:hover{
+  background-color: #2083c8;
+  color: #FFFFFF;
+}
