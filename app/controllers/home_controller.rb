@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def top
-    render layout: nil
+    render layout: 'home'
   end
 
   def about
