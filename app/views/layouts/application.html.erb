@@ -17,15 +17,27 @@
       <nav>
         <% if user_signed_in? %>
 
-          <strong><%= link_to current_user.userid, pages_show_path %></strong>
-          <%= link_to 'プロフィール変更', edit_user_registration_path %>
-          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+          <div class="container">
+          <div class="icons">
+            <%= image_tag("default_icon.png",class:"default_icon") %>
+            <i class="fab fa-fort-awesome"></i>
+            <i class="fab fa-searchengin"></i>
+            <i class="fas fa-comments"></i>
+            <i class="fas fa-users"></i>
+            <i class="fas fa-clock"></i>
+            <i class="fas fa-address-card"></i>
+          </div>
 
-
+          <div class="links">
+            <strong><%= link_to current_user.userid, pages_show_path,class: "link"%></strong>
+            <%= link_to 'プロフィール変更', edit_user_registration_path,class: "link" %>
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: "link" %>
         <% else %>
-          <%= link_to 'サインアップ', new_user_registration_path %>
-          <%= link_to 'ログイン', new_user_session_path %>
+          <%= link_to 'サインアップ', new_user_registration_path,class: "link" %>
+          <%= link_to 'ログイン', new_user_session_path,class: "link" %>
         <% end %>
+          </div>
+        </div>
       </nav>
     </header>
     <!-- ここに追加 -->
