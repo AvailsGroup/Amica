@@ -4,6 +4,7 @@ class RelationshipsController < ApplicationController
     redirect_to profile_path(params[:user_id]), notice: "Requested successfully!"
   end
 
+
   def destroy
     other_user = User.find(params[:user_id])
     current_user.unfollow(other_user)
