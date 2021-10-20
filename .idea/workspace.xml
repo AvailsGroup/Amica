@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7c6a9674-83d3-47d1-8f91-757424506375" name="変更" comment="ヘッダーの変更" />
+    <list id="39e4cd01-5440-4421-b574-56e0c0644627" name="n1200231さんが変更" comment="">
+      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.scss" afterDir="false" />
+    </list>
+    <list id="92db9b8d-2e7a-4cc8-bd5e-440e3da6fb90" name="n1200245さんが変更" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="SCSS File" />
+        <option value="Ruby File" />
+        <option value="HTML File" />
+        <option value="ERB File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="forms" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1634518569" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="forms" />
+                    <option name="lastUsedInstant" value="1634516797" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="Git Scope" pattern="" />
+  </component>
+  <component name="ProjectId" id="1z44FgfeOtkZK9fuvLHgWkWiyoe" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TODO_SCOPE" value="すべての場所" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/views/pages" />
+    <property name="list.type.of.created.stylesheet" value="SCSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\views\pages" />
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\views" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\views" />
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\views\Amica" />
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\assets\images" />
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\assets\default_icon" />
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\controllers" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="rails g model inquiry name:string message:string" />
+      <command value="gem 'font-awesome-sass'" />
+      <command value="bundle install --without production" />
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="名前未設定" type="RailsRunConfigurationType" factoryName="Rails" nameIsGenerated="true">
+      <module name="Avails-Amica" />
+      <predefined_log_file enabled="true" id="RUBY_RAILS_SERVER" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" IGNORE_RCOVRT="true" ENABLE_BRANCH_COVERAGE="true" ENABLE_FORKED_COVERAGE="true" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SCRIPT_ARGS" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="PORT" VALUE="3000" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="IP" VALUE="127.0.0.1" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="DUMMY_APP" VALUE="test/dummy" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RAILS_SERVER_TYPE" VALUE="default" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ENVIRONMENT_TYPE" VALUE="development" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="LAUNCH_JS" VALUE="false" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="アプリケーションレベル" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="true" RAKE_SPRING_PRE_LOADER_OPTION="true" RAILS_SPRING_PRE_LOADER_OPTION="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="デフォルトタスク">
+      <changelist id="7c6a9674-83d3-47d1-8f91-757424506375" name="変更" comment="" />
+      <created>1633393935820</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1633393935820</updated>
+      <workItem from="1633393940679" duration="8584000" />
+      <workItem from="1633405084229" duration="1159000" />
+      <workItem from="1633407730836" duration="5348000" />
+      <workItem from="1633421361008" duration="127000" />
+      <workItem from="1633421802618" duration="892000" />
+      <workItem from="1633478433038" duration="9215000" />
+      <workItem from="1633488449498" duration="485000" />
+      <workItem from="1633494297243" duration="33000" />
+      <workItem from="1633564598187" duration="3859000" />
+      <workItem from="1633569911966" duration="5244000" />
+      <workItem from="1633595869210" duration="596000" />
+      <workItem from="1633910277406" duration="10049000" />
+      <workItem from="1633927473912" duration="3588000" />
+      <workItem from="1633997347187" duration="14712000" />
+      <workItem from="1634083875130" duration="8515000" />
+      <workItem from="1634515301578" duration="9535000" />
+      <workItem from="1634602307100" duration="1039000" />
+      <workItem from="1634603364910" duration="111000" />
+      <workItem from="1634603493937" duration="64000" />
+      <workItem from="1634603574596" duration="274000" />
+      <workItem from="1634603887084" duration="6915000" />
+      <workItem from="1634688660773" duration="2980000" />
+    </task>
+    <task id="LOCAL-00001" summary="topページの変更">
+      <created>1633399295596</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1633399295596</updated>
+    </task>
+    <task id="LOCAL-00002" summary="n1201022さんが変更">
+      <created>1633402552664</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1633402552664</updated>
+    </task>
+    <task id="LOCAL-00003" summary="topページの変更">
+      <created>1633402563687</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1633402563687</updated>
+    </task>
+    <task id="LOCAL-00004" summary="aboutページの変更">
+      <created>1633479429831</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1633479429832</updated>
+    </task>
+    <task id="LOCAL-00005" summary="aboutページの変更">
+      <created>1633488857480</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1633488857481</updated>
+    </task>
+    <task id="LOCAL-00006" summary="n1200231さんが変更">
+      <created>1633488917063</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1633488917063</updated>
+    </task>
+    <task id="LOCAL-00007" summary="contactページの変更">
+      <created>1633912093143</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1633912093144</updated>
+    </task>
+    <task id="LOCAL-00008" summary="contactページの変更">
+      <created>1633998921583</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1633998921583</updated>
+    </task>
+    <task id="LOCAL-00009" summary="mailを送れるようにの変更">
+      <created>1634087665722</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1634087665723</updated>
+    </task>
+    <task id="LOCAL-00010" summary="n1201022さんが変更">
+      <created>1634087710504</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1634087710504</updated>
+    </task>
+    <task id="LOCAL-00011" summary="mailを送れるようにの変更">
+      <created>1634088381602</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1634088381602</updated>
+    </task>
+    <task id="LOCAL-00012" summary="mailを送れるようにの変更">
+      <created>1634089389321</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1634089389321</updated>
+    </task>
+    <task id="LOCAL-00013" summary="mailを送れるようにの変更">
+      <created>1634089966342</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1634089966342</updated>
+    </task>
+    <task id="LOCAL-00014" summary="ヘッダーの変更">
+      <created>1634516450933</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1634516450933</updated>
+    </task>
+    <task id="LOCAL-00015" summary="ヘッダーの変更">
+      <created>1634518523249</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1634518523249</updated>
+    </task>
+    <task id="LOCAL-00016" summary="ヘッダーの変更">
+      <created>1634527068038</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1634527068038</updated>
+    </task>
+    <task id="LOCAL-00017" summary="n1200231さんが変更">
+      <created>1634527091911</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1634527091911</updated>
+    </task>
+    <task id="LOCAL-00018" summary="ヘッダーの変更">
+      <created>1634690630025</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1634690630025</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="topページの変更" />
+    <MESSAGE value="aboutページの変更" />
+    <MESSAGE value="contactページの変更" />
+    <MESSAGE value="n1201022さんが変更" />
+    <MESSAGE value="mailを送れるようにの変更" />
+    <MESSAGE value="n1200231さんが変更" />
+    <MESSAGE value="ヘッダーの変更" />
+    <option name="LAST_COMMIT_MESSAGE" value="ヘッダーの変更" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Amica@.rcov" NAME="名前未設定 のカバレッジ結果" MODIFIED="1634688721545" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Avails-Amica" />
+  </component>
+</project>
