@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b0a9fb2-a15d-40fa-817d-7cddab655f85" name="デフォルト変更リスト" comment="仮実装">
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Avails-Amica.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Avails-Amica.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_10_18_9_26______.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021_10_18_9_26______.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_10_18_9_56_____n1200231_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021_10_18_9_56_____n1200231_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/uploaders/image_uploader.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/uploaders/image_uploader.rb" afterDir="false" />
     </list>
     <list id="a207d16f-275f-4683-a61e-0adf9398a3df" name="n1200245さんが変更" comment="n1200245さんが変更" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,12 +30,40 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="uploder" />
+                    <option name="lastUsedInstant" value="1634696651" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1634696650" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
     <option name="FILTER_INFO" value="true" />
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="Git Scope" pattern="" />
   </component>
   <component name="ProjectId" id="1z1K6VtOhHKFvZ8Ve9BeM7xTeR7" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -43,6 +75,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="list.type.of.created.stylesheet" value="Sass" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -170,6 +203,8 @@
       <workItem from="1634519007942" duration="1845000" />
       <workItem from="1634602505746" duration="8482000" />
       <workItem from="1634689505120" duration="3224000" />
+      <workItem from="1634696167058" duration="140000" />
+      <workItem from="1634696329095" duration="699000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1633393338499</created>
@@ -326,5 +361,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Avails_Amica@Development__Avails_Amica.rcov" NAME="Development: Avails-Amica のカバレッジ結果" MODIFIED="1634690280129" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Avails-Amica" />
+    <SUITE FILE_PATH="coverage/Amica@Development__Avails_Amica.rcov" NAME="Development: Avails-Amica のカバレッジ結果" MODIFIED="1634696372959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Avails-Amica" />
   </component>
 </project>
