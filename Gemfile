@@ -70,3 +70,8 @@ gem 'devise-i18n-views'
 gem 'omniauth'
 
 gem 'cancancan'
+
+gem 'carrierwave'
+
+gem 'mini_magick'
+

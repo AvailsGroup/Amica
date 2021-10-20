@@ -41,7 +41,7 @@ header {
 }
 
 .icon{
-  width: 50px;
+  margin-left: 75px;
 }
 
 .link{
@@ -57,8 +57,11 @@ header {
 
 .default_icon{
   background-color: #F7F7F7;
-  width: 50px;
+  width: 55px;
   border-radius: 50%;
   border:solid 1px black;
+  position: fixed;
+  left: 8px;
+  top: 8px;
 }
 

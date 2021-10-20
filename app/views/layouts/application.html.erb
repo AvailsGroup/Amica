@@ -18,15 +18,28 @@
         <% if user_signed_in? %>
 
           <div class="container">
-          <div class="icons">
-            <%= image_tag("default_icon.png",class:"default_icon") %>
-            <i class="fab fa-fort-awesome"></i>
-            <i class="fab fa-searchengin"></i>
-            <i class="fas fa-comments"></i>
-            <i class="fas fa-users"></i>
-            <i class="fas fa-clock"></i>
-            <i class="fas fa-address-card"></i>
+            <div class="icon">
+              <%= image_tag("default_icon.png",class:"default_icon") %>
+            <%= link_to  pages_path,class: "icons" do %>
+              <i class="fab fa-fort-awesome"></i>
+            <% end %>
+            <%= link_to  searches_path,class: "icons" do %>
+              <i class="fab fa-searchengin"></i>
+            <% end %>
+            <%= link_to  chats_path,class: "icons" do %>
+              <i class="fas fa-comments"></i>
+            <% end %>
+            <%= link_to  communities_path,class: "icons" do %>
+              <i class="fas fa-users"></i>
+            <% end %>
+            <%= link_to  timelines_path,class: "icons" do %>
+              <i class="fas fa-clock"></i>
+            <% end %>
+            <%= link_to  mypages_path,class: "icons" do %>
+              <i class="fas fa-address-card"></i>
+            <% end %>
           </div>
+
 
           <div class="links">
             <strong><%= link_to current_user.userid, pages_show_path,class: "link"%></strong>
@@ -41,6 +54,7 @@
       </nav>
     </header>
     <!-- ここに追加 -->
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>

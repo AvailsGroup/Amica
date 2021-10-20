@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
+
+
   devise_for :users
+
+
   resources :maller
+  resources :pages
+  resources :homes
+  resources :communities
+  resources :searches
+  resources :timelines
+  resources :chats
+  resources :mypages
+
   get "/"=>'home#top'
   get "/about" => 'home#about'
   get "/contact" => 'maller#new'
