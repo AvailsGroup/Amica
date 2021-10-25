@@ -1,3 +1,55 @@
 // Place all the styles related to the Pages controller here.
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+body {
+  font-family:'Noto Sans JP',sans-serif;
+  background-color:#f6f5f4;
+}
+
+.side {
+  background-color:#ff838b;
+  width:450px;
+  height:800px;
+  text-align:center;
+}
+
+.content {
+  background-color:#b3d874;
+  width:1050px;
+  height:800px;
+  text-align:center;
+  margin-left:10px;/*サイドバーとメインコンテンツの間に隙間                    をあけた*/
+}
+
+article {
+  display:flex;/*サイドバーとメインコンテンツを横並びにする                指定をした*/
+}
+
+.search_container{
+  box-sizing: border-box;
+  position: relative;
+  border: 1px solid #999;
+  padding: 3px 10px;
+  border-radius: 20px;
+  height: 2.3em;
+  width: auto;
+}
+.search_container input[type="text"]{
+  border: none;
+  height: 2.0em;
+}
+.search_container input[type="text"]:focus {
+  outline: 0;
+}
+.search_container input[type="submit"]{
+  cursor: pointer;
+  font-family: FontAwesome;
+  border: none;
+  border-radius: 20%;
+  background: #3879D9;
+  color: #fff;
+  outline : none;
+  width: 2.0em;
+  height: 2.0em;
+}
