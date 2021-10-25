@@ -1,0 +1,13 @@
+<%= stylesheet_link_tag 'communities', media: 'all', 'data-turbolinks-track': 'reload' %>
+<h2>コミュニティ新規作成</h2>
+
+<div id="inputs">
+  <%= form_for(@community, url: communities_path) do |f| %>
+
+      <%= f.text_field :name, autocomplete: "name", class: "input" ,:placeholder=>"コミュニティ名"%>
+      <%= f.text_field :name, autocomplete: "content", class: "input" ,:placeholder=>"概要"%>
+  </div>
+    <div class="button01">
+      <%= f.submit "新規作成", class:"submit_button"%>
+    </div>
+  <% end %>
