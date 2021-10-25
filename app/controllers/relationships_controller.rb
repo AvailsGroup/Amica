@@ -1,7 +1,8 @@
 class RelationshipsController < ApplicationController
-  def create
-    Relationship.create(follower_id: current_user.id, followed_id: params[:user_id])
-    redirect_to profile_path(params[:user_id]), notice: "Requested successfully!"
+  def create(user)
+    Relationship.create(follower_id: current_user.id, followed_id: params[user.id])
+    logger.debug(params[user.id])
+    redirect_to profile_path(params[user.id]), notice: "Requested successfully!"
   end
 
 
@@ -10,4 +11,5 @@ class RelationshipsController < ApplicationController
     current_user.unfollow(other_user)
     redirect_to profile_path(params[:user_id]), notice: "Canceld request"
   end
+
 end
