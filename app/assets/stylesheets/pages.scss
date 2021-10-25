@@ -4,18 +4,18 @@
 
 body {
   font-family:'Noto Sans JP',sans-serif;
-  background-color:#f6f5f4;
+  background-color:#CCFFFF;
 }
 
 .side {
-  background-color:#ff838b;
+  background-color:#ffffff;
   width:450px;
   height:800px;
   text-align:center;
 }
 
 .content {
-  background-color:#b3d874;
+  background-color:#ffffff;
   width:1050px;
   height:800px;
   text-align:center;
@@ -33,7 +33,9 @@ article {
   padding: 3px 10px;
   border-radius: 20px;
   height: 2.3em;
-  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20em;
 }
 .search_container input[type="text"]{
   border: none;
@@ -47,9 +49,16 @@ article {
   font-family: FontAwesome;
   border: none;
   border-radius: 20%;
-  background: #3879D9;
-  color: #fff;
+  background: #FFFFFF;
+  color: #777777;
   outline : none;
   width: 2.0em;
   height: 2.0em;
+}
+
+img.example1 {
+  background-color: #000000;
+  border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+  width:  50px;       /* ※縦横を同値に */
+  height: 50px;       /* ※縦横を同値に */
 }
