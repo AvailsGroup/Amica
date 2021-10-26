@@ -11,7 +11,6 @@ body {
   background-color:#ffffff;
   width:450px;
   height:800px;
-  text-align:center;
 }
 
 .content {
@@ -58,7 +57,17 @@ article {
 
 img.example1 {
   background-color: #000000;
+  margin-left: 25px;
   border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
-  width:  50px;       /* ※縦横を同値に */
-  height: 50px;       /* ※縦横を同値に */
+  width:  55px;       /* ※縦横を同値に */
+  height: 55px;       /* ※縦横を同値に */
+}
+
+.profile img {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.profile span {
+  font-size: 20px;
 }
