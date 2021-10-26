@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   get "/contact" => 'maller#new'
   post 'maller/create', to: 'maller#create'
 
-
   get 'pages/index'
   get 'pages/show'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'
