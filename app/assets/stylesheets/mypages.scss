@@ -1,7 +1,21 @@
 // Place all the styles related to the mypages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-
+.header{
+  font-size:20px;
+}
+body{
+  font-size:30px;
+}
 .right{
-  text-align: right;
+  position: relative;
+  /* 値は調整してください */
+  /* 値は調整してください */
+  top: 0px;
+  left: 150px;
+}
+.myicon{
+  width: 150px;
+  height: 150px;
+
 }

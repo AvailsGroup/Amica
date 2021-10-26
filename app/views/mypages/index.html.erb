@@ -1,13 +1,20 @@
+<%= stylesheet_link_tag "mypages"%>
 
-<h1>マイページ</h1>
-<p>icon
-  <%= current_user.nickname %>
-  <%= current_user.userid%>
+<div class="header">
+  マイページ
+</div>
+<body>
 
-  <%= form_for(@users, url: mypages_path) do |f|%>
-    <%= f.label "自己紹介" %>
-    <%= f.text_area :message %>
-    <%= f.label "タグ・趣味" %>
-    <%= f.text_area :message %>
-  <% end %>
+<p>
+  <%= image_tag 'background2.jpg',class:'myicon' %>
+<div class="right">
+  <%= current_user.nickname %><br>
+  <%= current_user.userid %>
+</div>
+学生、クラス、学籍番号<br>
+自己紹介<br>
+<a href="/profile">更新</a><br>
+取得資格<br>
+タグ、趣味<br>
 </p>
+</body>
