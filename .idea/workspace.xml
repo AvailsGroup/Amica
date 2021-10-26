@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b0a9fb2-a15d-40fa-817d-7cddab655f85" name="デフォルト変更リスト" comment="仮実装">
-      <change beforePath="$PROJECT_DIR$/.idea/Avails-Amica.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Avails-Amica.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_10_18_9_26______.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021_10_18_9_26______.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_10_18_9_56_____n1200231_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021_10_18_9_56_____n1200231_.xml" afterDir="false" />
+    <list default="true" id="1b0a9fb2-a15d-40fa-817d-7cddab655f85" name="デフォルト変更リスト" comment="デフォルト画像実装機能変更">
+      <change afterPath="$PROJECT_DIR$/app/assets/user_images/default_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/mypages/create.html.erb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/mypages/new.html.erb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/mypages/show.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_10_18_9_56_____n1200231_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_10_18_9_56_の_チェックアウト_前の未コミットの変更_[n1200231さんが変更]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/mypages_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/mypages_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/users/passwords_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/users/passwords_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/users/registrations_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/users/registrations_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/ability.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/ability.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/uploaders/image_uploader.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/uploaders/image_uploader.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/mypages/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/mypages/index.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/bundle" beforeDir="false" afterPath="$PROJECT_DIR$/bin/bundle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/setup" beforeDir="false" afterPath="$PROJECT_DIR$/bin/setup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
     </list>
     <list id="a207d16f-275f-4683-a61e-0adf9398a3df" name="n1200245さんが変更" comment="n1200245さんが変更" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,6 +93,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/assets/user_images" />
     <property name="list.type.of.created.stylesheet" value="Sass" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -85,16 +103,25 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\assets\user_images" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\assets\user_images" />
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\assets" />
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\assets\config" />
       <recent name="C:\Users\n1201022.STCN2\RubymineProjects\Avails-Amica\app\assets\stylesheets" />
       <recent name="C:\Users\n1201022.STCN2\RubymineProjects\Avails-Amica\app\assets\stylesheets\home" />
-      <recent name="C:\Users\n1201022.STCN2\RubymineProjects\Avails-Amica\app\assets\stylesheets\devise" />
     </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="yarn add jquery bootstrap popper.js" />
       <command value="yarn add @fortawesome/fontawesome-free" />
+      <command value="bundle install " />
+      <command value="bundle install --with-opt-dir" />
+      <command value="bundle install --without production" />
+      <command value=" bundle install --without production" />
     </option>
   </component>
   <component name="RunManager" selected="Rails.Development: Avails-Amica">
@@ -140,6 +167,26 @@
       <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="LAUNCH_JS" VALUE="false" />
       <method v="2" />
     </configuration>
+    <configuration name="db:migrate" type="RakeRunConfigurationType" factoryName="Rake" temporary="true">
+      <module name="Avails-Amica" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" IGNORE_RCOVRT="true" ENABLE_BRANCH_COVERAGE="true" ENABLE_FORKED_COVERAGE="true" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="db:migrate" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TESTOPTS" VALUE="" />
+      <method v="2" />
+    </configuration>
     <configuration name="spec: Avails-Amica" type="RakeRunConfigurationType" factoryName="Rake">
       <module name="Avails-Amica" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
@@ -183,6 +230,11 @@
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TESTOPTS" VALUE="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Rake.db:migrate" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="アプリケーションレベル" UseSingleDictionary="true" transferred="true" />
   <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="true" RAKE_SPRING_PRE_LOADER_OPTION="true" RAILS_SPRING_PRE_LOADER_OPTION="true" />
@@ -204,7 +256,9 @@
       <workItem from="1634602505746" duration="8482000" />
       <workItem from="1634689505120" duration="3224000" />
       <workItem from="1634696167058" duration="140000" />
-      <workItem from="1634696329095" duration="699000" />
+      <workItem from="1634696329095" duration="2023000" />
+      <workItem from="1635120168333" duration="10008000" />
+      <workItem from="1635206875810" duration="8992000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1633393338499</created>
@@ -325,7 +379,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634692847596</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="デフォルト画像実装機能変更">
+      <created>1634697120072</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1634697120072</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,10 +418,12 @@
     <MESSAGE value="権限の追加" />
     <MESSAGE value="フォロー機能を仮実装&#10;https://qiita.com/yamaday0u/items/c4793b2b16ead7b2db76" />
     <MESSAGE value="仮実装" />
-    <option name="LAST_COMMIT_MESSAGE" value="仮実装" />
+    <MESSAGE value="デフォルト画像実装機能変更" />
+    <option name="LAST_COMMIT_MESSAGE" value="デフォルト画像実装機能変更" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Avails_Amica@Development__Avails_Amica.rcov" NAME="Development: Avails-Amica のカバレッジ結果" MODIFIED="1634690280129" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Avails-Amica" />
-    <SUITE FILE_PATH="coverage/Amica@Development__Avails_Amica.rcov" NAME="Development: Avails-Amica のカバレッジ結果" MODIFIED="1634696372959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Avails-Amica" />
+    <SUITE FILE_PATH="coverage/Amica@db_migrate.rcov" NAME="db:migrate のカバレッジ結果" MODIFIED="1635215606664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Avails-Amica" />
+    <SUITE FILE_PATH="coverage/Amica@Development__Avails_Amica.rcov" NAME="Development: Avails-Amica のカバレッジ結果" MODIFIED="1635215613461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Avails-Amica" />
   </component>
 </project>

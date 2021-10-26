@@ -1,2 +1,7 @@
 <h1>Mypages#index</h1>
-<p>Find me in app/views/mypages/index.html.erb</p>
+
+<%= form_tag(mypages_path, {multipart: true}) do %>
+  <p>画像</p>
+  <input name="image" type="file">
+  <input type="submit" value="保存">
+<% end %>

@@ -1,0 +1,5 @@
+<% if @user.image? %>
+  <%= image_tag @user.image.url %>
+<% else %>
+  <%= image_tag "default_icon.png" %>
+<% end %>
