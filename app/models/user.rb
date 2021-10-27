@@ -6,6 +6,6 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable,
          :trackable, password_length: 8...128
 
-  mount_uploader :image, ImageUploader
+
 
 end

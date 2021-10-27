@@ -1,46 +1,34 @@
 class MypagesController < ApplicationController
   def index
-    @user = User.new
-    ImageUploader
-  end
-
-  def create
-    @user = User.find_by(id: params[:id])
-
-    if params[:image]
-      @user.image = "#{@user.id}.jpg"
-      image = params[:image]
-      File.binwrite("/app/assets/user_images/#{@user.image}", image.read)
-      flash[:success] = "画像を登録しました。"
-      render 'mypages/index'
-    end
-
+    @user = current_user
   end
 
   def update
-    @user = User.find_by(id: params[:id])
-    @user.id = params[:id]
+    @user = current_user
 
     if params[:image]
-      @user.image = "#{@user.id}.jpg"
+      #@user.image = "#{@user.id}.jpg"
+      @user.update(image:"#{@user.id}.jpg")
       image = params[:image]
-      File.binwrite("/user_images/#{@user.image}", image.read)
-    end
-
-    if @user.save
-      flash[:notice] = "ユーザー情報を編集しました"
-      redirect_to("/users/#{@user.id}")
+      File.binwrite("public/user_images/#{@user.image}", image.read)
+      flash.now[:notice] = "ユーザー情報を編集しました"
+      #redirect_to mypages_path
     else
-      render("mypages/index")
+      flash.now[:notice] = "ERROR"
+      #redirect_to mypages_path
     end
   end
 
-  def new
 
-  end
+    def check
+      @user = current_user
+      if @user.valid_password?(params[:password])
+        redirect_to mypages_update_path
+      else
+        flash.now[:notice] = "PASSWORD ERROR"
+        redirect_to mypages_path
+      end
+    end
 
-  def show
-
-  end
-
+  helper_method :check
 end
