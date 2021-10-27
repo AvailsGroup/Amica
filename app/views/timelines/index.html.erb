@@ -1,18 +1,4 @@
-<h1>タイムライン</h1>
-
-<!DOCTYPE html>
-<html>
-<head>
-  <title>TweetApp</title>
-  <%= csrf_meta_tags %>
-
-
-
-</head>
-
-<body>
-
-
+<%= stylesheet_link_tag 'timelines', media: 'all', 'data-turbolinks-track': 'reload' %>
   <ul class="header-menus">
 
     <li>
@@ -22,9 +8,9 @@
       <%= link_to("新規投稿", "/timelines/new") %>
     </li>
   </ul>
+<div class="activity" >
+  <% @posts.each do |post| %>
+  <%= post.content %><br>
+    </div>
+<% end %>
 
-  </div>
-  </div>
-
-</body>
-</html>
