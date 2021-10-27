@@ -5,3 +5,6 @@
 <p>
   コミュニティ一覧
 </p>
+<% @community.each do |community| %>
+  <%= community.name%> <%= community.content %><br>
+<% end %>

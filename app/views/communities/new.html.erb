@@ -5,7 +5,7 @@
   <%= form_for(@community, url: communities_path) do |f| %>
 
       <%= f.text_field :name, autocomplete: "name", class: "input" ,:placeholder=>"コミュニティ名"%>
-      <%= f.text_field :name, autocomplete: "content", class: "input" ,:placeholder=>"概要"%>
+      <%= f.text_field :content, autocomplete: "content", class: "input" ,:placeholder=>"概要"%>
   </div>
     <div class="button01">
       <%= f.submit "新規作成", class:"submit_button"%>
