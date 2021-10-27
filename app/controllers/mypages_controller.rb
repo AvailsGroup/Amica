@@ -5,30 +5,23 @@ class MypagesController < ApplicationController
 
   def update
     @user = current_user
+    user = @user
 
-    if params[:image]
-      #@user.image = "#{@user.id}.jpg"
-      @user.update(image:"#{@user.id}.jpg")
-      image = params[:image]
-      File.binwrite("public/user_images/#{@user.image}", image.read)
-      flash.now[:notice] = "ユーザー情報を編集しました"
-      #redirect_to mypages_path
+    if user.valid_password?(params[:password])
+        if params[:image]
+          @user.update(image:"#{@user.id}.jpg")
+          image = params[:image]
+          File.binwrite("public/user_images/#{@user.image}", image.read)
+          flash[:notice] = "ユーザー情報を編集しました"
+          redirect_to mypages_path
+        else
+          flash[:notice] = "NOIMAGE ERROR"
+          redirect_to mypages_path
+        end
     else
-      flash.now[:notice] = "ERROR"
-      #redirect_to mypages_path
+      flash[:notice] = "PASSWORD ERROR"
+      redirect_to mypages_path
     end
   end
 
-
-    def check
-      @user = current_user
-      if @user.valid_password?(params[:password])
-        redirect_to mypages_update_path
-      else
-        flash.now[:notice] = "PASSWORD ERROR"
-        redirect_to mypages_path
-      end
-    end
-
-  helper_method :check
 end

@@ -1,18 +1,7 @@
-<head>
-  <script type="text/javascript">
-      function CheckPassword(password){
-        <%= check %>
-      }
-  </script>
-</head>
-
 
 
 <h1>Mypages#index</h1>
 
-<% if flash %>
-  <%=  flash[:notice] %>
-<% end %>
 
 <h2>名前</h2>
 <%= @user.name %><br>
@@ -37,11 +26,10 @@
 
 <%= form_tag("mypages/update", {multipart: true}) do %>
   <p>画像</p>
-  <input name="image" type="file">
-  <p>password</p>
-  <input type="password" name="password" require>
-  <input type="submit" value="保存" onclick="CheckPassword()">
+  <input type="file" name="image" >
+  <input type="password" name="password" required>
+  <input type="submit" name="submit" value="保存">
+ <% end %>
 
-<% end %>
 
 

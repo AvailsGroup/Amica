@@ -4,26 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b0a9fb2-a15d-40fa-817d-7cddab655f85" name="デフォルト変更リスト" comment="デフォルト画像実装機能変更">
+    <list default="true" id="1b0a9fb2-a15d-40fa-817d-7cddab655f85" name="デフォルト変更リスト" comment="アイコン変更機能の実装">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/user_images/default_icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/mypages_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/mypages_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/users/confirmations_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/users/confirmations_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/users_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/users_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/uploaders/image_uploader.rb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/mypages/create.html.erb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/mypages/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/mypages/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/mypages/new.html.erb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/mypages/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/mypages/update.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/pages/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/pages/show.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/users/controller.html.erb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/migrate/20211004012338_add_columns_to_users.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20211004012338_add_columns_to_users.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/mypages/update.html.erb" beforeDir="false" />
     </list>
     <list id="a207d16f-275f-4683-a61e-0adf9398a3df" name="n1200245さんが変更" comment="n1200245さんが変更" />
     <option name="SHOW_DIALOG" value="false" />
@@ -266,7 +252,8 @@
       <workItem from="1635245945534" duration="3996000" />
       <workItem from="1635292839151" duration="6365000" />
       <workItem from="1635299228978" duration="4572000" />
-      <workItem from="1635307349666" duration="3422000" />
+      <workItem from="1635307349666" duration="9648000" />
+      <workItem from="1635317412439" duration="2557000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1633393338499</created>
@@ -401,7 +388,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635216162070</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="アイコン変更機能の実装">
+      <created>1635310838640</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1635310838640</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -434,11 +428,12 @@
     <MESSAGE value="フォロー機能を仮実装&#10;https://qiita.com/yamaday0u/items/c4793b2b16ead7b2db76" />
     <MESSAGE value="仮実装" />
     <MESSAGE value="デフォルト画像実装機能変更" />
-    <option name="LAST_COMMIT_MESSAGE" value="デフォルト画像実装機能変更" />
+    <MESSAGE value="アイコン変更機能の実装" />
+    <option name="LAST_COMMIT_MESSAGE" value="アイコン変更機能の実装" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Avails_Amica@Development__Avails_Amica.rcov" NAME="Development: Avails-Amica のカバレッジ結果" MODIFIED="1634690280129" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Avails-Amica" />
     <SUITE FILE_PATH="coverage/Amica@db_migrate.rcov" NAME="db:migrate のカバレッジ結果" MODIFIED="1635215606664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Avails-Amica" />
-    <SUITE FILE_PATH="coverage/Amica@Development__Avails_Amica.rcov" NAME="Development: Avails-Amica のカバレッジ結果" MODIFIED="1635299236863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Avails-Amica" />
+    <SUITE FILE_PATH="coverage/Amica@Development__Avails_Amica.rcov" NAME="Development: Avails-Amica のカバレッジ結果" MODIFIED="1635317528861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Avails-Amica" />
   </component>
 </project>
