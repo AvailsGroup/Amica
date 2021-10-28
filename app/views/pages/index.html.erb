@@ -1,19 +1,44 @@
+<%= javascript_pack_tag 'pages/index' %>
 <%= stylesheet_link_tag 'pages', media: 'all', 'data-turbolinks-track': 'reload' %>
 <article xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
   <div class="side">
+    <br>
     <p><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <form method="get" action="#" class="search_container">
       <input type="text" size="30" placeholder="名前で検索">
       <input type="submit" value="&#xf002"></p>
     </form>
+    <br>
+    <br>
     <p class="profile">
       <%= image_tag 'top_icon.png',class:'example1' %>
       <span>　友杉　颯太</span>
         <span>(ニックネーム)</span>
     </p>
-  </div>
 
+    <p class="sel sel--black-panther">
+      <select name="select-profession" id="select-profession">
+        <option value="" disabled>Profession</option>
+        <option value="hacker">Hacker</option>
+        <option value="gamer">Gamer</option>
+        <option value="developer">Developer</option>
+        <option value="programmer">Programmer</option>
+        <option value="designer">Designer</option>
+      </select>
+    </p>
+    <hr class="rule">
+
+    <p class="sel sel--superman">
+      <select name="select-superpower" id="select-superpower">
+        <option value="" disabled>Superpower</option>
+        <option value="hacker">Power</option>
+        <option value="gamer">Speed</option>
+        <option value="developer">Acrobatics</option>
+        <option value="programmer">Accuracy</option>
+      </select>
+  </p>
+  </div>
   <div class="content">
     <p>トーク画面（仮）</p>
   </div>
