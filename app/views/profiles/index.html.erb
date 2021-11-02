@@ -17,7 +17,7 @@
               </div>
 
               <div class="item-content-right">
-                <p><%= link_to user.name, profile_path(user.userid) %></p>
+                <p><%= link_to user.userid, profile_path(user.userid) %></p>
 
               </div>
 
@@ -45,7 +45,7 @@
                   <!--アイコン-->
                 </div>
                 <div class="item-content-right">
-                  <p><%= link_to user.name, profile_path(user.userid) %></p>
+                  <p><%= link_to user.userid, profile_path(user.userid) %></p>
                   <% if user.follow_request?(current_user, user) %>
                     <p><i class="fas fa-star"></i></p>
                   <% end %>
