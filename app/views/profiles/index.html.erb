@@ -1,0 +1,61 @@
+<div class="item-list">
+
+  <div class="item-list-header">
+    <p class="bold">Mate list</p>
+  </div>
+
+  <div class="item-list-content">
+    <ul>
+      <% @mates.each do |user| %>
+        <%# 友達（互いにフォローしている）を一覧表示 %>
+        <div class="each-item">
+          <li>
+            <div class="each-item-content">
+
+              <div class="item-content-left">
+                <p>Mate<br>image</p>
+              </div>
+
+              <div class="item-content-right">
+                <p><%= link_to user.name, profile_path(user.id) %></p>
+
+              </div>
+
+            </div>
+          </li>
+        </div>
+      <% end %>
+    </ul>
+  </div><%# End of item-list-content %>
+
+  <div class="item-list-header">
+    <p class="bold">User list</p>
+  </div>
+
+  <div class="item-list-content">
+    <ul>
+      <% @users.each do |user| %>
+        <%# 自分以外のユーザーを一覧表示 %>
+        <% unless current_user.id == user.id %>
+          <div class="each-item">
+
+            <li>
+              <div class="each-item-content">
+                <div class="item-content-left">
+                  <p>User<br>image</p>
+                </div>
+                <div class="item-content-right">
+                  <p><%= link_to user.name, profile_path(user.id) %></p>
+                  <% if user.follow_request?(current_user, user) %>
+                    <p><i class="fas fa-star"></i></p>
+                  <% end %>
+                </div>
+              </div>
+            </li>
+
+          </div>
+        <% end %>
+      <% end %>
+    </ul>
+  </div><%# End of item-list-content %>
+</div>

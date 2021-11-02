@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :maller
-  resources :profiles, only: [:show] do
+  resources :profiles, only: [:index,:show] do
     resources :relationships, only: [:create,:destroy]
   end
 
