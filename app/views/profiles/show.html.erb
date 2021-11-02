@@ -1,14 +1,10 @@
-<h1>Profiles#show</h1>
-<%= @user.userid %>
+<h1><%= @user.userid %></h1>
 <%= @user.email %>
 <% if @user.follow_request?(current_user, @user) %>
   <div class="form-group">
     <div class="schedule-item">
       <div class="schedule-item-header text-left">
-        <p class="bold"><i class="fas fa-star"></i>You have follow request<i class="fas fa-star"></i></p>
-      </div>
-      <div class="schedule-item-body text-left">
-        <p><%= @user.name %> requests you to be mate</p>
+        <p class="bold"><%= @user.userid %>からフレンド申請を受け取っています</p>
       </div>
     </div>
   </div>
@@ -18,7 +14,7 @@
   <div class="form-group">
     <div class="schedule-item">
       <div class="schedule-item-header text-left">
-        <p class="bold"><%= @user.name %> is your mate</p>
+        <p class="bold"><%= @user.userid %> は友達です。</p>
       </div>
     </div>
   </div>
@@ -29,11 +25,11 @@
 <% else %>
   <% unless current_user.following?(@user) %>
     <div class="actions">
-      <%= link_to 'Request to be mate', profile_relationships_path(@user.userid), method: :post, class:"sign-up-btn" %>
+      <%= link_to '友達申請をする', profile_relationships_path(@user.userid), method: :post, class:"sign-up-btn" %>
     </div>
   <% else %>
     <div class="actions">
-      <%= link_to 'Cancel to your request', profile_relationship_path(@user.userid), method: :delete, class:"sign-up-btn" %>
+      <%= link_to '友達申請を取り消す', profile_relationship_path(@user.userid), method: :delete, class:"sign-up-btn" %>
     </div>
   <% end %>
 <% end %>

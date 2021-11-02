@@ -1,7 +1,7 @@
 <div class="item-list">
 
   <div class="item-list-header">
-    <p class="bold">Mate list</p>
+    <p class="bold">友達一覧</p>
   </div>
 
   <div class="item-list-content">
@@ -13,11 +13,11 @@
             <div class="each-item-content">
 
               <div class="item-content-left">
-                <p>Mate<br>image</p>
+                <!--アイコン-->
               </div>
 
               <div class="item-content-right">
-                <p><%= link_to user.name, profile_path(user.id) %></p>
+                <p><%= link_to user.name, profile_path(user.userid) %></p>
 
               </div>
 
@@ -29,7 +29,7 @@
   </div><%# End of item-list-content %>
 
   <div class="item-list-header">
-    <p class="bold">User list</p>
+    <p class="bold">他のユーザー</p>
   </div>
 
   <div class="item-list-content">
@@ -42,10 +42,10 @@
             <li>
               <div class="each-item-content">
                 <div class="item-content-left">
-                  <p>User<br>image</p>
+                  <!--アイコン-->
                 </div>
                 <div class="item-content-right">
-                  <p><%= link_to user.name, profile_path(user.id) %></p>
+                  <p><%= link_to user.name, profile_path(user.userid) %></p>
                   <% if user.follow_request?(current_user, user) %>
                     <p><i class="fas fa-star"></i></p>
                   <% end %>
