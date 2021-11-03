@@ -1,3 +1,38 @@
 // Place all the styles related to the mypages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.body{
+padding-left: 13%;
+  border: solid 1px;
+}
+
+p{
+  text-align: center;
+}
+
+.uploader{
+  display: flex;
+  position: center;
+  margin: 0px 25% 0px 30%;
+}
+
+#preview{
+  border-radius: 50%;
+}
+
+.user_icon{
+  border-radius: 50%;
+}
+
+.form1{
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+.image_select {
+display: none;
+}
+.password{
+  padding-left: 10%;
+}

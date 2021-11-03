@@ -14,8 +14,6 @@ Rails.application.routes.draw do
   resources :chats
   resources :mypages
   post 'mypages/update', to: 'mypages#update'
-  #patch '/mypage/update/:id', to: 'mypages#update'
-
 
 
 

@@ -1,35 +1,51 @@
 
+<%= stylesheet_link_tag 'mypages', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<h1>Mypages#index</h1>
+<script>
+    function previewImage(obj)
+    {
+        var fileReader = new FileReader();
+        fileReader.onload = (function() {
+            document.getElementById('preview').src = fileReader.result;
+        });
+        fileReader.readAsDataURL(obj.files[0]);
+        document.getElementById("image_text").innerHTML = "選択した画像";
+    }
+</script>
 
 
-<h2>名前</h2>
-<%= @user.name %><br>
-<h2>email</h2>
-<%= @user.email %><br>
-<h2>ニックネーム</h2>
-<%= @user.nickname %><br>
-<h2>id</h2>
-<%= @user.id %><br>
 
+<div class="body">
+<h1>アイコン変更</h1>
 
-<p>現在のアイコン</p>
+  <span>現在のアイコン</span>
+
+  <div class="uploader">
+  <div class="form1">
+    <%= form_tag("mypages/update", {multipart: true}) do %>
+  <label>
+    <input type="file" name="image" class="image_select"  accept='image/*' onchange="previewImage(this);"  required >
 <% if @user.image? %>
-  <%= image_tag "/user_images/#{@user.image}"%>
-  user
+  <%= image_tag "/user_images/#{@user.image}",class: "user_icon"%>
 <% else %>
-  default
-  <%= image_tag "default_icon" %>
+  <%= image_tag "default_icon" , class: "user_icon" %>
 <% end %>
+   </label><br>
+      <p id="image_text">画像を選択してください</p>
+      <p>
+        <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px;">
+      </p>
 
-
-
-<%= form_tag("mypages/update", {multipart: true}) do %>
-  <p>画像</p>
-  <input type="file" name="image" >
-  <input type="password" name="password" required>
-  <input type="submit" name="submit" value="保存">
+      <p>password</p>
+      <span class="password">
+      <input type="password" name="password"  placeholder="PASSWORD"  required>
+    <label>
+    <input type="submit" name="submit" value="保存"><i class="fas fa-upload"></i>
+    </label>
+      </span>
  <% end %>
+  </div>
+</div>
 
 
-
+</div>

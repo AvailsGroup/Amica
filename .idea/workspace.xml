@@ -5,11 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b0a9fb2-a15d-40fa-817d-7cddab655f85" name="デフォルト変更リスト" comment="アイコン変更機能の実装">
+      <change afterPath="$PROJECT_DIR$/public/user_images/2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_10_18_9_26______.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021_10_18_9_26______.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/mypages.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/mypages.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/chats_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/chats_controller.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/mypages_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/mypages_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/chats/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/chats/index.html.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/mypages/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/mypages/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/mypages/update.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/environments/production.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/environments/production.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/seeds.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/seeds.rb" afterDir="false" />
     </list>
     <list id="a207d16f-275f-4683-a61e-0adf9398a3df" name="n1200245さんが変更" comment="n1200245さんが変更" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,10 +37,11 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="chat" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitToolBoxStore">
     <option name="recentBranches">
@@ -43,7 +53,11 @@
                 <list>
                   <RecentBranch>
                     <option name="branchName" value="uploder" />
-                    <option name="lastUsedInstant" value="1634696651" />
+                    <option name="lastUsedInstant" value="1635906074" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="chat" />
+                    <option name="lastUsedInstant" value="1635332372" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="master" />
@@ -69,17 +83,20 @@
     <scope name="Git Scope" pattern="" />
   </component>
   <component name="ProjectId" id="1z1K6VtOhHKFvZ8Ve9BeM7xTeR7" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/assets/user_images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/views/chats" />
     <property name="list.type.of.created.stylesheet" value="Sass" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -90,14 +107,16 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\views\chats" />
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\views" />
       <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\assets\user_images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\views\messages" />
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\views" />
+      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\views\chats" />
       <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\public" />
       <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\assets\user_images" />
-      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\assets" />
-      <recent name="C:\Users\n1200226.STCN2\RubymineProjects\Amica\app\assets\config" />
-      <recent name="C:\Users\n1201022.STCN2\RubymineProjects\Avails-Amica\app\assets\stylesheets" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -219,6 +238,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Rake.db:migrate" />
+        <item itemvalue="Rake.db:migrate" />
       </list>
     </recent_temporary>
   </component>
@@ -254,6 +274,15 @@
       <workItem from="1635299228978" duration="4572000" />
       <workItem from="1635307349666" duration="9648000" />
       <workItem from="1635317412439" duration="2557000" />
+      <workItem from="1635332266320" duration="264000" />
+      <workItem from="1635332718651" duration="858000" />
+      <workItem from="1635333599430" duration="1377000" />
+      <workItem from="1635335218421" duration="2096000" />
+      <workItem from="1635337338530" duration="1277000" />
+      <workItem from="1635729225331" duration="1032000" />
+      <workItem from="1635744233616" duration="1978000" />
+      <workItem from="1635906066842" duration="2962000" />
+      <workItem from="1635909050454" duration="6050000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1633393338499</created>
@@ -395,7 +424,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635310838640</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="アイコン変更機能の実装">
+      <created>1635332344014</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1635332344014</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -414,6 +450,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="First Commit" />
     <MESSAGE value="サブディレクトリの中のcssがapplication.html.erbに読み込まれてしまっていた不具合の修正" />
     <MESSAGE value="修正" />
@@ -434,6 +471,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Avails_Amica@Development__Avails_Amica.rcov" NAME="Development: Avails-Amica のカバレッジ結果" MODIFIED="1634690280129" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Avails-Amica" />
     <SUITE FILE_PATH="coverage/Amica@db_migrate.rcov" NAME="db:migrate のカバレッジ結果" MODIFIED="1635215606664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Avails-Amica" />
-    <SUITE FILE_PATH="coverage/Amica@Development__Avails_Amica.rcov" NAME="Development: Avails-Amica のカバレッジ結果" MODIFIED="1635317528861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Avails-Amica" />
+    <SUITE FILE_PATH="coverage/Amica@Development__Avails_Amica.rcov" NAME="Development: Avails-Amica のカバレッジ結果" MODIFIED="1635915332642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Avails-Amica" />
   </component>
 </project>

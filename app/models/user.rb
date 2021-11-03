@@ -7,5 +7,7 @@ class User < ApplicationRecord
          :trackable, password_length: 8...128
 
 
+  # 次の一行を追加
+  has_many :messages, dependent: :destroy
 
 end

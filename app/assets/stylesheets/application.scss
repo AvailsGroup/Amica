@@ -68,3 +68,17 @@ header {
   top: 8px;
 }
 
+// メッセージ一覧
+#message-container {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 1rem 1rem 8rem 1rem;
+}
+
+// メッセージ投稿フォーム
+footer {
+  max-width: 768px;
+  padding: 1rem;
+  margin: 0 auto;
+  background-color: white;
+}
