@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b0a9fb2-a15d-40fa-817d-7cddab655f85" name="デフォルト変更リスト" comment="アイコン変更機能の実装">
-      <change afterPath="$PROJECT_DIR$/public/user_images/2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_10_18_9_26______.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021_10_18_9_26______.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/mypages.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/mypages.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/chats_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/chats_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/mypages_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/mypages_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/chats/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/chats/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/mypages/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/mypages/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/environments/production.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/environments/production.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/seeds.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/seeds.rb" afterDir="false" />
     </list>
     <list id="a207d16f-275f-4683-a61e-0adf9398a3df" name="n1200245さんが変更" comment="n1200245さんが変更" />
     <option name="SHOW_DIALOG" value="false" />
@@ -431,7 +419,21 @@
       <option name="project" value="LOCAL" />
       <updated>1635332344014</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="アイコン変更機能の実装">
+      <created>1635916743785</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1635916743785</updated>
+    </task>
+    <task id="LOCAL-00023" summary="アイコン変更機能の実装">
+      <created>1635916798792</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1635916798792</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
