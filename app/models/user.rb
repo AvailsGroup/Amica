@@ -31,6 +31,14 @@ class User < ApplicationRecord
     active_relationships.find_by(followed_id: other_user.id)
   end
 
+  def followers_list
+    followers
+  end
+
+  def followings_list
+    followings
+  end
+
   # 友達（互いにフォローしている）をデータベースから取得
   def matchers
     followings & followers

@@ -1,24 +1,33 @@
 <div class="item-list">
 
+  <p>ユーザーを検索</p>
+  <nav class="navbar">
+    <%= form_with url: profile_search_path,:method => 'get',class: "container-fluid" do |f| %>
+      <div class="input-group">
+        <span class="input-group-text" id="basic-addon1">@</span>
+        <%= f.text_field :name, class: "form-control",placeholder: "UserName",aria: {label:"Username",describedby: "basic-addon1"}%>
+        <!--<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">-->
+      </div>
+    <% end %>
+  </nav>
+
   <div class="item-list-header">
-    <p class="bold">友達一覧</p>
+    <p class="bold">フォローリスト</p>
   </div>
 
   <div class="item-list-content">
     <ul>
       <% @mates.each do |user| %>
-        <%# 友達（互いにフォローしている）を一覧表示 %>
         <div class="each-item">
           <li>
             <div class="each-item-content">
 
               <div class="item-content-left">
-                <!--アイコン-->
+                <!--ユーザー画像-->
               </div>
 
               <div class="item-content-right">
-                <p><%= link_to user.userid, profile_path(user.userid) %></p>
-
+                <p><%= link_to user.username, profile_path(user.userid) %></p>
               </div>
 
             </div>
@@ -26,36 +35,37 @@
         </div>
       <% end %>
     </ul>
-  </div><%# End of item-list-content %>
+  </div>
 
   <div class="item-list-header">
-    <p class="bold">他のユーザー</p>
+    <p class="bold">おすすめユーザー</p>
   </div>
 
   <div class="item-list-content">
     <ul>
-      <% @users.each do |user| %>
-        <%# 自分以外のユーザーを一覧表示 %>
+      <% @users.shuffle.first(5).each do |user| %>
         <% unless current_user.id == user.id %>
-          <div class="each-item">
+          <% unless current_user.following?(user) %>
+            <div class="each-item">
 
-            <li>
-              <div class="each-item-content">
-                <div class="item-content-left">
-                  <!--アイコン-->
+              <li>
+                <div class="each-item-content">
+                  <div class="item-content-left">
+                    <!--ユーザー画像-->
+                  </div>
+                  <div class="item-content-right">
+                    <p><%= link_to user.username, profile_path(user.userid) %></p>
+                    <% if user.follow_request?(current_user, user) %>
+                      <p><i class="fas fa-star"></i></p>
+                    <% end %>
+                  </div>
                 </div>
-                <div class="item-content-right">
-                  <p><%= link_to user.userid, profile_path(user.userid) %></p>
-                  <% if user.follow_request?(current_user, user) %>
-                    <p><i class="fas fa-star"></i></p>
-                  <% end %>
-                </div>
-              </div>
-            </li>
+              </li>
 
-          </div>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
     </ul>
-  </div><%# End of item-list-content %>
+  </div>
 </div>
