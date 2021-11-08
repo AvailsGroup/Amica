@@ -7,7 +7,6 @@ class MypagesController < ApplicationController
     @user = current_user
     user = @user
 
-    if user.valid_password?(params[:password])
         if params[:image]
           @user.update(image:"#{@user.id}.jpg")
           image = params[:image]
@@ -15,10 +14,7 @@ class MypagesController < ApplicationController
           flash[:notice] = "ユーザー情報を編集しました"
           redirect_to mypages_path
         end
-    else
-      flash[:notice] = "PASSWORD ERROR"
-      redirect_to mypages_path
-    end
+
   end
 
 end
