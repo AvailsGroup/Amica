@@ -1,4 +1,3 @@
-<%= stylesheet_link_tag "mypages"%>
 
 <div class="header">
   マイページ
@@ -9,6 +8,13 @@
 
   <%= image_tag 'background2.jpg',class:'myicon' %>
 <div class="right">
-  <%= current_user.nickname %><br>
-  <%= current_user.userid %>
+  ニックネーム：<%= current_user.nickname %><br>
+  ID：<%= current_user.userid %>
+  学科：<%= @user %>
+  クラス：<%= current_user.userid %>
+  出席番号<%= current_user.userid %>
+  学籍番号<%= current_user.userid %>
+  自己紹介<%= current_user.userid %>
+  取得資格<%= current_user.userid %>
+  タグ、趣味<%= current_user.userid %>
 </div>
