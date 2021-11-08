@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_27_005845) do
+ActiveRecord::Schema.define(version: 2021_11_08_024358) do
 
   create_table "inquiries", force: :cascade do |t|
     t.string "name"
@@ -54,6 +54,13 @@ ActiveRecord::Schema.define(version: 2021_10_27_005845) do
     t.string "nickname"
     t.string "userid"
     t.boolean "admin", default: false
+    t.integer "year", default: 0
+    t.integer "class", default: 0
+    t.integer "number", default: 0
+    t.integer "studentid", default: 0
+    t.text "accreditation", default: "ここに所持資格を入力"
+    t.text "hobby", default: "ここに趣味を入力"
+    t.string "image"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
