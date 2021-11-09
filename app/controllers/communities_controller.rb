@@ -9,6 +9,8 @@ class CommunitiesController < ApplicationController
     @community = Community.new(community_params)
     if @community.save
     redirect_to(communities_path)
+    else
+      redirect_to(about_path)
     end
   end
   private
