@@ -7,56 +7,124 @@
 
       <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
       <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
     </head>
 
   <body>
-    <header>
-      <nav>
-        <% if user_signed_in? %>
+  <% if user_signed_in? %>
 
-          <div class="container">
-            <div class="icon">
-              <%= image_tag("default_icon.png",class:"default_icon") %>
-            <%= link_to  pages_path,class: "icons" do %>
-              <i class="fab fa-fort-awesome"></i>
-            <% end %>
-            <%= link_to  searches_path,class: "icons" do %>
-              <i class="fab fa-searchengin"></i>
-            <% end %>
-            <%= link_to  chats_path,class: "icons" do %>
-              <i class="fas fa-comments"></i>
-            <% end %>
-            <%= link_to  communities_path,class: "icons" do %>
-              <i class="fas fa-users"></i>
-            <% end %>
-            <%= link_to  timelines_path,class: "icons" do %>
-              <i class="fas fa-clock"></i>
-            <% end %>
-            <%= link_to  mypages_path,class: "icons" do %>
-              <i class="fas fa-address-card"></i>
-            <% end %>
-          </div>
+    <header class="w-auto" >
+
+      <nav class="navbar navbar-expand-lg navbar-light p-0 m-0">
+        <div class="container-fluid">
+          <% if @user.image? %>
+            <%= link_to  pages_show_path ,class: "link" do%>
+            <%= image_tag "/user_images/#{@user.image}",class: "user_icon"%>
+              <% end %>
+          <% else %>
+            <%= image_tag "default_icon" , class: "user_icon" %>
+          <% end %>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto m-0 mb-lg-0">
+
+              <table class="nav-item mr-auto">
+                <tr>
+                  <td>
+                <strong class="name"><%= current_user.nickname%></strong>
+                  </td>
+                </tr>
+                  <tr>
+                    <td>
+                <i class="fas fa-at"></i><strong><%= current_user.userid %>
+                </strong>
+                    </td>
+                </tr>
+
+            </table>
+              <li class="nav-item">
+                <%= link_to  chats_path,class: "icons nav-link" do %>
+                  <i class="fas fa-comments"></i>chats
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to  communities_path,class: "icons nav-link" do %>
+                  <i class="fas fa-users"></i>communities
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to  timelines_path,class: "icons nav-link" do %>
+                  <i class="fas fa-clock"></i>timelines
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to  mypages_path,class: "icons nav-link" do %>
+                  <i class="fas fa-address-card"></i>mypage
+                <% end %>
+              </li>
+
+              <li class="nav-item dropdown d-flex">
+                <a class="nav-link dropdown-toggle icons" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fas fa-box-open"></i>another
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                    <%= link_to 'プロフィール変更', edit_user_registration_path,class: "link nav-link" %>
+                  </li>
+                  <li>
+                    <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: "link nav-link me-2" %>
+                  </li>
+                </ul>
+            </ul>
+            </li>
 
 
-          <div class="links">
-            <strong><%= link_to current_user.userid, pages_show_path,class: "link"%></strong>
-            <%= link_to 'プロフィール変更', edit_user_registration_path,class: "link" %>
-            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: "link" %>
-        <% else %>
-          <%= link_to 'サインアップ', new_user_registration_path,class: "link" %>
-          <%= link_to 'ログイン', new_user_session_path,class: "link" %>
-        <% end %>
-          </div>
-        </div>
-      </nav>
-    </header>
+  <% else %>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-box-open"></i>another
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li>
+          <%= link_to 'サインアップ', new_user_registration_path,class: "link nav-link" %>
+        </li>
+        <li>
+          <%= link_to 'ログイン', new_user_session_path,class: "link nav-link" %>
+        </li>
+      </ul>
+    </li>
+
+
+  <% end %>
+  <form class="d-flex justify-content-end">
+    <input class="form-control me-0 my-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-success me-2 my-2" type="submit">Search</button>
+  </form>
+  </ul>
+  </div>
+  </div>
+
+
+  </div>
+  </div>
+  </nav>
+  </header>
+
+
+
     <!-- ここに追加 -->
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
+
 </html>

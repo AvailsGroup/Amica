@@ -1,10 +1,7 @@
 // Place all the styles related to the mypages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.body{
-padding-left: 13%;
 
-}
 
 p{
   text-align: center;
@@ -16,15 +13,9 @@ p{
   margin: 0px 25% 0px 30%;
 }
 
-#preview{
-  border-radius: 50%;
-}
 
-.user_icon{
-  border-radius: 50%;
-}
 
-.form1{
+.form_uploder{
   display: block;
   justify-content: center;
   align-items: center;
@@ -32,39 +23,4 @@ p{
 
 .image_select {
 display: none;
-}
-.btn{
-  font-size: 1.4rem;
-  font-weight: 700;
-  line-height: 1;
-  position: relative;
-  display: inline-block;
-  padding: 1rem 4rem;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  text-align: center;
-  vertical-align: middle;
-  text-decoration: none;
-  letter-spacing: 0.1em;
-  color: #212529;
-  border-radius: 0.5rem;
-  align-items: center;
-  margin: 0px 25% 0px 20%;
-}
-
-.btn--orange,
-a.btn--orange {
-  color: #fff;
-  background-color: #037394;
-}
-
-.btn--orange:hover,
-a.btn--orange:hover {
-  color: #fff;
-  background: #f56500;
 }
