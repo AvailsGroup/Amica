@@ -17,4 +17,13 @@ class TimelinesController < ApplicationController
 
     redirect_to(timelines_path)
   end
+
+  def edit
+  end
+
+  private
+
+  def post_params()
+    params.require(:post).permit(:content)
+  end
 end

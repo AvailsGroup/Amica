@@ -2,10 +2,13 @@
   <ul class="header-menus">
 
     <li>
-      <%= link_to("投稿一覧", "/timelines/index") %>
+      <%= link_to("投稿一覧", timelines_path) %>
     </li>
     <li>
       <%= link_to("新規投稿", "/timelines/new") %>
+    </li>
+    <li>
+      <%= link_to("編集", edit_timeline_path(1)) %>
     </li>
   </ul>
 <div class="activity" >
