@@ -1,5 +1,4 @@
-<div class="main posts-new">
-  <div class="container">
-    <h1 class="form-heading">編集する</h1>
-  </div>
-</div>
+<%= form_for(@post, url: timeline_path, method: :put) do |f|%>
+  <%= f.text_area :content, autocomplete: "content"  %>
+  <%= f.submit "投稿"%>
+<% end %>

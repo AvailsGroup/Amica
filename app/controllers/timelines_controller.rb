@@ -19,6 +19,18 @@ class TimelinesController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    @post.update(timeline_params)
+    redirect_to(timelines_path)
+  end
+
+  def destroy
+    Post.find(params[:id]).destroy
+    redirect_to(timelines_path)
   end
 
   private
