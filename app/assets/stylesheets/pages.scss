@@ -2,60 +2,22 @@
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-body {
-  font-family:'Noto Sans JP',sans-serif;
-  background-color:#C0C0C0;
+#form1 {                     /* 検索フォーム編集 */
+  text-align: center;
+  font-size: 18px;
 }
 
-.side {
-  background-color:#ffffff;
-  width:450px;
-  height:800px;
+#sbox1 {                     /* 検索欄の大きさ調整 */
+  width: 60%;
+
 }
 
-.content {
-  background-color:#ffffff;
-  width:1050px;
-  height:800px;
-  text-align:center;
-  margin-left:4px;/*サイドバーとメインコンテンツの間に隙間                    をあけた*/
+.profile {                   /* my profile編集 */
+  text-align: center;
+  margin-right:80px;
+  font-size: 23px;
 }
-
-article {
-  display:flex;/*サイドバーとメインコンテンツを横並びにする                指定をした*/
-}
-
-.search_container{
-  box-sizing: border-box;
-  position: relative;
-  border: 1px solid #999;
-  padding: 3px 10px;
-  border-radius: 20px;
-  height: 2.3em;
-  margin-left: auto;
-  margin-right: auto;
-  width: 20em;
-}
-.search_container input[type="text"]{
-  border: none;
-  height: 2.0em;
-}
-.search_container input[type="text"]:focus {
-  outline: 0;
-}
-.search_container input[type="submit"]{
-  cursor: pointer;
-  font-family: FontAwesome;
-  border: none;
-  border-radius: 20%;
-  background: #FFFFFF;
-  color: #777777;
-  outline : none;
-  width: 2.0em;
-  height: 2.0em;
-}
-
-img.example1 {
+img.example1 {               /* my profileの写真サイズ */
   background-color: #000000;
   margin-left: 25px;
   border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
@@ -63,163 +25,44 @@ img.example1 {
   height: 55px;       /* ※縦横を同値に */
 }
 
-.profile img {
-  vertical-align: middle;
-  display: inline-block;
-}
-
-.profile span {
-  font-size: 20px;
-}
-* {
+.hidden_box {           /* タブで友達とグループ表示 */
+  text-align: center;
+  margin: 2em 0;/*前後の余白*/
   padding: 0;
-  margin: 0;
+
 }
 
-
-/*プルダウンメニュー編集。*/
-
-
-.rule {
-  margin: 10px 0;
-  border: none;
-  height: 1.5px;
-  background-image: linear-gradient(left, #f0f0f0, #c9bbae, #f0f0f0);
+/*ボタン装飾*/
+.hidden_box label {
+  width: 600px;
+  padding: 15px;
+  font-weight: bold;
+  border: solid 2px black;
+  cursor :pointer;
 }
 
-/* ===== Select Box ===== */
-.sel {
-  font-size: 1rem;
-  display: inline-block;
-  margin: 3em 2em;
-  width: 350px;
-  background-color: transparent;
-  position: relative;
-  cursor: pointer;
+/*ボタンホバー時*/
+.hidden_box label:hover {
+  background: #efefef;
 }
 
-.sel::before {
-  position: absolute;
-  content: '\f063';
-  font-family: 'FontAwesome';
-  font-size: 2em;
-  color: #FFF;
-  right: 20px;
-  top: calc(50% - 0.5em);
-}
-
-.sel.active::before {
-  transform: rotateX(-180deg);
-}
-
-.sel__placeholder {
-  display: block;
-  font-family: 'Quicksand';
-  font-size: 2.3em;
-  color: #838e95;
-  padding: 0.2em 0.5em;
-  text-align: left;
-  pointer-events: none;
-  user-select: none;
-  visibility: visible;
-}
-
-.sel.active .sel__placeholder {
-  visibility: hidden;
-}
-
-.sel__placeholder::before {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0.2em 0.5em;
-  content: attr(data-placeholder);
-  visibility: hidden;
-}
-
-.sel.active .sel__placeholder::before {
-  visibility: visible;
-}
-
-.sel__box {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: -4px;
-  display: none;
-  list-style-type: none;
-  text-align: left;
-  font-size: 1em;
-  background-color: #FFF;
-  width: calc(100% + 8px);
-  box-sizing: border-box;
-}
-
-.sel.active .sel__box {
-  display: block;
-  animation: fadeInUp 500ms;
-}
-
-.sel__box__options {
-  display: list-item;
-  font-family: 'Quicksand';
-  font-size: 1.5em;
-  color: #838e95;
-  padding: 0.5em 1em;
-  user-select: none;
-}
-
-.sel__box__options::after {
-  content: '\f00c';
-  font-family: 'FontAwesome';
-  font-size: 0.5em;
-  margin-left: 5px;
+/*チェックは見えなくする*/
+.hidden_box input {
   display: none;
 }
 
-.sel__box__options.selected::after {
-  display: inline;
+/*中身を非表示にしておく*/
+.hidden_box .hidden_show {
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: 0.8s;
 }
 
-.sel__box__options:hover {
-  background-color: #ebedef;
-}
-
-/* ----- Select Box Black Panther ----- */
-.sel {
-  border-bottom: 4px solid rgba(0, 0, 0, 0.3);
-}
-
-.sel--black-panther {
-  z-index: 3;
-}
-
-/* ----- Select Box Superman ----- */
-.sel--superman {
-  /*   display: none; */
-  z-index: 2;
-}
-
-/* ===== Keyframes ===== */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 20px, 0);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
+/*クリックで中身表示*/
+.hidden_box input:checked ~ .hidden_show {
+  padding: 10px 0;
+  height: auto;
+  opacity: 1;
 }

@@ -1,46 +1,45 @@
 <%= javascript_pack_tag 'pages/index' %>
 <%= stylesheet_link_tag 'pages', media: 'all', 'data-turbolinks-track': 'reload' %>
-<article xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-  <div class="side">
-    <br>
-    <p><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <form method="get" action="#" class="search_container">
-      <input type="text" size="30" placeholder="名前で検索">
-      <input type="submit" value="&#xf002"></p>
-    </form>
-    <br>
-    <br>
-    <p class="profile">
-      <%= image_tag 'top_icon.png',class:'example1' %>
-      <span>　友杉　颯太</span>
+<div class="row">
+<div class="col-md-6" style="background: white; height: 600px;">            <!--左画面の作成-->
+
+  <div class="profile">　　                                                  <!--my profile&name表示-->
+    <%= image_tag 'top_icon.png',class:'example1' %>　
+    <span>　友杉　颯太</span>
+    <span>(ニックネーム)</span>
+  </div>
+  <br>　
+  <form id="form1" action="自分のサイトURL" method="get">                     <!--検索ボックス作成-->
+    <input id="sbox1" id="s" name="s" type="text" placeholder="友達を検索" />
+    <input id="sbtn1" type="submit" value="検索" /></form>
+<br>
+
+  <div class="hidden_box">
+    <label for="label1">友達</label>
+    <input type="checkbox" id="label1"/>
+    <div class="hidden_show">
+      <!--非表示ここから-->
+      <%= image_tag 'top_icon.png',class:'example1' %>　
+      <span>　須山　龍</span>
+      <span>(ニックネーム)</span>
+      <!--ここまで-->
+    </div>
+
+    <div class="hidden_box">
+      <label for="label2">グループ</label>
+      <input type="checkbox" id="label2"/>
+      <div class="hidden_show">
+        <!--非表示ここから-->
+        <%= image_tag 'top_icon.png',class:'example1' %>　
+        <span>　遠藤　圭樹</span>
         <span>(ニックネーム)</span>
-    </p>
-
-    <p class="sel sel--black-panther">
-      <select name="select-profession" id="select-profession">
-        <option value="" disabled>Profession</option>
-        <option value="hacker">Hacker</option>
-        <option value="gamer">Gamer</option>
-        <option value="developer">Developer</option>
-        <option value="programmer">Programmer</option>
-        <option value="designer">Designer</option>
-      </select>
-    </p>
-    <hr class="rule">
-
-    <p class="sel sel--superman">
-      <select name="select-superpower" id="select-superpower">
-        <option value="" disabled>Superpower</option>
-        <option value="hacker">Power</option>
-        <option value="gamer">Speed</option>
-        <option value="developer">Acrobatics</option>
-        <option value="programmer">Accuracy</option>
-      </select>
-  </p>
+        <!--ここまで-->
+      </div>
+    </div>
   </div>
-  <div class="content">
-    <p>トーク画面（仮）</p>
-  </div>
-</article>
+</div>                                                                      <!--左画面の作成ここまで-->
 
+<div class="col-md-6" style="background: blue; height: 600px;">　</div>     <!--右画面制作-->
+
+</div>
