@@ -1,4 +1,4 @@
-
+<%= stylesheet_link_tag "mypages"%>
 <div class="header">
   マイページ
 </div>
@@ -8,13 +8,13 @@
 
   <%= image_tag 'background2.jpg',class:'myicon' %>
 <div class="right">
-  ニックネーム：<%= current_user.nickname %><br>
-  ID：<%= current_user.userid %>
-  学科：<%= @user %>
-  クラス：<%= current_user.userid %>
-  出席番号<%= current_user.userid %>
-  学籍番号<%= current_user.userid %>
-  自己紹介<%= current_user.userid %>
-  取得資格<%= current_user.userid %>
-  タグ、趣味<%= current_user.userid %>
+  ニックネーム：<%= current_user.userid %><br>
+  ID：<%= current_user.userid %><br>
+  学科：<%= @profiles.grade %><br>
+  クラス：<%=@profiles.school_class%><br>
+  出席番号<%=@profiles.number %><br>
+  学籍番号<%=  @profiles.student_id%><br>
+  取得資格<br><%=  @profiles.accreditation %><br>
+  タグ、趣味<br><%= @profiles.hobby %><br>
+  <%= link_to "編集", edit_mypage_path(current_user.id) %>
 </div>

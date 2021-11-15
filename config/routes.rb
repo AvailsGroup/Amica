@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
 
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+  }
 
 
   resources :maller
@@ -17,8 +19,6 @@ Rails.application.routes.draw do
   get "/about" => 'home#about'
   get "/contact" => 'maller#new'
   post 'maller/create', to: 'maller#create'
-
-
   get 'pages/index'
   get 'pages/show'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'

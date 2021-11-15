@@ -1,11 +1,20 @@
 class MypagesController < ApplicationController
   before_action :sign_in_required, only: [:show]
   def index
-    @profiles = current_user
+    @profiles = Profile.find(current_user.id)
   end
 
-  @user = current_user
-  user = @user
+  def edit
+    @profile = Profile.find(current_user.id)
+  end
 
-  redirect_to mypages_path
+  def update
+    Profile.update(profile_params)
+    redirect_to(mypages_path)
+  end
+
+  private
+  def profile_params
+    params.require(:profile).permit(:grade,:school_class,:number,:student_id,:accreditation,:hobby)
+  end
 end
