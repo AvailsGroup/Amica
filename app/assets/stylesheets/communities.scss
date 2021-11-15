@@ -37,7 +37,7 @@ html{
   background-color: #cccccc;
   transition: 0.3s;
 }
-.community{
+.community {
   margin: 0 auto;
   padding: 1em 2em;
   color: #333;
@@ -86,4 +86,17 @@ html{
 
 .btn-horizontal-border:hover:after {
   top: 3px;
+}
+.community_icon_edit{
+  width: 200px;
+  height: 200px;
+}
+.community_name{
+
+}
+.community_content{
+  font-size: 2px;
+}
+.userid{
+  font-size: 2px;
 }

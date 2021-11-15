@@ -2,12 +2,30 @@
 <h1>コミュニティ</h1>
 <div class="btn-horizontal-border">
 <p>
-<%= link_to "コミュニティ新規作成","/communities/new"%>
+<%=link_to "コミュニティ新規作成","/communities/new"%>
 </p>
 </div>
 <% @community.each do |community| %>
   <div class="community">
-    <%= community.name%><br>
-  <%= community.content %><br>
+    <%= link_to community_path(community.id) do %>
+
+      <% if community.icon? %>
+       <%= image_tag "/communities_image/#{community.icon}",class: "community_icon_edit"%><br>
+      <% else %>
+        <%= image_tag /"default_icon"/, class: "community_icon_edit" %><br>
+     <% end %>
+
+    <div class="userid">
+      <%= @user.find(community.user_id).nickname %><br>
+    </div>
+
+    <div class="community_name">
+      <%= community.name%><br>
+    </div>
+
+    <div class="community_content">
+      <%= community.content %><br>
+    </div>
+<% end %>
   </div>
   <% end %>
