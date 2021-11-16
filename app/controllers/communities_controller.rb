@@ -21,7 +21,7 @@ class CommunitiesController < ApplicationController
     @community.icon = "#{@community.id}.jpg"
 
     if @community.save
-    redirect_to(communities_path)
+      redirect_to(communities_path)
     else
       redirect_to(about_path)
     end

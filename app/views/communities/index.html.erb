@@ -11,22 +11,22 @@
       <% @community.each do |community| %>
         <%= link_to community_path(community.id), style: "text-decoration: none" do %>
           <div class="col">
-            <div class="card h-100">
-              <% if community.icon? %>
-                <%= image_tag "/communities_image/#{community.icon}",class: "card-img-top",width: "300",height: "300" %><br>
-              <% else %>
-                <%= image_tag /"default_icon"/, class: "card-img-top",width: "300",height: "300"%><br>
-              <% end %>
-              <div class="card-body">
-                <h5 class="card-title"><%= community.name%></h5>
-                <p class="card-text"><%= community.content %></p>
-              </div>
-              <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">Created by <%= @user.find(community.user_id).nickname %></small>
+            <div class="card">
+                <% if community.icon? %>
+                  <%= image_tag "/communities_image/#{community.icon}",class: "card-img-top",width: "300",height: "300" %><br>
+                <% else %>
+                  <%= image_tag /"default_icon"/, class: "card-img-top",width: "300",height: "300"%><br>
+                <% end %>
+                <div class="carddy">
+                  <h5 class="card-title"><%= community.name %></h5>
+                  <p class="card-text"><%= community.content %></p>
+                </div>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Created by <%= @user.find(community.user_id).nickname %></small>
               </div>
             </div>
           </div>
