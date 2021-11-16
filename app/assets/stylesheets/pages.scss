@@ -2,7 +2,15 @@
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+
+
 #form1 {                     /* 検索フォーム編集 */
+  text-align: center;
+  font-size: 18px;
+}
+
+#form2 {                     /* 検索フォーム編集 */
+  margin-top: 79px;
   text-align: center;
   font-size: 18px;
 }
@@ -15,7 +23,8 @@
 .profile {                   /* my profile編集 */
   text-align: center;
   margin-right:80px;
-  font-size: 23px;
+  font-size: 20px;
+  white-space: nowrap;
 }
 img.example1 {               /* my profileの写真サイズ */
   background-color: #000000;
@@ -25,49 +34,3 @@ img.example1 {               /* my profileの写真サイズ */
   height: 55px;       /* ※縦横を同値に */
 }
 
-.hidden_box {           /* タブで友達とグループ表示 */
-  text-align: center;
-  margin: 2em 0;/*前後の余白*/
-  padding: 0;
-
-}
-
-/*ボタン装飾*/
-.hidden_box label {
-  width: 600px;
-  padding: 15px;
-  font-weight: bold;
-  border: solid 2px black;
-  cursor :pointer;
-}
-
-/*ボタンホバー時*/
-.hidden_box label:hover {
-  background: #efefef;
-}
-
-/*チェックは見えなくする*/
-.hidden_box input {
-  display: none;
-}
-
-/*中身を非表示にしておく*/
-.hidden_box .hidden_show {
-  height: 0;
-  padding: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: 0.8s;
-}
-
-/*クリックで中身表示*/
-.hidden_box input:checked ~ .hidden_show {
-  padding: 10px 0;
-  height: auto;
-  opacity: 1;
-}
-
-.hidden_show {     /* 友達とグループ画像の位置の固定化 */
-  text-align: left;
-  margin-left: 150px;
-}
