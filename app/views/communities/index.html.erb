@@ -19,7 +19,7 @@
                 <% end %>
                 <div class="carddy">
                   <h5 class="card-title"><%= community.name %></h5>
-                  <p class="card-text"><%= community.content %></p>
+                  <p class="card-text"><%= community.content .truncate(100, omission: '...')%></p>
                 </div>
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
