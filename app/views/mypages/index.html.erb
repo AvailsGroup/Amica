@@ -5,16 +5,19 @@
 <body>
 
 <p>
-
+<div class="col-2">
   <%= image_tag 'background2.jpg',class:'myicon' %>
-<div class="right">
+</div>
+
+  <div class="right" ><div class="col-8">
   ニックネーム：<%= current_user.userid %><br>
   ID：<%= current_user.userid %><br>
   学科：<%= @profiles.grade %><br>
   クラス：<%=@profiles.school_class%><br>
   出席番号<%=@profiles.number %><br>
-  学籍番号<%=  @profiles.student_id%><br>
+  学籍番号<%=@profiles.student_id%><br>
   取得資格<br><%=  @profiles.accreditation %><br>
   タグ、趣味<br><%= @profiles.hobby %><br>
   <%= link_to "編集", edit_mypage_path(current_user.id) %>
 </div>
+  </div>

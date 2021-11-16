@@ -10,24 +10,32 @@
 <div class="right">
   <%= current_user.nickname %><br>
   <%= current_user.userid %>
+
 </div>
-<%= form_for @profile, url: mypage_path  do |f| %>
-  <div class="profile">
-    　　学生　　クラス　　番号　　学籍番号<br>
-    <%= f.select :grade, [["情報処理科1年", "情報処理科1年"],["情報処理科2年", "情報処理科2年"],["実践IoT1年", "実践IoT1年"],["実践IoT2年", "実践IoT2年"],
-                         ["Web技術科1年", "Web技術科1年"],["Web技術科2年", "Web技術科2年"],["ビジネス科1年", "ビジネス科1年"],["ビジネス科2年", "ビジネス科2年"],
-                         ["先端ITシステム1年", "先端ITシステム1年"],["先端ITシステム2年", "先端ITシステム2年"],["先端ITシステム3年", "先端ITシステム3年"],["ITライセンス1年", "ITライセンス1年"],
-                         ["実践AI科1年", "実践AI科1年"],["実践AI科2年", "実践AI科2年"],["実践AI科3年", "実践AI科3年"],["実践AI科4年", "実践AI科4年"],
-                         ["情報セキュリティ学科1年", "情報セキュリティ学科1年"],["情報セキュリティ学科2年", "情報セキュリティ学科2年"],["情報セキュリティ学科3年", "情報セキュリティ学科3年"],["情報セキュリティ学科4年", "情報セキュリティ学科4年"]],include_blank: "学科",autocomplete:"grade"%>
-    <%= f.select :school_class, [["1", "1"], ["2", "2"], ["3", "3"],["4", "4"],["5", "5"],["6", "6"],["7", "7"],["8", "8"],["9", "9"],["10", "10"]], include_blank: "クラス", autocomplete:"school_class" %>
-    <%= f.text_field :number,autocomplete:"number" %>
-    <%= f.text_field :student_id,autocomplete:"student_id" %><br>
+<div class="mw-100 p-3" style="background-color: #eee;">
+  <div class="profile"style="width:750px">
+  <%= form_for @profile, url: mypage_path  do |f| %>
+
+   <div class="form-group">
+         学生<br><%= f.select :grade, [["情報処理科1年", "情報処理科1年"],["情報処理科2年", "情報処理科2年"],["実践IoT1年", "実践IoT1年"],["実践IoT2年", "実践IoT2年"],
+                                      ["Web技術科1年", "Web技術科1年"],["Web技術科2年", "Web技術科2年"],["ビジネス科1年", "ビジネス科1年"],["ビジネス科2年", "ビジネス科2年"],
+                                      ["先端ITシステム1年", "先端ITシステム1年"],["先端ITシステム2年", "先端ITシステム2年"],["先端ITシステム3年", "先端ITシステム3年"],["ITライセンス1年", "ITライセンス1年"],
+                                      ["実践AI科1年", "実践AI科1年"],["実践AI科2年", "実践AI科2年"],["実践AI科3年", "実践AI科3年"],["実践AI科4年", "実践AI科4年"],
+                                      ["情報セキュリティ学科1年", "情報セキュリティ学科1年"],["情報セキュリティ学科2年", "情報セキュリティ学科2年"],["情報セキュリティ学科3年", "情報セキュリティ学科3年"],["情報セキュリティ学科4年", "情報セキュリティ学科4年"]],class:'form-control',include_blank: "学科",autocomplete:"grade"%>
+   </div>
+      <div class="form-group">
+       クラス<br><%= f.select :school_class, [["1", "1"], ["2", "2"], ["3", "3"],["4", "4"],["5", "5"],["6", "6"],["7", "7"],["8", "8"],["9", "9"],["10", "10"]], class:'form-control',include_blank: "クラス", autocomplete:"school_class" %>
+      </div>
+        番号<br><%= f.text_field :number,class:'form-control',autocomplete:"number" %>
+    <br>学籍番号<br><%= f.text_field :student_id,class:'form-control',autocomplete:"student_id" %><br>
     取得資格<br>
-    <%= f.text_area :accreditation,autocomplete:"accreditation" %><br>
+    <%= f.text_area :accreditation,class:'form-control',autocomplete:"accreditation" %><br>
     タグ、趣味<br>
-    <%= f.text_area :hobby,autocomplete:"hobby"%><br>
+    <%= f.text_area :hobby,class:'form-control',autocomplete:"hobby"%><br>
     <%=f.submit "更新" %>
-  </div>
+   </div>
+      </div>
   </p>
   </body>
 <%end %>
+  </div>
