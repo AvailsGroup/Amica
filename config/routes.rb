@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   resources :timelines
   resources :chats
   resources :mypages
-  post 'mypages/update', to: 'mypages#update'
 
 
 

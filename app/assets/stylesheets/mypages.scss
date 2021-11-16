@@ -33,6 +33,159 @@ p{
 .image_select {
 display: none;
 }
+
+
+h1 {
+  margin-bottom: 60px;
+}
+
+
+
+.box_inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.arrows {
+  display: table;
+  width: 100%;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  top: 50%;
+}
+
+.arrow_left {
+  display: table-cell;
+  width: 50%;
+  padding-left: 5px;
+  box-sizing: border-box;
+}
+
+.box_load_inner {
+  display: block;
+}
+
+.arrow_rigth {
+  display: table-cell;
+  width: 50%;
+  text-align: right;
+  padding-right: 5px;
+  box-sizing: border-box;
+}
+
+.arrow_span {
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.arrow_span:hover {
+  color: #f00;
+}
+
+.close {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.box_cover {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  opacity: 0;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.box_cover.active {
+  z-index: 10;
+  opacity: 1;
+}
+
+.box {
+  position: fixed;
+  width: 90%;
+  max-width: 600px;
+  height: 90%;
+  max-height: 700px;
+  top: 50%;
+  left: 50%;
+  padding: 10px;
+  box-sizing: border-box;
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: .3s;
+  transition: .3s;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+
+.box.active {
+  z-index: 15;
+  opacity: 1;
+  visibility: visible;
+}
+
+.box_load>li {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.box_load_inner {
+  padding: 10px 30px;
+  box-sizing: border-box;
+}
+
+.load_0 {
+  background: #c0f8c2;
+}
+
+.load_1 {
+  background: #f8eac0;
+}
+
+.load_2 {
+  background: #cdffe8;
+}
+
+.load_3 {
+  background: #ffd2d4;
+}
+
+.box_load_cover {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.link_list li {
+  cursor: pointer;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.link_list li:hover {
+  background: #ddd;
+  cursor: pointer;
+}
 .btn{
   font-size: 1.4rem;
   font-weight: 700;

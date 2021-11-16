@@ -22,7 +22,7 @@
 
   <div class="uploader">
   <div class="form1">
-    <%= form_tag("mypages/update", {multipart: true}) do %>
+    <%= form_tag(mypages_path, {multipart: true}) do %>
   <label>
     <input type="file" name="image" class="image_select"  accept='image/*' onchange="previewImage(this);"  required >
 <% if @user.image? %>
