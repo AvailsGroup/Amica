@@ -91,12 +91,17 @@ html{
   width: 200px;
   height: 200px;
 }
-.community_name{
 
+.card-title{
+  text-align: center;
 }
-.community_content{
-  font-size: 2px;
+.card-text{
+  font-size: 20px;
 }
 .userid{
   font-size: 2px;
+}
+.btn-primary{
+  position: center;
+  align-items: center;
 }
