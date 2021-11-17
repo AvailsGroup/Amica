@@ -6,7 +6,6 @@
       <%= csp_meta_tag %>
 
       <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-      <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
       <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,47 +16,22 @@
     <header>
       <nav>
         <% if user_signed_in? %>
-
-          <div class="container">
-            <div class="icon">
-              <%= image_tag("default_icon.png",class:"default_icon") %>
-            <%= link_to  pages_path,class: "icons" do %>
-              <i class="fab fa-fort-awesome"></i>
-            <% end %>
-            <%= link_to  searches_path,class: "icons" do %>
-              <i class="fab fa-searchengin"></i>
-            <% end %>
-            <%= link_to  chats_path,class: "icons" do %>
-              <i class="fas fa-comments"></i>
-            <% end %>
-            <%= link_to  communities_path,class: "icons" do %>
-              <i class="fas fa-users"></i>
-            <% end %>
-            <%= link_to  timelines_path,class: "icons" do %>
-              <i class="fas fa-clock"></i>
-            <% end %>
-            <%= link_to  mypages_path,class: "icons" do %>
-              <i class="fas fa-address-card"></i>
-            <% end %>
-          </div>
+          <strong><%= link_to current_user.userid, pages_show_path %></strong>
+          <%= link_to 'プロフィール変更', edit_user_registration_path %>
+          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
 
 
-          <div class="links">
-            <strong><%= link_to current_user.userid, pages_show_path,class: "link"%></strong>
-            <%= link_to 'プロフィール変更', edit_user_registration_path,class: "link" %>
-            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: "link" %>
         <% else %>
-          <%= link_to 'サインアップ', new_user_registration_path,class: "link" %>
-          <%= link_to 'ログイン', new_user_session_path,class: "link" %>
+          <%= link_to 'サインアップ', new_user_registration_path %>
+          <%= link_to 'ログイン', new_user_session_path %>
         <% end %>
-          </div>
-        </div>
       </nav>
     </header>
     <!-- ここに追加 -->
-
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+
+
     <%= yield %>
   </body>
 </html>
