@@ -1,40 +1,23 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <title>Amica</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
+<%= stylesheet_link_tag 'top', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'home/index' %>
 
-  <%= stylesheet_link_tag 'top', media: 'all', 'data-turbolinks-track': 'reload' %>
-
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
-  <%= javascript_pack_tag 'home/index' %>
-</head>
-
-<body>
-
-<div class="top">
-  <div class="title">
-    <div class="title-image">
-          <%= image_tag("top_icon.png") %>
-    </div>
-    <div class="title-text">
-      <p>Amicaはあなたの生活に<u>新たな出会いををプラス</u>する</p>
-      <p><u>コミュニケーションツール</u>です</p>
-    </div>
-  </div>
-  <div class="buttons">
-    <a href="/users/sign_up" class="btn btn--orange"><span>新規登録</span></a>
-    <a href="/users/sign_in" class="btn btn--orange"><span>ログイン</span></a>
-  </div>
+<%= image_tag("top_icon.png",class: "icon",style: "margin-bottom: 30px")%>
+<div class="title-text" style="margin-bottom: 30px">
+  <p>Amicaはあなたの生活に<u>新たな出会いををプラス</u>する</p>
+  <p><u>コミュニケーションツール</u>です</p>
 </div>
+<p class="lead">
+  <%= link_to "新規登録",
+              new_user_registration_path,
+              class: "btn btn-lg btn-secondary fw-bold border-white bg-dark",
+              style: "margin-right: 10px; width: 150px"
+  %>
+  <%= link_to "ログイン",
+              new_user_session_path,
+              class: "btn btn-lg btn-secondary fw-bold border-white bg-dark",
+              style: "width: 150px"
+  %>
+</p>
 
-<footer>
-</footer>
-</body>
-</html>
 
 
