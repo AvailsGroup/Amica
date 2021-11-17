@@ -1,29 +1,21 @@
-<!DOCTYPE html>
 <html lang="ja" xmlns="http://www.w3.org/1999/html">
-<%= stylesheet_link_tag 'about', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag 'contacts', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<body>
 
 <%= flash.now[:notice] %>
-<!--- この辺にログインの認証 --->
-<header>
-
-</header>
 
 <section class="ask">
-  <span class="big">お問い合わせ</span>
+  <h2>お問い合わせ</h2>
   <div class="medium">
-
     <%= form_for(@inquiry, url: maller_create_path) do |f|%>
       <%= f.label "名前" %>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, id: "inputEmail", class: "form-control",style: "height: 25px"%>
       <%= f.label "email" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" , id: "inputEmail", class: "form-control",style: "height: 25px"%><br />
       <%= f.label "お問い合わせ内容" %><br />
-      <%= f.text_area :message %><br>
-      <%= f.submit "送信" %>
-      <%= f.submit "クリア" ,type: :reset%>
+      <%= f.text_area :message , id: "inputEmail", class: "form-control"%><br>
+      <%= f.submit "送信", class:"w-25 btn btn-lg btn-primary" %>
+      <%= f.submit "クリア" ,type: :reset , class:"w-25 btn btn-lg btn-primary"%>
     <% end %>
   </div>
 </section>
