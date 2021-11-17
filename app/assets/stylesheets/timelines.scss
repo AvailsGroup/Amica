@@ -1,14 +1,15 @@
 // Place all the styles related to the timelines controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-div.activity {
-  padding: 0;
-  background: #ffffff;
-  overflow: hidden;
-  max-width: 700px;
-  margin: 20px auto;
-  font-size: 80%;
-  border: solid 1px #eeeeee;
-  height: 800px;
-  overflow-y: scroll;
+.back{
+background-color:#666666;
+}
+
+.timeline{
+  background-color: white;
+}
+
+.panel-content {
+  border-top: 1px solid #eee;
+  padding: 31px 20px 33px;
 }

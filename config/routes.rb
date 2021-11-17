@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :chats
   resources :mypages
 
+
+
   get "/"=>'home#top'
   get "/about" => 'home#about'
   get "/contact" => 'maller#new'
