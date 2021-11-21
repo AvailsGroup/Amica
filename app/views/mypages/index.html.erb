@@ -1,6 +1,5 @@
 
 <%= stylesheet_link_tag 'mypages', media: 'all', 'data-turbolinks-track': 'reload' %>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
 
 <script>
     function previewImage(obj)
@@ -26,10 +25,10 @@
     <%= form_tag("mypages/update", {multipart: true}) do %>
   <label>
     <input type="file" name="image" class="image_select"  accept='image/*' onchange="previewImage(this);"  required >
-<% if @user.image? %>
-  <%= image_tag "/user_images/#{@user.image}",class: "user_icon_edit"%>
+<% if @user.image.nil? %>
+      <%= image_tag "/user_images/default_icon.png" , class: "user_icon_edit" %>
 <% else %>
-  <%= image_tag "default_icon" , class: "user_icon_edit" %>
+      <%= image_tag "/user_images/#{@user.image}",class: "user_icon_edit"%>
 <% end %>
    </label><br>
       <p id="image_text">画像を選択してください</p>
