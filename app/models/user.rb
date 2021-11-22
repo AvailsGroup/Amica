@@ -6,5 +6,13 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable,
          :trackable, password_length: 8...128
 
+  has_one :profile
+  before_create :build_default_profile
+
+  private
+  def build_default_profile
+    build_profile
+    true
+  end
 
 end

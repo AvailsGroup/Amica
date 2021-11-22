@@ -1,3 +1,6 @@
+<%= stylesheet_link_tag "mypages"%>
+
+  マイページ
 
 <%= stylesheet_link_tag 'mypages', media: 'all', 'data-turbolinks-track': 'reload' %>
 
@@ -42,5 +45,40 @@
   </div>
 </div>
 
+<p>
+   <div class="row">
+         <div class="col-md-auto">
+               <%= image_tag 'background2.jpg',class:'myicon'%>
+         </div>
+         <div class="col-md-auto">
+           <div class="top">
+                     <p class="h6">ニックネーム</p>
+                     <%= current_user.nickname %><br>
+                     <p class="h6">ユーザーID</p>
+                    <%= current_user.userid %>
+          </div>
+         </div>
+   </div>
+             <div style=background-color:#eee;">
+             <div class="m-3"style="width:auto",style="background-color:#eee;">
+                   <%= link_to "編集", edit_mypage_path(current_user.id),class:'btn btn-outline-primary btn-lg m-1'%><br>
+               <div class="m-1">
+               学科：<%= @profiles.grade%><br>
+               </div>
+                 <div class="m-1">
+                 クラス：<%=@profiles.school_class%><br>
+                 </div>
+                   <div class="m-1">
+                   出席番号：<%=@profiles.number %><br>
+                   </div>
+                     <div class="m-1">
+                       学籍番号：<%=@profiles.student_id%><br>
+                     </div>
+               取得資格<br><div class="border border-dark bg-white m-1"><%=  @profiles.accreditation %><br></div>
 
+                         タグ、趣味<br><div class="border border-dark bg-white m-1"><%= @profiles.hobby %><br></div>
+                 　　
+            </div>
+            </div>
 </div>
+</body>
