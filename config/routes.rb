@@ -2,8 +2,11 @@ Rails.application.routes.draw do
 
 
   get 'users/controller'
-  devise_for :users
 
+  devise_for :users, controllers: {
+    :registrations => "users/registrations",
+    :sessions => "users/sessions",
+  }
 
   resources :profiles, only: [:index,:show] do
     resources :relationships, only: [:create,:destroy]
@@ -17,7 +20,6 @@ Rails.application.routes.draw do
   resources :timelines
   resources :chats
   resources :mypages
-
 
   get "/"=>'home#top'
   get "/about" => 'home#about'

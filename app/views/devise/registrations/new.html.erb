@@ -1,44 +1,22 @@
 <%= stylesheet_link_tag 'registrations', media: 'all', 'data-turbolinks-track': 'reload' %>
-<%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css', media: 'all', 'data-turbolinks-track': 'reload' %>
 <div class="register">
-  <h2>会員登録</h2>
+  <h2 style= "margin-bottom: 30px">会員登録</h2>
 
   <div id="contact_form">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
-
-      <div class ="inputs">
-        <div class="inputWithIcon">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input", :placeholder=>"email" %>
-          <i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i>
-        </div>
-
-        <div class="inputWithIcon">
-          <%= f.password_field :password, autocomplete: "new-password", class: "input" ,:placeholder=>"パスワード(8文字以上で設定してください)"%>
-          <i class="fa fa-unlock-alt fa-lg fa-fw" aria-hidden="true"></i>
-        </div>
-
-        <div class="inputWithIcon">
-          <%= f.password_field :password_confirmation, autocomplete: "new-password" , class: "input" ,:placeholder=>"パスワード(確認)"%>
-          <i class="fa fa-unlock-alt fa-lg fa-fw" aria-hidden="true"></i>
-        </div>
-
-        <div class="inputWithIcon">
-          <%= f.text_field :nickname , class: "input" ,:placeholder=>"ニックネーム"%>
-          <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
-        </div>
-
-        <div class="inputWithIcon">
-          <%= f.text_field :userid , class: "input" ,:placeholder=>"ユーザーID"%>
-          <i class="fa fa-id-card fa-lg fa-fw" aria-hidden="true"></i>
-        </div>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", id: "inputEmail", class: "form-control",:placeholder=>"email" ,style: "margin-bottom: 30px" %>
+          <%= f.password_field :password, autocomplete: "new-password", id: "inputEmail", class: "form-control",:placeholder=>"パスワード(8文字以上で設定してください)",style: "margin-bottom: 30px"%>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" , id: "inputEmail", class: "form-control",:placeholder=>"パスワード(確認)",style: "margin-bottom: 30px"%>
+          <%= f.text_field :nickname , id: "inputEmail", class: "form-control",:placeholder=>"ニックネーム",style: "margin-bottom: 30px"%>
+          <%= f.text_field :userid , id: "inputEmail", class: "form-control",:placeholder=>"ユーザーID",style: "margin-bottom: 30px"%>
       </div>
 
       <div class="button01">
-        <%= f.submit "登録", class:"submit_button"%>
+        <%= f.submit "登録", class:"w-25 btn btn-lg btn-primary"%>
       </div>
     <% end %>
-  </div>
+
 
   <div class="links">
   <%= render "devise/shared/links" %>
