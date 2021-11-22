@@ -1,9 +1,22 @@
 Rails.application.routes.draw do
+
+
+  get 'users/controller'
   devise_for :users
-  resources :maller
+
+
   resources :profiles, only: [:index,:show] do
     resources :relationships, only: [:create,:destroy]
   end
+
+  resources :maller
+  resources :pages
+  resources :homes
+  resources :communities
+  resources :searches
+  resources :timelines
+  resources :chats
+  resources :mypages
 
 
   get "/"=>'home#top'
@@ -15,7 +28,6 @@ Rails.application.routes.draw do
   get '/pages/show'
 
   get "profile/search"=>"profiles#search"
-
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -23,3 +23,6 @@ require("@rails/activestorage").start()
 require("channels")
 // 追記
 require('jquery')
+
+import "bootstrap";
+import "../stylesheets/application";
