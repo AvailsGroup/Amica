@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable,
          :trackable, password_length: 8...128
+
   # アソシエーションの定義
   # フォローしている側のユーザー (active relationship)
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -30,6 +31,14 @@ class User < ApplicationRecord
     active_relationships.find_by(followed_id: other_user.id)
   end
 
+  def followers_list
+    followers
+  end
+
+  def followings_list
+    followings
+  end
+
   # 友達（互いにフォローしている）をデータベースから取得
   def matchers
     followings & followers
@@ -44,7 +53,5 @@ class User < ApplicationRecord
   def follow_request?(user, other_user)
     !user.matchers?(other_user) && other_user.following?(user)
   end
-
-
 
 end

@@ -1,39 +1,62 @@
-<h1>Profiles#show</h1>
-<%= @user.userid %>
-<%= @user.email %>
-<% if @user.follow_request?(current_user, @user) %>
+<div class="form-wrap">
   <div class="form-group">
     <div class="schedule-item">
-      <div class="schedule-item-header text-left">
-        <p class="bold"><i class="fas fa-star"></i>You have follow request<i class="fas fa-star"></i></p>
-      </div>
       <div class="schedule-item-body text-left">
-        <p><%= @user.name %> requests you to be mate</p>
+        <h1><%= @user.nickname %></h1><p>@<%= @user.userid %></p>
       </div>
     </div>
   </div>
-<% end %>
 
-<% if current_user.matchers?(@user) %>
+
   <div class="form-group">
     <div class="schedule-item">
-      <div class="schedule-item-header text-left">
-        <p class="bold"><%= @user.name %> is your mate</p>
+      <div class="schedule-item-body text-left">
+        <p>フォロー中 : <%= @user.followings_list.count %></p>
       </div>
     </div>
   </div>
-<% end %>
 
-<% if current_user.id == @user.id %>
-
-<% else %>
-  <% unless current_user.following?(@user) %>
-    <div class="actions">
-      <%= link_to 'Request to be mate', profile_relationships_path(@user.id), method: :post, class:"sign-up-btn" %>
+  <div class="form-group">
+    <div class="schedule-item">
+      <div class="schedule-item-body text-left">
+        <p>フォロワー : <%= @user.followers_list.count %></p>
+      </div>
     </div>
-  <% else %>
-    <div class="actions">
-      <%= link_to 'Cancel to your request', profile_relationship_path(@user.id), method: :delete, class:"sign-up-btn" %>
+  </div>
+
+  <% if @user.follow_request?(current_user, @user) %>
+    <div class="form-group">
+      <div class="schedule-item">
+        <div class="schedule-item-header text-left">
+          <p class="bold">フォローされています</p>
+        </div>
+      </div>
     </div>
   <% end %>
-<% end %>
+  <% if current_user.matchers?(@user) %>
+    <div class="form-group">
+      <div class="schedule-item">
+        <div class="schedule-item-header text-left">
+          <p class="bold">相互フォローです</p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% if current_user.id == @user.id %>
+  <% else %>
+    <% unless current_user.following?(@user) %>
+      <div class="actions">
+        <%= link_to 'フォローする', profile_relationships_path(@user.userid), method: :post, class:"sign-up-btn" %>
+      </div>
+    <% else %>
+      <div class="actions">
+        <%= link_to 'フォローを解除する',  profile_relationship_path(@user.userid), method: :delete, class:"sign-up-btn" %>
+      </div>
+    <% end %>
+  <% end %>
+  <% if current_user.id == @user.id %>
+    <div class="actions">
+      <%= link_to 'プロフィールを編集する', edit_user_registration_path, class:"sign-up-btn" %>
+    </div>
+  <% end %>
+</div>
