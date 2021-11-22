@@ -1,11 +1,11 @@
 class MypagesController < ApplicationController
+
   def index
     @user = current_user
   end
 
   def create
     @user = current_user
-    user = @user
 
         if params[:image]
           @user.update(image:"#{@user.id}.jpg")
