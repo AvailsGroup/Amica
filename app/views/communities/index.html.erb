@@ -13,13 +13,13 @@
           <div class="col">
             <div class="card">
                 <% if community.icon? %>
-                  <%= image_tag "/communities_image/#{community.icon}",class: "img-fluid",width: "300",height: "300" %><br>
+                  <%= image_tag "/communities_image/#{community.icon}",class: "img-fluid" %><br>
                 <% else %>
-                  <%= image_tag "/communities_image/default_icon.png/", class: "img-fluid",width: "300",height: "300"%><br>
+                  <%= image_tag "/communities_image/default_icon.png/", class: "img-fluid" %><br>
                 <% end %>
                 <div class="carddy">
                   <h5 class="card-title"><%= community.name %></h5>
-                  <p class="card-text"><%= community.content .truncate(25, omission: '...')%></p>
+                  <p class="card-text"><%= community.content .truncate(15, omission: '...')%></p>
                 </div>
                 <div class="card">
                   <ul class="list-group list-group-flush">
