@@ -88,25 +88,14 @@ html{
   top: 3px;
 }
 .community_icon_edit{
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
+}
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1400px; //例えば
+  max-height: 700px;
 }
 
-.card-title{
-  text-align: center;
-}
-.card-text{
-  height: 150px;
-  font-size: 17px;
-}
-.userid{
-  font-size: 2px;
-}
-.btn-primary{
-  position: center;
-  align-items: center;
-}
-.card img{
-  width: 100%;
-}
 

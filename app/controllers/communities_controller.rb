@@ -33,6 +33,6 @@ class CommunitiesController < ApplicationController
 
   private
   def community_params
-    params.require(:community).permit(:name,:content,:icon)
+    params.require(:community).permit(:name,:content,:icon,:tag)
   end
 end

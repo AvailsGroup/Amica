@@ -6,24 +6,24 @@
       <%=link_to "コミュニティ新規作成","/communities/new"%>
       </p>
     </div>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4  g-lg-4">
       <% @community.each do |community| %>
         <%= link_to community_path(community.id), style: "text-decoration: none" do %>
           <div class="col">
             <div class="card">
                 <% if community.icon? %>
-                  <%= image_tag "/communities_image/#{community.icon}",class: "card-img-top",width: "300",height: "300" %><br>
+                  <%= image_tag "/communities_image/#{community.icon}",class: "img-fluid",width: "300",height: "300" %><br>
                 <% else %>
-                  <%= image_tag /"default_icon"/, class: "card-img-top",width: "300",height: "300"%><br>
+                  <%= image_tag "/communities_image/default_icon.png/", class: "img-fluid",width: "300",height: "300"%><br>
                 <% end %>
                 <div class="carddy">
                   <h5 class="card-title"><%= community.name %></h5>
-                  <p class="card-text"><%= community.content .truncate(100, omission: '...')%></p>
+                  <p class="card-text"><%= community.content .truncate(25, omission: '...')%></p>
                 </div>
                 <div class="card">
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item"><%= community.tag %></li>
                     <li class="list-group-item">Dapibus ac facilisis in</li>
                     <li class="list-group-item">Vestibulum at eros</li>
                   </ul>
