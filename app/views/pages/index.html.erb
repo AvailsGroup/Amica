@@ -1,19 +1,27 @@
 <%= javascript_pack_tag 'pages/index' %>
 <%= stylesheet_link_tag 'pages', media: 'all', 'data-turbolinks-track': 'reload' %>
-
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+<main>
+
+<div class="profile">　　                                                  <!--my profile&name表示-->
+  <%= image_tag 'top_icon.png',class:'example1' %>　
+  <%= current_user.name %>
+  <%= current_user.nickname %>
+  (@<%= current_user.userid %>)
+</div>
+
 <div class="row ">
 <div class="col-md-6" style="background: white; height: 650px;">            <!--左画面の作成-->
 <br>
-  <div class="profile">　　                                                  <!--my profile&name表示-->
-    <%= image_tag 'top_icon.png',class:'example1' %>　
-    <span>友杉　颯太</span>
-    <span>(ニックネーム)</span>
+  <div class="page-header" style="text-align: center">                      <!--帯作成-->
+    <h1>友だち</h1>
   </div>
- <br>
+
+  <hr class="style" style="border-top: 1px solid #8c8b8b">
+
   <form id="form1" action="自分のサイトURL" method="get">                     <!--検索ボックス作成-->
     <input id="sbox1" id="s" name="s" type="text" placeholder="友達を検索" />
     <input id="sbtn1" type="submit" value="検索" /></form>
@@ -22,7 +30,6 @@
   <button
     type="button"
     class="btn btn-secondary btn-lg w-100 mt-2"
-    style="margin: 7px"
     data-toggle="collapse"
     data-target="#collapseExample1"
     aria-expanded="false"
@@ -34,6 +41,7 @@
 
   <!-- 対象のコンテンツ -->
   <div class="collapse show" id="collapseExample1">
+    <br>
       <%= image_tag 'top_icon.png',class:'example1' %>　
       <span>須山　龍</span>
       <span>(ニックネーム)</span>
@@ -42,7 +50,6 @@
   <button
     type="button"
     class="btn btn-secondary btn-lg w-100 mt-2"
-    style="margin: 7px"
     data-toggle="collapse"
     data-target="#collapseExample2"
     aria-expanded="false"
@@ -54,16 +61,27 @@
 
   <!-- 対象のコンテンツ -->
   <div class="collapse show" id="collapseExample2" >
+    <% @mates.each do |user| %>　
+      <br>
       <%= image_tag 'top_icon.png',class:'example1' %>　
-      <span>遠藤　圭樹</span>
-      <span>(ニックネーム)</span>
+      <%= user.name %>
+      (<%= user.nickname %>)
+      <%=user.id %>
+      <%= link_to "favorite_button"  ,edit_page_path(user.id), method: :post %>
+      <% end %>
     </div>
   </div>
                                                                     <!--左画面の作成ここまで-->
 
 <div class="col-md-6" style="background: white; height: 650px;">　
-
  <br>
+
+  <div class="page-header" style="text-align: center">                      <!--帯作成-->
+    <h1>コミュニティ</h1>
+  </div>
+
+  <hr class="style" style="border-top: 1px solid #8c8b8b">
+
   <form id="form2" action="自分のサイトURL" method="get">                     <!--検索ボックス作成-->
     <input id="sbox1" id="s" name="s" type="text" placeholder="グループを検索" />
     <input id="sbtn1" type="submit" value="検索" /></form>
@@ -71,7 +89,6 @@
   <button
     type="button"
     class="btn btn-secondary btn-lg w-100 mt-2"
-    style="margin: 7px"
     data-toggle="collapse"
     data-target="#collapseExample3"
     aria-expanded="false"
@@ -83,6 +100,7 @@
 
   <!-- 対象のコンテンツ -->
   <div class="collapse show" id="collapseExample3">
+    <br>
     <%= image_tag 'top_icon.png',class:'example1' %>　
     <span>とある愛好家</span>
   </div>
@@ -90,11 +108,10 @@
   <button
     type="button"
     class="btn btn-secondary btn-lg w-100 mt-2"
-    style="margin: 7px"
     data-toggle="collapse"
-    data-target="#collapseExample4"
+    data-target="#collapseExample3"
     aria-expanded="false"
-    aria-controls="collapseExample4"
+    aria-controls="collapseExample3"
   >
     コミュニティ
   </button>
@@ -107,3 +124,4 @@
   </div>
 </div>     <!--右画面制作-->
 </div>
+</main>

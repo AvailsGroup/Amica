@@ -2,9 +2,13 @@
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-
+main{
+  margin-left: 20px;
+  margin-right: 20px;
+}
 
 #form1 {                     /* 検索フォーム編集 */
+  margin-top: 79px;
   text-align: center;
   font-size: 18px;
 }
