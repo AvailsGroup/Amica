@@ -6,6 +6,8 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable,
          :trackable, password_length: 8...128
 
+  has_many :favorite
+
   # アソシエーションの定義
   # フォローしている側のユーザー (active relationship)
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -53,5 +55,6 @@ class User < ApplicationRecord
   def follow_request?(user, other_user)
     !user.matchers?(other_user) && other_user.following?(user)
   end
+
 
 end

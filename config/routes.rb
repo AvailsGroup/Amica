@@ -5,7 +5,10 @@ Rails.application.routes.draw do
     resources :relationships, only: [:create,:destroy]
   end
 
-  resources :pages
+  resources :pages, only:[:index,:show] do
+    resources :favorite, only[:create,:destroy]
+  end
+
   resources :homes
   resources :communities
   resources :searches
