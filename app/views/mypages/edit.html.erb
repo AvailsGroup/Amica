@@ -16,12 +16,10 @@
 
 
 <div class="mw-100 p-3" style="background-color: #eee;">
-  <div class="profile"style="width:auto">
+  <div class="profile" style="width:auto">
 
   <%= form_with model:[@profile], url: mypage_path , multipart: true do |f| %>
-
       <h1>EDIT PAGE</h1>
-
       <span>現在のアイコン</span>
 
       <div class="uploader">
@@ -38,40 +36,36 @@
             <p>
               <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px;">
             </p>
-
         </div>
       </div>
 
-
       <div class="m-1">
-         学科<br><%= f.select :grade, [["情報処理科1年", "情報処理科1年"],["情報処理科2年", "情報処理科2年"],["実践IoT1年", "実践IoT1年"],["実践IoT2年", "実践IoT2年"],
+         学科<br>
+        <%= f.select :grade, [["情報処理科1年", "情報処理科1年"],["情報処理科2年", "情報処理科2年"],["実践IoT1年", "実践IoT1年"],["実践IoT2年", "実践IoT2年"],
                                       ["Web技術科1年", "Web技術科1年"],["Web技術科2年", "Web技術科2年"],["ビジネス科1年", "ビジネス科1年"],["ビジネス科2年", "ビジネス科2年"],
                                       ["先端ITシステム1年", "先端ITシステム1年"],["先端ITシステム2年", "先端ITシステム2年"],["先端ITシステム3年", "先端ITシステム3年"],["ITライセンス1年", "ITライセンス1年"],
                                       ["実践AI科1年", "実践AI科1年"],["実践AI科2年", "実践AI科2年"],["実践AI科3年", "実践AI科3年"],["実践AI科4年", "実践AI科4年"],
                                       ["情報セキュリティ学科1年", "情報セキュリティ学科1年"],["情報セキュリティ学科2年", "情報セキュリティ学科2年"],["情報セキュリティ学科3年", "情報セキュリティ学科3年"],["情報セキュリティ学科4年", "情報セキュリティ学科4年"]],class:'form-control',include_blank: "学科",autocomplete:"grade"%>
       </div>
 
-        <div class="m-1">
-       クラス<br><%= f.select :school_class, [["1", "1"], ["2", "2"], ["3", "3"],["4", "4"],["5", "5"],["6", "6"],["7", "7"],["8", "8"],["9", "9"],["10", "10"]], class:'form-control',include_blank: "クラス", autocomplete:"school_class" %>
-        </div>
+      <div class="m-1">
+        クラス<br><%= f.select :school_class, [["1", "1"], ["2", "2"], ["3", "3"],["4", "4"],["5", "5"],["6", "6"],["7", "7"],["8", "8"],["9", "9"],["10", "10"]], class:'form-control',include_blank: "クラス", autocomplete:"school_class" %>
+      </div>
       <div class="m-1">
         番号<br><%= f.text_field :number,class:'form-control',autocomplete:"number" %>
       </div>
       <div class="m-1">
-      学籍番号<br><%= f.text_field :student_id,class:'form-control',autocomplete:"student_id" %>
+        学籍番号<br><%= f.text_field :student_id,class:'form-control',autocomplete:"student_id" %>
       </div>
-        <div class="m-1">
-    取得資格<br>
-    <%= f.text_area :accreditation,class:'form-control',autocomplete:"accreditation" %>
-        </div>
       <div class="m-1">
-      タグ、趣味
-    <%= f.text_area :hobby,class:'form-control',autocomplete:"hobby"%>
-
-        <%=f.submit "更新",class:'btn btn-outline-primary btn-lg m-1'%>
-   </div>
+        取得資格<br>
+        <%= f.text_area :accreditation,class:'form-control',autocomplete:"accreditation" %>
       </div>
-  </p>
-  </body>
-<%end %>
+      <div class="m-1">
+        タグ、趣味
+        <%= f.text_area :hobby,class:'form-control',autocomplete:"hobby"%>
+        <%=f.submit "更新",class:'btn btn-outline-primary btn-lg m-1'%>
+      </div>
+    <% end %>
   </div>
+</div>

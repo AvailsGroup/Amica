@@ -7,6 +7,7 @@ class ProfilesController < ApplicationController
     @following = current_user.followings_list
     @follower = current_user.followers_list
     @users = User.all
+    @profile = Profile.find(current_user.id)
   end
 
   def show
