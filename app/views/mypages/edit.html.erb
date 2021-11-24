@@ -69,3 +69,10 @@
     <% end %>
   </div>
 </div>
+
+<form id="form">
+  <div id="file-input"><input id="file-selecter" type="file" name="file" accept="image/jpeg, image/png"></div>
+  <div><canvas id="thumbnail" width="10" height="10"></canvas></div>
+  <input type="button" value="送信" onclick="submitResizeFile()">
+  <div id="message"></div>
+</form>
