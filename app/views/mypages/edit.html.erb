@@ -17,6 +17,7 @@
 
 <div class="mw-100 p-3" style="background-color: #eee;">
   <div class="profile"style="width:auto">
+
   <%= form_with model:@profile, url: mypage_path , multipart: true do |f| %>
 
       <h1>EDIT PAGE</h1>
@@ -26,7 +27,7 @@
       <div class="uploader">
         <div class="form1">
             <label>
-              <input type="file" name="image" class="image_select"  accept='image/*' style="display: none" onchange="previewImage(this);"  required >
+              <input type="file" name="image" class="image_select"  accept='image/*' style="display: none" onchange="previewImage(this);">
               <% if @user.image? %>
                 <%= image_tag "/user_images/#{@user.image}",class: "user_icon"%>
               <% else %>
@@ -42,7 +43,6 @@
       </div>
 
 
-
       <div class="m-1">
          学科<br><%= f.select :grade, [["情報処理科1年", "情報処理科1年"],["情報処理科2年", "情報処理科2年"],["実践IoT1年", "実践IoT1年"],["実践IoT2年", "実践IoT2年"],
                                       ["Web技術科1年", "Web技術科1年"],["Web技術科2年", "Web技術科2年"],["ビジネス科1年", "ビジネス科1年"],["ビジネス科2年", "ビジネス科2年"],
@@ -50,6 +50,7 @@
                                       ["実践AI科1年", "実践AI科1年"],["実践AI科2年", "実践AI科2年"],["実践AI科3年", "実践AI科3年"],["実践AI科4年", "実践AI科4年"],
                                       ["情報セキュリティ学科1年", "情報セキュリティ学科1年"],["情報セキュリティ学科2年", "情報セキュリティ学科2年"],["情報セキュリティ学科3年", "情報セキュリティ学科3年"],["情報セキュリティ学科4年", "情報セキュリティ学科4年"]],class:'form-control',include_blank: "学科",autocomplete:"grade"%>
       </div>
+
         <div class="m-1">
        クラス<br><%= f.select :school_class, [["1", "1"], ["2", "2"], ["3", "3"],["4", "4"],["5", "5"],["6", "6"],["7", "7"],["8", "8"],["9", "9"],["10", "10"]], class:'form-control',include_blank: "クラス", autocomplete:"school_class" %>
         </div>

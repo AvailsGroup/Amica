@@ -1,47 +1,51 @@
 <%= stylesheet_link_tag 'mypages', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 
-<div class="body">
-
-<p>
-
-             <div style=background-color:#eee;">
-             <div class="m-3"style="width:auto",style="background-color:#eee;">
-               <h1>MYPAGE</h1>
-               <div class="col-md-auto">
-                 <% if @user.image? %>
-                   <%= image_tag "/user_images/#{@user.image}",class: "user_icon"%>
-                 <% else %>
-                   <%= image_tag "default_icon" , class: "user_icon" %>
-                 <% end %>
-               </div>
-               <div class="col-md-auto">
-                 <div class="top">
-                   <p class="h6">ニックネーム</p>
-                   <%= current_user.nickname %><br>
-                   <p class="h6">ユーザーID</p>
-                   <%= current_user.userid %>
-                 </div>
-               </div>
-
-               <div class="m-1">
-               学科：<%= @profiles.grade%><br>
-               </div>
-                 <div class="m-1">
-                 クラス：<%=@profiles.school_class%><br>
-                 </div>
-                   <div class="m-1">
-                   出席番号：<%=@profiles.number %><br>
+<body>
+             <div style="width:auto">
+                  <div class="col-md-auto">
+                   <h1>MYPAGE</h1>
                    </div>
-                     <div class="m-1">
-                       学籍番号：<%=@profiles.student_id%><br>
-                     </div>
-               取得資格<br><div class="border border-dark bg-white m-1"><%=  @profiles.accreditation %><br></div>
+                 <% if @user.image? %>
+                   <div class="d-block mx-auto" style="width: 200px;height: 200px; ">
+                   <%= image_tag "/user_images/#{@user.image}",class:"img-fluid"  , size: '200x200',style: 'float-left'%>
+                 </div>
+                 <% else %>
+                   <%= image_tag "default_icon" , class: "img-rounded" , size: '200x200' %>
+                 <% end %>
+                 <div style=" width:auto;">
+               <h2 class="text-center"><%= current_user.nickname %></h2>
+               <h2 class="text-center background">@<%= current_user.userid %></h2>
+            </div>
+            <p class="m-1">
+              学科:<%= @profiles.grade %>
+             </p>
 
-                         タグ、趣味<br><div class="border border-dark bg-white m-1"><%= @profiles.hobby %><br></div>
+               <p class="m-1 background">
+                 クラス：<%=@profiles.school_class%>
+               </p>
+               <p class="m-1">
+                  出席番号：<%=@profiles.number %>
+               </p>
+               <p class="m-1 background">
+                       学籍番号：<%=@profiles.student_id%>
+               </p>
+               <p class="m-1">
+                 資格取得:
+               </p>
+               <p class="m-1 background">
+                 <%=  @profiles.accreditation %>
+               </p>
+               <p class="m-1">
+                 タグ、趣味
+               </p>
+               <p class="m-1 background">
+                 <%= @profiles.hobby %>
+               </p>
+               <div class="align-self-center">
                <%= link_to "編集", edit_mypage_path(current_user.id),class:'btn btn-outline-primary btn-lg m-1'%>
+               </div>
                  　　
             </div>
             </div>
-</div>
 </body>
