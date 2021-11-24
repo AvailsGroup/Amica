@@ -12,17 +12,37 @@
 
 <div class="border border-5 rounded" style="margin: 50px">
   <div class="timeline mx-auto" >
-  <ul class="header-menus">
-      <%= form_for(@create ,url:timelines_path) do |f|%>
-        <div class="form-group">
-          <%= f.text_area :content, placeholder:"どしたん？",class: "form-control" %>
-        </div>
-        <%= f.submit "投稿"%>
-      <% end %>
-  </ul>
-<div class="activity" >
-  <% @posts.each do |post| %>
-  <%= post.content %><br>
-    </div>
-<% end %>
+    <ul class="header-menus">
+        <%= form_for(@create ,url:timelines_path) do |f|%>
+          <div class="form-group">
+            <%= f.text_area :content, placeholder:"タイムラインを投稿してください",class: "form-control" %>
+          </div>
+          <%= f.submit "投稿"%>
+        <% end %>
+    </ul>
 
+    <% @posts.each do |p| %>
+      <div class="panel-content panel-activity">
+      <p><%= @user.find(p.userid).nickname %></p>
+      <p><%= p.content %></p>
+      <p><%= p.created_at.to_s(:datetime_jp) %></p>
+
+        <% if current_user.liked_by?(p.id) %>
+          <%= link_to timeline_like_path(p.id,current_user.id), method: :delete , remote: true do%>
+              <i class="fas fa-heart"></i>
+          <% end %>
+          <%= p.likes.count %>
+        <% else %>
+          <%= link_to timeline_likes_path(p.id), method: :post, remote: true do %>
+            <i class="far fa-heart"></i>
+          <% end %>
+          <%= p.likes.count %>
+        <% end %>
+        <%= link_to(timeline_path(p.id),method: :delete) do%>
+          <i class="fas fa-trash"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+</body>
