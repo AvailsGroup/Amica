@@ -58,6 +58,11 @@
                     <i class="fas fa-box-open"></i>another
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <% if current_user.try(:admin?) %>
+                      <li>
+                        <%= link_to '管理者コンソールを表示', rails_admin_path, class: "link nav-link" %>
+                      </li>
+                    <% end %>
                     <li>
                       <%= link_to 'マイページ', profile_path(current_user.userid),class: "link nav-link" %>
                     </li>

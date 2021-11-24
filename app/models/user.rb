@@ -54,4 +54,7 @@ class User < ApplicationRecord
     !user.matchers?(other_user) && other_user.following?(user)
   end
 
+  def active?
+    !ban?
+  end
 end
