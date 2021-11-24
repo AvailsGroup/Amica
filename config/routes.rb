@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+
+  get 'users/controller'
+
   devise_for :users, controllers: {
     :registrations => "users/registrations",
     :sessions => "users/sessions",
@@ -13,6 +16,9 @@ Rails.application.routes.draw do
   resources :timelines
   resources :chats
   resources :mypages
+  post 'mypages/update', to: 'mypages#update'
+
+
 
   get "/"=>'home#top'
   get "/about" => 'home#about'

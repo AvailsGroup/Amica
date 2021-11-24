@@ -7,5 +7,4 @@ class User < ApplicationRecord
          :trackable, password_length: 8...128
 
 
-
 end
