@@ -6,11 +6,19 @@ class MypagesController < ApplicationController
   end
 
   def edit
+    @user = current_user
     @profile = Profile.find(current_user.id)
   end
 
   def update
     Profile.update(profile_params)
+
+    if params[:image]
+      Profile.update(image:"#{current_user.id}.jpg")
+      image = params[:image]
+      File.binwrite("public/user_images/#{current_user.image}", image.read)
+      flash[:notice] = "ユーザー情報を編集しました"
+    end
     redirect_to(mypages_path)
   end
 
