@@ -4,7 +4,7 @@ class MypagesController < ApplicationController
     @user = current_user
   end
 
-  def update
+  def create
     @user = current_user
 
         if params[:image]
