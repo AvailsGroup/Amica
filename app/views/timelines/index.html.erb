@@ -2,14 +2,12 @@
 <%= stylesheet_link_tag 'timelines', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 </head>
 
+<body>
 <div class="border border-5 rounded" style="margin: 50px">
   <div class="timeline mx-auto" >
     <ul class="header-menus">
@@ -22,26 +20,11 @@
     </ul>
 
     <% @posts.each do |p| %>
-      <div class="panel-content panel-activity">
-      <p><%= @user.find(p.userid).nickname %></p>
-      <p><%= p.content %></p>
-      <p><%= p.created_at.to_s(:datetime_jp) %></p>
-
-        <% if current_user.liked_by?(p.id) %>
-          <%= link_to timeline_like_path(p.id,current_user.id), method: :delete , remote: true do%>
-              <i class="fas fa-heart"></i>
-          <% end %>
-          <%= p.likes.count %>
-        <% else %>
-          <%= link_to timeline_likes_path(p.id), method: :post, remote: true do %>
-            <i class="far fa-heart"></i>
-          <% end %>
-          <%= p.likes.count %>
+      <% unless current_user.id != p.userid and current_user.following?(@user.find(p.userid)) == false %>
+        <div id="post_<%= p.id %>">
+          <%= render "timelines/post",post:p, user:@user %>
+        </div>
         <% end %>
-        <%= link_to(timeline_path(p.id),method: :delete) do%>
-          <i class="fas fa-trash"></i>
-        <% end %>
-      </div>
     <% end %>
   </div>
 </div>

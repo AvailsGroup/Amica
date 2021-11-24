@@ -12,10 +12,13 @@ Rails.application.routes.draw do
   resources :homes
   resources :communities
   resources :searches
-  resources :timelines
+
   resources :chats
   resources :mypages
 
+  resources :timelines do
+    resources :likes,only:[:create,:destroy]
+  end
   resources :profiles, only: [:index,:show] do
     resources :relationships, only: [:create,:destroy]
   end

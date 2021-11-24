@@ -28,7 +28,7 @@ class User < ApplicationRecord
 
   # 相手をフォローしていればtrueを返す
   def following?(other_user)
-    active_relationships.find_by(followed_id: other_user.id)
+    active_relationships.where(followed_id: other_user.id).exists?
   end
 
   def followers_list
