@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="h-100">
 
 <head>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <title>Amica</title>
   <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
-
 
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
@@ -15,16 +14,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
 </head>
 
-<body>
-<header>
-  <div class="header buttons">
-    <a href="/" class="Link"><span>TOP</span></a>
-    <a href="/about" class="Link"><span>アプリについて</span></a>
-    <a href="/contact" class="Link"><span>contact</span></a>
-  </div>
-</header>
-<a href="/"><%= image_tag "header_icon.png", alt: "header_icon", class: "header_icon" %></a>
-<%= yield %>
-</body>
+  <body class="d-flex h-100 text-center text-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="mb-auto">
+        <div>
+          <h3 class="float-md-start mb-0" style="color: #037394;">Amica</h3>
+          <nav class="nav nav-masthead　bg-blue justify-content-center float-md-end">
+            <a class="nav-link" aria-current="page" href="/">ホーム</a>
+            <a class="nav-link" href="<%= about_path %>">Amicaについて</a>
+            <a class="nav-link" href="<%= contact_path %>">お問い合わせ</a>
+          </nav>
+        </div>
+      </header>
 
+      <main class="px-3">
+        <%= yield %>
+      </main>
+
+      <footer class="mt-auto text-dark">
+        <p>©Avails Group All rights reserved</p>
+      </footer>
+    </div>
+  </body>
 </html>

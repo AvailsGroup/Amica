@@ -7,6 +7,6 @@ environment.plugins.append('Provide',
         $: 'jquery/src/jquery',
         jQuery: 'jquery/src/jquery'
     })
-);
-
-module.exports = environment;
+)
+// ここまで
+module.exports = environment
