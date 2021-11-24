@@ -13,12 +13,12 @@
 </script>
 
 
-<p>
+
 
 <div class="mw-100 p-3" style="background-color: #eee;">
   <div class="profile"style="width:auto">
 
-  <%= form_with model:@profile, url: mypage_path , multipart: true do |f| %>
+  <%= form_with model:[@profile], url: mypage_path , multipart: true do |f| %>
 
       <h1>EDIT PAGE</h1>
 

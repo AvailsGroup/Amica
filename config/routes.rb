@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :chats
   resources :mypages
 
+  post 'mypages/nickname', to:'mypages#update_nickname'
 
 
   get "/"=>'home#top'

@@ -1,6 +1,5 @@
 <%= stylesheet_link_tag 'mypages', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-
 <body>
              <div style="width:auto">
                   <div class="col-md-auto">
@@ -14,6 +13,10 @@
                    <%= image_tag "default_icon" , class: "img-rounded" , size: '200x200' %>
                  <% end %>
                  <div style=" width:auto;">
+
+
+
+
                <h2 class="text-center"><%= current_user.nickname %></h2>
                <h2 class="text-center background">@<%= current_user.userid %></h2>
             </div>
@@ -45,7 +48,16 @@
                <div class="align-self-center">
                <%= link_to "編集", edit_mypage_path(current_user.id),class:'btn btn-outline-primary btn-lg m-1'%>
                </div>
+
+               <%= form_with model:@users,url:mypages_nickname_path do |f| %>
+                 <div class="m-1">
+                   ニックネーム(※10文字までです)<br><%= f.text_field :nickname,class:'form-control',value: current_user.nickname,maxlength: "20" %>
+                 <%=f.submit "更新",class:' btn btn-outline-primary btn-lg m-1'%>
+                 </div>
+               <% end %>
                  　　
             </div>
             </div>
+
+
 </body>
