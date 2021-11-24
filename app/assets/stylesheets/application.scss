@@ -19,7 +19,7 @@ html{
 
 body{
   margin: 0;
-}
+ }
 
 
 header {
@@ -27,54 +27,33 @@ header {
   border-bottom: solid 2px;
 }
 
-.container{
-  display: flex;
-  justify-content: space-between;
-}
 
 .icons{
-  color:#F7F7F7;
-  text-decoration: none;
   font-size: 1.6rem;
 }
 
 .link{
-  font-size: 20px;
-  color: #F7F7F7;
+ color: #212529;
   text-decoration: none;
 }
 
 .link:hover{
-  color: #4cbdbd;
+  color: #FFFFFF;
 }
 
 .default_icon{
-  background-color: #F7F7F7;
-  width: 55px;
+  background-color: #FFFFFF;
+  border: solid 2px;
   border-radius: 50%;
-  border:solid 1px black;
-  position: fixed;
-  left: 8px;
-  top: 8px;
+  width: 60px;
 }
 
-// メッセージ一覧
-#message-container {
-  max-width: 768px;
-  margin: 0 auto;
-  padding: 1rem 1rem 8rem 1rem;
-}
-
-// メッセージ投稿フォーム
-footer {
-  max-width: 768px;
-  padding: 1rem;
-  margin: 0 auto;
-  background-color: white;
-}
 
 .user_icon{
   border: solid 2px;
   border-radius: 50%;
-  width: 100px;
+    width: 60px;
+}
+.name{
+  font-size: 1.2rem;
 }
