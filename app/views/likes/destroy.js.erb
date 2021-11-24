@@ -1,1 +1,1 @@
-document.getElementById('post_<%= @post.id %>').innerHTML = '<%= j(render "timelines/post", post: @post) %>'
+document.getElementById('post_<%= @post.id %>').innerHTML = '<%= j(render "timelines/post", post: @post,user:@user) %>'
