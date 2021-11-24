@@ -77,3 +77,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 
 gem 'rake'
+
+gem 'rails_admin'
+
+gem 'rack-attack'

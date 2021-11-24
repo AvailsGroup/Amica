@@ -10,13 +10,11 @@
           <%= f.password_field :password_confirmation, autocomplete: "new-password" , id: "inputEmail", class: "form-control",:placeholder=>"パスワード(確認)",style: "margin-bottom: 30px"%>
           <%= f.text_field :nickname , id: "inputEmail", class: "form-control",:placeholder=>"ニックネーム",style: "margin-bottom: 30px"%>
           <%= f.text_field :userid , id: "inputEmail", class: "form-control",:placeholder=>"ユーザーID",style: "margin-bottom: 30px"%>
-      </div>
-
       <div class="button01">
         <%= f.submit "登録", class:"w-25 btn btn-lg btn-primary"%>
       </div>
     <% end %>
-
+  </div>
 
   <div class="links">
   <%= render "devise/shared/links" %>
