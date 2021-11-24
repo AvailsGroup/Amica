@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag 'top', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= javascript_pack_tag 'home/index' %>
 
@@ -9,13 +10,13 @@
 <p class="lead">
   <%= link_to "新規登録",
               new_user_registration_path,
-              class: "btn btn-lg btn-secondary fw-bold border-white bg-dark",
-              style: "margin-right: 10px; width: 150px"
+              class: "btn btn-lg btn-secondary fw-bold border-white bg-blue",
+              style: "margin-right: 10px; width: 150px;color:#FFF"
   %>
   <%= link_to "ログイン",
               new_user_session_path,
-              class: "btn btn-lg btn-secondary fw-bold border-white bg-dark",
-              style: "width: 150px"
+              class: "btn btn-lg btn-secondary fw-bold border-white bg-blue",
+              style: "width: 150px;color:#FFF"
   %>
 </p>
 
