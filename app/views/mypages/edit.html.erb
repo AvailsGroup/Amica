@@ -1,5 +1,8 @@
 <%= stylesheet_link_tag "mypages"%>
-
+<%= javascript_pack_tag 'mypages/edit'%>
+<head>
+  <script type="text/javascript" src="dist/cropper.js" charset="UTF-8"></script>
+</head>
 <script>
     function previewImage(obj)
     {
@@ -27,11 +30,11 @@
             <label>
               <input type="file" name="image" class="image_select"  accept='image/*' style="display: none" onchange="previewImage(this);">
               <% if @user.image? %>
-                <%= image_tag "/user_images/#{@user.image}",class: "user_icon"%>
+                <%= image_tag "/user_images/#{@user.image}",class: "user_image", style: "max-width:200px;"%>
               <% else %>
-                <%= image_tag "default_icon" , class: "user_icon" %>
+                <%= image_tag "default_icon" , class: "user_image", style: "max-width:200px;"%>
               <% end %>
-            </label><br>
+            </label><br /><br />
             <p id="image_text">画像を選択してください</p>
             <p>
               <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px;">
