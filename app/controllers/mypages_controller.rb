@@ -9,13 +9,13 @@ class MypagesController < ApplicationController
   def edit
     @user = current_user
     @profile = Profile.find(current_user.id)
-    @users = User.new
+
   end
 
   def update
     Profile.update(profile_params)
     if params[:image]
-      Profile.update(image:"#{current_user.id}.jpg")
+      current_user.update(image:"#{current_user.id}.jpg")
       image = params[:image]
       File.binwrite("public/user_images/#{current_user.image}", image.read)
       flash[:notice] = "ユーザー情報を編集しました"
@@ -25,6 +25,11 @@ class MypagesController < ApplicationController
 
   def update_nickname
     @users = User.update(nickname: params[:nickname])
+    redirect_to(mypages_path)
+  end
+
+  def update_name
+    @users = current_user.update(name: params[:name])
     redirect_to(mypages_path)
   end
 

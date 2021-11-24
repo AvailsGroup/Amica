@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_015654) do
+ActiveRecord::Schema.define(version: 2021_11_24_094802) do
 
   create_table "inquiries", force: :cascade do |t|
     t.string "name"
@@ -27,6 +27,19 @@ ActiveRecord::Schema.define(version: 2021_11_17_015654) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.text "grade", default: "学科"
+    t.integer "school_class", default: 0
+    t.integer "number", default: 0
+    t.integer "student_id", default: 0
+    t.text "accreditation", default: "ここに所持資格を入力"
+    t.text "hobby", default: "ここに趣味を入力"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -35,20 +48,6 @@ ActiveRecord::Schema.define(version: 2021_11_17_015654) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
-  end
-
-  create_table "profiles", force: :cascade do |t|
-    t.text "grade", default: "0"
-    t.integer "school_class", default: 0
-    t.integer "number", default: 0
-    t.integer "student_id", default: 0
-    t.text "accreditation", default: "ここに所持資格を入力"
-    t.text "hobby", default: "ここに趣味を入力"
-    t.text "image"
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -75,8 +74,6 @@ ActiveRecord::Schema.define(version: 2021_11_17_015654) do
     t.string "nickname"
     t.string "userid"
     t.boolean "admin", default: false
-    t.integer "grade"
-    t.integer "class_number"
     t.string "image"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

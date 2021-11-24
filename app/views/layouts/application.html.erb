@@ -19,7 +19,7 @@
             <% if current_user.image.nil? %>
               <%= image_tag "/user_images/default_icon.png" , class: "user_icon" %>
             <% else %>
-              <%= link_to  pages_show_path ,class: "link" do%>
+              <%= link_to  pages_path ,class: "link" do%>
                 <%= image_tag "/user_images/#{current_user.image}",class: "user_icon"%>
               <% end %>
             <% end %>

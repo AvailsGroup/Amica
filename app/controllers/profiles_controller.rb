@@ -2,6 +2,7 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @user = current_user
     @friends = current_user.matchers
     @following = current_user.followings_list
     @follower = current_user.followers_list

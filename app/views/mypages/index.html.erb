@@ -16,8 +16,8 @@
 
 
 
-
-               <h2 class="text-center"><%= current_user.nickname %></h2>
+               <h2 class="text-center"><%= current_user.name %></h2>
+               <h2 class="text-center">(<%= current_user.nickname %>)</h2>
                <h2 class="text-center background">@<%= current_user.userid %></h2>
             </div>
             <p class="m-1">
@@ -51,9 +51,15 @@
 
                <%= form_with model:@users,url:mypages_nickname_path do |f| %>
                  <div class="m-1">
-                   ニックネーム(※10文字までです)<br><%= f.text_field :nickname,class:'form-control',value: current_user.nickname,maxlength: "20" %>
+                   ニックネーム(※20文字までです)<br><%= f.text_field :nickname,class:'form-control',value: current_user.nickname,maxlength: "20" %>
                  <%=f.submit "更新",class:' btn btn-outline-primary btn-lg m-1'%>
                  </div>
+               <% end %>
+               <%= form_with model:@users,url:mypages_name_path do |f| %>
+               <div class="m-1">
+                 名前(※20文字までです)<br><%= f.text_field :name,class:'form-control',value: current_user.name %>
+                 <%=f.submit "更新",class:' btn btn-outline-primary btn-lg m-1'%>
+               </div>
                <% end %>
                  　　
             </div>
