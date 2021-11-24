@@ -4,7 +4,14 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def banned
-    if current_user.ban? == true
+    pp current_user.warning
+    pp current_user.ban
+
+    if current_user.warning >= 3
+      current_user.ban = true
+    end
+
+    if current_user.ban
       sign_out current_user
       flash.alert = "あなたはアカウント停止処分を受けています。"
       redirect_to "/"
