@@ -12,10 +12,10 @@ class TimelinesController < ApplicationController
   end
 
   def create
-     @post = Post.new(content: params[:content])
-     @post.save
-
-    redirect_to(timelines_path)
+     @create = Post.new(post_params)
+     @create.userid = current_user.id
+     @create.save
+     redirect_to(timelines_path)
   end
 
   def edit
