@@ -1,4 +1,6 @@
 class RelationshipsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @user = User.find_by(userid: params[:profile_id])
     Relationship.create(follower_id: current_user.id, followed_id: @user.id)

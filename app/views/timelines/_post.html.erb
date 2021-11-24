@@ -1,0 +1,22 @@
+<div class="panel-content panel-activity">
+  <p><%= user.find(post.userid).nickname %></p>
+  <p><%= post.content %></p>
+  <p><%= post.created_at.to_s(:datetime_jp) %></p>
+
+  <% if current_user.liked_by?(post.id) %>
+    <%= link_to timeline_like_path(post.id,current_user.id), method: :delete , remote: true do%>
+      <i class="fas fa-heart"></i>
+    <% end %>
+    <%= post.likes.count %>
+  <% else %>
+    <%= link_to timeline_likes_path(post.id), method: :post, remote: true do %>
+      <i class="far fa-heart"></i>
+    <% end %>
+    <%= post.likes.count %>
+  <% end %>
+  <% if post.userid == current_user.id%>
+      <%= link_to(timeline_path(post.id),method: :delete) do%>
+        <i class="fas fa-trash"></i>
+      <% end %>
+    <% end %>
+</div>

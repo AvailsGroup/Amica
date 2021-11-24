@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :sign_in_required, only: [:show]
+  before_action :authenticate_user!
 
   def index
     @user = current_user
