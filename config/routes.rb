@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'users/controller'
+
   devise_for :users, controllers: {
     :registrations => "users/registrations",
     :sessions => "users/sessions",
