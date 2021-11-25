@@ -12,9 +12,27 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # end
 
   # GET /resource/confirmation?confirmation_token=abcdef
-  # def show
-  #   super
-  # end
+  def show
+    self.resource = resource_class.find_by_confirmation_token(params[:confirmation_token]) if params[:confirmation_token].present?
+    super if resource.nil? or resource.confirmed?
+  end
+
+  def confirm
+    confirmation_token = params[resource_name][:confirmation_token]
+    self.resource = resource_class.find_by_confirmation_token!(confirmation_token)
+    if resource.update_attributes(confirm_params)
+      self.resource = resource_class.confirm_by_token(confirmation_token)
+      set_flash_message :notice, :confirmed
+      sign_in_and_redirect(resource_name, resource)
+    else
+      render :action => "show"
+    end
+  end
+
+  private
+  def confirm_params
+    params.require(resource_name).permit(:password, :password_confirmation)
+  end
 
   # protected
 

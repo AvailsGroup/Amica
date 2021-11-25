@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     :registrations => "users/registrations",
     :sessions => "users/sessions",
+    :confirmations => 'users/confirmations',
   }
+
+  devise_scope :user do
+    patch "users/confirm" => "users/confirmations#confirm"
+  end
 
   resources :maller
   resources :pages
@@ -18,7 +23,6 @@ Rails.application.routes.draw do
   resources :profiles, only: [:index,:show] do
     resources :relationships, only: [:create,:destroy]
   end
-
   get "profile/search"=>"profiles#search"
   get "profile/follow" => "profiles#follow"
   get "profile/follower" => "profiles#follower"

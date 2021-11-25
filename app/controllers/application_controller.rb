@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
       current_user.ban = true
     end
 
-    if current_user.ban
+    if current_user.banjmnm
       sign_out current_user
       flash.alert = "あなたはアカウント停止処分を受けています。"
       redirect_to "/"

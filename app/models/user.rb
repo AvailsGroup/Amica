@@ -15,6 +15,14 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
 
+  def active_for_authentication?
+    super && confirmed?
+  end
+
+  def inactive_message
+    confirmed? ? super : :needs_confirmation
+  end
+
   # メソッドの定義
   # ユーザーをフォロー
   def follow(other_user)
