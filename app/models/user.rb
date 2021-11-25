@@ -6,6 +6,17 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable,
          :trackable, password_length: 8...128
 
+  validates :name,
+            length: { minimum: 2, maximum: 20 },
+            allow_nil: true
+
+  validates :userid,
+            uniqueness: { case_sensitive: false },
+            format: { with: /\A[A-Za-z][A-Za-z0-9]*\z/, allow_blank: true },
+            length: { minimum: 1, maximum: 20 },
+            allow_nil: true
+
+
   # アソシエーションの定義
   # フォローしている側のユーザー (active relationship)
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -60,6 +71,14 @@ class User < ApplicationRecord
   # 自分はフォローしていない&相手からフォローされていればtrueを返す
   def follow_request?(user, other_user)
     !user.matchers?(other_user) && other_user.following?(user)
+  end
+  has_one :profile
+  before_create :build_default_profile
+
+  private
+  def build_default_profile
+    build_profile
+    true
   end
 
   def active?

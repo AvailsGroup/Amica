@@ -2,25 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-
-p{
-  text-align: center;
+.top{
+  position: relative;
 }
 
-.uploader{
-  display: flex;
-  position: center;
-  margin: 0px 25% 0px 30%;
-}
-
-
-
-.form_uploder{
-  display: block;
-  justify-content: center;
-  align-items: center;
-}
-
-.image_select {
-display: none;
+.background{
+  background-color: #eee;
 }

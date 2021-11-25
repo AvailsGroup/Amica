@@ -2,10 +2,10 @@
 <div class="form-group">
   <div class="schedule-item">
     <div class="schedule-item-body text-center">
-      <% if current_user.image.nil? %>
-        <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "100px",height: "100px" %>
+      <% if @user.image.nil? %>
+        <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "100px",height: "100px" %>
       <% else %>
-        <%= image_tag "/user_images/#{current_user.image}.png" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "100px",height: "100px"%>
+        <%= image_tag "/user_images/#{@user.image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "100px",height: "100px"%>
       <% end %>
     </div>
   </div>

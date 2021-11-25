@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'users/controller'
+
   devise_for :users, controllers: {
     :registrations => "users/registrations",
     :sessions => "users/sessions",
@@ -19,10 +20,13 @@ Rails.application.routes.draw do
   resources :timelines
   resources :chats
   resources :mypages
+  post 'mypages/nickname', to:'mypages#update_nickname'
+  post 'mypages/name', to:'mypages#update_name'
 
   resources :profiles, only: [:index,:show] do
     resources :relationships, only: [:create,:destroy]
   end
+
   get "profile/search"=>"profiles#search"
   get "profile/follow" => "profiles#follow"
   get "profile/follower" => "profiles#follower"
