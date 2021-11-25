@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   get "/"=>'home#top'
   get "/about" => 'home#about'
   get "/contact" => 'maller#new'
+  get "/static" => "home#static"
+  get "/privacy" => "home#privacy"
   post 'maller/create', to: 'maller#create'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

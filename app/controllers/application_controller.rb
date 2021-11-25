@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
       current_user.ban = true
     end
 
-    if current_user.banjmnm
+    if current_user.ban
       sign_out current_user
       flash.alert = "あなたはアカウント停止処分を受けています。"
       redirect_to "/"
@@ -29,10 +29,7 @@ class ApplicationController < ActionController::Base
 
   protected
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:nickname])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:userid])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:userid])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:agreement_terms])
   end
 
 
