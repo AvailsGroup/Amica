@@ -1,0 +1,53 @@
+<main>
+  <div class="py-5 text-center">
+    <%= image_tag "/communities_image/#{@community.icon}",class: "img-fluid" ,width: 100,height: 100 %>
+    <h2><%= @community.name %></h2>
+    <p class="lead"></p>
+  </div>
+
+  <div class="row g-3">
+    <h4 class="mb-3">コミュニティ編集</h4>
+    <%= form_for(@community, url: community_path,method: :put, multipart: true ,class: "need-validation") do |f| %>
+      <div class="row g-12">
+        <div class="col-sm-6">
+          <%= f.label "コミュニティ名" , class: "form-label" %><br>
+          <%= f.text_field :name, autocomplete: "name", class: "input"%>
+          <div class="invalid-feedback">
+            Valid first name is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <%= f.label "概要" , class: "form-label" %>
+        <%= f.text_area :content, autocomplete: "content",class:"form-control",id:"content"%>
+      </div>
+
+      <%= f.label "アイコンの設定" %><br>
+      <%= f.file_field :icon,autocomplete: "icon", class: "input",:placeholder=>"icon",style: "width: 260px"%>
+
+      <%= form_with(url:community_tag_path(@community.id), :action=> "post") do |f_tag|%>
+        <div class="col-12">
+          <%= f_tag.label "タグ" , class: "form-label" %>
+
+          <div class="row g-12">
+            <div class="col-2">
+              <%= f_tag.text_field :tag, autocomplete: "tag",class:"form-control",id:"tag",style: "width:230px"%>
+            </div>
+            <div class="col-3">
+              <%= f_tag.submit "タグの追加" ,class:" btn btn-primary ",style:"height:40px"%>
+            </div>
+          </div>
+        </div>
+        <div class="tags">
+          <% @tag.each do |t|%>
+            <%= t.tag %>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="my-3 text-center">
+        <%= f.submit "変更", class:"w-50 btn btn-primary btn-lg"%>
+      </div>
+    <% end %>
+  </div>
+</main>
