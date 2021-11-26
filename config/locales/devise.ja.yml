@@ -45,7 +45,7 @@ ja:
       updated: 'アカウントを更新しました。'
       #      updated: 'You updated your account successfully.'
       destroyed: 'アカウントを削除しました。またのご利用をお待ちしております。'
-      signed_up_but_needs_confirmation: "ご登録いただいたメールアドレスにメールを送信しました。メールを確認してアカウントを有効化してください。"
+      signed_up_but_needs_confirmation: "ご登録いただいたメールアドレスにメールを送信しました。メールを確認してアカウントを有効化してください。(迷惑メールに分類されている可能性があります。)"
     #      destroyed: 'Bye! Your account was successfully cancelled. We hope to see you again soon.'
     unlocks:
       send_instructions: 'アカウントの凍結解除方法を数分以内にメールでご連絡します。'

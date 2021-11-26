@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_24_185111) do
+ActiveRecord::Schema.define(version: 2021_11_25_230819) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2021_11_24_185111) do
     t.text "grade", default: "学科"
     t.integer "school_class", default: 0
     t.integer "number", default: 0
-    t.integer "student_id", default: 0
+    t.text "student_id", default: "0000000"
     t.text "accreditation", default: "ここに所持資格を入力"
     t.text "hobby", default: "ここに趣味を入力"
     t.integer "user_id", null: false

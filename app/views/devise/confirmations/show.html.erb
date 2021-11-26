@@ -2,181 +2,109 @@
 <div class="container" style="max-width: 960px">
   <main>
     <div class="py-5 text-center">
-      <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-      <h2>Checkout form</h2>
-      <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+      <%= image_tag "/user_images/default_icon.png" , class: "d-block mx-auto mb-4",width: "100" %>
+      <h2>新規登録</h2>
+      <p class="lead">Amicaへようこそ！<br/>Amicaを利用する前にあなたのことを教えて下さい！</p>
     </div>
-
-    <div class="row g-3">
-      <div class="col-md-12">
-        <h4 class="mb-3">Billing address</h4>
-        <form class="needs-validation" novalidate>
+    <p><%= devise_error_messages! %></p>
+    <%= form_for(resource, as: resource_name, url: users_confirm_path) do |f| %>
+      <div class="row g-3">
+        <div class="col-md-12">
           <div class="row g-3">
             <div class="col-sm-6">
-              <label for="firstName" class="form-label">First name</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                Valid first name is required.
-              </div>
+              <%= f.label "本名", class:"form-label" %>
+              <%= f.text_field :name, class:"form-control" ,id:"name",placeholder: "Name"%>
             </div>
-
             <div class="col-sm-6">
-              <label for="lastName" class="form-label">Last name</label>
-              <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                Valid last name is required.
-              </div>
+              <%= f.label "ニックネーム(2~20文字)" , class:"form-label"%>
+              <%= f.text_field :nickname, class:"form-control" ,id:"nickname",placeholder: "NickName",maxlength:"20"%>
             </div>
 
             <div class="col-12">
-              <label for="username" class="form-label">Username</label>
+              <%= f.label "ユーザーID(1~20文字)", class:"form-label" %>
               <div class="input-group">
                 <span class="input-group-text">@</span>
-                <input type="text" class="form-control" id="username" placeholder="Username" required>
-                <div class="invalid-feedback">
-                  Your username is required.
-                </div>
+                <%= f.text_field :userid ,class:"form-control",id:"userid",placeholder: "UserID" ,maxlength:"20"%>
               </div>
             </div>
 
-            <div class="col-12">
-              <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com">
-              <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
-              </div>
-            </div>
+            <hr class="my-4">
 
-            <div class="col-12">
-              <label for="address" class="form-label">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-              <div class="invalid-feedback">
-                Please enter your shipping address.
+            <%= f.fields_for :profile do |pf|%>
+              <div class="col-12">
+                <%= pf.label "学科" , class:"form-label"%>
+                <br />
+                <%= pf.select :grade,
+                              [%w[情報処理科1年 情報処理科1年],
+                               %w[情報処理科2年 情報処理科2年],
+                               %w[実践IoT1年 実践IoT1年],
+                               %w[実践IoT2年 実践IoT2年],
+                               %w[Web技術科1年 Web技術科1年],
+                               %w[Web技術科2年 Web技術科2年],
+                               %w[ビジネス科1年 ビジネス科1年],
+                               %w[ビジネス科2年 ビジネス科2年],
+                               %w[先端ITシステム1年 先端ITシステム1年],
+                               %w[先端ITシステム2年 先端ITシステム2年],
+                               %w[先端ITシステム3年 先端ITシステム3年],
+                               %w[ITライセンス1年 ITライセンス1年],
+                               %w[実践AI科1年 実践AI科1年],
+                               %w[実践AI科2年 実践AI科2年],
+                               %w[実践AI科3年 実践AI科3年],
+                               %w[実践AI科4年 実践AI科4年],
+                               %w[情報セキュリティ学科1年 情報セキュリティ学科1年],
+                               %w[情報セキュリティ学科2年 情報セキュリティ学科2年],
+                               %w[情報セキュリティ学科3年 情報セキュリティ学科3年],
+                               %w[情報セキュリティ学科4年 情報セキュリティ学科4年],
+                               %w[教員 教員],
+                               %w[OB OB]],
+                              {},
+                              class:'form-select',
+                              id: "grade",
+                              include_blank: "",
+                              autocomplete:"grade"
+                %>
               </div>
-            </div>
 
-            <div class="col-12">
-              <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-            </div>
-
-            <div class="col-md-5">
-              <label for="country" class="form-label">Country</label>
-              <select class="form-select" id="country" required>
-                <option value="">Choose...</option>
-                <option>United States</option>
-              </select>
-              <div class="invalid-feedback">
-                Please select a valid country.
+              <div class="col-sm-6">
+              <%= pf.label "クラス 例:2T1→1を入力 (無い場合は0を入力)", class:"form-label" %>
+              <%= pf.text_field :school_class, class:"form-control" ,id:"school_class",placeholder: "クラス",maxlength:"1"%>
               </div>
-            </div>
 
-            <div class="col-md-4">
-              <label for="state" class="form-label">State</label>
-              <select class="form-select" id="state" required>
-                <option value="">Choose...</option>
-                <option>California</option>
-              </select>
-              <div class="invalid-feedback">
-                Please provide a valid state.
+              <div class="col-sm-6">
+                <%= pf.label "出席番号 (無い場合は0を入力)" , class:"form-label"%>
+                <%= pf.text_field :number, class:"form-control" ,id:"number",placeholder: "出席番号",maxlength:"2"%>
               </div>
-            </div>
 
-            <div class="col-md-3">
-              <label for="zip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="zip" placeholder="" required>
-              <div class="invalid-feedback">
-                Zip code required.
+              <div class="col-sm-6">
+                <%= pf.label "学籍番号 (無い場合は0000000を入力)" , class:"form-label"%>
+                <%= pf.text_field :student_id, class:"form-control" ,id:"number",placeholder: "学籍番号",maxlength:"7"%>
               </div>
-            </div>
+
+              <hr class="my-4">
+
+              <div class="col-12">
+              <%= f.label "パスワード(8~24文字 半角英数字(大文字小文字)、記号 [$!@_%^*&()] が使用できます)"%>
+              <%= f.password_field :password, class:"form-control", autocomplete: "off" ,maxlength:"24"%>
+              </div>
+
+              <div class="col-12">
+                <%= f.label "パスワード(確認)" %><br />
+                <%= f.password_field :password_confirmation, class:"form-control", autocomplete: "off" ,maxlength:"24"%>
+              </div>
+
+              <%= f.hidden_field :confirmation_token %>
+              <hr class="my-4">
+            <% end %>
+
+            <%= f.submit "登録",class:"w-100 btn btn-primary btn-lg mb-5"%>
           </div>
-
-          <hr class="my-4">
-
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="same-address">
-            <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
-          </div>
-
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="save-info">
-            <label class="form-check-label" for="save-info">Save this information for next time</label>
-          </div>
-
-          <hr class="my-4">
-
-          <h4 class="mb-3">Payment</h4>
-
-          <div class="my-3">
-            <div class="form-check">
-              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
-              <label class="form-check-label" for="credit">Credit card</label>
-            </div>
-            <div class="form-check">
-              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
-              <label class="form-check-label" for="debit">Debit card</label>
-            </div>
-            <div class="form-check">
-              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
-              <label class="form-check-label" for="paypal">PayPal</label>
-            </div>
-          </div>
-
-          <div class="row gy-3">
-            <div class="col-md-6">
-              <label for="cc-name" class="form-label">Name on card</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="" required>
-              <small class="text-muted">Full name as displayed on card</small>
-              <div class="invalid-feedback">
-                Name on card is required
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <label for="cc-number" class="form-label">Credit card number</label>
-              <input type="text" class="form-control" id="cc-number" placeholder="" required>
-              <div class="invalid-feedback">
-                Credit card number is required
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <label for="cc-expiration" class="form-label">Expiration</label>
-              <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-              <div class="invalid-feedback">
-                Expiration date required
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <label for="cc-cvv" class="form-label">CVV</label>
-              <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-              <div class="invalid-feedback">
-                Security code required
-              </div>
-            </div>
-          </div>
-
-          <hr class="my-4">
-
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
-        </form>
+        </div>
       </div>
-    </div>
+    <% end %>
   </main>
-
-  <footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">&copy; 2017?2020 Company Name</p>
-    <ul class="list-inline">
-      <li class="list-inline-item"><a href="#">Privacy</a></li>
-      <li class="list-inline-item"><a href="#">Terms</a></li>
-      <li class="list-inline-item"><a href="#">Support</a></li>
-    </ul>
-  </footer>
 </div>
 
 
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="form-validation.js"></script>
 </body>

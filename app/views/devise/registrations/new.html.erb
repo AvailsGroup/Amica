@@ -1,11 +1,13 @@
 <%= stylesheet_link_tag 'registrations', media: 'all', 'data-turbolinks-track': 'reload' %>
 <div class="register">
-  <h1 style= "margin-bottom: 30px">新規登録</h1>
+  <h1 style= "margin-bottom: 50px">新規登録</h1>
+
 
   <div id="contact_form">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", id: "inputEmail", class: "form-control",:placeholder=>"email" ,style: "margin-bottom: 30px" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", id: "inputEmail", class: "form-control",:placeholder=>"email"%>
+      <p style= "margin-bottom: 50px">登録できるドメインは@gn.iwasaki.ac.jpのみです。</p>
       <%= f.check_box :agreement_terms %>
       <%= link_to "利用規約",static_path, target: "_blank", rel: "noopener"%>・<%= link_to "プライバシーポリシー",privacy_path, target: "_blank", rel: "noopener" %>に同意する
       <br />

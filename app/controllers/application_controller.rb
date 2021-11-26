@@ -4,9 +4,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def banned
-    pp current_user.warning
-    pp current_user.ban
-
     if current_user.warning >= 3
       current_user.ban = true
     end

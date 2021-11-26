@@ -1,109 +1,105 @@
 <!DOCTYPE html>
-  <html lang = "ja">
-  <head>
-    <title>Amica</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
-  </head>
+<html lang = "ja">
+<head>
+  <title>Amica</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
+</head>
 
-  <body>
-    <header class="w-auto">
-      <nav class="navbar navbar-expand-lg navbar-light p-0 m-0">
-        <div class="container-fluid">
-          <% if user_signed_in? %>
-            <% if current_user.image.nil? %>
-              <%= image_tag "/user_images/default_icon.png" , class: "user_icon" %>
-            <% else %>
-              <%= link_to  pages_path ,class: "link" do%>
-                <%= image_tag "/user_images/#{current_user.image}",class: "user_icon"%>
-              <% end %>
-            <% end %>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <p class="mb-0 small lh-sm" style="margin-left:7px">
-                <strong class="d-block text-gray-dark"><%= current_user.name %> (<%= current_user.nickname %>)</strong>
-                @<%= current_user.userid %>
-              </p>
-              <ul class="navbar-nav me-auto m-0 mb-lg-0">
-                <li class="nav-item">
-                  <%= link_to  chats_path,class: "icons nav-link" do %>
-                    <i class="fas fa-comments"></i>chats
-                  <% end %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to  communities_path,class: "icons nav-link" do %>
-                    <i class="fas fa-users"></i>communities
-                  <% end %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to  timelines_path,class: "icons nav-link" do %>
-                    <i class="fas fa-clock"></i>timelines
-                  <% end %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to  profiles_path,class: "icons nav-link" do %>
-                    <i class="fas fa-address-card"></i>friend
-                  <% end %>
-                </li>
-                <li class="nav-item dropdown d-flex">
-                  <a class="nav-link dropdown-toggle icons" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-box-open"></i>another
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <% if current_user.try(:admin?) %>
-                      <li>
-                        <%= link_to '管理者コンソールを表示', rails_admin_path, class: "link nav-link" %>
-                      </li>
-                    <% end %>
-                    <li>
-                      <%= link_to 'マイページ', profile_path(current_user.userid),class: "link nav-link" %>
-                    </li>
-                    <li>
-                      <%= link_to 'プロフィール変更', edit_user_registration_path,class: "link nav-link" %>
-                    </li>
-                    <li>
-                      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: "link nav-link me-2" %>
-                    </li>
-                  </ul>
-              </ul>
-              <form class="d-flex justify-content-end">
-                <input class="form-control me-0 my-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-success me-2 my-2" type="submit">Search</button>
-              </form>
-            </div>
+<body>
+<header class="w-auto">
+  <nav class="navbar navbar-expand-lg navbar-light p-0 m-0">
+    <div class="container-fluid">
+      <% if user_signed_in? %>
+        <%= link_to  pages_path ,class: "link" do%>
+          <% if current_user.image.nil? %>
+            <%= image_tag "/user_images/default_icon.png" , class: "user_icon" %>
           <% else %>
-            <ul class="navbar-nav me-auto m-0 mb-lg-0">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fas fa-box-open"></i>another
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= image_tag "/user_images/#{current_user.image}",class: "user_icon"%>
+          <% end %>
+        <% end %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <p class="mb-0 small lh-sm" style="margin-left:7px">
+            <strong class="d-block text-gray-dark"><%= current_user.name %> (<%= current_user.nickname %>)</strong>
+            @<%= current_user.userid %>
+          </p>
+          <ul class="navbar-nav me-auto m-0 mb-lg-0">
+            <li class="nav-item">
+              <%= link_to  chats_path,class: "icons nav-link" do %>
+                <i class="fas fa-comments"></i>chats
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to  communities_path,class: "icons nav-link" do %>
+                <i class="fas fa-users"></i>communities
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to  timelines_path,class: "icons nav-link" do %>
+                <i class="fas fa-clock"></i>timelines
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to  profiles_path,class: "icons nav-link" do %>
+                <i class="fas fa-address-card"></i>friend
+              <% end %>
+            </li>
+            <li class="nav-item dropdown d-flex">
+              <a class="nav-link dropdown-toggle icons" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-box-open"></i>another
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <% if current_user.try(:admin?) %>
                   <li>
-                    <%= link_to 'サインアップ', new_user_registration_path,class: "link nav-link" %>
+                    <%= link_to '管理者コンソールを表示', rails_admin_path, class: "link nav-link" %>
                   </li>
-                  <li>
-                    <%= link_to 'ログイン', new_user_session_path,class: "link nav-link" %>
-                  </li>
-                </ul>
+                <% end %>
+                <li>
+                  <%= link_to 'マイページ', profile_path(current_user.userid),class: "link nav-link" %>
+                </li>
+                <li>
+                  <%= link_to 'プロフィール変更', edit_user_registration_path,class: "link nav-link" %>
+                </li>
+                <li>
+                  <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: "link nav-link me-2" %>
+                </li>
+              </ul>
+          </ul>
+        </div>
+      <% else %>
+        <ul class="navbar-nav me-auto m-0 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-box-open"></i>another
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <%= link_to 'サインアップ', new_user_registration_path,class: "link nav-link" %>
+              </li>
+              <li>
+                <%= link_to 'ログイン', new_user_session_path,class: "link nav-link" %>
               </li>
             </ul>
-          <% end %>
-      </div>
-    </nav>
-  </header>
-    <!-- ここに追加 -->
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </nav>
+</header>
+<!-- ここに追加 -->
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-  </body>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+<%= yield %>
+</body>
 
 </html>
