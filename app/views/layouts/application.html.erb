@@ -92,6 +92,9 @@
           </ul>
         </div>
       <% end %>
+      <% if current_user.admin? %>
+        ★
+      <% end %>
     </div>
   </nav>
 </header>
