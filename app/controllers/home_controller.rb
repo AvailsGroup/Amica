@@ -10,4 +10,12 @@ class HomeController < ApplicationController
   def contact
     render layout: 'home'
   end
+
+  def static
+
+  end
+
+  def privacy
+
+  end
 end

@@ -2,12 +2,12 @@
 <%= stylesheet_link_tag 'top', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= javascript_pack_tag 'home/index' %>
 
-<%= image_tag("top_icon.png",class: "icon",style: "margin-bottom: 30px")%>
-<div class="title-text" style="margin-bottom: 30px">
+<%= image_tag("top_icon.png",class: "icon title-image",style: "margin-bottom: 30px;display:none")%>
+<div class="title-text" style="margin-bottom: 30px;opacity:0">
   <p>Amicaはあなたの生活に<u>新たな出会いををプラス</u>する</p>
   <p><u>コミュニケーションツール</u>です</p>
 </div>
-<p class="lead">
+<p class="lead buttons" style="opacity:0">
   <%= link_to "新規登録",
               new_user_registration_path,
               class: "btn btn-lg btn-secondary fw-bold border-white bg-blue",

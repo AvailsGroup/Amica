@@ -1,5 +1,6 @@
 class TimelinesController < ApplicationController
   before_action :authenticate_user!
+  before_action :banned
 
   def index
     @posts = Post.all.order(created_at: :desc)

@@ -1,11 +1,14 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
+  before_action :banned
 
   def index
+    @user = current_user
     @friends = current_user.matchers
     @following = current_user.followings_list
     @follower = current_user.followers_list
     @users = User.all
+    @profile = Profile.find(current_user.id)
   end
 
   def show

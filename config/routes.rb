@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     :registrations => "users/registrations",
     :sessions => "users/sessions",
+    :confirmations => 'users/confirmations',
   }
+
+  devise_scope :user do
+    patch "users/confirm" => "users/confirmations#confirm"
+  end
 
   resources :maller
   resources :pages
@@ -15,6 +20,8 @@ Rails.application.routes.draw do
 
   resources :chats
   resources :mypages
+  post 'mypages/nickname', to:'mypages#update_nickname'
+  post 'mypages/name', to:'mypages#update_name'
 
   resources :timelines do
     resources :likes,only:[:create,:destroy]
@@ -31,9 +38,11 @@ Rails.application.routes.draw do
   get "/"=>'home#top'
   get "/about" => 'home#about'
   get "/contact" => 'maller#new'
+  get "/static" => "home#static"
+  get "/privacy" => "home#privacy"
   post 'maller/create', to: 'maller#create'
-  get 'pages/index'
-  get 'pages/show'
+
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
