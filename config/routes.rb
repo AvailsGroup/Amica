@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
 
   get 'users/controller'
+
   devise_for :users, controllers: {
     :registrations => "users/registrations",
     :sessions => "users/sessions",
+    :confirmations => 'users/confirmations',
   }
+
+  devise_scope :user do
+    patch "users/confirm" => "users/confirmations#confirm"
+  end
 
   resources :maller
   resources :pages
@@ -14,6 +20,8 @@ Rails.application.routes.draw do
   resources :timelines
   resources :chats
   resources :mypages
+  post 'mypages/nickname', to:'mypages#update_nickname'
+  post 'mypages/name', to:'mypages#update_name'
 
   resources :profiles, only: [:index,:show] do
     resources :relationships, only: [:create,:destroy]
@@ -27,6 +35,8 @@ Rails.application.routes.draw do
   get "/"=>'home#top'
   get "/about" => 'home#about'
   get "/contact" => 'maller#new'
+  get "/static" => "home#static"
+  get "/privacy" => "home#privacy"
   post 'maller/create', to: 'maller#create'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

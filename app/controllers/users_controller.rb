@@ -5,5 +5,4 @@ class UsersController < ApplicationController
     params.require(:user).permit(:image)
   end
 
-
 end
