@@ -11,33 +11,3 @@
 }
 
 
-
-#cropperWrapper{
-  width: 600px;
-}
-#croppeWrapper:after{
-  content: '';
-  display: block;
-  clear: both;
-}
-.cropperContent{
-  float: left;
-  margin: 10px;
-  display: none;
-}
-#cropperFile{
-  width: 100%;
-}
-#cropperPreview{
-  text-align: center;
-  overflow: hidden;
-}
-#cropperPreview,
-#cropperPreview img{
-  width: 100px;
-  height: 100px;
-}
-#cropperCanvas{
-  width: 400px;
-  height: 200px;
-}
