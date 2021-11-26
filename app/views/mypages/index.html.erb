@@ -5,17 +5,15 @@
                   <div class="col-md-auto">
                    <h1>MYPAGE</h1>
                    </div>
-                 <% if @user.image? %>
-                   <div class="d-block mx-auto" style="width: 200px;height: 200px; ">
-                   <%= image_tag "/user_images/#{@user.image}",class:"img-fluid"  , size: '200x200',style: 'float-left'%>
-                 </div>
-                 <% else %>
-                   <%= image_tag "default_icon" , class: "img-rounded" , size: '200x200' %>
-                 <% end %>
-                 <div style=" width:auto;">
+               <div class="d-block mx-auto" style="width: 200px;height: 200px; ">
+               <% if @user.image? %>
+                 <%= image_tag "/user_images/#{@user.image}", :size => '200x200' ,class: "user_image"%>
+               <% else %>
+                 <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
+               <% end %>
+               </div>
 
-
-
+            <div style=" width:auto;">
                <h2 class="text-center"><%= current_user.name %></h2>
                <h4 class="text-center">(<%= current_user.nickname %>)</h4>
                <h4 class="text-center background">@<%= current_user.userid %></h4>

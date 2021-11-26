@@ -1,0 +1,1 @@
+<%= image_tag @user.image.variant(crop: "#{session[:crop_width]}x#{session[:crop_height]}+#{session[:crop_x]}+#{session[:crop_y]}") %>

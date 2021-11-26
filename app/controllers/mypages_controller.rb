@@ -1,5 +1,7 @@
 class MypagesController < ApplicationController
   before_action :sign_in_required, only: [:show]
+
+
   def index
     @user = current_user
     @profiles = Profile.find(current_user.id)
@@ -24,6 +26,21 @@ class MypagesController < ApplicationController
     redirect_to(mypages_path)
   end
 
+  def show
+    @user = current_user
+  end
+
+  def create
+    @icon = Profile.new(user_params)
+    @icon.save
+    session[:crop_x] = user_params[:x]
+    session[:crop_y] = user_params[:y]
+    session[:crop_width] = user_params[:width]
+    session[:crop_height] = user_params[:height]
+
+    redirect_to mypages_path @icon
+  end
+
   def update_nickname
     @users = current_user.update(nickname: params[:nickname])
     redirect_to(mypages_path)
@@ -39,6 +56,10 @@ class MypagesController < ApplicationController
     params.require(:profile).permit(:grade,:school_class,:number,:student_id,:accreditation,:hobby)
   end
 
+  private
+  def user_params
+    params.require(:user).permit(:image, :x, :y, :width, :height)
+  end
 
 
 

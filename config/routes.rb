@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :relationships, only: [:create,:destroy]
   end
 
+
   get "profile/search"=>"profiles#search"
   get "profile/follow" => "profiles#follow"
   get "profile/follower" => "profiles#follower"
