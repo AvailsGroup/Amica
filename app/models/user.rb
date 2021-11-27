@@ -94,14 +94,6 @@ class User < ApplicationRecord
   def follow_request?(user, other_user)
     !user.matchers?(other_user) && other_user.following?(user)
   end
-  has_one :profile
-  before_create :build_default_profile
-
-  private
-  def build_default_profile
-    build_profile
-    true
-  end
 
   def active?
     !ban?
