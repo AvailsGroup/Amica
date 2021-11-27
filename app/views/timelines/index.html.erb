@@ -32,15 +32,17 @@
       <% end %>
     </div>
 
-    <div class="my-3 p-3 bg-white rounded shadow-sm">
+
       <% @posts.each do |p| %>
-        <% unless current_user.following?(@user.find(p.userid)) == false %>
-          <div id="post_<%= p.id %>">
-            <%= render "timelines/post",post:p, user:@user %>
-          </div>
-        <% end %>
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
+          <% unless current_user.following?(@user.find(p.userid)) == false %>
+            <div id="post_<%= p.id %>">
+              <%= render "timelines/post",post:p, user:@user %>
+            </div>
+          <% end %>
+        </div>
       <% end %>
-    </div>
+
   </main>
 
   <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>

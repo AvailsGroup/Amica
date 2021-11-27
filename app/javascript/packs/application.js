@@ -26,4 +26,4 @@ require('jquery')
 import "bootstrap";
 import "../stylesheets/application";
 
-
+require ("rails-timeago")
