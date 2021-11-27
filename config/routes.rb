@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       get :search
     end
   end
+
   resources :profiles, only: [:index,:show] do
     resources :relationships, only: [:create,:destroy]
   end

@@ -83,3 +83,5 @@ gem 'jquery-rails'
 gem 'rails_admin'
 
 gem 'rack-attack'
+
+gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
