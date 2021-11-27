@@ -46,6 +46,12 @@ class TimelinesController < ApplicationController
     redirect_to(timelines_path)
   end
 
+  def search
+    @post = params[:q]
+    @posts = Post.search_content_for(params[:q]).order(created_at: :desc).page(params[:page]).per(10)
+    @user = User.all
+  end
+
   private
 
   def post_params()

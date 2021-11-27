@@ -14,7 +14,7 @@
       <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %></span>
       <br />
       <br />
-      <span class="text-dark" style="font-size:18px; margin: 0;"><%= post.content %></span>
+      <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= html_with_link_to_hashtag(post.content) %></span>
       <br />
     </p>
   </div>
