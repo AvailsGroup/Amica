@@ -80,9 +80,6 @@ gem 'rake'
 
 gem 'jquery-rails'
 
-
-
 gem 'rails_admin'
 
 gem 'rack-attack'
-

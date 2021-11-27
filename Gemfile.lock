@@ -202,9 +202,6 @@ GEM
     rails-i18n (6.0.0)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 7)
-    rails-timeago (2.19.1)
-      actionpack (>= 3.1)
-      activesupport (>= 3.1)
     rails_admin (2.2.1)
       activemodel-serializers-xml (>= 1.0)
       builder (~> 3.1)
@@ -308,7 +305,6 @@ DEPENDENCIES
   rack-attack
   rails (~> 6.1.4, >= 6.1.4.1)
   rails-i18n
-  rails-timeago (~> 2.0)
   rails_admin
   rake
   rexml
