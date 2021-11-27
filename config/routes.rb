@@ -1,21 +1,14 @@
 Rails.application.routes.draw do
+  devise_for :users
 
-  resources :profiles, :only =>  [:index,:show] do
-    resources :relationships, :only =>  [:create,:destroy]
+  resources :profiles, only: [:index,:show] do
+    resources :relationships, only: [:create,:destroy]
   end
 
-  resources :pages, :only => [:index,:show] do
-    resources :favorite, :only => [:create,:destroy]
+  resources :pages, only:[:index,:show] do
+    resources :favorite, only:[:create,:destroy]
   end
-  get 'users/controller'
 
-  devise_for :users, controllers: {
-    :registrations => "users/registrations",
-    :sessions => "users/sessions",
-  }
-
-  resources :maller
-  resources :pages
   resources :homes
   resources :communities
   resources :searches
