@@ -1,0 +1,65 @@
+<%= stylesheet_link_tag 'profiles', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class="form-group">
+  <div class="schedule-item">
+    <div class="schedule-item-body text-center">
+      <% if @user.image.nil? %>
+        <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "100px",height: "100px" %>
+      <% else %>
+        <%= image_tag "/user_images/#{@user.image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "100px",height: "100px"%>
+      <% end %>
+    </div>
+  </div>
+  <div class="schedule-item">
+    <div class="schedule-item-body text-center">
+      <h2><%= @user.name %></h2>
+      <h3>(<%= @user.nickname %>)</h3>
+    </div>
+  </div>
+
+  <div class="schedule-item">
+    <div class="schedule-item-body text-center">
+      <span>フォロー : <%= @user.followings_list.count %></span>
+      <span>フォロワー : <%= @user.followers_list.count %></span>
+    </div>
+  </div>
+  <div class = "schedule-item text-center">
+    <% if @user.follow_request?(current_user, @user) %>
+      <p class="bold">フォローされています</p>
+    <% end %>
+    <% if current_user.matchers?(@user) %>
+      <p class="bold">友達です</p>
+    <% end %>
+  </div>
+  <div class = "schedule-item text-center">
+    <% if current_user.id != @user.id %>
+      <% unless current_user.following?(@user) %>
+        <div class="actions ">
+          <%= link_to 'フォロー',
+                      profile_relationships_path(@user.userid),
+                      method: :post,
+                      class: "btn btn-lg btn-secondary fw-bold border-white bg-blue",
+                      style: "font-size: 18px;width: 150px;color:#FFF"
+          %>
+        </div>
+      <% else %>
+        <div class="actions">
+          <%= link_to 'フォロー解除',
+                      profile_relationship_path(@user.userid),
+                      method: :delete,
+                      class: "btn btn-lg btn-secondary fw-bold border-white bg-blue",
+                      style: "font-size: 18px;width: 150px;color:#FFF"
+          %>
+        </div>
+      <% end %>
+    <% end %>
+    <% if current_user.id == @user.id %>
+      <div class="actions">
+        <%= link_to '編集',
+                    mypages_path,
+                    class: "btn btn-lg btn-secondary fw-bold border-white bg-blue",
+                    style: "font-size: 18px;width: 150px;color:#FFF"
+        %>
+      </div>
+    <% end %>
+  </div>
+</div>

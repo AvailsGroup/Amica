@@ -9,6 +9,13 @@ class HomeController < ApplicationController
 
   def contact
     render layout: 'home'
-    flash.now[:notice] = 'test'
+  end
+
+  def static
+
+  end
+
+  def privacy
+
   end
 end

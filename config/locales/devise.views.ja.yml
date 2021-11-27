@@ -10,6 +10,10 @@ ja:
         current_sign_in_at: 現在のログイン時刻
         current_sign_in_ip: 現在のログインIPアドレス
         email: Eメール
+        name: 名前
+        nickname: ニックネーム
+        userid: ユーザーid
+        agreement_terms: 利用規約
         encrypted_password: 暗号化パスワード
         failed_attempts: 失敗したログイン試行回数
         last_sign_in_at: 最終ログイン時刻
@@ -25,6 +29,10 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+      profile:
+        school_class: クラス
+        number: 出席番号
+        student_id: 学籍番号
     models:
       user: ユーザー
   devise:
@@ -139,5 +147,5 @@ ja:
       not_found: は見つかりませんでした。
       not_locked: はロックされていません。
       not_saved:
-        one: エラーが発生したため %{resource} は保存されませんでした。
-        other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+        one: 入力に誤りがあります。
+        other: 入力に誤りがあります。

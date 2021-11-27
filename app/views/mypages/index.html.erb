@@ -1,2 +1,69 @@
-<h1>Mypages#index</h1>
-<p>Find me in app/views/mypages/index.html.erb</p>
+<%= stylesheet_link_tag 'mypages', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<body>
+             <div style="width:auto">
+                  <div class="col-md-auto">
+                   <h1>MYPAGE</h1>
+                   </div>
+                 <% if @user.image? %>
+                   <div class="d-block mx-auto" style="width: 200px;height: 200px; ">
+                   <%= image_tag "/user_images/#{@user.image}",class:"img-fluid"  , size: '200x200',style: 'float-left'%>
+                 </div>
+                 <% else %>
+                   <%= image_tag "default_icon" , class: "img-rounded" , size: '200x200' %>
+                 <% end %>
+                 <div style=" width:auto;">
+
+
+
+               <h2 class="text-center"><%= current_user.name %></h2>
+               <h4 class="text-center">(<%= current_user.nickname %>)</h4>
+               <h4 class="text-center background">@<%= current_user.userid %></h4>
+            </div>
+            <p class="m-1">
+              学科:<%= @profiles.grade %>
+             </p>
+
+               <p class="m-1 background">
+                 クラス：<%=@profiles.school_class%>
+               </p>
+               <p class="m-1">
+                  出席番号：<%=@profiles.number %>
+               </p>
+               <p class="m-1 background">
+                       学籍番号：<%=@profiles.student_id%>
+               </p>
+               <p class="m-1">
+                 資格取得:
+               </p>
+               <p class="m-1 background">
+                 <%=  @profiles.accreditation %>
+               </p>
+               <p class="m-1">
+                 タグ、趣味
+               </p>
+               <p class="m-1 background">
+                 <%= @profiles.hobby %>
+               </p>
+               <div class="align-self-center">
+               <%= link_to "編集", edit_mypage_path(current_user.id),class:'btn btn-outline-primary btn-lg m-1'%>
+               </div>
+
+               <%= form_with model:@users,url:mypages_nickname_path do |f| %>
+                 <div class="m-1">
+                   ニックネーム(※20文字までです)<br><%= f.text_field :nickname,class:'form-control',value: current_user.nickname,maxlength: "20" %>
+                 <%=f.submit "更新",class:' btn btn-outline-primary btn-lg m-1'%>
+                 </div>
+               <% end %>
+               <%= form_with model:@users,url:mypages_name_path do |f| %>
+               <div class="m-1">
+                 名前(※20文字までです)<br><%= f.text_field :name,class:'form-control',value: current_user.name %>
+                 <%=f.submit "更新",class:' btn btn-outline-primary btn-lg m-1'%>
+               </div>
+               <% end %>
+                 　　
+            </div>
+            </div>
+
+
+</body>

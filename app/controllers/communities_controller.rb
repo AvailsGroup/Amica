@@ -1,4 +1,7 @@
 class CommunitiesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :banned
+
   def index
     @community = Community.all
     @user = User.all
