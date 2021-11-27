@@ -20,8 +20,6 @@ Rails.application.routes.draw do
   resources :timelines
   resources :chats
   resources :mypages
-  post 'mypages/nickname', to:'mypages#update_nickname'
-  post 'mypages/name', to:'mypages#update_name'
 
   resources :profiles, only: [:index,:show] do
     resources :relationships, only: [:create,:destroy]

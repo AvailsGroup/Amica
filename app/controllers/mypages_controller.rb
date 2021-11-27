@@ -14,15 +14,21 @@ class MypagesController < ApplicationController
 
   end
 
+  def new
+    @profile = Profile.new
+    @user = User.new
+  end
+
   def update
-    Profile.update(profile_params)
+    current_user.update(user_params)
+
     if params[:image]
       current_user.update(image:"#{current_user.id}.jpg")
       image = params[:image]
       File.binwrite("public/user_images/#{current_user.image}", image.read)
       Rails.cache.delete("image")
-      flash[:notice] = "ユーザー情報を編集しました"
     end
+    flash[:notice] = "ユーザー情報を編集しました"
     redirect_to(mypages_path)
   end
 
@@ -30,21 +36,12 @@ class MypagesController < ApplicationController
     @user = current_user
   end
 
-  def update_nickname
-    @users = current_user.update(nickname: params[:nickname])
-    redirect_to(mypages_path)
-  end
-
-  def update_name
-    @users = current_user.update(name: params[:name])
-    redirect_to(mypages_path)
-  end
 
   private
-  def profile_params
-    params.require(:profile).permit(:grade,:school_class,:number,:student_id,:accreditation,:hobby)
+
+  def user_params
+    params.require(:user).permit(:nickname,:name, profile_attributes:
+      %i[grade school_class number student_id accreditation hobby])
   end
-
-
 
 end

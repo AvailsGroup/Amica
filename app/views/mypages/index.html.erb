@@ -46,22 +46,9 @@
                <div class="align-self-center">
                <%= link_to "編集", edit_mypage_path(current_user.id),class:'btn btn-outline-primary btn-lg m-1'%>
                </div>
+                              　　
+            </div>
 
-               <%= form_with model:@users,url:mypages_nickname_path do |f| %>
-                 <div class="m-1">
-                   ニックネーム(※20文字までです)<br><%= f.text_field :nickname,class:'form-control',value: current_user.nickname,maxlength: "20" %>
-                 <%=f.submit "更新",class:' btn btn-outline-primary btn-lg m-1'%>
-                 </div>
-               <% end %>
-               <%= form_with model:@users,url:mypages_name_path do |f| %>
-               <div class="m-1">
-                 名前(※20文字までです)<br><%= f.text_field :name,class:'form-control',value: current_user.name %>
-                 <%=f.submit "更新",class:' btn btn-outline-primary btn-lg m-1'%>
-               </div>
-               <% end %>
-                 　　
-            </div>
-            </div>
 
 
 </body>
