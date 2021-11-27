@@ -1,30 +1,56 @@
 <%= stylesheet_link_tag 'communities', media: 'all', 'data-turbolinks-track': 'reload' %>
 <script>
-    function previewImage(obj)
-    {
+    function previewImage(obj) {
         var fileReader = new FileReader();
-        fileReader.onload = (function() {
+        fileReader.onload = function() {
             document.getElementById('preview').src = fileReader.result;
-        });
+        };
         fileReader.readAsDataURL(obj.files[0]);
         document.getElementById("image_text").innerHTML = "選択した画像";
     }
 </script>
 
-<h2>コミュニティ新規作成</h2>
+<div class="container">
+  <%= form_for(@community, url: communities_path, multipart: true,class: "needs-validation") do |f| %>
+    <main>
+      <div class="py-5 text-center">
+        <h2>コミュニティ新規作成</h2>
+        <p class="lead">コミュニティを作成して、同じ趣味の友だちを探しましょう！</p>
+        <div class="uploader">
+          <div class="form1">
+            <label>
+                <%= image_tag "default_icon" , :size => '200x200',id:"preview",class: "d-block mx-auto mb-4 border border-success rounded"%>
+            </label><br /><br />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-12">
+        <div class="row g-3">
+          <div class="col-sm-12">
+            <%= f.label "コミュニティ名", class:"form-label"%>
+            <%= f.text_field :name, autocomplete: "name", class: "form-control" ,:placeholder=>"コミュニティ名"%>
+          </div>
 
-<div id="inputs">
-  <%= form_for(@community, url: communities_path, multipart: true) do |f| %>
-      <%= f.text_field :name, autocomplete: "name", class: "input" ,:placeholder=>"コミュニティ名"%>
-      <%= f.text_field :content, autocomplete: "content", class: "input" ,:placeholder=>"概要"%>
-  </div>
-アイコンの設定
-<%= f.file_field :icon,autocomplete: "icon", class: "input",:placeholder=>"icon" %>
 
+          <div class="col-sm-12">
+            <%= f.label "概要", class:"form-label"%>
+            <%= f.text_area :content, autocomplete: "content", class: "form-control",style:"height:100px" ,:placeholder=>"概要"%>
+          </div>
 
-    <div class="button01">
-      <%= f.submit "新規作成", class:"submit_button"%>
-    </div>
-  <% end %>
+          <div class="col-sm-12">
+            <%= f.label "アイコン", class:"form-label"%>
+            <%= f.file_field :icon,autocomplete: "icon", class: "form-control",:placeholder=>"icon",onchange: "previewImage(this);" %>
+          </div>
+
+          <hr class="my-4">
+
+          <div class="col-sm-12 text-center">
+            <%= f.submit "新規作成", class:"w-50 btn btn-primary btn-lg mb-4"%>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </main>
+</div>
 
 
