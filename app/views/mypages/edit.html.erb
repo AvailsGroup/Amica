@@ -18,47 +18,6 @@
         document.getElementById("image_text").innerHTML = "選択した画像";
     };
 
-    function IconCrop(obj){
-        var fileReader = new FileReader();
-        fileReader.onload = (function() {
-            fileReader.cropper('destroy').removeAttr('src');
-            document.getElementById('icon_crop').src = fileReader.result;
-        });
-        fileReader.readAsDataURL(obj.files[0]);
-    }
-
-
-    // templete 要素の content 属性の有無を確認することで、
-    // ブラウザーが HTML template 要素に対応しているかテストします。
-    $(function () {
-        if ('content' in document.createElement('template')) {
-
-// 既存の HTML tbody と template の行を使って
-// table をインスタンス生成します。
-        var tbody = document.querySelector("tbody");
-        var template = document.querySelector('#productrow');
-
-// 新しい行を複製して表に挿入します。
-        var clone = template.content.cloneNode(true);
-        var td = clone.querySelectorAll("td");
-        td[0].textContent = "1235646565";
-        td[1].textContent = "Stuff";
-
-        tbody.appendChild(clone);
-
-// 新しい行を複製して表に挿入します。
-        var clone2 = template.content.cloneNode(true);
-        td = clone2.querySelectorAll("td");
-        td[0].textContent = "0384928528";
-        td[1].textContent = "Acme Kidney Beans 2";
-
-        tbody.appendChild(clone2);
-
-    } else {
-// HTML template 要素に対応していないので
-// 表に行を追加するほかの方法を探します。
-    }
-    })
 </script>
 
 
@@ -67,7 +26,7 @@
 <div class="mw-100 p-3" style="background-color: #eee;">
   <div class="profile" style="width:auto">
 
-  <%= form_with model:[@profile], url: mypage_path , multipart: true do |f| %>
+  <%= form_with model:current_user, url: mypage_path , multipart: true do |f| %>
       <h1>EDIT PAGE</h1>
       <span>現在のアイコン</span>
 
@@ -87,11 +46,17 @@
             </p>
         </div>
       </div>
+      <div class="m-1">
+        名前<br><%= f.text_field :name,class:'form-control'%>
+      </div>
+      <div class="m-1">
+        ニックネーム<%= f.text_field :nickname,class:'form-control' %>
+      </div>
 
-
+      <%= f.fields_for :profile do |pf|%>
       <div class="m-1">
          学科<br>
-        <%= f.select :grade,
+        <%= pf.select :grade,
                      [%w[情報処理科1年 情報処理科1年],
                       %w[情報処理科2年 情報処理科2年],
                       %w[実践IoT1年 実践IoT1年],
@@ -120,21 +85,22 @@
       </div>
 
       <div class="m-1">
-        クラス<br><%= f.select :school_class, [["1", "1"], ["2", "2"], ["3", "3"],["4", "4"],["5", "5"],["6", "6"],["7", "7"],["8", "8"],["9", "9"],["10", "10"]], class:'form-control',include_blank: "クラス", autocomplete:"school_class" %>
+        クラス<br><%= pf.select :school_class, [["1", "1"], ["2", "2"], ["3", "3"],["4", "4"],["5", "5"],["6", "6"],["7", "7"],["8", "8"],["9", "9"],["10", "10"]], class:'form-control',include_blank: "クラス", autocomplete:"school_class" %>
       </div>
       <div class="m-1">
-        番号<br><%= f.text_field :number,class:'form-control',autocomplete:"number" %>
+        番号<br><%= pf.text_field :number,class:'form-control',autocomplete:"number" %>
       </div>
       <div class="m-1">
-        学籍番号<br><%= f.text_field :student_id,class:'form-control',autocomplete:"student_id" %>
+        学籍番号<br><%= pf.text_field :student_id,class:'form-control',autocomplete:"student_id" %>
       </div>
       <div class="m-1">
         取得資格<br>
-        <%= f.text_area :accreditation,class:'form-control',autocomplete:"accreditation" %>
+        <%= pf.text_area :accreditation,class:'form-control',autocomplete:"accreditation" %>
       </div>
       <div class="m-1">
         タグ、趣味
-        <%= f.text_area :hobby,class:'form-control',autocomplete:"hobby"%>
+        <%= pf.text_area :hobby,class:'form-control',autocomplete:"hobby"%>
+        <% end %>
         <%=f.submit "更新",class:'btn btn-outline-primary btn-lg m-1'%>
       </div>
     <% end %>

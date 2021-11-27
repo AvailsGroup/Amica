@@ -2,6 +2,7 @@ class MypagesController < ApplicationController
   before_action :sign_in_required, only: [:show]
 
 
+
   def index
     @user = current_user
     @profiles = Profile.find(current_user.id)
