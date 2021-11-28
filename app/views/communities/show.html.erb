@@ -1,17 +1,44 @@
-<%= stylesheet_link_tag 'mypages', media: 'all', 'data-turbolinks-track': 'reload' %>
-コミュニティ詳細
-<div class="position-relative overflow-hidden text-center bg-light">
-    コミュニティ名
-    <h1 class="display-4 fw-normal background"><%=@community.name %></h1>
-    <%= image_tag "default_icon", class:"img-fluid"%><br>
-    コミュニティ説明
-    <p class="lead fw-normal background"><%=@community.content %></p>
-    参加者（参加人数を表示したいい）
-    <p class="lead fw-normal background">橋本環奈、本田翼、広瀬すず、広瀬アリス</p>
-    タグ
-    <p class="lead fw-normal background">#ウンチブリブリブリムストーン</p>
-    <div class="d-flex justify-content-around">
-      <a class="btn btn-outline-secondary w-50" href="#">参加</a>
-      <a class="btn btn-outline-secondary w-50" href="/communities">コミュニティ一覧へ戻る</a>
+<%= stylesheet_link_tag 'communities', media: 'all', 'data-turbolinks-track': 'reload' %>
+<main>
+  <div class="position-relative overflow-hidden p-1 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-5 p-lg-1 mx-auto my-1">
+      <% if @community.icon? %>
+        <%= image_tag "/communities_image/#{@community.icon}", class:"img-fluid rounded",style:"width: 150px;height: 150px;" %><br>
+      <% else %>
+        <%= image_tag "default_icon", class:"img-fluid rounded",style:"width: 150px;height: 150px;"%><br>
+      <% end %>
+      <h1 class="display-4 fw-normal"><%=@community.name %></h1>
+      <p class="lead fw-normal"><%=@community.content %></p>
+      <a class="btn btn-outline-dark" href="#">参加</a>
     </div>
-</div>
+  </div>
+
+  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+    <div class="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white">
+      <div class="my-3 py-3">
+        <h2 class="display-5">参加者</h2>
+        <p class="lead">橋本環奈、本田翼</p>
+      </div>
+    </div>
+
+    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center">
+      <div class="my-3 py-3">
+        <h2 class="display-5">タグ</h2>
+        <p class="lead">#うんちぶりぶりブリムストーン</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container text-center">
+    <div class="row">
+      <div class="sol-sm"></div>
+      <div class="sol-sm">
+        <div class="">
+          <%= link_to "トップページへ戻る",communities_path,class:"btn btn-outline-dark w-auto mb-2" %>
+        </div>
+      </div>
+      <div class="sol-sm"></div>
+    </div>
+  </div>
+</main>
+
