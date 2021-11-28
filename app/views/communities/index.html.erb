@@ -14,7 +14,7 @@
               <% if community.icon? %>
               <%= image_tag "/communities_image/#{community.icon}",class: "img-fluid" %><br>
             <% else %>
-              <%= image_tag "/communities_image/default_icon.png/", class: "img-fluid" %><br>
+              <%= image_tag "default_icon", class: "img-fluid" %><br>
             <% end %>
             <div class="carddy">
               <h5 class="card-title"><%= community.name %></h5>

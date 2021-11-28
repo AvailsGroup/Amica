@@ -1,4 +1,9 @@
 <%= stylesheet_link_tag 'communities', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_link_tag "cropper.min" %>
+<%= javascript_pack_tag "cropper" %>
+<%= javascript_pack_tag "jquery-cropper" %>
+<%= javascript_pack_tag "communities/new" %>
+
 <script>
     function previewImage(obj) {
         var fileReader = new FileReader();
@@ -6,7 +11,6 @@
             document.getElementById('preview').src = fileReader.result;
         };
         fileReader.readAsDataURL(obj.files[0]);
-        document.getElementById("image_text").innerHTML = "選択した画像";
     }
 </script>
 
@@ -39,7 +43,7 @@
 
           <div class="col-sm-12">
             <%= f.label "アイコン", class:"form-label"%>
-            <%= f.file_field :icon,autocomplete: "icon", class: "form-control",:placeholder=>"icon",onchange: "previewImage(this);" %>
+            <%= f.file_field :icon,autocomplete: "icon", class: "form-control",:placeholder=>"icon",onchange: "previewImage(this);",type: "file"%>
           </div>
 
           <hr class="my-4">

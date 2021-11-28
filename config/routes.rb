@@ -14,7 +14,6 @@ Rails.application.routes.draw do
 
   resources :maller
   resources :pages
-  resources :homes
   resources :communities
   resources :searches
   resources :timelines

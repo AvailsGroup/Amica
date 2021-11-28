@@ -15,19 +15,20 @@ class CommunitiesController < ApplicationController
     @community = Community.new(community_params)
     @community.user_id = current_user.id
     @community.save
-    pp @community.id
+
     pp community_params[:icon]
-    if  community_params[:icon]
+    if community_params[:icon]
       image = community_params[:icon]
       File.binwrite("public/communities_image/#{@community.id}.jpg", image.read)
+      @community.icon = "#{@community.id}.jpg"
     end
-    @community.icon = "#{@community.id}.jpg"
 
     if @community.save
-      redirect_to(communities_path)
+      flash[:notice] = "コミュニティを作成しました！"
     else
-      redirect_to(about_path)
+      flash[:notice] = "不明なエラーが発生しました。"
     end
+    redirect_to(communities_path)
   end
 
   def show
@@ -36,6 +37,6 @@ class CommunitiesController < ApplicationController
 
   private
   def community_params
-    params.require(:community).permit(:name,:content,:icon,:tag)
+    params.require(:community).permit(:name,:content,:icon)
   end
 end
