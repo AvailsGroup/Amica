@@ -104,4 +104,8 @@ class User < ApplicationRecord
   def active?
     !ban?
   end
+
+    attr_accessor :x, :y, :width, :height
+
+
 end

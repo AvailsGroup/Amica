@@ -20,8 +20,14 @@ class MypagesController < ApplicationController
     @user = User.new
   end
 
+
   def update
     current_user.update(user_params)
+    session[:crop_x] = user_params[:x]
+    session[:crop_y] = user_params[:y]
+    session[:crop_width] = user_params[:width]
+    session[:crop_height] = user_params[:height]
+
 
     if params[:image]
       current_user.update(image:"#{current_user.id}.jpg")
@@ -30,18 +36,19 @@ class MypagesController < ApplicationController
       Rails.cache.delete("image")
     end
     flash[:notice] = "ユーザー情報を編集しました"
-    redirect_to(mypages_path)
+    redirect_to(profile_path)
   end
 
   def show
     @user = current_user
+
   end
 
 
   private
 
   def user_params
-    params.require(:user).permit(:nickname,:name, profile_attributes:
+    params.require(:user).permit(:nickname,:name,:image, :x, :y, :width, :height, profile_attributes:
       %i[grade school_class number student_id accreditation hobby])
   end
 

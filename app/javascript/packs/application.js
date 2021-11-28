@@ -8,9 +8,9 @@
 //= require mypages/cropper.min.js
 //= require jquery-cropper.min.js
 //= require activestorage
+// require_tree .
 //= require popper
 //= require bootstrap-sprockets
-// require_tree .
 
 import 'bootstrap';
 import '../stylesheets/application';

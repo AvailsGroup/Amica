@@ -2,13 +2,11 @@
 <%= javascript_pack_tag 'mypages/edit' %>
 
 
-
 <head>
   <script type="text/javascript" src="cropper.js" charset="UTF-8"></script>
 </head>
 
 <script>
-
     function previewImage(obj){
         var fileReader = new FileReader();
         fileReader.onload = (function() {
@@ -17,7 +15,6 @@
         fileReader.readAsDataURL(obj.files[0]);
         document.getElementById("image_text").innerHTML = "選択した画像";
     };
-
 </script>
 
 
@@ -28,10 +25,11 @@
 
   <%= form_with model:current_user, url: mypage_path , multipart: true do |f| %>
       <h1>EDIT PAGE</h1>
-      <span>現在のアイコン</span>
+      <p>現在のアイコン</p>
 
       <div class="uploader">
         <div class="form1">
+          <div style="text-align: center">
             <label>
               <input type="file" name="image" class="image_select"  accept='image/*' style="display: none" onchange="previewImage(this);">
               <% if @user.image? %>
@@ -39,7 +37,9 @@
               <% else %>
                 <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
               <% end %>
-            </label><br /><br />
+            </label>
+          </div>
+          <br /><br />
             <p id="image_text">画像を選択してください</p>
             <p>
               <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px; max-height: 200px" >
@@ -101,33 +101,44 @@
         タグ、趣味
         <%= pf.text_area :hobby,class:'form-control',autocomplete:"hobby"%>
         <% end %>
+      <div class="row">
         <%=f.submit "更新",class:'btn btn-outline-primary btn-lg m-1'%>
+      </div>
       </div>
     <% end %>
   </div>
 </div>
 
-
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="preview" style='overflow:hidden'>
+        <div id="beforeUpload">
+        </div>
+        <img src="" id="croppedImage">
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+      <%= form_with model:current_user, url: mypage_path , multipart: true do |f| %>
+        <%= f.file_field :image%>
+        <%= f.hidden_field :x, id:"dataX"%>
+        <%= f.hidden_field :y, id:"dataY"%>
+        <%= f.hidden_field :width, id:"dataWidth"%>
+        <%= f.hidden_field :height, id:"dataHeight"%>
+
+        <%= f.submit "button", id:"btnUpload", class: 'btn btn-success'%>
+      <% end %>
+      <div class="modal fade" id="cropModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="img-container">
+                <img src="" id="imageModal" alt="picture">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="btn-save" data-dismiss="modal">Save</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
