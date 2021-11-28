@@ -78,6 +78,8 @@ gem 'mini_magick'
 
 gem 'rake'
 
+gem 'jquery-rails'
+
 gem 'rails_admin'
 
 gem 'rack-attack'
@@ -85,3 +87,5 @@ gem 'rack-attack'
 
 gem 'cropper_rails'
 
+
+gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'

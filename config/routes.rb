@@ -17,9 +17,16 @@ Rails.application.routes.draw do
   resources :homes
   resources :communities
   resources :searches
-  resources :timelines
+
   resources :chats
   resources :mypages
+
+  resources :timelines do
+    resources :likes,only:[:create,:destroy]
+    collection do
+      get :search
+    end
+  end
 
   resources :profiles, only: [:index,:show] do
     resources :relationships, only: [:create,:destroy]
