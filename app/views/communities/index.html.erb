@@ -11,7 +11,7 @@
       <%= link_to community_path(community.id), style: "text-decoration: none" do %>
         <div class="col">
           <div class="card">
-              <% if community.icon? %>
+            <% if community.icon? %>
               <%= image_tag "/communities_image/#{community.icon}",class: "img-fluid" %><br>
             <% else %>
               <%= image_tag "default_icon", class: "img-fluid" %><br>
