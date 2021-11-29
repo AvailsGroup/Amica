@@ -80,4 +80,8 @@ gem 'rake'
 
 gem 'rails_admin'
 
+gem 'acts-as-taggable-on'
+
+gem 'gon'
+
 gem 'rack-attack'

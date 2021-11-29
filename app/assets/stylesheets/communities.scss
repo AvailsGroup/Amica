@@ -33,8 +33,13 @@ img{
 .flex-equal > * {
   flex: 1;
 }
+
 @media (min-width: 768px) {
   .flex-md-equal > * {
     flex: 1;
   }
+}
+
+.ui-autocomplete.ui-front {
+  z-index: 1051;
 }
