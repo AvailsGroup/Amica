@@ -12,7 +12,8 @@
   <div class="schedule-item">
     <div class="schedule-item-body text-center">
       <h2><%= @user.name %></h2>
-      <h3>(<%= @user.nickname %>)</h3>
+      <h4>(<%= @user.nickname %>)</h4>
+      <h3 class="text-center background">@<%= current_user.userid %></h3>
     </div>
   </div>
 
@@ -22,6 +23,29 @@
       <span>フォロワー : <%= @user.followers_list.count %></span>
     </div>
   </div>
+
+  <div class = "schedule-item text-center">
+    <p class="m-1"><strong>学科:</strong>
+      <%= @profiles.grade %>
+    </p>
+    <p class="m-1"><strong>クラス:</strong>
+      <%=@profiles.school_class%>
+    </p>
+    <p class="m-1"><strong>出席番号:</strong>
+      <%=@profiles.number %>
+    </p>
+    <p class="m-1"><strong>学籍番号:</strong>
+      <%=@profiles.student_id%>
+    </p>
+    <p class="m-1"><strong>資格取得:</strong>
+      <%=  @profiles.accreditation %>
+    </p>
+    <p class="m-1"><strong>タグ、趣味:</strong>
+      <%= @profiles.hobby %>
+    </p>
+  </div>
+
+
   <div class = "schedule-item text-center">
     <% if @user.follow_request?(current_user, @user) %>
       <p class="bold">フォローされています</p>
@@ -55,7 +79,7 @@
     <% if current_user.id == @user.id %>
       <div class="actions">
         <%= link_to '編集',
-                    mypages_path,
+                    edit_mypage_path,
                     class: "btn btn-lg btn-secondary fw-bold border-white bg-blue",
                     style: "font-size: 18px;width: 150px;color:#FFF"
         %>

@@ -1,13 +1,48 @@
 <%= stylesheet_link_tag 'timelines', media: 'all', 'data-turbolinks-track': 'reload' %>
-<ul class="header-menus">
+<%= javascript_pack_tag 'timeline/main', 'data-turbolinks-track': 'reload' %>
 
-  <li>
-    <%= link_to("投稿一覧", "/timelines/index") %>
-  </li>
-  <li>
-    <%= link_to("新規投稿", "/timelines/new") %>
-  </li>
-  <li>
-    <%= link_to("編集", edit_timeline_path(1)) %>
-  </li>
-</ul>
+<body class="bg-light">
+  <div class="nav-scroller bg-white shadow-sm">
+    <nav class="nav nav-underline" aria-label="Secondary navigation">
+      <a class="nav-link active" aria-current="page" href="#">友達
+        <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%=current_user.matchers.count %></span>
+      </a>
+      <a class="nav-link" href="#">
+        フォロー中
+        <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%=current_user.followings_list.count %></span>
+      </a>
+      <a class="nav-link" href="#">最新</a>
+      <a class="nav-link" href="#">おすすめ</a>
+    </nav>
+  </div>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+  <main class="container">
+    <div class="align-items-center p-3 my-3 text-dark bg-light rounded shadow-sm">
+      <%= form_for(@create ,url:timelines_path) do |f|%>
+        <div class="FlexTextarea form-group mb-2">
+          <div class="FlexTextarea__dummy" aria-hidden="true"></div>
+          <%= f.text_area :content, placeholder:"タイムラインを投稿してください",maxlength:"280",id:"FlexTextarea",class: "FlexTextarea__textarea form-control" %>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <%= f.submit "投稿", class:"btn btn-primary"%>
+        </div>
+      <% end %>
+    </div>
+
+      <% @posts.each do |p| %>
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
+          <% unless current_user.following?(@user.find(p.userid)) == false %>
+            <div id="post_<%= p.id %>">
+              <%= render "timelines/post",post:p, user:@user %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+  </main>
+
+  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="offcanvas.js"></script>
+</body>

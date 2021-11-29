@@ -1,5 +1,8 @@
 class MypagesController < ApplicationController
   before_action :sign_in_required, only: [:show]
+
+
+
   def index
     @user = current_user
     @profiles = Profile.find(current_user.id)
@@ -12,34 +15,41 @@ class MypagesController < ApplicationController
 
   end
 
+  def new
+    @profile = Profile.new
+    @user = User.new
+  end
+
+
   def update
-    Profile.update(profile_params)
+    current_user.update(user_params)
+    session[:crop_x] = user_params[:x]
+    session[:crop_y] = user_params[:y]
+    session[:crop_width] = user_params[:width]
+    session[:crop_height] = user_params[:height]
+
+
     if params[:image]
       current_user.update(image:"#{current_user.id}.jpg")
       image = params[:image]
       File.binwrite("public/user_images/#{current_user.image}", image.read)
       Rails.cache.delete("image")
-      flash[:notice] = "ユーザー情報を編集しました"
     end
-    redirect_to(mypages_path)
+    flash[:notice] = "ユーザー情報を編集しました"
+    redirect_to(profile_path)
   end
 
-  def update_nickname
-    @users = current_user.update(nickname: params[:nickname])
-    redirect_to(mypages_path)
+  def show
+    @user = current_user
+
   end
 
-  def update_name
-    @users = current_user.update(name: params[:name])
-    redirect_to(mypages_path)
-  end
 
   private
-  def profile_params
-    params.require(:profile).permit(:grade,:school_class,:number,:student_id,:accreditation,:hobby)
+
+  def user_params
+    params.require(:user).permit(:nickname,:name,:image, :x, :y, :width, :height, profile_attributes:
+      %i[grade school_class number student_id accreditation hobby])
   end
-
-
-
 
 end

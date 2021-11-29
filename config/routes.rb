@@ -16,15 +16,21 @@ Rails.application.routes.draw do
   resources :pages
   resources :communities
   resources :searches
-  resources :timelines
+
   resources :chats
   resources :mypages
-  post 'mypages/nickname', to:'mypages#update_nickname'
-  post 'mypages/name', to:'mypages#update_name'
+
+  resources :timelines do
+    resources :likes,only:[:create,:destroy]
+    collection do
+      get :search
+    end
+  end
 
   resources :profiles, only: [:index,:show] do
     resources :relationships, only: [:create,:destroy]
   end
+
 
   get "profile/search"=>"profiles#search"
   get "profile/follow" => "profiles#follow"
