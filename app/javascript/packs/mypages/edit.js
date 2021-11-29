@@ -1,31 +1,30 @@
+import {Modal} from "bootstrap";
 
 document.addEventListener("turbolinks:load", function(){
 
     //-------------------------------- 解説1 ----------------------------------
     $('#trim_img_uploder').click(function(e){
-        alert("click")
         $(this).val('');
         document.getElementById("prev_img").style.display = '';
         document.getElementById("cropped_canvas").style.display = 'none';
     });
 
     $('#trim_img_uploder').change(function(e){
-        alert("change")
         document.getElementById("prev_img").style.display = 'none';
-        document.getElementById("cropped_canvas").style.display = '';
         $('#modal_area').fadeIn();
+        $('.modal-text').fadeOut();
+        $('#user_icon').fadeOut();
        });
 
     //-------------------------------- 解説2 ----------------------------------
     let cropper = null;
-    const scaled_width = 300;
+    const scaled_width = 500;
     const aspect_numerator = parseFloat(document.getElementById("aspect_numerator").value)
     const aspect_denominator = parseFloat(document.getElementById("aspect_denominator").value)
     const crop_aspect_ratio = aspect_denominator / aspect_numerator;
 
     //-------------------------------- 解説3 ----------------------------------
     const crop_image = function (e) {
-        alert("crop_image")
         const files = e.target.files;
         if (files.length == 0) {
             return;
@@ -78,12 +77,15 @@ document.addEventListener("turbolinks:load", function(){
                     let image_w = document.getElementById("image_w").value;
                     let image_h = document.getElementById("image_h").value;
                     ctx.drawImage(image, image_x/scale, image_y/scale, image_w/scale , image_h/scale ,0 ,0 , cropped_canvas.width ,cropped_canvas.height);
-                    $('#modal_area').fadeOut();
-                    $('#submit').fadeIn();
+                    document.getElementById("image_text").innerHTML = "選択した画像";
+                    document.getElementById("cropped_canvas").style.display = '';
+                   // $('#submit').fadeIn();
                 });
             }
         }
     }
+
+
 
     // アップローダーに画像が設定されるとcrop_imageを設定
     const uploader = document.getElementById('trim_img_uploder');

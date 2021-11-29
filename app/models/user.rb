@@ -115,7 +115,8 @@ class User < ApplicationRecord
     !ban?
   end
 
-    attr_accessor :x, :y, :width, :height
 
+
+  attr_accessor :image_x,:image_y,:image_w,:image_h,:aspect_numerator,:aspect_denominator
 
 end
