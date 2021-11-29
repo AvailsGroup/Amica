@@ -1,6 +1,7 @@
 class CommunitiesController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
+  before_action :set_community_tags_to_gon, only: [:new]
 
   def index
     @community = Community.all
@@ -16,7 +17,6 @@ class CommunitiesController < ApplicationController
     @community.user_id = current_user.id
     @community.save
 
-    pp params["item"]["tags"]
     if community_params[:icon]
       image = community_params[:icon]
       File.binwrite("public/communities_image/#{@community.id}.jpg", image.read)
@@ -35,9 +35,17 @@ class CommunitiesController < ApplicationController
     @community = Community.find(params[:id])
   end
 
+  def set_available_tags_to_gon
+    gon.available_tags = Community.tags_on(:tags).pluck(:name)
+  end
+
+  def set_community_tags_to_gon
+    gon.community_tags = @community.tag_list
+  end
+
   private
 
   def community_params
-    params.require(:community).permit(:name,:content,:icon)
+    params.require(:community).permit(:name, :content, :icon, :tag_list)
   end
 end

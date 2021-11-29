@@ -7,8 +7,23 @@
 
 <% javascript_pack_tag "communities/new" %>
 <script>
-    $(document).ready(function() {
-        $("#tags").tagit();
+
+    $(document).on('turbolinks:load', function () {
+        var i, len, ref, results, tag;
+        $('#myTags').tagit({
+            fieldName: 'community[tag_list]',
+            singleField: true,
+            availableTags: gon.available_tags
+        });
+        if (gon.community_tags != null) {
+            ref = gon.community_tags;
+            results = [];
+            for (i = 0, len = ref.length; i < len; i++) {
+                tag = ref[i];
+                results.push($('#myTags').tagit('createTag', tag));
+            }
+            return results;
+        }
     });
 
     function previewImage(obj) {
@@ -53,17 +68,15 @@
           </div>
 
           <div class="col-sm-12">
-            <%= f.label "タグ" %>
-            <ul id="tags">
-              <%= f.text_field nil, class: "form-control" %>
-            </ul>
+            <div class="search-area-colum form-contents">
+              <%= f.label "タグ" %>
+              <%= f.text_field :tag_list,id:"myTags",autocomplete:"tag_list",values: "tags",name: "tags" %>
+            </div>
           </div>
-
 
           <div class="col-sm-12 text-center">
             <%= f.submit "新規作成", class:"w-50 btn btn-primary btn-lg mb-4"%>
           </div>
-
         </div>
       </div>
     </main>

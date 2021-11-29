@@ -1,6 +1,5 @@
 class Community < ApplicationRecord
-  include ActiveModel::Model
-  attr_accessor :tag
+  acts_as_taggable
 
   validates :name, presence: true
   validates :content, presence: true

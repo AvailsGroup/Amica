@@ -22,9 +22,14 @@
             </div>
             <div class="card">
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">a</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
+                <% community.tag_list.shuffle.first(3).each do |t| %>
+                  <li class="list-group-item">#<%= t %></li>
+                <% end %>
+                <% tag_count =  community.tag_list.count%>
+                <% while tag_count < 3 do%>
+                  <li class="list-group-item">ㅤ</li>
+                  <% tag_count += 1 %>
+                <% end %>
               </ul>
             </div>
             <div class="btn-group">
