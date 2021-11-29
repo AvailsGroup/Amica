@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   resources :homes
   resources :communities
   resources :searches
-
   resources :chats
   resources :mypages
 

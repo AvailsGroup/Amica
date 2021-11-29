@@ -1,9 +1,10 @@
 <%= stylesheet_link_tag "mypages"%>
-<%= javascript_pack_tag 'mypages/edit' %>
-
 
 <head>
-  <script type="text/javascript" src="cropper.js" charset="UTF-8"></script>
+<link rel="stylesheet" type="text/css" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 
 <script>
@@ -17,8 +18,68 @@
     };
 </script>
 
+<!-- Button trigger modal -->
 
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">登録画面</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+<div class="form_wrapper">
+  <%= form_with model: current_user, url: communities_path, method: "post" do |f| %>
+    <!-------------------------------- 解説2 ---------------------------------->
+   <div id="image-wrapper">
+
+        <%= f.file_field :image, id: "trim_img_uploder", value: "assets/default.png" %>
+        <%= image_tag "/user_images/#{@user.image}", id: :prev_img ,:size => '200x200'%>
+      <canvas id="cropped_canvas" style="display:none"></canvas>
+    </div>
+
+
+    <%= f.hidden_field :image_x, id: "image_x" %>
+    <%= f.hidden_field :image_y, id: "image_y" %>
+    <%= f.hidden_field :image_w, id: "image_w" %>
+    <%= f.hidden_field :image_h, id: "image_h" %>
+    <%= f.hidden_field :aspect_numerator, id: "aspect_numerator", value: "1.0" %>
+    <%= f.hidden_field :aspect_denominator ,id: "aspect_denominator", value: "1.0" %>
+    <button id="submit" type='submit' style="display: none">登録</button>
+  <% end %>
+</div>
+
+<div id="modal_area">
+  <div id="modal_back_area" class="modal_back_area"></div>
+  <div class="modal_wrapper">
+    <div class="modal_padding modal_title_wrapper">
+      <h4>範囲を選択してください</h4>
+    </div>
+    <div class="canvas_wrapper">
+      <td><canvas id="source_canvas" width="1" height="1"></canvas></td>
+    </div>
+    <button type="button" id="close_button">OK</button>
+  </div>
+</div>
+
+</div>
+
+
+  <%= javascript_pack_tag 'mypages/edit' %>
+  <%= stylesheet_link_tag 'cropper.min.css' %>
+  <%= javascript_pack_tag 'mypages/cropper.js' %>
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+  </div>
+</div>
 
 <div class="mw-100 p-3" style="background-color: #eee;">
   <div class="profile" style="width:auto">
@@ -31,7 +92,7 @@
         <div class="form1">
           <div style="text-align: center">
             <label>
-              <input type="file" name="image" class="image_select"  accept='image/*' style="display: none" onchange="previewImage(this);">
+              <button id="modalBtn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
               <% if @user.image? %>
                 <%= image_tag "/user_images/#{@user.image}", :size => '200x200' ,class: "user_image"%>
               <% else %>
@@ -106,43 +167,6 @@
       </div>
       </div>
     <% end %>
-  </div>
-</div>
-
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="preview" style='overflow:hidden'>
-        <div id="beforeUpload">
-        </div>
-        <img src="" id="croppedImage">
-      </div>
-      <%= form_with model:current_user, url: mypage_path , multipart: true do |f| %>
-        <%= f.file_field :image%>
-        <%= f.hidden_field :x, id:"dataX"%>
-        <%= f.hidden_field :y, id:"dataY"%>
-        <%= f.hidden_field :width, id:"dataWidth"%>
-        <%= f.hidden_field :height, id:"dataHeight"%>
-
-        <%= f.submit "button", id:"btnUpload", class: 'btn btn-success'%>
-      <% end %>
-      <div class="modal fade" id="cropModal" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-body">
-              <div class="img-container">
-                <img src="" id="imageModal" alt="picture">
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="btn-save" data-dismiss="modal">Save</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 

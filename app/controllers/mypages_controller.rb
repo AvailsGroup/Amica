@@ -48,8 +48,9 @@ class MypagesController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:nickname,:name,:image, :x, :y, :width, :height, profile_attributes:
-      %i[grade school_class number student_id accreditation hobby])
+    params.require(:user).permit(:nickname,:name,:image,:image_x,:image_y,:image_w,:image_h,:aspect_numerator,
+                                 :aspect_denominator,
+                                 profile_attributes:%i[grade school_class number student_id accreditation hobby])
   end
 
 end

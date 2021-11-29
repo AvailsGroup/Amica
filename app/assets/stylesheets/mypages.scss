@@ -10,8 +10,16 @@
 //  background-color: #eee;
 //}
 
-
 p{
   font-size: 1.2em;
   text-align: center;
+}
+
+#modalBtn{
+display: none;
+}
+
+
+#modal_area{
+  display: none;
 }

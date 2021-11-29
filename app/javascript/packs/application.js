@@ -5,7 +5,7 @@
 //= require rails-ujs
 //= require jquery
 //= require jquery_ujs
-//= require mypages/cropper.min.js
+//= require mypages/cropper.js
 //= require jquery-cropper.min.js
 //= require activestorage
 // require_tree .
