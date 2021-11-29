@@ -33,6 +33,8 @@ class User < ApplicationRecord
   has_one :profile
   accepts_nested_attributes_for :profile, update_only: true
 
+  has_one :favorite
+
   # アソシエーションの定義
   # フォローしている側のユーザー (active relationship)
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -94,6 +96,10 @@ class User < ApplicationRecord
   end
   has_one :profile
   before_create :build_default_profile
+
+  def is_favorite?(user,other_user)
+    Favorite.exists?(user_id:user.id,favorite_user_id:other_user.id)
+  end
 
   private
   def build_default_profile

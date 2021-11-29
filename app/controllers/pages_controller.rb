@@ -4,6 +4,7 @@ class PagesController < ApplicationController
 
   def index
     @user = current_user
+    @mates = current_user.matchers
   end
 
   def show

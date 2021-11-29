@@ -22,7 +22,7 @@
       <hr class="style" style="border-top:  1px solid #000000">
 
       <form id="form1" action="自分のサイトURL" method="get">                     <!--検索ボックス作成-->
-        <input id="sbox1" id="s" name="s" type="text" placeholder="友達を検索" />
+        <input id="sbox1" name="s" type="text" placeholder="友達を検索" />
         <input id="sbtn1" type="submit" value="検索" /></form>
 
 
@@ -42,13 +42,13 @@
       <div class="collapse show " id="collapseExample1">
         <% @mates.each do |user| %>
 
-          <% unless current_user.is_favorite?(user.id) == false %>
+          <% unless current_user.is_favorite?(current_user,user) == false %>
            <%= image_tag 'top_icon.png',class:'example1' %>
             <%= user.name %>
             <%= user.nickname %>
 
             <div class="float-end" style="border: solid 1px">
-            <% if current_user.is_favorite?(user.id) %>
+            <% if current_user.is_favorite?(current_user,user) %>
               <%= link_to page_favorite_path(user.id,current_user.id), method: :delete do %>
                 <i class="fas fa-star"></i>
 
@@ -83,12 +83,13 @@
           <%= user.name %>
           (<%= user.nickname %>)
           <span style= "float: right;">
-          <% if current_user.is_favorite?(user.id) %>
+
+          <% if current_user.is_favorite?(current_user,user) %>
             <%= link_to page_favorite_path(user.id,current_user.id), method: :delete  do %>
               <i class="fas fa-star"></i>
             <% end %>
           <% else %>
-            <%= link_to  page_favorite_index_path(user.id),class:"text-right", method: :post do %>
+            <%= link_to  page_favorite_index_path(user.id,),class:"text-right", method: :post do %>
               <i class="far fa-star"></i>
             <% end %>
         <% end %>
