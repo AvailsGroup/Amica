@@ -24,12 +24,14 @@ Rails.application.routes.draw do
   resources :pages, only:[:index,:show] do
     resources :favorite, only:[:create,:destroy]
   end
+  get "page/user"=>"pages#user"
+  get "page/community"=>"pages#community"
 
   resources :profiles, only: [:index,:show] do
     resources :relationships, only: [:create,:destroy]
   end
 
-  get "profile/search"=>"profiles#search"
+  get "profile/search" => "profiles#search"
   get "profile/follow" => "profiles#follow"
   get "profile/follower" => "profiles#follower"
   get "profile/friends" => "profiles#friends"
