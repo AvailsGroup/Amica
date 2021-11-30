@@ -49,6 +49,20 @@ ActiveRecord::Schema.define(version: 2021_11_29_003206) do
     t.integer "user_id"
   end
 
+  create_table "community_tags", force: :cascade do |t|
+    t.integer "community_id"
+    t.string "tag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "favorite_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "inquiries", force: :cascade do |t|
     t.string "name"
     t.string "message"
@@ -57,25 +71,11 @@ ActiveRecord::Schema.define(version: 2021_11_29_003206) do
     t.string "email"
   end
 
-  create_table "likes", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "messages", force: :cascade do |t|
     t.integer "user_id", null: false
     t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "posts", force: :cascade do |t|
-    t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "userid"
   end
 
   create_table "profiles", force: :cascade do |t|

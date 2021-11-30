@@ -23,11 +23,7 @@ class CommunitiesController < ApplicationController
       @community.icon = "#{@community.id}.jpg"
     end
 
-    flash[:notice] = if @community.save
-      "コミュニティを作成しました！"
-    else
-      "不明なエラーが発生しました。"
-                     end
+    flash[:notice] = @community.save ? "コミュニティを作成しました！" : "不明なエラーが発生しました。"
     redirect_to(communities_path)
   end
 
@@ -39,11 +35,11 @@ class CommunitiesController < ApplicationController
     gon.available_tags = Community.tags_on(:tags).pluck(:name)
   end
 
+  private
+
   def set_community_tags_to_gon
     gon.community_tags = @community.tag_list
   end
-
-  private
 
   def community_params
     params.require(:community).permit(:name, :content, :icon, :tag_list)

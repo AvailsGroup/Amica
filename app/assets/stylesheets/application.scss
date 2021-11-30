@@ -11,10 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_self
- *= require cropperjs/dist/cropper.css
  */
-
-
 
 html{
   font-family: 'Kiwi Maru', serif;
@@ -24,12 +21,10 @@ body{
   margin: 0;
 }
 
-
 header {
   background-color: #00A1AE;
   border-bottom: solid 2px;
 }
-
 
 .icons{
   font-size: 1.4rem;
