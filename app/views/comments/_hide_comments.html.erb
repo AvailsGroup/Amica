@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row d-flex align-items-center pb-3">
+    <div class="col">
+      <% if user.find(post.userid).image.nil? %>
+        <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+      <% else %>
+        <%= image_tag "/user_images/#{user.find(post.userid).image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+      <% end %>
+      <%=link_to "#{comment.user.name}さん", profile_path(comment.user.id), class: 'link pl-1'%>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <%= comment.created_at.strftime('%Y/%m/%d') %>
+    </div>
+  </div>
+  <div class="card-body border rounded mb-3">
+    <%= comment.comment %>
+  </div>
+  <hr class="d-none">
+  <% if comment.user == current_user %>
+      <div class="text-right">
+        <%= link_to "削除する", timeline_comment_path(comment.post_id, comment.id), method: :delete, remote: true,class:"btn btn-outline-secondary" %>
+      </div>
+  <% end %>
+</div>

@@ -1,0 +1,9 @@
+<%=form_for comment ,url:timeline_comments_path(timeline_id:@post.id) ,local: false, remote: true do |f| %>
+  <div class="form-group">
+    <%= f.label "コメントを投稿する" %>
+    <%= f.text_area :comment,{ size: "3x3", autocomplete: 'off', placeholder: "コメントを入力してください", class: 'form-control'}%>
+    <div class="text-right">
+      <%=f.submit "コメントする", class: 'btn btn-warning text-white' %>
+    </div>
+  </div>
+<% end %>

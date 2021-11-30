@@ -1,0 +1,19 @@
+<h5><%="コメント一覧（#{comments.count}件)"%></h5>
+<hr>
+<% comments.first(2).each do |comment| %>
+  <%= render 'comments/hide_comments', comment: comment,user: user,post: post%>
+<% end %>
+
+<!---コメントが3件以上の場合、残りのコメントをプルダウンで表示するボタンの作成--->
+<% comments.offset(2).any? do%>
+  <div class="text-right">
+    <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      | もっと見る....
+    </button>
+  </div>
+    <div class="collapse" id="collapseExample">
+      <% comments.offset(2).each do |comment| %>
+        <%= render 'comments/hide_comments', comment: comment, user: user,post: post %>
+      <% end %>
+    </div>
+<% end %>

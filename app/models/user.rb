@@ -103,6 +103,9 @@ class User < ApplicationRecord
     likes.where(post_id: post_id).exists?
   end
 
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
   before_create :build_default_profile
 
   private
