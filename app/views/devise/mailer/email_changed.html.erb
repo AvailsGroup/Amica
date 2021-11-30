@@ -1,7 +1,12 @@
-<p>Hello <%= @email %>!</p>
+<p>こんにちは <%= @email %>さん。　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　</p>
 
 <% if @resource.try(:unconfirmed_email?) %>
-  <p>We're contacting you to notify you that your email is being changed to <%= @resource.unconfirmed_email %>.</p>
+  <p>メールアドレスが<%= @resource.unconfirmed_email %>に変更されることをご連絡いたします。</p>
 <% else %>
-  <p>We're contacting you to notify you that your email has been changed to <%= @resource.email %>.</p>
+  <p>メールアドレスが<%= @resource.email %>に変更されたことをご連絡いたします。</p>
 <% end %>
+
+-------------------------------------------
+AvailsGroup
+email : avails2022@gmail.com
+-------------------------------------------
