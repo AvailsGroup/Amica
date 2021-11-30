@@ -6,10 +6,14 @@ class TimelinesController < ApplicationController
     @posts = Post.all.order(created_at: :desc)
     @create = Post.new
     @user = User.all
+
   end
 
   def show
     @post = Post.find_by(id: params[:id])
+    @comment = Comment.new
+    @comments = @post.comments.order(created_at: :desc)
+    @user = User.all
   end
 
   def new

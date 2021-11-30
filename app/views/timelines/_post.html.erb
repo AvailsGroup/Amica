@@ -22,7 +22,7 @@
   <div class="d-flex justify-content-between">
     <div style="margin-left: 50px">
       <% if current_user.liked_by?(post.id) %>
-        <%= link_to timeline_like_path(post.id,current_user.id), method: :delete , remote: true do%>
+        <%= link_to timeline_like_path(post.id,current_user.id), method: :delete do%>
           <i class="fas fa-heart"></i>
         <% end %>
         <%= post.likes.count %>
