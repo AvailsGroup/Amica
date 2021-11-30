@@ -1,0 +1,11 @@
+
+<%= stylesheet_link_tag 'pages', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class="row">
+  <div class="col-md-12" style="background: white; height: 600px;">
+  <h1 style="text-align: center; letter-spacing: 15px;">検索結果</h1>
+<% @result.each do |user|%>
+  <%= user.name %>
+  <%= user.nickname %>
+  <% end %>
+</div>
+</div>
