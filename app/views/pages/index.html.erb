@@ -22,16 +22,15 @@
 
       <hr class="style" style="border-top:  1px solid #000000">
 
-      <%= form_with url: pages_path,:method => 'get',class: "container-fluid col px-0" do |f| %>
+      <%= form_with url: page_user_path, class: "container-fluid col px-0" ,local: false,remote: true do |f| %>
         <p class="me-3">ユーザー検索</p>
         <div class="input-group">
           <%= f.text_field :name, class: "form-control mb-3",placeholder: "UserName",aria: {label:"Username",describedby: "basic-addon1"} %>
         </div>
       <% end %>
-      <% @result.each do |user|%>
-        <%= user.name %>
-        <%= user.nickname %>
-      <% end %>
+
+      <div id="favorite_user"></div>
+
       <button
         type="button"
         class="btn btn-secondary btn-lg w-100 mt-2 mb-3"
@@ -45,23 +44,24 @@
       <!-- /トリガーとなるリンク&ボタン -->
 
       <!-- 対象のコンテンツ -->
+
       <% @mates.each do |user| %>
         <% unless current_user.is_favorite?(current_user,user) == false %>
           <div class="collapse show mb-3" id="collapseExample1">
-           <%= image_tag 'top_icon.png',class:'example1' %>
+            <%= image_tag 'top_icon.png',class:'example1' %>
             <%= user.name %>
             <%= user.nickname %>
             <div class="float-end mt-3">
 
-            <% if current_user.is_favorite?(current_user,user) %>
-              <%= link_to page_favorite_path(user.id,current_user.id), method: :delete do %>
-                <i class="fas fa-star"></i>
+              <% if current_user.is_favorite?(current_user,user) %>
+                <%= link_to page_favorite_path(user.id,current_user.id), method: :delete do %>
+                  <i class="fas fa-star"></i>
+                <% end %>
+              <% else %>
+                <%= link_to  page_favorite_index_path(user.id), method: :post do %>
+                  <i class="far fa-star"></i>
+                <% end %>
               <% end %>
-            <% else %>
-              <%= link_to  page_favorite_index_path(user.id), method: :post do %>
-                <i class="far fa-star"></i>
-              <% end %>
-            <% end %>
 
             </div>
           </div>

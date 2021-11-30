@@ -18,13 +18,13 @@ Rails.application.routes.draw do
   resources :timelines
   resources :chats
   resources :mypages
-  post 'mypages/nickname', to:'mypages#update_nickname'
-  post 'mypages/name', to:'mypages#update_name'
+  post 'mypages/nickname', 'mypages#update_nickname'
+  post 'mypages/name', 'mypages#update_name'
 
   resources :pages, only:[:index,:show] do
     resources :favorite, only:[:create,:destroy]
   end
-  get "page/user"=>"pages#user"
+  post "page/user"=>"pages#user"
   get "page/community"=>"pages#community"
 
   resources :profiles, only: [:index,:show] do

@@ -5,6 +5,7 @@ class PagesController < ApplicationController
   def index
     @user = current_user
     @mates = current_user.matchers
+    @favorites = @mates.select {|e| current_user.is_favorite?(current_user,e)}
 
   end
 
@@ -13,14 +14,16 @@ class PagesController < ApplicationController
   end
 
   def user
-    search_text = params[:name]
-    @result = Array.new
-    current_user.matchers.each do |user|
-      if user.name.include?(search_text)
-        @result.push(user)
+    @mates = []
+    unless params[:name] == ""
+      current_user.matchers.each do |u|
+        if u.name.downcase.include?(params[:name].downcase) || u.nickname.downcase.include?(params[:name].downcase) || u.userid.downcase.include?(params[:name].downcase)
+          @mates.push(u)
+        end
       end
     end
 
+    render 'pages/user'
   end
 
   def community
