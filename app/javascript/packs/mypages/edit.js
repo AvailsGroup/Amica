@@ -1,19 +1,23 @@
 import {Modal} from "bootstrap";
 
-document.addEventListener("turbolinks:load", function(){
+document.addEventListener("DOMContentLoaded", function(){
 
     //-------------------------------- 解説1 ----------------------------------
     $('#trim_img_uploder').click(function(e){
         $(this).val('');
         document.getElementById("prev_img").style.display = '';
         document.getElementById("cropped_canvas").style.display = 'none';
+        var result = document.getElementById('result-img');
+        result.style.display="none";
+        let base64 = "";
+        result.src = base64;
+
     });
 
     $('#trim_img_uploder').change(function(e){
         document.getElementById("prev_img").style.display = 'none';
         $('#modal_area').fadeIn();
         $('.modal-text').fadeOut();
-        $('#user_icon').fadeOut();
        });
 
     //-------------------------------- 解説2 ----------------------------------
@@ -78,17 +82,12 @@ document.addEventListener("turbolinks:load", function(){
                     let image_h = document.getElementById("image_h").value;
                     ctx.drawImage(image, image_x/scale, image_y/scale, image_w/scale , image_h/scale ,0 ,0 , cropped_canvas.width ,cropped_canvas.height);
                     document.getElementById("image_text").innerHTML = "選択した画像";
-                    document.getElementById("cropped_canvas").style.display = '';
-                   // $('#submit').fadeIn();
+                    $('#user_icon').fadeOut();
                     document.getElementById("image").value = cropper.getCroppedCanvas().toDataURL('image/jpeg');
                     let base64 = cropper.getCroppedCanvas().toDataURL('image/jpeg');
-                    //ここにbase64をデコードして画像に変換する処理
-
-                    //document.getElementById("image").value = ここにimage data;
-
                     var result = document.getElementById('result-img');
+                    result.style.display = '';
                     result.src = base64;
-                    // $('#submit').fadeIn();
 
 
                 });
