@@ -23,13 +23,7 @@ class MypagesController < ApplicationController
   def update
     current_user.update(user_params)
 
-    if params[user_params]
-      current_user.update(image:"#{current_user.id}.jpg")
-      image = user_params
-      File.binwrite("public/user_images/#{current_user.image}", image.read)
-      Rails.cache.delete("image")
-    end
-    flash[:notice] = "ユーザー情報を編集しました"
+
     redirect_to profile_path
   end
 
@@ -44,7 +38,7 @@ class MypagesController < ApplicationController
 
   def user_params
     attrs = [
-      :nickname,:name,:image,:image_x,:image_y,:image_w,:image_h,:aspect_numerator,:aspect_denominator
+      :nickname,:name,:image
     ]
 
     params.require(:user).permit(attrs, profile_attributes:%i[grade school_class number student_id accreditation hobby])

@@ -22,13 +22,19 @@
       <div class="modal-body">
         <h4 class="modal-text">画像を選択してください</h4>
 <div class="form_wrapper">
-  <%= form_with model: current_user, url:mypages_path, method: "post" do |f| %>
+  <%= form_with model: current_user, url:mypage_path,multipart:true do |f| %>
     <!-------------------------------- 解説2 ---------------------------------->
    <div id="image-wrapper">
 
-        <%= f.file_field :image, id: "trim_img_uploder", value: "assets/default" %>
-        <%= image_tag "/user_images/#{@user.image}", id: :prev_img ,:size => '200x200'%>
-
+        <%= f.file_field :images, id: "trim_img_uploder", value: "assets/default" %>
+        <%= f.hidden_field :image, id: "image" %>
+     <div id="prev_img">
+     <% if current_user.image.nil? %>
+       <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
+     <% else %>
+       <img src="<%= current_user.image %>"style="width: 200px;height:200px;" class="user_image">
+     <% end %>
+     </div>
     </div>
 
     <%= f.hidden_field :image_x, id: "image_x" %>
@@ -71,10 +77,10 @@
             <div id="user_icon">
             <label>
               <button type="button" class="btn btn-primary disp_none" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-              <% if @user.image? %>
-                <%= image_tag "/user_images/#{@user.image}", :size => '200x200' ,class: "user_image"%>
-              <% else %>
+              <% if current_user.image.nil? %>
                 <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
+              <% else %>
+                <img src="<%= current_user.image %>"style="width: 200px;height:200px;" class="user_image">
               <% end %>
             </label>
             </div>

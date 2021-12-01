@@ -2,10 +2,10 @@
 <div class="form-group">
   <div class="schedule-item">
     <div class="schedule-item-body text-center">
-      <% if @user.image.nil? %>
-        <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "100px",height: "100px" %>
+      <% if current_user.image.nil? %>
+        <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
       <% else %>
-        <%= image_tag "/user_images/#{@user.image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "100px",height: "100px"%>
+        <img src="<%= current_user.image %>"style="width: 200px;height:200px;" class="user_image">
       <% end %>
     </div>
   </div>

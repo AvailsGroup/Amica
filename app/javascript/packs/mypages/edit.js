@@ -80,6 +80,17 @@ document.addEventListener("turbolinks:load", function(){
                     document.getElementById("image_text").innerHTML = "選択した画像";
                     document.getElementById("cropped_canvas").style.display = '';
                    // $('#submit').fadeIn();
+                    document.getElementById("image").value = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+                    let base64 = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+                    //ここにbase64をデコードして画像に変換する処理
+
+                    //document.getElementById("image").value = ここにimage data;
+
+                    var result = document.getElementById('result-img');
+                    result.src = base64;
+                    // $('#submit').fadeIn();
+
+
                 });
             }
         }
