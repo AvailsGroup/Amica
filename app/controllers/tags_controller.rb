@@ -1,7 +1,6 @@
 class TagsController < ApplicationController
 
   def create
-    pp "test"
     @tag = Tag.new(tag_params)
     @tag.community_id = params[:community_id]
     redirect_to(edit_community_path(params[:community_id]),method: :get)

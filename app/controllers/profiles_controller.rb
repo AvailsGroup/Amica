@@ -33,5 +33,4 @@ class ProfilesController < ApplicationController
   def follow
     @following = current_user.followings_list
   end
-  result
 end

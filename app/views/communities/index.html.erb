@@ -2,7 +2,7 @@
 <h1>コミュニティ</h1>
 <div class="btn-horizontal-border">
   <p>
-    <%=link_to "コミュニティ新規作成","/communities/new"%>
+    <%=link_to "コミュニティ新規作成",new_community_path%>
   </p>
 </div>
 <div class="container">
@@ -31,10 +31,6 @@
                   <% tag_count += 1 %>
                 <% end %>
               </ul>
-            </div>
-            <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
             </div>
             <div class="card-footer">
               <small class="text-muted">Created by <%= @user.find(community.user_id).nickname %></small>

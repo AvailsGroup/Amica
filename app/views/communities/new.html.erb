@@ -1,38 +1,20 @@
 <%= stylesheet_link_tag 'communities', media: 'all', 'data-turbolinks-track': 'reload' %>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tag-it/2.0/js/tag-it.min.js" type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/tag-it/2.0/css/jquery.tagit.min.css" rel="stylesheet" type="text/css">
-
-<% javascript_pack_tag "communities/new" %>
+<%= javascript_pack_tag "communities/new" %>
 <script>
-
-    $(document).on('turbolinks:load', function () {
-        var i, len, ref, results, tag;
+    $(document).ready(function () {
         $('#myTags').tagit({
-            fieldName: 'community[tag_list]',
+            tagLimit: 20,
+            placeholderText: 'タグを追加してください',
             singleField: true,
-            availableTags: gon.available_tags
+            availableTags: <%= raw @all_tag_list %>
         });
-        if (gon.community_tags != null) {
-            ref = gon.community_tags;
-            results = [];
-            for (i = 0, len = ref.length; i < len; i++) {
-                tag = ref[i];
-                results.push($('#myTags').tagit('createTag', tag));
-            }
-            return results;
-        }
     });
 
-    function previewImage(obj) {
-        var fileReader = new FileReader();
-        fileReader.onload = function() {
-            document.getElementById('preview').src = fileReader.result;
-        };
-        fileReader.readAsDataURL(obj.files[0]);
-    }
+    $(document).on("keyup", '.tagit', function() {
+        let tag_count = 10 - $(".tagit-choice").length    // ↑ と同じなので、まとめた方がいい。
+        $(".ui-widget-content.ui-autocomplete-input").attr(
+            'placeholder','あと' + tag_count + '個登録できます');
+    });
 </script>
 
 <div class="container">
@@ -41,10 +23,11 @@
       <div class="py-5 text-center">
         <h2>コミュニティ新規作成</h2>
         <p class="lead">コミュニティを作成して、同じ趣味の友だちを探しましょう！</p>
+        <%= render 'layouts/error_messages', model: f.object %>
         <div class="uploader">
           <div class="form1">
             <label>
-              <%= image_tag "default_icon" , :size => '200x200',id:"preview",class: "d-block mx-auto mb-4 border border-success rounded"%>
+              <%= image_tag "default_icon" ,id:"preview",class: "d-block mx-auto mb-4 border border-success rounded icon"%>
             </label><br /><br />
           </div>
         </div>
@@ -69,8 +52,8 @@
 
           <div class="col-sm-12">
             <div class="search-area-colum form-contents">
-              <%= f.label "タグ" %>
-              <%= f.text_field :tag_list,id:"myTags",autocomplete:"tag_list",values: "tags",name: "tags" %>
+              <%= f.label "タグ (1つ2~20文字)" , class:"form-label"%>
+              <%= f.text_field :tag_list, id:"myTags",autocomplete:"tag_list"%>
             </div>
           </div>
 
