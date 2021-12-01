@@ -11,8 +11,11 @@ class Community < ApplicationRecord
 
   validate :validate_tag
 
+  has_many :community_members
+
   def validate_tag
     return if tag_list == nil?
+
     tag_list.each do |tag|
       errors.add(:tag_list, '1つのタグは2~20文字です。') if (tag.length < 2) || (tag.length > 20)
     end

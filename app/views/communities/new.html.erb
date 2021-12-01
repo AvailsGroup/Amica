@@ -4,16 +4,10 @@
     $(document).ready(function () {
         $('#myTags').tagit({
             tagLimit: 20,
-            placeholderText: 'タグを追加してください',
+            placeholderText: 'タグは10個までです',
             singleField: true,
             availableTags: <%= raw @all_tag_list %>
         });
-    });
-
-    $(document).on("keyup", '.tagit', function() {
-        let tag_count = 10 - $(".tagit-choice").length    // ↑ と同じなので、まとめた方がいい。
-        $(".ui-widget-content.ui-autocomplete-input").attr(
-            'placeholder','あと' + tag_count + '個登録できます');
     });
 </script>
 
