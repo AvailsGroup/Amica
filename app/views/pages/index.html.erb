@@ -7,7 +7,11 @@
 
 <main>
   <div class="profile">　　                                                  <!--my profile&name表示-->
-    <%= image_tag 'top_icon.png',class:'example1' %>　
+    <% if current_user.image.nil? %>
+      <%= image_tag "/user_images/default_icon.png" , class: "user_icon" %>
+    <% else %>
+      <%= image_tag "/user_images/#{current_user.image}",class: "user_icon"%>
+    <% end %>　
     <%= current_user.name %>
     <%= current_user.nickname %>
     (@<%= current_user.userid %>)
@@ -52,7 +56,11 @@
             <%= link_to profile_path(user.userid) do %>
               <div class="d-flex justify-content-between">
                 <div class="d-flex text-muted pt-3">
-                    <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+                  <% if user.image.nil? %>
+                    <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+                  <% else %>
+                    <%= image_tag "/user_images/#{user.image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+                  <% end %>
                   <p class="pb-3 mb-0 small lh-sm w-100">
                     <strong class="d-block text-gray-dark"><%= user.name %> (<%= user.nickname %>)</strong>
                     @<%= user.userid %>
@@ -92,12 +100,16 @@
       <!-- 対象のコンテンツ -->
 
       <% @mates.each do |user| %>
-          <div class="collapse show mb-3" id="collapseExample2">
+          <div class="collapse show mb-1" id="collapseExample2">
             <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
                 <%= link_to profile_path(user.userid) do %>
                   <div class="d-flex justify-content-between">
                     <div class="d-flex text-muted pt-3">
-                      <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+                      <% if user.image.nil? %>
+                        <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+                      <% else %>
+                        <%= image_tag "/user_images/#{user.image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+                      <% end %>
                       <p class="pb-3 mb-0 small lh-sm w-100">
                         <strong class="d-block text-gray-dark"><%= user.name %> (<%= user.nickname %>)</strong>
                         @<%= user.userid %>
@@ -152,10 +164,22 @@
       <!-- /トリガーとなるリンク&ボタン -->
 
       <!-- 対象のコンテンツ -->
-      <div class="collapse show" id="collapseExample3">
-        <%= image_tag 'top_icon.png',class:'example1' %>　
-        <span>とある愛好家</span>
-      </div>
+          <div class="collapse show mb-1" id="collapseExample3">
+            <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex text-muted pt-3">
+                    <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+                    <p class="pb-3 mb-0 small lh-sm w-100">
+                      <strong class="d-block text-gray-dark">アニメ愛好家</strong>
+                      アニメ好き集まれ～
+                    </p>
+                  </div>
+                  <div style="padding-top: 19px; color: #007bff;">
+                        <i class="fas fa-star"></i>
+                  </div>
+              </div>
+            </div>
+          </div>
 
       <button
         type="button"
@@ -171,9 +195,37 @@
       <!-- /トリガーとなるリンク&ボタン -->
 
       <!-- 対象のコンテンツ -->
-      <div class="collapse show" id="collapseExample4" >
-        <%= image_tag 'top_icon.png',class:'example1' %>　
-        <span>東京卍会</span>
+          <div class="collapse show mb-1" id="collapseExample4">
+            <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex text-muted pt-3">
+                    <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+                    <p class="pb-3 mb-0 small lh-sm w-100">
+                      <strong class="d-block text-gray-dark">アニメ愛好家</strong>
+                      アニメ好き集まれ～
+                    </p>
+                  </div>
+                  <div style="padding-top: 19px; color: #007bff;">
+                        <i class="fas fa-star"></i>
+                  </div>
+              </div>
+            </div>
+          </div>
+      <div class="collapse show mb-1" id="collapseExample4">
+      <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex text-muted pt-3">
+          <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+          <p class="pb-3 mb-0 small lh-sm w-100">
+            <strong class="d-block text-gray-dark">IT勉強会</strong>
+            一緒に極めよう
+          </p>
+        </div>
+        <div style="padding-top: 19px; color: #007bff;">
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+    </div>
       </div>
     </div>     <!--右画面制作-->
   </div>
