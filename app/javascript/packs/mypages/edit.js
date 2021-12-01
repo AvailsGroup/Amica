@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function(){
         result.style.display="none";
         let base64 = "";
         result.src = base64;
-
+        $('#user_icon').fadeIn();
     });
 
     $('#trim_img_uploder').change(function(e){
