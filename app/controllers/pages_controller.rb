@@ -27,7 +27,17 @@ class PagesController < ApplicationController
   end
 
   def community
+    @community = current_community.matchers
+    @community = []
+    unless params[:name] == ""
+      current_community.matchers.each do |u|
+        if u.name.downcase.include?(params[:name].downcase) || u.name.downcase.include?(params[:name].downcase) || u.userid.downcase.include?(params[:name].downcase)
+          @mates.push(u)
+        end
+      end
+    end
 
+    render 'pages/community'
   end
 
 

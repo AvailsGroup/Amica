@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resources :favorite, only:[:create,:destroy]
   end
   post "page/user"=>"pages#user"
-  get "page/community"=>"pages#community"
+  post "page/community"=>"pages#community"
 
   resources :profiles, only: [:index,:show] do
     resources :relationships, only: [:create,:destroy]

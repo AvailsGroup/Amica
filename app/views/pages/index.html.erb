@@ -34,7 +34,7 @@
       <button
         type="button"
         class="btn btn-secondary btn-lg w-100 mt-2 mb-3"
-        style="background-color: #00A1AE"
+        style="background-color: #00bfff"
         data-toggle="collapse"
         data-target="#collapseExample1"
         aria-expanded="false"
@@ -47,23 +47,31 @@
 
       <% @mates.each do |user| %>
         <% unless current_user.is_favorite?(current_user,user) == false %>
-          <div class="collapse show mb-3" id="collapseExample1">
-            <%= image_tag 'top_icon.png',class:'example1' %>
-            <%= user.name %>
-            <%= user.nickname %>
-            <div class="float-end mt-3">
-
-              <% if current_user.is_favorite?(current_user,user) %>
-                <%= link_to page_favorite_path(user.id,current_user.id), method: :delete do %>
-                  <i class="fas fa-star"></i>
-                <% end %>
-              <% else %>
-                <%= link_to  page_favorite_index_path(user.id), method: :post do %>
-                  <i class="far fa-star"></i>
-                <% end %>
-              <% end %>
-
-            </div>
+          <div class="collapse show mb-1" id="collapseExample1">
+          <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
+            <%= link_to profile_path(user.userid) do %>
+              <div class="d-flex justify-content-between">
+                <div class="d-flex text-muted pt-3">
+                    <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+                  <p class="pb-3 mb-0 small lh-sm w-100">
+                    <strong class="d-block text-gray-dark"><%= user.name %> (<%= user.nickname %>)</strong>
+                    @<%= user.userid %>
+                  </p>
+                </div>
+                <div style="padding-top: 19px">
+                  <% if current_user.is_favorite?(current_user,user) %>
+                    <%= link_to page_favorite_path(user.id,current_user.id), method: :delete do %>
+                      <i class="fas fa-star"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to  page_favorite_index_path(user.id), method: :post do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
+                  <% end %>
+                </div>
+            <% end %>
+          </div>
+          </div>
           </div>
         <% end %>
       <% end %>
@@ -71,7 +79,7 @@
       <button
         type="button"
         class="btn btn-secondary btn-lg w-100 mt-2 mb-3"
-        style="background-color: #00A1AE"
+        style="background-color: #00bfff"
         data-toggle="collapse"
         data-target="#collapseExample2"
         aria-expanded="false"
@@ -85,20 +93,29 @@
 
       <% @mates.each do |user| %>
           <div class="collapse show mb-3" id="collapseExample2">
-            <%= image_tag 'top_icon.png',class:'example1' %>
-            <%= user.name %>
-            <%= user.nickname %>
-            <div class="float-end mt-3">
-
-              <% if current_user.is_favorite?(current_user,user) %>
-                <%= link_to page_favorite_path(user.id,current_user.id), method: :delete do %>
-                  <i class="fas fa-star"></i>
+            <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
+                <%= link_to profile_path(user.userid) do %>
+                  <div class="d-flex justify-content-between">
+                    <div class="d-flex text-muted pt-3">
+                      <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+                      <p class="pb-3 mb-0 small lh-sm w-100">
+                        <strong class="d-block text-gray-dark"><%= user.name %> (<%= user.nickname %>)</strong>
+                        @<%= user.userid %>
+                      </p>
+                    </div>
+                    <div style="padding-top: 19px">
+                      <% if current_user.is_favorite?(current_user,user) %>
+                        <%= link_to page_favorite_path(user.id,current_user.id), method: :delete do %>
+                          <i class="fas fa-star"></i>
+                        <% end %>
+                      <% else %>
+                        <%= link_to  page_favorite_index_path(user.id), method: :post do %>
+                          <i class="far fa-star"></i>
+                        <% end %>
+                      <% end %>
+                    </div>
                 <% end %>
-              <% else %>
-                <%= link_to  page_favorite_index_path(user.id), method: :post do %>
-                  <i class="far fa-star"></i>
-                <% end %>
-              <% end %>
+              </div>
             </div>
           </div>
       <% end %>
@@ -124,7 +141,7 @@
       <button
         type="button"
         class="btn btn-secondary btn-lg w-100 mt-2 mb-3"
-        style="background-color: #00A1AE"
+        style="background-color: #00bfff"
         data-toggle="collapse"
         data-target="#collapseExample3"
         aria-expanded="false"
@@ -143,7 +160,7 @@
       <button
         type="button"
         class="btn btn-secondary btn-lg w-100 mt-2 mb-3"
-        style="background-color: #00A1AE"
+        style="background-color: #00bfff"
         data-toggle="collapse"
         data-target="#collapseExample3"
         aria-expanded="false"
@@ -156,7 +173,7 @@
       <!-- 対象のコンテンツ -->
       <div class="collapse show" id="collapseExample4" >
         <%= image_tag 'top_icon.png',class:'example1' %>　
-        <span>　東京卍会</span>
+        <span>東京卍会</span>
       </div>
     </div>     <!--右画面制作-->
   </div>
