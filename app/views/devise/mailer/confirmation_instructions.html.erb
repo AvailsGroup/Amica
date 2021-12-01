@@ -1,7 +1,7 @@
-<p><%= @email %>さん、Amicaへようこそ。</p>
+<p>Hi!<%= @email %>さん、Amicaへようこそ!</p>
 
-<p>以下のリンクからアカウントのメールアドレスを確認できます:</p>
-
+<p>これからあなたを最も優れているSNSの世界へご招待!</p>
+<p>まずは以下のリンクからメールアドレスを確認してネ:</p>
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
 
 -------------------------------------------
