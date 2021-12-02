@@ -10,11 +10,11 @@
             <% if @user.image.nil? %>
               <%= image_tag "default_icon", class: "userpicimg icon flex-shrink-0 show-icon",width: "150px",height: "150px" %>
             <% else %>
-              <%= image_tag "/user_images/#{@user.image}" , class: "icon bd-placeholder-img flex-shrink-0 show-icon",width: "150px",height: "150px"%>
+              <%= image_tag "/user_images/#{@user.image}" , class: "userpicimg icon bd-placeholder-img flex-shrink-0 show-icon",width: "150px",height: "150px"%>
             <% end %>
           </div>
           <h3 class="username"><%= @user.nickname %></h3>
-          <p>@<%=current_user.userid%></p>
+          <p>@<%=@user.userid%></p>
         </div>
         <div class="col-md-12 border-top border-bottom">
           <ul class="nav nav-pills pull-left countlist" role="tablist">
