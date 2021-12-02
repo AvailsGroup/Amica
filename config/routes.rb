@@ -14,7 +14,12 @@ Rails.application.routes.draw do
 
   resources :maller
   resources :pages
-  resources :communities
+
+  resources :communities do
+    resources :manage, only: [:create, :destroy]
+  end
+
+
   resources :searches
   resources :timelines
   resources :chats

@@ -11,7 +11,7 @@ class Community < ApplicationRecord
 
   validate :validate_tag
 
-  has_many :community_members
+  has_many :community_members, dependent: :destroy
 
   def validate_tag
     return if tag_list == nil?

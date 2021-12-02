@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(version: 2021_12_01_005719) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "communities", force: :cascade do |t|
     t.string "name"
     t.string "content"
@@ -50,10 +58,12 @@ ActiveRecord::Schema.define(version: 2021_12_01_005719) do
   end
 
   create_table "community_members", force: :cascade do |t|
-    t.integer "community_id"
-    t.integer "user_id"
+    t.integer "user_id", null: false
+    t.integer "community_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["community_id"], name: "index_community_members_on_community_id"
+    t.index ["user_id"], name: "index_community_members_on_user_id"
   end
 
   create_table "community_tags", force: :cascade do |t|
@@ -70,6 +80,13 @@ ActiveRecord::Schema.define(version: 2021_12_01_005719) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "hashtags", force: :cascade do |t|
+    t.string "hashname"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hashname"], name: "index_hashtags_on_hashname", unique: true
+  end
+
   create_table "inquiries", force: :cascade do |t|
     t.string "name"
     t.string "message"
@@ -78,11 +95,25 @@ ActiveRecord::Schema.define(version: 2021_12_01_005719) do
     t.string "email"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "messages", force: :cascade do |t|
     t.integer "user_id", null: false
     t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "userid"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -137,6 +168,15 @@ ActiveRecord::Schema.define(version: 2021_12_01_005719) do
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
+  create_table "timeline_hashtag_relations", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "hashtag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hashtag_id"], name: "index_timeline_hashtag_relations_on_hashtag_id"
+    t.index ["post_id"], name: "index_timeline_hashtag_relations_on_post_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -172,6 +212,10 @@ ActiveRecord::Schema.define(version: 2021_12_01_005719) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "community_members", "communities"
+  add_foreign_key "community_members", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "timeline_hashtag_relations", "hashtags"
+  add_foreign_key "timeline_hashtag_relations", "posts"
 end

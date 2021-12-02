@@ -15,7 +15,6 @@ ActiveStorage.start()
 
 require("@rails/activestorage").start()
 require("channels")
-require('jquery')
 require('jquery-ui/ui/widgets/autocomplete')
 require('jquery-ui/ui/widget')
 require('tag-it')
