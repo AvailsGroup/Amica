@@ -1,52 +1,48 @@
 <%= stylesheet_link_tag 'communities', media: 'all', 'data-turbolinks-track': 'reload' %>
+<style>
+    .flash{
+        display: none;
+    }
+</style>
+
+<div class="nav-scroller bg-white shadow-sm">
+  <nav class="nav nav-underline" aria-label="Secondary navigation">
+    <%= link_to "最新", communities_path,class: "nav-link"%>
+    <%= link_to "おすすめ", community_pickup_path,class: "nav-link",'aria-current': "page", remote: true %>
+    <%= link_to community_joined_path,class: "nav-link",'aria-current': "page", remote: true do%>
+      参加中
+      <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= @join %></span>
+    <% end %>
+  </nav>
+</div>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
 <div class="container">
-  <div class="d-flex align-items-center p-3 my-3 text-dark bg-blue rounded shadow-sm">
+  <div class="p-3 my-3 text-dark bg-blue rounded shadow-sm">
     <div class="lh-1">
-      <nav class="navbar">
-        <%= form_with url: profile_search_path,:method => 'get',class: "container-fluid" do |f| %>
-          <p class="me-3">コミュニティを検索</p>
-          <div class="input-group">
-            <%= f.text_field :name, class: "form-control",placeholder: "コミュニティ名、タグ、id等...",aria: {label:"Username",describedby: "basic-addon1"}%>
+      <%= form_with url: profile_search_path,:method => 'get',class: "container-fluid" do |f| %>
+        <div class="input-group">
+          <div class="d-flex flex-column w-100">
+            <div class="p-2 bd-highlight">
+              <%= f.text_field :name, class: "form-control w-100",placeholder: "コミュニティを検索",aria: {label:"Username",describedby: "basic-addon1"}%>
+            </div>
+            <div class="p-2 bd-highlight text-center">
+              <p>or</p>
+              <%=link_to "コミュニティ新規作成",new_community_path,class:"btn btn-primary"%>
+            </div>
           </div>
-          <%=link_to "コミュニティ新規作成",new_community_path,class:"btn btn-primary mt-3"%>
         <% end %>
-
-
-      </nav>
+      </div>
     </div>
   </div>
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4  g-lg-4">
-    <% @community.each do |community| %>
-      <%= link_to community_path(community.id), style: "text-decoration: none" do %>
-        <div class="col">
-          <div class="card">
-            <% if community.icon? %>
-              <%= image_tag "/communities_image/#{community.icon}",class: "img-fluid" %><br>
-            <% else %>
-              <%= image_tag "default_icon", class: "img-fluid" %><br>
-            <% end %>
-            <div class="carddy">
-              <h5 class="card-title"><%= community.name %></h5>
-              <p class="card-text"><%= community.content .truncate(15, omission: '...')%></p>
-            </div>
-            <div class="card">
-              <ul class="list-group list-group-flush">
-                <% community.tag_list.shuffle.first(3).each do |t| %>
-                  <li class="list-group-item">#<%= t %></li>
-                <% end %>
-                <% tag_count =  community.tag_list.count%>
-                <% while tag_count < 3 do%>
-                  <li class="list-group-item">－</li>
-                  <% tag_count += 1 %>
-                <% end %>
-              </ul>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">Created by <%= @user.find(community.user_id).nickname %></small>
-            </div>
-          </div>
-        </div>
-      <% end %>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 g-lg-4 p-3 my-3" id="community">
+     <% @community.each do |community| %>
+      <div id="communities">
+        <%= render "communities/community",community:community,user:@user %>
+      </div>
     <% end %>
   </div>
 </div>

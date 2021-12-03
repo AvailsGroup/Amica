@@ -3,8 +3,9 @@ class CommunitiesController < ApplicationController
   before_action :banned
 
   def index
-    @community = Community.all
+    @community = Community.all.order(created_at: :desc)
     @user = User.all
+    @join = CommunityMember.where(user_id: current_user.id).count
   end
 
   def new
@@ -39,6 +40,19 @@ class CommunitiesController < ApplicationController
     @members = CommunityMember.where(community_id: @community.id)
     @user = User.all
     @tag = @community.tag_counts_on(:tags)
+  end
+
+  def pickup
+
+  end
+
+  def joined
+    @community = []
+    join = CommunityMember.where(user_id: current_user.id)
+    join.each do |m|
+      @community.push(Community.find(m.community_id))
+    end
+    @user = User.all
   end
 
   private

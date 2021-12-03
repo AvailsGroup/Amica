@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   resources :communities do
     resources :manage, only: [:create, :destroy]
   end
+  get "community/pickup" => "communities#pickup"
+  get "community/joined" => "communities#joined"
+
 
 
   resources :searches
