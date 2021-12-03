@@ -13,9 +13,11 @@ class ProfilesController < ApplicationController
 
   def show
     @user = User.find_by(userid: params[:id])
-    if @user == nil
+    if @user.nil?
       redirect_to profiles_path, notice: "そのユーザーidは存在しませんでした"
+      return
     end
+    @profile = Profile.find(@user.id)
   end
 
   def search

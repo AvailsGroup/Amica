@@ -23,15 +23,55 @@ body{
   margin: 0;
 }
 
-
-header {
-  background-color: #00A1AE;
-  border-bottom: solid 2px;
+header{
+  position: sticky;
 }
 
+#main-nav{
+  z-index: 9999;
+}
+
+#sub-nav{
+  z-index: 9998;
+}
+
+#main-nav,#sub-nav{
+  background-color: #ffffff;
+  font-family: 'Rubik','M PLUS Rounded 1c', sans-serif;
+  border: rgba(166,145,113,0.2) solid 1px;
+}
+
+#main-nav .btn{
+  border: 0 solid transparent;
+  padding:3px;
+  margin-top: 5px;
+  margin-left: 3px;
+  margin-bottom: 5px;
+}
+
+#main-nav .btn-primary{
+  background-color: rgba(29,144,190,0.8);
+  border-color: rgba(29,144,190,0.8);
+}
+
+#main-nav svg{
+  margin-right: 3px;
+}
+
+.notice{
+  font-family: 'Kiwi Maru', serif;
+}
+
+.box{
+  display: inline-block;
+}
+
+.amica_icon{
+  width: 50px;
+}
 
 .icons{
-  font-size: 1.4rem;
+  font-size: 1rem;
   margin-left: 7px;
 }
 
@@ -70,3 +110,5 @@ header {
 table{
   margin-left: 7px;
 }
+
+
