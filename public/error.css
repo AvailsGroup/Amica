@@ -4,16 +4,9 @@ HTML, BODY {
 BODY {
     background: #082330;
     background-size: 0.12em 100%;
-
     font: 16em/1 Arial;
 }
-
 .text--line {
-
-    font-size: 0.3em;
-}
-.text--line2{
-
     font-size: 0.5em;
 }
 svg {
