@@ -1,15 +1,9 @@
 <%= stylesheet_link_tag "mypages"%>
-
-<head>
 <link rel="stylesheet" type="text/css" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-</head>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <%= javascript_pack_tag 'mypages/edit' %>
-<%= stylesheet_link_tag 'cropper.min.css' %>
-<%= javascript_pack_tag 'mypages/cropper.js' %>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -21,92 +15,81 @@
       </div>
       <div class="modal-body">
         <h4 class="modal-text">画像を選択してください</h4>
-<div class="form_wrapper">
-  <%= form_with model: current_user, url:mypage_path,multipart:true do |f| %>
-    <!-------------------------------- 解説2 ---------------------------------->
-   <div id="image-wrapper">
-
-        <%= f.file_field :images, id: "trim_img_uploder", value: "assets/default" %>
-        <%= f.hidden_field :image, id: "image" %>
-     <div id="prev_img">
-     <% if current_user.image.nil? %>
-       <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
-     <% else %>
-       <img src="<%= current_user.image %>"style="width: 200px;height:200px;" class="user_image">
-     <% end %>
-     </div>
-    </div>
-
-    <%= f.hidden_field :image_x, id: "image_x" %>
-    <%= f.hidden_field :image_y, id: "image_y" %>
-    <%= f.hidden_field :image_w, id: "image_w" %>
-    <%= f.hidden_field :image_h, id: "image_h" %>
-    <%= f.hidden_field :aspect_numerator, id: "aspect_numerator", value: "1.0" %>
-    <%= f.hidden_field :aspect_denominator ,id: "aspect_denominator", value: "1.0" %>
-
-</div>
-
-<div id="modal_area" class="disp_none">
-  <div id="modal_back_area" class="modal_back_area"></div>
-  <div class="modal_wrapper">
-    <div class="modal_padding modal_title_wrapper">
-      <h4>範囲を選択してください</h4>
-    </div>
-    <div class="canvas_wrapper">
-      <td><canvas id="source_canvas" width="1" height="1"></canvas></td>
-    </div>
-    <div class="modal-footer">
-    <button type="button" id="close_button" class="btn btn-primary" data-bs-dismiss="modal">画像を切り取る</button>
-    </div>
-  </div>
-</div>
-
-</div>
-    </div>
+          <div class="form_wrapper">
+            <%= form_with model: current_user, url:mypage_path,multipart:true do |f| %>
+              <div id="image-wrapper">
+                <%= f.file_field :images, id: "trim_img_uploder", value: "assets/default" %>
+                <%= f.hidden_field :image, id: "image" %>
+                <%= f.hidden_field :image_x, id: "image_x" %>
+                <%= f.hidden_field :image_y, id: "image_y" %>
+                <%= f.hidden_field :image_w, id: "image_w" %>
+                <%= f.hidden_field :image_h, id: "image_h" %>
+                <%= f.hidden_field :aspect_numerator, id: "aspect_numerator", value: "1.0" %>
+                <%= f.hidden_field :aspect_denominator ,id: "aspect_denominator", value: "1.0" %>
+                <div id="prev_img">
+                  <% if current_user.image.nil? %>
+                    <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
+                  <% else %>
+                    <%= image_tag "/user_images/#{current_user.image}", :size => '200x200', class:"user_image"%>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div id="modal_area" class="disp_none">
+                <div id="modal_back_area" class="modal_back_area">
+                </div>
+              <div class="modal_wrapper">
+                <div class="modal_padding modal_title_wrapper">
+                  <h4>範囲を選択してください</h4>
+                </div>
+                <div class="canvas_wrapper">
+                  <canvas id="source_canvas" width="1" height="1"></canvas>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="close_button" class="btn btn-primary" data-bs-dismiss="modal">画像を切り取る</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
   </div>
 </div>
 
 
 <div class="mw-100 p-3" style="background-color: #eee;">
   <div class="profile" style="width:auto">
-      <h1>EDIT PAGE</h1>
-      <p id="image_text">現在のアイコン</p>
-      <div class="uploader">
-        <div class="form1">
-          <div style="text-align: center;">
-            <div id="user_icon">
+    <h1>EDIT PAGE</h1>
+    <p id="image_text">現在のアイコン</p>
+    <div class="uploader">
+      <div class="form1">
+        <div style="text-align: center;">
+          <div id="user_icon">
             <label>
               <button type="button" class="btn btn-primary disp_none" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
               <% if current_user.image.nil? %>
                 <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
               <% else %>
-                <img src="<%= current_user.image %>"style="width: 200px;height:200px;" class="user_image">
+                <%= image_tag "/user_images/#{current_user.image}", :size => '200x200', class:"user_image"%>
               <% end %>
             </label>
-            </div>
-            <label>
-              <button type="button" class="btn btn-primary disp_none" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-              <canvas id="cropped_canvas" style="display:none;width: 200px;height: 200px;"></canvas>
-              <img src="" id="result-img" style="display:none;width: 200px;height: 200px;">
-
-            </label>
-
           </div>
-
+          <label>
+            <button type="button" class="btn btn-primary disp_none" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+            <canvas id="cropped_canvas" style="display:none;width: 200px;height: 200px;"></canvas>
+            <img src="" id="result-img" style="display:none;width: 200px;height: 200px;">
+          </label>
         </div>
       </div>
-
-
-      <div class="m-1">
+    </div>
+    <div class="m-1">
         名前<br><%= f.text_field :name,class:'form-control'%>
-      </div>
+    </div>
+    <div class="m-1">
+      ニックネーム<%= f.text_field :nickname,class:'form-control' %>
+    </div>
+    <%= f.fields_for :profile do |pf|%>
       <div class="m-1">
-        ニックネーム<%= f.text_field :nickname,class:'form-control' %>
-      </div>
-
-      <%= f.fields_for :profile do |pf|%>
-      <div class="m-1">
-         学科<br>
+        学科<br>
         <%= pf.select :grade,
                      [%w[情報処理科1年 情報処理科1年],
                       %w[情報処理科2年 情報処理科2年],
@@ -134,7 +117,6 @@
                      include_blank: "学科",
                      autocomplete:"grade"%>
       </div>
-
       <div class="m-1">
         クラス<br><%= pf.select :school_class, [["1", "1"], ["2", "2"], ["3", "3"],["4", "4"],["5", "5"],["6", "6"],["7", "7"],["8", "8"],["9", "9"],["10", "10"]], class:'form-control',include_blank: "クラス", autocomplete:"school_class" %>
       </div>
@@ -154,7 +136,7 @@
         <% end %>
       <div class="row">
         <%=f.submit "更新",class:'btn btn-outline-primary btn-lg m-1'%>
-      </div>
+        </div>
       </div>
     <% end %>
   </div>

@@ -7,10 +7,10 @@
       <div class="panel panel-default">
         <div class="userprofile social ">
           <div class="userpic">
-            <% if current_user.image.nil? %>
+            <% if @user.image.nil? %>
               <%= image_tag "default_icon" , :size => '100x100', class: "userpicimg icon flex-shrink-0 show-icon"%>
             <% else %>
-              <img src="<%= current_user.image %>"style="width: 100px;height:100px;" class="userpicimg icon bd-placeholder-img flex-shrink-0 show-icon">
+              <%= image_tag "/user_images/#{@user.image}",style: "width: 100px;height:100px;",class:"userpicimg icon bd-placeholder-img flex-shrink-0 show-icon"%>
             <% end %>
           </div>
           <h3 class="username"><%= @user.nickname %></h3>

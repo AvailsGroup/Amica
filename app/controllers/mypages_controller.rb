@@ -18,12 +18,15 @@ class MypagesController < ApplicationController
     @user = User.new
   end
 
-
-
   def update
     current_user.update(user_params)
-
-
+    if params["user"]["image"]
+      current_user.update(image: "#{current_user.id}.jpg")
+      File.open("public/user_images/#{current_user.image}", 'wb') do |f|
+        f.write(Base64.decode64(params["user"]["image"]['data:image/png;base64,'.length .. -1]))
+      end
+    end
+    flash[:notice] = "ユーザー情報を編集しました"
     redirect_to profile_path
   end
 
@@ -35,13 +38,10 @@ class MypagesController < ApplicationController
 
   private
 
-
   def user_params
-    attrs = [
-      :nickname,:name,:image
-    ]
+    attrs = [:nickname,:name]
 
     params.require(:user).permit(attrs, profile_attributes:%i[grade school_class number student_id accreditation hobby])
-    end
+  end
 
 end
