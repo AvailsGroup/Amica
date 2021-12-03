@@ -1,45 +1,34 @@
 class MypagesController < ApplicationController
   before_action :sign_in_required, only: [:show]
-  def index
-    @user = current_user
-    @profiles = Profile.find(current_user.id)
-
-  end
 
   def edit
     @user = current_user
+    permission
     @profile = Profile.find(current_user.id)
-
   end
 
   def update
-    Profile.update(profile_params)
-    if params[:image]
-      current_user.update(image:"#{current_user.id}.jpg")
-      image = params[:image]
-      File.binwrite("public/user_images/#{current_user.image}", image.read)
-      Rails.cache.delete("image")
-      flash[:notice] = "ユーザー情報を編集しました"
+    current_user.update(user_params)
+    if params["user"]["image"]
+      current_user.update(image: "#{current_user.id}.jpg")
+      File.open("public/user_images/#{current_user.image}", 'wb') do |f|
+        f.write(Base64.decode64(params["user"]["image"]['data:image/png;base64,'.length .. -1]))
+      end
     end
-    redirect_to(mypages_path)
-  end
-
-  def update_nickname
-    @users = current_user.update(nickname: params[:nickname])
-    redirect_to(mypages_path)
-  end
-
-  def update_name
-    @users = current_user.update(name: params[:name])
-    redirect_to(mypages_path)
+    flash[:notice] = "ユーザー情報を編集しました"
+    redirect_to profile_path
   end
 
   private
-  def profile_params
-    params.require(:profile).permit(:grade,:school_class,:number,:student_id,:accreditation,:hobby)
+  def user_params
+    attrs = [:nickname,:name]
+    params.require(:user).permit(attrs, profile_attributes:%i[grade school_class number student_id accreditation hobby])
   end
 
-
-
-
+  def permission
+    unless params[:id] == @user.userid
+      flash[:notice] = "権限がありません"
+      redirect_to profile_path
+    end
+  end
 end

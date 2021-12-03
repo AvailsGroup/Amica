@@ -1,101 +1,87 @@
-(function() {
-    "use strict";
-    var cropper, file, cropperFile, cropperPreview, cropperCanvas, cropperHeight, cropperWidth;
-    kintone.events.on([
-        'app.record.create.show',
-        'app.record.edit.show',
-    ], function(event){
-        kintone.app.record.setFieldShown('添付ファイル', false);
-        kintone.app.record.getSpaceElement('space').innerHTML = '<div class="control-label-gaia"><span class="control-label-text-gaia">添付ファイル</span></div><div id="cropperWrapper"><input id="cropperFile" type="file"><div class="cropperContent"><div id="cropperPreview"></div><p><span id="cropperHeight"></span>*<span id="cropperWidth"></span>px</p></div><div class="cropperContent"><div id="cropperCanvas"></div></div></div>';
-        cropperFile = document.getElementById('cropperFile');
-        cropperPreview = document.getElementById('cropperPreview');
-        cropperCanvas = document.getElementById('cropperCanvas');
-        cropperHeight = document.getElementById('cropperHeight');
-        cropperWidth = document.getElementById('cropperWidth');
-        if(event.type === 'app.record.edit.show'){
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/k/v1/file.json?fileKey=' + event.record.添付ファイル.value[0].fileKey);
-            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            xhr.responseType = 'blob';
-            xhr.addEventListener('load', function(){
-                var image = new Image();
-                image.addEventListener('load', function(){
-                    cropperPreview.appendChild(image);
-                    cropperHeight.innerHTML = image.naturalHeight;
-                    cropperWidth.innerHTML = image.naturalWidth;
-                    document.getElementsByClassName('cropperContent')[0].style.display = 'block';
-                });
-                image.src = (window.URL || window.webkitURL).createObjectURL(xhr.response);
-            });
-            xhr.send();
-        }
-        cropperFile.addEventListener('change', function(e){
-            var reader = new FileReader();
-            file = e.target.files[0] || file;
-            if(file.type.indexOf("image") < 0){
-                return false;
-            }
-            reader.addEventListener('load', function(e){
-                cropperCanvas.innerHTML = '<img src="' + e.target.result + '">';
-                cropper = new Cropper(cropperCanvas.children[0], {
-                    aspectRatio: 1,
-                    preview: cropperPreview
-                });
-                cropperCanvas.children[0].addEventListener('crop', function(e){
-                    cropperHeight.innerHTML = Math.floor(e.detail.height);
-                    cropperWidth.innerHTML = Math.floor(e.detail.width);
-                });
-                [].forEach.call(document.getElementsByClassName('cropperContent'), function(element){
-                    element.style.display = 'block';
-                });
-            });
-            reader.readAsDataURL(file);
-        });
+document.addEventListener("DOMContentLoaded", function(){
+    $('#trim_img_uploder').click(function(e){
+        $(this).val('');
+        document.getElementById("prev_img").style.display = '';
+        document.getElementById("cropped_canvas").style.display = 'none';
+        var result = document.getElementById('result-img');
+        result.style.display="none";
+        let base64 = "";
+        result.src = base64;
+        $('#user_icon').fadeIn();
     });
-    kintone.events.on([
-        'app.record.create.submit.success',
-        'app.record.edit.submit.success',
-    ], function(event){
-        if(!file) return event;
-        return new kintone.Promise(function(resolve){
-            cropper.getCroppedCanvas().toBlob(function(blob){
-                var formData = new FormData();
-                var xhr = new XMLHttpRequest();
-                formData.append('__REQUEST_TOKEN__', kintone.getRequestToken());
-                formData.append('file', blob, file.name);
-                xhr.open('POST', encodeURI('/k/v1/file.json'));
-                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-                xhr.addEventListener('load', function(){
-                    kintone.api('/k/v1/record', 'PUT', {
-                        app: kintone.app.getId(),
-                        id: event.recordId,
-                        record: {
-                            添付ファイル: {
-                                value: [
-                                    {fileKey: JSON.parse(xhr.responseText).fileKey}
-                                ]
-                            }
+
+    $('#trim_img_uploder').change(function(e){
+        document.getElementById("prev_img").style.display = 'none';
+        $('#modal_area').fadeIn();
+        $('.modal-text').fadeOut();
+       });
+
+    let cropper = null;
+    const scaled_width = 500;
+    const aspect_numerator = parseFloat(document.getElementById("aspect_numerator").value)
+    const aspect_denominator = parseFloat(document.getElementById("aspect_denominator").value)
+    const crop_aspect_ratio = aspect_denominator / aspect_numerator;
+
+    const crop_image = function (e) {
+        const files = e.target.files;
+        if (files.length == 0) {
+            return;
+        }
+        let file = files[0];
+        let image = new Image();
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+            image.src = e.target.result;
+            image.onload = function () {
+
+                let scale = scaled_width / image.width;
+                const canvas = document.getElementById("source_canvas");
+                canvas.width = image.width * scale;
+                canvas.height = image.height * scale;
+                let ctx = canvas.getContext("2d");
+                ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+                if (cropper != null) {
+                    cropper.destroy();
+                }
+
+                cropper = new Cropper(canvas,
+                    {
+                        aspectRatio: crop_aspect_ratio,
+                        data: {width: canvas.width, height: canvas.width * crop_aspect_ratio},
+                        crop: function (event) {
+                            document.getElementById("image_x").value = event.detail.x;
+                            document.getElementById("image_y").value = event.detail.y;
+                            document.getElementById("image_w").value = event.detail.width;
+                            document.getElementById("image_h").value = event.detail.height;
                         }
-                    }).then(function(){
-                        resolve(event);
-                    });
+                    }
+                );
+
+                $('#close_button,#modal_back_area').click(function(){
+                    const cropped_canvas = document.getElementById("cropped_canvas");
+                    let ctx = cropped_canvas.getContext("2d");
+                    let cropped_image_width = image.height * crop_aspect_ratio;
+                    cropped_canvas.width = cropped_image_width * scale;
+                    cropped_canvas.height = image.height * scale;
+
+                    let image_x = document.getElementById("image_x").value;
+                    let image_y = document.getElementById("image_y").value;
+                    let image_w = document.getElementById("image_w").value;
+                    let image_h = document.getElementById("image_h").value;
+                    ctx.drawImage(image, image_x/scale, image_y/scale, image_w/scale , image_h/scale ,0 ,0 , cropped_canvas.width ,cropped_canvas.height);
+                    document.getElementById("image_text").innerHTML = "選択した画像";
+                    $('#user_icon').fadeOut();
+                    document.getElementById("image").value = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+                    let base64 = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+                    var result = document.getElementById('result-img');
+                    result.style.display = '';
+                    result.src = base64;
                 });
-                xhr.send(formData);
-            }, file.type);
-        });
-    });
-})();
-// ポリフィル(参考URL:https://developer.mozilla.org/ja/docs/Web/API/HTMLCanvasElement/toBlob)
-if(!HTMLCanvasElement.prototype.toBlob){
-    Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
-        value: function(callback, type, quality){
-            var binStr = atob(this.toDataURL(type, quality).split(',')[1]),
-                len = binStr.length,
-                arr = new Uint8Array(len);
-            for(var i=0; i<len; i++ ){
-                arr[i] = binStr.charCodeAt(i);
             }
-            callback(new Blob([arr], {type: type || 'image/png'}));
         }
-    });
-}
+    }
+
+    const uploader = document.getElementById('trim_img_uploder');
+    uploader.addEventListener('change', crop_image);
+});
