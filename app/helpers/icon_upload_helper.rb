@@ -1,0 +1,2 @@
+module IconUploadHelper
+end

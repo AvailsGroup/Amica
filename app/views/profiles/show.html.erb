@@ -8,9 +8,9 @@
         <div class="userprofile social ">
           <div class="userpic">
             <% if @user.image.nil? %>
-              <%= image_tag "default_icon", class: "userpicimg icon flex-shrink-0 show-icon",width: "150px",height: "150px" %>
+              <%= image_tag "default_icon" , :size => '100x100', class: "userpicimg icon flex-shrink-0 show-icon"%>
             <% else %>
-              <%= image_tag "/user_images/#{@user.image}" , class: "userpicimg icon bd-placeholder-img flex-shrink-0 show-icon",width: "150px",height: "150px"%>
+              <%= image_tag "/user_images/#{@user.image}",style: "width: 100px;height:100px;",class:"userpicimg icon bd-placeholder-img flex-shrink-0 show-icon"%>
             <% end %>
           </div>
           <h3 class="username"><%= @user.nickname %></h3>
@@ -63,7 +63,7 @@
                 </div>
               <% end %>
             <% end %>
-            <% if current_user.id == @user.id %>
+           <% if current_user.id == @user.id %>
               <div class="actions">
                 <%= link_to '編集',
                             edit_mypage_path,

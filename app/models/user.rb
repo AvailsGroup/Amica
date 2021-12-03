@@ -36,6 +36,8 @@ class User < ApplicationRecord
   has_one :profile
   accepts_nested_attributes_for :profile, update_only: true
 
+  has_many :likes
+
   # アソシエーションの定義
   # フォローしている側のユーザー (active relationship)
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -102,10 +104,18 @@ class User < ApplicationRecord
     !ban?
   end
 
+  def liked_by?(post_id)
+    likes.where(post_id: post_id).exists?
+  end
+
   private
 
   def build_default_profile
     build_profile
     true
+  end
+
+  def active?
+    !ban?
   end
 end
