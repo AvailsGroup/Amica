@@ -84,9 +84,8 @@ gem 'rails_admin'
 
 gem 'rack-attack'
 
-
 gem 'cropper_rails'
-
 
 gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 
+gem 'dotenv-rails'
