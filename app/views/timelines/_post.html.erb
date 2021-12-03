@@ -37,7 +37,7 @@
     <div>
       <% if post.userid == current_user.id%>
         <%= link_to(timeline_path(post.id),method: :delete) do%>
-          <i class="fas fa-trash"></i>
+          <i class="far fa-trash-alt"></i>
         <% end %>
       <% end %>
     </div>

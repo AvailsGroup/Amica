@@ -35,6 +35,8 @@ class User < ApplicationRecord
 
   has_many :likes
 
+  has_many :comments, dependent: :destroy
+
   # アソシエーションの定義
   # フォローしている側のユーザー (active relationship)
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
