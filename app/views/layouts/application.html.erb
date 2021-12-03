@@ -4,19 +4,20 @@
   <title>Amica</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 <header class="w-auto">
-  <nav class="navbar navbar-expand-lg navbar-light p-0 m-0">
+  <nav class="navbar navbar-expand-lg navbar-light p-0 m-0" id="main-nav">
     <div class="container-fluid">
+      <!--
       <% if user_signed_in? %>
         <%= link_to  pages_path ,class: "link" do%>
           <% if current_user.image.nil? %>
@@ -24,40 +25,47 @@
           <% else %>
             <%= image_tag "/user_images/#{current_user.image}",class: "user_icon"%>
           <% end %>
+        <% end %>-->
+        <%= link_to pages_path,class: "link" do%>
+          <%= image_tag "/user_images/default_icon.png",class:"amica_icon" %>
+        <% end %>
+        <%= link_to pages_path,class: "link" do%>
+          <h2 style="margin-left:2px;margin-top: 8px;color: rgba(29,144,190,0.8)">Amica</h2>
         <% end %>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <p class="mb-0 small lh-sm" style="margin-left:7px">
+          <!--<p class="mb-0 small lh-sm" style="margin-left:7px">
             <strong class="d-block text-gray-dark"><%= current_user.name %> (<%= current_user.nickname %>)</strong>
             @<%= current_user.userid %>
-          </p>
-          <ul class="navbar-nav me-auto m-0 mb-lg-0">
+          </p>-->
+          <div class="navbar-nav me-auto m-0 mb-lg-0"></div>
+          <ul class="navbar-nav d-flex">
             <li class="nav-item">
               <%= link_to  chats_path,class: "icons nav-link" do %>
-                <i class="fas fa-comments"></i>chats
+                <i class="fas fa-comments"></i>チャット
               <% end %>
             </li>
             <li class="nav-item">
               <%= link_to  communities_path,class: "icons nav-link" do %>
-                <i class="fas fa-users"></i>communities
+                <i class="fas fa-users"></i>コミュニティ
               <% end %>
             </li>
             <li class="nav-item">
               <%= link_to  timelines_path,class: "icons nav-link" do %>
-                <i class="fas fa-clock"></i>timelines
+                <i class="fas fa-clock"></i>タイムライン
               <% end %>
             </li>
             <li class="nav-item">
               <%= link_to  profiles_path,class: "icons nav-link" do %>
-                <i class="fas fa-address-card"></i>friend
+                <i class="fas fa-address-card"></i>友達
               <% end %>
             </li>
             <li class="nav-item dropdown d-flex">
               <a class="nav-link dropdown-toggle icons" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-box-open"></i>another
+                <i class="fas fa-box-open"></i>その他
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <% if current_user.try(:admin?) %>
@@ -75,6 +83,10 @@
                   <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: "link nav-link me-2" %>
                 </li>
               </ul>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,style:"color: #FFF;",class: "link nav-link btn btn-primary"%>
+            </li>
           </ul>
         </div>
       <% else %>
@@ -96,14 +108,18 @@
       <% end %>
     </div>
   </nav>
+  <nav id="sub-nav" style="background-color: #666666;height: 30px">
+    <p style="color: white;margin-left: 12px"><%=current_user.name %> (@<%=current_user.userid%>) </p>
+  </nav>
 </header>
+<main>
 <!-- ここに追加 -->
-
-<div class="flash">
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-</div>
-<%= yield %>
+  <div class="flash">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  </div>
+  <%= yield %>
+</main>
 </body>
 
 </html>
