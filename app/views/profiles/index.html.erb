@@ -101,8 +101,6 @@
   <div class="my-3 p-3 bg-white rounded shadow-sm">
     <h6 class="border-bottom pb-2 mb-0">おすすめユーザー</h6>
     <% @users.shuffle.first(5).each do |user| %>
-      <% pp current_user.id %>
-      <% pp user.id %>
       <% unless current_user.id == user.id %>
         <% unless current_user.following?(user) %>
           <% unless user.userid == nil%>
