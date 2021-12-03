@@ -1,9 +1,11 @@
 <div class="panel-content panel-activity">
   <div class="d-flex text-muted">
-    <% if user.find(post.userid).image.nil? %>
-      <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-    <% else %>
-      <%= image_tag "/user_images/#{user.find(post.userid).image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+    <%= link_to profile_path(user.find(post.userid).userid), style:"color:black" do %>
+      <% if user.find(post.userid).image.nil? %>
+        <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+      <% else %>
+        <%= image_tag "/user_images/#{user.find(post.userid).image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+      <% end %>
     <% end %>
 
 
