@@ -1,5 +1,4 @@
 <div class="panel-content panel-activity">
-
   <div class="d-flex text-muted">
     <% if user.find(post.userid).image.nil? %>
       <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
@@ -21,19 +20,27 @@
 
   <div class="d-flex justify-content-between">
     <div style="margin-left: 50px">
-      <% if current_user.liked_by?(post.id) %>
-        <%= link_to timeline_like_path(post.id,current_user.id), method: :delete , remote: true do%>
-          <i class="fas fa-heart"></i>
+      <span class="likes">
+        <% if current_user.liked_by?(post.id) %>
+          <%= link_to timeline_like_path(post.id,current_user.id), method: :delete , remote: true do%>
+            <i class="fas fa-heart"></i>
+          <% end %>
+          <%= post.likes.count %>
+        <% else %>
+          <%= link_to timeline_likes_path(post.id), method: :post, remote: true do %>
+            <i class="far fa-heart"></i>
+          <% end %>
+          <%= post.likes.count %>
         <% end %>
-        <%= post.likes.count %>
-      <% else %>
-        <%= link_to timeline_likes_path(post.id), method: :post, remote: true do %>
-          <i class="far fa-heart"></i>
+      </span>
+      <span class="comments">
+        <%= link_to timeline_path(post.id) do%>
+          <i class="far fa-comment-alt" style="height: 15.5px"></i>
         <% end %>
-        <%= post.likes.count %>
-      <% end %>
-
+        <%= post.comments.count %>
+      </span>
     </div>
+
     <div>
       <% if post.userid == current_user.id%>
         <%= link_to(timeline_path(post.id),method: :delete) do%>
@@ -43,3 +50,4 @@
     </div>
   </div>
 </div>
+
