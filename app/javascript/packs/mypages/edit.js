@@ -1,5 +1,4 @@
 import {Modal} from "bootstrap";
-
 document.addEventListener("DOMContentLoaded", function(){
 
     //-------------------------------- 解説1 ----------------------------------
