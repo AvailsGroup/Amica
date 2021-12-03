@@ -5,6 +5,7 @@ class CommunitiesController < ApplicationController
   def index
     @community = Community.all.order(created_at: :desc)
     @user = User.all
+    @member = CommunityMember.all
     @join = CommunityMember.where(user_id: current_user.id).count
   end
 
@@ -45,12 +46,14 @@ class CommunitiesController < ApplicationController
 
   def edit
     @community = Community.find(params[:id])
+    permission
     @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
     @tag = @community.tag_list.join(',')
   end
 
   def update
     @community = Community.find(params[:id])
+    permission
     unless  @community.update(community_params)
       @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
       @tag = @community.tag_list.join(',')
@@ -65,9 +68,10 @@ class CommunitiesController < ApplicationController
     flash[:notice] = "コミュニティを編集しました！"
     redirect_to(community_path(@community.id))
   end
-
+  
   def destroy
-
+    @community = Community.find(params[:id])
+    permission
   end
 
   #Async
@@ -78,16 +82,24 @@ class CommunitiesController < ApplicationController
   #Async
   def joined
     @community = []
-    join = CommunityMember.where(user_id: current_user.id)
+    join = CommunityMember.where(user_id: current_user.id).order(created_at: :desc)
     join.each do |m|
       @community.push(Community.find(m.community_id))
     end
     @user = User.all
+    @member = CommunityMember.all
   end
 
   private
 
   def community_params
     params.require(:community).permit(:name, :content, :icon, :tag_list)
+  end
+
+  def permission
+    unless @community.user_id == current_user.id
+      flash[:notice] = "コミュニティを編集できるのはリーダーのみです"
+      redirect_to(community_path)
+    end
   end
 end

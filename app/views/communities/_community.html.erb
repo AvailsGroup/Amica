@@ -1,5 +1,5 @@
 <%= link_to community_path(community.id), style: "text-decoration: none" do %>
-  <div class="col">
+  <div class="col mb-3">
     <div class="card rounded shadow-sm">
       <% if community.icon? %>
         <%= image_tag "/communities_image/#{community.icon}",class: "img-fluid" %><br>
@@ -8,6 +8,7 @@
       <% end %>
       <div class="carddy">
         <h5 class="card-title"><%= community.name %></h5>
+        <p><span class="far fa-user" style="margin-right: 3px"></span><%= member.where(community_id:community.id).count %> </p>
       </div>
       <div class="card">
         <ul class="list-group list-group-flush">
