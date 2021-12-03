@@ -26,6 +26,10 @@ body {
   }
 }
 
+.nav{
+  z-index: 9997;
+}
+
 .nav-scroller {
   position: relative;
   z-index: 2;

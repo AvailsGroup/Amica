@@ -50,12 +50,13 @@
           </div>
 
           <div class="col-sm-12 text-center">
-            <%= f.submit "更新", class:"w-50 btn btn-primary btn-lg mb-4"%>
+            <%= f.submit "更新", class:"w-50 btn btn-primary btn-lg mb-5"%>
           </div>
         </div>
 
         <div class="col-sm-12 text-center mt-5">
           <h2>DANGER ZONE</h2>
+          <%= link_to "コミュニティを削除する",community_path,method: :delete,class: "btn btn-primary mb-5", data: {confirm: "本当に削除しますか？"} %>
         </div>
       </div>
     </main>

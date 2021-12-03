@@ -72,6 +72,9 @@ class CommunitiesController < ApplicationController
   def destroy
     @community = Community.find(params[:id])
     permission
+    @community.destroy
+    flash[:notice] = "コミュニティを削除しました！"
+    redirect_to(communities_path)
   end
 
   #Async
