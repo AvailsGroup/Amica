@@ -27,6 +27,7 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false },
             format: { with: /\A[A-Za-z][A-Za-z0-9_]*\z/},
             #上記の正規表現は行頭半角英語、それ以外は半角英数字が入力できるようになってます。
+            # TODO: 本番環境に移行する際は最低でも英語数字が含まれるように
             length: { minimum: 1, maximum: 20 },
             allow_nil: true
 
