@@ -10,13 +10,13 @@ BODY {
 
 .text--line {
 
+    font-size: 0.3em;
+}
+.text--line2{
+
     font-size: 0.5em;
 }
-
 svg {
-    background-image: url("error2.png");
-    background-repeat: no-repeat;
-    background-position: center;
     position: absolute;
     width: 100%;
     height: 100%;
