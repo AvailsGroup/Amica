@@ -17,7 +17,7 @@ class Community < ApplicationRecord
     return if tag_list == nil?
 
     tag_list.each do |tag|
-      errors.add(:tag_list, '1つのタグは2~20文字です。') if (tag.length < 2) || (tag.length > 20)
+      errors.add(:tag_list, 'は1つ2~20文字です。') if (tag.length < 2) || (tag.length > 20)
     end
   end
 end

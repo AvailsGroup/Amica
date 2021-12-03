@@ -40,12 +40,42 @@ class CommunitiesController < ApplicationController
     @members = CommunityMember.where(community_id: @community.id)
     @user = User.all
     @tag = @community.tag_counts_on(:tags)
+    @leader = @community.user_id ==current_user.id
   end
 
+  def edit
+    @community = Community.find(params[:id])
+    @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+    @tag = @community.tag_list.join(',')
+  end
+
+  def update
+    @community = Community.find(params[:id])
+    unless  @community.update(community_params)
+      @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+      @tag = @community.tag_list.join(',')
+      render action: "edit"
+      return
+    end
+    if community_params[:icon]
+      image = community_params[:icon]
+      File.binwrite("public/communities_image/#{@community.id}.jpg", image.read)
+      @community.update(icon:"#{@community.id}.jpg")
+    end
+    flash[:notice] = "コミュニティを編集しました！"
+    redirect_to(community_path(@community.id))
+  end
+
+  def destroy
+
+  end
+
+  #Async
   def pickup
 
   end
 
+  #Async
   def joined
     @community = []
     join = CommunityMember.where(user_id: current_user.id)
