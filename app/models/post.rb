@@ -8,7 +8,6 @@ class Post < ApplicationRecord
 
   scope :search_content_for, ->(query) { where('content like ?', "%#{query}%") }
 
-  belongs_to :user
   has_many :comments, dependent: :destroy
 
 end
