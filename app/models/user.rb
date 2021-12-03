@@ -114,9 +114,4 @@ class User < ApplicationRecord
   def active?
     !ban?
   end
-
-
-
-  attr_accessor :image_x,:image_y,:image_w,:image_h,:aspect_numerator,:aspect_denominator
-
 end

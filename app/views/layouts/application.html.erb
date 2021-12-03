@@ -21,7 +21,7 @@
           <% if current_user.image.nil? %>
             <%= image_tag "default_icon" , class: "user_icon"  %>
           <% else %>
-            <img src="<%= current_user.image %>" class="user_icon">
+            <%= image_tag "/user_images/#{current_user.image}",class:"user_icon" %>
           <% end %>
         <% end %>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,9 +92,6 @@
             </li>
           </ul>
         </div>
-      <% end %>
-      <% if current_user.admin? %>
-        ★
       <% end %>
     </div>
   </nav>
