@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   before_create :build_default_profile
 
+  validate :validate_tag
+
   validates :password, format: { with: /\A[a-zA-Z0-9.$!@_%^*&()]{8,24}\z/ },allow_nil: true
 
   validates :agreement_terms, allow_nil: false, acceptance: true, on: :create
@@ -34,6 +36,8 @@ class User < ApplicationRecord
             # TODO: 本番環境に移行する際は最低でも英語数字が含まれるように
             length: { minimum: 1, maximum: 20 },
             allow_nil: true
+
+
 
   has_one :profile
   accepts_nested_attributes_for :profile, update_only: true
@@ -117,7 +121,11 @@ class User < ApplicationRecord
     true
   end
 
-  def active?
-    !ban?
+  def validate_tag
+    return if tag_list == nil?
+
+    tag_list.each do |tag|
+      errors.add(:tag_list, 'は1つ2~20文字です。') if (tag.length < 2) || (tag.length > 20)
+    end
   end
 end

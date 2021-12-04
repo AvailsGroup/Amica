@@ -26,12 +26,19 @@ class ProfilesController < ApplicationController
     permission
     @profile = Profile.find(current_user.id)
     @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+    @tag = current_user.tag_list.join(',')
   end
 
   def update
     @user = current_user
     permission
-    current_user.update(user_params)
+
+    unless  current_user.update(user_params)
+        @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+        @tag = current_user.tag_list.join(',')
+        render action: "edit"
+      return
+    end
 
     unless params["user"]["images"].nil?
       accepted_format = %w[.jpg .jpeg .png]
@@ -76,7 +83,7 @@ class ProfilesController < ApplicationController
 
   private
   def user_params
-    attrs = [:nickname,:name]
+    attrs = [:nickname,:name,:tag_list]
     params.require(:user).permit(attrs, profile_attributes:%i[grade school_class number student_id accreditation hobby])
   end
 

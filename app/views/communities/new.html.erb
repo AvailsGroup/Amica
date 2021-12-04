@@ -1,15 +1,15 @@
-<%= stylesheet_link_tag 'communities', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_link_tag 'communities'%>
 <%= javascript_pack_tag "communities/new" %>
 
 <script>
-    /*$(document).ready(function () {
+    $(document).ready(function () {
         $('#myTags').tagit({
             tagLimit: 20,
             placeholderText: 'タグは20個までです',
             singleField: true,
             availableTags: <%= raw @all_tag_list %>
         });
-    });*/
+    });
 </script>
 
 <div class="container">

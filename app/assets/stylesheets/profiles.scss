@@ -1,6 +1,7 @@
 // Place all the styles related to the profiles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
 html,
 body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
@@ -84,6 +85,64 @@ a{
   margin: 15px 0;
 }
 
+
+.ui-autocomplete.ui-front {
+  z-index: 1051;
+}
+
+
+/* Optional scoped theme for tag-it which mimics the zendesk widget. */
+
+
+ul.tagit {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #C6C6C6;
+  background: inherit;
+}
+ul.tagit li.tagit-choice {
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  background: #00bfff none;
+
+  font-weight: normal;
+}
+ul.tagit li.tagit-choice .tagit-label:not(a) {
+  color: #555;
+}
+ul.tagit li.tagit-choice a.tagit-close {
+  text-decoration: none;
+}
+ul.tagit li.tagit-choice .tagit-close {
+  right: .4em;
+}
+ul.tagit li.tagit-choice .ui-icon {
+  display: none;
+}
+ul.tagit li.tagit-choice .tagit-close .text-icon {
+  display: inline;
+  font-family: arial, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  color: #777;
+}
+ul.tagit li.tagit-choice:hover, ul.tagit li.tagit-choice.remove {
+  background-color: #bbcef1;
+  border-color: #6d95e0;
+}
+ul.tagit li.tagit-choice a.tagLabel:hover,
+ul.tagit li.tagit-choice a.tagit-close .text-icon:hover {
+  color: #222;
+}
+ul.tagit input[type="text"] {
+  color: #333333;
+  background: none;
+}
+.ui-widget {
+  font-size: 1em;
+}
+
 /* Forked from a jQuery UI theme, so that we don't require the jQuery UI CSS as a dependency. */
 .tagit-autocomplete.ui-autocomplete { position: absolute; cursor: default; }
 * html .tagit-autocomplete.ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
@@ -124,6 +183,7 @@ a{
 
 .tagit-autocomplete .ui-widget-content { border: 1px solid #aaaaaa; }
 .ui-helper-hidden-accessible { display: none}
+
 
 .modal{
   z-index: 10000;

@@ -86,7 +86,7 @@
   <div class="row d-flex justify-content-around center-block">
     <div class="col-md-3 col-sm-12 w-100">
       <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading m-3">
           <h3 class="page-header">取得資格</h3>
           <p class="page-subtitle small"><%= @profile.accreditation %></p>
         </div>
@@ -94,9 +94,13 @@
     </div>
     <div class="col-md-9 col-sm-12 w-100">
       <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading m-3">
           <h3 class="page-header">タグ、趣味</h3>
-          <p class="page-subtitle small"><%= @profile.hobby %></p>
+          <p class="page-subtitle">
+            <% @user.tag_list.each do |t| %>
+            #<%= t %>
+            <% end %>
+          </p>
         </div>
       </div>
     </div>

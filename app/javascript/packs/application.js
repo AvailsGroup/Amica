@@ -20,7 +20,6 @@ require("jquery")
 require('jquery-ui/ui/widgets/autocomplete')
 require('jquery-ui/ui/widget')
 require('tag-it')
-require('cropperjs')
 
 
 
