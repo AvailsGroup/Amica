@@ -1,47 +1,94 @@
 <%= stylesheet_link_tag "mypages"%>
+<link rel="stylesheet" type="text/css" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<%= javascript_pack_tag 'mypages/edit' %>
 
-<script>
-    function previewImage(obj)
-    {
-        var fileReader = new FileReader();
-        fileReader.onload = (function() {
-            document.getElementById('preview').src = fileReader.result;
-        });
-        fileReader.readAsDataURL(obj.files[0]);
-        document.getElementById("image_text").innerHTML = "選択した画像";
-    }
-</script>
-
-
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">画像トリミング</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4 class="modal-text">画像を選択してください</h4>
+          <div class="form_wrapper">
+            <%= form_with model: current_user, url:mypage_path,multipart:true do |f| %>
+              <div id="image-wrapper">
+                <%= f.file_field :images, id: "trim_img_uploder", value: "assets/default" %>
+                <%= f.hidden_field :image, id: "image" %>
+                <%= f.hidden_field :image_x, id: "image_x" %>
+                <%= f.hidden_field :image_y, id: "image_y" %>
+                <%= f.hidden_field :image_w, id: "image_w" %>
+                <%= f.hidden_field :image_h, id: "image_h" %>
+                <%= f.hidden_field :aspect_numerator, id: "aspect_numerator", value: "1.0" %>
+                <%= f.hidden_field :aspect_denominator ,id: "aspect_denominator", value: "1.0" %>
+                <div id="prev_img">
+                  <% if current_user.image.nil? %>
+                    <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
+                  <% else %>
+                    <%= image_tag "/user_images/#{current_user.image}", :size => '200x200', class:"user_image"%>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div id="modal_area" class="disp_none">
+              <div class="modal_wrapper">
+                <div class="modal_padding modal_title_wrapper">
+                  <h4>範囲を選択してください</h4>
+                </div>
+                <div class="canvas_wrapper">
+                  <canvas id="source_canvas" width="1" height="1"></canvas>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="close_button" class="btn btn-primary" data-bs-dismiss="modal">画像を切り取る</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
 
 
 <div class="mw-100 p-3" style="background-color: #eee;">
   <div class="profile" style="width:auto">
-
-  <%= form_with model:[@profile], url: mypage_path , multipart: true do |f| %>
-      <h1>EDIT PAGE</h1>
-      <span>現在のアイコン</span>
-
-      <div class="uploader">
-        <div class="form1">
+    <h1>EDIT PAGE</h1>
+    <p id="image_text">現在のアイコン</p>
+    <div class="uploader">
+      <div class="form1">
+        <div style="text-align: center;">
+          <div id="user_icon">
             <label>
-              <input type="file" name="image" class="image_select"  accept='image/*' style="display: none" onchange="previewImage(this);">
-              <% if @user.image? %>
-                <%= image_tag "/user_images/#{@user.image}",class: "user_icon"%>
+              <button type="button" class="btn btn-primary disp_none" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+              <% if current_user.image.nil? %>
+                <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
               <% else %>
-                <%= image_tag "default_icon" , class: "user_icon" %>
+                <%= image_tag "/user_images/#{current_user.image}", :size => '200x200', class:"user_image"%>
               <% end %>
-            </label><br>
-            <p id="image_text">画像を選択してください</p>
-            <p>
-              <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px;">
-            </p>
+            </label>
+          </div>
+          <label>
+            <button type="button" class="btn btn-primary disp_none" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+            <canvas id="cropped_canvas" style="display:none;width: 200px;height: 200px;"></canvas>
+            <img src="" id="result-img" style="display:none;width: 200px;height: 200px;">
+          </label>
         </div>
       </div>
-
+    </div>
+    <div class="m-1">
+        名前<br><%= f.text_field :name,class:'form-control'%>
+    </div>
+    <div class="m-1">
+      ニックネーム<%= f.text_field :nickname,class:'form-control' %>
+    </div>
+    <%= f.fields_for :profile do |pf|%>
       <div class="m-1">
-         学科<br>
-        <%= f.select :grade,
+        学科<br>
+        <%= pf.select :grade,
                      [%w[情報処理科1年 情報処理科1年],
                       %w[情報処理科2年 情報処理科2年],
                       %w[実践IoT1年 実践IoT1年],
@@ -68,32 +115,28 @@
                      include_blank: "学科",
                      autocomplete:"grade"%>
       </div>
-
       <div class="m-1">
-        クラス<br><%= f.select :school_class, [["1", "1"], ["2", "2"], ["3", "3"],["4", "4"],["5", "5"],["6", "6"],["7", "7"],["8", "8"],["9", "9"],["10", "10"]], class:'form-control',include_blank: "クラス", autocomplete:"school_class" %>
+        クラス<br><%= pf.select :school_class, [["1", "1"], ["2", "2"], ["3", "3"],["4", "4"],["5", "5"],["6", "6"],["7", "7"],["8", "8"],["9", "9"],["10", "10"]], class:'form-control',include_blank: "クラス", autocomplete:"school_class" %>
       </div>
       <div class="m-1">
-        番号<br><%= f.text_field :number,class:'form-control',autocomplete:"number" %>
+        番号<br><%= pf.text_field :number,class:'form-control',autocomplete:"number" %>
       </div>
       <div class="m-1">
-        学籍番号<br><%= f.text_field :student_id,class:'form-control',autocomplete:"student_id" %>
+        学籍番号<br><%= pf.text_field :student_id,class:'form-control',autocomplete:"student_id" %>
       </div>
       <div class="m-1">
         取得資格<br>
-        <%= f.text_area :accreditation,class:'form-control',autocomplete:"accreditation" %>
+        <%= pf.text_area :accreditation,class:'form-control',autocomplete:"accreditation" %>
       </div>
       <div class="m-1">
         タグ、趣味
-        <%= f.text_area :hobby,class:'form-control',autocomplete:"hobby"%>
+        <%= pf.text_area :hobby,class:'form-control',autocomplete:"hobby"%>
+        <% end %>
+      <div class="row">
         <%=f.submit "更新",class:'btn btn-outline-primary btn-lg m-1'%>
+        </div>
       </div>
     <% end %>
   </div>
 </div>
 
-<form id="form">
-  <div id="file-input"><input id="file-selecter" type="file" name="file" accept="image/jpeg, image/png"></div>
-  <div><canvas id="thumbnail" width="10" height="10"></canvas></div>
-  <input type="button" value="送信" onclick="submitResizeFile()">
-  <div id="message"></div>
-</form>

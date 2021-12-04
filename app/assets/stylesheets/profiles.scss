@@ -1,3 +1,6 @@
+// Place all the styles related to the profiles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
 html,
 body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
@@ -21,6 +24,10 @@ body {
     visibility: visible;
     transform: translateX(-100%);
   }
+}
+
+.nav{
+  z-index: 9997;
 }
 
 .nav-scroller {
@@ -71,12 +78,8 @@ a{
   text-decoration: none;
 }
 
-span{
-  font-size: 20px;
-  margin: 0 10px;
-}
+
 
 .schedule-item{
   margin: 15px 0;
 }
-

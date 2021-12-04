@@ -1,5 +1,26 @@
-<p>Welcome <%= @email %>!</p>
+<h1><%=ENV["APP_NAME"] %></h1>
 
-<p>You can confirm your account email through the link below:</p>
+<p>※このメールは自動送信メールです。</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<h2><%= @email %>様</h2>
+<p>、Amicaへようこそ!</p>
+<br />
+<p>「<%= ENV['APP_NAME'] %>」運営の「<%= ENV['DEVELOPMENT_GROUP'] %>」です。</p>
+<p>この度は「<%= ENV['APP_NAME'] %>」にご登録いただきありがとうございます。</p>
+<br/>
+<p>Amicaを使用するにはメールアドレスを認証する必要があります。</p>
+<p>まずは以下のリンクからメールアドレスを確認し、本登録してください。</p>
+<br/>
+<p><%= link_to "メールアドレスを認証", confirmation_url(@resource, confirmation_token: @token) %></p>
+<br/>
+<p>※URLの有効期限は24時間です。</p>
+<p>※このメールは送信専用です。お問い合わせはサイト内のお問い合わせからお願いします。</p>
+<p>※このメールが身に覚えがない場合は、お手数ですが破棄していただきますようよろしくお願い申し上げます</p>
+<br />
+<br />
+<p>-------------------------------------------</p>
+<p><%=ENV["APP_NAME"] %></p>
+<p><%=ENV["URL"] %></p>
+<p><%=ENV["DEVELOPMENT_GROUP"] %></p>
+<p>Email : <%=ENV["EMAIL"] %></p>
+<p>-------------------------------------------</p>

@@ -1,0 +1,64 @@
+<%= stylesheet_link_tag 'communities', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag "communities/new" %>
+<script>
+    $(document).ready(function () {
+        $('#myTags').tagit({
+            tagLimit: 20,
+            placeholderText: 'タグは20個までです',
+            singleField: true,
+            availableTags: <%= raw @all_tag_list %>
+        });
+    });
+</script>
+
+<div class="container">
+  <%= form_for(@community, url: community_path,method: "put", multipart: true,class: "needs-validation") do |f| %>
+    <main>
+      <div class="py-5 text-center">
+        <h2>コミュニティ編集</h2>
+        <%= render 'layouts/error_messages', model: f.object %>
+        <div class="uploader mt-4">
+          <div class="form1">
+            <label>
+              <%= image_tag "default_icon" ,id:"preview",class: "d-block mx-auto mb-4 border border-success rounded icon"%>
+            </label><br /><br />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-12">
+        <div class="row g-3">
+          <div class="col-sm-12">
+            <%= f.label "コミュニティ名", class:"form-label"%>
+            <%= f.text_field :name, autocomplete: "name", class: "form-control" ,:placeholder=>"コミュニティ名"%>
+          </div>
+
+          <div class="col-sm-12">
+            <%= f.label "概要", class:"form-label"%>
+            <%= f.text_area :content, autocomplete: "content", class: "form-control",style:"height:100px" ,:placeholder=>"概要"%>
+          </div>
+
+          <div class="col-sm-12">
+            <%= f.label "アイコン", class:"form-label"%>
+            <%= f.file_field :icon,autocomplete: "icon", class: "form-control",:placeholder=>"icon",onchange: "previewImage(this);"%>
+          </div>
+
+          <div class="col-sm-12">
+            <div class="search-area-colum form-contents">
+              <%= f.label "タグ (1つ2~20文字)" , class:"form-label"%>
+              <%= f.text_field :tag_list, id:"myTags",value: @tag%>
+            </div>
+          </div>
+
+          <div class="col-sm-12 text-center">
+            <%= f.submit "更新", class:"w-50 btn btn-primary btn-lg mb-5"%>
+          </div>
+        </div>
+
+        <div class="col-sm-12 text-center mt-5">
+          <h2>DANGER ZONE</h2>
+          <%= link_to "コミュニティを削除する",community_path,method: :delete,class: "btn btn-primary mb-5", data: {confirm: "本当に削除しますか？"} %>
+        </div>
+      </div>
+    </main>
+  <% end %>
+</div>

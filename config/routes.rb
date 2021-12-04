@@ -13,7 +13,15 @@ Rails.application.routes.draw do
   end
 
   resources :maller
-  resources :communities
+
+  resources :communities do
+    resources :manage, only: [:create, :destroy]
+  end
+  get "community/pickup" => "communities#pickup"
+  get "community/joined" => "communities#joined"
+
+
+
   resources :searches
   resources :timelines
   resources :chats
@@ -27,11 +35,18 @@ Rails.application.routes.draw do
   post "page/user"=>"pages#user"
   post "page/community"=>"pages#community"
 
+  resources :timelines do
+    resources :likes,only:[:create,:destroy]
+    collection do
+      get :search
+    end
+  end
+
   resources :profiles, only: [:index,:show] do
     resources :relationships, only: [:create,:destroy]
   end
 
-  get "profile/search" => "profiles#search"
+  get "profile/search"=>"profiles#search"
   get "profile/follow" => "profiles#follow"
   get "profile/follower" => "profiles#follower"
   get "profile/friends" => "profiles#friends"

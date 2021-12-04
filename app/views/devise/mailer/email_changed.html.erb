@@ -1,7 +1,24 @@
-<p>Hello <%= @email %>!</p>
+<h1><%=ENV["APP_NAME"] %></h1>
 
+<p>※このメールは自動送信メールです。</p>
+
+<h2><%= @email %>様</h2>
+
+<p>「<%= ENV['APP_NAME'] %>」運営の「<%= ENV['DEVELOPMENT_GROUP'] %>」です。</p>
+<br/>
 <% if @resource.try(:unconfirmed_email?) %>
-  <p>We're contacting you to notify you that your email is being changed to <%= @resource.unconfirmed_email %>.</p>
+  <p>ご登録のメールアドレスが<%= @resource.unconfirmed_email %>に変更されたことをお知らせします。</p>
 <% else %>
-  <p>We're contacting you to notify you that your email has been changed to <%= @resource.email %>.</p>
+  <p>ご登録のメールアドレスが<%= @resource.email %>に変更されたことをお知らせします。</p>
 <% end %>
+<br/>
+<p>※このメールは送信専用です。お問い合わせはサイト内のお問い合わせからお願いします。</p>
+<p>※このメールが身に覚えがない場合は、アカウントが乗っ取られている可能性がありますので、お手数ですがサイト内からお問い合わせをお願いします。</p>
+<br />
+<br />
+<p>-------------------------------------------</p>
+<p><%=ENV["APP_NAME"] %></p>
+<p><%=ENV["URL"] %></p>
+<p><%=ENV["DEVELOPMENT_GROUP"] %></p>
+<p>Email : <%=ENV["EMAIL"] %></p>
+<p>-------------------------------------------</p>

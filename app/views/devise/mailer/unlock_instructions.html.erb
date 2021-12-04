@@ -1,7 +1,23 @@
-<p>Hello <%= @resource.email %>!</p>
+<h1><%=ENV["APP_NAME"] %></h1>
 
-<p>Your account has been locked due to an excessive number of unsuccessful sign in attempts.</p>
+<p>※このメールは自動送信メールです。</p>
 
-<p>Click the link below to unlock your account:</p>
+<h2><%= @email %>様</h2>
 
-<p><%= link_to 'Unlock my account', unlock_url(@resource, unlock_token: @token) %></p>
+<p>「<%= ENV['APP_NAME'] %>」運営の「<%= ENV['DEVELOPMENT_GROUP'] %>」です。</p>
+<br />
+<p>サインインに失敗した回数が多すぎる為、アカウントがロックされました。</p>
+<p>アカウントのロックを解除するには、以下のリンクをクリックしてください:</p>
+<br />
+<p><%= link_to 'ロックを解除する', unlock_url(@resource, unlock_token: @token) %></p>
+<br />
+<p>※このメールは送信専用です。お問い合わせはサイト内のお問い合わせからお願いします。</p>
+<p>※このメールが身に覚えがない場合は、お手数ですが破棄していただきますようよろしくお願い申し上げます</p>
+<br />
+<br />
+<p>-------------------------------------------</p>
+<p><%=ENV["APP_NAME"] %></p>
+<p><%=ENV["URL"] %></p>
+<p><%=ENV["DEVELOPMENT_GROUP"] %></p>
+<p>Email : <%=ENV["EMAIL"] %></p>
+<p>-------------------------------------------</p>
