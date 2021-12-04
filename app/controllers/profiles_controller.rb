@@ -29,6 +29,16 @@ class ProfilesController < ApplicationController
 
   def update
     current_user.update(user_params)
+
+    unless params["user"]["images"].nil?
+      accepted_format = %w[.jpg .jpeg .png]
+      unless accepted_format.include? File.extname(params["user"]["images"].original_filename)
+        flash[:alert] = "画像は jpg jpeg png 形式のみ対応しております。"
+        redirect_to(edit_profile_path)
+        return
+      end
+    end
+
     if !params["user"]["images"].nil? && base64?(params["user"]["image"]['data:image/jpeg;base64,'.length .. -1])
       unless current_user.image.nil?
         if File.exist?("public/user_images/#{current_user.image}")
