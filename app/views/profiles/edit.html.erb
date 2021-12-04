@@ -3,7 +3,13 @@
 
 <script>
     $(document).ready(function () {
-        $('#myTags').tagit({
+        $('#accreditation').tagit({
+            tagLimit: 40,
+            placeholderText: '資格は40個までです',
+            singleField: true,
+            availableTags: <%= raw @all_tag_list %>
+        });
+        $('#tag').tagit({
             tagLimit: 40,
             placeholderText: 'タグは40個までです',
             singleField: true,
@@ -108,8 +114,15 @@
 
               <div class="col-sm-12">
                 <div class="search-area-colum form-contents">
+                  <%= f.label "資格 (1つ2~20文字)" , class:"form-label"%>
+                  <%= f.text_field :accreditation_list, id:"accreditation",value: @accreditation_tag %>
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="search-area-colum form-contents">
                   <%= f.label "タグ (1つ2~20文字)" , class:"form-label"%>
-                  <%= f.text_field :tag_list, id:"myTags",value: @tag%>
+                  <%= f.text_field :tag_list, id:"tag",value: @tag %>
                 </div>
               </div>
 

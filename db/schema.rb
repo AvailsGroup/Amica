@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_01_005719) do
+ActiveRecord::Schema.define(version: 2021_12_04_143323) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -121,8 +121,6 @@ ActiveRecord::Schema.define(version: 2021_12_01_005719) do
     t.integer "school_class", default: 0
     t.integer "number", default: 0
     t.text "student_id", default: "0000000"
-    t.text "accreditation", default: "ここに所持資格を入力"
-    t.text "hobby", default: "ここに趣味を入力"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

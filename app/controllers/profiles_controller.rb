@@ -27,6 +27,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.find(current_user.id)
     @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
     @tag = current_user.tag_list.join(',')
+    @accreditation_tag = current_user.accreditation_list.join(',')
   end
 
   def update
@@ -83,7 +84,7 @@ class ProfilesController < ApplicationController
 
   private
   def user_params
-    attrs = [:nickname,:name,:tag_list]
+    attrs = [:nickname,:name,:tag_list,:accreditation_list]
     params.require(:user).permit(attrs, profile_attributes:%i[grade school_class number student_id accreditation hobby])
   end
 

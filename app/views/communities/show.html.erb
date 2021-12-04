@@ -41,7 +41,9 @@
       <div class="my-3 py-3">
         <h2 class="display-5">タグ</h2>
         <% @tag.each do |t| %>
-          <p class="lead mb-0">#<%= t %></p>
+          <%= link_to search_tag_path(t),class:"text-decoration-none" do %>
+            <p class="lead mb-0">#<%= t %></p>
+          <% end %>
         <% end %>
       </div>
     </div>

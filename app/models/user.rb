@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :trackable, password_length: 8...24
 
   acts_as_taggable
+  acts_as_taggable_on :accreditations
 
   before_create :build_default_profile
 
