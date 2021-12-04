@@ -14,11 +14,9 @@ Rails.application.routes.draw do
 
   resources :maller
   resources :pages
-  resources :homes
   resources :communities
   resources :searches
   resources :chats
-  resources :mypages
 
   resources :timelines do
     resources :likes,only:[:create,:destroy]
@@ -27,7 +25,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :profiles, only: [:index,:show] do
+  resources :profiles do
     resources :relationships, only: [:create,:destroy]
   end
 
