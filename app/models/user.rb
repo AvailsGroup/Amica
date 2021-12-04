@@ -6,6 +6,8 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable,
          :trackable, password_length: 8...24
 
+  before_create :build_default_profile
+
   validates :password, format: { with: /\A[a-zA-Z0-9.$!@_%^*&()]{8,24}\z/ },allow_nil: true
 
   validates :agreement_terms, allow_nil: false, acceptance: true, on: :create
@@ -44,6 +46,8 @@ class User < ApplicationRecord
   # フォローされている側のユーザー(passive relationship)
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
+
+  has_many :community_member, dependent: :destroy
 
   def password_required?
     super && confirmed?
@@ -104,9 +108,8 @@ class User < ApplicationRecord
     likes.where(post_id: post_id).exists?
   end
 
-  before_create :build_default_profile
-
   private
+
   def build_default_profile
     build_profile
     true

@@ -82,6 +82,8 @@ gem 'jquery-rails'
 
 gem 'rails_admin'
 
+gem 'acts-as-taggable-on'
+
 gem 'rack-attack'
 
 gem 'cropper_rails'

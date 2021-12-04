@@ -17,7 +17,12 @@ Rails.application.routes.draw do
 
   get 'users/setting' => 'pages#setting'
 
-  resources :communities
+  resources :communities do
+    resources :manage, only: [:create, :destroy]
+  end
+  get "community/pickup" => "communities#pickup"
+  get "community/joined" => "communities#joined"
+
   resources :searches
   resources :chats
 
@@ -35,7 +40,6 @@ Rails.application.routes.draw do
   get 'profile/follow' => 'profiles#follow'
   get 'profile/follower' => 'profiles#follower'
   get 'profile/friends' => 'profiles#friends'
-
 
 
   get '/'=>'home#top'

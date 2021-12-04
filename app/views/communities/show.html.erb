@@ -1,0 +1,51 @@
+<%= stylesheet_link_tag 'communities', media: 'all', 'data-turbolinks-track': 'reload' %>
+<main>
+  <div class="position-relative overflow-hidden p-1 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-5 p-lg-1 mx-auto my-1">
+      <% if @community.icon? %>
+        <%= image_tag "/communities_image/#{@community.icon}", class:"img-fluid rounded",style:"width: 150px;height: 150px;" %><br>
+      <% else %>
+        <%= image_tag "default_icon", class:"img-fluid rounded",style:"width: 150px;height: 150px;"%><br>
+      <% end %>
+      <h1 class="display-4 fw-normal"><%=@community.name %></h1>
+      <p class="lead fw-normal"><%=safe_join(@community.content.split("\n"),tag(:br)) %></p>
+      <% if @leader %>
+        <%=  link_to "編集", edit_community_path,class: "btn btn-outline-dark" %>
+      <% else %>
+        <% if @join %>
+          <%=  link_to "退出" , community_manage_path(@community.id,current_user.id), method: :delete,class: "btn btn-outline-dark"  %>
+        <%  else  %>
+          <%= link_to "参加", community_manage_index_path(@community.id), method: :post, class: "btn btn-outline-dark" %>
+        <% end %>
+      <% end %>
+
+    </div>
+  </div>
+
+  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+    <div class="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white">
+      <div class="my-3 py-3">
+        <h2 class="display-5">参加者</h2>
+        <%= link_to "リーダー : #{@user.find(@community.user_id).name}" ,profile_path(@user.find(@community.user_id).userid),class: "lead text-white",style: "text-decoration:none;"%>
+        <br />
+        <% @members.shuffle.first(5).each do |m| %>
+          <% unless @user.find(@community.user_id) == @user.find(m.user_id)%>
+            <%= link_to "#{@user.find(m.user_id).name}" ,profile_path(@user.find(m.user_id).userid),class: "lead text-white",style: "text-decoration:none;"%>
+            <br />
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center">
+      <div class="my-3 py-3">
+        <h2 class="display-5">タグ</h2>
+        <% @tag.each do |t| %>
+          <p class="lead mb-0">#<%= t %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</main>
+
