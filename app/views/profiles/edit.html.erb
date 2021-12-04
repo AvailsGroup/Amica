@@ -6,8 +6,10 @@
 
 <div class="container" style="max-width: 960px">
   <main>
+    <%= form_with model: current_user, url:profile_path,method: :put, multipart:true do |f| %>
     <div class="py-5 text-center">
       <h2>プロフィール編集</h2>
+      <%= render 'layouts/error_messages', model: f.object %>
       <p class="lead">ここではプロフィールを変更することが出来ます</p>
       <p id="image_text">現在のアイコン</p>
       <div id="user_icon">
@@ -26,7 +28,6 @@
         <img src="" id="result-img" style="display:none;width: 200px;height: 200px;">
       </label>
     </div>
-    <%= form_with model: current_user, url:profile_path,method: :put, multipart:true do |f| %>
       <div class="row g-3">
         <div class="col-md-12">
           <div class="row g-3">
@@ -93,20 +94,10 @@
               </div>
               <div class="col-sm-6">
                 <%= pf.label "学籍番号 (無い場合は0000000を入力)" , class:"form-label"%>
-                <%= pf.text_field :student_id, class:"form-control" ,id:"number",placeholder: "学籍番号",maxlength:"7"%>
+                <%= pf.text_field :student_id, class:"form-control" ,id:"student_number",placeholder: "学籍番号",maxlength:"7"%>
               </div>
               <hr class="my-4">
-              <div class="col-12">
-                <%= f.label "パスワード(8~24文字 半角英数字(大文字小文字)、記号 [$!@_%^*&()] が使用できます)"%>
-                <%= f.password_field :password, class:"form-control", autocomplete: "off" ,maxlength:"24"%>
-              </div>
-              <div class="col-12">
-                <%= f.label "パスワード(確認)" %><br />
-                <%= f.password_field :password_confirmation, class:"form-control", autocomplete: "off" ,maxlength:"24"%>
-              </div>
 
-              <%= f.hidden_field :confirmation_token %>
-              <hr class="my-4">
             <% end %>
             <%= f.submit "変更",class:"w-100 btn btn-primary btn-lg mb-5"%>
           </div>
@@ -114,7 +105,7 @@
       </div>
 
 
-<!-- Modal -->
+      <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -163,4 +154,3 @@
     </div>
   </main>
 </div>
-

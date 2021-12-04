@@ -37,11 +37,11 @@
   border-radius: 100%;
 }
 .username {
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 20px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 25px;
   color: #000000;
-  margin-top: 20px;
+  margin-top: 10px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -115,6 +115,11 @@
   width: 100%;
   margin: 0;
 }
+
+.userdata{
+  z-index: 3;
+}
+
 /*==============================*/
 /*====== Social Profile css =====*/
 /*==============================*/
@@ -143,15 +148,17 @@
   background: url(https://www.bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg) no-repeat top center;
   background-size: 100%;
   padding: 50px 0;
-  margin: 0
+  margin: 0;
+  z-index: 2;
 }
 .userprofile.social .username {
-  color: #ffffff
+  color: #000
 }
 .userprofile.social .username+p {
-  color: #ffffff;
+  color: #000;
   opacity: 0.8
 }
+
 .postbtn {
   position: absolute;
   right: 5px;
@@ -164,7 +171,7 @@
   margin-bottom: 15px
 }
 .posttimeline .panel {
-  margin-bottom: 15px
+  margin-bottom: 15px;
 }
 .commentsblock {
   background: #f8f9fb;
@@ -267,6 +274,7 @@
   border: 0;
   display: inline-block;
   width: 100%;
+  z-index: 1;
 }
 
 .panel-footer {

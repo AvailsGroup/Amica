@@ -3,18 +3,23 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
   <div class="row">
-    <div class="col-md-12 text-center">
+    <div class="col-md-12 text-center" style="z-index: 1;">
       <div class="panel panel-default">
-        <div class="userprofile social ">
-          <div class="userpic">
-            <% if @user.image.nil? %>
-              <%= image_tag "default_icon" , :size => '100x100', class: "userpicimg icon flex-shrink-0 show-icon"%>
-            <% else %>
-              <%= image_tag "/user_images/#{@user.image}",style: "width: 100px;height:100px;",class:"userpicimg icon bd-placeholder-img flex-shrink-0 show-icon"%>
-            <% end %>
+        <div class="userprofile social">
+          <div class="userdata">
+            <div class="userpic">
+              <% if @user.image.nil? %>
+                <%= image_tag "default_icon" , :size => '100x100', class: "userpicimg icon flex-shrink-0 show-icon"%>
+              <% else %>
+                <%= image_tag "/user_images/#{@user.image}",style: "width: 100px;height:100px;",class:"userpicimg icon bd-placeholder-img flex-shrink-0 show-icon"%>
+              <% end %>
+            </div>
+            <div class="names">
+              <h2 class="username"><%= @user.name %></h2>
+              <p style="margin-bottom: 0">(<%= @user.nickname %>)</p>
+              <p>@<%=@user.userid%></p>
+            </div>
           </div>
-          <h3 class="username"><%= @user.nickname %></h3>
-          <p>@<%=@user.userid%></p>
         </div>
         <div class="col-md-12 border-top border-bottom">
           <ul class="nav nav-pills pull-left countlist" role="tablist">

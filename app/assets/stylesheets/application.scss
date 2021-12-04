@@ -24,10 +24,6 @@ body{
   margin: 0;
 }
 
-header{
-  position: sticky;
-}
-
 #main-nav{
   z-index: 9999;
 }
@@ -40,6 +36,10 @@ header{
   background-color: #ffffff;
   font-family: 'Rubik','M PLUS Rounded 1c', sans-serif;
   border: rgba(166,145,113,0.2) solid 1px;
+}
+
+#main-nav .dropdown-menu{
+  z-index: 9999;
 }
 
 #main-nav .btn{
@@ -111,6 +111,10 @@ header{
 
 table{
   margin-left: 7px;
+}
+
+main{
+  z-index: 1;
 }
 
 

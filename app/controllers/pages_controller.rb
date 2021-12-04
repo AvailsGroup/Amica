@@ -10,4 +10,8 @@ class PagesController < ApplicationController
     @user = current_user
   end
 
+  def setting
+
+  end
+
 end

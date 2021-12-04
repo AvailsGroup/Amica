@@ -69,13 +69,14 @@
                   </li>
                 <% end %>
                 <li>
-                  <%= link_to 'マイページ', profile_path(current_user.userid),class: "link nav-link" %>
+                  <%= link_to profile_path(current_user.userid),class:"link" do %>
+                  <span class="link nav-link">マイページ</span>
+                  <% end %>
                 </li>
                 <li>
-                  <%= link_to 'プロフィール変更', edit_user_registration_path,class: "link nav-link" %>
-                </li>
-                <li>
-                  <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: "link nav-link me-2" %>
+                  <%= link_to users_setting_path,class:"link" do %>
+                    <span class="link nav-link">設定</span>
+                  <% end %>
                 </li>
               </ul>
             </li>
@@ -112,7 +113,7 @@
 <!-- ここに追加 -->
   <div class="flash text-center">
     <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <p class="notice"><%= alert %></p>
   </div>
   <%= yield %>
 </main>
