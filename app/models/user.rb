@@ -6,6 +6,8 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable,
          :trackable, password_length: 8...24
 
+  acts_as_taggable
+
   before_create :build_default_profile
 
   validates :password, format: { with: /\A[a-zA-Z0-9.$!@_%^*&()]{8,24}\z/ },allow_nil: true

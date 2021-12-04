@@ -25,9 +25,12 @@ class ProfilesController < ApplicationController
     @user = current_user
     permission
     @profile = Profile.find(current_user.id)
+    @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
   end
 
   def update
+    @user = current_user
+    permission
     current_user.update(user_params)
 
     unless params["user"]["images"].nil?

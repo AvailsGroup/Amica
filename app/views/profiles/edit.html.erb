@@ -1,8 +1,16 @@
-<link rel="stylesheet" type="text/css" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <%= javascript_pack_tag 'profiles/edit' %>
+<%= stylesheet_link_tag 'profiles' %>
+
+<script>
+    $(document).ready(function () {
+        $('#myTags').tagit({
+            tagLimit: 20,
+            placeholderText: 'タグは20個までです',
+            singleField: true,
+            availableTags: <%= raw @all_tag_list %>
+        });
+    });
+</script>
 
 <div class="container" style="max-width: 960px">
   <main>
@@ -97,6 +105,13 @@
                 <%= pf.text_field :student_id, class:"form-control" ,id:"student_number",placeholder: "学籍番号",maxlength:"7"%>
               </div>
               <hr class="my-4">
+
+              <div class="col-sm-12">
+                <div class="search-area-colum form-contents">
+                  <%= f.label "タグ (1つ2~20文字)" , class:"form-label"%>
+                  <%= f.text_field :tag_list, id:"myTags",autocomplete:"tag_list"%>
+                </div>
+              </div>
 
             <% end %>
             <%= f.submit "変更",class:"w-100 btn btn-primary btn-lg mb-5"%>
