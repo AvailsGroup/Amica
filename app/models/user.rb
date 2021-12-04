@@ -6,6 +6,13 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable,
          :trackable, password_length: 8...24
 
+  acts_as_taggable
+  acts_as_taggable_on :accreditations
+
+  before_create :build_default_profile
+
+  validate :validate_tag
+
   validates :password, format: { with: /\A[a-zA-Z0-9.$!@_%^*&()]{8,24}\z/ },allow_nil: true
 
   validates :agreement_terms, allow_nil: false, acceptance: true, on: :create
@@ -31,6 +38,8 @@ class User < ApplicationRecord
             length: { minimum: 1, maximum: 20 },
             allow_nil: true
 
+
+
   has_one :profile
   accepts_nested_attributes_for :profile, update_only: true
 
@@ -44,6 +53,8 @@ class User < ApplicationRecord
   # フォローされている側のユーザー(passive relationship)
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
+
+  has_many :community_member, dependent: :destroy
 
   def password_required?
     super && confirmed?
@@ -104,15 +115,18 @@ class User < ApplicationRecord
     likes.where(post_id: post_id).exists?
   end
 
-  before_create :build_default_profile
-
   private
+
   def build_default_profile
     build_profile
     true
   end
 
-  def active?
-    !ban?
+  def validate_tag
+    return if tag_list == nil?
+
+    tag_list.each do |tag|
+      errors.add(:tag_list, 'は1つ2~20文字です。') if (tag.length < 2) || (tag.length > 20)
+    end
   end
 end

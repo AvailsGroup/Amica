@@ -81,6 +81,8 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
+    acts-as-taggable-on (8.1.0)
+      activerecord (>= 5.0, < 6.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     bcrypt (3.1.16)
@@ -298,6 +300,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  acts-as-taggable-on
   bootsnap (>= 1.4.4)
   byebug
   cancancan

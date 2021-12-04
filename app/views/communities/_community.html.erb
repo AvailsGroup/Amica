@@ -1,0 +1,32 @@
+<div class="col mb-3">
+  <%= link_to community_path(community.id), style: "text-decoration: none" do %>
+    <div class="card rounded shadow-sm">
+      <% if community.icon? %>
+        <%= image_tag "/communities_image/#{community.icon}",class: "img-fluid" %><br>
+      <% else %>
+        <%= image_tag "default_icon", class: "img-fluid" %><br>
+      <% end %>
+      <div class="card">
+        <h5 class="card-title"><%= community.name %></h5>
+        <p><span class="far fa-user" style="margin-right: 3px"></span><%= member.where(community_id:community.id).count %> </p>
+      </div>
+      <div class="card">
+        <ul class="list-group list-group-flush">
+          <% community.tag_list.shuffle.first(3).each do |t| %>
+            <%= link_to search_tag_path(t),class:"text-decoration-none" do %>
+              <li class="list-group-item">#<%= t %></li>
+            <% end %>
+          <% end %>
+          <% tag_count =  community.tag_list.count%>
+          <% while tag_count < 3 do%>
+            <li class="list-group-item">－</li>
+            <% tag_count += 1 %>
+          <% end %>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted"><%= link_to user.find(community.user_id).name ,profile_path(user.find(community.user_id).userid),class:"text-decoration-none text-dark"%></small>
+      </div>
+    </div>
+  <% end %>
+</div>
