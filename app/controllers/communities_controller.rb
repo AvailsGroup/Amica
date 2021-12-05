@@ -3,10 +3,7 @@ class CommunitiesController < ApplicationController
   before_action :banned
 
   def index
-    @community = Community.all.order(created_at: :desc)
-    @user = User.all
-    @member = CommunityMember.all
-    @join = CommunityMember.where(user_id: current_user.id).count
+    @community = Community.includes(:community_members, :user, :tags).order(created_at: :desc)
   end
 
   def new
@@ -36,12 +33,9 @@ class CommunitiesController < ApplicationController
   end
 
   def show
-    @community = Community.find(params[:id])
-    @join = CommunityMember.exists?(user: current_user, community_id: @community.id)
-    @members = CommunityMember.where(community_id: @community.id)
-    @user = User.all
-    @tag = @community.tag_counts_on(:tags)
-    @leader = @community.user_id ==current_user.id
+    @community = Community.includes(:user, :tags,:community_members).find(params[:id])
+    @join = @community.community_members.exists?(user: current_user)
+    @leader = @community.user
   end
 
   def edit
@@ -84,13 +78,7 @@ class CommunitiesController < ApplicationController
 
   #Async
   def joined
-    @community = []
-    join = CommunityMember.where(user_id: current_user.id).order(created_at: :desc)
-    join.each do |m|
-      @community.push(Community.find(m.community_id))
-    end
-    @user = User.all
-    @member = CommunityMember.all
+    @community = Community.includes(:community_members, :user, :tags).where(id: current_user.community_member.select(:community_id)).order(created_at: :desc)
   end
 
   private

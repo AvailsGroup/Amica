@@ -1,5 +1,5 @@
 var communities = $("#community")
 communities.empty()
 <% @community.each do |c|%>
-  communities.append("<%= j(render 'communities/community', community:c,user: @user,member:@member) %>");
+  communities.append("<%= j(render 'communities/community', community:c) %>");
 <% end %>

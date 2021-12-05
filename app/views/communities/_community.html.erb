@@ -8,7 +8,7 @@
       <% end %>
       <div class="card">
         <h5 class="card-title"><%= community.name %></h5>
-        <p><span class="far fa-user" style="margin-right: 3px"></span><%= member.where(community_id:community.id).count %> </p>
+        <p><span class="far fa-user" style="margin-right: 3px"></span><%= community.community_members.count %> </p>
       </div>
       <div class="card">
         <ul class="list-group list-group-flush">
@@ -17,7 +17,7 @@
               <li class="list-group-item">#<%= t %></li>
             <% end %>
           <% end %>
-          <% tag_count =  community.tag_list.count%>
+          <% tag_count =  community.tag_list.count %>
           <% while tag_count < 3 do%>
             <li class="list-group-item">－</li>
             <% tag_count += 1 %>
@@ -25,7 +25,7 @@
         </ul>
       </div>
       <div class="card-footer">
-        <small class="text-muted"><%= link_to user.find(community.user_id).name ,profile_path(user.find(community.user_id).userid),class:"text-decoration-none text-dark"%></small>
+        <small class="text-muted"><%= link_to community.user.name ,profile_path(community.user.userid),class:"text-decoration-none text-dark"%></small>
       </div>
     </div>
   <% end %>

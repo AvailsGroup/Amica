@@ -9,7 +9,7 @@
       <% end %>
       <h1 class="display-4 fw-normal"><%=@community.name %></h1>
       <p class="lead fw-normal"><%=safe_join(@community.content.split("\n"),tag(:br)) %></p>
-      <% if @leader %>
+      <% if @leader == current_user %>
         <%=  link_to "編集", edit_community_path,class: "btn btn-outline-dark" %>
       <% else %>
         <% if @join %>
@@ -26,11 +26,11 @@
     <div class="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white">
       <div class="my-3 py-3">
         <h2 class="display-5">参加者</h2>
-        <%= link_to "リーダー : #{@user.find(@community.user_id).name}" ,profile_path(@user.find(@community.user_id).userid),class: "lead text-white",style: "text-decoration:none;"%>
+        <%= link_to "リーダー : #{@leader.name}" ,profile_path(@leader.userid),class: "lead text-white",style: "text-decoration:none;"%>
         <br />
-        <% @members.shuffle.first(5).each do |m| %>
-          <% unless @user.find(@community.user_id) == @user.find(m.user_id)%>
-            <%= link_to "#{@user.find(m.user_id).name}" ,profile_path(@user.find(m.user_id).userid),class: "lead text-white",style: "text-decoration:none;"%>
+        <% @community.community_members.shuffle.first(5).each do |m| %>
+          <% unless @leader == m.user%>
+            <%= link_to "#{m.user.name}" ,profile_path(m.user.userid),class: "lead text-white",style: "text-decoration:none;"%>
             <br />
           <% end %>
         <% end %>
@@ -40,7 +40,7 @@
     <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center">
       <div class="my-3 py-3">
         <h2 class="display-5">タグ</h2>
-        <% @tag.each do |t| %>
+        <% @community.tags.each do |t| %>
           <%= link_to search_tag_path(t),class:"text-decoration-none" do %>
             <p class="lead mb-0">#<%= t %></p>
           <% end %>

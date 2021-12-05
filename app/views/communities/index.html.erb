@@ -11,7 +11,7 @@
     <%= link_to "おすすめ", community_pickup_path,class: "nav-link",'aria-current': "page", remote: true %>
     <%= link_to community_joined_path,class: "nav-link",'aria-current': "page", remote: true do%>
       参加中
-      <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= @join %></span>
+      <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= current_user.community_member.count %></span>
     <% end %>
   </nav>
 </div>
@@ -44,7 +44,7 @@
 
      <% @community.each do |community| %>
       <div id="communities">
-        <%= render "communities/community",community:community,user:@user,member:@member %>
+        <%= render "communities/community",community:community %>
       </div>
     <% end %>
   </div>
