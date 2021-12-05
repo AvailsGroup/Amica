@@ -1,5 +1,1 @@
-var communities = $("#community")
-communities.empty()
-<% @community.each do |c|%>
-  communities.append("<%= j(render 'communities/community', community:c) %>");
-<% end %>
+$("#community").empty().append("<%= j(render partial:'communities/community', collection: @community, as: :community) %>");

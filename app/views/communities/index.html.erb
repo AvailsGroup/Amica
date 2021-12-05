@@ -11,7 +11,7 @@
     <%= link_to "おすすめ", community_pickup_path,class: "nav-link",'aria-current': "page", remote: true %>
     <%= link_to community_joined_path,class: "nav-link",'aria-current': "page", remote: true do%>
       参加中
-      <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= current_user.community_member.count %></span>
+      <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= current_user.community_member.size %></span>
     <% end %>
   </nav>
 </div>
@@ -38,14 +38,7 @@
     </div>
   </div>
 
-  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2
-              row-cols-lg-2  row-cols-xl-3 row-cols-xxl-4
-              g-4　g-lg-4　p-3　my-3" id="community">
-
-     <% @community.each do |community| %>
-      <div id="communities">
-        <%= render "communities/community",community:community %>
-      </div>
-    <% end %>
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2  row-cols-xl-3 row-cols-xxl-4 g-4　g-lg-4　p-3　my-3" id="community">
+    <%= render partial:'communities/community', collection: @community, as: :community %>
   </div>
 </div>

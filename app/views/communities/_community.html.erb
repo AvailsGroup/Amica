@@ -8,16 +8,16 @@
       <% end %>
       <div class="card">
         <h5 class="card-title"><%= community.name %></h5>
-        <p><span class="far fa-user" style="margin-right: 3px"></span><%= community.community_members.count %> </p>
+        <p><span class="far fa-user" style="margin-right: 3px"></span><%= community.community_members.size %> </p>
       </div>
       <div class="card">
         <ul class="list-group list-group-flush">
-          <% community.tag_list.shuffle.first(3).each do |t| %>
+          <% community.tags.pluck(:name).shuffle.first(3).each do |t| %>
             <%= link_to search_tag_path(t),class:"text-decoration-none" do %>
               <li class="list-group-item">#<%= t %></li>
             <% end %>
           <% end %>
-          <% tag_count =  community.tag_list.count %>
+          <% tag_count =  community.tags.pluck(:name).count %>
           <% while tag_count < 3 do%>
             <li class="list-group-item">－</li>
             <% tag_count += 1 %>
