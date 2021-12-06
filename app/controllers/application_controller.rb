@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
       pages_path
   end
 
+  def base64?(value)
+    value.is_a?(String) && Base64.strict_encode64(Base64.decode64(value)) == value
+  end
+
   private
   def sign_in_required
     redirect_to new_user_session_url unless user_signed_in?
