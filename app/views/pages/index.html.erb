@@ -146,9 +146,11 @@
       <%= form_with url: profile_search_path,:method => 'get',class: "container-fluid col px-0" do |f| %>
         <p class="me-3">コミュニティ検索</p>
         <div class="input-group">
-          <%= f.text_field :name, class: "form-control mb-3",placeholder: "CommunityName",aria: {label:"Username",describedby: "basic-addon1"} %>
+          <%= f.text_field :name, class: "form-control mb-3",placeholder: "CommunityName",aria: {label:"Communityname",describedby: "basic-addon1"} %>
         </div>
       <% end %>
+
+      <div id="favorite_community"></div>
 
       <button
         type="button"
@@ -164,69 +166,83 @@
       <!-- /トリガーとなるリンク&ボタン -->
 
       <!-- 対象のコンテンツ -->
-          <div class="collapse show mb-1" id="collapseExample3">
-            <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
-                <div class="d-flex justify-content-between">
-                  <div class="d-flex text-muted pt-3">
-                    <%= image_tag "profiles.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-                    <p class="pb-3 mb-0 small lh-sm w-100">
-                      <strong class="d-block text-gray-dark">アニメ愛好家</strong>
-                      アニメ好き集まれ～
-                    </p>
-                  </div>
-                  <div style="padding-top: 19px; color: #007bff;">
-                        <i class="fas fa-star"></i>
-                  </div>
+            <% @community.each do |community| %>
+              <div class="collapse show mb-1" id="collapseExample3">
+                <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
+                  <%= link_to profile_path(community.user_id) do %>
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex text-muted pt-3">
+                        <% if community.icon.nil? %>
+                          <%= image_tag "default_icon" ,id:"preview",class: "d-block mx-auto mb-4 border border-success rounded icon",width: "40px",height: "40px" %>
+                        <% else %>
+                          <%= image_tag "/community_icon/#{community.icon}.png" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+                        <% end %>
+                        <p class="pb-3 mb-0 small lh-sm w-100">
+                          <strong class="d-block text-gray-dark"><%= community.name %> </strong>
+                        </p>
+                      </div>
+                      <div style="padding-top: 19px">
+                        <% if current_user.is_favorite?(current_user,current_user) %>
+                          <%= link_to page_favorite_path(user.id,current_user.id), method: :delete do %>
+                            <i class="fas fa-star"></i>
+                          <% end %>
+                        <% else %>
+                          <%= link_to  page_favorite_index_path(community.id), method: :post do %>
+                            <i class="far fa-star"></i>
+                          <% end %>
+                        <% end %>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
               </div>
-            </div>
-          </div>
+            <% end %>
 
       <button
         type="button"
         class="btn btn-secondary btn-lg w-100 mt-2 mb-3"
         style="background-color: #00bfff"
         data-toggle="collapse"
-        data-target="#collapseExample3"
+        data-target="#collapseExample4"
         aria-expanded="false"
-        aria-controls="collapseExample3"
+        aria-controls="collapseExample4"
       >
         コミュニティ
       </button>
       <!-- /トリガーとなるリンク&ボタン -->
-
-      <!-- 対象のコンテンツ -->
-          <div class="collapse show mb-1" id="collapseExample4">
-            <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
-                <div class="d-flex justify-content-between">
-                  <div class="d-flex text-muted pt-3">
-                    <%= image_tag "profiles.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-                    <p class="pb-3 mb-0 small lh-sm w-100">
-                      <strong class="d-block text-gray-dark">アニメ愛好家</strong>
-                      アニメ好き集まれ～
-                    </p>
-                  </div>
-                  <div style="padding-top: 19px; color: #007bff;">
+      <% @community.each do |community| %>
+        <div class="collapse show mb-1" id="collapseExample3">
+          <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
+            <%= link_to page_path(community.user_id) do %>
+              <div class="d-flex justify-content-between">
+                <div class="d-flex text-muted pt-3">
+                  <% if community_path(community.icon).nil? %>
+                    <%= image_tag "/community_icon/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+                  <% else %>
+                    <%= image_tag "/community_icon/#{community.icon}.png" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+                  <% end %>
+                  <p class="pb-3 mb-0 small lh-sm w-100">
+                    <strong class="d-block text-gray-dark"><%= community.name %></strong>
+                  </p>
+                </div>
+                <div style="padding-top: 19px">
+                  <% if current_user.is_favorite?(current_user,current_user) %>
+                    <%= link_to page_favorite_path(user.id,current_user.id), method: :delete do %>
                       <i class="fas fa-star"></i>
-                  </div>
+                    <% end %>
+                  <% else %>
+                    <%= link_to  page_favorite_index_path(community.id), method: :post do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
+                  <% end %>
+                </div>
               </div>
-            </div>
+            <% end %>
           </div>
-      <div class="collapse show mb-1" id="collapseExample4">
-      <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
-      <div class="d-flex justify-content-between">
-        <div class="d-flex text-muted pt-3">
-          <%= image_tag "profile.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-          <p class="pb-3 mb-0 small lh-sm w-100">
-            <strong class="d-block text-gray-dark">IT勉強会</strong>
-            一緒に極めよう
-          </p>
         </div>
-        <div style="padding-top: 19px; color: #007bff;">
-          <i class="far fa-star"></i>
-        </div>
-      </div>
-    </div>
-      </div>
+      <% end %>
+      <!-- 対象のコンテンツ -->
+
     </div>     <!--右画面制作-->
   </div>
 </main>

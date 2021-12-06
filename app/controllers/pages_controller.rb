@@ -6,6 +6,7 @@ class PagesController < ApplicationController
     @user = current_user
     @mates = current_user.matchers
     @favorites = @mates.select {|e| current_user.is_favorite?(current_user,e)}
+    @community = community_contents
 
   end
 
@@ -27,18 +28,13 @@ class PagesController < ApplicationController
   end
 
   def community
-    @community = current_community.matchers
-    @community = []
-    unless params[:name] == ""
-      current_community.matchers.each do |u|
-        if u.name.downcase.include?(params[:name].downcase) || u.name.downcase.include?(params[:name].downcase) || u.userid.downcase.include?(params[:name].downcase)
-          @mates.push(u)
-        end
-      end
-    end
 
     render 'pages/community'
   end
 
+  private
 
+  def community_contents
+     @community = Community.includes([:community_members,:tags]).where(id:current_user.community_member.select(:community_id)).order(created_at: :desc)
+  end
 end

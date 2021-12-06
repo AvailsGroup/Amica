@@ -1,4 +1,4 @@
-<% mates.each do |community| %>
+<% community.each do |community| %>
   <div class="collapse show mb-1" id="collapseExample1">
     <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
       <%= link_to profile_path(user.userid) do %>
@@ -11,7 +11,6 @@
             <% end %>
             <p class="pb-3 mb-0 small lh-sm w-100">
               <strong class="d-block text-gray-dark"><%= community.name %> (<%= community.community_id %>)</strong>
-              @<%= community.userid %>
             </p>
           </div>
           <div style="padding-top: 19px">
