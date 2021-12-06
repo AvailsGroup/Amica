@@ -48,13 +48,6 @@ ActiveRecord::Schema.define(version: 2021_12_04_143323) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "hashtags", force: :cascade do |t|
-    t.string "hashname"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["hashname"], name: "index_hashtags_on_hashname", unique: true
-  end
-
   create_table "communities", force: :cascade do |t|
     t.string "name"
     t.string "content"
@@ -71,20 +64,6 @@ ActiveRecord::Schema.define(version: 2021_12_04_143323) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["community_id"], name: "index_community_members_on_community_id"
     t.index ["user_id"], name: "index_community_members_on_user_id"
-  end
-
-  create_table "community_tags", force: :cascade do |t|
-    t.integer "community_id"
-    t.string "tag"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "favorites", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "favorite_user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "hashtags", force: :cascade do |t|
@@ -142,15 +121,6 @@ ActiveRecord::Schema.define(version: 2021_12_04_143323) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
-  end
-
-  create_table "timeline_hashtag_relations", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "hashtag_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["hashtag_id"], name: "index_timeline_hashtag_relations_on_hashtag_id"
-    t.index ["post_id"], name: "index_timeline_hashtag_relations_on_post_id"
   end
 
   create_table "taggings", force: :cascade do |t|
