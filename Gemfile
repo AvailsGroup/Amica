@@ -82,6 +82,12 @@ gem 'jquery-rails'
 
 gem 'rails_admin'
 
+gem 'acts-as-taggable-on'
+
 gem 'rack-attack'
 
-gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
+gem 'cropper_rails'
+
+gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
+
+gem 'dotenv-rails'

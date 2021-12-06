@@ -34,14 +34,14 @@
 .userprofile .userpic .userpicimg {
   height: auto;
   width: 100%;
-  border-radius: 100%;
+  border-radius: 10%;
 }
 .username {
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 20px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 25px;
   color: #000000;
-  margin-top: 20px;
+  margin-top: 10px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -115,6 +115,11 @@
   width: 100%;
   margin: 0;
 }
+
+.userdata{
+  z-index: 3;
+}
+
 /*==============================*/
 /*====== Social Profile css =====*/
 /*==============================*/
@@ -143,15 +148,17 @@
   background: url(https://www.bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg) no-repeat top center;
   background-size: 100%;
   padding: 50px 0;
-  margin: 0
+  margin: 0;
+  z-index: 2;
 }
 .userprofile.social .username {
-  color: #ffffff
+  color: #000
 }
 .userprofile.social .username+p {
-  color: #ffffff;
+  color: #000;
   opacity: 0.8
 }
+
 .postbtn {
   position: absolute;
   right: 5px;
@@ -164,7 +171,7 @@
   margin-bottom: 15px
 }
 .posttimeline .panel {
-  margin-bottom: 15px
+  margin-bottom: 15px;
 }
 .commentsblock {
   background: #f8f9fb;
@@ -267,6 +274,7 @@
   border: 0;
   display: inline-block;
   width: 100%;
+  z-index: 1;
 }
 
 .panel-footer {
@@ -391,4 +399,84 @@
 .media-body {
   color: #607D8B;
   overflow: visible;
+}
+
+.amica-badge{
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.at-badge .svg-inline--fa{
+  width:  30px;
+  height: 30px;
+
+}
+
+.admin-badge{
+  position: relative;
+  cursor: pointer;
+  display:  inline-block;
+  color: rgba(29,144,190,0.8);
+}
+
+.admin-badge-description {
+  display: none;
+  position: absolute;
+  padding: 10px;
+  font-size: 12px;
+  line-height: 1.6em;
+  color: #fff;
+  border-radius: 5px;
+  background: #000;
+  width: 100px;
+}
+
+.admin-badge-description:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border: 15px solid transparent;
+  border-top: 15px solid #000;
+  margin-left: -15px;
+}
+
+.admin-badge:hover .admin-badge-description{
+  display: inline-block;
+  top: -75px;
+  left: -35px;
+}
+
+.register-badge{
+  position: relative;
+  cursor: pointer;
+  display:  inline-block;
+  color: orange;
+}
+
+.register-badge-description {
+  display: none;
+  position: absolute;
+  padding: 2px;
+  font-size: 12px;
+  line-height: 1.6em;
+  color: #fff;
+  border-radius: 5px;
+  background: #000;
+  width: 100px;
+}
+
+.register-badge-description:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border: 15px solid transparent;
+  border-top: 15px solid #000;
+  margin-left: -15px;
+}
+.register-badge:hover .register-badge-description{
+  display: inline-block;
+  top: -75px;
+  left: -35px;
 }
