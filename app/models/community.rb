@@ -13,6 +13,8 @@ class Community < ApplicationRecord
 
   validate :validate_tag
 
+  attr_accessor :image_x,:image_y,:image_w,:image_h,:aspect_numerator,:aspect_denominator
+
   has_many :community_members, dependent: :destroy
 
   def validate_tag

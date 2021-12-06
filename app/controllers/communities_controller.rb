@@ -48,19 +48,37 @@ class CommunitiesController < ApplicationController
   def update
     @community = Community.find(params[:id])
     permission
-    unless  @community.update(community_params)
+
+    unless  @community.update(user_params)
       @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
       @tag = @community.tag_list.join(',')
       render action: "edit"
       return
     end
-    if community_params[:icon]
-      image = community_params[:icon]
-      File.binwrite("public/communities_image/#{@community.id}.jpg", image.read)
-      @community.update(icon:"#{@community.id}.jpg")
+
+    unless params["community"]["images"].nil?
+      accepted_format = %w[.jpg .jpeg .png]
+      unless accepted_format.include? File.extname(params["community"]["images"].original_filename)
+        flash[:alert] = "画像は jpg jpeg png 形式のみ対応しております。"
+        redirect_to(edit_profile_path)
+        return
+      end
     end
-    flash[:notice] = "コミュニティを編集しました！"
-    redirect_to(community_path(@community.id))
+
+    if !params["community"]["images"].nil? && base64?(params["community"]["image"]['data:image/jpeg;base64,'.length .. -1])
+      unless @community.image.nil?
+        if File.exist?("public/user_images/#{@community.image}")
+          File.delete("public/user_images/#{@community.image}")
+        end
+      end
+      rand = rand(1_000_000..9_999_999)
+      @community.update(image: "#{@community.id}#{rand}.jpg")
+      File.open("public/user_images/#{@community.image}", 'wb') do |f|
+        f.write(Base64.decode64(params["community"]["image"]['data:image/jpeg;base64,'.length .. -1]))
+      end
+    end
+    flash[:notice] = "ユーザー情報を編集しました"
+    redirect_to profile_path
   end
   
   def destroy
