@@ -17,8 +17,7 @@ class CommunitiesController < ApplicationController
 
     unless @community.save
       @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-      @tag = @community.tag_list.join(',')
-      render action: "edit"
+      render action: "timelines/new"
       return
     end
 
@@ -26,7 +25,7 @@ class CommunitiesController < ApplicationController
       accepted_format = %w[.jpg .jpeg .png]
       unless accepted_format.include? File.extname(params["community"]["images"].original_filename)
         flash[:alert] = "画像は jpg jpeg png 形式のみ対応しております。"
-        redirect_to(edit_profile_path)
+        redirect_to(new_community_path)
         return
       end
     end
@@ -66,7 +65,7 @@ class CommunitiesController < ApplicationController
     @community = Community.find(params[:id])
     permission
 
-    unless  @community.update(user_params)
+    unless @community.update(community_params)
       @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
       @tag = @community.tag_list.join(',')
       render action: "edit"
@@ -77,12 +76,12 @@ class CommunitiesController < ApplicationController
       accepted_format = %w[.jpg .jpeg .png]
       unless accepted_format.include? File.extname(params["community"]["images"].original_filename)
         flash[:alert] = "画像は jpg jpeg png 形式のみ対応しております。"
-        redirect_to(edit_profile_path)
+        redirect_to(edit_community_path)
         return
       end
     end
 
-    if !params["community"]["images"].nil? && base64?(params["community"]["icon"]['data:image/jpeg;base64,'.length .. -1])
+    if !params["community"]["images"].nil? && base64?(params["community"]["image"]['data:image/jpeg;base64,'.length .. -1])
       unless @community.image.nil?
         if File.exist?("public/communities_image/#{@community.icon}")
           File.delete("public/communities_image/#{@community.icon}")
@@ -91,11 +90,11 @@ class CommunitiesController < ApplicationController
       rand = rand(1_000_000..9_999_999)
       @community.update(icon: "#{@community.id}#{rand}.jpg")
       File.open("public/communities_image/#{@community.icon}", 'wb') do |f|
-        f.write(Base64.decode64(params["community"]["icon"]['data:image/jpeg;base64,'.length .. -1]))
+        f.write(Base64.decode64(params["community"]["image"]['data:image/jpeg;base64,'.length .. -1]))
       end
     end
     flash[:notice] = "ユーザー情報を編集しました"
-    redirect_to profile_path
+    redirect_to community_path(@community.id)
   end
   
   def destroy

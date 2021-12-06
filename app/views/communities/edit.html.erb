@@ -24,10 +24,10 @@
           <div id="user_icon">
             <label>
               <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-              <% if current_user.image.nil? %>
+              <% if @community.icon.nil? %>
                 <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
               <% else %>
-                <%= image_tag "/community_image/#{@community.image}", :size => '200x200', class:"user_image"%>
+                <%= image_tag "/communities_image/#{@community.icon}", :size => '200x200', class:"user_image", style:"width: 200px"%>
               <% end %>
             </label>
           </div>
@@ -51,11 +51,6 @@
           </div>
 
           <div class="col-sm-12">
-            <%= f.label "アイコン", class:"form-label"%>
-            <%= f.file_field :icon,autocomplete: "icon", class: "form-control",:placeholder=>"icon",onchange: "previewImage(this);"%>
-          </div>
-
-          <div class="col-sm-12">
             <div class="search-area-colum form-contents">
               <%= f.label "タグ (1つ2~20文字)" , class:"form-label"%>
               <%= f.text_field :tag_list, id:"myTags",value: @tag%>
@@ -72,7 +67,7 @@
           <%= link_to "コミュニティを削除する",community_path,method: :delete,class: "btn btn-primary mb-5", data: {confirm: "本当に削除しますか？"} %>
         </div>
       </div>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index:10000">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -92,10 +87,10 @@
                   <%= f.hidden_field :aspect_numerator, id: "aspect_numerator", value: "1.0" %>
                   <%= f.hidden_field :aspect_denominator ,id: "aspect_denominator", value: "1.0" %>'
                     <div id="prev_img">
-                      <% if current_user.image.nil? %>
+                      <% if @community.icon.nil? %>
                         <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
                       <% else %>
-                        <%= image_tag "/user_images/#{current_user.image}", :size => '200x200', class:"user_image"%>
+                        <%= image_tag "/communities_image/#{@community.icon}", :size => '200x200', class:"user_image"%>
                       <% end %>
                     </div>
                 </div>

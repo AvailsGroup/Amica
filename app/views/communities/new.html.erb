@@ -17,7 +17,7 @@
   <%= form_for(@community, url: communities_path, multipart: true,class: "needs-validation") do |f| %>
     <main>
       <div class="py-5 text-center">
-        <h2>プロフィール編集</h2>
+        <h2>新規コミュニティ作成</h2>
         <%= render 'layouts/error_messages', model: f.object %>
         <p class="lead">ここではコミュニティの内容を作成することが出来ます</p>
         <p id="image_text">現在のアイコン</p>
@@ -25,10 +25,10 @@
           <div id="user_icon">
             <label>
               <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-              <% if current_user.image.nil? %>
+              <% if @community.icon.nil? %>
                 <%= image_tag "default_icon" , :size => '200x200', class: "user_image", style:"width:200px;height:200pz"%>
               <% else %>
-                <%= image_tag "/community_image/#{@community.image}", :size => '200x200', class:"user_image"%>
+                <%= image_tag "/communities_image/#{@community.icon}", :size => '200x200', class:"user_image"%>
               <% end %>
             </label>
           </div>
@@ -85,10 +85,10 @@
                   <%= f.hidden_field :aspect_numerator, id: "aspect_numerator", value: "1.0" %>
                   <%= f.hidden_field :aspect_denominator ,id: "aspect_denominator", value: "1.0" %>'
                   <div id="prev_img">
-                    <% if current_user.image.nil? %>
+                    <% if @community.icon.nil? %>
                       <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
                     <% else %>
-                      <%= image_tag "/user_images/#{current_user.image}", :size => '200x200', class:"user_image"%>
+                      <%= image_tag "/communities_image/#{@community.icon}", :size => '200x200', class:"user_image"%>
                     <% end %>
                   </div>
                 </div>
