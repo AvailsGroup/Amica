@@ -31,7 +31,7 @@ class ProfilesController < ApplicationController
         postsCount: Post.where(userid: current_user.id).count
       # ,commentsCount:Comments.where(userid: current_user.id).count
       )
-      @achievement = Achievement.find_by(userid: current_user.id)
+
     end
     @profiles = Profile.find(current_user.id)
     @user = User.find_by(userid: params[:id])

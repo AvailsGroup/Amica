@@ -404,6 +404,9 @@
 .amica-badge{
   margin-left: 3px;
   margin-right: 3px;
+  position: relative;
+  cursor: pointer;
+  display:  inline-block;
 }
 
 .at-badge .svg-inline--fa{
@@ -412,27 +415,10 @@
 
 }
 
-.admin-badge{
-  position: relative;
-  cursor: pointer;
-  display:  inline-block;
-  color: rgba(29,144,190,0.8);
-}
-
-.register-badge{
-  position: relative;
-  cursor: pointer;
-  display:  inline-block;
-  color: orange;
-}
-
-
-
-
-.admin-badge-description {
+.badge-description {
   display: none;
   position: absolute;
-  padding: 10px;
+  padding: 5px;
   font-size: 12px;
   line-height: 1.6em;
   color: #fff;
@@ -441,19 +427,7 @@
   width: 100px;
 }
 
-.register-badge-description {
-  display: none;
-  position: absolute;
-  padding: 2px;
-  font-size: 12px;
-  line-height: 1.6em;
-  color: #fff;
-  border-radius: 5px;
-  background: #000;
-  width: 100px;
-}
-
-.admin-badge-description:before {
+.badge-description:before {
   content: "";
   position: absolute;
   top: 100%;
@@ -463,23 +437,8 @@
   margin-left: -15px;
 }
 
-.register-badge-description:before {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  border: 15px solid transparent;
-  border-top: 15px solid #000;
-  margin-left: -15px;
-}
 
-.admin-badge:hover .admin-badge-description{
-  display: inline-block;
-  top: -75px;
-  left: -35px;
-}
-
-.register-badge:hover .register-badge-description{
+.amica-badge:hover  .badge-description{
   display: inline-block;
   top: -75px;
   left: -35px;

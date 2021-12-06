@@ -10,17 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_06_061537) do
+ActiveRecord::Schema.define(version: 2021_12_06_134035) do
 
-  create_table "achievements", primary_key: "userid", force: :cascade do |t|
-    t.integer "id", null: false
-    t.integer "communitiesCount"
-    t.integer "registrationDays"
-    t.integer "friendsCount"
-    t.integer "likesCount"
-    t.integer "commentsCount"
+  create_table "achievements", force: :cascade do |t|
+    t.integer "userid", null: false
+    t.integer "communitiesCount", default: 0
+    t.integer "registrationDays", default: 0
+    t.integer "friendsCount", default: 0
+    t.integer "likesCount", default: 0
+    t.integer "commentsCount", default: 0
+    t.integer "postsCount", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "niceLv1", default: false
+    t.boolean "niceLv2", default: false
+    t.boolean "niceLv3", default: false
   end
 
   create_table "communities", force: :cascade do |t|
