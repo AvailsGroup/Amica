@@ -23,7 +23,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   # def new
-  #   super
+  #  super
+  #  reset_session
   # end
 
   # DELETE /resource

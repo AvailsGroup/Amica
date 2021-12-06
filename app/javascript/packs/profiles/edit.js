@@ -1,3 +1,9 @@
+import Cropper from "cropperjs";
+import "jquery"
+import "jquery-ui/ui/widget"
+import "jquery-ui/ui/widgets/autocomplete"
+import "tag-it"
+
 document.addEventListener("DOMContentLoaded", function(){
     $('#trim_img_uploder').click(function(e){
         $(this).val('');
@@ -24,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     const crop_image = function (e) {
         const files = e.target.files;
-        if (files.length == 0) {
+        if (files.length === 0) {
             return;
         }
         let file = files[0];

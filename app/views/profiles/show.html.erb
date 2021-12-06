@@ -3,18 +3,23 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
   <div class="row">
-    <div class="col-md-12 text-center">
+    <div class="col-md-12 text-center" style="z-index: 1;">
       <div class="panel panel-default">
-        <div class="userprofile social ">
-          <div class="userpic">
-            <% if @user.image.nil? %>
-              <%= image_tag "default_icon" , :size => '100x100', class: "userpicimg icon flex-shrink-0 show-icon"%>
-            <% else %>
-              <%= image_tag "/user_images/#{@user.image}",style: "width: 100px;height:100px;",class:"userpicimg icon bd-placeholder-img flex-shrink-0 show-icon"%>
-            <% end %>
+        <div class="userprofile social">
+          <div class="userdata">
+            <div class="userpic">
+              <% if @user.image.nil? %>
+                <%= image_tag "default_icon" , :size => '100x100', class: "userpicimg icon flex-shrink-0 show-icon"%>
+              <% else %>
+                <%= image_tag "/user_images/#{@user.image}",style: "width: 100px;height:100px;",class:"userpicimg icon bd-placeholder-img flex-shrink-0 show-icon"%>
+              <% end %>
+            </div>
+            <div class="names">
+              <h2 class="username"><%= @user.name %></h2>
+              <p style="margin-bottom: 0">(<%= @user.nickname %>)</p>
+              <p>@<%=@user.userid%></p>
+            </div>
           </div>
-          <h3 class="username"><%= @user.nickname %></h3>
-          <p>@<%=@user.userid%></p>
         </div>
         <div class="col-md-12 border-top border-bottom">
           <ul class="nav nav-pills pull-left countlist" role="tablist">
@@ -43,55 +48,95 @@
                 <small>学籍番号</small> </h3>
             </li>
           </ul>
-          <button class="btn btn-primary followbtn">
-            <% if current_user.id != @user.id %>
-              <% unless current_user.following?(@user) %>
-                <div class="actions ">
-                  <%= link_to 'フォロー',
-                              profile_relationships_path(@user.userid),
-                              method: :post,
-                              style: "color:#FFF;"
-                  %>
-                </div>
-              <% else %>
-                <div class="actions">
-                  <%= link_to 'フォロー解除',
-                              profile_relationship_path(@user.userid),
-                              method: :delete,
-                              style: "color:#FFF;"
-                  %>
-                </div>
-              <% end %>
-            <% end %>
-           <% if current_user.id == @user.id %>
+          <% if current_user.id != @user.id %>
+            <% unless current_user.following?(@user) %>
+              <div class="actions ">
+                <%= link_to 'フォロー',
+                            profile_relationships_path(@user.userid),
+                            method: :post,
+                            style: "color:#FFF;",
+                            class:"btn btn-primary followbtn"
+                %>
+              </div>
+            <% else %>
               <div class="actions">
-                <%= link_to '編集',
-                            edit_mypage_path,
-                            style: "color:#FFF;"
-
+                <%= link_to 'フォロー解除',
+                            profile_relationship_path(@user.userid),
+                            method: :delete,
+                            style: "color:#FFF;",
+                            class:"btn btn-primary followbtn"
                 %>
               </div>
             <% end %>
-          </button>
+          <% end %>
+           <% if current_user.id == @user.id %>
+              <div class="actions">
+                <%= link_to '編集',
+                            edit_profile_path,
+                            style: "color:#FFF;",
+                            class:"btn btn-primary followbtn" %>
+              </div>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
+
+
   <!-- /.col-md-12 -->
   <div class="row d-flex justify-content-around center-block">
     <div class="col-md-3 col-sm-12 w-100">
       <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="page-header">取得資格</h3>
-          <p class="page-subtitle small"><%= @profile.accreditation %></p>
+        <div class="panel-heading m-3">
+          <h3 class="page-header">バッジ</h3>
+          <div class="amica-badge register-badge">
+            <span class="at-badge"><i class="fas fa-smile-wink"></i></span>
+            <div class="register-badge-description"><%= @user.created_at.strftime('%Y/%m/%d') %> Amicaに登録した記念バッジ</div>
+          </div>
+          <% if @user.admin %>
+            <div class="amica-badge admin-badge">
+              <span class="at-badge"><i class="fas fa-crown"></i></span>
+              <div class="admin-badge-description">Amica運営バッジ</div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
+
+    <div class="col-md-3 col-sm-12 w-100">
+      <div class="panel panel-default">
+        <div class="panel-heading m-3">
+          <h3 class="page-header">取得資格</h3>
+          <p class="page-subtitle">
+            <% @user.accreditation_list.each do |t| %>
+              <%= link_to search_tag_path(t) do %>
+                <span><%= t %> </span>
+              <% end %>
+            <% end %>
+
+            <% if @user.accreditation_list.empty? %>
+              未入力です
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+
     <div class="col-md-9 col-sm-12 w-100">
       <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading m-3">
           <h3 class="page-header">タグ、趣味</h3>
-          <p class="page-subtitle small"><%= @profile.hobby %></p>
+          <p class="page-subtitle">
+            <% @user.tag_list.each do |t| %>
+              <%= link_to search_tag_path(t) do %>
+                <span>#<%= t %></span>
+              <% end %>
+            <% end %>
+
+            <% if @user.tag_list.empty? %>
+              まだタグを入力していないようです！
+            <% end %>
+          </p>
         </div>
       </div>
     </div>

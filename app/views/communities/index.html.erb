@@ -17,7 +17,7 @@
 </div>
 
 <p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<p class="notice"><%= alert %></p>
 
 <div class="container">
   <div class="p-3 my-3 text-dark bg-blue rounded shadow-sm">
@@ -38,17 +38,10 @@
     </div>
   </div>
 
-  <div
-    class="row
-           row-cols-1
-           row-cols-sm-1
-           row-cols-md-2
-           row-cols-lg-2
-           row-cols-xl-3
-           row-cols-xxl-4
-           g-4　g-lg-4　p-3　my-3"
-    id="community"
-  >
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2
+              row-cols-lg-2  row-cols-xl-3 row-cols-xxl-4
+              g-4　g-lg-4　p-3　my-3" id="community">
+
      <% @community.each do |community| %>
       <div id="communities">
         <%= render "communities/community",community:community,user:@user,member:@member %>
