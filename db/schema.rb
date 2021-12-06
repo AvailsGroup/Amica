@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 2021_12_06_134035) do
     t.boolean "niceLv3", default: false
   end
 
+  create_table "hashtags", force: :cascade do |t|
+    t.string "hashname"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hashname"], name: "index_hashtags_on_hashname", unique: true
+  end
+
   create_table "communities", force: :cascade do |t|
     t.string "name"
     t.string "content"
@@ -100,6 +107,15 @@ ActiveRecord::Schema.define(version: 2021_12_06_134035) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "timeline_hashtag_relations", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "hashtag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hashtag_id"], name: "index_timeline_hashtag_relations_on_hashtag_id"
+    t.index ["post_id"], name: "index_timeline_hashtag_relations_on_post_id"
   end
 
   create_table "taggings", force: :cascade do |t|

@@ -24,6 +24,13 @@ Rails.application.routes.draw do
 
   #pages---------------
   resources :pages
+  resources :communities
+  resources :searches
+  resources :chats
+
+  resources :mypages
+  post 'mypages/nickname', to:'mypages#update_nickname'
+  post 'mypages/name', to:'mypages#update_name'
   get 'users/setting' => 'pages#setting'
 
   #communities---------
@@ -36,10 +43,12 @@ Rails.application.routes.draw do
   #timelines-----------
   resources :timelines do
     resources :likes,only:[:create,:destroy]
+    resources :comments, only: [:create, :destroy]
     collection do
       get :search
     end
   end
+
 
   #profiles------------
   resources :profiles do

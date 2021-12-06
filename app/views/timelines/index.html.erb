@@ -33,16 +33,16 @@
     </div>
 
       <% @posts.each do |p| %>
-        <div class="my-3 p-3 bg-white rounded shadow-sm">
-          <% unless current_user.following?(@user.find(p.userid)) == false %>
-            <div id="post_<%= p.id %>">
-              <%= render "timelines/post",post:p, user:@user %>
-            </div>
-          <% end %>
-        </div>
+        <%= link_to timeline_path(p.id) do%>
+          <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <% unless current_user.following?(@user.find(p.userid)) == false %>
+              <div id="post_<%= p.id %>">
+                <%= render "timelines/post",post:p, user:@user %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
   </main>
 
-  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="offcanvas.js"></script>
 </body>

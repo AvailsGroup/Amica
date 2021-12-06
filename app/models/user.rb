@@ -38,12 +38,12 @@ class User < ApplicationRecord
             length: { minimum: 1, maximum: 20 },
             allow_nil: true
 
-
-
   has_one :profile
   accepts_nested_attributes_for :profile, update_only: true
 
   has_many :likes
+
+  has_many :comments, dependent: :destroy
 
   # アソシエーションの定義
   # フォローしている側のユーザー (active relationship)
@@ -115,8 +115,12 @@ class User < ApplicationRecord
     likes.where(post_id: post_id).exists?
   end
 
-  private
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
+  before_create :build_default_profile
+
+  private
   def build_default_profile
     build_profile
     true
