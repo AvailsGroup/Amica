@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
+  require 'active_support/all'
 
   def index
     @user = current_user
@@ -12,7 +13,26 @@ class ProfilesController < ApplicationController
   end
 
   def show
-
+    @user = current_user
+    if params[:id] == @user.userid
+      @achievement = Achievement.find_by(userid: params[:id])
+      if @achievement.nil?
+        @achievement = Achievement.new
+        @achievement.userid = current_user.id
+        @achievement.save
+      end
+      @achievement = Achievement.find_by(userid: current_user.id)
+      days = Date.today - current_user.created_at.to_date + 1
+      @achievement.update(
+        communitiesCount: Community.where(user_id: current_user.id).count,
+        registrationDays: days.numerator,
+        friendsCount: current_user.matchers.count,
+        likesCount: Like.where(user_id: current_user.id).count,
+        postsCount: Post.where(userid: current_user.id).count
+      # ,commentsCount:Comments.where(userid: current_user.id).count
+      )
+      @achievement = Achievement.find_by(userid: current_user.id)
+    end
     @profiles = Profile.find(current_user.id)
     @user = User.find_by(userid: params[:id])
     if @user.nil?
@@ -99,4 +119,6 @@ class ProfilesController < ApplicationController
   def base64?(value)
     value.is_a?(String) && Base64.strict_encode64(Base64.decode64(value)) == value
   end
+
+
 end

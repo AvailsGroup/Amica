@@ -93,6 +93,16 @@
             <span class="at-badge"><i class="fas fa-smile-wink"></i></span>
             <div class="register-badge-description"><%= @user.created_at.strftime('%Y/%m/%d') %> Amicaに登録した記念バッジ</div>
           </div>
+          <% if @achievement.postsCount > 100%>
+            <div class="amica-badge posts100-badge">
+              <span class="at-badge"><i class="fas fa-smile-wink"></i></span>
+              <div class="register-badge-description">投稿数100個を超えた記念バッジ</div>
+            </div>
+          <% end %>
+          <div class="amica-badge posts100-badge">
+            <span class="at-badge"><i class="fas fa-smile-wink"></i></span>
+            <div class="register-badge-description">投稿数100個を超えた記念バッジ</div>
+          </div>
           <% if @user.admin %>
             <div class="amica-badge admin-badge">
               <span class="at-badge"><i class="fas fa-crown"></i></span>

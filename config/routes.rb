@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   #profiles------------
   resources :profiles do
     resources :relationships, only: [:create,:destroy]
+    resources :achievements, only: [:update]
   end
   get 'profile/search' => 'profiles#search'
   get 'profile/follow' => 'profiles#follow'
