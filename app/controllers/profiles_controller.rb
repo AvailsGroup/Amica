@@ -28,8 +28,8 @@ class ProfilesController < ApplicationController
         registrationDays: days.numerator,
         friendsCount: current_user.matchers.count,
         likesCount: Like.where(user_id: current_user.id).count,
-        postsCount: Post.where(userid: current_user.id).count
-      # ,commentsCount:Comments.where(userid: current_user.id).count
+        postsCount: Post.where(userid: current_user.id).count,
+        commentsCount:Comment.where(user_id: current_user.id).count
       )
 
     end
@@ -120,5 +120,10 @@ class ProfilesController < ApplicationController
     value.is_a?(String) && Base64.strict_encode64(Base64.decode64(value)) == value
   end
 
+  def badge?
+    @achievement.postsCount >= 100 ? @posts_badge1 = true : false
+    @achievement.postsCount >= 1000 ? @posts_badge2 = true : false
+    @achievement.postsCount >= 10000 ? @posts_badge3 = true : false
+  end
 
 end
