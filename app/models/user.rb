@@ -45,6 +45,8 @@ class User < ApplicationRecord
 
   has_many :likes
 
+  has_one :favorite
+
   # アソシエーションの定義
   # フォローしている側のユーザー (active relationship)
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -114,6 +116,15 @@ class User < ApplicationRecord
   def liked_by?(post_id)
     likes.where(post_id: post_id).exists?
   end
+
+  def is_user_favorite?(user,other_user)
+    Favorite.exists?(user_id:user.id,favorite_user_id:other_user.id)
+  end
+
+  def is_community_favorite?(user,other_user)
+    Favorite.exists?(user_id:user.id,community_id:other_user.id)
+  end
+
 
   private
 

@@ -41,6 +41,16 @@ Rails.application.routes.draw do
     end
   end
 
+  #pages---------------
+  resources :pages, only:[:index,:show] do
+    post "favorite/user_create" => "favorite#user_create"
+    delete "favorite/community_delete" => "favorite#community_destroy"
+    post "favorite/community_create" => "favorite#community_create"
+    delete "favorite/user_delete" => "favorite#user_destroy"
+  end
+  post "page/user"=>"pages#user"
+  post "page/community"=>"pages#community"
+
   #profiles------------
   resources :profiles do
     resources :relationships, only: [:create,:destroy]
