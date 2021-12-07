@@ -3,7 +3,7 @@
   <div class="d-flex align-items-center p-3 my-3 text-dark bg-blue rounded shadow-sm">
     <div class="lh-1">
       <nav class="navbar">
-        <%= form_with url: profile_search_path,:method => 'get',class: "container-fluid" do |f| %>
+        <%= form_with url: search_user_path,class: "container-fluid" do |f| %>
           <p class="me-3">ユーザーを検索</p>
           <div class="input-group">
             <span class="input-group-text" id="basic-addon1">@</span>

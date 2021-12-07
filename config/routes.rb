@@ -66,9 +66,9 @@ Rails.application.routes.draw do
   #searches-----------
   resources :searches, only: [:index] do
     get '/tag' => 'searches#tag'
-    get '/user' => 'searches#user'
-    get '/community' => 'searches#community'
   end
+  post 'search/user' => 'searches#user'
+  post 'search/community' => 'searches#community'
 
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
