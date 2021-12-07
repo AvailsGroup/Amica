@@ -14,12 +14,12 @@
             </p>
           </div>
           <div style="padding-top: 19px">
-            <% if current_user.is_favorite?(current_user,user) %>
-              <%= link_to page_favorite_path(user.id,current_user.id), method: :delete do %>
+            <% if current_user.is_user_favorite?(current_user,user) %>
+              <%= link_to page_favorite_user_delete_path(user.id,current_user.id), method: :delete do %>
                 <i class="fas fa-star"></i>
               <% end %>
             <% else %>
-              <%= link_to  page_favorite_index_path(user.id), method: :post do %>
+              <%= link_to  page_favorite_user_create_path(user.id), method: :post do %>
                 <i class="far fa-star"></i>
               <% end %>
             <% end %>
