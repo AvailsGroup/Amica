@@ -180,8 +180,8 @@
                         </p>
                       </div>
                       <div style="padding-top: 19px">
-                        <% if current_user.is_favorite?(current_user,current_user) %>
-                          <%= link_to page_favorite_path(community.id,current_user.id), method: :delete do %>
+                        <% if current_user.is_community_favorite?(current_user,community) %>
+                          <%= link_to page_favorite_community_delete_path(community.id,current_user.id), method: :delete do %>
                             <i class="fas fa-star"></i>
                           <% end %>
                         <% else %>

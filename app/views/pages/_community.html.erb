@@ -1,4 +1,4 @@
- <div class="collapse show mb-1" id="collapseExample3">
+<div class="collapse show mb-1" id="collapseExample3">
     <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
       <%= link_to page_path(community.user_id) do %>
         <div class="d-flex justify-content-between">
@@ -14,12 +14,12 @@
             </p>
           </div>
           <div style="padding-top: 19px">
-            <% if current_user.is_favorite?(current_user,current_user) %>
-              <%= link_to page_favorite_path(community.id,current_user.id), method: :delete do %>
+            <% if current_user.is_community_favorite?(current_user,community) %>
+              <%= link_to page_favorite_community_delete_path(community.id,current_user.id), method: :delete do %>
                 <i class="fas fa-star"></i>
               <% end %>
             <% else %>
-              <%= link_to  page_favorite_index_path(community.id), method: :post do %>
+              <%= link_to  page_favorite_community_create_path(community.id), method: :post do %>
                 <i class="far fa-star"></i>
               <% end %>
             <% end %>
