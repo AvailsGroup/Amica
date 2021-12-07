@@ -24,14 +24,14 @@ main{
 
 }
 
-.profile {                   /* my profile編集 */
+main .profile {                   /* my profile編集 */
   text-align: center;
   margin-right:80px;
   font-size: 20px;
   white-space: nowrap;
 }
 
-img.example1 {               /* my profileの写真サイズ */
+main img.example1 {               /* my profileの写真サイズ */
   background-color: #000000;
   margin-left: 25px;
   border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
@@ -39,8 +39,12 @@ img.example1 {               /* my profileの写真サイズ */
   height: 55px;       /* ※縦横を同値に */
 }
 
-.icon{
+main .icon{
   border: solid 1.5px;
   border-radius: 30%;
+}
+
+main a{
+  text-decoration: none;
 }
 

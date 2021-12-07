@@ -1,9 +1,5 @@
 <%= javascript_pack_tag 'pages/index' %>
 <%= stylesheet_link_tag 'pages', media: 'all', 'data-turbolinks-track': 'reload' %>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <main>
   <div class="profile">　　                                                  <!--my profile&name表示-->
@@ -39,8 +35,8 @@
         type="button"
         class="btn btn-secondary btn-lg w-100 mt-2 mb-3"
         style="background-color: #00bfff"
-        data-toggle="collapse"
-        data-target="#collapseExample1"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseExample1"
         aria-expanded="false"
         aria-controls="collapseExample1">
         お気に入り
@@ -88,8 +84,8 @@
         type="button"
         class="btn btn-secondary btn-lg w-100 mt-2 mb-3"
         style="background-color: #00bfff"
-        data-toggle="collapse"
-        data-target="#collapseExample2"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseExample2"
         aria-expanded="false"
         aria-controls="collapseExample2"
       >
@@ -143,10 +139,10 @@
 
       <hr class="style" style="border-top: 1px solid #000000">
 
-      <%= form_with url: profile_search_path,:method => 'get',class: "container-fluid col px-0" do |f| %>
+      <%= form_with url: page_community_path, class: "container-fluid col px-0" ,local: false,remote: true do |f| %>
         <p class="me-3">コミュニティ検索</p>
         <div class="input-group">
-          <%= f.text_field :name, class: "form-control mb-3",placeholder: "CommunityName",aria: {label:"Communityname",describedby: "basic-addon1"} %>
+          <%= f.text_field :name, class: "form-control mb-3",placeholder: "CommunityName",aria: {label:"CommunityName",describedby: "basic-addon1"} %>
         </div>
       <% end %>
 
@@ -156,8 +152,8 @@
         type="button"
         class="btn btn-secondary btn-lg w-100 mt-2 mb-3"
         style="background-color: #00bfff"
-        data-toggle="collapse"
-        data-target="#collapseExample3"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseExample3"
         aria-expanded="false"
         aria-controls="collapseExample3"
       >
@@ -166,7 +162,8 @@
       <!-- /トリガーとなるリンク&ボタン -->
 
       <!-- 対象のコンテンツ -->
-            <% @community.each do |community| %>
+      <% @community.each do |community| %>
+        <% unless current_user.is_favorite?(current_user,community) == false %>
               <div class="collapse show mb-1" id="collapseExample3">
                 <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
                   <%= link_to profile_path(community.user_id) do %>
@@ -178,12 +175,13 @@
                           <%= image_tag "/community_icon/#{community.icon}.png" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
                         <% end %>
                         <p class="pb-3 mb-0 small lh-sm w-100">
-                          <strong class="d-block text-gray-dark"><%= community.name %> </strong>
+                          <strong class="d-block text-gray-dark"><%= community.name %></strong>
+                          <br>
                         </p>
                       </div>
                       <div style="padding-top: 19px">
                         <% if current_user.is_favorite?(current_user,current_user) %>
-                          <%= link_to page_favorite_path(user.id,current_user.id), method: :delete do %>
+                          <%= link_to page_favorite_path(community.id,current_user.id), method: :delete do %>
                             <i class="fas fa-star"></i>
                           <% end %>
                         <% else %>
@@ -197,13 +195,14 @@
                 </div>
               </div>
             <% end %>
+        <% end %>
 
       <button
         type="button"
         class="btn btn-secondary btn-lg w-100 mt-2 mb-3"
         style="background-color: #00bfff"
-        data-toggle="collapse"
-        data-target="#collapseExample4"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseExample4"
         aria-expanded="false"
         aria-controls="collapseExample4"
       >
@@ -211,7 +210,7 @@
       </button>
       <!-- /トリガーとなるリンク&ボタン -->
       <% @community.each do |community| %>
-        <div class="collapse show mb-1" id="collapseExample3">
+        <div class="collapse show mb-1" id="collapseExample4">
           <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
             <%= link_to page_path(community.user_id) do %>
               <div class="d-flex justify-content-between">
@@ -223,11 +222,12 @@
                   <% end %>
                   <p class="pb-3 mb-0 small lh-sm w-100">
                     <strong class="d-block text-gray-dark"><%= community.name %></strong>
+                    <br>
                   </p>
                 </div>
                 <div style="padding-top: 19px">
                   <% if current_user.is_favorite?(current_user,current_user) %>
-                    <%= link_to page_favorite_path(user.id,current_user.id), method: :delete do %>
+                    <%= link_to page_favorite_path(community.id,current_user.id), method: :delete do %>
                       <i class="fas fa-star"></i>
                     <% end %>
                   <% else %>

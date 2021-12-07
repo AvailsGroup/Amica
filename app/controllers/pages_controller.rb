@@ -23,18 +23,15 @@ class PagesController < ApplicationController
         end
       end
     end
-
-    render 'pages/user'
   end
 
   def community
-
-    render 'pages/community'
+    @community = community_contents
   end
 
   private
 
   def community_contents
-     @community = Community.includes([:community_members,:tags]).where(id:current_user.community_member.select(:community_id)).order(created_at: :desc)
+      @community = Community.includes([:community_members,:tags]).where(id:current_user.community_member.select(:community_id)).order(created_at: :desc)
+    end
   end
-end

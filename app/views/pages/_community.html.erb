@@ -1,25 +1,25 @@
-<% community.each do |community| %>
-  <div class="collapse show mb-1" id="collapseExample1">
+ <div class="collapse show mb-1" id="collapseExample3">
     <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
-      <%= link_to profile_path(user.userid) do %>
+      <%= link_to page_path(community.user_id) do %>
         <div class="d-flex justify-content-between">
           <div class="d-flex text-muted pt-3">
-            <% if community.image.nil? %>
-              <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+            <% if community_path(community.icon).nil? %>
+              <%= image_tag "/community_icon/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
             <% else %>
-              <%= image_tag "/user_images/#{user.image}.png" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+              <%= image_tag "/community_icon/#{community.icon}.png" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
             <% end %>
             <p class="pb-3 mb-0 small lh-sm w-100">
-              <strong class="d-block text-gray-dark"><%= community.name %> (<%= community.community_id %>)</strong>
+              <strong class="d-block text-gray-dark"><%= community.name %></strong>
+              <br>
             </p>
           </div>
           <div style="padding-top: 19px">
-            <% if current_user.is_favorite?(current_user,user) %>
-              <%= link_to page_favorite_path(user.id,current_user.id), method: :delete do %>
+            <% if current_user.is_favorite?(current_user,current_user) %>
+              <%= link_to page_favorite_path(community.id,current_user.id), method: :delete do %>
                 <i class="fas fa-star"></i>
               <% end %>
             <% else %>
-              <%= link_to  page_favorite_index_path(user.id), method: :post do %>
+              <%= link_to  page_favorite_index_path(community.id), method: :post do %>
                 <i class="far fa-star"></i>
               <% end %>
             <% end %>
@@ -28,4 +28,3 @@
       <% end %>
     </div>
   </div>
-<% end %>

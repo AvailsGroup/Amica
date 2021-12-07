@@ -1,1 +1,1 @@
-$("#favorite_user").html("<%= j(render 'pages/user', mates: @mates) %>");
+$("#favorite_user").html("<%= j(render partial:'pages/user',  collection:  @mates, as: :user) %>");
