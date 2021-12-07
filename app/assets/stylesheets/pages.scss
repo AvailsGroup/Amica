@@ -2,42 +2,10 @@
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-main{
-  margin-left: 20px;
-  margin-right: 20px;
+html {
+  overflow-y: scroll;
 }
 
-#form1 {                     /* 検索フォーム編集 */
-  margin-top: 79px;
-  text-align: center;
-  font-size: 18px;
-}
-
-#form2 {                     /* 検索フォーム編集 */
-  margin-top: 79px;
-  text-align: center;
-  font-size: 18px;
-}
-
-#sbox1 {                     /* 検索欄の大きさ調整 */
-  width: 60%;
-
-}
-
-main .profile {                   /* my profile編集 */
-  text-align: center;
-  margin-right:80px;
-  font-size: 20px;
-  white-space: nowrap;
-}
-
-main img.example1 {               /* my profileの写真サイズ */
-  background-color: #000000;
-  margin-left: 25px;
-  border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
-  width:  55px;       /* ※縦横を同値に */
-  height: 55px;       /* ※縦横を同値に */
-}
 
 main .icon{
   border: solid 1.5px;

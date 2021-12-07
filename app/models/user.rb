@@ -118,14 +118,6 @@ class User < ApplicationRecord
     likes.where(post_id: post_id).exists?
   end
 
-  def is_user_favorite?(user,other_user)
-    Favorite.exists?(user_id:user.id,favorite_user_id:other_user.id)
-  end
-
-  def is_community_favorite?(user,other_user)
-    Favorite.exists?(user_id:user.id,community_id:other_user.id)
-  end
-
 
   private
 

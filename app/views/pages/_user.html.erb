@@ -1,31 +1,30 @@
-<div class="collapse show mb-1" id="collapseExample4">
-    <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
-        <%= link_to profile_path(user.userid) do %>
-        <div class="d-flex justify-content-between">
-          <div class="d-flex text-muted pt-3">
-            <% if user.image.nil? %>
-              <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-            <% else %>
-              <%= image_tag "/user_images/#{user.image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
-            <% end %>
-            <p class="pb-3 mb-0 small lh-sm w-100">
-              <strong class="d-block text-gray-dark"><%= user.name %> (<%= user.nickname %>)</strong>
-              @<%= user.userid %>
-            </p>
-          </div>
-          <div style="padding-top: 19px">
-            <% if current_user.is_user_favorite?(current_user,user) %>
-              <%= link_to page_favorite_user_delete_path(user.id,current_user.id), method: :delete do %>
-                <i class="fas fa-star"></i>
-              <% end %>
-            <% else %>
-              <%= link_to  page_favorite_user_create_path(user.id), method: :post do %>
-                <i class="far fa-star"></i>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+<div class="p-1 bg-white rounded shadow-sm my-1" style="padding-left: 10px;padding-right: 10px">
+  <%= link_to profile_path(user.userid) do %>
+    <div class="d-flex justify-content-between">
+      <div class="d-flex text-muted pt-3">
+        <% if user.image.nil? %>
+          <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+        <% else %>
+          <%= image_tag "/user_images/#{user.image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+        <% end %>
+        <p class="pb-3 mb-0 small lh-sm w-100">
+          <strong class="d-block text-gray-dark"><%= user.name %> (<%= user.nickname %>)</strong>
+          @<%= user.userid %>
+        </p>
+      </div>
+      <div style="padding-top: 19px">
+        <% if favorite_model.exists?(user_id:fixed_current_user.id,favorite_user_id:user.id) %>
+          <%= link_to page_favorite_user_delete_path(user.id,fixed_current_user.id), method: :delete do %>
+            <i class="fas fa-star"></i>
+          <% end %>
+        <% else %>
+          <%= link_to  page_favorite_user_create_path(user.id), method: :post do %>
+            <i class="far fa-star"></i>
+          <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
+</div>
+
 
