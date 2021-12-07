@@ -19,7 +19,6 @@ require("@rails/activestorage").start()
 require("jquery")
 require('jquery-ui/ui/widgets/autocomplete')
 require('jquery-ui/ui/widget')
-require("jquery_ujs")
 require('tag-it')
 
 

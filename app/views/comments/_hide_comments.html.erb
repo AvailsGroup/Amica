@@ -20,7 +20,7 @@
     </div>
     <div class="text-end">
       <% if comment.user == current_user %>
-        <%= link_to timeline_comment_path(comment.post_id, comment.id), method: :delete do%>
+        <%= link_to timeline_comment_path(comment.post_id, comment.id), method: :delete, remote: true do%>
           <i class="far fa-trash-alt"></i>
         <% end %>
       <% end %>
