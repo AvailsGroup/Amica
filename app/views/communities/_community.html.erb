@@ -17,7 +17,7 @@
               <li class="list-group-item">#<%= t %></li>
             <% end %>
           <% end %>
-          <% tag_count =  community.tags.pluck(:name).count %>
+          <% tag_count =  community.tags.pluck(:name).size %>
           <% while tag_count < 3 do%>
             <li class="list-group-item">－</li>
             <% tag_count += 1 %>

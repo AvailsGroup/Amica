@@ -115,6 +115,10 @@ class CommunitiesController < ApplicationController
     @community = Community.includes([:community_members, :user, :tags]).where(id: current_user.community_member.select(:community_id)).order(created_at: :desc)
   end
 
+  def members
+    @community = Community.includes([:community_members, :user, :tags]).find(params[:community_id])
+  end
+
   private
 
   def community_params
