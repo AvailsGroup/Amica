@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   def index
     @user = current_user
     @mates = current_user.matchers
-    @favorites = @mates.select {|e| current_user.is_favorite?(current_user,e)}
+    @favorites = @mates.select {|e| current_user.is_user_favorite?(current_user,e)}
     @community = community_contents
 
   end

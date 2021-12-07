@@ -43,7 +43,10 @@ Rails.application.routes.draw do
 
   #pages---------------
   resources :pages, only:[:index,:show] do
-    resources :favorite, only:[:create,:destroy]
+    post "favorite/user_create" => "favorite#user_create"
+    delete "favorite/community_delete" => "favorite#community_destroy"
+    post "favorite/community_create" => "favorite#community_create"
+    delete "favorite/user_delete" => "favorite#user_destroy"
   end
   post "page/user"=>"pages#user"
   post "page/community"=>"pages#community"

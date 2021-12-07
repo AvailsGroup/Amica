@@ -46,7 +46,7 @@
       <!-- 対象のコンテンツ -->
 
       <% @mates.each do |user| %>
-        <% unless current_user.is_favorite?(current_user,user) == false %>
+        <% unless current_user.is_user_favorite?(current_user,user) == false %>
           <div class="collapse show mb-1" id="collapseExample1">
           <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
             <%= link_to profile_path(user.userid) do %>
@@ -63,12 +63,12 @@
                   </p>
                 </div>
                 <div style="padding-top: 19px">
-                  <% if current_user.is_favorite?(current_user,user) %>
-                    <%= link_to page_favorite_path(user.id,current_user.id), method: :delete do %>
+                  <% if current_user.is_user_favorite?(current_user,user) %>
+                    <%= link_to page_favorite_user_delete_path(user.id,current_user.id), method: :delete do %>
                       <i class="fas fa-star"></i>
                     <% end %>
                   <% else %>
-                    <%= link_to  page_favorite_index_path(user.id), method: :post do %>
+                    <%= link_to  page_favorite_user_create_path(user.id), method: :post do %>
                       <i class="far fa-star"></i>
                     <% end %>
                   <% end %>
@@ -112,12 +112,12 @@
                       </p>
                     </div>
                     <div style="padding-top: 19px">
-                      <% if current_user.is_favorite?(current_user,user) %>
-                        <%= link_to page_favorite_path(user.id,current_user.id), method: :delete do %>
+                      <% if current_user.is_user_favorite?(current_user,user) %>
+                        <%= link_to page_favorite_user_delete_path(user.id,current_user.id), method: :delete do %>
                           <i class="fas fa-star"></i>
                         <% end %>
                       <% else %>
-                        <%= link_to  page_favorite_index_path(user.id), method: :post do %>
+                        <%= link_to  page_favorite_user_create_path(user.id), method: :post do %>
                           <i class="far fa-star"></i>
                         <% end %>
                       <% end %>
@@ -163,7 +163,7 @@
 
       <!-- 対象のコンテンツ -->
       <% @community.each do |community| %>
-        <% unless current_user.is_favorite?(current_user,community) == false %>
+        <% unless current_user.is_community_favorite?(current_user,community) == false %>
               <div class="collapse show mb-1" id="collapseExample3">
                 <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
                   <%= link_to profile_path(community.user_id) do %>
@@ -185,7 +185,7 @@
                             <i class="fas fa-star"></i>
                           <% end %>
                         <% else %>
-                          <%= link_to  page_favorite_index_path(community.id), method: :post do %>
+                          <%= link_to page_favorite_community_create_path(community.id), method: :post do %>
                             <i class="far fa-star"></i>
                           <% end %>
                         <% end %>
@@ -226,12 +226,12 @@
                   </p>
                 </div>
                 <div style="padding-top: 19px">
-                  <% if current_user.is_favorite?(current_user,current_user) %>
-                    <%= link_to page_favorite_path(community.id,current_user.id), method: :delete do %>
+                  <% if current_user.is_community_favorite?(current_user,community) %>
+                    <%= link_to page_favorite_community_delete_path(community.id,current_user.id), method: :delete do %>
                       <i class="fas fa-star"></i>
                     <% end %>
                   <% else %>
-                    <%= link_to  page_favorite_index_path(community.id), method: :post do %>
+                    <%= link_to  page_favorite_community_create_path(community.id), method: :post do %>
                       <i class="far fa-star"></i>
                     <% end %>
                   <% end %>
@@ -242,7 +242,6 @@
         </div>
       <% end %>
       <!-- 対象のコンテンツ -->
-
     </div>     <!--右画面制作-->
   </div>
 </main>
