@@ -56,6 +56,7 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
 
+  has_many :communities, dependent: :destroy
   has_many :community_member, dependent: :destroy
 
   def password_required?
@@ -138,6 +139,7 @@ class User < ApplicationRecord
 
     tag_list.each do |tag|
       errors.add(:tag_list, 'は1つ2~20文字です。') if (tag.length < 2) || (tag.length > 20)
+      errors.add(:tag_list, "には記号やスペースを入れることが出来ません [#{tag}]") unless /\A[a-zA-Z0-9ぁ-んァ-ヶ一-龥々ー]+\z/u.match?(tag)
     end
   end
 end

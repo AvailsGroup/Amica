@@ -8,12 +8,13 @@
         <%= image_tag "default_icon", class:"img-fluid rounded",style:"width: 150px;height: 150px;"%><br>
       <% end %>
       <h1 class="display-4 fw-normal"><%=@community.name %></h1>
-      <p class="lead fw-normal"><%=safe_join(@community.content.split("\n"),tag(:br)) %></p>
-      <% if @leader %>
-        <%=  link_to "編集", edit_community_path,class: "btn btn-outline-dark" %>
+      <% if @leader == current_user %>
+        <%=  link_to "チャット", chats_path,class: "btn btn-outline-dark mx-2" %>
+        <%=  link_to "編集", edit_community_path,class: "btn btn-outline-dark mx-2" %>
       <% else %>
         <% if @join %>
-          <%=  link_to "退出" , community_manage_path(@community.id,current_user.id), method: :delete,class: "btn btn-outline-dark"  %>
+          <%=  link_to "チャット", chats_path,class: "btn btn-outline-dark mx-2" %>
+          <%=  link_to "脱退" , community_manage_path(@community.id,current_user.id), method: :delete,class: "btn btn-outline-dark mx-2", data: {confirm: "本当に脱退しますか？"}  %>
         <%  else  %>
           <%= link_to "参加", community_manage_index_path(@community.id), method: :post, class: "btn btn-outline-dark" %>
         <% end %>
@@ -21,28 +22,36 @@
 
     </div>
   </div>
+  <div class="position-relative overflow-hidden p-1 p-md-5 m-md-3 text-center bg-light overflow-scroll" style="height: 530px">
+    <div class="col-md-5 p-lg-1 mx-auto my-1">
+      <h2 class="display-5 text-center">概要</h2>
+      <p class="lead fw-normal"><%=safe_join(@community.content.split("\n"),tag(:br)) %></p>
+    </div>
+  </div>
 
   <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-    <div class="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white">
+    <div class="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-white text-center" style="height: 530px">
       <div class="my-3 py-3">
-        <h2 class="display-5">参加者</h2>
-        <%= link_to "リーダー : #{@user.find(@community.user_id).name}" ,profile_path(@user.find(@community.user_id).userid),class: "lead text-white",style: "text-decoration:none;"%>
-        <br />
-        <% @members.shuffle.first(5).each do |m| %>
-          <% unless @user.find(@community.user_id) == @user.find(m.user_id)%>
-            <%= link_to "#{@user.find(m.user_id).name}" ,profile_path(@user.find(m.user_id).userid),class: "lead text-white",style: "text-decoration:none;"%>
-            <br />
+        <h2 class="display-5 text-center">参加者</h2>
+        <p class="mb-0"><%= link_to "リーダー : #{@leader.name}" ,profile_path(@leader.userid),class: "lead text-white",style: "text-decoration:none;"%></p>
+        <% @community.community_members.shuffle.first(10).each do |m| %>
+          <% unless @leader == m.user%>
+            <p class="mb-0"><%= link_to "#{m.user.name}" ,profile_path(m.user.userid),class: "lead text-white",style: "text-decoration:none;"%></p>
           <% end %>
+        <% end %>
+        <% if @community.community_members.size >= 10%>
+          <br />
+          <p class="mb-0 small"><%= link_to "もっと見る..." ,community_members_path(@community.id),class: "lead text-white",style: "text-decoration:none;"%></p>
         <% end %>
       </div>
     </div>
 
-    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center">
+    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center" style="height: 530px">
       <div class="my-3 py-3">
         <h2 class="display-5">タグ</h2>
-        <% @tag.each do |t| %>
+        <% @community.tags.each do |t| %>
           <%= link_to search_tag_path(t),class:"text-decoration-none" do %>
-            <p class="lead mb-0">#<%= t %></p>
+            <span class="lead mb-0">#<%= t %> </span>
           <% end %>
         <% end %>
       </div>
