@@ -95,7 +95,7 @@
 
       <!-- 対象のコンテンツ -->
 
-      <% @mates.each do |user| %>
+      <% @mates.first(20).each do |user| %>
           <div class="collapse show mb-1" id="collapseExample2">
             <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
                 <%= link_to profile_path(user.userid) do %>
@@ -162,6 +162,7 @@
       <!-- /トリガーとなるリンク&ボタン -->
 
       <!-- 対象のコンテンツ -->
+      <div class="collapse show mb-1" id="collapseExample3">
       <% @community.each do |community| %>
         <% unless current_user.is_community_favorite?(current_user,community) == false %>
               <div class="collapse show mb-1" id="collapseExample3">
@@ -196,6 +197,7 @@
               </div>
             <% end %>
         <% end %>
+      </div>
 
       <button
         type="button"
@@ -209,7 +211,7 @@
         コミュニティ
       </button>
       <!-- /トリガーとなるリンク&ボタン -->
-      <% @community.each do |community| %>
+      <% @community.first(20).each do |community| %>
         <div class="collapse show mb-1" id="collapseExample4">
           <div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
             <%= link_to page_path(community.user_id) do %>

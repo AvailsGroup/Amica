@@ -26,7 +26,17 @@ class PagesController < ApplicationController
   end
 
   def community
-    @community = community_contents
+    pp params[:name]
+    @result = []
+    community_c = community_contents
+    unless params[:name] == ""
+      community_c.each do |c|
+        pp c.name
+        if c.name.downcase.include?(params[:name].downcase)
+          @result.push(c)
+        end
+      end
+    end
   end
 
   private
