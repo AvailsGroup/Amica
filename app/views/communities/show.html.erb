@@ -10,19 +10,22 @@
       <h1 class="display-4 fw-normal"><%=@community.name %></h1>
       <p class="lead fw-normal"><%=safe_join(@community.content.split("\n"),tag(:br)) %></p>
       <% if @leader == current_user %>
-        <%=  link_to "編集", edit_community_path,class: "btn btn-outline-dark" %>
+        <%=  link_to "チャット", edit_community_path,class: "btn btn-outline-dark mx-2" %>
+        <%=  link_to "編集", edit_community_path,class: "btn btn-outline-dark mx-2" %>
       <% else %>
         <% if @join %>
-          <%=  link_to "退出" , community_manage_path(@community.id,current_user.id), method: :delete,class: "btn btn-outline-dark"  %>
+          <%=  link_to "チャット", edit_community_path,class: "btn btn-outline-dark mx-2" %>
+          <%=  link_to "脱退" , community_manage_path(@community.id,current_user.id), method: :delete,class: "btn btn-outline-dark mx-2", data: {confirm: "本当に脱退しますか？"}  %>
         <%  else  %>
           <%= link_to "参加", community_manage_index_path(@community.id), method: :post, class: "btn btn-outline-dark" %>
         <% end %>
       <% end %>
+
     </div>
   </div>
 
-  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3" style="height: 600px">
-    <div class="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white">
+  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+    <div class="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white" style="height: 600px">
       <div class="my-3 py-3">
         <h2 class="display-5">参加者</h2>
         <%= link_to "リーダー : #{@leader.name}" ,profile_path(@leader.userid),class: "lead text-white",style: "text-decoration:none;"%>
