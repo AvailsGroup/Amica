@@ -217,7 +217,7 @@
             <%= link_to page_path(community.user_id) do %>
               <div class="d-flex justify-content-between">
                 <div class="d-flex text-muted pt-3">
-                  <% if community_path(community.icon).nil? %>
+                  <% if community.icon.nil? %>
                     <%= image_tag "/community_icon/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
                   <% else %>
                     <%= image_tag "/community_icon/#{community.icon}.png" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
