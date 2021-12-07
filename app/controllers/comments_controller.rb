@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    pp 'test'
     @comment = Comment.find(params[:id])
     @comment.destroy
     flash.now[:notice] = "コメントを削除しました。"
