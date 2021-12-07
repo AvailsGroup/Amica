@@ -1,28 +1,31 @@
-<div class="container">
-  <div class="row d-flex align-items-center pb-3">
-    <div class="col">
-      <% if user.find(post.userid).image.nil? %>
-        <%= image_tag "default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-      <% else %>
-        <%= image_tag "/user_images/#{user.find(post.user_id).image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+<main class="container">
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <div class="d-flex text-muted">
+      <%= link_to profile_path(@user.find(@post.userid).userid), style:"color:black" do %>
+        <% if @user.find(@post.userid).image.nil? %>
+          <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+        <% else %>
+          <%= image_tag "/user_images/#{user.find(post.userid).image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+        <% end %>
       <% end %>
-      <%= link_to "#{comment.user.name}さん",profile_path(user.find(comment.user_id).userid), class: 'link pl-1'%>
-    </div>
 
-    <div class="col d-flex justify-content-end">
-      <%= comment.created_at.strftime('%Y/%m/%d')%>
+      <p class="pb-3 mb-0 lh-sm w-100">
+        <strong class="text-dark" style="font-size:20px;margin: 0"><%= @user.find(@post.userid).nickname %></strong>
+        <span class="text-gray small" style="margin: 0">@<%= @user.find(@post.userid).userid %></span>
+        <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(comment.created_at) %></span>
+        <br />
+        <br />
+        <span class="spans text-dark" style="font-size:18px; margin: 0;"><%=comment.comment%></span>
+      </p>
+    </div>
+    <div class="text-end">
+      <% if comment.user == current_user %>
+        <%= link_to timeline_comment_path(comment.post_id, comment.id), method: :delete do%>
+          <i class="far fa-trash-alt"></i>
+        <% end %>
+      <% end %>
     </div>
   </div>
 
-  <div class="card-body border rounded mb-3">
-    <%=comment.comment%>
-  </div>
-
+</main>
 <hr class="d-none">
-  <% if comment.user == current_user %>
-
-      <div class="text-right">
-        <%= link_to "削除する",timeline_comment_path(comment.post_id, comment.id), method: :delete, remote: true,class:"btn btn-outline-secondary"%>
-      </div>
-  <% end %>
-</div>
