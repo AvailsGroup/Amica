@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
   helper_method :following?
 
   def index
-    @users = User.preload(:profile,:favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+    @users = User.preload(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
     @user = @users.find(current_user.id)
     @friends = matchers(@user)
     @following = @user.followings_list
@@ -20,6 +20,14 @@ class ProfilesController < ApplicationController
     end
     @profile = @user.profile
     @following = @user.followings_list
+    @communities = Community.includes([:community_members, :user, :tags]).where(id: @user.community_member.select(:community_id))
+
+    @friends_count = @user.matchers.size
+    @community_count = @user.community_member.size
+    sec = (Time.zone.now - @user.created_at).floor
+    @days = (sec / 60 / 60 / 24).floor
+    @comments_count = @user.comments.size
+    @achievement = @user.achievement
   end
 
   def edit
@@ -35,10 +43,10 @@ class ProfilesController < ApplicationController
     @user = current_user
     permission
 
-    unless  current_user.update(user_params)
-        @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-        @tag = current_user.tag_list.join(',')
-        render action: "edit"
+    unless current_user.update(user_params)
+      @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+      @tag = current_user.tag_list.join(',')
+      render action: "edit"
       return
     end
 
@@ -95,6 +103,4 @@ class ProfilesController < ApplicationController
       redirect_to profile_path
     end
   end
-
-
 end
