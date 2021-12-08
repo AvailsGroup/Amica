@@ -1,13 +1,29 @@
 class PagesController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
+  helper_method :is_user_favorite?
+  helper_method :is_community_favorite?
 
   def index
-    @user = current_user
-    @mates = current_user.matchers
-    @favorites = @mates.select {|e| current_user.is_user_favorite?(current_user,e)}
-    @community = community_contents
+    @user_db = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+    @user = @user_db.find(current_user.id)
+    @favorite = Favorite.all
 
+    @mates = matchers(@user)
+    @favorite_users = []
+    @mates.each do |m|
+      if @favorite.any? { |u| u.user_id == @user.id } && @favorite.any? { |u| u.favorite_user_id == m.id }
+        @favorite_users.push(m)
+      end
+    end
+
+    @communities = Community.includes([:community_members, :tags,:taggings]).where(id:current_user.community_member.select(:community_id)).order(created_at: :desc)
+    @favorite_communities = []
+    @communities.each do |c|
+      if @favorite.any? { |u| u.user_id == @user.id } && @favorite.any? { |u| u.community_id == c.id }
+        @favorite_communities.push(c)
+      end
+    end
   end
 
   def show
@@ -16,7 +32,7 @@ class PagesController < ApplicationController
 
   def user
     @mates = []
-    unless params[:name] == ""
+    unless params[:name] == ''
       current_user.matchers.each do |u|
         if u.name.downcase.include?(params[:name].downcase) || u.nickname.downcase.include?(params[:name].downcase) || u.userid.downcase.include?(params[:name].downcase)
           @mates.push(u)
@@ -26,22 +42,25 @@ class PagesController < ApplicationController
   end
 
   def community
-    pp params[:name]
     @result = []
-    community_c = community_contents
-    unless params[:name] == ""
-      community_c.each do |c|
-        pp c.name
-        if c.name.downcase.include?(params[:name].downcase)
-          @result.push(c)
-        end
+    unless params[:name] == ''
+      community_contents.each do |c|
+        @result.push(c) if c.name.downcase.include?(params[:name].downcase)
       end
     end
   end
 
-  private
+  protected
 
-  def community_contents
-      @community = Community.includes([:community_members,:tags]).where(id:current_user.community_member.select(:community_id)).order(created_at: :desc)
-    end
+  def is_user_favorite?(favorite, user, other_user)
+    favorite.any? { |u| u.user_id == user.id } && @favorite.any? { |u| u.favorite_user_id == other_user.id }
   end
+
+  def is_community_favorite?(favorite , user, community)
+    favorite.any? { |u| u.user_id == user.id } && @favorite.any? { |u| u.community_id == community.id }
+  end
+
+  def matchers(user)
+    user.followings & user.followers
+  end
+end

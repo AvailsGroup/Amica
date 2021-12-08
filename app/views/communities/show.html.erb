@@ -25,7 +25,7 @@
   <div class="position-relative overflow-hidden p-1 p-md-5 m-md-3 text-center bg-light overflow-scroll" style="height: 530px">
     <div class="col-md-5 p-lg-1 mx-auto my-1">
       <h2 class="display-5 text-center">概要</h2>
-      <p class="lead fw-normal"><%=safe_join(@community.content.split("\n"),tag(:br)) %></p>
+      <p class="lead fw-normal"><%= safe_join(@community.content.split("\n"),tag(:br)) %></p>
     </div>
   </div>
 

@@ -16,6 +16,8 @@ class Community < ApplicationRecord
 
   has_many :community_members, dependent: :destroy
 
+  has_many :favorites
+
 
   private
 
