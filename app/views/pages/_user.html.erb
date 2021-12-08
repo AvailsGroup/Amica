@@ -13,7 +13,7 @@
         </p>
       </div>
       <div style="padding-top: 19px">
-        <% if favorite_model.exists?(user_id:fixed_current_user.id,favorite_user_id:user.id) %>
+        <% if is_user_favorite?(favorite_model,fixed_current_user,user) %>
           <%= link_to page_favorite_user_delete_path(user.id,fixed_current_user.id), method: :delete do %>
             <i class="fas fa-star"></i>
           <% end %>

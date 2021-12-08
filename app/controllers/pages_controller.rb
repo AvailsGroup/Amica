@@ -5,12 +5,25 @@ class PagesController < ApplicationController
   helper_method :is_community_favorite?
 
   def index
-    @user = User.includes(:profile, :favorite, :followers,:followings, :tags).find(current_user.id)
-    @favorite = Favorite.includes(:user, :favorite_user)
-    @mates = @user.followings & @user.followers
-    @favorite_users = @mates.select { |e| @favorite.where(user_id: @user.id, favorite_user_id: e.id).size == 1 }
-    @communities = community_contents
-    @favorite_communities = @community.select{ |e| @favorite.where(user_id: @user.id, community_id: e.id).size == 1 }
+    @user_db = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+    @user = @user_db.find(current_user.id)
+    @favorite = Favorite.all
+
+    @mates = matchers(@user)
+    @favorite_users = []
+    @mates.each do |m|
+      if @favorite.any? { |u| u.user_id == @user.id } && @favorite.any? { |u| u.favorite_user_id == m.id }
+        @favorite_users.push(m)
+      end
+    end
+
+    @communities = Community.includes([:community_members, :tags,:taggings]).where(id:current_user.community_member.select(:community_id)).order(created_at: :desc)
+    @favorite_communities = []
+    @communities.each do |c|
+      if @favorite.any? { |u| u.user_id == @user.id } && @favorite.any? { |u| u.community_id == c.id }
+        @favorite_communities.push(c)
+      end
+    end
   end
 
   def show
@@ -39,24 +52,15 @@ class PagesController < ApplicationController
 
   protected
 
-  def is_user_favorite?(favorite, user ,other_user)
-    favorite.exists?(user_id:user.id,favorite_user_id:other_user.id)
+  def is_user_favorite?(favorite, user, other_user)
+    favorite.any? { |u| u.user_id == user.id } && @favorite.any? { |u| u.favorite_user_id == other_user.id }
   end
 
-  def is_community_favorite?(favorite ,user ,other_user)
-    favorite.exists?(user_id:user.id,community_id:other_user.id)
+  def is_community_favorite?(favorite , user, community)
+    favorite.any? { |u| u.user_id == user.id } && @favorite.any? { |u| u.community_id == community.id }
   end
 
   def matchers(user)
     user.followings & user.followers
   end
-
-  private
-
-  def community_contents
-    @community = Community.includes([:community_members, :tags,:taggings]).where(id:current_user.community_member.select(:community_id)).order(created_at: :desc)
-  end
-
-
-
 end

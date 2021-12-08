@@ -1,5 +1,5 @@
-<div class="p-1 bg-white rounded shadow-sm" style="padding-left: 10px;padding-right: 10px">
-  <%= link_to page_path(community.user_id) do %>
+<div class="p-1 bg-white rounded shadow-sm my-1" style="padding-left: 10px;padding-right: 10px">
+  <%= link_to community_path(community.id) do %>
     <div class="d-flex justify-content-between">
       <div class="d-flex text-muted pt-3">
         <% if community.icon.nil? %>
