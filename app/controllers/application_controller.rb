@@ -16,7 +16,12 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-      pages_path
+    flash[:alert] = "ようこそAmicaへ！ "
+    pages_path
+  end
+
+  def base64?(value)
+    value.is_a?(String) && Base64.strict_encode64(Base64.decode64(value)) == value
   end
 
   private

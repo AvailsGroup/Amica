@@ -94,7 +94,7 @@ class ProfilesController < ApplicationController
       end
     end
     flash[:notice] = "ユーザー情報を編集しました"
-    redirect_to profile_path
+    redirect_to profile_path(current_user.userid)
   end
 
   def search
@@ -115,7 +115,7 @@ class ProfilesController < ApplicationController
 
   private
   def user_params
-    attrs = [:nickname,:name,:tag_list,:accreditation_list]
+    attrs = [:nickname,:name,:userid,:tag_list,:accreditation_list]
     params.require(:user).permit(attrs, profile_attributes:%i[grade school_class number student_id accreditation hobby])
   end
 
@@ -124,10 +124,6 @@ class ProfilesController < ApplicationController
       flash[:notice] = "権限がありません"
       redirect_to profile_path
     end
-  end
-
-  def base64?(value)
-    value.is_a?(String) && Base64.strict_encode64(Base64.decode64(value)) == value
   end
 
   def badge?
