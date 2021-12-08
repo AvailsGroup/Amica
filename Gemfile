@@ -90,3 +90,5 @@ gem 'cropper_rails'
 gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
 
 gem 'dotenv-rails'
+
+gem 'activesupport'

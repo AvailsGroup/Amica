@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_07_024841) do
+ActiveRecord::Schema.define(version: 2021_12_06_134035) do
+
+  create_table "achievements", force: :cascade do |t|
+    t.integer "userid", null: false
+    t.integer "communitiesCount", default: 0
+    t.integer "registrationDays", default: 0
+    t.integer "friendsCount", default: 0
+    t.integer "likesCount", default: 0
+    t.integer "commentsCount", default: 0
+    t.integer "postsCount", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "niceLv1", default: false
+    t.boolean "niceLv2", default: false
+    t.boolean "niceLv3", default: false
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -34,10 +48,12 @@ ActiveRecord::Schema.define(version: 2021_12_07_024841) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
-    t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "communities", force: :cascade do |t|
@@ -72,7 +88,6 @@ ActiveRecord::Schema.define(version: 2021_12_07_024841) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "community_id"
   end
-
   create_table "hashtags", force: :cascade do |t|
     t.string "hashname"
     t.datetime "created_at", precision: 6, null: false
@@ -201,8 +216,6 @@ ActiveRecord::Schema.define(version: 2021_12_07_024841) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "community_members", "communities"
   add_foreign_key "community_members", "users"
   add_foreign_key "profiles", "users"

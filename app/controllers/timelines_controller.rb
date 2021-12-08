@@ -9,7 +9,12 @@ class TimelinesController < ApplicationController
   end
 
   def show
-    @post = Post.find_by(id: params[:id])
+    @post = Post.find(params[:id])
+    # コメント一覧表示で使用する全コメントデータを代入（新着順で表示）
+    @comments = @post.comments.order(created_at: :desc)
+    # コメントの作成
+    @comment = Comment.new
+    @user = User.all
   end
 
   def new
@@ -27,7 +32,7 @@ class TimelinesController < ApplicationController
 
     @create = Post.new(post_params)
     @create.userid = current_user.id
-    @create.save
+    pp @create.save!
     redirect_to(timelines_path)
   end
 

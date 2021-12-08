@@ -1,0 +1,9 @@
+<p> <%= @post.content %></p>
+
+<%= render 'comments/form', post: @post, comment: @comment%>
+
+<div id="comments_area">
+  <%= render 'comments/index', comments: @comments, post:@post,user:@user %>
+</div>
+
+
