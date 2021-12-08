@@ -1,24 +1,25 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
+  helper_method :following?
 
   def index
-    @user = current_user
-    @friends = current_user.matchers
-    @following = current_user.followings_list
-    @follower = current_user.followers_list
-    @users = User.all
-    @profile = Profile.find(current_user.id)
+    @users = User.preload(:profile,:favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+    @user = @users.find(current_user.id)
+    @friends = matchers(@user)
+    @following = @user.followings_list
+    @follower = @user.followers_list
+    @profile = @user.profile
   end
 
   def show
-    @profiles = Profile.find(current_user.id)
     @user = User.find_by(userid: params[:id])
     if @user.nil?
       redirect_to profiles_path, notice: "そのユーザーidは存在しませんでした"
       return
     end
-    @profile = Profile.find(@user.id)
+    @profile = @user.profile
+    @following = @user.followings_list
   end
 
   def edit
@@ -94,5 +95,6 @@ class ProfilesController < ApplicationController
       redirect_to profile_path
     end
   end
+
 
 end
