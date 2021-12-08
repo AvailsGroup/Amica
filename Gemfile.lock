@@ -304,6 +304,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  activesupport
   acts-as-taggable-on
   bootsnap (>= 1.4.4)
   bullet
@@ -342,4 +343,4 @@ RUBY VERSION
    ruby 3.0.1p64
 
 BUNDLED WITH
-   2.2.15
+   2.2.22
