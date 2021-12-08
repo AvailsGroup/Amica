@@ -1,3 +1,38 @@
+<%= javascript_pack_tag 'timeline/main', 'data-turbolinks-track': 'reload' %>
+
+<script>
+    function onClick(id){
+        $(function () {
+            $('#img1_'+id).click(function (e) {
+            $('#back').css({
+                'width': $(window).width(),
+                'height': $(document).height()
+            }).show();
+            $('#img1Big_'+id).css({
+                'position': 'absolute',
+                'left': Math.floor(($(window).width() - $('#img1Big_'+id).width()) / 2) + 'px',
+                'top': $(window).scrollTop() + 50 + 'px'
+            }).fadeIn();
+        });
+        $('#img1Big_'+id+', #back').click(function () {
+            $('#img1Big_'+id).fadeOut('slow', function () {
+                $('#back').hide();
+            });
+        });
+    });
+    }
+</script>
+
+<style>
+    #back {
+        display: none;
+        background: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 10000;
+    }
+</style>
 <div class="panel-content panel-activity">
   <div class="d-flex text-muted">
     <%= link_to profile_path(user.find(post.userid).userid), style:"color:black" do %>
@@ -16,7 +51,7 @@
       <br />
       <br />
       <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= html_escape(html_with_link_to_hashtag((post.content))).gsub(/\r\n|\r|\n/, "<br />").html_safe %></span>
-      <br />
+      <br/>
     </p>
   </div>
 

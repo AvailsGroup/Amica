@@ -26,6 +26,8 @@
           <div class="FlexTextarea__dummy" aria-hidden="true"></div>
           <%= f.text_area :content, placeholder:"タイムラインを投稿してください",maxlength:"280",id:"FlexTextarea",class: "FlexTextarea__textarea form-control" %>
         </div>
+        <%= f.label "画像" %><br />
+        <%= f.file_field :image, class: "image" %>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <%= f.submit "投稿", class:"btn btn-primary"%>
         </div>
@@ -37,7 +39,7 @@
           <div class="my-3 p-3 bg-white rounded shadow-sm">
             <% unless current_user.following?(@user.find(p.userid)) == false %>
               <div id="post_<%= p.id %>">
-                <%= render "timelines/post",post:p, user:@user %>
+               <%= render "timelines/post",post:p, user:@user %>
               </div>
             <% end %>
           </div>
