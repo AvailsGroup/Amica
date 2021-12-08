@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
   def show
     @user = current_user
     if params[:id] == @user.userid
-      @achievement = Achievement.find_by(userid: params[:id])
+      @achievement = Achievement.find_by(userid: current_user.id)
       if @achievement.nil?
         @achievement = Achievement.new
         @achievement.userid = current_user.id
@@ -31,8 +31,18 @@ class ProfilesController < ApplicationController
         postsCount: Post.where(userid: current_user.id).count,
         commentsCount:Comment.where(user_id: current_user.id).count
       )
+      @badge = true
+    else
+      @user = User.find_by(userid: params[:id])
+      @achievement = Achievement.find_by(userid: @user.id)
+      if @achievement.nil?
+        @badge = false
+      else
+        @badge = true
+      end
 
     end
+
     @profiles = Profile.find(current_user.id)
     @user = User.find_by(userid: params[:id])
     if @user.nil?
