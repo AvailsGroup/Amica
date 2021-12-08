@@ -24,6 +24,16 @@ class ApplicationController < ActionController::Base
     value.is_a?(String) && Base64.strict_encode64(Base64.decode64(value)) == value
   end
 
+  #友達の配列を返す
+  def matchers(user)
+    user.followings & user.followers
+  end
+
+  # 相手をフォローしていればtrueを返す
+  def following?(user,other_user)
+    user.any? { |u| u == other_user }
+  end
+
   private
   def sign_in_required
     redirect_to new_user_session_url unless user_signed_in?

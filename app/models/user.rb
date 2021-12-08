@@ -47,6 +47,7 @@ class User < ApplicationRecord
 
   has_one :favorite
 
+  has_one :achievement, dependent: :destroy
 
   # アソシエーションの定義
   # フォローしている側のユーザー (active relationship)

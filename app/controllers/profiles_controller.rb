@@ -1,55 +1,33 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
-  require 'active_support/all'
+  helper_method :following?
 
   def index
-    @user = current_user
-    @friends = current_user.matchers
-    @following = current_user.followings_list
-    @follower = current_user.followers_list
-    @users = User.all
-    @profile = Profile.find(current_user.id)
+    @users = User.preload(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+    @user = @users.find(current_user.id)
+    @friends = matchers(@user)
+    @following = @user.followings_list
+    @follower = @user.followers_list
+    @profile = @user.profile
   end
 
   def show
-    @user = current_user
-    if params[:id] == @user.userid
-      @achievement = Achievement.find_by(userid: current_user.id)
-      if @achievement.nil?
-        @achievement = Achievement.new
-        @achievement.userid = current_user.id
-        @achievement.save
-      end
-      @achievement = Achievement.find_by(userid: current_user.id)
-      days = Date.today - current_user.created_at.to_date + 1
-      @achievement.update(
-        communitiesCount: Community.where(user_id: current_user.id).count,
-        registrationDays: days.numerator,
-        friendsCount: current_user.matchers.count,
-        likesCount: Like.where(user_id: current_user.id).count,
-        postsCount: Post.where(userid: current_user.id).count,
-        commentsCount:Comment.where(user_id: current_user.id).count
-      )
-      @badge = true
-    else
-      @user = User.find_by(userid: params[:id])
-      @achievement = Achievement.find_by(userid: @user.id)
-      if @achievement.nil?
-        @badge = false
-      else
-        @badge = true
-      end
-
-    end
-
-    @profiles = Profile.find(current_user.id)
     @user = User.find_by(userid: params[:id])
     if @user.nil?
       redirect_to profiles_path, notice: "そのユーザーidは存在しませんでした"
       return
     end
-    @profile = Profile.find(@user.id)
+    @profile = @user.profile
+    @following = @user.followings_list
+    @communities = Community.includes([:community_members, :user, :tags]).where(id: @user.community_member.select(:community_id))
+
+    @friends_count = @user.matchers.size
+    @community_count = @user.community_member.size
+    sec = (Time.zone.now - @user.created_at).floor
+    @days = (sec / 60 / 60 / 24).floor
+    @comments_count = @user.comments.size
+    @achievement = @user.achievement
   end
 
   def edit
@@ -65,10 +43,10 @@ class ProfilesController < ApplicationController
     @user = current_user
     permission
 
-    unless  current_user.update(user_params)
-        @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-        @tag = current_user.tag_list.join(',')
-        render action: "edit"
+    unless current_user.update(user_params)
+      @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+      @tag = current_user.tag_list.join(',')
+      render action: "edit"
       return
     end
 
@@ -125,11 +103,4 @@ class ProfilesController < ApplicationController
       redirect_to profile_path
     end
   end
-
-  def badge?
-    @achievement.postsCount >= 100 ? @posts_badge1 = true : false
-    @achievement.postsCount >= 1000 ? @posts_badge2 = true : false
-    @achievement.postsCount >= 10000 ? @posts_badge3 = true : false
-  end
-
 end

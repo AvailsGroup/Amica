@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   helper_method :is_community_favorite?
 
   def index
-    @user_db = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+    @user_db = User.includes(:favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
     @user = @user_db.find(current_user.id)
     @favorite = Favorite.all
 
@@ -17,7 +17,7 @@ class PagesController < ApplicationController
       end
     end
 
-    @communities = Community.includes([:community_members, :tags,:taggings]).where(id:current_user.community_member.select(:community_id)).order(created_at: :desc)
+    @communities = Community.includes([:community_members, :tags]).where(id:current_user.community_member.select(:community_id)).order(created_at: :desc)
     @favorite_communities = []
     @communities.each do |c|
       if @favorite.any? { |u| u.user_id == @user.id } && @favorite.any? { |u| u.community_id == c.id }
@@ -58,9 +58,5 @@ class PagesController < ApplicationController
 
   def is_community_favorite?(favorite , user, community)
     favorite.any? { |u| u.user_id == user.id } && @favorite.any? { |u| u.community_id == community.id }
-  end
-
-  def matchers(user)
-    user.followings & user.followers
   end
 end
