@@ -5,4 +5,9 @@ class ChatsController < ApplicationController
   def index
     @user = current_user
   end
+
+  def show
+    @user = current_user
+    @chat_message = ChatMessage.all
+  end
 end
