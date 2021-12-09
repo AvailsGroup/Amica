@@ -9,8 +9,6 @@ class User < ApplicationRecord
   acts_as_taggable
   acts_as_taggable_on :accreditations
 
-  paginates_per 10
-
   before_create :build_default_profile
 
   validate :validate_tag
