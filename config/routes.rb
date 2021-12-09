@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   #devise--------------
   get 'users/controller'
 
@@ -63,8 +64,10 @@ Rails.application.routes.draw do
   get 'profile/friends' => 'profiles#friends'
 
   #chats--------------
-  resources :chats
-
+  resources :chats do
+    mount ActionCable.server => '/cable'
+  end
+  
   #searches-----------
   resources :searches, only: [:index] do
     get '/tag' => 'searches#tag'

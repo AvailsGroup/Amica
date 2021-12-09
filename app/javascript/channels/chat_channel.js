@@ -1,6 +1,6 @@
 import consumer from "./consumer"
 
-consumer.subscriptions.create("ChatChannel", {
+const appRoom = consumer.subscriptions.create("ChatChannel", {
   connected() {
     // Called when the subscription is ready for use on the server
   },
@@ -10,10 +10,17 @@ consumer.subscriptions.create("ChatChannel", {
   },
 
   received(data) {
-    // Called when there's incoming data on the websocket for this channel
+    return alert(data['message']);
   },
 
-  speak: function() {
-    return this.perform('speak');
+  speak: function(message) {
+    return this.perform('speak', {message: message});
   }
 });
+window.addEventListener("keypress", function(e) {
+  if (e.keyCode === 13) {
+    appRoom.speak(e.target.value);
+    e.target.value = '';
+    e.preventDefault();
+  }
+})
