@@ -18,11 +18,5 @@
       <% end %>
     <% end %>
   </div>
-  <div class="row">
-    <div class="col-sm"></div>
-    <div class="col-sm">
-      <%= paginate @member %>
-    </div>
-    <div class="col-sm"></div>
-  </div>
+  <%= render "layouts/pagenate", pagenate:@member %>
 </main>

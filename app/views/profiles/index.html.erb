@@ -1,128 +1,46 @@
 <%= stylesheet_link_tag 'profiles', media: 'all', 'data-turbolinks-track': 'reload' %>
 <main class="container">
-  <div class="d-flex align-items-center p-3 my-3 text-dark bg-blue rounded shadow-sm">
+  <div class="d-flex align-items-center p-3 my-3 text-dark bg-light rounded shadow-sm">
     <div class="lh-1">
       <nav class="navbar">
-        <%= form_with url: profile_search_path,:method => 'get',class: "container-fluid" do |f| %>
+        <%= form_with url: profile_search_path, :method => 'get', class: "container-fluid" do |f| %>
           <p class="me-3">ユーザーを検索</p>
           <div class="input-group">
             <span class="input-group-text" id="basic-addon1">@</span>
-            <%= f.text_field :name, class: "form-control",placeholder: "UserID",aria: {label:"Username",describedby: "basic-addon1"}%>
+            <%= f.text_field :name, class: "form-control", placeholder: "UserID", aria: { label: "Username", describedby: "basic-addon1" } %>
           </div>
         <% end %>
       </nav>
     </div>
   </div>
 
-  <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-0">友達 (<%= @friends.count %>)</h6>
-    <% if @friends[0] == nil %>
-      <br>
-      <p class="text-gray-dark">友達がいないようです！</p>
-    <% end %>
-    <% @friends.first(10).each do |user| %>
-      <%= link_to profile_path(user.userid) do %>
-        <div class="d-flex text-muted pt-3">
-          <% if user.image.nil? %>
-            <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-          <% else %>
-            <%= image_tag "/user_images/#{user.image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
-          <% end %>
-          <p class="pb-3 mb-0 small lh-sm  border-bottom w-100">
-            <strong class="d-block text-gray-dark"><%= user.name %> (<%= user.nickname %>)</strong>
-            @<%= user.userid %>
-          </p>
-        </div>
-      <% end %>
-    <% end %>
-    <% if @friends[0] != nil %>
-      <small class="d-block text-end mt-3">
-        <%= link_to "すべて表示",profile_friends_path %>
-      </small>
-    <% end %>
-  </div>
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-2 row-cols-xxl-2 g-4　g-lg-4　p-3　my-3" id="community">
+    <%= render 'profiles/list', name: "友達", count: @friends.size, list: @friends.first(5), path: profile_friends_path %>
+    <%= render 'profiles/list', name: "フォロー", count: @following.size, list: @following.first(5), path: profile_follow_path %>
+    <%= render 'profiles/list', name: "フォロワー", count: @follower.size, list: @follower.first(5), path: profile_follower_path %>
 
-  <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-0">フォローリスト (<%= @following.size %>)</h6>
-    <% if @following[0] == nil %>
-      <br>
-      <p class="text-gray-dark">現在はいないようです！</p>
-    <% end %>
-    <% @following.first(5).each do |user| %>
-      <%= link_to profile_path(user.userid) do %>
-        <div class="d-flex text-muted pt-3">
-          <% if user.image.nil? %>
-            <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-          <% else %>
-            <%= image_tag "/user_images/#{user.image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
-          <% end %>
-          <p class="pb-3 mb-0 small lh-sm  border-bottom w-100">
-            <strong class="d-block text-gray-dark"><%= user.name %> (<%= user.nickname %>)</strong>
-            @<%= user.userid %>
-          </p>
-        </div>
-      <% end %>
-    <% end %>
-    <% if @following[0] != nil %>
-      <small class="d-block text-end mt-3">
-        <%= link_to "すべて表示",profile_follow_path %>
-      </small>
-    <% end %>
-  </div>
-
-  <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-0">フォロワーリスト (<%= @follower.size %>)</h6>
-    <% if @follower[0] == nil%>
-      <br>
-      <p class="text-gray-dark">現在はいないようです！</p>
-    <% end %>
-    <% @follower.first(5).each do |user| %>
-      <%= link_to profile_path(user.userid) do %>
-        <div class="d-flex text-muted pt-3">
-          <% if user.image.nil? %>
-            <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-          <% else %>
-            <%= image_tag "/user_images/#{user.image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
-          <% end %>
-          <p class="pb-3 mb-0 small lh-sm  border-bottom w-100">
-            <strong class="d-block text-gray-dark"><%= user.name %> (<%= user.nickname %>)</strong>
-            @<%= user.userid %>
-          </p>
-        </div>
-      <% end %>
-    <% end %>
-    <% if @follower[0] != nil %>
-      <small class="d-block text-end mt-3">
-        <%= link_to "すべて表示",profile_follower_path %>
-      </small>
-    <% end %>
-  </div>
-
-  <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-0">おすすめユーザー</h6>
-    <% count = 0 %>
-    <% @users.shuffle.each do |user| %>
-      <% if user.userid?%>
-        <% unless current_user.id == user.id %>
-          <% unless following?(@following,user) %>
-            <%= link_to profile_path(user.userid) do%>
-              <div class="d-flex text-muted pt-3">
-                <% if user.image.nil? %>
-                  <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-                <% else %>
-                  <%= image_tag "/user_images/#{user.image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
-                <% end %>
-                  <p class="pb-3 mb-0 small lh-sm  border-bottom w-100">
-                    <strong class="d-block text-gray-dark"><%= user.name %> (<%= user.nickname %>)</strong>
-                    @<%= user.userid %>
-                  </p>
-              </div>
-              <% count += 1 %>
-              <% break if count > 5 %>
+    <div class="col-md-6">
+      <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h6 class="border-bottom pb-2 mb-0">おすすめユーザー</h6>
+        <% count = 0 %>
+        <% @users.shuffle.each do |user| %>
+          <% if user.userid? %>
+            <% unless current_user.id == user.id %>
+              <% unless following?(@following, user) %>
+                <%= render "profiles/user", user: user %>
+                <% count += 1 %>
+                <% break if count > 4 %>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
-      <% end %>
-    <% end %>
+        <% unless count == 0 && count > 5 %>
+          <small class="d-block text-end mt-3">
+            <!-- TODO -->
+            <%= link_to "すべて表示", profile_friends_path%>
+          </small>
+        <% end %>
+      </div>
+    </div>
   </div>
 </main>
