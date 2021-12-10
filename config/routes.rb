@@ -24,14 +24,23 @@ Rails.application.routes.draw do
 
   #pages---------------
   resources :pages
+  resources :communities
+  resources :searches
+  resources :chats
+
+  resources :mypages
+  post 'mypages/nickname', to:'mypages#update_nickname'
+  post 'mypages/name', to:'mypages#update_name'
   get 'users/setting' => 'pages#setting'
 
   #communities---------
   resources :communities do
     resources :manage, only: [:create, :destroy]
+    get '/members' => 'communities#members'
   end
   get 'community/pickup' => 'communities#pickup'
   get 'community/joined' => 'communities#joined'
+
 
   #timelines-----------
   resources :timelines do
@@ -42,9 +51,21 @@ Rails.application.routes.draw do
     end
   end
 
+
+  #pages---------------
+  resources :pages, only:[:index,:show] do
+    post "favorite/user_create" => "favorite#user_create"
+    delete "favorite/community_delete" => "favorite#community_destroy"
+    post "favorite/community_create" => "favorite#community_create"
+    delete "favorite/user_delete" => "favorite#user_destroy"
+  end
+  post "page/user"=>"pages#user"
+  post "page/community"=>"pages#community"
+
   #profiles------------
   resources :profiles do
     resources :relationships, only: [:create,:destroy]
+    resources :achievements, only: [:update]
   end
   get 'profile/search' => 'profiles#search'
   get 'profile/follow' => 'profiles#follow'

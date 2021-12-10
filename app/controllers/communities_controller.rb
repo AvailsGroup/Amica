@@ -3,10 +3,7 @@ class CommunitiesController < ApplicationController
   before_action :banned
 
   def index
-    @community = Community.all.order(created_at: :desc)
-    @user = User.all
-    @member = CommunityMember.all
-    @join = CommunityMember.where(user_id: current_user.id).count
+    @community = Community.includes([:community_members, :user, :tags]).order(created_at: :desc)
   end
 
   def new
@@ -20,14 +17,30 @@ class CommunitiesController < ApplicationController
 
     unless @community.save
       @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-      render action: "new"
+      render action: "timelines/new"
       return
     end
 
-    if community_params[:icon]
-      image = community_params[:icon]
-      File.binwrite("public/communities_image/#{@community.id}.jpg", image.read)
-      @community.update(icon:"#{@community.id}.jpg")
+    unless params["community"]["images"].nil?
+      accepted_format = %w[.jpg .jpeg .png]
+      unless accepted_format.include? File.extname(params["community"]["images"].original_filename)
+        flash[:alert] = "画像は jpg jpeg png 形式のみ対応しております。"
+        redirect_to(new_community_path)
+        return
+      end
+    end
+
+    if !params["community"]["images"].nil? && base64?(params["community"]["icon"]['data:image/jpeg;base64,'.length .. -1])
+      unless @community.image.nil?
+        if File.exist?("public/communities_image/#{@community.icon}")
+          File.delete("public/communities_image/#{@community.icon}")
+        end
+      end
+      rand = rand(1_000_000..9_999_999)
+      @community.update(icon: "#{@community.id}#{rand}.jpg")
+      File.open("public/communities_image/#{@community.icon}", 'wb') do |f|
+        f.write(Base64.decode64(params["community"]["icon"]['data:image/jpeg;base64,'.length .. -1]))
+      end
     end
 
     flash[:notice] = "コミュニティを作成しました！"
@@ -36,12 +49,9 @@ class CommunitiesController < ApplicationController
   end
 
   def show
-    @community = Community.find(params[:id])
-    @join = CommunityMember.exists?(user: current_user, community_id: @community.id)
-    @members = CommunityMember.where(community_id: @community.id)
-    @user = User.all
-    @tag = @community.tag_counts_on(:tags)
-    @leader = @community.user_id ==current_user.id
+    @community = Community.includes(:user, :tags,:community_members).find(params[:id])
+    @join = @community.community_members.exists?(user: current_user)
+    @leader = @community.user
   end
 
   def edit
@@ -54,19 +64,37 @@ class CommunitiesController < ApplicationController
   def update
     @community = Community.find(params[:id])
     permission
-    unless  @community.update(community_params)
+
+    unless @community.update(community_params)
       @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
       @tag = @community.tag_list.join(',')
       render action: "edit"
       return
     end
-    if community_params[:icon]
-      image = community_params[:icon]
-      File.binwrite("public/communities_image/#{@community.id}.jpg", image.read)
-      @community.update(icon:"#{@community.id}.jpg")
+
+    unless params["community"]["images"].nil?
+      accepted_format = %w[.jpg .jpeg .png]
+      unless accepted_format.include? File.extname(params["community"]["images"].original_filename)
+        flash[:alert] = "画像は jpg jpeg png 形式のみ対応しております。"
+        redirect_to(edit_community_path)
+        return
+      end
     end
-    flash[:notice] = "コミュニティを編集しました！"
-    redirect_to(community_path(@community.id))
+
+    if !params["community"]["images"].nil? && base64?(params["community"]["image"]['data:image/jpeg;base64,'.length .. -1])
+      unless @community.image.nil?
+        if File.exist?("public/communities_image/#{@community.icon}")
+          File.delete("public/communities_image/#{@community.icon}")
+        end
+      end
+      rand = rand(1_000_000..9_999_999)
+      @community.update(icon: "#{@community.id}#{rand}.jpg")
+      File.open("public/communities_image/#{@community.icon}", 'wb') do |f|
+        f.write(Base64.decode64(params["community"]["image"]['data:image/jpeg;base64,'.length .. -1]))
+      end
+    end
+    flash[:notice] = "ユーザー情報を編集しました"
+    redirect_to community_path(@community.id)
   end
   
   def destroy
@@ -84,13 +112,13 @@ class CommunitiesController < ApplicationController
 
   #Async
   def joined
-    @community = []
-    join = CommunityMember.where(user_id: current_user.id).order(created_at: :desc)
-    join.each do |m|
-      @community.push(Community.find(m.community_id))
-    end
-    @user = User.all
-    @member = CommunityMember.all
+    @community = Community.includes([:community_members, :user, :tags]).where(id: current_user.community_member.select(:community_id)).order(created_at: :desc)
+  end
+
+  def members
+    @community = Community.includes([:community_members, :user, :tags]).find(params[:community_id])
+    @count = @community.community_members.size
+    @member = @community.community_members.page(params[:page]).per(2)
   end
 
   private

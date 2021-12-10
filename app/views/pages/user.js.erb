@@ -1,0 +1,1 @@
+$("#favorite_user").html("<%= j(render partial:'pages/user',  collection:  @mates, as: :user, locals: {favorite_model:@favorite, fixed_current_user:@user}) %>");

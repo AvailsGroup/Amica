@@ -32,7 +32,7 @@ class TimelinesController < ApplicationController
 
     @create = Post.new(post_params)
     @create.userid = current_user.id
-    @create.save
+    pp @create.save!
     redirect_to(timelines_path)
   end
 

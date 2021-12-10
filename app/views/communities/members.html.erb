@@ -1,0 +1,8 @@
+<main class="container">
+  <h2 class="text-center"><%= @community.name %>のメンバー</h2>
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">ユーザーリスト (<%= @count %>)</h6>
+    <%= render partial:'layouts/user', collection:@member,as: :user %>
+  </div>
+  <%= render "layouts/pagenate", pagenate:@member %>
+</main>

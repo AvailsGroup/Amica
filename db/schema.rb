@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_08_034801) do
+ActiveRecord::Schema.define(version: 2021_12_08_155307) do
+
+  create_table "achievements", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.boolean "niceLv1", default: false
+    t.boolean "niceLv2", default: false
+    t.boolean "niceLv3", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -66,6 +75,21 @@ ActiveRecord::Schema.define(version: 2021_12_08_034801) do
     t.index ["user_id"], name: "index_community_members_on_user_id"
   end
 
+  create_table "community_tags", force: :cascade do |t|
+    t.integer "community_id"
+    t.string "tag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "favorite_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "community_id"
+  end
+
   create_table "hashtags", force: :cascade do |t|
     t.string "hashname"
     t.datetime "created_at", precision: 6, null: false
@@ -111,6 +135,9 @@ ActiveRecord::Schema.define(version: 2021_12_08_034801) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "birthday"
+    t.text "twitter_id"
+    t.integer "enrolled_year"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
