@@ -11,6 +11,7 @@ import "channels"
 import '@fortawesome/fontawesome-free/js/all';
 import "cropperjs"
 import "cropperjs/dist/cropper.css"
+import "lity"
 
 Rails.start()
 ActiveStorage.start()

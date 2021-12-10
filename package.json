@@ -12,6 +12,7 @@
     "cropperjs": "^1.5.12",
     "jquery": "^3.6.0",
     "jquery-ui": "^1.13.0",
+    "lity": "^2.4.1",
     "popper.js": "^1.16.1",
     "selectize": "^0.12.6",
     "tag-it": "^2.0.0",
