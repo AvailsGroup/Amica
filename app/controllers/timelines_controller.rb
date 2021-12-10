@@ -21,15 +21,6 @@ class TimelinesController < ApplicationController
   end
 
   def create
-
-    #if Post.where(content: params[:posts][:content]).last.userid != nil
-    #if Post.where(content: params[:posts][:content]).last.id == current_user.id
-    #flash[:alert] = "連続して同じ内容の投稿はできません。"
-    #  redirect_to(timelines_path)
-    # return
-    # end
-    # end
-
     @create = Post.new(post_params)
     @create.userid = current_user.id
     unless @create.save
