@@ -1,15 +1,4 @@
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import "bootstrap";
 @import "~tag-it/css/jquery.tagit";
-
-#img1Big{
-  display:none;
-}
-
-#back {
-  display: none;
-  background: rgba(0, 0, 0, 0.5);
-  position: absolute;
-  left: 0px;
-  top: 0px;
-}
+@import "~lity/dist/lity.min";

@@ -1,28 +1,4 @@
 <%= javascript_pack_tag 'timeline/main', 'data-turbolinks-track': 'reload' %>
-
-<script>
-    function onClick(id){
-        $(function () {
-            $('#img1_'+id).click(function (e) {
-            $('#back').css({
-                'width': $(window).width(),
-                'height': $(document).height()
-            }).show();
-            $('#img1Big_'+id).css({
-                'position': 'absolute',
-                'left': Math.floor(($(window).width() - $('#img1Big_'+id).width()) / 2) + 'px',
-                'top': $(window).scrollTop() + 50 + 'px'
-            }).fadeIn();
-        });
-        $('#img1Big_'+id+', #back').click(function () {
-            $('#img1Big_'+id).fadeOut('slow', function () {
-                $('#back').hide();
-            });
-        });
-    });
-    }
-</script>
-
 <style>
     #back {
         display: none;
@@ -56,13 +32,7 @@
   </div>
   <div class="d-flex justify-content-between" style="margin-left: 50px">
     <% if post.image? %>
-      <div id="img1_<%= post.id %>" onclick="onClick(<%= post.id %>)" >
-        <%= image_tag post.image.url, style: "width: 200px; height: 200px;" %>
-      </div>
-      <div id="back"></div>
-      <div id="img1Big_<%= post.id %>" style="display: none;z-index: 10001">
-        <%= image_tag post.image.url %>
-      </div>
+      <%= image_tag post.image.url, style: "width: 200px; height: 200px;" , "data-lity" => "data-lity"%>
     <% end %>
   </div>
 
