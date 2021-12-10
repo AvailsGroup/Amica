@@ -31,9 +31,12 @@ class PagesController < ApplicationController
   end
 
   def user
+    @favorite = Favorite.all
+    @users = User.preload(:profile, :favorite, :followers, :followings, :tags)
+    @user = @users.find(current_user.id)
     @mates = []
     unless params[:name] == ''
-      current_user.matchers.each do |u|
+      @user.matchers.each do |u|
         if u.name.downcase.include?(params[:name].downcase) || u.nickname.downcase.include?(params[:name].downcase) || u.userid.downcase.include?(params[:name].downcase)
           @mates.push(u)
         end
@@ -42,9 +45,13 @@ class PagesController < ApplicationController
   end
 
   def community
+    @favorite = Favorite.all
     @result = []
+    @users = User.preload(:tags)
+    @user = @users.find(current_user.id)
+    @communities = Community.includes([:community_members, :user, :tags]).where(id: current_user.community_member.select(:community_id)).order(created_at: :desc)
     unless params[:name] == ''
-      community_contents.each do |c|
+      Community.includes([:community_members, :user, :tags]).where(id: current_user.community_member.select(:community_id)).order(created_at: :desc).each do |c|
         @result.push(c) if c.name.downcase.include?(params[:name].downcase)
       end
     end
