@@ -3,7 +3,7 @@ class CommunitiesController < ApplicationController
   before_action :banned
 
   def index
-    @community = Community.includes([:community_members, :user, :tags]).order(created_at: :desc)
+    @community = Community.includes([:community_members, :user, :tags]).order(created_at: :desc).page(params[:page]).per(24)
   end
 
   def new
@@ -107,7 +107,7 @@ class CommunitiesController < ApplicationController
 
   #Async
   def pickup
-
+    user = User.includes(:community_member, :tags).find(current_user.id)
   end
 
   #Async
