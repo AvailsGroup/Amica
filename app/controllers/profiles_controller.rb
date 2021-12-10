@@ -1,24 +1,33 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
+  helper_method :following?
 
   def index
-    @user = current_user
-    @friends = current_user.matchers
-    @following = current_user.followings_list
-    @follower = current_user.followers_list
-    @users = User.all
-    @profile = Profile.find(current_user.id)
+    @users = User.preload(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+    @user = @users.find(current_user.id)
+    @friends = matchers(@user)
+    @following = @user.followings_list
+    @follower = @user.followers_list
+    @profile = @user.profile
   end
 
   def show
-    @profiles = Profile.find(current_user.id)
     @user = User.find_by(userid: params[:id])
     if @user.nil?
       redirect_to profiles_path, notice: "そのユーザーidは存在しませんでした"
       return
     end
-    @profile = Profile.find(@user.id)
+    @profile = @user.profile
+    @following = @user.followings_list
+    @communities = Community.includes([:community_members, :user, :tags]).where(id: @user.community_member.select(:community_id))
+
+    @friends_count = @user.matchers.size
+    @community_count = @user.community_member.size
+    sec = (Time.zone.now - @user.created_at).floor
+    @days = (sec / 60 / 60 / 24).floor
+    @comments_count = @user.comments.size
+    @achievement = @user.achievement
   end
 
   def edit
@@ -34,10 +43,10 @@ class ProfilesController < ApplicationController
     @user = current_user
     permission
 
-    unless  current_user.update(user_params)
-        @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-        @tag = current_user.tag_list.join(',')
-        render action: "edit"
+    unless current_user.update(user_params)
+      @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+      @tag = current_user.tag_list.join(',')
+      render action: "edit"
       return
     end
 
@@ -71,15 +80,24 @@ class ProfilesController < ApplicationController
   end
 
   def friends
-    @friends = current_user.matchers
+    @users = User.preload(:profile, :favorite, :followers, :followings, :tags)
+    @user = @users.find(current_user.id)
+    @friends = @user.matchers
+    @pagenate = Kaminari.paginate_array(@friends).page(params[:page]).per(20)
   end
 
   def follower
-    @follower = current_user.followers_list
+    @users = User.preload(:profile, :favorite, :followers, :tags)
+    @user = @users.find(current_user.id)
+    @follower = @user.followers_list
+    @pagenate = @follower.page(params[:page]).per(20)
   end
 
   def follow
-    @following = current_user.followings_list
+    @users = User.preload(:profile, :favorite,  :followings, :tags)
+    @user = @users.find(current_user.id)
+    @following = @user.followings_list
+    @pagenate =  @following.page(params[:page]).per(20)
   end
 
   private
@@ -94,5 +112,4 @@ class ProfilesController < ApplicationController
       redirect_to profile_path
     end
   end
-
 end
