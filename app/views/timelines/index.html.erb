@@ -5,6 +5,12 @@
   .lity{
       z-index: 10002;
   }
+  .send{
+      margin-right: 2px;
+      margin-bottom: 2px;
+      color: #0d6efd;
+      border:none;
+  }
 </style>
 <body class="bg-white">
   <div class="nav-scroller bg-white shadow-sm">
@@ -29,12 +35,16 @@
       <%= form_for(@create ,url:timelines_path) do |f|%>
         <div class="FlexTextarea form-group mb-2">
           <div class="FlexTextarea__dummy" aria-hidden="true"></div>
-          <%= f.text_area :content, placeholder:"タイムラインを投稿してください",maxlength:"280",id:"FlexTextarea",class: "FlexTextarea__textarea form-control" %>
+          <%= f.text_area :content, placeholder:"今起こってることをみんなに共有しよう",maxlength:"280",id:"FlexTextarea",class: "FlexTextarea__textarea form-control" %>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <%= button_tag class: 'send bg-white position-absolute bottom-0 end-0' do %>
+              <i class="far fa-paper-plane"></i>
+            <% end %>
+          </div>
         </div>
-        <%= f.label "画像" %><br />
-        <%= f.file_field :image, class: "image" %>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <%= f.submit "投稿", class:"btn btn-primary"%>
+        <div class="custom-file">
+          <%= f.label "画像" %>
+          <%= f.file_field :image, class: "form-control mb-3", style:"width:100%"%>
         </div>
       <% end %>
     </div>
