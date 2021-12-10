@@ -118,35 +118,35 @@
 </main>
 
 <footer class="text-center bg-gray text-light" style="margin-top:100px">
-  <div class="mb-1">
-    <h1>Amica</h1>
-    <p>学園生活に新たな出会いを</p>
-  </div>
   <div class="container">
     <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-4 mx-0">
-      <div class="col">
+      <div class="col mt-3">
         <h5 class="mb-2">ガイド</h5>
-        <p><%= link_to "About", about_path, class: "text-decoration-none text-light" %></p>
-        <p><%= link_to "利用規約", static_path, class: "text-decoration-none text-light" %></p>
-        <p><%= link_to "プライバシーポリシー", privacy_path, class: "text-decoration-none text-light" %></p>
-        <p><%= link_to "お問い合わせ", contact_path, class: "text-decoration-none text-light" %></p>
-        <p><%= link_to "ヘルプ", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "About", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "利用規約", static_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "プライバシーポリシー", privacy_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "お問い合わせ", contact_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "ヘルプ", about_path, class: "text-decoration-none text-light" %></p>
       </div>
-      <div class="col">
+      <div class="col mt-3">
         <h5 class="mb-2">コンテンツ</h5>
-        <p><%= link_to "運営からのお知らせ", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "運営からのお知らせ", about_path, class: "text-decoration-none text-light" %></p>
       </div>
-      <div class="col">
+      <div class="col mt-3">
         <h5 class="mb-2">アカウント</h5>
-        <p><%= link_to "ログアウト", destroy_user_session_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "ログアウト", destroy_user_session_path, class: "text-decoration-none text-light" %></p>
       </div>
-      <div class="col">
+      <div class="col mt-3">
         <h5 class="mb-2">運営</h5>
-        <p><%= link_to "Avails", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "Avails", about_path, class: "text-decoration-none text-light" %></p>
       </div>
     </div>
   </div>
-  <p class="mb-0">©Avails Group</p>
+  <hr/>
+  <div class="p-3">
+    <h1 class="mb-0">Amica</h1>
+    <p class="mb-0">©Avails Group. All rights reserved.</p>
+  </div>
 </footer>
 </body>
 
