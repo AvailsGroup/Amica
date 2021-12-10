@@ -9,9 +9,8 @@ import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import '@fortawesome/fontawesome-free/js/all';
-import "cropperjs"
-import "cropperjs/dist/cropper.css"
 import "lity"
+import "cropperjs"
 
 Rails.start()
 ActiveStorage.start()
