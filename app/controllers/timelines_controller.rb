@@ -32,7 +32,9 @@ class TimelinesController < ApplicationController
 
     @create = Post.new(post_params)
     @create.userid = current_user.id
-    pp @create.save!
+    unless @create.save
+      flash[:alert] = "投稿の文字数は1~280文字までです"
+    end
     redirect_to(timelines_path)
   end
 
