@@ -11,7 +11,7 @@ class TimelinesController < ApplicationController
   def show
     @post = Post.find(params[:id])
     # コメント一覧表示で使用する全コメントデータを代入（新着順で表示）
-    @comments = @post.comments.order(created_at: :desc)
+    @comments = @post.comments.order(created_at: :desc).page(params[:page]).per(10)
     # コメントの作成
     @comment = Comment.new
     @user = User.all
@@ -60,6 +60,6 @@ class TimelinesController < ApplicationController
   private
 
   def post_params()
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content, :image)
   end
 end

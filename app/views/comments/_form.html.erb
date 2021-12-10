@@ -1,9 +1,10 @@
-<%= form_with model: comment, url: timeline_comments_path(post.id),local: false do |f| %>
-  <div class="form-group">
-    <%= f.label "コメントを投稿する" %>
-    <%= f.text_area :comment, :size => "3x3", autocomplete: 'off', placeholder: "コメントを入力してください", class: 'form-control' %>
-  </div>
-  <div class="text-right">
-    <%= f.submit "コメントする", class: 'btn btn-warning text-white'%>
-  </div>
-<% end %>
+  <%= form_with model: comment, url: timeline_comments_path(post.id),local: false do |f| %>
+    <div class="FlexTextarea form-group mb-2">
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <%= button_tag  class: 'btn btn-primary position-absolute bottom-0 end-0 text-white' do%>
+          <i class="far fa-paper-plane"></i>
+        <% end %>
+      </div>
+      <%= f.text_area :comment, :size => "3x3", autocomplete: 'off', placeholder: "コメントを入力してください", class: 'form-control' %>
+    </div>
+  <% end %>

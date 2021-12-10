@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 2021_12_08_155307) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "userid"
+    t.string "image"
   end
 
   create_table "profiles", force: :cascade do |t|
