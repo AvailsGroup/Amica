@@ -1,7 +1,14 @@
 module TimelinesHelper
+  require 'uri'
+
   HASHTAG_REGEX = /(?<=\s|　|^)#.+?(?=(　|\s|$))/.freeze
 
   def link_to_hashtag(content)
+    URI.extract(content, %w[http https]).uniq.each do |url|
+      sub_text = ""
+      sub_text << "<a href=" << url << " target=\"_blank\">" << url << "</a>"
+      content.gsub!(url, sub_text)
+    end
     content.gsub(HASHTAG_REGEX) { |hashtag| link_to(hashtag, search_timelines_path(q: hashtag)) }
   end
 
