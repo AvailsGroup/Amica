@@ -1,5 +1,5 @@
-<%= stylesheet_link_tag 'timelines', media: 'all', 'data-turbolinks-track': 'reload' %>
-<%= javascript_pack_tag 'timeline/main', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_link_tag 'timelines' %>
+<%= javascript_pack_tag 'timeline/main' %>
 <style>
     .send {
         margin-right: 2px;
@@ -8,6 +8,7 @@
         border: none;
     }
 </style>
+
 <%= form_with model: comment, url: timeline_comments_path(post.id), local: false do |f| %>
   <div class="FlexTextarea form-group mb-2">
     <div class="FlexTextarea__dummy" aria-hidden="true"></div>

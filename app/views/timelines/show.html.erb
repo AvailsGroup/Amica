@@ -17,35 +17,14 @@
 
   <main class="container">
     <div class="my-5 p-3 bg-white rounded shadow-sm ">
-      <div class="d-flex text-muted">
-        <%= link_to profile_path(@user.find(@post.userid).userid), style: "color:black" do %>
-          <% if @user.find(@post.userid).image.nil? %>
-            <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
-          <% else %>
-            <%= image_tag "/user_images/#{@user.find(@post.userid).image}", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
-          <% end %>
-        <% end %>
-
-        <p class="pb-3 mb-0 lh-sm w-100">
-          <strong class="text-dark" style="font-size:20px;margin: 0"><%= @user.find(@post.userid).nickname %></strong>
-          <span class="text-gray small" style="margin: 0">@<%= @user.find(@post.userid).userid %></span>
-          <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(@post.created_at) %></span>
-          <br/>
-          <br/>
-          <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= html_escape(html_with_link_to_hashtag((@post.content))).gsub(/\r\n|\r|\n/, "<br />").html_safe %></span>
-          <br/>
-        </p>
-      </div>
+      <%= render "timelines/post", post:@post, user:@user %>
       <div class="mt-3 p-3 bg-white ">
         <%= render 'comments/form', post: @post, comment: @comment %>
       </div>
     </div>
-
-
     <div id="comments_area">
       <%= render 'comments/index', comments: @comments, post: @post, user: @user %>
     </div>
-
     <%= render "layouts/pagenate", pagenate: @comments %>
   </main>
 </body>
