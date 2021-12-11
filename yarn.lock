@@ -3397,6 +3397,11 @@ iferr@^0.1.5:
   resolved "https://registry.npmjs.org/iferr/-/iferr-0.1.5.tgz"
   integrity sha1-xg7taebY/bazEEofy8ocGS3FtQE=
 
+imagefit@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/imagefit/-/imagefit-2.2.0.tgz#b3f8fc1ceaf0287c8644731c9487a81e7b5642cf"
+  integrity sha512-JxbA2Bct1QmjTDWih1KtHTxR/qULxM7wC7CVx6Nkvvq+Gg95fVn44OkLrY+xzSQLiejaXxuO9YGKVa+hYnPZ4A==
+
 import-cwd@^2.0.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/import-cwd/-/import-cwd-2.1.0.tgz"
