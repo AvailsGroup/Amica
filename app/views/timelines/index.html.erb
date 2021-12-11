@@ -35,7 +35,7 @@
       </div>
       <div class="custom-file">
         <%= f.label "画像" %>
-        <%= f.file_field :image, class: "form-control mb-3", style: "width:100%" %>
+        <%= f.file_field :image, class: "form-control mb-3", style: "width:100%",accept: 'image/jpg,image/jpeg,image/png,image/gif' %>
       </div>
     </div>
   <% end %>
