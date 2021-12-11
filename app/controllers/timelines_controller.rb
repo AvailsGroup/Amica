@@ -6,7 +6,6 @@ class TimelinesController < ApplicationController
     @posts = Post.all.order(created_at: :desc).page(params[:page]).per(30)
     @create = Post.new
     @user = User.all
-
   end
 
   def show
@@ -23,10 +22,8 @@ class TimelinesController < ApplicationController
 
   def create
     @create = Post.new(post_params)
-    @create.userid = current_user.id
-    unless @create.save
-      flash[:alert] = "投稿の文字数は1~280文字までです<br/>画像はjpg jpeg png gifのみ対応しています。<br/>画像は10MBまでです。".html_safe
-    end
+    @create.user = current_user
+    flash[:alert] = "投稿の文字数は1~280文字までです<br/>画像はjpg jpeg png gifのみ対応しています。<br/>画像は10MBまでです。" unless @create.save!
     redirect_to(timelines_path)
   end
 
