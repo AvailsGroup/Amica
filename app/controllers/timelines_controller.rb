@@ -6,6 +6,7 @@ class TimelinesController < ApplicationController
     @posts = Post.all.order(created_at: :desc).page(params[:page]).per(30)
     @create = Post.new
     @user = User.all
+
   end
 
   def show
