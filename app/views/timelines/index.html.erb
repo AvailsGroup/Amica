@@ -13,7 +13,6 @@
         border: none;
     }
 </style>
-<body class="bg-white">
 <%= render 'timelines/nav' %>
 
 
@@ -42,17 +41,16 @@
     </div>
   <% end %>
   <% @posts.each do |p| %>
-    <%= link_to timeline_path(p.id) do %>
-      <div class="my-3 p-3 bg-white rounded shadow-sm">
-        <% unless current_user.following?(@user.find(p.user_id)) == false %>
+    <% if following?(@user.followings_list,p.user) || @user == current_user %>
+      <%= link_to timeline_path(p.id) do %>
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
           <div id="post_<%= p.id %>">
-            <%= render "timelines/post", post: p, user: @user %>
+            <%= render "timelines/post", post: p, post_model: @post %>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 
   <%= render "layouts/pagenate", pagenate: @posts %>
 </main>
-</body>

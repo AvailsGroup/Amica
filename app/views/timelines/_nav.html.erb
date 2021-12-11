@@ -2,11 +2,11 @@
   <nav class="nav nav-underline" aria-label="Secondary navigation">
     <%= link_to timelines_path, "aria-current": "page", class: "nav-link active" do %>
       友達
-      <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= current_user.matchers.count %></span>
+      <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= matchers(@user).size %></span>
     <% end %>
     <a class="nav-link" href="#">
       フォロー中
-      <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= current_user.followings_list.count %></span>
+      <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= @user.followings.size %></span>
     </a>
     <a class="nav-link" href="#">最新</a>
     <a class="nav-link" href="#">おすすめ</a>

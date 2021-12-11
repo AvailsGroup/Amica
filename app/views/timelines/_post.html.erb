@@ -23,18 +23,17 @@
 </style>
 <div class="panel-content panel-activity">
   <div class="d-flex text-muted">
-    <%= link_to profile_path(user.find(post.user_id).userid), style: "color:black" do %>
-      <% if user.find(post.user_id).image.nil? %>
+    <%= link_to profile_path(post.user.userid), style: "color:black" do %>
+      <% if post.user.image.nil? %>
         <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
       <% else %>
-        <%= image_tag "/user_images/#{user.find(post.user_id).image}", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+        <%= image_tag "/user_images/#{post.user.image}", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
       <% end %>
     <% end %>
 
-
     <p class="pb-3 mb-0 lh-sm w-100">
-      <strong class="text-dark" style="font-size:20px;margin: 0"><%= user.find(post.user_id).nickname %></strong>
-      <span class="text-gray small" style="margin: 0">@<%= user.find(post.user_id).userid %></span>
+      <strong class="text-dark" style="font-size:20px;margin: 0"><%= post.user.nickname %></strong>
+      <span class="text-gray small" style="margin: 0">@<%=  post.user.userid %></span>
       <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %></span>
       <br/>
       <br/>
@@ -51,7 +50,7 @@
   <div class="d-flex justify-content-between" style="margin-left: 45px">
     <div class="d-flex flex-row">
       <span class="likes">
-        <% if current_user.liked_by?(post.id) %>
+        <% if liked_by?(post,current_user) %>
           <%= button_to timeline_like_path(post.id, current_user.id), method: :delete, remote: true, class: "send bg-white", style: "height: 15.5px;padding: 0", data: { disable_with: "<i class='fas fa-heart'></i>" } do %>
             <i class="fas fa-heart"></i>
           <% end %>
@@ -62,17 +61,17 @@
         <% end %>
       </span>
       <span>
-        <%= post.likes.count %>
+        <%= post.likes.size %>
         <span class="comments">
           <%= link_to timeline_path(post.id) do %>
             <i class="far fa-comment-alt" style="height: 15.5px"></i>
-            <span class="text-dark"><%= post.comments.count %></span>
+            <span class="text-dark"><%= post.comments.size %></span>
           <% end %>
         </span>
       </span>
     </div>
     <div>
-      <% if post.user_id == current_user.id %>
+      <% if post.user == current_user %>
         <%= button_to(timeline_path(post.id), class: "send bg-white", method: :delete, data: { disable_with: "削除中..." }) do %>
           <i class="far fa-trash-alt"></i>
         <% end %>
