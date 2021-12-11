@@ -33,7 +33,7 @@
       <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %></span>
       <br/>
       <br/>
-      <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= html_escape(html_with_link_to_hashtag((post.content))).gsub(/\r\n|\r|\n/, "<br />").html_safe %></span>
+      <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= html_escape(html_with_link_to_hashtag(post.content)).gsub(/\r\n|\r|\n/, "<br />").html_safe %></span>
       <br/>
     </p>
   </div>
@@ -68,7 +68,7 @@
     </div>
     <div>
       <% if post.userid == current_user.id %>
-        <%= link_to(timeline_path(post.id), class: "send bg-white", method: :delete, data: { disable_with: "削除中..." }) do %>
+        <%= button_to(timeline_path(post.id), class: "send bg-white", method: :delete, data: { disable_with: "削除中..." }) do %>
           <i class="far fa-trash-alt"></i>
         <% end %>
       <% end %>

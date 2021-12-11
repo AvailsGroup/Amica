@@ -3,7 +3,7 @@ class TimelinesController < ApplicationController
   before_action :banned
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.all.order(created_at: :desc).page(params[:page]).per(30)
     @create = Post.new
     @user = User.all
   end
@@ -24,7 +24,7 @@ class TimelinesController < ApplicationController
     @create = Post.new(post_params)
     @create.userid = current_user.id
     unless @create.save
-      flash[:alert] = "投稿の文字数は1~280文字までです"
+      flash[:alert] = "投稿の文字数は1~280文字までです<br/>画像はjpg jpeg png gifのみ対応しています。<br/>画像は10MBまでです。".html_safe
     end
     redirect_to(timelines_path)
   end
