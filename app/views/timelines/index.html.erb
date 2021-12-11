@@ -14,19 +14,7 @@
     }
 </style>
 <body class="bg-white">
-<div class="nav-scroller bg-white shadow-sm">
-  <nav class="nav nav-underline" aria-label="Secondary navigation">
-    <a class="nav-link active" aria-current="page" href="#">友達
-      <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= current_user.matchers.count %></span>
-    </a>
-    <a class="nav-link" href="#">
-      フォロー中
-      <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= current_user.followings_list.count %></span>
-    </a>
-    <a class="nav-link" href="#">最新</a>
-    <a class="nav-link" href="#">おすすめ</a>
-  </nav>
-</div>
+<%= render 'timelines/nav' %>
 
 
 <main class="container">
@@ -63,6 +51,6 @@
     <% end %>
   <% end %>
 
-  <%= render "layouts/pagenate", pagenate:@posts %>
+  <%= render "layouts/pagenate", pagenate: @posts %>
 </main>
 </body>
