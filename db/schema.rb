@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_11_121231) do
+ActiveRecord::Schema.define(version: 2021_12_12_191438) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_121231) do
     t.boolean "niceLv3", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "rare_like", default: false
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|

@@ -59,14 +59,16 @@
           <% end %>
         <% else %>
           <% case rand(1..65536) %>
-            <% when 1 then icon = '<i class="fas fa-hand-holding-heart"></i>'#1/65536 %>
+            <% when 1 then
+                 icon = '<i class="fas fa-hand-holding-heart"></i>'
+                 current_user.achievement.change_rare_like #1/65536 %>
             <% when 2..6 then icon = '<i class="fas fa-laugh-wink"></i>'#1/16384 %>
             <% when 11..19 then icon = '<i class="fab fa-yarn"></i>'#1/8192 %>
             <% when 20..28 then icon = '<i class="fab fa-node-js"></i>'#1/8192 %>
             <% when 29..37 then icon = '<i class="fab fa-yarn"></i>'#1/8192 %>
             <% when 38..103 then icon = '<i class="fas fa-rocket"></i>' #1/1000 %>
             <% when 1000..1261 then icon = '<i class="fas fa-mug-hot"></i>' #1/250 %>
-            <% when 2000..2654 then icon = '<i class="fas fa-heartbeat"></i>' #1/100%>
+            <% when 2000..2654 then icon = '<i class="fas fa-heartbeat"></i>' #1/100 %>
             <% else icon = '<i class="fas fa-heart"></i>' %>
           <% end %>
           <%= button_to timeline_likes_path(post.id), method: :post, remote: true, class: "send bg-white", style: "height: 15.5px;padding: 0", data: { disable_with: icon } do %>
