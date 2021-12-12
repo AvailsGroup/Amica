@@ -16,7 +16,6 @@ class Community < ApplicationRecord
 
   has_many :community_members, dependent: :destroy
 
-
   private
 
   def validate_tag

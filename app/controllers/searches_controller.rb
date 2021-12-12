@@ -22,7 +22,7 @@ class SearchesController < ApplicationController
   end
 
   def community
-    @community = Community.includes(:community_members,:tags,:taggings)
+    @community = Community.includes(:community_members)
     @communities = []
     unless params[:name] == ""
       @community.each do |c|
