@@ -24,9 +24,6 @@ class TimelinesController < ApplicationController
     @user = @users.find(current_user.id)
   end
 
-  def new
-  end
-
   def create
     @create = Post.new(post_params)
     @create.user = current_user
