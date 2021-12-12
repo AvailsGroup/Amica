@@ -8,11 +8,7 @@ class TimelinesController < ApplicationController
   helper_method :matchers?
 
   def index
-    @post = Post.includes(:user, :likes, :comments)
-    @posts = @post.order(created_at: :desc).page(params[:page]).per(30)
-    @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
-    @user = @users.find(current_user.id)
-    @create = Post.new
+    view_parameter
   end
 
   def show
@@ -55,14 +51,26 @@ class TimelinesController < ApplicationController
   end
 
   def follow
+    view_parameter
+  end
+
+  def latest
+    view_parameter
+  end
+
+  def pickup
+    view_parameter
+  end
+
+  private
+
+  def view_parameter
     @post = Post.includes(:user, :likes, :comments)
     @posts = @post.order(created_at: :desc).page(params[:page]).per(30)
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
     @create = Post.new
   end
-
-  private
 
   def post_params()
     params.require(:post).permit(:content, :image)
