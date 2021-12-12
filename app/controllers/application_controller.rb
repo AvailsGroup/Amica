@@ -29,6 +29,10 @@ class ApplicationController < ActionController::Base
     user.followings & user.followers
   end
 
+  def matchers?(user, other_user)
+    matchers(user).include?(other_user)
+  end
+
   # 相手をフォローしていればtrueを返す
   def following?(user_followings_list, other_user)
     user_followings_list.any? { |u| u == other_user }

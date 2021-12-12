@@ -13,9 +13,7 @@
         border: none;
     }
 </style>
-<%= render 'timelines/nav' %>
-
-
+<%= render 'timelines/nav', page:"follow" %>
 <div class="container">
   <%= render "timelines/form", create:@create %>
   <% @posts.each do |p| %>

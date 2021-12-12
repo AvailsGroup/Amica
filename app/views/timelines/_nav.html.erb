@@ -1,14 +1,32 @@
 <div class="nav-scroller bg-white shadow-sm">
   <nav class="nav nav-underline" aria-label="Secondary navigation">
-    <%= link_to timelines_path, "aria-current": "page", class: "nav-link active" do %>
-      友達
-      <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= matchers(@user).size %></span>
+    <% not_active_class = "nav-link" %>
+    <% if defined?(page) %>
+      <% active_class = "nav-link active" %>
+      <%= link_to timelines_path, "aria-current": "page", class: page == "friends" ? active_class : not_active_class do %>
+        友達
+        <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= matchers(@user).size %></span>
+      <% end %>
+      <%= link_to follow_timelines_path, "aria-current": "page", class: page == "follow" ? active_class : not_active_class do %>
+        フォロー中
+        <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= @user.followings.size %></span>
+      <% end %>
+      <%= link_to "最新", latest_timelines_path, "aria-current": "page", class: page == "latest" ? active_class : not_active_class %>
+      <%= link_to "おすすめ", pickup_timelines_path, "aria-current": "page", class: page == "pickup" ? active_class : not_active_class %>
+
+    <% else %>
+
+      <%= link_to timelines_path, "aria-current": "page", class: not_active_class do %>
+        友達
+        <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= matchers(@user).size %></span>
+      <% end %>
+      <%= link_to follow_timelines_path, "aria-current": "page", class: not_active_class do %>
+        フォロー中
+        <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= @user.followings.size %></span>
+      <% end %>
+      <%= link_to "最新", latest_timelines_path, "aria-current": "page", class: not_active_class %>
+      <%= link_to "おすすめ", pickup_timelines_path, "aria-current": "page", class: not_active_class %>
+
     <% end %>
-    <a class="nav-link" href="#">
-      フォロー中
-      <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= @user.followings.size %></span>
-    </a>
-    <a class="nav-link" href="#">最新</a>
-    <a class="nav-link" href="#">おすすめ</a>
   </nav>
 </div>

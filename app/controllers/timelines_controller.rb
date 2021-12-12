@@ -1,9 +1,11 @@
 class TimelinesController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
+
   helper_method :following?
   helper_method :liked_by?
   helper_method :matchers
+  helper_method :matchers?
 
   def index
     @post = Post.includes(:user, :likes, :comments)
@@ -50,6 +52,14 @@ class TimelinesController < ApplicationController
     @post = params[:q]
     @posts = Post.search_content_for(params[:q]).order(created_at: :desc).page(params[:page]).per(10)
     @user = User.all
+  end
+
+  def follow
+    @post = Post.includes(:user, :likes, :comments)
+    @posts = @post.order(created_at: :desc).page(params[:page]).per(30)
+    @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
+    @user = @users.find(current_user.id)
+    @create = Post.new
   end
 
   private
