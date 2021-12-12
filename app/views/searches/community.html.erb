@@ -1,0 +1,20 @@
+<main class="container">
+  <h2 class="text-center"><%= params[:name] %>のコミュニティ検索結果</h2>
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">コミュニティリスト (<%= @communities.count %>)</h6>
+    <% @communities.each do |community| %>
+      <%= link_to profile_path(community.name),style:"text-decoration: none;" do %>
+        <div class="d-flex text-muted pt-3">
+          <% if community.image.nil? %>
+            <%= image_tag "/community_icon/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+          <% else %>
+            <%= image_tag "/community_icon/#{community.icon}.png" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+          <% end %>
+          <p class="pb-3 mb-0 small lh-sm  border-bottom w-100">
+            <strong class="d-block text-gray-dark"><%= community.name %></strong>
+          </p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</main>

@@ -22,6 +22,16 @@ class SearchesController < ApplicationController
   end
 
   def community
-    # @_@
+    @community = Community.includes(:community_members,:tags,:taggings)
+    @communities = []
+    unless params[:name] == ""
+      @community.each do |c|
+        unless c == current_user
+          if c.name.downcase.include?(params[:name].downcase)
+            @communities.push(c)
+          end
+        end
+      end
+    end
   end
 end
