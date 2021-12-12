@@ -8,18 +8,20 @@ class TimelinesController < ApplicationController
   def index
     @post = Post.includes(:user, :likes, :comments)
     @posts = @post.order(created_at: :desc).page(params[:page]).per(30)
-    @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships,:active_relationships)
+    @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
     @create = Post.new
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post_m = Post.includes(:user, :likes, :comments)
+    @post = @post_m.find(params[:id])
     # コメント一覧表示で使用する全コメントデータを代入（新着順で表示）
     @comments = @post.comments.order(created_at: :desc).page(params[:page]).per(10)
     # コメントの作成
     @comment = Comment.new
-    @user = User.all
+    @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
+    @user = @users.find(current_user.id)
   end
 
   def new

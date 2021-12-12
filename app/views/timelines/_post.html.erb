@@ -1,4 +1,4 @@
-<%= javascript_pack_tag 'timeline/main', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'timeline/main'%>
 <style>
     #back {
         display: none;
@@ -48,7 +48,7 @@
   <div class="d-flex justify-content-between" style="margin-left: 45px">
     <div class="d-flex flex-row">
       <span class="likes">
-        <% if liked_by?(post,current_user) %>
+        <% if current_user.liked_by?(post) %>
           <%= button_to timeline_like_path(post.id, current_user.id), method: :delete, remote: true, class: "send bg-white", style: "height: 15.5px;padding: 0", data: { disable_with: "<i class='fas fa-heart'></i>" } do %>
             <i class="fas fa-heart"></i>
           <% end %>
