@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_13_005902) do
+ActiveRecord::Schema.define(version: 2021_12_13_015228) do
 
   create_table "comments", force: :cascade do |t|
     t.text "comment"
@@ -105,7 +105,6 @@ ActiveRecord::Schema.define(version: 2021_12_13_005902) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.integer "room_id"
     t.integer "started_userid"
     t.integer "invited_userid"
     t.datetime "created_at", precision: 6, null: false
