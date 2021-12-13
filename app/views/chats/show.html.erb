@@ -8,7 +8,6 @@
   </div>
 <% end %>
 
-<form>
-  <label>Say something:</label><br>
-  <input type="text" data-behavior="chat_speaker">
-</form>
+<%= label_tag :content, 'Say something:' %>
+<%= text_field_tag :content, nil,data: {behavior: "chat_speaker"} %>
+
