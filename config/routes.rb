@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   #pages---------------
   resources :pages
   get 'users/setting' => 'pages#setting'
+  get 'users/tutorial'=> 'pages#tutorial'
 
   #communities---------
   resources :communities do
