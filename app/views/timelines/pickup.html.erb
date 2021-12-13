@@ -1,0 +1,33 @@
+<%= stylesheet_link_tag 'timelines' %>
+<%= javascript_pack_tag 'timeline/main'%>
+
+<style>
+    .lity {
+        z-index: 10002;
+    }
+
+    .send {
+        margin-right: 2px;
+        margin-bottom: 2px;
+        color: #0d6efd;
+        border: none;
+    }
+</style>
+<%= render 'timelines/nav', page:"pickup" %>
+
+
+<div class="container">
+  <%= render "timelines/form", create:@create %>
+  <% @posts.each do |p| %>
+    <% if following?(@user.followings_list,p.user) || p.user == current_user %>
+      <%= link_to timeline_path(p.id) do %>
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
+          <div id="post_<%= p.id %>">
+            <%= render "timelines/post", post: p, post_model: @post %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%= render "layouts/pagenate", pagenate: @posts %>
+</div>

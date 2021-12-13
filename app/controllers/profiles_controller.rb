@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
   helper_method :following?
 
   def index
-    @users = User.preload(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+    @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
     @user = @users.find(current_user.id)
     @friends = matchers(@user)
     @following = @user.followings_list

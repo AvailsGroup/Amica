@@ -1,16 +1,16 @@
 <div class="my-3 p-3 bg-white rounded shadow-sm">
   <div class="d-flex text-muted">
-    <%= link_to profile_path(@user.find(@post.userid).userid), style: "color:black" do %>
-      <% if @user.find(@post.userid).image.nil? %>
+    <%= link_to profile_path(post.user), style: "color:black" do %>
+      <% if post.user.image.nil? %>
         <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
       <% else %>
-        <%= image_tag "/user_images/#{user.find(post.userid).image}", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+        <%= image_tag "/user_images/#{post.user.image}", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
       <% end %>
     <% end %>
 
     <p class="pb-3 mb-0 lh-sm w-100">
-      <strong class="text-dark" style="font-size:20px;margin: 0"><%= @user.find(@post.userid).nickname %></strong>
-      <span class="text-gray small" style="margin: 0">@<%= @user.find(@post.userid).userid %></span>
+      <strong class="text-dark" style="font-size:20px;margin: 0"><%= post.user.nickname %></strong>
+      <span class="text-gray small" style="margin: 0">@<%= post.user.userid %></span>
       <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(comment.created_at) %></span>
       <br/>
       <br/>
@@ -18,8 +18,8 @@
     </p>
   </div>
   <div class="text-end">
-    <% if comment.user == current_user %>
-      <%= link_to timeline_comment_path(comment.post_id, comment.id), method: :delete, remote: true do %>
+    <% if post.user == current_user %>
+      <%= link_to timeline_comment_path(post.id, comment.id), method: :delete, remote: true do %>
         <i class="far fa-trash-alt"></i>
       <% end %>
     <% end %>

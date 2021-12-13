@@ -48,6 +48,9 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
     collection do
       get :search
+      get :follow
+      get :pickup
+      get :latest
     end
   end
 
