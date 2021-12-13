@@ -1,9 +1,9 @@
 
 <h1>Chat room</h1>
-<% @chat_message.each do |p| %>
+<% @message.each do |p| %>
   <div class="my-3 p-3 bg-white rounded shadow-sm">
     <div id="messages">
-      <%= render 'chats/chat_message',chat_message:p, user:@user  %>
+      <%= render 'chats/chat_message',message:p, user:@user  %>
     </div>
   </div>
 <% end %>

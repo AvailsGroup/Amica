@@ -8,6 +8,6 @@ class ChatsController < ApplicationController
 
   def show
     @user = current_user
-    @chat_message = ChatMessage.all
+    @message = Message.all
   end
 end

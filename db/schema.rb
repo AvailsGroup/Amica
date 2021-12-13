@@ -10,29 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_09_064206) do
-
-  create_table "achievements", force: :cascade do |t|
-    t.integer "userid", null: false
-    t.integer "communitiesCount", default: 0
-    t.integer "registrationDays", default: 0
-    t.integer "friendsCount", default: 0
-    t.integer "likesCount", default: 0
-    t.integer "commentsCount", default: 0
-    t.integer "postsCount", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.boolean "niceLv1", default: false
-    t.boolean "niceLv2", default: false
-    t.boolean "niceLv3", default: false
-  end
-
-  create_table "chat_messages", force: :cascade do |t|
-    t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "send_userid"
-  end
+ActiveRecord::Schema.define(version: 2021_12_13_005902) do
 
   create_table "comments", force: :cascade do |t|
     t.text "comment"
@@ -127,6 +105,7 @@ ActiveRecord::Schema.define(version: 2021_12_09_064206) do
   end
 
   create_table "rooms", force: :cascade do |t|
+    t.integer "room_id"
     t.integer "started_userid"
     t.integer "invited_userid"
     t.datetime "created_at", precision: 6, null: false
