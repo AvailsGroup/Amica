@@ -1,0 +1,127 @@
+<%= stylesheet_link_tag 'profiles_show', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class="amica-badge register-badge">
+  <span class="at-badge" style="color: rgba(29,144,190,0.8)"><i class="fas fa-smile-wink"></i></span>
+  <div class="badge-description"><%= @user.created_at.strftime('%Y/%m/%d') %> Amicaに登録した記念バッジ</div>
+</div>
+
+<% if false #コメントアウトの代わり %>
+  <% if @user.posts.count >= 100 %>
+    <div class="amica-badge posts-badge">
+      <span class="at-badge" style="color: green"><i class="fas fa-bullhorn"></i></span>
+      <div class="register-badge-description">投稿数100個達成記念バッジ</div>
+    </div>
+    <% if @achievement.postsCount >= 1000 %>
+      <div class="amica-badge posts-badge">
+        <span class="at-badge" style="color:orange"><i class="fas fa-bullhorn"></i></span>
+        <div class="badge-description">投稿数1000個達成記念バッジ</div>
+      </div>
+      <% if @achievement.postsCount >= 10000 %>
+        <div class="amica-badge posts-badge">
+          <span class="at-badge" style="color: red"><i class="fas fa-bullhorn"></i></span>
+          <div class="badge-description">投稿数10000個達成記念バッジ</div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if @friends_count >= 10 %>
+  <div class="amica-badge friends10-badge">
+    <span class="at-badge" style="color: green"><i class="fas fa-icons"></i></span>
+    <div class="badge-description">友達人数10人達成記念バッジ</div>
+  </div>
+  <% if @friends_count >= 50 %>
+    <div class="amica-badge friends50-badge">
+      <span class="at-badge" style="color: orange"><i class="fas fa-icons"></i></span>
+      <div class="badge-description">友達人数50人達成経過記念バッジ</div>
+    </div>
+    <% if @friends_count >= 100 %>
+      <div class="amica-badge friends100-badge">
+        <span class="at-badge" style="color: red"><i class="fas fa-icons"></i></span>
+        <div class="badge-description">友達人数100人達成経過記念バッジ</div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if @community_count >= 1 %>
+  <div class="amica-badge communities1-badge">
+    <span class="at-badge" style="color: green"><i class="fas fa-map-marked-alt"></i></span>
+    <div class="badge-description">コミュニティ参加記念バッジ</div>
+  </div>
+  <% if @community_count >= 5 %>
+    <div class="amica-badge communities5-badge">
+      <span class="at-badge" style="color: orange"><i class="fas fa-map-marked-alt"></i></span>
+      <div class="badge-description">コミュニティ5個参加記念バッジ</div>
+    </div>
+    <% if @community_count >= 15 %>
+      <div class="amica-badge communities15-badge">
+        <span class="at-badge" style="color: red"><i class="fas fa-map-marked-alt"></i></span>
+        <div class="badge-description">コミュニティ15個参加記念バッジ</div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if @days >= 100 %>
+  <div class="amica-badge registrationDays10-badge">
+    <span class="at-badge" style="color: green"><i class="fas fa-sign-in-alt"></i></span>
+    <div class="badge-description">amica登録から100日経過記念バッジ</div>
+  </div>
+  <% if @days >= 200 %>
+    <div class="amica-badge communities5-badge">
+      <span class="at-badge" style="color: orange"><i class="fas fa-sign-in-alt"></i></span>
+      <div class="badge-description">amica登録から200日経過記念バッジ</div>
+    </div>
+    <% if @days >= 365 %>
+      <div class="amica-badge communities15-badge">
+        <span class="at-badge" style="color: red"><i class="fas fa-sign-in-alt"></i></span>
+        <div class="badge-description">amica登録から365日経過記念バッジ</div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if @comments_count >= 10 %>
+  <div class="amica-badge comments10-badge">
+    <span class="at-badge" style="color: green"><i class="fas fa-handshake"></i></span>
+    <div class="badge-description">コメント数10個記念バッジ</div>
+  </div>
+  <% if @comments_count >= 50 %>
+    <div class="amica-badge comments50-badge">
+      <span class="at-badge" style="color: orange"><i class="fas fa-handshake"></i></span>
+      <div class="badge-description">コメント数50個記念バッジ</div>
+    </div>
+    <% if @comments_count >= 100 %>
+      <div class="amica-badge comments100-badge">
+        <span class="at-badge" style="color: red"><i class="fas fa-handshake"></i></span>
+        <div class="badge-description">コメント数100個記念バッジ</div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if @achievement.niceLv1 %>
+  <div class="amica-badge niceLv1-badge">
+    <span class="at-badge" style="color: green"><i class="fas fa-thumbs-up"></i></span>
+    <div class="badge-description">amica運営からの特別なバッジLv1</div>
+  </div>
+  <% if @achievement.niceLv2 %>
+    <div class="amica-badge niceLv2-badge">
+      <span class="at-badge" style="color: orange"><i class="fas fa-thumbs-up"></i></span>
+      <div class="badge-description">amica運営からの特別なバッジLv2</div>
+    </div>
+    <% if @achievement.niceLv3 %>
+      <div class="amica-badge niceLv3-badge">
+        <span class="at-badge" style="color: red"><i class="fas fa-thumbs-up"></i></span>
+        <div class="badge-description">amica運営からの特別なバッジLv3</div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+<% if @user.admin %>
+  <div class="amica-badge admin-badge">
+    <span class="at-badge" style="color: rgba(29,144,190,0.8)"><i class="fas fa-crown"></i></span>
+    <div class="badge-description">Amica運営バッジ</div>
+  </div>
+<% end %>

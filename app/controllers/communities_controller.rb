@@ -118,7 +118,7 @@ class CommunitiesController < ApplicationController
   def members
     @community = Community.includes([:community_members, :user, :tags]).find(params[:community_id])
     @count = @community.community_members.size
-    @member = @community.community_members.page(params[:page]).per(20)
+    @member = @community.community_members.page(params[:page]).per(2)
   end
 
   private

@@ -16,11 +16,22 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-      pages_path
+    flash[:alert] = "ようこそAmicaへ！ "
+    pages_path
   end
 
   def base64?(value)
     value.is_a?(String) && Base64.strict_encode64(Base64.decode64(value)) == value
+  end
+
+  #友達の配列を返す
+  def matchers(user)
+    user.followings & user.followers
+  end
+
+  # 相手をフォローしていればtrueを返す
+  def following?(user,other_user)
+    user.any? { |u| u == other_user }
   end
 
   private

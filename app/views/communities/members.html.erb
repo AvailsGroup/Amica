@@ -2,27 +2,7 @@
   <h2 class="text-center"><%= @community.name %>のメンバー</h2>
   <div class="my-3 p-3 bg-white rounded shadow-sm">
     <h6 class="border-bottom pb-2 mb-0">ユーザーリスト (<%= @count %>)</h6>
-    <% @member.each do |c| %>
-      <%= link_to profile_path(c.user.userid),style:"text-decoration: none;" do %>
-        <div class="d-flex text-muted pt-3">
-          <% if c.user.image.nil? %>
-            <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-          <% else %>
-            <%= image_tag "/user_images/#{c.user.image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
-          <% end %>
-          <p class="pb-3 mb-0 small lh-sm  border-bottom w-100">
-            <strong class="d-block text-gray-dark"><%= c.user.name %> (<%= c.user.nickname %>)</strong>
-            @<%= c.user.userid %>
-          </p>
-        </div>
-      <% end %>
-    <% end %>
+    <%= render partial:'layouts/user', collection:@member,as: :user %>
   </div>
-  <div class="row">
-    <div class="col-sm"></div>
-    <div class="col-sm">
-      <%= paginate @member %>
-    </div>
-    <div class="col-sm"></div>
-  </div>
+  <%= render "layouts/pagenate", pagenate:@member %>
 </main>

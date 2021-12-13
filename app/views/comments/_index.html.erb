@@ -1,0 +1,6 @@
+<h5><%= "コメント（#{comments.count})"%></h5>
+<hr>
+
+<% comments.each do |comment| %>
+  <%=  render 'comments/hide_comments', comment: comment ,user:user,post:post%>
+<% end %>

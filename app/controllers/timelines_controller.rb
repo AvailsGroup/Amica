@@ -3,31 +3,29 @@ class TimelinesController < ApplicationController
   before_action :banned
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.all.order(created_at: :desc).page(params[:page]).per(30)
     @create = Post.new
     @user = User.all
   end
 
   def show
-    @post = Post.find_by(id: params[:id])
+    @post = Post.find(params[:id])
+    # コメント一覧表示で使用する全コメントデータを代入（新着順で表示）
+    @comments = @post.comments.order(created_at: :desc).page(params[:page]).per(10)
+    # コメントの作成
+    @comment = Comment.new
+    @user = User.all
   end
 
   def new
   end
 
   def create
-
-    #if Post.where(content: params[:posts][:content]).last.userid != nil
-    #if Post.where(content: params[:posts][:content]).last.id == current_user.id
-    #flash[:alert] = "連続して同じ内容の投稿はできません。"
-    #  redirect_to(timelines_path)
-    # return
-    # end
-    # end
-
     @create = Post.new(post_params)
     @create.userid = current_user.id
-    @create.save
+    unless @create.save
+      flash[:alert] = "投稿の文字数は1~280文字までです<br/>画像はjpg jpeg png gifのみ対応しています。<br/>画像は10MBまでです。".html_safe
+    end
     redirect_to(timelines_path)
   end
 
@@ -55,6 +53,6 @@ class TimelinesController < ApplicationController
   private
 
   def post_params()
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content, :image)
   end
 end

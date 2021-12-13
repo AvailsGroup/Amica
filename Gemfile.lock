@@ -180,7 +180,7 @@ GEM
     orm_adapter (0.5.0)
     pg (1.2.3)
     public_suffix (4.0.6)
-    puma (5.5.0)
+    puma (5.5.2)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
@@ -304,6 +304,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  activesupport
   acts-as-taggable-on
   bootsnap (>= 1.4.4)
   bullet
@@ -323,7 +324,7 @@ DEPENDENCIES
   mini_magick
   omniauth
   pg (~> 1.1)
-  puma (~> 5.0)
+  puma (>= 5.5.1)
   rack-attack
   rails (~> 6.1.4, >= 6.1.4.1)
   rails-i18n
@@ -342,4 +343,4 @@ RUBY VERSION
    ruby 3.0.1p64
 
 BUNDLED WITH
-   2.2.15
+   2.2.22

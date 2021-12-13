@@ -25,9 +25,9 @@
             <label>
               <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
               <% if @community.icon.nil? %>
-                <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
+                <%= image_tag "default_icon" , :size => '200x200', class: "user_image", style:"width:200px;height:200px"%>
               <% else %>
-                <%= image_tag "/communities_image/#{@community.icon}", :size => '200x200', class:"user_image", style:"width: 200px"%>
+                <%= image_tag "/communities_image/#{@community.icon}", :size => '200x200', class:"user_image", style:"width:200px;height:200px"%>
               <% end %>
             </label>
           </div>
