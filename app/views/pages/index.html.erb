@@ -45,12 +45,13 @@
             <div class="collapse show mb-1" id="collapseExample2">
               <%= render partial: 'pages/user', collection: @mates, as: :user, locals: { fixed_current_user: @user, favorite_model: @favorite } %>
             </div>
-          </div>
         <% end %>
+          </div>
 
       <div class="hidden-lg d-lg-none d-xl-none d-xxl-none">
         <hr class="my-4">
       </div>
+
 
       <div class="col-lg mb-5" style="background: white; min-height: 100px;">
         <div class="page-header" style="text-align: center">
@@ -73,6 +74,7 @@
         <% if @favorite_communities.size == 0  %>
           <p>グループおらんやんｗ</p>
         <% else %>
+
         <div id="favorite_community"></div>
         <button type="button" class="btn btn-secondary btn-lg w-100 mt-2 mb-3" style="background-color: #00bfff" data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">お気に入り</button>
         <div class="collapse show mb-1" id="collapseExample3">
@@ -82,9 +84,9 @@
           <button type="button" class="btn btn-secondary btn-lg w-100 mt-2 mb-3" style="background-color: #00bfff" data-bs-toggle="collapse" data-bs-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">コミュニティ</button>
           <div class="collapse show mb-1" id="collapseExample4">
             <%= render partial: 'pages/community', collection: @communities, as: :community, locals: { fixed_current_user: @user, favorite_model: @favorite } %>
+        <% end %>
           </div>
         </div>
       </div>
     </div>
-        <%end %>
   </main>
