@@ -18,7 +18,6 @@ class Community < ApplicationRecord
 
   has_many :favorites
 
-
   private
 
   def validate_tag
