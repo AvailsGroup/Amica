@@ -11,6 +11,10 @@ class HomeController < ApplicationController
     render layout: 'home'
   end
 
+  def help_page
+
+  end
+
   def static
 
   end
