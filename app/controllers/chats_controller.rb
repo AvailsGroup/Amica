@@ -11,9 +11,9 @@ class ChatsController < ApplicationController
     if @room.nil?
       in_room?
     end
-    @user = current_user
     @room_id = @room.id
-    @message = Message.all
+    @message = Message.where(room_id: @room_id)
+
   end
 end
 
