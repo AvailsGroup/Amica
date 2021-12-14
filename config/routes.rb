@@ -85,6 +85,8 @@ Rails.application.routes.draw do
   post 'search/user' => 'searches#user'
   post 'search/community' => 'searches#community'
 
+  #notification--------
+  resources :notifications, only: [:index, :destroy]
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'
