@@ -1,6 +1,7 @@
 <%= hidden_field_tag :room_id, @room_id ,id: "room_id" %>
 
 <h1>Chat room</h1>
+<p>room_number:<%= @room_id %></p>
 <% @message.each do |p| %>
   <div class="my-3 p-3 bg-white rounded shadow-sm">
     <div id="messages">
