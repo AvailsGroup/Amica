@@ -118,7 +118,7 @@ class User < ApplicationRecord
   end
 
   def liked_by?(post_id)
-    likes.where(post_id: post_id).exists?
+    likes.any? {|p| p.post_id == post_id}
   end
 
   has_many :posts, dependent: :destroy
