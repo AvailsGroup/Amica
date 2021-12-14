@@ -1,16 +1,17 @@
 
 
-<h1>Chat room</h1>
-<p>room_number:<%= @room_id %></p>
-<div id="messages"></div>
+<h1><%=  @invited_user.name %>Chat room</h1>
+<div id="messages">
 <% @message.each do |p| %>
-  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
       <%= render 'chats/chat_message',message:p %>
-  </div>
+    </div>
 <% end %>
+<div id="append"></div>
 
 
 <%= label_tag :content, 'Say something:' %>
 <input type="hidden" id="room_id" value= <%= @room_id %> data-behavior="chat_speaker">
+  <input type="hidden" id="user_id" value= <%= current_user.id %> data-behavior="chat_speaker">
 <%= text_field_tag :content, nil,data: {behavior: "chat_speaker"} %>
-
+</div>

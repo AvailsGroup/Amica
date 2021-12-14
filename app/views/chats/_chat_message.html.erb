@@ -1,5 +1,12 @@
 <%# views/messages/_chat_message.html.erb %>
-<div class="message">
-  <p>send_username:<%= message.user_id %></p>
-    <p>content:<%= message.content %></p>
-</div>
+  <% if message.user_id === current_user.id %>
+    <div class="messages" style="text-align: right">
+      <p>user_id:<%= message.user_id %></p>
+      <p>content:<%= message.content %></p>
+    </div>
+  <% else %>
+    <div class="messages">
+      <p>user_id:<%= message.user_id %></p>
+      <p>content:<%= message.content %></p>
+    </div>
+  <% end %>

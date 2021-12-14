@@ -13,7 +13,6 @@ class ChatsController < ApplicationController
     end
     @room_id = @room.id
     @message = Message.where(room_id: @room_id)
-
   end
 end
 
