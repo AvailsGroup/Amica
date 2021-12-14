@@ -108,6 +108,11 @@ class CommunitiesController < ApplicationController
   #Async
   def pickup
     user = User.includes(:community_member, :tags).find(current_user.id)
+    @tag = user.tags.pluck(:name)
+    @match = []
+    user.each do |u|
+      u.tags.pluck(:name)
+    end
   end
 
   #Async
