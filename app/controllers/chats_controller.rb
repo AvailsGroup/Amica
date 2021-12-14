@@ -12,7 +12,7 @@ class ChatsController < ApplicationController
       in_room?
     end
     @user = current_user
-    in_room?
+    @room_id = @room.id
     @message = Message.all
   end
 end
