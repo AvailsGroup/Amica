@@ -28,10 +28,6 @@ Rails.application.routes.draw do
   resources :communities
   resources :searches
   resources :chats
-
-  resources :mypages
-  post 'mypages/nickname', to:'mypages#update_nickname'
-  post 'mypages/name', to:'mypages#update_name'
   get 'users/setting' => 'pages#setting'
 
   #communities---------
@@ -70,11 +66,14 @@ Rails.application.routes.draw do
   resources :profiles do
     resources :relationships, only: [:create,:destroy]
     resources :achievements, only: [:update]
+    collection do
+      get :search
+      get :follow
+      get :follower
+      get :friends
+      get :pickup
+    end
   end
-  get 'profile/search' => 'profiles#search'
-  get 'profile/follow' => 'profiles#follow'
-  get 'profile/follower' => 'profiles#follower'
-  get 'profile/friends' => 'profiles#friends'
 
   #chats--------------
   resources :chats

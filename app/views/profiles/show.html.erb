@@ -49,35 +49,18 @@
             </li>
           </ul>
 
-          <% if current_user.id != @user.id %>
-            <% if following?(@following, @user) %>
-              <div class="actions">
-                <%= link_to 'フォロー解除',
-                            profile_relationship_path(@user.userid),
-                            method: :delete,
-                            style: "color:#FFF;",
-                            class: "btn btn-primary followbtn"
-                %>
-              </div>
+          <div class="actions">
+            <% if current_user.id != @user.id %>
+              <% if following?(@following, @user) %>
+                  <%= link_to 'フォロー解除', profile_relationship_path(@user.userid), method: :delete, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
+              <% else %>
+                  <%= link_to 'フォロー', profile_relationships_path(@user.userid), method: :post, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
+              <% end %>
             <% else %>
-              <div class="actions ">
-                <%= link_to 'フォロー',
-                            profile_relationships_path(@user.userid),
-                            method: :post,
-                            style: "color:#FFF;",
-                            class: "btn btn-primary followbtn"
-                %>
-              </div>
+              <%= link_to '編集', edit_profile_path, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
             <% end %>
-          <% end %>
-          <% if current_user.id == @user.id %>
-            <div class="actions">
-              <%= link_to '編集',
-                          edit_profile_path,
-                          style: "color:#FFF;",
-                          class: "btn btn-primary followbtn" %>
-            </div>
-          <% end %>
+          </div>
+
         </div>
       </div>
     </div>

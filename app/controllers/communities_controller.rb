@@ -105,17 +105,12 @@ class CommunitiesController < ApplicationController
     redirect_to(communities_path)
   end
 
-  #Async
+  # Async
   def pickup
-    user = User.includes(:community_member, :tags).find(current_user.id)
-    @tag = user.tags.pluck(:name)
-    @match = []
-    user.each do |u|
-      u.tags.pluck(:name)
-    end
+
   end
 
-  #Async
+  # Async
   def joined
     @community = Community.includes([:community_members, :user, :tags]).where(id: current_user.community_member.select(:community_id)).order(created_at: :desc)
   end
