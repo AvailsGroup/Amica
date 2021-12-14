@@ -3,15 +3,17 @@ class LikesController < ApplicationController
 
   def create
     Like.create(user_id: current_user.id, post_id: params[:timeline_id])
-    @post = Post.find_by(id: params[:timeline_id])
-    @user = User.all
+    @posts = Post.includes(:user, :likes, :comments)
+    @post = @posts.find_by(id: params[:timeline_id])
+    @user = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     #redirect_to timelines_path
   end
 
   def destroy
     Like.find_by(user_id: current_user.id, post_id: params[:timeline_id]).destroy
-    @post = Post.find_by(id: params[:timeline_id])
-    @user = User.all
+    @posts = Post.includes(:user, :likes, :comments)
+    @post = @posts.find_by(id: params[:timeline_id])
+    @user = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     #redirect_to timelines_path
   end
 end

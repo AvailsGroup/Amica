@@ -8,10 +8,30 @@ class SearchesController < ApplicationController
   end
 
   def user
-    # ^_^
+    @user = User.includes(:profile,:tags,:taggings)
+    @users = []
+    unless params[:name] == ""
+      @user.each do |u|
+        unless u == current_user
+          if u.name.downcase.include?(params[:name].downcase) || u.nickname.downcase.include?(params[:name].downcase) || u.userid.downcase.include?(params[:name].downcase)
+            @users.push(u)
+          end
+        end
+      end
+    end
   end
 
   def community
-    # @_@
+    @community = Community.includes(:community_members)
+    @communities = []
+    unless params[:name] == ""
+      @community.each do |c|
+        unless c == current_user
+          if c.name.downcase.include?(params[:name].downcase)
+            @communities.push(c)
+          end
+        end
+      end
+    end
   end
 end

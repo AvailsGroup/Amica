@@ -48,6 +48,9 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
     collection do
       get :search
+      get :follow
+      get :pickup
+      get :latest
     end
   end
 
@@ -78,9 +81,9 @@ Rails.application.routes.draw do
   #searches-----------
   resources :searches, only: [:index] do
     get '/tag' => 'searches#tag'
-    get '/user' => 'searches#user'
-    get '/community' => 'searches#community'
   end
+  post 'search/user' => 'searches#user'
+  post 'search/community' => 'searches#community'
 
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

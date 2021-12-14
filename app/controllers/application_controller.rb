@@ -29,9 +29,17 @@ class ApplicationController < ActionController::Base
     user.followings & user.followers
   end
 
+  def matchers?(user, other_user)
+    matchers(user).include?(other_user)
+  end
+
   # 相手をフォローしていればtrueを返す
-  def following?(user,other_user)
-    user.any? { |u| u == other_user }
+  def following?(user_followings_list, other_user)
+    user_followings_list.any? { |u| u == other_user }
+  end
+
+  def liked_by?(post, user)
+    post.likes.any? { |l| l.user == user }
   end
 
   private

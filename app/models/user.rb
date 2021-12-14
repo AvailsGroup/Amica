@@ -41,6 +41,7 @@ class User < ApplicationRecord
   has_one :profile
   accepts_nested_attributes_for :profile, update_only: true
 
+  has_many :posts
   has_many :likes
 
   has_many :comments, dependent: :destroy
@@ -117,7 +118,7 @@ class User < ApplicationRecord
   end
 
   def liked_by?(post_id)
-    likes.where(post_id: post_id).exists?
+    likes.any? {|p| p.post_id == post_id}
   end
 
   has_many :posts, dependent: :destroy
