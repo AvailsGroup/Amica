@@ -17,6 +17,7 @@
 
 
 <div class="container">
+  まだ完成してないこのページ
   <%= render "timelines/form", create:@create %>
   <% @posts.each do |p| %>
     <% if following?(@user.followings_list,p.user) || p.user == current_user %>
