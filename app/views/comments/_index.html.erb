@@ -1,6 +1,4 @@
-<h5><%= "コメント一覧（#{comments.count}件)"%></h5>
+<h5><%= "コメント（#{post.comments.size})"%></h5>
 <hr>
 
-<% comments.each do |comment| %>
-  <%=  render 'comments/hide_comments', comment: comment ,user:user,post:post%>
-<% end %>
+<%= render partial:'comments/hide_comments', collection: post.comments, as: :comment,locals: { post:post } %>

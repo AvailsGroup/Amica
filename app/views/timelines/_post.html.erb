@@ -1,4 +1,4 @@
-<%= javascript_pack_tag 'timeline/main', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'timeline/main' %>
 <style>
     #back {
         display: none;
@@ -8,61 +8,87 @@
         top: 0;
         z-index: 10000;
     }
+
+    .send {
+        margin-right: 2px;
+        margin-bottom: 2px;
+        color: #0d6efd;
+        border: none;
+    }
+
+    .im {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .red{
+        color: red;
+    }
 </style>
 <div class="panel-content panel-activity">
   <div class="d-flex text-muted">
-    <%= link_to profile_path(user.find(post.userid).userid), style: "color:black" do %>
-      <% if user.find(post.userid).image.nil? %>
+    <%= link_to profile_path(post.user.userid), style: "color:black" do %>
+      <% if post.user.image.nil? %>
         <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
       <% else %>
-        <%= image_tag "/user_images/#{user.find(post.userid).image}", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+        <%= image_tag "/user_images/#{post.user.image}", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
       <% end %>
     <% end %>
-
-
     <p class="pb-3 mb-0 lh-sm w-100">
-      <strong class="text-dark" style="font-size:20px;margin: 0"><%= user.find(post.userid).nickname %></strong>
-      <span class="text-gray small" style="margin: 0">@<%= user.find(post.userid).userid %></span>
+      <strong class="text-dark" style="font-size:20px;margin: 0"><%= post.user.nickname %></strong>
+      <span class="text-gray small" style="margin: 0">@<%= post.user.userid %></span>
       <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %></span>
       <br/>
       <br/>
-      <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= html_escape(html_with_link_to_hashtag((post.content))).gsub(/\r\n|\r|\n/, "<br />").html_safe %></span>
+      <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= html_escape(html_with_link_to_hashtag(h(post.content).html_safe)).gsub(/\r\n|\r|\n/, "<br />").html_safe %></span>
       <br/>
     </p>
   </div>
-  <div class="d-flex justify-content-between" style="margin-left: 50px">
+  <div class="d-flex pb-3  justify-content-between" style="margin-left: 50px">
     <% if post.image? %>
-      <%= image_tag post.image.url, style: "width: 200px; height: 200px;" , "data-lity" => "data-lity"%>
+      <%= image_tag post.image.url, "data-lity" => "data-lity", class: "im" %>
     <% end %>
   </div>
-
-  <div class="d-flex justify-content-between">
-
-    <div style="margin-left: 50px">
+  <div class="d-flex justify-content-between" style="margin-left: 45px">
+    <div class="d-flex flex-row">
       <span class="likes">
-        <% if current_user.liked_by?(post.id) %>
-          <%= link_to timeline_like_path(post.id, current_user.id), method: :delete, remote: true do %>
+        <% if current_user.liked_by?(post) %>
+          <%= button_to timeline_like_path(post.id, current_user.id), method: :delete, remote: true, class: "send bg-white", style: "height: 15.5px;padding: 0", data: { disable_with: "<i class='fas fa-heart'></i>" } do %>
             <i class="fas fa-heart"></i>
           <% end %>
-          <%= post.likes.count %>
         <% else %>
-          <%= link_to timeline_likes_path(post.id), method: :post, remote: true do %>
+          <% case rand(1..65536) %>
+            <% when 1 then
+                 icon = '<i class="fas fa-hand-holding-heart red"></i>'
+                 current_user.achievement.change_rare_like #1/65536 %>
+            <% when 2..6 then icon = '<i class="fas fa-laugh-wink"></i>'#1/16384 %>
+            <% when 11..19 then icon = '<i class="fab fa-yarn"></i>'#1/8192 %>
+            <% when 20..28 then icon = '<i class="fab fa-node-js"></i>'#1/8192 %>
+            <% when 29..37 then icon = '<i class="fab fa-yarn"></i>'#1/8192 %>
+            <% when 38..103 then icon = '<i class="fas fa-rocket"></i>' #1/1000 %>
+            <% when 1000..1261 then icon = '<i class="fas fa-mug-hot"></i>' #1/250 %>
+            <% when 2000..2654 then icon = '<i class="fas fa-heartbeat"></i>' #1/100 %>
+            <% else icon = '<i class="fas fa-heart"></i>' %>
+          <% end %>
+          <%= button_to timeline_likes_path(post.id), method: :post, remote: true, class: "send bg-white", style: "height: 15.5px;padding: 0", data: { disable_with: icon } do %>
             <i class="far fa-heart"></i>
           <% end %>
-          <%= post.likes.count %>
         <% end %>
       </span>
-      <span class="comments">
-        <%= link_to timeline_path(post.id) do %>
-          <i class="far fa-comment-alt" style="height: 15.5px"></i>
-        <% end %>
-        <%= post.comments.count %>
+      <span>
+        <%= post.likes.size %>
+        <span class="comments">
+          <%= link_to timeline_path(post.id) do %>
+            <i class="far fa-comment-alt" style="height: 15.5px"></i>
+            <span class="text-dark"><%= post.comments.size %></span>
+          <% end %>
+        </span>
       </span>
     </div>
-
     <div>
-      <% if post.userid == current_user.id %>
-        <%= link_to(timeline_path(post.id), method: :delete) do %>
+      <% if post.user == current_user %>
+        <%= button_to(timeline_path(post.id), class: "send bg-white", method: :delete, data: { disable_with: "削除中..." }) do %>
           <i class="far fa-trash-alt"></i>
         <% end %>
       <% end %>

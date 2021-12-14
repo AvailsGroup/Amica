@@ -12,6 +12,7 @@ import '@fortawesome/fontawesome-free/js/all';
 import "lity"
 import "cropperjs"
 
+
 Rails.start()
 ActiveStorage.start()
 
