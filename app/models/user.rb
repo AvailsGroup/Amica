@@ -40,28 +40,28 @@ class User < ApplicationRecord
 
   validates :userid,
             uniqueness: { case_sensitive: false },
-            format: { with: /\Afollow\z/i },
+            format: { without: /\Afollow\z/i },
             length: { minimum: 1, maximum: 20 },
             allow_nil: true
 
 
   validates :userid,
             uniqueness: { case_sensitive: false },
-            format: { with: /\Afollower\z/i },
+            format: { without: /\Afollower\z/i },
             length: { minimum: 1, maximum: 20 },
             allow_nil: true
 
 
   validates :userid,
             uniqueness: { case_sensitive: false },
-            format: { with: /\Afriends\z/i },
+            format: { without: /\Afriends\z/i },
             length: { minimum: 1, maximum: 20 },
             allow_nil: true
 
 
   validates :userid,
             uniqueness: { case_sensitive: false },
-            format: { with: /\Apickup\z/i },
+            format: { without: /\Apickup\z/i },
             length: { minimum: 1, maximum: 20 },
             allow_nil: true
 
