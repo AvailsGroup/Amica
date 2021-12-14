@@ -23,16 +23,11 @@ Rails.application.routes.draw do
 
   resources :maller
 
+  get 'setting' => 'pages#setting'
+  get 'faq' => 'pages#faq'
+
   #pages---------------
   resources :pages
-  resources :communities
-  resources :searches
-  resources :chats
-
-  resources :mypages
-  post 'mypages/nickname', to:'mypages#update_nickname'
-  post 'mypages/name', to:'mypages#update_name'
-  get 'users/setting' => 'pages#setting'
 
   #communities---------
   resources :communities do
@@ -57,24 +52,26 @@ Rails.application.routes.draw do
 
 
   #pages---------------
-  resources :pages, only:[:index,:show] do
-    post "favorite/user_create" => "favorite#user_create"
-    delete "favorite/community_delete" => "favorite#community_destroy"
-    post "favorite/community_create" => "favorite#community_create"
-    delete "favorite/user_delete" => "favorite#user_destroy"
+  resources :pages, only:[:index] do
+    post 'favorite/user_create' => 'favorite#user_create'
+    delete 'favorite/community_delete' => 'favorite#community_destroy'
+    post 'favorite/community_create' => 'favorite#community_create'
+    delete 'favorite/user_delete' => 'favorite#user_destroy'
   end
-  post "page/user"=>"pages#user"
-  post "page/community"=>"pages#community"
+  post 'page/user'=>'pages#user'
+  post 'page/community'=>'pages#community'
 
   #profiles------------
   resources :profiles do
     resources :relationships, only: [:create,:destroy]
     resources :achievements, only: [:update]
+    collection do
+      get :follow
+      get :follower
+      get :friends
+      get :pickup
+    end
   end
-  get 'profile/search' => 'profiles#search'
-  get 'profile/follow' => 'profiles#follow'
-  get 'profile/follower' => 'profiles#follower'
-  get 'profile/friends' => 'profiles#friends'
 
   #chats--------------
   resources :chats
@@ -85,7 +82,6 @@ Rails.application.routes.draw do
   end
   post 'search/user' => 'searches#user'
   post 'search/community' => 'searches#community'
-
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'
