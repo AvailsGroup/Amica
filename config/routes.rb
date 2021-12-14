@@ -85,6 +85,8 @@ Rails.application.routes.draw do
   post 'search/user' => 'searches#user'
   post 'search/community' => 'searches#community'
 
+  #operation_message------------
+  resources :operation_message
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'

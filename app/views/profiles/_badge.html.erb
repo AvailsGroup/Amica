@@ -101,31 +101,7 @@
   <% end %>
 <% end %>
 
-<% if @achievement.rare_like %>
-  <div class="amica-badge good-effect">
-    <span class="at-badge" style="color: red"><i class="fas fa-hand-holding-heart"></i></span>
-    <div class="badge-description">超低確率のいいねエフェクトを引いた!</div>
-  </div>
-<% end %>
 
-<% if @achievement.niceLv1 %>
-  <div class="amica-badge niceLv1-badge">
-    <span class="at-badge" style="color: green"><i class="fas fa-thumbs-up"></i></span>
-    <div class="badge-description">運営からの特別バッジLv1</div>
-  </div>
-  <% if @achievement.niceLv2 %>
-    <div class="amica-badge niceLv2-badge">
-      <span class="at-badge" style="color: orange"><i class="fas fa-thumbs-up"></i></span>
-      <div class="badge-description">運営からの特別バッジLv2</div>
-    </div>
-    <% if @achievement.niceLv3 %>
-      <div class="amica-badge niceLv3-badge">
-        <span class="at-badge" style="color: red"><i class="fas fa-thumbs-up"></i></span>
-        <div class="badge-description">運営からの特別バッジLv3</div>
-      </div>
-    <% end %>
-  <% end %>
-<% end %>
 <% if @user.admin %>
   <div class="amica-badge admin-badge">
     <span class="at-badge" style="color: rgba(29,144,190,0.8)"><i class="fas fa-crown"></i></span>

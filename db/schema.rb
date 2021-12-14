@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_12_191438) do
+ActiveRecord::Schema.define(version: 2021_12_13_002036) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -48,6 +48,13 @@ ActiveRecord::Schema.define(version: 2021_12_12_191438) do
     t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "blocks", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "block_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -129,7 +136,7 @@ ActiveRecord::Schema.define(version: 2021_12_12_191438) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.text "grade", default: "学科"
+    t.text "grade", default: "0"
     t.integer "school_class", default: 0
     t.integer "number", default: 0
     t.text "student_id", default: "0000000"
@@ -150,6 +157,13 @@ ActiveRecord::Schema.define(version: 2021_12_12_191438) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.integer "userid"
+    t.text "report"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -214,6 +228,8 @@ ActiveRecord::Schema.define(version: 2021_12_12_191438) do
     t.string "nickname"
     t.string "userid"
     t.boolean "admin", default: false
+    t.integer "grade"
+    t.integer "class_number"
     t.string "image"
     t.boolean "ban", default: false
     t.integer "warning", default: 0

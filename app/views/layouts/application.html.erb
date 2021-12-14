@@ -18,9 +18,7 @@
   <nav class="navbar navbar-expand-lg navbar-light p-0 m-0" id="main-nav">
     <div class="container-fluid">
       <% if user_signed_in? %>
-        <%= link_to pages_path, class: "link" do %>
-          <%= image_tag "/user_images/default_icon.png", class: "amica_icon" %>
-        <% end %>
+
         <%= link_to pages_path, class: "link" do %>
           <h2 style="margin-left:2px;margin-top: 8px;color: rgba(29,144,190,0.8)">Amica</h2>
         <% end %>
@@ -32,6 +30,9 @@
           <div class="navbar-nav me-auto m-0 mb-lg-0"></div>
           <ul class="navbar-nav d-flex">
             <li class="nav-item">
+              <%= link_to operation_message_index_path, class: "icons nav-link" do %>
+                <i class="fas fa-exclamation-circle"></i>お知らせ<span class="notice badge bg-light text-dark rounded-pill align-text-bottom">100</span>
+              <% end %>
               <%= link_to pages_path, class: "icons nav-link" do %>
                 <i class="fas fa-bell"></i>通知<span class="notice badge bg-light text-dark rounded-pill align-text-bottom">100</span>
               <% end %>
