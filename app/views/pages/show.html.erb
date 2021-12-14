@@ -1,4 +1,88 @@
-<h1>こんにちは、<%= current_user.nickname %>さん</h1>
-<p>ユーザー用ページです。</p>
+<%= stylesheet_link_tag 'help', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
 
+      <!-- Tips Widget -->
+      <!--===================================================-->
+      <div class="mar-btm">
+        <h4 class="text-thin"><i class="fa fa-lightbulb-o fa-lg fa-fw text-warning"></i> Useful tips</h4>
+        <p class="text-muted mar-top">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
+        <div class="list-group bg-trans">
+          <a class="list-group-item" href="#"><span class="badge badge-purple badge-icon badge-fw pull-left"></span> Lorem ipsum</a>
+          <a class="list-group-item" href="#"><span class="badge badge-info badge-icon badge-fw pull-left"></span> Consectetuer adipiscing</a>
+          <a class="list-group-item" href="#"><span class="badge badge-pink badge-icon badge-fw pull-left"></span> Sed diam nonummy</a>
+          <a class="list-group-item" href="#"><span class="badge badge-success badge-icon badge-fw pull-left"></span> Euismod tincidunt</a>
+        </div>
+      </div>
+      <!--===================================================-->
 
+      <hr>
+
+      <!-- Contact us widget -->
+      <!--===================================================-->
+      <div class="mar-btm">
+        <h4 class="text-thin"><i class="fa fa-question-circle fa-lg fa-fw text-primary"></i> Can't find the answer? </h4>
+        <p class="text-muted mar-top">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
+        <a href="#" class="btn btn-primary">Contact us</a>
+      </div>
+      <!--===================================================-->
+
+    </div>
+    <div class="col-md-9">
+      <div class="panel">
+        <div class="panel-body">
+
+          <!-- GENERAL -->
+          <!--===================================================-->
+          <h3 class="pad-all bord-btm text-thin">Q&A</h3>
+          <div id="demo-gen-faq" class="panel-group accordion">
+            <div class="bord-no pad-top">
+              <div class="container">
+                <div class="row justify-content-center">
+                  <div class="col-12 col-sm-10 col-lg-8">
+                    <div class="accordion faq-accordian shadow-sm" id="faqAccordion">
+                      <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                        <div class="card-header" id="headingTwo">
+                          <h6 data-bs-toggle="collapse" href="#collapseOne" role="button" aria-expanded="false" aria-controls="collapseOne">Q.ライオンキングのイノシシはどうやって討伐しますか？<span class="lni-chevron-up"></span></h6>
+                        </div>
+                        <div class="collapse" id="collapseOne" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                          <div class="card-body">
+                            <p>A.あいつは討伐できませんざまぁwww</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                        <div class="card-header" id="headingTwo">
+                          <h6 data-bs-toggle="collapse" href="#collapseTwo" role="button" aria-expanded="false" aria-controls="collapseTwo">Q.俺に彼女はできますか？<span class="lni-chevron-up"></span></h6>
+                        </div>
+                        <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                          <div class="card-body">
+                            <p>A.来世に期待しな</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                        <div class="card-header" id="headingThree">
+                          <h6 data-bs-toggle="collapse" href="#collapseThree" role="button" aria-expanded="false" aria-controls="collapseThree">Q.tomomaruパチンコで儲けてる？<span class="lni-chevron-up"></span></h6>
+                        </div>
+                        <div class="collapse" id="collapseThree" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                          <div class="card-body">
+                            <p>A.tomomaruは6万負けてました</p>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/contact' => 'maller#new'
   get '/static' => 'home#static'
   get '/privacy' => 'home#privacy'
+  get '/help_page' => 'home#help_page'
   post 'maller/create', to: 'maller#create'
 
   resources :maller
