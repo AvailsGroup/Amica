@@ -15,8 +15,15 @@
             </div>
             <div class="names">
               <h2 class="username"><%= @user.name %></h2>
-              <p style="margin-bottom: 0">(<%= @user.nickname %>)</p>
+              <p style="margin-bottom: 0">(<%= @user.nickname %>)
+                <% if following?(@user.followings_list, @current) && !matchers?(@user,@current) %>
+                  <i class="fas fa-user-plus"></i>
+                <% elsif matchers?(@user,@current) %>
+                    <i class="fas fa-user-friends"></i>
+                <% end %>
+              </p>
               <p>@<%= @user.userid %></p>
+
             </div>
           </div>
         </div>
@@ -101,13 +108,13 @@
         <div class="panel-heading m-3">
           <h3 class="page-header">タグ、趣味</h3>
           <p class="page-subtitle">
-            <% @user.tag_list.each do |t| %>
+            <% @user.tags.pluck(:name).each do |t| %>
               <%= link_to search_tag_path(t) do %>
                 <span>#<%= t %></span>
               <% end %>
             <% end %>
 
-            <% if @user.tag_list.empty? %>
+            <% if @user.tags.pluck(:name).empty? %>
               まだタグを入力していないようです！
             <% end %>
           </p>

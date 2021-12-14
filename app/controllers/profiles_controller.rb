@@ -2,6 +2,7 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
   helper_method :following?
+  helper_method :matchers?
 
   def index
     @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
@@ -14,13 +15,15 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @user = User.find_by(userid: params[:id])
+    @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+    @user = @users.find_by(userid: params[:id])
+    @current = @users.find(current_user.id)
     if @user.nil?
       redirect_to profiles_path, notice: "そのユーザーidは存在しませんでした"
       return
     end
     @profile = @user.profile
-    @following = current_user.followings_list
+    @following = @current.followings_list
     @communities = Community.includes([:community_members, :user, :tags]).where(id: @user.community_member.select(:community_id))
 
     @friends_count = @user.matchers.size

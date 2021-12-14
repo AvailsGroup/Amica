@@ -38,6 +38,34 @@ class User < ApplicationRecord
             length: { minimum: 1, maximum: 20 },
             allow_nil: true
 
+  validates :userid,
+            uniqueness: { case_sensitive: false },
+            format: { with: /\Afollow\z/i },
+            length: { minimum: 1, maximum: 20 },
+            allow_nil: true
+
+
+  validates :userid,
+            uniqueness: { case_sensitive: false },
+            format: { with: /\Afollower\z/i },
+            length: { minimum: 1, maximum: 20 },
+            allow_nil: true
+
+
+  validates :userid,
+            uniqueness: { case_sensitive: false },
+            format: { with: /\Afriends\z/i },
+            length: { minimum: 1, maximum: 20 },
+            allow_nil: true
+
+
+  validates :userid,
+            uniqueness: { case_sensitive: false },
+            format: { with: /\Apickup\z/i },
+            length: { minimum: 1, maximum: 20 },
+            allow_nil: true
+
+
   has_one :profile
   accepts_nested_attributes_for :profile, update_only: true
 

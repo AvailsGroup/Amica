@@ -67,7 +67,6 @@ Rails.application.routes.draw do
     resources :relationships, only: [:create,:destroy]
     resources :achievements, only: [:update]
     collection do
-      get :search
       get :follow
       get :follower
       get :friends
