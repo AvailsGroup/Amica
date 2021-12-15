@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :communities
   resources :searches
   resources :chats
+  resources :operation_message
 
   resources :mypages
   post 'mypages/nickname', to:'mypages#update_nickname'
@@ -86,7 +87,7 @@ Rails.application.routes.draw do
   post 'search/community' => 'searches#community'
 
   #operation_message------------
-  resources :operation_message
+  resources :operation_messages
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'

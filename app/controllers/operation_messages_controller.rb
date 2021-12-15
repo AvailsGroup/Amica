@@ -1,0 +1,2 @@
+class OperationMessagesController < ApplicationController
+end
