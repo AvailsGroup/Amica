@@ -72,6 +72,7 @@ Rails.application.routes.draw do
 
   #reports--------------
   get  "reports/new"  => "reports#new"
+  post 'reports/create', to: 'reports#create'
 
   #searches-----------
   resources :searches, only: [:index] do
