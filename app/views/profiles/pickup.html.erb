@@ -1,0 +1,5 @@
+<% @users.each do |u| %>
+  <%= u.name %><br/>
+  <%= u.tags.pluck(:name) %>
+  <hr/>
+<% end %>

@@ -1,0 +1,2 @@
+module CommunityChatHelper
+end

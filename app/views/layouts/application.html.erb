@@ -74,7 +74,7 @@
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to users_setting_path, class: "link" do %>
+                  <%= link_to setting_path, class: "link" do %>
                     <span class="link nav-link">設定</span>
                   <% end %>
                 </li>
@@ -123,10 +123,10 @@
     <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-4 mx-0">
       <div class="col mt-3">
         <h5 class="mb-2">ガイド</h5>
-        <p class="mb-1 small"><%= link_to "About", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "Amicaについて", about_path, class: "text-decoration-none text-light" %></p>
         <p class="mb-1 small"><%= link_to "利用規約", static_path, class: "text-decoration-none text-light" %></p>
         <p class="mb-1 small"><%= link_to "プライバシーポリシー", privacy_path, class: "text-decoration-none text-light" %></p>
-        <p class="mb-1 small"><%= link_to "お問い合わせ", contact_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "Q&A", faq_path, class: "text-decoration-none text-light" %></p>
         <p class="mb-1 small"><%= link_to "ヘルプ", about_path, class: "text-decoration-none text-light" %></p>
       </div>
       <div class="col mt-3">

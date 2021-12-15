@@ -26,10 +26,6 @@ class PagesController < ApplicationController
     end
   end
 
-  def show
-    @user = current_user
-  end
-
   def user
     @favorite = Favorite.all
     @users = User.preload(:profile, :favorite, :followers, :followings, :tags)
@@ -57,6 +53,14 @@ class PagesController < ApplicationController
     end
   end
 
+  def setting
+
+  end
+
+  def faq
+    @user = current_user
+  end
+
   protected
 
   def is_user_favorite?(favorite, user, other_user)
@@ -66,4 +70,6 @@ class PagesController < ApplicationController
   def is_community_favorite?(favorite , user, community)
     favorite.any? { |u| u.user_id == user.id } && @favorite.any? { |u| u.community_id == community.id }
   end
+
+
 end
