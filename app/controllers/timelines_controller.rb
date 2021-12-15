@@ -55,11 +55,19 @@ class TimelinesController < ApplicationController
   end
 
   def latest
-    view_parameter
+    @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
+    @user = @users.find(current_user.id)
+    @post = Post.includes(:user, :likes, :comments)
+    @posts = @post.order(created_at: :desc).page(params[:page]).per(30)
+    @create = Post.new
   end
 
   def pickup
-    view_parameter
+    @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
+    @user = @users.find(current_user.id)
+    @users = @users.sort_by { |u| (@user.tags.pluck(:name) & u.tags.pluck(:name)).size }
+    @users = @users.reverse
+    @create = Post.new
   end
 
   private
