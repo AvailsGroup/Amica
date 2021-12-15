@@ -1,9 +1,20 @@
 <%if current_user.admin==true %>
+  <%= form_with model: @operationmessage, local: true do |form| %>
 
-  aaaa
+    <p><%= form.label :title %><br>
+      <%= form.text_field :title %> #titleの入力フォーム生成
+    </p>
 
-  <%end %>
+    <p><%= form.label :body %><br>
+      <%= form.text_area :body %> #bodyの入力フォーム生成
+    </p>
+       <%=form.label :time %><br>
+      <%=form.datetime_field :time %>
+    <p><%= form.submit %> #送信ボタンを生成
+    </p>
 
+  <% end %>
+<%end %>
 <div class="container">
   <div class="row justify-content-md-center border border-dark">
     <div class="col col-lg-2">
