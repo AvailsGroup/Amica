@@ -1,9 +1,17 @@
 <h1>Chat一覧</h1>
-<% @latest_message.each do |chat| %>
-  <% chat.each do |cr| %>
-    <%= cr.room_id %>
-    <%= cr.content %>
+
+<% num = 0
+   while num < @room_partner.size do %>
+
+  <%= link_to chat_path(@room_partner[num].userid) do %>
+    <% if @room_partner[num].image.nil? %>
+      <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+    <% else %>
+      <%= image_tag "/user_images/#{ @room_partner[num].image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+    <% end %>
+    <%= @room_partner[num].name %>
+    <%= @latest_message[num] %>
   <% end %>
+  <br>
+   <% num = num + 1 %>
 <% end %>
-
-
