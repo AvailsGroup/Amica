@@ -7,7 +7,7 @@
   padding: 4px 10px 7px !important;
   border-radius: 10px 10px 10px 0;
   background: #ffffff;
-  font-size: 12px;
+  font-size: 16px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
   word-wrap: break-word;
   border: 1px solid #C6C6C6;
@@ -19,7 +19,7 @@
   background: #ffbf00;
   border-radius: 10px 10px 0 10px;
   padding: 4px 10px 7px !important;
-  font-size: 12px;
+  font-size: 16px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
   word-wrap: break-word;
 }
@@ -29,6 +29,7 @@
 }
 
 .reply {
+  position: fixed;
   bottom: 0;
   left:0;
   height: auto;
@@ -53,4 +54,11 @@
   position: fixed;
   top: 10%;
   left:0;
+}
+.modal-icons{
+  color: #6c757d;
+}
+
+.modal-item{
+  width: 50%;
 }

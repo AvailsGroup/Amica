@@ -1,17 +1,25 @@
 <%= stylesheet_link_tag 'chats', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<div id="body">
-<div id="chat" class="m-4">
-    <div id="messages">
-      <% @message.each do |p| %>
-           <%= render 'chats/chat_message',message:p %>
-      <% end %>
-      <div id="append"></div>
-      <div class="clear"></div>
-    </div>
-</div>
+<script>
+    document.addEventListener("DOMContentLoaded",function bottom_scroll(){
+        var elm = document.documentElement;
+        var bottom = elm.scrollHeight - elm.clientHeight;
+        window.scroll(0, bottom);
+    });
+</script>
 
-      <div class="mt-2 row messageBox reply">
+<div id="body">
+  <div id="chat"  style="margin:1% 1% 70px 1%">
+      <div id="messages">
+        <% @message.each do |p| %>
+             <%= render 'chats/chat_message',message:p %>
+        <% end %>
+        <div id="append"></div>
+        <div class="clear"></div>
+      </div>
+  </div>
+
+      <div class="mt-2 row messageBox reply d-flex justify-content-center">
         <div class="col-sm-12 messageBox-inner">
           <h4 class="m-0" style="float: left">
             To:
@@ -22,17 +30,62 @@
             <% end %>
             <%=  @invited_user.name %>
           </h4>
-          <div class="row g-3">
-            <div class="col">
+          <span class="clear"></span>
+          <div class="row ">
+            <div class="w-100 d-flex ">
              <input type="hidden" id="room_id" value= <%= @room_id %> data-behavior="chat_speaker">
              <input type="hidden" id="user_id" value= <%= current_user.id %> data-behavior="chat_speaker">
             <%= text_field_tag  :content, nil, class:"form-control", placeholder:"message", data: {behavior: "chat_speaker"} %>
+                <label><!-- Button trigger modal -->
+                  <button style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+                  <span class="m-1" style="font-size: 1.6rem;color: #5e5e5e"> <i class="fas fa-th-large"></i></span>
+                </label>
             </div>
           </div>
         </div>
       </div>
-
 </div>
 
-
-
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">menu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+        <div class=" mb-0 d-flex ">
+          <div class="modal-item shadow-sm mb-5 bg-body rounded">
+            <%= link_to  chats_path,class: " modal-icons nav-link" do %>
+              <i class="fas fa-comments"></i>
+              <p class="small">チャット</p>
+            <% end %>
+          </div>
+          <div class="modal-item shadow-sm mb-5 bg-body rounded">
+            <%= link_to  communities_path,class: "modal-icons nav-link" do %>
+              <i class="fas fa-users"></i>
+              <p class="small">コミュニティ</p>
+            <% end %>
+          </div>
+        </div>
+          <div class="mb-0 d-flex ">
+          <div class="modal-item shadow-sm  mb-5 bg-body rounded">
+            <%= link_to  timelines_path,class: "modal-icons nav-link" do %>
+              <i class="fas fa-clock"></i>
+              <p class="small">タイムライン</p>
+            <% end %>
+          </div>
+          <div class="modal-item shadow-sm  mb-5 bg-body rounded">
+            <%= link_to  profiles_path,class: "modal-icons nav-link" do %>
+              <i class="fas fa-address-card"></i>
+              <p class="small">友達</p>
+            <% end %>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
