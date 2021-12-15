@@ -3,7 +3,7 @@
   <div class="d-flex align-items-center p-3 my-3 text-dark bg-light rounded shadow-sm">
     <div class="lh-1">
       <nav class="navbar">
-        <%= form_with url: search_user_path,class: "container-fluid" do |f| %>
+        <%= form_with url: search_user_path, class: "container-fluid" do |f| %>
           <p class="me-3">ユーザーを検索</p>
           <div class="input-group">
             <span class="input-group-text" id="basic-addon1">@</span>
@@ -15,31 +15,27 @@
   </div>
 
   <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-2 row-cols-xxl-2 g-4　g-lg-4　p-3　my-3" id="community">
-    <%= render 'profiles/list', name: "友達", count: @friends.size, list: @friends.first(5), path: profile_friends_path %>
-    <%= render 'profiles/list', name: "フォロー", count: @following.size, list: @following.first(5), path: profile_follow_path %>
-    <%= render 'profiles/list', name: "フォロワー", count: @follower.size, list: @follower.first(5), path: profile_follower_path %>
+    <%= render 'profiles/list', name: "友達", count: @friends.size, list: @friends.first(5), path: friends_profiles_path %>
+    <%= render 'profiles/list', name: "フォロー", count: @following.size, list: @following.first(5), path: follower_profiles_path %>
+    <%= render 'profiles/list', name: "フォロワー", count: @follower.size, list: @follower.first(5), path: follower_profiles_path %>
 
     <div class="col-md-6">
       <div class="my-3 p-3 bg-white rounded shadow-sm">
         <h6 class="border-bottom pb-2 mb-0">おすすめユーザー</h6>
         <% count = 0 %>
-        <% @users.shuffle.each do |user| %>
+        <% @users.each do |user| %>
           <% if user.userid? %>
-            <% unless current_user.id == user.id %>
-              <% unless following?(@following, user) %>
-                <%= render "profiles/user", user: user %>
-                <% count += 1 %>
-                <% break if count > 4 %>
-              <% end %>
+            <% unless current_user.id == user.id || following?(@following, user) %>
+              <%= render "profiles/user", user: user %>
+              <% count += 1 %>
+              <% break if count > 4 %>
             <% end %>
           <% end %>
         <% end %>
-        <% unless count == 0 && count > 5 %>
-          <small class="d-block text-end mt-3">
-            <!-- TODO -->
-            <%= link_to "すべて表示", profile_friends_path%>
-          </small>
-        <% end %>
+        <small class="d-block text-end mt-3">
+          <!-- TODO -->
+          <%= link_to "すべて表示", pickup_profiles_path %>
+        </small>
       </div>
     </div>
   </div>

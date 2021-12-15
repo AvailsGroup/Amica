@@ -12,7 +12,7 @@ class Users::UnlocksController < Devise::UnlocksController
   # end
 
   # GET /resource/unlock?unlock_token=abcdef
-  # def show
+  # def question
   #   super
   # end
 
