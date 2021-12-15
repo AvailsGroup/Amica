@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   get '/privacy' => 'home#privacy'
   get '/help_page' => 'home#help_page'
   post 'maller/create', to: 'maller#create'
-
   resources :maller
 
   #communities---------
@@ -56,7 +55,6 @@ Rails.application.routes.draw do
   post 'page/community'=>'pages#community'
   get 'setting' => 'pages#setting'
   get 'faq' => 'pages#faq'
-
   #profiles------------
   resources :profiles do
     resources :relationships, only: [:create,:destroy]
@@ -71,6 +69,9 @@ Rails.application.routes.draw do
 
   #chats--------------
   resources :chats
+
+  #reports--------------
+  get  "reports/new"  => "reports#new"
 
   #searches-----------
   resources :searches, only: [:index] do

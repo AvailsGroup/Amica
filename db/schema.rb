@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_12_191438) do
+ActiveRecord::Schema.define(version: 2021_12_15_065004) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -76,13 +76,6 @@ ActiveRecord::Schema.define(version: 2021_12_12_191438) do
     t.index ["user_id"], name: "index_community_members_on_user_id"
   end
 
-  create_table "community_tags", force: :cascade do |t|
-    t.integer "community_id"
-    t.string "tag"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "favorite_user_id"
@@ -109,13 +102,6 @@ ActiveRecord::Schema.define(version: 2021_12_12_191438) do
   create_table "likes", force: :cascade do |t|
     t.integer "post_id"
     t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -150,6 +136,17 @@ ActiveRecord::Schema.define(version: 2021_12_12_191438) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.integer "reported_user_id"
+    t.integer "user_id"
+    t.string "message"
+    t.integer "post_id"
+    t.integer "comment_id"
+    t.integer "community_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "taggings", force: :cascade do |t|
