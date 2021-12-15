@@ -1,5 +1,9 @@
-<h1>コチャ♡</h1>
-<p>うるせぇ～～～～！！！！！</p>
-<p>しらねぇ～～～～～～～！！！！！</p>
-<p>FinalFant</p>
-<p>asy</p>
+<h1>Chat一覧</h1>
+<% @latest_message.each do |chat| %>
+  <% chat.each do |cr| %>
+    <%= cr.room_id %>
+    <%= cr.content %>
+  <% end %>
+<% end %>
+
+

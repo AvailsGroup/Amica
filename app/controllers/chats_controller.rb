@@ -4,6 +4,15 @@ class ChatsController < ApplicationController
 
   def index
     @user = current_user
+    latest_message?
+
+    @latest_message.each do |chat|
+      chat.each do |cr|
+        cr.room_id
+        cr.content
+      end
+    end
+
   end
 
   def show
@@ -17,6 +26,15 @@ class ChatsController < ApplicationController
 end
 
 private
+
+def latest_message?
+  @latest_message = []
+  @chatroom = Room.where(started_userid: current_user.id).or(Room.where(invited_userid: current_user.id))
+  @chatroom.each do |cr|
+    @message = Message.where(room_id: cr.id)
+    @latest_message << @message.order(updated_at: :desc).limit(1).to_a
+  end
+end
 
 def in_room?
   @room = Room.find_by(started_userid: current_user.id, invited_userid: @invited_user.id)
