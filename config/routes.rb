@@ -27,9 +27,11 @@ Rails.application.routes.draw do
   resources :communities do
     resources :manage, only: [:create, :destroy]
     get '/members' => 'communities#members'
+    collection do
+      get :pickup
+      get :joined
+    end
   end
-  get 'community/pickup' => 'communities#pickup'
-  get 'community/joined' => 'communities#joined'
 
 
   #timelines-----------
