@@ -74,6 +74,8 @@ class User < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
+  has_many :report
+
   has_one :favorite
 
   has_one :achievement, dependent: :destroy
