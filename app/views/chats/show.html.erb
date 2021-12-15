@@ -1,16 +1,7 @@
 <%= stylesheet_link_tag 'chats', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<h1>Chat room</h1>
-  <h4 class="m-3">
-    <% if @invited_user .image.nil? %>
-    <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-    <% else %>
-    <%= image_tag "/user_images/#{  @invited_user .image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
-    <% end %>
-    <%=  @invited_user.name %>
-  </h4>
-
-<div id="body" class="m-4">
+<div id="body">
+<div id="chat" class="m-4">
     <div id="messages">
       <% @message.each do |p| %>
            <%= render 'chats/chat_message',message:p %>
@@ -22,13 +13,26 @@
 
       <div class="mt-2 row messageBox reply">
         <div class="col-sm-12 messageBox-inner">
-           <input type="hidden" id="room_id" value= <%= @room_id %> data-behavior="chat_speaker">
-           <input type="hidden" id="user_id" value= <%= current_user.id %> data-behavior="chat_speaker">
-           <%= text_field_tag  :content, nil, class:"form-control", placeholder:"message", data: {behavior: "chat_speaker"} %>
+          <h4 class="m-0" style="float: left">
+            To:
+            <% if @invited_user .image.nil? %>
+              <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+            <% else %>
+              <%= image_tag "/user_images/#{  @invited_user .image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+            <% end %>
+            <%=  @invited_user.name %>
+          </h4>
+          <div class="row g-3">
+            <div class="col">
+             <input type="hidden" id="room_id" value= <%= @room_id %> data-behavior="chat_speaker">
+             <input type="hidden" id="user_id" value= <%= current_user.id %> data-behavior="chat_speaker">
+            <%= text_field_tag  :content, nil, class:"form-control", placeholder:"message", data: {behavior: "chat_speaker"} %>
+            </div>
+          </div>
         </div>
       </div>
 
-
+</div>
 
 
 
