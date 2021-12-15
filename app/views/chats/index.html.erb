@@ -1,17 +1,29 @@
-<h1>Chat一覧</h1>
+<%= stylesheet_link_tag 'chats', media: 'all', 'data-turbolinks-track': 'reload' %>
 
+<h1>Chat</h1>
+<div class="m-3">
 <% num = 0
    while num < @room_partner.size do %>
-
-  <%= link_to chat_path(@room_partner[num].userid) do %>
-    <% if @room_partner[num].image.nil? %>
-      <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-    <% else %>
-      <%= image_tag "/user_images/#{ @room_partner[num].image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
-    <% end %>
-    <%= @room_partner[num].name %>
-    <%= @latest_message[num] %>
-  <% end %>
-  <br>
+    <div class="container">
+        <%= link_to chat_path(@room_partner[num].userid) ,style:" text-decoration:none;" do %>
+          <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <div class="d-flex pt-3">
+              <% if @room_partner[num].image.nil? %>
+                <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+              <% else %>
+                <%= image_tag "/user_images/#{ @room_partner[num].image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+              <% end %>
+              <p class="pb-3 mb-0  border-bottom w-100">
+                <strong class="d-block" style="color: black"><%= @room_partner[num].name %> (<%= @room_partner[num].nickname %>)</strong>
+                <span class="text-muted medium lh-sm"> <%= @latest_message[num] %></span>
+              </p>
+            </div>
+          </div>
+        <% end %>
+    </div>
    <% num = num + 1 %>
 <% end %>
+
+</div>
+
+

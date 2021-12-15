@@ -28,7 +28,6 @@
   clear:both;
 }
 
-
 .reply {
   position: fixed;
   z-index: 1000;
@@ -39,4 +38,15 @@
   background-color: #f5f1ee;
   padding: 10px 5px 10px 5px !important;
   margin: 0 !important;
+}
+
+.chat_inside{
+  color: #6c757d;
+  width: auto !important;
+  padding: 4px 10px 7px !important;
+  border-radius: 10px;
+  background: #ffffff;
+  font-size: 12px;
+  word-wrap: break-word;
+  border: 1px solid #C6C6C6;
 }

@@ -1,13 +1,14 @@
 <%= stylesheet_link_tag 'chats', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-  <h1 class="m-3">
+<h1>Chat room</h1>
+  <h4 class="m-3">
     <% if @invited_user .image.nil? %>
     <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
     <% else %>
     <%= image_tag "/user_images/#{  @invited_user .image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
     <% end %>
-    <%=  @invited_user.name %>Chat room
-  </h1>
+    <%=  @invited_user.name %>
+  </h4>
 
 <div id="body" class="m-4">
     <div id="messages">

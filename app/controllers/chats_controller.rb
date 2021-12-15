@@ -5,8 +5,6 @@ class ChatsController < ApplicationController
   def index
     @user = current_user
     latest_message?
-
-
   end
 
   def show
@@ -49,8 +47,8 @@ def in_room?
   if @room.nil?
     @room = Room.find_by(started_userid: @invited_user.id, invited_userid: current_user.id)
     if @room.nil?
-      Room.create(started_userid: current_user.id, invited_userid: @invited_user.id)
-      @room = Room.find_by(started_userid: current_user.id, invited_userid: @invited_user.id)
+      @room = Room.create(started_userid: current_user.id, invited_userid: @invited_user.id)
+      @room.save
     end
   end
 end
