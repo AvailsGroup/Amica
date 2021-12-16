@@ -40,11 +40,11 @@ def latest_message?
       @latest_message << @message.content.delete("\n").slice(0..50)
     end
     if cr.started_userid == current_user.id
-      @nameid = cr.invited_userid
+      @userid = cr.invited_userid
     else
-      @nameid = cr.started_userid
+      @userid = cr.started_userid
     end
-    @room_partner << User.find_by(id: @nameid)
+    @room_partner << User.find_by(id: @userid)
   end
 end
 
