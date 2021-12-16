@@ -15,11 +15,11 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
     if (data.room_id === Number(room_id)){
       if (data.user_id === Number(user_id)) {
         $('#append').append('<div class="my-1 p-1 sender">' + '<div class="messages">'
-            + '<p>' + data.content + '</p>' + '</div>' + '</div>' + ' <div class="clear"></div>' )
+            +  data.content  + '</div>' + '</div>' + ' <div class="clear"></div>' )
         bottom_scroll();
       } else {
         $('#append').append('<div class="my-1 p-1 receiver">' + '<div class="messages">'
-            + '<p>' + data.content + '</p>' + '</div>' + '</div>' + ' <div class="clear"></div>')
+            +  data.content  + '</div>' + '</div>' + ' <div class="clear"></div>')
         bottom_scroll();
       }
     }
@@ -29,10 +29,23 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
     return this.perform('speak', {message: message,room_id: room_id});
   }
 });
+
 document.addEventListener("DOMContentLoaded", function() {
-  const content = document.getElementById('content')
-  const submitButton = document.getElementById('submit_button')
-  const room_id = document.getElementById('room_id')
+  const content = document.getElementById('content');
+  const submitButton = document.getElementById('submit_button');
+  const room_id = document.getElementById('room_id');
+
+  const name = document.getElementById('user_name');
+  let screen_50width = screen.availWidth * 0.5 ;
+  window.addEventListener('resize', resizeWindow);
+  function  resizeWindow(){
+    let width_size = window.innerWidth;
+      if (screen_50width > width_size || screen_50width * 2 < 500 ) {
+        name.style.display = "none";
+      } else {
+        name.style.display = "";
+      }
+  }
 
     let $textarea = $('#content');
     const lineHeight = parseInt($textarea.css('lineHeight'));
@@ -70,6 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
 });
+
 
 function bottom_scroll(){
   var elm = document.documentElement;

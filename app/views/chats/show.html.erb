@@ -28,6 +28,8 @@
          <% else %>
            <%= image_tag "/user_images/#{  @invited_user .image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
          <% end %>
+       </h4>
+      <h4 id="user_name" class="m-0" style="float: left">
          <%=  @invited_user.name %>
        </h4>
        <span class="clear"></span>
