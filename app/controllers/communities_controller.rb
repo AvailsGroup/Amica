@@ -138,12 +138,20 @@ class CommunitiesController < ApplicationController
   end
 
   def kick
-    @community = Community.find(params[:community_id])
+    @community = Community.includes(:community_members, :tags, :user,:favorites, :community_securities).find(params[:community_id])
     permission
+    @users = User.includes(:community_member, :tags)
+    @user = @users.find(params[:id])
+    if @community.community_members.any? { |m| m.user_id == @user.id }
+      @cm = CommunityMember.find_by(user_id: @user.id, community_id: @community.id)
+      @cm.destroy
+    end
+    flash[:notice] = "ユーザーを強制退出させました。"
+    redirect_to(community_members_path(@community.id))
   end
 
   def change
-    @community = Community.find(params[:community_id])
+    @community = Community.includes(:community_members, :tags, :user,:favorites, :community_securities).find(params[:community_id])
     permission
   end
 

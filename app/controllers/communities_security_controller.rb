@@ -8,6 +8,7 @@ class CommunitiesSecurityController < ApplicationController
       @cm = CommunityMember.find_by(user_id: @user.id, community_id: @community.id)
       @cm.destroy
     end
+    flash[:notice] = "ユーザーを参加禁止にしました。"
     redirect_to(community_members_path)
   end
 
