@@ -5,7 +5,7 @@ class CommunitiesController < ApplicationController
   def index
     @users = User.includes(:community_member, :tags)
     @user = @users.find(current_user.id)
-    @community = Community.includes([:community_members, :user, :tags]).order(created_at: :desc).page(params[:page]).per(24)
+    @community = Community.includes([:community_members, :user, :tags]).order(created_at: :desc).page(params[:page]).per(36)
   end
 
   def new
@@ -115,13 +115,13 @@ class CommunitiesController < ApplicationController
     @community = Community.includes([:community_members, :user, :tags]).order(created_at: :desc).where.not(id: current_user.community_member.select(:community_id))
     @community = @community.sort_by { |u| (@user.tags.pluck(:name) & u.tags.pluck(:name)).size }
     @community = @community.reverse
-    @community = Kaminari.paginate_array(@community).page(params[:page]).per(24)
+    @community = Kaminari.paginate_array(@community).page(params[:page]).per(36)
   end
 
   def joined
     @users = User.includes(:community_member, :tags)
     @user = @users.find(current_user.id)
-    @community = Community.includes([:community_members, :user, :tags]).where(id: current_user.community_member.select(:community_id)).order(created_at: :desc).page(params[:page]).per(24)
+    @community = Community.includes([:community_members, :user, :tags]).where(id: current_user.community_member.select(:community_id)).order(created_at: :desc).page(params[:page]).per(36)
   end
 
   def members
