@@ -15,13 +15,13 @@ Rails.application.routes.draw do
   #top----------------
   get '/'=>'home#top'
   get '/about' => 'home#about'
-  get '/contact' => 'maller#new'
+  get '/contact' => 'mailer#new'
   get '/static' => 'home#static'
   get '/privacy' => 'home#privacy'
   get '/help_page' => 'home#help_page'
-  post 'maller/create', to: 'maller#create'
+  post 'mailer/create', to: 'mailer#create'
 
-  resources :maller
+  resources :mailer
 
   #communities---------
   resources :communities do
