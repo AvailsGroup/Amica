@@ -1,0 +1,19 @@
+<%if current_user.admin==true %>
+  <h1>新規投稿</h1>
+  <table>
+    <%=form_for(@post,url:{controller: 'operation_messages',action: 'create'})do |form|%>
+    <tr>
+      <th>タイトル</th>
+      <td><%= form.text_field :title %></td>
+    </tr>
+      <tr>
+        <th>投稿内容</th>
+        <td><%= form.text_field :content %></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td><%= form.submit'投稿'%></td>
+      </tr>
+    <% end %>
+  </table>
+<%end %>

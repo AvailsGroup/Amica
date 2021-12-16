@@ -1,15 +1,23 @@
 class OperationMessagesController < ApplicationController
+  def index
+    @posts=Operationmessage.all
+  end
+
+  def show
+    @post=Operationmessage.find(params[operation_messages.id])
+  end
+
   def new
-    @operationmessage=Operationmessage.new
+    @post=Operationmessage.new
   end
 
   def create
-    @operationmessage=Operationmessage.new(operationmessages_params)
-    @operationmessage.save
-    redirect_to request.referer
+    Operationmessage.create(post_params)
+    redirect_to operation_messages_path,notice: '投稿しました'
   end
+
   private
-  def operationmessages_params
-    params.require(:text).permit(:title, :body, :time)
+  def post_params
+    params.require(:operationmessage).permit(:title,:content)
   end
-end
+  end

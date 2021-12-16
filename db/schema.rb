@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_053929) do
+ActiveRecord::Schema.define(version: 2021_12_16_140637) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -122,8 +122,7 @@ ActiveRecord::Schema.define(version: 2021_12_15_053929) do
 
   create_table "operationmessages", force: :cascade do |t|
     t.string "title"
-    t.text "body"
-    t.datetime "time"
+    t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
