@@ -2,10 +2,10 @@
   <%= link_to community_path(community.id) do %>
     <div class="d-flex justify-content-between">
       <div class="d-flex text-muted pt-3">
-        <% if community.icon.nil? %>
-          <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-        <% else %>
+        <% if community.icon? %>
           <%= image_tag "/communities_image/#{community.icon}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+        <% else %>
+          <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
         <% end %>
         <p class="pb-3 mb-0 small lh-sm w-100">
           <strong class="d-block text-gray-dark"><%= community.name %></strong>

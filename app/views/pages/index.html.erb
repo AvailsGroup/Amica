@@ -15,8 +15,8 @@
           <h1>友だち</h1>
         </div>
         <% if @favorite_users.size == 0  %>
-          <div class="text-center "style="font-size: 25px; margin-top: 60px;">
-          <%= link_to "おすすめユーザを表示or検索", profiles_path %>
+          <div class="text-center " style="font-size: 18px; margin-top: 60px;">
+          <%= link_to "あなたに合った友だちを探してみましょう！", profiles_path %>
           </div>
         <% else %>
 
@@ -59,8 +59,8 @@
           <h1>コミュニティ</h1>
       </div>
         <% if @favorite_communities.size == 0  %>
-          <div class="text-center "style="font-size: 25px; margin-top: 60px;">
-            <%= link_to "コミュニティを探すor作成", "/communities/pickup" %>
+          <div class="text-center " style="font-size: 18px; margin-top: 60px;">
+            <%= link_to "あなたに合ったコミュニティを見つけてみましょう！", "/communities/pickup" %>
           </div>
         <% else %>
 
