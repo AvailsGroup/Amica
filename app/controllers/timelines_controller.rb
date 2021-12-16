@@ -63,10 +63,12 @@ class TimelinesController < ApplicationController
   end
 
   def pickup
+    @post = Post.includes(:user, :likes, :comments).where(created_at: 1.week.ago.beginning_of_day..Time.zone.now.end_of_day)
+    @posts = @post.sort_by { | p | p.likes.size }
+    @posts = @posts.reverse
+    @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(30)
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
-    @users = @users.sort_by { |u| (@user.tags.pluck(:name) & u.tags.pluck(:name)).size }
-    @users = @users.reverse
     @create = Post.new
   end
 
