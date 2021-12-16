@@ -138,6 +138,10 @@ class CommunitiesController < ApplicationController
     @user = @users.find(current_user.id)
   end
 
+  def banned
+
+  end
+
   def kick
     @community = Community.includes(:community_members, :tags, :user,:favorites, :community_securities).find(params[:community_id])
     permission
@@ -152,8 +156,13 @@ class CommunitiesController < ApplicationController
   end
 
   def change
-    @community = Community.includes(:community_members, :tags, :user,:favorites, :community_securities).find(params[:community_id])
+    @community = Community.find(params[:community_id])
     permission
+    @users = User.includes(:community_member ,:tags)
+    @user = @users.find(params[:id])
+    @community.update_attribute(:user_id, @user.id)
+    flash[:notice] = "#{@user.name}にリーダー権限を譲渡しました。"
+    redirect_to(community_members_path)
   end
 
   def community_ban?(community)

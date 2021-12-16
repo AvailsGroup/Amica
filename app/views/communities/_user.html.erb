@@ -16,10 +16,10 @@
         <% if community.user == fixed_current_user && user.user != fixed_current_user %>
           <div style="padding-top: 19px">
             <span class="text-dark" style="margin-right:10px">管理用</span>
-            <%= link_to "change/#{user.user.id}", method: :put, style: "text-decoration: none;color:red;margin-right:10px", data: { confirm: "#{user.user.name}にリーダーを譲渡します。本当によろしいですか？" } do %>
+            <%= link_to community_change_path(id:user.user.id), method: :put, style: "text-decoration: none;color:red;margin-right:10px", data: { confirm: "#{user.user.name}にリーダーを譲渡します。本当によろしいですか？" } do %>
               <i class="fas fa-people-arrows"></i>
             <% end %>
-            <%= link_to kick_communities_path(id:user.user.id,community_id:community.id), method: :delete, style: "text-decoration: none;color:red;margin-right:10px", data: { confirm: "#{user.user.name}を強制退出させます。本当によろしいですか？" } do %>
+            <%= link_to community_kick_path(id:user.user.id), method: :delete, style: "text-decoration: none;color:red;margin-right:10px", data: { confirm: "#{user.user.name}を強制退出させます。本当によろしいですか？" } do %>
               <i class="fas fa-user-minus"></i>
             <% end %>
             <%= link_to community_communities_security_index_path(id:user.user.id,community_id:community.id),method: :post, style: "text-decoration: none;color:red", data: { confirm: "#{user.user.name}を参加禁止にします。本当によろしいですか？" } do %>
