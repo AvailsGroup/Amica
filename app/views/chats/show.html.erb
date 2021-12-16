@@ -23,19 +23,21 @@
     <div class="col-sm-12 messageBox-inner">
        <h4 class="m-0" style="float: left">
          To:
-         <% if @invited_user .image.nil? %>
-           <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-         <% else %>
-           <%= image_tag "/user_images/#{  @invited_user .image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+         <%= link_to profile_path(@user.userid) do %>
+           <% if @user .image.nil? %>
+             <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+           <% else %>
+             <%= image_tag "/user_images/#{  @user .image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+           <% end %>
          <% end %>
        </h4>
       <h4 id="user_name" class="m-0" style="float: left">
-         <%=  @invited_user.name %>
+         <%=  @user.name %>
        </h4>
        <span class="clear"></span>
        <div class="row ">
          <div class="w-100 d-flex ">
-          <input type="hidden" id="room_id" value= <%= @room_id %> data-behavior="chat_speaker">
+          <input type="hidden" id="room_id" value= <%= @room.id %> data-behavior="chat_speaker">
           <input type="hidden" id="user_id" value= <%= current_user.id %> data-behavior="chat_speaker">
           <%= text_area_tag  :content, nil, class:"form-control", placeholder:"message", data: {behavior: "chat_speaker"},id:"content" %>
           <label><!-- Button trigger modal -->
