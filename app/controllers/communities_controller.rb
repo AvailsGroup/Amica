@@ -134,6 +134,12 @@ class CommunitiesController < ApplicationController
   end
 
   def kick
+    @community = Community.find(params[:community_id])
+    permission
+  end
+
+  def change
+    @community = Community.find(params[:community_id])
     permission
   end
 
@@ -145,7 +151,7 @@ class CommunitiesController < ApplicationController
 
   def permission
     unless @community.user_id == current_user.id
-      flash[:notice] = 'コミュニティを編集できるのはリーダーのみです'
+      flash[:notice] = '権限がありません。'
       redirect_to(community_path)
     end
   end

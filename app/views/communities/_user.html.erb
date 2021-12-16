@@ -13,17 +13,20 @@
             @<%= user.user.userid %>
           </p>
         </div>
-        <div style="padding-top: 19px">
-          <% if community.user == fixed_current_user %>
-            <%= link_to kick_communities_path(user.user) , style: "text-decoration: none;color:red;margin-right:10px" do %>
+        <% if community.user == fixed_current_user %>
+          <div style="padding-top: 19px">
+            <span class="text-dark" style="margin-right:10px">管理用</span>
+            <%= link_to "change/#{user.user.id}",method: :put, style: "text-decoration: none;color:red;margin-right:10px" do %>
+              <i class="fas fa-people-arrows"></i>
+            <% end %>
+            <%= link_to "kick/#{user.user.id}",method: :delete, style: "text-decoration: none;color:red;margin-right:10px" do %>
               <i class="fas fa-user-minus"></i>
             <% end %>
-            <%= link_to community_communities_security_index_path(user.user) , style: "text-decoration: none;color:red" do %>
+            <%= link_to community_communities_security_index_path(user.user), style: "text-decoration: none;color:red" do %>
               <i class="fas fa-user-alt-slash"></i>
             <% end %>
-          <% end %>
-
-        </div>
+          </div>
+        <% end %>
       </div>
     <% end %>
   </div>
