@@ -21,8 +21,6 @@ Rails.application.routes.draw do
   get '/help_page' => 'home#help_page'
   post 'mailer/create', to: 'mailer#create'
 
-  resources :mailer
-
   #communities---------
   resources :communities do
     resources :manage, only: [:create, :destroy]
