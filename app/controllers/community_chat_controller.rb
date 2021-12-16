@@ -1,0 +1,2 @@
+class CommunityChatController < ApplicationController
+end

@@ -23,19 +23,15 @@ Rails.application.routes.draw do
 
   resources :maller
 
-  get 'setting' => 'pages#setting'
-  get 'faq' => 'pages#faq'
-
-  #pages---------------
-  resources :pages
-
   #communities---------
   resources :communities do
     resources :manage, only: [:create, :destroy]
     get '/members' => 'communities#members'
+    collection do
+      get :pickup
+      get :joined
+    end
   end
-  get 'community/pickup' => 'communities#pickup'
-  get 'community/joined' => 'communities#joined'
 
 
   #timelines-----------
@@ -60,6 +56,8 @@ Rails.application.routes.draw do
   end
   post 'page/user'=>'pages#user'
   post 'page/community'=>'pages#community'
+  get 'setting' => 'pages#setting'
+  get 'faq' => 'pages#faq'
 
   #profiles------------
   resources :profiles do
