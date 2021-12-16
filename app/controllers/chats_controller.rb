@@ -36,7 +36,7 @@ def latest_message?
       else
         @nameid = @room.started_userid
       end
-      @latest_message << cr.content
+      @latest_message << cr.content.delete("\n").slice(0..50)
       @room_partner << User.find_by(id: @nameid)
     end
   end
