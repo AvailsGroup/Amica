@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     $(document).on('keypress', '[data-behavior~=chat_speaker]', function(event) {
       if(event.shiftKey) {
-        if (event.key === 'Enter' && event.target.value !== "") {
+        if (event.key === 'Enter' && event.target.value && event.target.value.match(/\S/g)) {
           ChatChannel.speak(event.target.value, room_id.value);
           bottom_scroll()
           event.target.value = '';
