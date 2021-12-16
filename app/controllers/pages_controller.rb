@@ -16,6 +16,7 @@ class PagesController < ApplicationController
         @favorite_users.push(m)
       end
     end
+    @mates -= @favorite_users
 
     @communities = Community.includes([:community_members, :tags]).where(id:current_user.community_member.select(:community_id)).order(created_at: :desc)
     @favorite_communities = []
@@ -24,6 +25,7 @@ class PagesController < ApplicationController
         @favorite_communities.push(c)
       end
     end
+    @communities -= @favorite_communities
   end
 
   def user
@@ -68,7 +70,7 @@ class PagesController < ApplicationController
   end
 
   def is_community_favorite?(favorite , user, community)
-    favorite.any? { |u| u.user_id == user.id } && @favorite.any? { |u| u.community_id == community.id }
+    favorite.any? { |u| u.user_id == user.id } && favorite.any? { |u| u.community_id == community.id }
   end
 
 

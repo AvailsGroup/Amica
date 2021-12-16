@@ -76,13 +76,6 @@ ActiveRecord::Schema.define(version: 2021_12_12_191438) do
     t.index ["user_id"], name: "index_community_members_on_user_id"
   end
 
-  create_table "community_tags", force: :cascade do |t|
-    t.integer "community_id"
-    t.string "tag"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "favorite_user_id"
