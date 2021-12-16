@@ -1,4 +1,4 @@
-class MallerController < ApplicationController
+class MailerController < ApplicationController
   def new
     @inquiry = Inquiry.new
     render layout: 'home'
@@ -13,7 +13,7 @@ class MallerController < ApplicationController
     @contact = Inquiry.new(inquiry_params)
     if @contact.save
       ContactMailer.contact_mail(@contact).deliver
-      redirect_to "/contact", notice:"送信しました"
+      redirect_to "/", notice:"お問い合わせを送信しました。内容によっては返答にお時間をいただくことがありますが、ご容赦くださいますようよろしくお願いいたします。"
     else
       render :new
     end

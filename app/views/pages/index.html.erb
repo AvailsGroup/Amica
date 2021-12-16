@@ -14,35 +14,42 @@
         <div class="page-header" style="text-align: center">
           <h1>友だち</h1>
         </div>
-
-        <div class="align-items-center p-3 my-3 text-dark bg-light rounded shadow-sm">
-          <div class="lh-1">
-            <nav class="navbar">
-              <%= form_with url: page_user_path, class: "container-fluid col px-0", local: false, remote: true do |f| %>
-                <p class="me-3">ユーザー検索</p>
-                <div class="input-group">
-                  <%= f.text_field :name, class: "form-control mb-3", placeholder: "UserName", aria: { label: "Username", describedby: "basic-addon1" } %>
-                </div>
-              <% end %>
-            </nav>
+        <% if @mates.size == 0 %>
+          <div class="text-center " style="font-size: 18px; margin-top: 60px;">
+            <%= link_to "あなたに合った友だちを探してみましょう！", profiles_path %>
           </div>
-        </div>
+        <% else %>
 
+          <div class="align-items-center p-3 my-3 text-dark bg-light rounded shadow-sm">
+            <div class="lh-1">
+              <nav class="navbar">
+                <%= form_with url: page_user_path, class: "container-fluid col px-0", local: false, remote: true do |f| %>
+                  <p class="me-3">ユーザー検索</p>
+                  <div class="input-group">
+                    <%= f.text_field :name, class: "form-control mb-3", placeholder: "UserName", aria: { label: "Username", describedby: "basic-addon1" } %>
+                  </div>
+                <% end %>
+              </nav>
+            </div>
+          </div>
 
-        <div id="favorite_user"></div>
-        <button type="button" class="btn btn-secondary btn-lg w-100 mt-2 mb-3" style="background-color: #00bfff" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
-          お気に入り
-        </button>
-        <div class="collapse show mb-1" id="collapseExample1">
-          <%= render partial: 'pages/user', collection: @favorite_users, as: :user, locals: { fixed_current_user: @user, favorite_model: @favorite } %>
-        </div>
+          <% if @favorite_users.size > 0 %>
+            <div id="favorite_user"></div>
+            <button type="button" class="btn btn-secondary btn-lg w-100 mt-2 mb-3" style="background-color: #00bfff" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+              お気に入り
+            </button>
+            <div class="collapse show mb-1" id="collapseExample1">
+              <%= render partial: 'pages/user', collection: @favorite_users, as: :user, locals: { fixed_current_user: @user, favorite_model: @favorite } %>
+            </div>
+          <% end %>
 
-        <button type="button" class="btn btn-secondary btn-lg w-100 mt-2 mb-3" style="background-color: #00bfff" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-          友達
-        </button>
-        <div class="collapse show mb-1" id="collapseExample2">
-          <%= render partial: 'pages/user', collection: @mates, as: :user, locals: { fixed_current_user: @user, favorite_model: @favorite } %>
-        </div>
+          <button type="button" class="btn btn-secondary btn-lg w-100 mt-2 mb-3" style="background-color: #00bfff" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+            友だち
+          </button>
+          <div class="collapse show mb-1" id="collapseExample2">
+            <%= render partial: 'pages/user', collection: @mates, as: :user, locals: { fixed_current_user: @user, favorite_model: @favorite } %>
+          </div>
+        <% end %>
       </div>
 
       <div class="hidden-lg d-lg-none d-xl-none d-xxl-none">　
@@ -53,31 +60,36 @@
         <div class="page-header" style="text-align: center">
           <h1>コミュニティ</h1>
         </div>
-
-        <div class="align-items-center p-3 my-3 text-dark bg-light rounded shadow-sm">
-          <div class="lh-1">
-            <nav class="navbar">
-              <%= form_with url: page_community_path, class: "container-fluid col px-0", local: false, remote: true do |f| %>
-                <p class="me-3">コミュニティ検索</p>
-                <div class="input-group">
-                  <%= f.text_field :name, class: "form-control mb-3", placeholder: "CommunityName", aria: { label: "CommunityName", describedby: "basic-addon1" } %>
-                </div>
-              <% end %>
-            </nav>
+        <% if @communities.size == 0 %>
+          <div class="text-center " style="font-size: 18px; margin-top: 60px;">
+            <%= link_to "あなたに合ったコミュニティを見つけてみましょう！", "/communities/pickup" %>
           </div>
-        </div>
+        <% else %>
 
+          <div class="align-items-center p-3 my-3 text-dark bg-light rounded shadow-sm">
+            <div class="lh-1">
+              <nav class="navbar">
+                <%= form_with url: page_community_path, class: "container-fluid col px-0", local: false, remote: true do |f| %>
+                  <p class="me-3">コミュニティ検索</p>
+                  <div class="input-group">
+                    <%= f.text_field :name, class: "form-control mb-3", placeholder: "CommunityName", aria: { label: "CommunityName", describedby: "basic-addon1" } %>
+                  </div>
+                <% end %>
+              </nav>
+            </div>
+          </div>
 
-        <div id="favorite_community"></div>
-
-        <button type="button" class="btn btn-secondary btn-lg w-100 mt-2 mb-3" style="background-color: #00bfff" data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">お気に入り</button>
-        <div class="collapse show mb-1" id="collapseExample3">
-          <%= render partial: 'pages/community', collection: @favorite_communities, as: :community, locals: { fixed_current_user: @user, favorite_model: @favorite } %>
-        </div>
-
-        <button type="button" class="btn btn-secondary btn-lg w-100 mt-2 mb-3" style="background-color: #00bfff" data-bs-toggle="collapse" data-bs-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">コミュニティ</button>
-        <div class="collapse show mb-1" id="collapseExample4">
-          <%= render partial: 'pages/community', collection: @communities, as: :community, locals: { fixed_current_user: @user, favorite_model: @favorite } %>
+          <% if @favorite_communities.size > 0 %>
+            <div id="favorite_community"></div>
+            <button type="button" class="btn btn-secondary btn-lg w-100 mt-2 mb-3" style="background-color: #00bfff" data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">お気に入り</button>
+            <div class="collapse show mb-1" id="collapseExample3">
+              <%= render partial: 'pages/community', collection: @favorite_communities, as: :community, locals: { fixed_current_user: @user, favorite_model: @favorite } %>
+            </div>
+          <% end %>
+          <button type="button" class="btn btn-secondary btn-lg w-100 mt-2 mb-3" style="background-color: #00bfff" data-bs-toggle="collapse" data-bs-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">コミュニティ</button>
+          <div class="collapse show mb-1" id="collapseExample4">
+            <%= render partial: 'pages/community', collection: @communities, as: :community, locals: { fixed_current_user: @user, favorite_model: @favorite } %>
+        <% end %>
         </div>
       </div>
     </div>

@@ -18,28 +18,18 @@ Rails.application.routes.draw do
   get '/contact' => 'maller#new'
   get '/static' => 'home#static'
   get '/privacy' => 'home#privacy'
-  post 'maller/create', to: 'maller#create'
-
-  resources :maller
-
-  #pages---------------
-  resources :pages
-  resources :communities
-  resources :searches
-  resources :chats
-
-  resources :mypages
-  post 'mypages/nickname', to:'mypages#update_nickname'
-  post 'mypages/name', to:'mypages#update_name'
-  get 'users/setting' => 'pages#setting'
+  get '/help_page' => 'home#help_page'
+  post 'mailer/create', to: 'mailer#create'
 
   #communities---------
   resources :communities do
     resources :manage, only: [:create, :destroy]
     get '/members' => 'communities#members'
+    collection do
+      get :pickup
+      get :joined
+    end
   end
-  get 'community/pickup' => 'communities#pickup'
-  get 'community/joined' => 'communities#joined'
 
 
   #timelines-----------
@@ -56,24 +46,28 @@ Rails.application.routes.draw do
 
 
   #pages---------------
-  resources :pages, only:[:index,:show] do
-    post "favorite/user_create" => "favorite#user_create"
-    delete "favorite/community_delete" => "favorite#community_destroy"
-    post "favorite/community_create" => "favorite#community_create"
-    delete "favorite/user_delete" => "favorite#user_destroy"
+  resources :pages, only:[:index] do
+    post 'favorite/user_create' => 'favorite#user_create'
+    delete 'favorite/community_delete' => 'favorite#community_destroy'
+    post 'favorite/community_create' => 'favorite#community_create'
+    delete 'favorite/user_delete' => 'favorite#user_destroy'
   end
-  post "page/user"=>"pages#user"
-  post "page/community"=>"pages#community"
+  post 'page/user'=>'pages#user'
+  post 'page/community'=>'pages#community'
+  get 'setting' => 'pages#setting'
+  get 'faq' => 'pages#faq'
 
   #profiles------------
   resources :profiles do
     resources :relationships, only: [:create,:destroy]
     resources :achievements, only: [:update]
+    collection do
+      get :follow
+      get :follower
+      get :friends
+      get :pickup
+    end
   end
-  get 'profile/search' => 'profiles#search'
-  get 'profile/follow' => 'profiles#follow'
-  get 'profile/follower' => 'profiles#follower'
-  get 'profile/friends' => 'profiles#friends'
 
   #chats--------------
   resources :chats

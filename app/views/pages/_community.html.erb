@@ -2,10 +2,10 @@
   <%= link_to community_path(community.id) do %>
     <div class="d-flex justify-content-between">
       <div class="d-flex text-muted pt-3">
-        <% if community.icon.nil? %>
-          <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-        <% else %>
+        <% if community.icon? %>
           <%= image_tag "/communities_image/#{community.icon}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+        <% else %>
+          <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
         <% end %>
         <p class="pb-3 mb-0 small lh-sm w-100">
           <strong class="d-block text-gray-dark"><%= community.name %></strong>
@@ -14,11 +14,11 @@
       </div>
       <div style="padding-top: 19px">
         <% if is_community_favorite?(favorite_model,fixed_current_user,community) %>
-          <%= link_to page_favorite_community_delete_path(community.id,fixed_current_user.id), method: :delete do %>
+          <%= button_to page_favorite_community_delete_path(community.id), method: :delete, class: 'bg-white',style: "border: none;color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="far fa-star"></i>' } do %>
             <i class="fas fa-star"></i>
           <% end %>
         <% else %>
-          <%= link_to  page_favorite_community_create_path(community.id), method: :post do %>
+          <%= button_to page_favorite_community_create_path(community.id), method: :post, class: 'bg-white', style: "border: none;color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="fas fa-star"></i>' } do %>
             <i class="far fa-star"></i>
           <% end %>
         <% end %>
