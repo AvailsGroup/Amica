@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'communities_security/create'
+  get 'communities_security/destroy'
   #devise--------------
   get 'users/controller'
 

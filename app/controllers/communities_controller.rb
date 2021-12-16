@@ -130,6 +130,10 @@ class CommunitiesController < ApplicationController
     @member = @community.community_members.includes([:user]).page(params[:page]).per(30)
   end
 
+  def kick
+    permission
+  end
+
   private
 
   def community_params
