@@ -61,15 +61,7 @@ class PagesController < ApplicationController
     @user = current_user
   end
 
-  protected
 
-  def is_user_favorite?(favorite, user, other_user)
-    favorite.any? { |u| u.user_id == user.id } && @favorite.any? { |u| u.favorite_user_id == other_user.id }
-  end
-
-  def is_community_favorite?(favorite , user, community)
-    favorite.any? { |u| u.user_id == user.id } && @favorite.any? { |u| u.community_id == community.id }
-  end
 
 
 end

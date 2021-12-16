@@ -1,6 +1,7 @@
 class CommunitiesController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
+  helper_method :is_user_favorite?
 
   def index
     @users = User.includes(:community_member, :tags)
@@ -128,6 +129,8 @@ class CommunitiesController < ApplicationController
     @community = Community.includes([:community_members, :user, :tags]).find(params[:community_id])
     @count = @community.community_members.size
     @member = @community.community_members.includes([:user]).page(params[:page]).per(30)
+    @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
+    @user = @users.find(current_user.id)
   end
 
   def kick

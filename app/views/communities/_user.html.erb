@@ -1,0 +1,30 @@
+<div class="user_list">
+  <div class="my-3 p-2 bg-white rounded shadow-sm">
+    <%= link_to profile_path(user.user.userid), style: "text-decoration: none;" do %>
+      <div class="d-flex justify-content-between">
+        <div class="d-flex text-muted pt-3">
+          <% if user.user.image.nil? %>
+            <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+          <% else %>
+            <%= image_tag "/user_images/#{user.user.image}", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+          <% end %>
+          <p class="pb-3 mb-0 small lh-sm  w-100">
+            <strong class="d-block text-gray-dark"><%= user.user.name %> (<%= user.user.nickname %>)</strong>
+            @<%= user.user.userid %>
+          </p>
+        </div>
+        <div style="padding-top: 19px">
+          <% if community.user == fixed_current_user %>
+            <%= link_to kick_communities_path(user.user) , style: "text-decoration: none;color:red;margin-right:10px" do %>
+              <i class="fas fa-user-minus"></i>
+            <% end %>
+            <%= link_to community_communities_security_index_path(user.user) , style: "text-decoration: none;color:red" do %>
+              <i class="fas fa-user-alt-slash"></i>
+            <% end %>
+          <% end %>
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
