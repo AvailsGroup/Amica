@@ -27,24 +27,23 @@ def latest_message?
   @arry = []
   @room_partner = []
   @latest_message = []
-  @chatroom = Room.where(started_userid: current_user.id).or(Room.where(invited_userid: current_user.id))
+  @chatroom = Room.order(updated_at: :desc).where(started_userid: current_user.id).or(Room.order(updated_at: :desc).where(invited_userid: current_user.id))
   @chatroom.each do |cr|
-    @message = Message.where(room_id: cr.id)
-    @arry << @message.order(updated_at: :desc).limit(1).to_a
+    @message = Message.order(updated_at: :desc).find_by(room_id: cr.id)
+    @arry << @message
   end
   @arry.each do |chat|
-    chat.each do |cr|
-      @room = Room.find_by(id: cr.room_id)
-      if @room.started_userid == current_user.id
-        @nameid = @room.invited_userid
-      else
-        @nameid = @room.started_userid
-      end
-      @latest_message << cr.content.delete("\n").slice(0..50)
-      @room_partner << User.find_by(id: @nameid)
+    @room = Room.find_by(id: chat.room_id)
+    if @room.started_userid == current_user.id
+      @nameid = @room.invited_userid
+    else
+      @nameid = @room.started_userid
     end
+    @room_partner << User.find_by(id: @nameid)
+    @latest_message << chat.content.delete("\n").slice(0..50)
   end
 end
+
 
 def in_room?
   @room = Room.find_by(started_userid: current_user.id, invited_userid: @invited_user.id)

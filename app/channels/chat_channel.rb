@@ -13,6 +13,8 @@ class ChatChannel < ApplicationCable::Channel
     @user_id = current_user.id
     @message = Message.create content: @content, user_id: @user_id, room_id: @room_id
     @message.save
+    @room = Room.find_by(id: @room_id)
+    @room.touch(:created_at)
     ActionCable.server.broadcast 'chat_channel', @message
   end
 end
