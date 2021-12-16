@@ -9,6 +9,10 @@ class ChatsController < ApplicationController
 
   def show
     @invited_user = User.find_by(userid: params[:id])
+    if @invited_user.nil?
+      redirect_to profiles_path, notice: "そのユーザーidは存在しませんでした"
+      return
+    end
     if @room.nil?
       in_room?
     end
