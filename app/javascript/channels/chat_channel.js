@@ -29,27 +29,44 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
     return this.perform('speak', {message: message,room_id: room_id});
   }
 });
-
-$(document).on('keypress', '[data-behavior~=chat_speaker]', function(event) {
-  if(event.shiftKey) {
-    if (event.key === 'Enter' && event.target.value !== "") {
-      const room_id = document.getElementById("room_id").value
-      ChatChannel.speak(event.target.value, room_id);
-      bottom_scroll()
-      event.target.value = '';
-      return event.preventDefault();
-    }
-  }
-});
 document.addEventListener("DOMContentLoaded", function() {
-    $('#submit_button').click('[data-behavior~=chat_speaker]', function () {
-      if ( document.getElementById("content").value !== "") {
-        const room_id = document.getElementById("room_id").value
-        const content = document.getElementById("content").value
-        ChatChannel.speak(content, room_id);
+  const content = document.getElementById('content')
+  const submitButton = document.getElementById('submit_button')
+  const room_id = document.getElementById('room_id')
+
+    let $textarea = $('#content');
+    const lineHeight = parseInt($textarea.css('lineHeight'));
+    // 最低行数を指定
+    let minHeight = lineHeight * 2;
+    // 最高幅を指定
+    let maxHeight = parseInt($(window).height() * 0.5);
+    $textarea.on('input', function() {
+      let lines = ($(this).val() + '\n').match(/\n/g).length;
+      $(this).height(Math.min(maxHeight, Math.max(lineHeight * lines, minHeight)));
+      if ( content.value === "") {
+        $(this).height(0);
+      }
+    });
+
+    $(document).on('keypress', '[data-behavior~=chat_speaker]', function(event) {
+      if(event.shiftKey) {
+        if (event.key === 'Enter' && event.target.value !== "") {
+          ChatChannel.speak(event.target.value, room_id.value);
+          bottom_scroll()
+          event.target.value = '';
+          $($textarea).height(0);
+          return event.preventDefault();
+        }
+      }
+    });
+    $(submitButton).click('[data-behavior~=chat_speaker]', function () {
+      if ( content.value !== "") {
+        const message = content.value
+        ChatChannel.speak(message, room_id.value);
         bottom_scroll()
-        document.getElementById("content").value = '';
-        return document.getElementById("content").preventDefault();
+        content.value = '';
+        $($textarea).height(0);
+        return content.preventDefault();
       }
     });
 });
