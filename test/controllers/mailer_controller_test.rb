@@ -1,13 +1,13 @@
 require "test_helper"
 
-class MallerControllerTest < ActionDispatch::IntegrationTest
+class MailerControllerTest < ActionDispatch::IntegrationTest
   test "should get new" do
-    get maller_new_url
+    get new_mailer_url
     assert_response :success
   end
 
   test "should get create" do
-    get maller_create_url
+    get mailer_create_url
     assert_response :success
   end
 end
