@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'communities_security/create'
-  get 'communities_security/destroy'
   #devise--------------
   get 'users/controller'
 
@@ -28,10 +26,12 @@ Rails.application.routes.draw do
   #communities---------
   resources :communities do
     resources :manage, only: [:create, :destroy]
+    resources :communities_security, only: [:create,:destroy]
     get '/members' => 'communities#members'
     collection do
       get :pickup
       get :joined
+      get :kick
     end
   end
 
