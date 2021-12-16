@@ -56,10 +56,11 @@ class CommunitiesController < ApplicationController
   end
 
   def show
-    @community = Community.includes(:user, :tags, :community_members, :community_securities).find(params[:id])
-    @join = @community.community_members.exists?(user: current_user)
+    @community = Community.includes(:user, :tags, :community_members, :community_securities,:favorites ).find(params[:id])
+    @users = User.includes(:community_member, :tags)
+    @user = @users.find(current_user.id)
+    @join = @community.community_members.any?{ |c| c.user_id == @user.id }
     @leader = @community.user
-    @user = current_user
     exists_community_security
   end
 
