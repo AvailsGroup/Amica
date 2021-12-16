@@ -1,0 +1,2 @@
+class CommunitySecurity < ApplicationRecord
+end

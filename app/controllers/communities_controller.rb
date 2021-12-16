@@ -54,6 +54,8 @@ class CommunitiesController < ApplicationController
     @community = Community.includes(:user, :tags,:community_members).find(params[:id])
     @join = @community.community_members.exists?(user: current_user)
     @leader = @community.user
+    @user = current_user
+    exists_community_security
   end
 
   def edit
@@ -138,6 +140,13 @@ class CommunitiesController < ApplicationController
     unless @community.user_id == current_user.id
       flash[:notice] = 'コミュニティを編集できるのはリーダーのみです'
       redirect_to(community_path)
+    end
+  end
+
+  def exists_community_security
+    if CommunitySecurity.exists?(community_id:@community.id, user_id:@user.id)
+      flash[:alert] = "あなたはこのコミュニティからBanされています。"
+      redirect_to communities_path
     end
   end
 end
