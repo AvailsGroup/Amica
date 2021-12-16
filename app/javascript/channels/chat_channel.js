@@ -14,12 +14,22 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
     const room_id = document.getElementById("room_id").value
     if (data.room_id === Number(room_id)){
       if (data.user_id === Number(user_id)) {
-        $('#append').append('<div class="message-body" style="white-space: pre;">'+'<div class="sender my-1 p-1">' + '<div class="messages">'
-            + data.content  + '</div>' + '</div>'+ '</div>' )
+        $('#append').append('<div class="message-body" style="white-space: pre;">'+
+                              '<div class="sender my-1 p-1">' +
+                                '<div class="messages">' +
+                                  data.content  +
+                                '</div>' +
+                              '</div>'+
+                            '</div>' )
         bottom_scroll();
       } else {
-        $('#append').append('<div class="message-body" style="white-space: pre;">'+'<div class="receiver my-1 p-1">' + '<div class="messages">'
-            +  data.content + '</div>' + '</div>' + '</div>' )
+        $('#append').append('<div class="message-body" style="white-space: pre;">'+
+                              '<div class="receiver my-1 p-1">' +
+                                '<div class="messages">' +
+                                  data.content  +
+                                '</div>' +
+                              '</div>'+
+                            '</div>')
         bottom_scroll();
       }
     }

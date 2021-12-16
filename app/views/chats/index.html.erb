@@ -15,7 +15,12 @@
               <% end %>
               <p class="pb-3 mb-0  border-bottom w-100">
                 <strong class="d-block" style="color: black"><%= @room_partner[num].name %> (<%= @room_partner[num].nickname %>)</strong>
-                <span class="text-muted medium lh-sm"> <%= @latest_message[num] %></span>
+                <% if @latest_message[num] === '' %>
+                  <span class="medium lh-sm" style="float: right;color: black">※このユーザーとはまだ会話したことがないようです！会話してみましょう！※</span>
+                  <span class="clear"></span>
+                <% else %>
+                  <span class="text-muted medium lh-sm"> <%= @latest_message[num] %></span>
+                <% end %>
               </p>
             </div>
           </div>
