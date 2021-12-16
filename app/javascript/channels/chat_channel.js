@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let $textarea = $('#content');
     const lineHeight = parseInt($textarea.css('lineHeight'));
     // 最低行数を指定
-    let minHeight = lineHeight * 2;
+    let minHeight = lineHeight;
     // 最高幅を指定
     let maxHeight = parseInt($(window).height() * 0.5);
     $textarea.on('input', function() {
