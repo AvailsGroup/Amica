@@ -14,7 +14,7 @@
             <p class="my-0 fine-print"><i class="far fa-user fine-print"></i> <%= community.community_members.size %>
             </p>
             <% community.tags.pluck(:name).shuffle.first(3).each do |t| %>
-              <p class="my-0"><%= link_to "\##{t}", search_tag_path(t), class: "fine-print text-decoration-none" %></p>
+              <%= link_to "\##{t}", search_tag_path(t), class: "fine-print text-decoration-none my-0" %>
             <% end %>
           </div>
           <div class="inner-wrapper text-right w-25 h-auto" style="bottom: 0; left: 0;margin-bottom: 0;padding: 0;">
