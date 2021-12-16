@@ -70,7 +70,6 @@ class TimelinesController < ApplicationController
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
     @create = Post.new
-
   end
 
   private
