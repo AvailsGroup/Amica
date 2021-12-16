@@ -2,7 +2,6 @@ import consumer from "./consumer"
 
 const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
   connected() {
-    console.log('connected')
     // Called when the subscription is ready for use on the server
   },
 
@@ -32,13 +31,27 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
 });
 
 $(document).on('keypress', '[data-behavior~=chat_speaker]', function(event) {
-  if (event.key === 'Enter'&& event.target.value !== "") {
-    const room_id =  document.getElementById("room_id").value
-    ChatChannel.speak(event.target.value, room_id);
-    bottom_scroll()
-    event.target.value = '';
-    return event.preventDefault();
+  if(event.shiftKey) {
+    if (event.key === 'Enter' && event.target.value !== "") {
+      const room_id = document.getElementById("room_id").value
+      ChatChannel.speak(event.target.value, room_id);
+      bottom_scroll()
+      event.target.value = '';
+      return event.preventDefault();
+    }
   }
+});
+document.addEventListener("DOMContentLoaded", function() {
+    $('#submit_button').click('[data-behavior~=chat_speaker]', function () {
+      if ( document.getElementById("content").value !== "") {
+        const room_id = document.getElementById("room_id").value
+        const content = document.getElementById("content").value
+        ChatChannel.speak(content, room_id);
+        bottom_scroll()
+        document.getElementById("content").value = '';
+        return document.getElementById("content").preventDefault();
+      }
+    });
 });
 
 function bottom_scroll(){

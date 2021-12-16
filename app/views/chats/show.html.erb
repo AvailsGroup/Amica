@@ -35,11 +35,15 @@
             <div class="w-100 d-flex ">
              <input type="hidden" id="room_id" value= <%= @room_id %> data-behavior="chat_speaker">
              <input type="hidden" id="user_id" value= <%= current_user.id %> data-behavior="chat_speaker">
-            <%= text_field_tag  :content, nil, class:"form-control", placeholder:"message", data: {behavior: "chat_speaker"} %>
-                <label><!-- Button trigger modal -->
-                  <button style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-                  <span class="m-1" style="font-size: 1.6rem;color: #5e5e5e"> <i class="fas fa-th-large"></i></span>
-                </label>
+            <%= text_field_tag  :content, nil, class:"form-control", placeholder:"message", data: {behavior: "chat_speaker"},id:"content" %>
+              <label><!-- Button trigger modal -->
+                <button id="submit_button" style="display: none" type="submit" class="btn btn-primary form-control" ></button>
+                <span class="m-1" style="font-size: 1.6rem;color: #5e5e5e"><i class="fas fa-paper-plane"></i></span>
+              </label>
+              <label><!-- Button trigger modal -->
+                <button style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+                <span class="m-1" style="font-size: 1.6rem;color: #5e5e5e"> <i class="fas fa-th-large"></i></span>
+              </label>
             </div>
           </div>
         </div>
