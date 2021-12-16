@@ -14,11 +14,11 @@
       </div>
       <div style="padding-top: 19px">
         <% if is_community_favorite?(favorite_model,fixed_current_user,community) %>
-          <%= link_to page_favorite_community_delete_path(community.id,fixed_current_user.id), method: :delete do %>
+          <%= button_to page_favorite_community_delete_path(community.id), method: :delete, class: 'bg-white',style: "border: none;color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="far fa-star"></i>' } do %>
             <i class="fas fa-star"></i>
           <% end %>
         <% else %>
-          <%= link_to  page_favorite_community_create_path(community.id), method: :post do %>
+          <%= button_to page_favorite_community_create_path(community.id), method: :post, class: 'bg-white', style: "border: none;color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="fas fa-star"></i>' } do %>
             <i class="far fa-star"></i>
           <% end %>
         <% end %>
