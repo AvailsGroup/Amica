@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
     $(submitButton).click('[data-behavior~=chat_speaker]', function () {
-      if ( content.value !== "") {
+      if ( content.value && content.value.match(/\S/g)) {
         const message = content.value
         ChatChannel.speak(message, room_id.value);
         bottom_scroll()

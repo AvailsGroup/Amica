@@ -1,6 +1,12 @@
 // Place all the styles related to the chats controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.messages{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .receiver {
   float: left;
   width: auto !important;
@@ -42,7 +48,7 @@
 .chat_inside{
   color: #6c757d;
   width: auto !important;
-  padding: 4px 10px 7px !important;
+  padding: 4px 10px 0px !important;
   border-radius: 10px;
   background: #ffffff;
   font-size: 12px;
