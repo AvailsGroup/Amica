@@ -22,7 +22,12 @@
                     <span class="medium lh-sm" style="float: right;color: black">※このユーザーがあなたと会話したいようです！会話してみましょう！※</span>
                     <span class="clear"></span>
                   <% else %>
-                    <span class="text-muted medium lh-sm"> <%= @latest_message[num] %></span>
+                    <span class="text-muted medium lh-sm"> <%= @latest_message[num].content.delete("\n").slice(0..50) %></span>
+                    <% if @latest_message[num].created_at.to_date === Date.today %>
+                      <span class="small" style="float: right;color:gray;"><%= @latest_message[num].created_at.strftime("今日 %H:%M") %></span>
+                    <% else %>
+                      <span class="small" style="float: right;color:gray;"><%= @latest_message[num].created_at.strftime("%m月%d日") %></span>
+                    <% end %>
                   <% end %>
                 </p>
               </div>

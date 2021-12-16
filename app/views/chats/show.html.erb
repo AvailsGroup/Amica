@@ -1,5 +1,4 @@
 <%= stylesheet_link_tag 'chats', media: 'all', 'data-turbolinks-track': 'reload' %>
-
 <script>
     document.addEventListener("DOMContentLoaded",function bottom_scroll(){
         var elm = document.documentElement;
@@ -11,13 +10,14 @@
 <div id="body">
   <div id="chat" style="margin:1% 1% 70px 1%">
       <div id="messages">
+        <div id="test"></div>
         <% @message.each do |p| %>
              <%= render 'chats/chat_message',message:p %>
         <% end %>
-        <div id="append"></div>
-        <div class="clear"></div>
+        <div id="append" class="col-sm-12"></div>
       </div>
   </div>
+
 
   <div class="mt-2 row messageBox reply d-flex justify-content-center">
     <div class="col-sm-12 messageBox-inner">

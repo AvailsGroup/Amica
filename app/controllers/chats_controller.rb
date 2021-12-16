@@ -36,7 +36,7 @@ def latest_message?
         @latest_message << nil
       end
     else
-      @latest_message << @message.content.delete("\n").slice(0..50)
+      @latest_message << @message
     end
     if cr.started_userid == current_user.id
       @userid = cr.invited_userid

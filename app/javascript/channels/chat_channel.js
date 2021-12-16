@@ -20,7 +20,13 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
                                   data.content  +
                                 '</div>' +
                               '</div>'+
-                            '</div>' )
+                            '</div>'+
+                            '<div class="clear"></div>'+
+                              '<span class="small" style="float: right">'+
+                                 '今日 '+data.created_at.slice(11,16)+
+                              '</span>'+
+                            '<div class="clear"></div>'
+        )
         bottom_scroll();
       } else {
         $('#append').append('<div class="message-body" style="white-space: pre;">'+
@@ -29,7 +35,13 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
                                   data.content  +
                                 '</div>' +
                               '</div>'+
-                            '</div>')
+                            '</div>'+
+                            '<div class="clear"></div>'+
+                              '<span class="small">'+
+                              '今日 '+data.created_at.slice(11,16)+
+                              '</span>'+
+                            '<div class="clear"></div>'
+        )
         bottom_scroll();
       }
     }
@@ -56,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function() {
         name.style.display = "";
       }
   }
-
     let $textarea = $('#content');
     const lineHeight = parseInt($textarea.css('lineHeight'));
     // 最低行数を指定
