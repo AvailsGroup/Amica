@@ -1,40 +1,20 @@
+<h1>運営からのお知らせ</h1>
 <%if current_user.admin==true %>
-  <%= form_with model: @operationmessage, local: true do |form| %>
-
-    <p><%= form.label :title %><br>
-      <%= form.text_field :title %> #titleの入力フォーム生成
-    </p>
-
-    <p><%= form.label :body %><br>
-      <%= form.text_area :body %> #bodyの入力フォーム生成
-    </p>
-       <%=form.label :time %><br>
-      <%=form.datetime_field :time %>
-    <p><%= form.submit %> #送信ボタンを生成
-    </p>
-
+  <%= link_to new_operation_message_path class: "icons nav-link" do %>
+    <i class="fas fa-exclamation-circle"></i>新規作成
   <% end %>
+
 <%end %>
-<div class="container">
-  <div class="row justify-content-md-center border border-dark">
-    <div class="col col-lg-2">
-      1 of 3
-    </div>
-    <div class="col-md-auto">
-      Variable width content
-    </div>
-    <div class="col col-lg-2">
-      3 of 3
-    </div>
-  </div>
-    <div class="col">
-      1 of 3
-    </div>
-    <div class="col-md-auto">
-      Variable width content
-    </div>
-    <div class="col col-lg-2">
-      3 of 3
-    </div>
-  </div>
-</div>
+<table>
+  <tr>
+    <th>タイトル</th>
+    <th>内容</th>
+  </tr>
+  <% @posts.each do |post| %>
+  <tr>
+    <td><%=post.title %></td>
+    <td><%=post.content %></td>
+    <td><%=post.created_at %></td>
+  </tr>
+<%end %>
+</table>
