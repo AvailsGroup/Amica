@@ -1,0 +1,2 @@
+class Operationmessage < ApplicationRecord
+end
