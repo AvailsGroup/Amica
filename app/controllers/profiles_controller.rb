@@ -2,24 +2,28 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
   helper_method :following?
+  helper_method :matchers?
 
   def index
-    @users = User.preload(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+    @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
     @user = @users.find(current_user.id)
     @friends = matchers(@user)
     @following = @user.followings_list
     @follower = @user.followers_list
     @profile = @user.profile
+    sort_pickup
   end
 
   def show
-    @user = User.find_by(userid: params[:id])
+    @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+    @user = @users.find_by(userid: params[:id])
+    @current = @users.find(current_user.id)
     if @user.nil?
       redirect_to profiles_path, notice: "そのユーザーidは存在しませんでした"
       return
     end
     @profile = @user.profile
-    @following = @user.followings_list
+    @following = @current.followings_list
     @communities = Community.includes([:community_members, :user, :tags]).where(id: @user.community_member.select(:community_id))
 
     @friends_count = @user.matchers.size
@@ -100,7 +104,14 @@ class ProfilesController < ApplicationController
     @pagenate =  @following.page(params[:page]).per(20)
   end
 
+  def pickup
+    @users = User.includes(:tags)
+    @user = @users.find(current_user.id)
+    sort_pickup
+  end
+
   private
+
   def user_params
     attrs = [:nickname,:name,:userid,:tag_list,:accreditation_list]
     params.require(:user).permit(attrs, profile_attributes:%i[grade school_class number student_id accreditation hobby])
@@ -111,5 +122,10 @@ class ProfilesController < ApplicationController
       flash[:notice] = "権限がありません"
       redirect_to profile_path
     end
+  end
+
+  def sort_pickup
+    @users = @users.sort_by { |u| (@user.tags.pluck(:name) & u.tags.pluck(:name)).size }
+    @users = @users.reverse
   end
 end
