@@ -16,17 +16,16 @@ class PagesController < ApplicationController
         @favorite_users.push(m)
       end
     end
+    @mates -= @favorite_users
 
     @communities = Community.includes([:community_members, :tags]).where(id:current_user.community_member.select(:community_id)).order(created_at: :desc)
     @favorite_communities = []
     @communities.each do |c|
-      pp c.id
-      pp @user.id
-      pp @favorite.any? { |u| u.user_id == @user.id } && @favorite.any? { |u| u.community_id == c.id }
       if @favorite.any? { |u| u.user_id == @user.id } && @favorite.any? { |u| u.community_id == c.id }
         @favorite_communities.push(c)
       end
     end
+    @communities -= @favorite_communities
   end
 
   def user
