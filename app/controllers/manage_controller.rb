@@ -6,8 +6,13 @@ class ManageController < ApplicationController
   def create
     if @community.user_id == current_user.id
       flash[:notice] = "あなたはすでにコミュニティリーダーです。"
-    else
+      redirect_to(community_path(@community.id))
+      return
+    end
+    if community_ban?(@community)
       CommunityMember.create(user_id: current_user.id, community_id: @community.id)
+    else
+      flash[:alert] = "あなたはこのコミュニティから参加禁止にされています。"
     end
     redirect_to(community_path(@community.id))
   end
@@ -23,7 +28,12 @@ class ManageController < ApplicationController
   end
 
   private
+
   def set_community
-    @community = Community.find(params[:community_id])
+    @community = Community.includes(:user, :tags, :community_members, :community_securities, :favorites).find(params[:community_id])
+  end
+
+  def community_ban?(community)
+    community.community_securities.any? { |c| c.user_id == @user.id }
   end
 end

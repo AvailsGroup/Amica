@@ -2,11 +2,15 @@ class CommunitiesController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
   helper_method :is_user_favorite?
+  helper_method :community_ban?
 
   def index
     @users = User.includes(:community_member, :tags)
     @user = @users.find(current_user.id)
-    @community = Community.includes([:community_members, :user, :tags]).order(created_at: :desc).page(params[:page]).per(36)
+    @community = Community.includes(:community_members, :tags, :user,:favorites, :community_securities)
+                          .order(created_at: :desc)
+                          .page(params[:page])
+                          .per(36)
   end
 
   def new
@@ -52,7 +56,7 @@ class CommunitiesController < ApplicationController
   end
 
   def show
-    @community = Community.includes(:user, :tags,:community_members).find(params[:id])
+    @community = Community.includes(:user, :tags, :community_members, :community_securities).find(params[:id])
     @join = @community.community_members.exists?(user: current_user)
     @leader = @community.user
     @user = current_user
@@ -113,7 +117,7 @@ class CommunitiesController < ApplicationController
   def pickup
     @users = User.includes(:community_member, :tags)
     @user = @users.find(current_user.id)
-    @community = Community.includes([:community_members, :user, :tags]).order(created_at: :desc).where.not(id: current_user.community_member.select(:community_id))
+    @community = Community.includes(:community_members, :tags, :user,:favorites, :community_securities).order(created_at: :desc).where.not(id: current_user.community_member.select(:community_id))
     @community = @community.sort_by { |u| (@user.tags.pluck(:name) & u.tags.pluck(:name)).size }
     @community = @community.reverse
     @community = Kaminari.paginate_array(@community).page(params[:page]).per(36)
@@ -122,11 +126,11 @@ class CommunitiesController < ApplicationController
   def joined
     @users = User.includes(:community_member, :tags)
     @user = @users.find(current_user.id)
-    @community = Community.includes([:community_members, :user, :tags]).where(id: current_user.community_member.select(:community_id)).order(created_at: :desc).page(params[:page]).per(36)
+    @community = Community.includes(:community_members, :tags, :user,:favorites, :community_securities).where(id: current_user.community_member.select(:community_id)).order(created_at: :desc).page(params[:page]).per(36)
   end
 
   def members
-    @community = Community.includes([:community_members, :user, :tags]).find(params[:community_id])
+    @community = Community.includes(:community_members, :tags, :user,:favorites, :community_securities).find(params[:community_id])
     @count = @community.community_members.size
     @member = @community.community_members.includes([:user]).page(params[:page]).per(30)
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
@@ -141,6 +145,10 @@ class CommunitiesController < ApplicationController
   def change
     @community = Community.find(params[:community_id])
     permission
+  end
+
+  def community_ban?(community)
+    community.community_securities.any? { |c| c.user_id == @user.id}
   end
 
   private
@@ -158,7 +166,7 @@ class CommunitiesController < ApplicationController
 
   def exists_community_security
     if CommunitySecurity.exists?(community_id:@community.id, user_id:@user.id)
-      flash[:alert] = "あなたはこのコミュニティからBanされています。"
+      flash[:alert] = "あなたはこのコミュニティから参加禁止にされています。"
       redirect_to communities_path
     end
   end

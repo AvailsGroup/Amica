@@ -28,11 +28,11 @@ Rails.application.routes.draw do
     resources :manage, only: [:create, :destroy]
     resources :communities_security, only: [:create,:destroy]
     get '/members' => :members
-    delete '/kick/:id' => :kick
-    put '/change/:id' => :change
     collection do
       get :pickup
       get :joined
+      delete :kick
+      put :change
     end
   end
 
