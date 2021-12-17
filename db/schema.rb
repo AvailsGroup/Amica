@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_14_014008) do
+ActiveRecord::Schema.define(version: 2021_12_15_223425) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2021_12_14_014008) do
     t.boolean "niceLv3", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "rare_like", default: false
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -73,6 +74,14 @@ ActiveRecord::Schema.define(version: 2021_12_14_014008) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["community_id"], name: "index_community_members_on_community_id"
     t.index ["user_id"], name: "index_community_members_on_user_id"
+  end
+
+  create_table "community_securities", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "community_id"
+    t.text "reason"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "favorites", force: :cascade do |t|
