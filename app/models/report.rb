@@ -1,6 +1,6 @@
 class Report < ApplicationRecord
   belongs_to :user
-  belongs_to :post
-
+  has_one :post
+  has_one :community
   validates :user, uniqueness: { scope: :post }
 end
