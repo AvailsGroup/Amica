@@ -27,7 +27,7 @@
             <%= link_to "お気に入り登録", page_favorite_community_create_path(@community.id), method: :post, class: 'btn btn-outline-dark mx-2', style: "", data: { disable_with: 'お気に入り登録' } %>
           <% end %>
       <% else %>
-        <%= link_to "参加", community_manage_index_path(@community.id), method: :post, class: "btn btn-outline-dark" %>
+        <%= link_to "参加", community_manage_index_path(@community.id), method: :post, class: "btn btn-outline-dark", data: { disable_with: '参加中...' } %>
       <% end %>
     <% end %>
     </div>
