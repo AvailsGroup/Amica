@@ -37,7 +37,9 @@
       <% if is_community_favorite?(@favorite, @user, @community) %>
         <%= link_to "お気に入り解除", page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'btn btn-outline-dark mx-2 bg-dark text-light', style: "", data: { disable_with: 'お気に入り解除' } %>
       <% else %>
-        <%= link_to "お気に入り登録", page_favorite_community_create_path(@community.id), method: :post, class: 'btn btn-outline-dark mx-2', style: "", data: { disable_with: 'お気に入り登録' } %>
+        <%= link_to page_favorite_community_create_path(@community.id), method: :post, class: 'mx-2', style: "", data: { disable_with: 'お気に入り登録' } do%>
+          <i class="far fa-star fa-2x"></i>
+        <% end %>
       <% end %>
     <% else %>
       <% if @join %>
