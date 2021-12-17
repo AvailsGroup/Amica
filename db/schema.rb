@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_14_014008) do
+ActiveRecord::Schema.define(version: 2021_12_15_223425) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -76,6 +76,21 @@ ActiveRecord::Schema.define(version: 2021_12_14_014008) do
     t.index ["user_id"], name: "index_community_members_on_user_id"
   end
 
+  create_table "community_securities", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "community_id"
+    t.text "reason"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "community_tags", force: :cascade do |t|
+    t.integer "community_id"
+    t.string "tag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "favorite_user_id"
@@ -111,21 +126,6 @@ ActiveRecord::Schema.define(version: 2021_12_14_014008) do
     t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "notifications", force: :cascade do |t|
-    t.integer "visitor_id", null: false
-    t.integer "visited_id", null: false
-    t.integer "micropost_id", null: false
-    t.integer "comment_id", null: false
-    t.string "action"
-    t.boolean "checked"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["comment_id"], name: "index_notifications_on_comment_id"
-    t.index ["micropost_id"], name: "index_notifications_on_micropost_id"
-    t.index ["visited_id"], name: "index_notifications_on_visited_id"
-    t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -235,10 +235,6 @@ ActiveRecord::Schema.define(version: 2021_12_14_014008) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "community_members", "communities"
   add_foreign_key "community_members", "users"
-  add_foreign_key "notifications", "comments"
-  add_foreign_key "notifications", "microposts"
-  add_foreign_key "notifications", "visiteds"
-  add_foreign_key "notifications", "visitors"
   add_foreign_key "profiles", "users"
   add_foreign_key "taggings", "tags"
   add_foreign_key "timeline_hashtag_relations", "hashtags"

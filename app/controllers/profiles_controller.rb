@@ -3,6 +3,7 @@ class ProfilesController < ApplicationController
   before_action :banned
   helper_method :following?
   helper_method :matchers?
+  helper_method :is_user_favorite?
 
   def index
     @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
@@ -87,7 +88,8 @@ class ProfilesController < ApplicationController
     @users = User.preload(:profile, :favorite, :followers, :followings, :tags)
     @user = @users.find(current_user.id)
     @friends = @user.matchers
-    @pagenate = Kaminari.paginate_array(@friends).page(params[:page]).per(10)
+    @pagenate = Kaminari.paginate_array(@friends).page(params[:page]).per(20)
+    @favorite = Favorite.all
   end
 
   def follower
@@ -105,7 +107,7 @@ class ProfilesController < ApplicationController
   end
 
   def pickup
-    @users = User.includes(:profile, :favorite, :followers, :tags)
+    @users = User.includes(:tags)
     @user = @users.find(current_user.id)
     sort_pickup
     @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(10)

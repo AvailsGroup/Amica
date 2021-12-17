@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag 'profiles', media: 'all', 'data-turbolinks-track': 'reload' %>
 <main class="container">
+  <h2 class="text-center pb-2 mb-0">フォロー (<%= @following.size %>)</h2>
   <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-0">フォロー (<%= @following.size %>)</h6>
     <% if @following.size == 0 %>
       <p class="text-gray-dark">現在はいないようです！</p>
     <% end %>
