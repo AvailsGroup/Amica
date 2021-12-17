@@ -90,7 +90,7 @@ class ProfilesController < ApplicationController
     @users = User.preload(:profile, :favorite, :followers, :followings, :tags)
     @user = @users.find(current_user.id)
     @friends = @user.matchers
-    @pagenate = Kaminari.paginate_array(@friends).page(params[:page]).per(5)
+    @pagenate = Kaminari.paginate_array(@friends).page(params[:page]).per(30)
     @favorite = Favorite.all
   end
 
@@ -98,14 +98,14 @@ class ProfilesController < ApplicationController
     @users = User.preload(:profile, :favorite, :followers, :tags)
     @user = @users.find(current_user.id)
     @follower = @user.followers_list
-    @pagenate = @follower.page(params[:page]).per(20)
+    @pagenate = @follower.page(params[:page]).per(30)
   end
 
   def follow
     @users = User.preload(:profile, :favorite,  :followings, :tags)
     @user = @users.find(current_user.id)
     @following = @user.followings_list
-    @pagenate =  @following.page(params[:page]).per(20)
+    @pagenate =  @following.page(params[:page]).per(30)
   end
 
   def pickup
