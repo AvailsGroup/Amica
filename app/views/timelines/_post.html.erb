@@ -86,9 +86,10 @@
         </span>
       </span>
       <div class="ms-2">
-        <%= link_to new_timeline_report_path(post.id) do %>
+          <label>
+          <button type="button" class="btn btn-primary" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=<% post.id %>></button>
           <i class="fas fa-bullhorn"></i>
-        <% end %>
+          </label>
       </div>
     </div>
     <div>
@@ -102,3 +103,28 @@
   </div>
 </div>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">通報</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <%= form_for(@report, url:  timeline_reports_path(post.id)) do |f|%>
+          <%= f.hidden_field :user_id , id: "reported_user_id ", class: "form-control",value: current_user.id  %>
+          <%= f.hidden_field :post_id ,id: "post_id" , class: "form-control",value: post.id %>
+          <%= f.hidden_field :reported_user_id , id: "reported_user_id ", class: "form-control",value: post.user.id  %>
+          <div> <%= post.user.nickname %></div>
+          <div> <%= post.content %></div>
+          <%= f.text_area :message , id: "message", class: "form-control"%><br>
+      </div>
+      <div class="modal-footer">
+        <%= f.submit "送信", class:"btn btn-lg btn-secondary fw-bold border-white bg-blue" ,style: "margin-right: 10px; width: 150px;color:#FFF"%>
+        <%= f.submit "クリア" ,type: :reset , class:"btn btn-lg btn-secondary fw-bold border-white bg-blue",style: "margin-right: 10px; width: 150px;color:#FFF"%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

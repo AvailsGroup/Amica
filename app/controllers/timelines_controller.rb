@@ -9,6 +9,7 @@ class TimelinesController < ApplicationController
 
   def index
     view_parameter
+    @report = Report.new
   end
 
   def show
@@ -75,4 +76,6 @@ class TimelinesController < ApplicationController
   def post_params()
     params.require(:post).permit(:content, :image)
   end
+
+
 end
