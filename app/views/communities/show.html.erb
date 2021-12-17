@@ -34,15 +34,13 @@
     <div class="my-3 py-3">
       <h2 class="display-5 text-center">参加者</h2>
       <p class="mb-0"><%= link_to "リーダー : #{@leader.name}", profile_path(@leader.userid), class: "lead text-white", style: "text-decoration:none;" %></p>
-      <% @community.community_members.shuffle.first(10).each do |m| %>
+      <% @community.community_members.includes(:user).shuffle.first(10).each do |m| %>
         <% unless @leader == m.user %>
           <p class="mb-0"><%= link_to "#{m.user.name}", profile_path(m.user.userid), class: "lead text-white", style: "text-decoration:none;" %></p>
         <% end %>
       <% end %>
-      <% if @community.community_members.size >= 10 %>
-        <br/>
+        <hr/>
         <p class="mb-0 small"><%= link_to "もっと見る...", community_members_path(@community.id), class: "lead text-white", style: "text-decoration:none;" %></p>
-      <% end %>
     </div>
   </div>
 
