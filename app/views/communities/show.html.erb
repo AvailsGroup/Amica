@@ -11,13 +11,18 @@
     <% if @leader == current_user %>
       <%= link_to "チャット", chats_path, class: "btn btn-outline-dark mx-2" %>
       <%= link_to "編集", edit_community_path, class: "btn btn-outline-dark mx-2" %>
+      <% if is_community_favorite?(@favorite, @user, @community) %>
+        <%= link_to "お気に入り解除", page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'btn btn-outline-dark mx-2 bg-dark text-light', style: "", data: { disable_with: 'お気に入り解除' } %>
+      <% else %>
+        <%= link_to "お気に入り登録", page_favorite_community_create_path(@community.id), method: :post, class: 'btn btn-outline-dark mx-2', style: "", data: { disable_with: 'お気に入り登録' } %>
+      <% end %>
     <% else %>
       <% if @join %>
         <div class="w-100">
           <%= link_to "チャット", chats_path, class: "btn btn-outline-dark mx-2" %>
           <%= link_to "脱退", community_manage_path(@community.id, current_user.id), method: :delete, class: "btn btn-outline-dark mx-2", data: { confirm: "本当に脱退しますか？" } %>
           <% if is_community_favorite?(@favorite, @user, @community) %>
-            <%= link_to "お気に入り解除", page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'btn btn-outline-dark mx-2', style: "", data: { disable_with: 'お気に入り解除' } %>
+            <%= link_to "お気に入り解除", page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'btn btn-outline-dark mx-2 bg-dark text-light', style: "", data: { disable_with: 'お気に入り解除' } %>
           <% else %>
             <%= link_to "お気に入り登録", page_favorite_community_create_path(@community.id), method: :post, class: 'btn btn-outline-dark mx-2', style: "", data: { disable_with: 'お気に入り登録' } %>
           <% end %>
