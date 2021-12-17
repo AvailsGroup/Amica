@@ -15,6 +15,8 @@
     <td><%=post.title %></td>
     <td><%=post.content %></td>
     <td><%=post.created_at %></td>
+    <td><%= link_to "編集", edit_operation_message_path(id:post) %></td>
+    <td><%= link_to "削除", operation_message_path(id:post),method: :delete %></td>
   </tr>
 <%end %>
 </table>

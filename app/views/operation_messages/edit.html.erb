@@ -1,0 +1,11 @@
+<%= form_for(@post,url:operation_message_path(@post)) do |f| %>
+  <div>
+    <%= f.label :タイトル %><br>
+    <%= f.text_field :title, autofocus: true, :placeholder =>"#{@post.title}" %>
+  </div>
+  <div>
+    <%= f.label :中身 %><br>
+    <%= f.text_area :content, :placeholder =>"#{@post.content}" %>
+  </div>
+  <div><%= f.submit "更新する" %></div>
+<% end %>
