@@ -10,9 +10,18 @@
 <div id="body">
   <div id="chat" style="margin:1% 1% 70px 1%">
       <div id="messages">
-        <div id="test"></div>
-        <% @message.each do |p| %>
-             <%= render 'chats/chat_message',message:p %>
+        <% last_message = nil %>
+        <% @message.each do |m| %>
+          <% if last_message == nil %>
+            <% last_message = m.created_at %>
+          <% end %>
+          <% if m.created_at - last_message == 0 %>
+            <div class="date"><%= m.created_at.strftime("%m月%d日") %></div>
+          <% elsif (m.created_at.to_date - last_message.to_date).to_i >= 1 %>
+            <div class="date"><%= m.created_at.strftime("%m月%d日") %></div>
+          <% end %>
+             <%= render 'chats/chat_message',message:m %>
+          <% last_message = m.created_at %>
         <% end %>
         <div id="append" class="col-sm-12"></div>
       </div>

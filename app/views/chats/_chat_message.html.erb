@@ -12,7 +12,7 @@
       <% if message.created_at.to_date === Date.today %>
         <span class="text-gray small" style="text-align: right"><%= message.created_at.strftime("今日 %H:%M") %></span>
       <% else %>
-        <span class="text-gray small" style="text-align: right"><%= message.created_at.strftime("%m月%d日") %></span>
+        <span class="text-gray small" style="text-align: right"><%= message.created_at.strftime("%H:%M") %></span>
       <% end %>
     </div>
   <% else %>
@@ -27,7 +27,7 @@
       <% if message.created_at.to_date === Date.today %>
         <span class="text-gray small"><%= message.created_at.strftime("今日 %H:%M") %></span>
       <% else %>
-        <span class="text-gray small"><%= message.created_at.strftime("%m月%d日") %></span>
+        <span class="text-gray small"><%= message.created_at.strftime("%H:%M") %></span>
       <% end %>
     </div>
   <% end %>

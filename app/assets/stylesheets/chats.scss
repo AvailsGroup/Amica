@@ -93,3 +93,14 @@
   width: 0;
   height: 0;
 }
+
+.date {
+  text-align:center;
+  width: auto !important;
+  padding: 4px 10px 7px !important;
+  border-radius: 10px 10px 10px 10px;
+  background: #ffffff;
+  font-size: 16px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+  border: 1px solid #C6C6C6;
+}
