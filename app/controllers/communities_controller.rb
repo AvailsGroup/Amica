@@ -52,6 +52,7 @@ class CommunitiesController < ApplicationController
     @community = Community.includes(:user, :tags,:community_members).find(params[:id])
     @join = @community.community_members.exists?(user: current_user)
     @leader = @community.user
+    @report = Report.new
   end
 
   def edit

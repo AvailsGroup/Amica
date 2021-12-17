@@ -113,7 +113,7 @@
 
       <div class="modal-body">
         <%= form_for(@report, url:  timeline_reports_path(post.id)) do |f|%>
-          <%= f.hidden_field :user_id , id: "reported_user_id ", class: "form-control",value: current_user.id  %>
+          <%= f.hidden_field :user_id , id: "user_id ", class: "form-control",value: current_user.id  %>
           <%= f.hidden_field :post_id ,id: "post_id" , class: "form-control",value: post.id %>
           <%= f.hidden_field :reported_user_id , id: "reported_user_id ", class: "form-control",value: post.user.id  %>
           <div> <%= post.user.nickname %></div>
@@ -123,8 +123,9 @@
       <div class="modal-footer">
         <%= f.submit "送信", class:"btn btn-lg btn-secondary fw-bold border-white bg-blue" ,style: "margin-right: 10px; width: 150px;color:#FFF"%>
         <%= f.submit "クリア" ,type: :reset , class:"btn btn-lg btn-secondary fw-bold border-white bg-blue",style: "margin-right: 10px; width: 150px;color:#FFF"%>
-        <% end %>
       </div>
+        <% end %>
+
     </div>
   </div>
 </div>

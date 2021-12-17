@@ -15,6 +15,34 @@
         <% if @join %>
           <%=  link_to "チャット", chats_path,class: "btn btn-outline-dark mx-2" %>
           <%=  link_to "脱退" , community_manage_path(@community.id,current_user.id), method: :delete,class: "btn btn-outline-dark mx-2", data: {confirm: "本当に脱退しますか？"}  %>
+          <div class="ms-2">
+            <label>
+              <button type="button" class="btn btn-primary" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=<% @community.id %>></button>
+              <i class="fas fa-bullhorn"></i>
+            </label>
+          </div>
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">通報</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+          <div class="modal-body">
+            <%= form_for(@report, url:  community_reports_path(@community.id)) do |f|%>
+              <%= f.hidden_field :user_id , id: "user_id ", class: "form-control",value: current_user.id  %>
+              <%= f.hidden_field :post_id ,id: "community_id" , class: "form-control",value: @community.id %>
+              <div> <%= @community.name %></div>
+              <%= f.text_area :message , id: "message", class: "form-control"%><br>
+              </div>
+              <div class="modal-footer">
+                <%= f.submit "送信", class:"btn btn-lg btn-secondary fw-bold border-white bg-blue" ,style: "margin-right: 10px; width: 150px;color:#FFF"%>
+                <%= f.submit "クリア" ,type: :reset , class:"btn btn-lg btn-secondary fw-bold border-white bg-blue",style: "margin-right: 10px; width: 150px;color:#FFF"%>
+              </div>
+            <% end %>
+          </div>
+            </div>
+          </div>
         <%  else  %>
           <%= link_to "参加", community_manage_index_path(@community.id), method: :post, class: "btn btn-outline-dark" %>
         <% end %>

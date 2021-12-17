@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   #communities---------
   resources :communities do
     resources :manage, only: [:create, :destroy]
+    resources :reports,only:[:new,:create]
     get '/members' => 'communities#members'
   end
   get 'community/pickup' => 'communities#pickup'
