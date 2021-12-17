@@ -5,7 +5,16 @@
       <div class="col-sm-12 message-main-sender">
         <div class="sender my-1 p-1">
           <div class="messages">
+            <% if  message.content.slice(0..3) === "http" %>
+              <% url = message.content.sub(/\r\n.*|\r.*|\n.*|\s.*|\t.*/m, "") %>
+              <% messages = message.content.gsub(/#{url}/,"") %>
+              <span>
+                <a href="<%= url %>" target="_blank" rel="noopener noreferrer"><%= url %></a>
+                <%=safe_join(messages.split("\n"),tag(:br))%>
+              </span>
+            <% else %>
             <%=safe_join(message.content.split("\n"),tag(:br))%>
+            <% end %>
           </div>
         </div>
       </div>
@@ -20,7 +29,16 @@
       <div class="col-sm-12 message-main-receiver">
         <div class="receiver my-1 p-1">
           <div class="messages">
-            <%=safe_join(message.content.split("\n"),tag(:br))%>
+            <% if  message.content.slice(0..3) === "http" %>
+              <% url = message.content.sub(/\r\n.*|\r.*|\n.*|\s.*|\t.*/m, "") %>
+              <% messages = message.content.gsub(/#{url}/,"") %>
+              <span>
+                <a href="<%= url %>" target="_blank" rel="noopener noreferrer"><%= url %></a>
+                <%=safe_join(messages.split("\n"),tag(:br))%>
+              </span>
+            <% else %>
+              <%=safe_join(message.content.split("\n"),tag(:br))%>
+            <% end %>
           </div>
         </div>
       </div>
