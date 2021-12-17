@@ -17,6 +17,7 @@ class PagesController < ApplicationController
       end
     end
     @mates -= @favorite_users
+    @mates = @mates.shuffle.first(30)
 
     @communities = Community.includes([:community_members, :tags]).where(id:current_user.community_member.select(:community_id)).order(created_at: :desc)
     @favorite_communities = []
@@ -26,6 +27,7 @@ class PagesController < ApplicationController
       end
     end
     @communities -= @favorite_communities
+    @communities = @communities.shuffle.first(30)
   end
 
   def user

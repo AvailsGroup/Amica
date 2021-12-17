@@ -16,7 +16,7 @@
   <%= form_for(@community, url: community_path,method: "put", multipart: true,class: "needs-validation") do |f| %>
     <main>
       <div class="py-5 text-center">
-        <h2>プロフィール編集</h2>
+        <h2>コミュニティ編集</h2>
         <%= render 'layouts/error_messages', model: f.object %>
         <p class="lead">ここではコミュニティの内容を変更することが出来ます</p>
         <p id="image_text">現在のアイコン</p>
@@ -24,10 +24,10 @@
           <div id="user_icon">
             <label>
               <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-              <% if @community.icon.nil? %>
-                <%= image_tag "default_icon" , :size => '200x200', class: "user_image", style:"width:200px;height:200px"%>
-              <% else %>
+              <% if @community.icon %>
                 <%= image_tag "/communities_image/#{@community.icon}", :size => '200x200', class:"user_image", style:"width:200px;height:200px"%>
+              <% else %>
+                <%= image_tag "default_icon" , :size => '200x200', class: "user_image", style:"width:200px;height:200px"%>
               <% end %>
             </label>
           </div>
@@ -41,7 +41,7 @@
       <div class="col-md-12 col-lg-12">
         <div class="row g-3">
           <div class="col-sm-12">
-            <%= f.label "コミュニティ名", class:"form-label"%>
+            <%= f.label "コミュニティ名(記号は半角のみです)", class:"form-label"%>
             <%= f.text_field :name, autocomplete: "name", class: "form-control" ,:placeholder=>"コミュニティ名"%>
           </div>
 
