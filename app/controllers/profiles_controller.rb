@@ -90,7 +90,7 @@ class ProfilesController < ApplicationController
     @users = User.preload(:profile, :favorite, :followers, :followings, :tags)
     @user = @users.find(current_user.id)
     @friends = @user.matchers
-    @pagenate = Kaminari.paginate_array(@friends).page(params[:page]).per(20)
+    @pagenate = Kaminari.paginate_array(@friends).page(params[:page]).per(5)
     @favorite = Favorite.all
   end
 
@@ -113,9 +113,8 @@ class ProfilesController < ApplicationController
     @user = @users.find(current_user.id)
     @users -= matchers(@user)
     @users -= [@user]
-    @count = @users.size
     sort_pickup
-    @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
+    @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(30)
   end
 
   private
