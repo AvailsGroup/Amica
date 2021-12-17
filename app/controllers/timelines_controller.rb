@@ -56,11 +56,21 @@ class TimelinesController < ApplicationController
   end
 
   def latest
-    view_parameter
+    @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
+    @user = @users.find(current_user.id)
+    @post = Post.includes(:user, :likes, :comments)
+    @posts = @post.order(created_at: :desc).page(params[:page]).per(30)
+    @create = Post.new
   end
 
   def pickup
-    view_parameter
+    @post = Post.includes(:user, :likes, :comments).where(created_at: 1.week.ago.beginning_of_day..Time.zone.now.end_of_day)
+    @posts = @post.sort_by { | p | p.likes.size }
+    @posts = @posts.reverse
+    @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(30)
+    @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
+    @user = @users.find(current_user.id)
+    @create = Post.new
   end
 
   private

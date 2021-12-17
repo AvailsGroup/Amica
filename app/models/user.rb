@@ -72,6 +72,8 @@ class User < ApplicationRecord
   has_many :posts
   has_many :likes
 
+  has_many :community_securities
+
   has_many :comments, dependent: :destroy
 
   has_many :report

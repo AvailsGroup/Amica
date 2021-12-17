@@ -1,0 +1,35 @@
+<div class="container">
+  <% if @community.user == @user %>
+    <%= link_to "メンバー", community_members_path(@community.id) %>
+  <% end %>
+  <h2 class="text-center"><%= @community.name %>のBanしたメンバー</h2>
+  <% @member.each do |m| %>
+    <div class="user_list">
+      <%= link_to profile_path(m.user.userid), style: "text-decoration: none;" do %>
+        <div class="my-3 p-2 bg-white rounded shadow-sm">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex text-muted pt-3">
+              <% if m.user.image.nil? %>
+                <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+              <% else %>
+                <%= image_tag "/user_images/#{m.user.image}", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+              <% end %>
+              <p class="pb-3 mb-0 small lh-sm  w-100">
+                <strong class="d-block text-gray-dark"><%= m.user.name %> (<%= m.user.nickname %>)</strong>
+                @<%= m.user.userid %>
+              </p>
+            </div>
+            <% if @community.user == @user && m.user != @user %>
+              <div style="padding-top: 19px">
+                <span class="text-dark" style="margin-right:10px">管理用</span>
+                <%= link_to community_communities_security_path(id: m.user.id), method: :delete, style: "text-decoration: none;color:green", data: { confirm: "#{m.user.name}を参加可能にします。本当によろしいですか？" } do %>
+                  <i class="fas fa-user-check"></i>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
