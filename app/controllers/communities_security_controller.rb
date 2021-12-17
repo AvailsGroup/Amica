@@ -17,8 +17,9 @@ class CommunitiesSecurityController < ApplicationController
     @user = @users.find(params[:id])
     @community = Community.includes(:user, :tags, :community_members, :community_securities).find(params[:community_id])
     if @community.community_securities.exists?(user_id: params[:id], community_id: params[:community_id])
-      @community.community_securities.destroy(user_id: params[:id], community_id: params[:community_id])
+      @community.community_securities.find_by(user_id: params[:id]).destroy
     end
-    redirect_to(community_members_path)
+    flash[:notice] = "ユーザーの参加禁止を解除しました。"
+    redirect_to(community_banned_member_path)
   end
 end

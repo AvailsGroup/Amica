@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   #top----------------
-  get '/'=>'home#top'
+  get '/' => 'home#top'
   get '/about' => 'home#about'
   get '/contact' => 'mailer#new'
   get '/static' => 'home#static'
@@ -28,8 +28,8 @@ Rails.application.routes.draw do
     get :members
     delete :kick
     put :change
+    get :banned_member
     collection do
-      get :banned
       get :pickup
       get :joined
     end

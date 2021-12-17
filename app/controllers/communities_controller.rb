@@ -138,7 +138,13 @@ class CommunitiesController < ApplicationController
     @user = @users.find(current_user.id)
   end
 
-  def banned
+  def banned_member
+    @community = Community.includes(:community_members, :tags, :user,:favorites, :community_securities).find(params[:community_id])
+    permission
+    @count = @community.community_securities.size
+    @member = @community.community_securities.includes([:user]).page(params[:page]).per(30)
+    @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
+    @user = @users.find(current_user.id)
 
   end
 
@@ -178,7 +184,7 @@ class CommunitiesController < ApplicationController
   def permission
     unless @community.user_id == current_user.id
       flash[:notice] = '権限がありません。'
-      redirect_to(community_path)
+      redirect_to(communities_path)
     end
   end
 
