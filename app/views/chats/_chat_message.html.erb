@@ -7,36 +7,33 @@
           <div class="messages">
            <% start = message.content.index("http")%>
             <% if start != nil %>
-              <% check = 0 %>
-                <% length = message.content.size %>
-              <%= length %>
 
-                    <% ends = message.content.index("\n",start) %>
-
-                    <% url = message.content[start.to_i..ends.to_i - 1] %>
+                <% messages = message.content %>
+<% while start != nil do%>
+                    <% ends = messages.index("\n",start) %>
+                      <% url = messages[start.to_i..ends.to_i - 1] %>
                     <% if start == 0 %>
-                      <% messages = message.content.gsub("#{url}","") %>
+                      <% messages = messages.gsub("#{url}","") %>
                       <span>
                          <a href="<%= url %>" target="_blank" rel="noopener noreferrer"><%= url %></a>
                         <%=safe_join(messages.split("\n"),tag(:br))%>
-                       </span>
-                      <% check =+ url.size + messages.size %>
-<%= check %>
-                    <% else %>
-                      <% first = message.content[0..start.to_i-1] %>
-                      <% messages = message.content.gsub("#{first}", "").gsub("#{url}", "") %>
+                      </span>
+                  <% start = messages.index("http")%>
 
+                    <% else %>
+                      <% first = messages[0..start.to_i-1] %>
+                      <% messages = messages.gsub("#{first}", "").gsub("#{url}", "") %>
                       <span>
                         <%= safe_join(first.split("\n"),tag(:br)) %><br>
                          <a href="<%= url %>" target="_blank" rel="noopener noreferrer"><%= url %></a>
-                        <%=safe_join(messages.split("\n"),tag(:br))%>
+                        <% start = messages.index("http")%>
+                        <% if start == nil %>
+                          <%= safe_join(messages.split("\n"),tag(:br))%> nil
+                        <% end %>
+                        <%= start %>
                        </span>
-                          <% start = messages.index("http")%>
-                <%= start %>
-                        <% check =+ first.size+ url.size + messages.size %>
-                <%= check %>
                     <% end %>
-
+<% end %>
             <% else %>
             <%=safe_join(message.content.split("\n"),tag(:br))%>
             <% end %>
