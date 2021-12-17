@@ -105,9 +105,10 @@ class ProfilesController < ApplicationController
   end
 
   def pickup
-    @users = User.includes(:tags)
+    @users = User.includes(:profile, :favorite, :followers, :tags)
     @user = @users.find(current_user.id)
     sort_pickup
+    @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(20)
   end
 
   private
