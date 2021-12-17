@@ -85,6 +85,11 @@
           <% end %>
         </span>
       </span>
+      <div class="ms-2">
+        <%= link_to new_timeline_report_path(post.id) do %>
+          <i class="fas fa-bullhorn"></i>
+        <% end %>
+      </div>
     </div>
     <div>
       <% if post.user == current_user %>
@@ -93,6 +98,7 @@
         <% end %>
       <% end %>
     </div>
+
   </div>
 </div>
 
