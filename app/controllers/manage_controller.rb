@@ -10,7 +10,6 @@ class ManageController < ApplicationController
       return
     end
     @user = current_user
-    pp community_ban?(@community)
     if community_ban?(@community)
       flash[:alert] = "あなたはこのコミュニティから参加禁止にされています。"
     else

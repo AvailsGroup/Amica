@@ -3,6 +3,7 @@ class ProfilesController < ApplicationController
   before_action :banned
   helper_method :following?
   helper_method :matchers?
+  helper_method :is_user_favorite?
 
   def index
     @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
@@ -88,6 +89,7 @@ class ProfilesController < ApplicationController
     @user = @users.find(current_user.id)
     @friends = @user.matchers
     @pagenate = Kaminari.paginate_array(@friends).page(params[:page]).per(20)
+    @favorite = Favorite.all
   end
 
   def follower

@@ -1,8 +1,8 @@
 class CommunitiesController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
-  helper_method :is_user_favorite?
   helper_method :community_ban?
+  helper_method :is_community_favorite?
 
   def index
     @users = User.includes(:community_member, :tags)
@@ -61,6 +61,7 @@ class CommunitiesController < ApplicationController
     @user = @users.find(current_user.id)
     @join = @community.community_members.any?{ |c| c.user_id == @user.id }
     @leader = @community.user
+    @favorite = Favorite.all
     exists_community_security
   end
 
