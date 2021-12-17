@@ -1,5 +1,7 @@
 class ReportsController < ApplicationController
   def new
+    @post = Post.find_by(id: params[:timeline_id])
+    @user = User.find_by(id: @post.user_id)
     @report = Report.new
     render layout: 'home'
     flash.now[:notice] = 'test'

@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :timelines do
     resources :likes,only:[:create,:destroy]
     resources :comments, only: [:create, :destroy]
+    resources :reports,only:[:new,:create]
     collection do
       get :search
       get :follow
@@ -69,10 +70,6 @@ Rails.application.routes.draw do
 
   #chats--------------
   resources :chats
-
-  #reports--------------
-  get  "reports/new"  => "reports#new"
-  post 'reports/create', to: 'reports#create'
 
   #searches-----------
   resources :searches, only: [:index] do
