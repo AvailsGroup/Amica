@@ -6,13 +6,15 @@ class ProfilesController < ApplicationController
   helper_method :is_user_favorite?
 
   def index
-    @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+    @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags).where.not(userid: nil)
     @user = @users.find(current_user.id)
     @friends = matchers(@user)
     @following = @user.followings_list
     @follower = @user.followers_list
     @profile = @user.profile
     sort_pickup
+    @users -= @friends
+    @users -= [@user]
   end
 
   def show
@@ -107,9 +109,13 @@ class ProfilesController < ApplicationController
   end
 
   def pickup
-    @users = User.includes(:tags)
+    @users = User.includes(:tags,:followings,:followers).where.not(userid: nil)
     @user = @users.find(current_user.id)
+    @users -= matchers(@user)
+    @users -= [@user]
+    @count = @users.size
     sort_pickup
+    @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
   end
 
   private
