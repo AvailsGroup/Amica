@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   #communities---------
   resources :communities do
     resources :manage, only: [:create, :destroy]
-    resources :reports,only:[:new,:create]
+    resources :reports,only:[:create]
     get '/members' => 'communities#members'
     resources :communities_security, only: [:create,:destroy]
     get :members

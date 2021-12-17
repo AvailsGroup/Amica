@@ -1,5 +1,5 @@
 <%= stylesheet_link_tag 'timelines' %>
-<%= javascript_pack_tag 'timeline/main'%>
+<%= javascript_pack_tag 'timeline/main' %>
 
 <style>
     .lity {
@@ -13,22 +13,20 @@
         border: none;
     }
 </style>
-<%= render 'timelines/nav', page:"friends" %>
+<%= render 'timelines/nav', page: "friends" %>
 
 
 <div class="container">
-  <%= render "timelines/form", create:@create %>
+  <%= render "timelines/form", create: @create %>
   <% @posts.each do |p| %>
-    <% if matchers?(@user,p.user) || p.user == current_user %>
+    <% if matchers?(@user, p.user) || p.user == current_user %>
       <%= link_to timeline_path(p.id) do %>
         <div class="my-3 p-3 bg-white rounded shadow-sm">
-          <div id="post_<%= p.id %>">
-            <%= render "timelines/post", post: p, post_model: @post %>
-          </div>
+          <%= render "timelines/post", post: p, post_model: @post, report: @report %>
         </div>
       <% end %>
     <% end %>
-<% end %>
+  <% end %>
   <%= render "layouts/pagenate", pagenate: @posts %>
 </div>
 

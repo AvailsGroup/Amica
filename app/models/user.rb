@@ -95,6 +95,11 @@ class User < ApplicationRecord
   has_many :communities, dependent: :destroy
   has_many :community_member, dependent: :destroy
 
+  has_many :reports
+
+  has_many :passive_reports, class_name: "Report", foreign_key: "reported_user_id"
+  has_many :reported_users, through: :passive_reports, source: :reported_user
+
   def password_required?
     super && confirmed?
   end

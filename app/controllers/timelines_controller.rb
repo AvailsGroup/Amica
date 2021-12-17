@@ -21,6 +21,7 @@ class TimelinesController < ApplicationController
     @comment = Comment.new
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
+    @report = Report.new
   end
 
   def create
