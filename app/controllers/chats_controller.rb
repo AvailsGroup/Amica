@@ -1,6 +1,7 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
+  require "uri"
 
   def index
     latest_message?
@@ -15,6 +16,7 @@ class ChatsController < ApplicationController
     in_room?
     @message = Message.where(room_id: @room.id)
   end
+
 end
 
 private
@@ -58,3 +60,4 @@ def in_room?
     end
   end
 end
+

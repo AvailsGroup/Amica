@@ -5,7 +5,11 @@
       <div class="col-sm-12 message-main-sender">
         <div class="sender my-1 p-1">
           <div class="messages">
-            <% if  message.content.slice(0..3) === "http" %>
+           <% start = message.content.index("http")%>
+            <% if start != nil %>
+              <% ends = message.content.index("\n",start) %>
+              <% url = message.content[start..ends] %>
+              <%= url %>
               <% url = message.content.sub(/\r\n.*|\r.*|\n.*|\s.*|\t.*/m, "") %>
               <% messages = message.content.gsub(/#{url}/,"") %>
               <span>
@@ -29,7 +33,8 @@
       <div class="col-sm-12 message-main-receiver">
         <div class="receiver my-1 p-1">
           <div class="messages">
-            <% if  message.content.slice(0..3) === "http" %>
+            <% start = message.content.index("http")%>
+            <% if start != nil %>
               <% url = message.content.sub(/\r\n.*|\r.*|\n.*|\s.*|\t.*/m, "") %>
               <% messages = message.content.gsub(/#{url}/,"") %>
               <span>

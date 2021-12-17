@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const submitButton = document.getElementById('submit_button');
   const room_id = document.getElementById('room_id');
 
+  //ブラウザがスクリーンサイズの50%以下or500px以下の時に相手の名前を消す
   const name = document.getElementById('user_name');
   let screen_50width = screen.availWidth * 0.5 ;
   window.addEventListener('resize', resizeWindow);
@@ -68,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
         name.style.display = "";
       }
   }
+  //改行や文字数に応じてtextareaを伸び縮みさせる
     let $textarea = $('#content');
     const lineHeight = parseInt($textarea.css('lineHeight'));
     // 最低行数を指定
@@ -81,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
         $(this).height(0);
       }
     });
-
+  //Shift+Enter or 紙飛行機ボタンでメッセ➖ジを送信させる
     $(document).on('keypress', '[data-behavior~=chat_speaker]', function(event) {
       if(event.shiftKey) {
         if (event.key === 'Enter' && event.target.value && event.target.value.match(/\S/g)) {
