@@ -7,15 +7,35 @@
           <div class="messages">
            <% start = message.content.index("http")%>
             <% if start != nil %>
-              <% ends = message.content.index("\n",start) %>
-              <% url = message.content[start..ends] %>
-              <%= url %>
-              <% url = message.content.sub(/\r\n.*|\r.*|\n.*|\s.*|\t.*/m, "") %>
-              <% messages = message.content.gsub(/#{url}/,"") %>
-              <span>
-                <a href="<%= url %>" target="_blank" rel="noopener noreferrer"><%= url %></a>
-                <%=safe_join(messages.split("\n"),tag(:br))%>
-              </span>
+              <% check = 0 %>
+              <% length = message.content.size %>
+<%= length %>
+                  <% ends = message.content.index("\n",start) %>
+
+                  <% url = message.content[start.to_i..ends.to_i - 1] %>
+                  <% if start == 0 %>
+                    <% messages = message.content.gsub(/#{url}/,"") %>
+                    <span>
+                       <a href="<%= url %>" target="_blank" rel="noopener noreferrer"><%= url %></a>
+                      <%=safe_join(messages.split("\n"),tag(:br))%>
+                     </span>
+                    <% check =+ url.size + messages.size %>
+<%= check %>
+                  <% start = ends.to_i %>
+                  <% else %>
+                    <% first = message.content[0..start.to_i-1] %>
+                    <% messages = message.content.gsub(/#{url}|#{first}/, url => "", first => "") %>
+                <% first + "\n" %>
+                    <span>
+                      <%= safe_join(first.split("\n"),tag(:br)) %><br>
+                       <a href="<%= url %>" target="_blank" rel="noopener noreferrer"><%= url %></a>
+                      <%=safe_join(messages.split("\n"),tag(:br))%>
+                     </span>
+                      <% check =+ first.size+ url.size + messages.size %>
+                <%= check %>
+                    <% start = ends.to_i %>
+                  <% end %>
+
             <% else %>
             <%=safe_join(message.content.split("\n"),tag(:br))%>
             <% end %>
