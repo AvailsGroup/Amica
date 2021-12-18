@@ -41,11 +41,7 @@
               <%= f.hidden_field :aspect_denominator, id: "aspect_denominator", value: "1.0" %>'
 
               <div id="prev_img">
-                <% if current_user.image.nil? %>
-                  <%= image_tag "default_icon", :size => '200x200', class: "user_image" %>
-                <% else %>
-                  <%= image_tag "/user_images/#{current_user.image}", :size => '200x200', class: "user_image" %>
-                <% end %>
+                  <%= image_tag current_user.decorate.image, :size => '200x200', class: "user_image" %>
               </div>
             </div>
           </div>
@@ -75,11 +71,7 @@
       <div id="user_icon">
         <label>
           <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-          <% if current_user.image.nil? %>
-            <%= image_tag "default_icon", :size => '200x200', class: "user_image" %>
-          <% else %>
-            <%= image_tag "/user_images/#{current_user.image}", :size => '200x200', class: "user_image" %>
-          <% end %>
+          <%= image_tag current_user.decorate.image, :size => '200x200', class: "user_image" %>
         </label>
       </div>
       <label>

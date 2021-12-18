@@ -5,11 +5,7 @@
     <% @users.each do |user| %>
       <%= link_to profile_path(user.userid),style:"text-decoration: none;" do %>
         <div class="d-flex text-muted pt-3">
-          <% if user.image.nil? %>
-            <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-          <% else %>
-            <%= image_tag "/user_images/#{user.image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
-          <% end %>
+            <%= image_tag user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
           <p class="pb-3 mb-0 small lh-sm  border-bottom w-100">
             <strong class="d-block text-gray-dark"><%= user.name %> (<%= user.nickname %>)</strong>
             @<%= user.userid %>

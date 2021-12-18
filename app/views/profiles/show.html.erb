@@ -7,11 +7,7 @@
         <div class="userprofile social">
           <div class="userdata">
             <div class="userpic">
-              <% if @user.image.nil? %>
-                <%= image_tag "default_icon", :size => '100x100', class: "userpicimg icon flex-shrink-0 question-icon" %>
-              <% else %>
-                <%= image_tag "/user_images/#{@user.image}", style: "width: 100px;height:100px;", class: "userpicimg icon bd-placeholder-img flex-shrink-0 question-icon" %>
-              <% end %>
+                <%= image_tag @user.decorate.image, :size => '100x100', class: "userpicimg icon flex-shrink-0 question-icon" %>
             </div>
             <div class="names">
               <h2 class="username"><%= @user.name %></h2>
