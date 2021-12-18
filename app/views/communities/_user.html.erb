@@ -3,7 +3,7 @@
     <div class="my-3 p-2 bg-white rounded shadow-sm">
       <div class="d-flex justify-content-between">
         <div class="d-flex text-muted pt-3">
-            <%= image_tag user.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+          <%= image_tag user.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
           <p class="pb-3 mb-0 small lh-sm  w-100">
             <strong class="d-block text-gray-dark"><%= user.user.name %> (<%= user.user.nickname %>)</strong>
             @<%= user.user.userid %>
@@ -12,14 +12,20 @@
         <% if community.user == fixed_current_user && user.user != fixed_current_user %>
           <div style="padding-top: 19px">
             <span class="text-dark" style="margin-right:10px">管理用</span>
-            <%= link_to community_change_path(id:user.user.id), method: :put, style: "text-decoration: none;color:red;margin-right:10px", data: { confirm: "#{user.user.name}にリーダーを譲渡します。本当によろしいですか？" } do %>
-              <i class="fas fa-people-arrows"></i>
-            <% end %>
-            <%= link_to community_kick_path(id:user.user.id), method: :delete, style: "text-decoration: none;color:red;margin-right:10px", data: { confirm: "#{user.user.name}を強制退出させます。本当によろしいですか？" } do %>
-              <i class="fas fa-user-minus"></i>
-            <% end %>
-            <%= link_to community_communities_security_index_path(id:user.user.id,community_id:community.id),method: :post, style: "text-decoration: none;color:red", data: { confirm: "#{user.user.name}を参加禁止にします。本当によろしいですか？" } do %>
-              <i class="fas fa-user-alt-slash"></i>
+            <% if page == 'member' %>
+              <%= link_to community_change_path(id: user.user.id), method: :put, style: "text-decoration: none;color:red;margin-right:10px", data: { confirm: "#{user.user.name}にリーダーを譲渡します。本当によろしいですか？" } do %>
+                <i class="fas fa-people-arrows"></i>
+              <% end %>
+              <%= link_to community_kick_path(id: user.user.id), method: :delete, style: "text-decoration: none;color:red;margin-right:10px", data: { confirm: "#{user.user.name}を強制退出させます。本当によろしいですか？" } do %>
+                <i class="fas fa-user-minus"></i>
+              <% end %>
+              <%= link_to community_communities_security_index_path(id: user.user.id, community_id: community.id), method: :post, style: "text-decoration: none;color:red", data: { confirm: "#{user.user.name}を参加禁止にします。本当によろしいですか？" } do %>
+                <i class="fas fa-user-alt-slash"></i>
+              <% end %>
+            <% else %>
+              <%= link_to community_communities_security_path(id: user.user.id), method: :delete, style: "text-decoration: none;color:green", data: { confirm: "#{user.user.name}を参加可能にします。本当によろしいですか？" } do %>
+                <i class="fas fa-user-check"></i>
+              <% end %>
             <% end %>
           </div>
         <% end %>
