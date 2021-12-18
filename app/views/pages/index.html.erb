@@ -12,7 +12,7 @@
         <div class="page-header" style="text-align: center">
           <h1>友だち</h1>
         </div>
-        <% if @mates.size == 0 %>
+        <% if @favorite_users==0 && @mates.size == 0 %>
           <div class="text-center " style="font-size: 18px; margin-top: 60px;">
             <%= link_to "あなたに合った友だちを探してみましょう！", profiles_path %>
           </div>
@@ -58,7 +58,7 @@
         <div class="page-header" style="text-align: center">
           <h1>コミュニティ</h1>
         </div>
-        <% if @communities.size == 0 %>
+        <% if @favorite_communities.size == 0 && @communities.size == 0 %>
           <div class="text-center " style="font-size: 18px; margin-top: 60px;">
             <%= link_to "あなたに合ったコミュニティを見つけてみましょう！", "/communities/pickup" %>
           </div>
