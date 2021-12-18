@@ -1,7 +1,45 @@
-<div class="notification-view">
-  <%= notification_form(notification) %><span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)}前)" %></span>
-  <br>
-  <% if !@comment.nil? %>
-    <p class="notification-comment"><%= @comment %></p>
-  <% end %>
-</div>
+ <% visitor = notification.visitor %>
+ <% visited = notification.visited %>
+  <div calss="col-md-6 mx-auto">
+  <div class="form-inline">
+      <span>
+   <%= link_to user_path(visitor) do %>
+   <%= image_tag avatar_url(visitor).to_s, class: "icon_mini" %>
+      </span>
+  <strong>
+   <%= visitor.name %>
+   <%= 'さんが' %>
+  </strong>
+
+   <% case notification.action %>
+   <% when 'follow' then %>
+   <%= "あなたをフォローしました" %>
+   <% when 'like' then %>
+   <%= link_to 'あなたの投稿', notification.post, style: "font-weight: bold;" %>
+   <%= "にいいねしました" %>
+   <% when 'comment' then %>
+   <% if notification.post.user_id == visited.id %>
+    <%= link_to "あなたの投稿", notification.post, style: "font-weight: bold;" %>
+   <% else %>
+      <span>
+       <%= link_to post_path(notification.post) do %>
+       <%= image_tag avatar_url(notification.post.user).to_s, class: "icon_mini" %>
+          </span>
+      <strong>
+       <%= notification.post.user.name + 'さんの投稿' %>
+       <%= "にコメントしました" %>
+      </strong>
+          </div>
+
+          <P class="text-muted mb-0">
+       <%= Comment.find_by(id: notification.comment_id)&.comment %>
+      </p>
+      <div class="small text-muted text-right">
+       <%= time_ago_in_words(notification.created_at).upcase %>
+      </div>
+      <hr>
+      <%end %>
+    <%end %>
+             <%end %>
+           <%end %>
+      </div>
