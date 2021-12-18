@@ -1,8 +1,8 @@
 <p class="h1 mt-4" style="font-weight: normal; text-align: center;">確認のメールが届きませんでしたか？</p>
 <div class="text-center mt-5">
-  <p class="vw"><%= "送信先メールアドレスは間違っていませんか？また指定された「＠gn.iwasaki.ac.jp」" %>
+  <p class="vw"><%= "送信先メールアドレスは間違っていませんか？＠の後に、指定された「gn.iwasaki.ac.jp」" %>
     <br>
-    <%= "をきちんといれていますか？ここではメールアドレスが存在するかどうかを確認できます。" %></p>
+    <%= "をきちんと入れていますか？ここではメールアドレスが存在するかどうかを確認できます。" %></p>
 
   <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
