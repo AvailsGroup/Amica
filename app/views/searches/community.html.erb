@@ -5,11 +5,7 @@
     <% @communities.each do |community| %>
       <%= link_to community_path(community.id),style:"text-decoration: none;" do %>
         <div class="d-flex text-muted pt-3">
-          <% if community.image.nil? %>
-            <%= image_tag "/communities_image/#{community.icon}", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-          <% else %>
-            <%= image_tag "/community_icon/#{community.icon}.png" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
-          <% end %>
+          <%= image_tag community.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
           <p class="pb-3 mb-0 small lh-sm  border-bottom w-100">
             <strong class="d-block text-gray-dark"><%= community.name %></strong>
           </p>

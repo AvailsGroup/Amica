@@ -91,3 +91,5 @@ gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
 gem 'dotenv-rails'
 
 gem 'activesupport'
+
+gem 'draper'
