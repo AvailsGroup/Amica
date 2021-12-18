@@ -10,7 +10,7 @@
               <% if start != nil %>
                 <% messages = message.content %>
                 <% while start != nil do%>
-                  <% ends = messages.index(/\r\n|\r|\n|\s|\t/,start) %>
+                  <% ends = messages.index(/\r\n|\r|\n|\s|　|\t/,start) %>
                   <% url = messages[start.to_i..ends.to_i - 1] %>
                   <% if start == 0 %>
                     <% messages = messages.sub("#{url}","") %>

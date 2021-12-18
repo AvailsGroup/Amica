@@ -32,7 +32,7 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
         $('#append').append('<div class="message-body" style="white-space: pre;">'+
                               '<div class="receiver my-1 p-1">' +
                                 '<div class="messages">' +
-                                  data.content  +
+                                   AutoLink(data.content)+
                                 '</div>' +
                               '</div>'+
                             '</div>'+
@@ -111,9 +111,11 @@ function AutoLink(str) {
   var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
   var regexp_makeLink = function(all, url, h, href) {
     return '<a href="h' + href + '">' + url + '</a>';
-  }
-  return  str.replace(regexp_url, regexp_makeLink);
 
+  }
+  let content;
+      content = str.replace(regexp_url, regexp_makeLink)
+     return  content.replace(/\r?\n/g, '<br>');
 
 }
 
