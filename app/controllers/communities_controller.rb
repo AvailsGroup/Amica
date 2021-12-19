@@ -21,33 +21,15 @@ class CommunitiesController < ApplicationController
     @community = Community.new(community_params)
     @community.user_id = current_user.id
 
+    check_format?(new_community_path)
+
     unless @community.save
       @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-      render action: 'communities/new'
+      render 'communities/new'
       return
     end
 
-    unless params['community']['images'].nil?
-      accepted_format = %w[.jpg .jpeg .png]
-      unless accepted_format.include? File.extname(params['community']['images'].original_filename)
-        flash[:alert] = '画像は jpg jpeg png 形式のみ対応しております。'
-        redirect_to(new_community_path)
-        return
-      end
-    end
-
-    if !params['community']['images'].nil? && base64?(params['community']['icon']['data:image/jpeg;base64,'.length .. -1])
-      unless @community.image.nil?
-        if File.exist?("public/communities_image/#{@community.icon}")
-          File.delete("public/communities_image/#{@community.icon}")
-        end
-      end
-      rand = rand(1_000_000..9_999_999)
-      @community.update(icon: "#{@community.id}#{rand}.jpg")
-      File.open("public/communities_image/#{@community.icon}", 'wb') do |f|
-        f.write(Base64.decode64(params['community']['icon']['data:image/jpeg;base64,'.length .. -1]))
-      end
-    end
+    check_image
 
     flash[:notice] = 'コミュニティを作成しました！'
     CommunityMember.create(user_id: current_user.id, community_id: @community.id)
@@ -75,6 +57,8 @@ class CommunitiesController < ApplicationController
     @community = Community.find(params[:id])
     permission
 
+    check_format(edit_community_path)
+
     unless @community.update(community_params)
       @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
       @tag = @community.tag_list.join(',')
@@ -82,27 +66,8 @@ class CommunitiesController < ApplicationController
       return
     end
 
-    unless params['community']['images'].nil?
-      accepted_format = %w[.jpg .jpeg .png]
-      unless accepted_format.include? File.extname(params['community']['images'].original_filename)
-        flash[:alert] = '画像は jpg jpeg png 形式のみ対応しております。'
-        redirect_to(edit_community_path)
-        return
-      end
-    end
+    check_image(true)
 
-    if !params['community']['images'].nil? && base64?(params['community']['image']['data:image/jpeg;base64,'.length .. -1])
-      unless @community.image.nil?
-        if File.exist?("public/communities_image/#{@community.icon}")
-          File.delete("public/communities_image/#{@community.icon}")
-        end
-      end
-      rand = rand(1_000_000..9_999_999)
-      @community.update(icon: "#{@community.id}#{rand}.jpg")
-      File.open("public/communities_image/#{@community.icon}", 'wb') do |f|
-        f.write(Base64.decode64(params['community']['image']['data:image/jpeg;base64,'.length .. -1]))
-      end
-    end
     flash[:notice] = 'ユーザー情報を編集しました'
     redirect_to community_path(@community.id)
   end
@@ -186,7 +151,7 @@ class CommunitiesController < ApplicationController
   end
 
   def community_params
-    params.require(:community).permit(:name, :content, :icon, :tag_list)
+    params.require(:community).permit(:name, :content, :image, :tag_list)
   end
 
   def permission
@@ -202,9 +167,42 @@ class CommunitiesController < ApplicationController
       redirect_to communities_path
     end
   end
-  
+
   def redirect(page)
     @page = page
     render "communities/index"
+  end
+
+  def check_format(path)
+    unless params['community']['images'].nil?
+      accepted_format = %w[.jpg .jpeg .png]
+      unless accepted_format.include? File.extname(params['community']['images'].original_filename)
+        flash[:alert] = '画像は jpg jpeg png 形式のみ対応しております。'
+        redirect_to(path)
+      end
+    end
+  end
+
+  def check_image(delete = false)
+    if !params['community']['images'].nil? && base64?(params['community']['image']['data:image/jpeg;base64,'.length .. -1])
+      delete_old_image if delete
+      save_image
+    end
+  end
+
+  def delete_old_image
+    unless @community.image.nil?
+      if File.exist?("public/communities_image/#{@community.image}")
+        File.delete("public/communities_image/#{@community.image}")
+      end
+    end
+  end
+
+  def save_image
+    rand = rand(1_000_000..9_999_999)
+    @community.update(image: "#{@community.id}#{rand}.jpg")
+    File.open("public/communities_image/#{@community.image}", 'wb') do |f|
+      f.write(Base64.decode64(params['community']['image']['data:image/jpeg;base64,'.length .. -1]))
+    end
   end
 end
