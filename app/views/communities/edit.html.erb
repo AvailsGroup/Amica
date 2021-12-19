@@ -23,11 +23,7 @@
         <div id="user_icon">
           <label>
             <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-            <% if @community.icon %>
-              <%= image_tag "/communities_image/#{@community.icon}", :size => '200x200', class: "user_image", style: "width:200px;height:200px" %>
-            <% else %>
-              <%= image_tag "default_icon", :size => '200x200', class: "user_image", style: "width:200px;height:200px" %>
-            <% end %>
+            <%= image_tag @community.decorate.image, :size => '200x200', class: "user_image", style: "width:200px;height:200px" %>
           </label>
         </div>
         <label>
@@ -86,11 +82,7 @@
                 <%= f.hidden_field :aspect_numerator, id: "aspect_numerator", value: "1.0" %>
                 <%= f.hidden_field :aspect_denominator, id: "aspect_denominator", value: "1.0" %>'
                 <div id="prev_img">
-                  <% if @community.icon.nil? %>
-                    <%= image_tag "default_icon", :size => '200x200', class: "user_image" %>
-                  <% else %>
-                    <%= image_tag "/communities_image/#{@community.icon}", :size => '200x200', class: "user_image" %>
-                  <% end %>
+                  <%= image_tag @community.decorate.image, :size => '200x200', class: "user_image" %>
                 </div>
               </div>
             </div>

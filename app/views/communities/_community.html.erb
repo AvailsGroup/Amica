@@ -4,11 +4,7 @@
     <%= link_to community_path(community.id), class: "text-dark", style: "text-decoration: none" do %>
       <div class="col">
         <div class="carbon-example flex-wrapper">
-          <% if community.icon? %>
-            <%= image_tag "/communities_image/#{community.icon}", class: "img-fluid", style: "width:200px" %><br>
-          <% else %>
-            <%= image_tag "default_icon", style: "width:200px" %><br>
-          <% end %>
+          <%= image_tag community.decorate.image, class: "img-fluid", style: "width:200px" %><br>
           <div class="inner-wrapper text-center w-100">
             <h5><%= community.name %> </h5>
             <p class="my-0 fine-print"><i class="far fa-user fine-print"></i> <%= community.community_members.size %>
