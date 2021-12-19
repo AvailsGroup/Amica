@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'block/create'
+  get 'block/destroy'
   #devise--------------
   get 'users/controller'
 
