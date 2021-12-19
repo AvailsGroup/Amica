@@ -21,10 +21,13 @@ class ManageController < ApplicationController
   def destroy
     @community = Community.includes(:user, :tags, :community_members, :community_securities, :favorites).find(params[:community_id])
     if @community.user_id == current_user.id
-      flash[:notice] = "コミュニティリーダーは抜けることはできません。"
+      flash[:notice] = "コミュニティリーダーは抜けることはできません。もし抜ける場合はリーダー権限をメンバー一覧から譲渡してください"
     else
       @cm = CommunityMember.find_by(user_id: current_user.id, community_id: @community.id)
       @cm.destroy
+      if Favorite.exists?(user_id: current_user.id, community_id: @community.id)
+        Favorite.find_by(user_id: current_user.id, community_id: @community.id).destroy
+      end
     end
     redirect_to(community_path(@community.id))
   end

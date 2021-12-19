@@ -117,6 +117,9 @@ class CommunitiesController < ApplicationController
     if @community.community_members.any? { |m| m.user_id == @user.id }
       @cm = CommunityMember.find_by(user_id: @user.id, community_id: @community.id)
       @cm.destroy
+      if Favorite.exists?(user_id: @user.id, community_id: @community.id)
+        Favorite.find_by(user_id: @user.id, community_id: @community.id).destroy
+      end
     end
     flash[:notice] = "ユーザーを強制退出させました。"
     redirect_to(community_members_path(@community.id))
@@ -131,8 +134,6 @@ class CommunitiesController < ApplicationController
     flash[:notice] = "#{@user.name}にリーダー権限を譲渡しました。"
     redirect_to(community_members_path)
   end
-
-
 
   private
 

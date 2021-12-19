@@ -10,6 +10,10 @@ class RelationshipsController < ApplicationController
 
   def destroy
     other_user = User.find_by(userid: params[:profile_id])
+    if Favorite.exists?(user_id: current_user.id, favorite_user_id: other_user.id)
+      Favorite.find_by(user_id: current_user.id, favorite_user_id: other_user.id).destroy
+    end
+
     current_user.unfollow(other_user)
     redirect_to profile_path(params[:profile_id]), notice: "フォローを解除しました！"
   end
