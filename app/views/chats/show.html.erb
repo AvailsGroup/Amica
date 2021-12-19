@@ -46,6 +46,10 @@
        <span class="clear"></span>
        <div class="row ">
          <div class="w-100 d-flex ">
+           <label>
+             <button style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#imageModal"></button>
+             <span class="m-1" style="font-size: 1.6rem;color: #5e5e5e"> <i class="fas fa-image"></i></span>
+           </label>
           <input type="hidden" id="room_id" value= <%= @room.id %> data-behavior="chat_speaker">
           <input type="hidden" id="user_id" value= <%= current_user.id %> data-behavior="chat_speaker">
           <%= text_area_tag  :content, nil, class:"form-control", placeholder:"message", data: {behavior: "chat_speaker"},id:"content" %>
@@ -54,7 +58,7 @@
              <span class="m-1" style="font-size: 1.6rem;color: #5e5e5e"><i class="fas fa-paper-plane"></i></span>
            </label>
            <label>
-             <button style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+             <button style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#menuModal"></button>
              <span class="m-1" style="font-size: 1.6rem;color: #5e5e5e"> <i class="fas fa-th-large"></i></span>
            </label>
          </div>
@@ -63,12 +67,12 @@
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- menuModal -->
+<div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">menu</h5>
+        <h5 class="modal-title" id="menuModalLabel">menu</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -102,6 +106,26 @@
           </div>
         </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- iamgeModal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="imageModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+<input type="image">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
