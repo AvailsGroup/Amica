@@ -10,13 +10,13 @@ class ApplicationController < ActionController::Base
 
     if current_user.ban
       sign_out current_user
-      flash.alert = "あなたはアカウント停止処分を受けています。"
-      redirect_to "/"
+      flash.alert = 'あなたはアカウント停止処分を受けています。'
+      redirect_to '/'
     end
   end
 
   def after_sign_in_path_for(resource)
-    flash[:alert] = "ようこそAmicaへ！ "
+    flash[:alert] = 'ようこそAmicaへ！ '
     pages_path
   end
 
