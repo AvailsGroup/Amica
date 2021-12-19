@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   end
 
   def blocked?(user, other_user)
-    user.block.any?{ |u| u.blocked_user_id == other_user.id}
+    user.block.any? { |u| u.blocked_user_id == other_user.id }
   end
 
   def following?(user_followings_list, other_user)
