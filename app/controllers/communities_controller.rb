@@ -5,12 +5,11 @@ class CommunitiesController < ApplicationController
   helper_method :is_community_favorite?
 
   def index
-    @users = User.includes(:community_member, :tags)
-    @user = @users.find(current_user.id)
-    @community = Community.includes(:community_members, :tags, :user,:favorites, :community_securities)
-                          .order(created_at: :desc)
+    view_parameter
+    @community = @community.order(created_at: :desc)
                           .page(params[:page])
                           .per(36)
+    redirect('index')
   end
 
   def new
@@ -117,18 +116,18 @@ class CommunitiesController < ApplicationController
   end
 
   def pickup
-    @users = User.includes(:community_member, :tags)
-    @user = @users.find(current_user.id)
-    @community = Community.includes(:community_members, :tags, :user,:favorites, :community_securities).order(created_at: :desc).where.not(id: current_user.community_member.select(:community_id))
+    view_parameter
+    @community = @community.order(created_at: :desc).where.not(id: current_user.community_member.select(:community_id))
     @community = @community.sort_by { |u| (@user.tags.pluck(:name) & u.tags.pluck(:name)).size }
     @community = @community.reverse
     @community = Kaminari.paginate_array(@community).page(params[:page]).per(36)
+    redirect('pickup')
   end
 
   def joined
-    @users = User.includes(:community_member, :tags)
-    @user = @users.find(current_user.id)
-    @community = Community.includes(:community_members, :tags, :user,:favorites, :community_securities).where(id: current_user.community_member.select(:community_id)).order(created_at: :desc).page(params[:page]).per(36)
+    view_parameter
+    @community = @community.where(id: current_user.community_member.select(:community_id)).order(created_at: :desc).page(params[:page]).per(36)
+    redirect('joined')
   end
 
   def members
@@ -137,6 +136,7 @@ class CommunitiesController < ApplicationController
     @member = @community.community_members.includes([:user]).page(params[:page]).per(30)
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
+    @page = 'member'
   end
 
   def banned_member
@@ -146,7 +146,8 @@ class CommunitiesController < ApplicationController
     @member = @community.community_securities.includes([:user]).page(params[:page]).per(30)
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
-
+    @page = 'banned'
+    render "communities/members"
   end
 
   def kick
@@ -178,6 +179,12 @@ class CommunitiesController < ApplicationController
 
   private
 
+  def view_parameter
+    @users = User.includes(:community_member, :tags)
+    @user = @users.find(current_user.id)
+    @community = Community.includes(:community_members, :tags, :user,:favorites, :community_securities)
+  end
+
   def community_params
     params.require(:community).permit(:name, :content, :icon, :tag_list)
   end
@@ -194,5 +201,10 @@ class CommunitiesController < ApplicationController
       flash[:alert] = "あなたはこのコミュニティから参加禁止にされています。"
       redirect_to communities_path
     end
+  end
+  
+  def redirect(page)
+    @page = page
+    render "communities/index"
   end
 end
