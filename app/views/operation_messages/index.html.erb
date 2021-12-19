@@ -1,22 +1,36 @@
-<h1>運営からのお知らせ</h1>
+
+
+<div class="row">
+  <div class="col-6">
+    <h1>通知</h1>
+  </div>
+  <div class="col-6 m-auto">
+    <h1>運営からのお知らせ</h1>
 <%if current_user.admin==true %>
   <%= link_to new_operation_message_path class: "icons nav-link" do %>
-    <i class="fas fa-exclamation-circle"></i>新規作成
+    <i class="fas fa-exclamation-circle"></i>新規作成<br>
   <% end %>
-
 <%end %>
-<table>
-  <tr>
-    <th>タイトル</th>
-    <th>内容</th>
-  </tr>
-  <% @posts.each do |post| %>
-  <tr>
-    <td><%=post.title %></td>
-    <td><%=post.content %></td>
-    <td><%=post.created_at %></td>
-    <td><%= link_to "編集", edit_operation_message_path(id:post) %></td>
-    <td><%= link_to "削除", operation_message_path(id:post),method: :delete %></td>
-  </tr>
+    <table class="mt-1 w-100">
+  <% @posts.reverse_each do |post| %>
+        <th class="border border-dark">
+    <%=post.title %><br>
+    <%=I18n.l post.created_at %>
+      </th>
+        <tr>
+        <td class="border border-dark">
+          <div class="bg-light"><%=post.content%></div>
+        </td>
+        </tr>
+        <tr>
+          <td>
+            <%if current_user.admin==true %>
+    <%= link_to "編集", edit_operation_message_path(id:post)%>
+    <%= link_to "削除", operation_message_path(id:post),method: :delete%>
+            <% end %>
+          </td>
+        </tr>
 <%end %>
-</table>
+    </table>
+  </div>
+</div>
