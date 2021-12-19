@@ -1,5 +1,1 @@
-<% @users.each do |u| %>
-  <%= u.name %><br/>
-  <%= u.tags.pluck(:name) %>
-  <hr/>
-<% end %>
+<%= render "profiles/page", content:@users, pagenate:@pagenate, name: "おすすめ" %>

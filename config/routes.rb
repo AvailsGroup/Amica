@@ -13,20 +13,22 @@ Rails.application.routes.draw do
   end
 
   #top----------------
-  get '/'=>'home#top'
+  get '/' => 'home#top'
   get '/about' => 'home#about'
-  get '/contact' => 'maller#new'
+  get '/contact' => 'mailer#new'
   get '/static' => 'home#static'
   get '/privacy' => 'home#privacy'
   get '/help_page' => 'home#help_page'
-  post 'maller/create', to: 'maller#create'
-
-  resources :maller
+  post 'mailer/create', to: 'mailer#create'
 
   #communities---------
   resources :communities do
     resources :manage, only: [:create, :destroy]
-    get '/members' => 'communities#members'
+    resources :communities_security, only: [:create,:destroy]
+    get :members
+    delete :kick
+    put :change
+    get :banned_member
     collection do
       get :pickup
       get :joined

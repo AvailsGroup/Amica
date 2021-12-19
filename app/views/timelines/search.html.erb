@@ -1,49 +1,15 @@
-<%= stylesheet_link_tag 'timelines', media: 'all', 'data-turbolinks-track': 'reload' %>
-<%= javascript_pack_tag 'timeline/main', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_link_tag 'timelines'%>
+<%= javascript_pack_tag 'timeline/main'%>
 
-<body class="bg-light">
-  <div class="nav-scroller bg-white shadow-sm">
-    <nav class="nav nav-underline" aria-label="Secondary navigation">
-      <a class="nav-link active" aria-current="page" href="<%= timelines_path %>">友達
-        <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%=current_user.matchers.count %></span>
-      </a>
-      <a class="nav-link" href="#">
-        フォロー中
-        <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%=current_user.followings_list.count %></span>
-      </a>
-      <a class="nav-link" href="#">最新</a>
-      <a class="nav-link" href="#">おすすめ</a>
-    </nav>
-  </div>
+<%= render 'timelines/nav', page:"search" %>
 
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-
-  <main class="container">
-    <div class="text-center">
+  <div class="container">
+    <div class="text-center mt-4">
       <h2><%= @post %>の検索結果</h2>
     </div>
 
-    <% @posts.each do |p| %>
-      <div class="my-3 p-3 bg-white rounded shadow-sm">
-          <div id="post_<%= p.id %>">
-            <%= render "timelines/post",post:p, user:@user  %>
-         </div>
-      </div>
-     <% end %>
+    <%= render partial:"timelines/post", collection:@posts , as: :post,locals: { post_model: @post_m } %>
 
-    <div class="row">
-      <div class="col-sm"></div>
-      <div class="col-sm">
-        <%= paginate @posts %>
-      </div>
-      <div class="col-sm"></div>
-    </div>
+    <%= render "layouts/pagenate", pagenate:@posts %>
 
-  </main>
-
-
-
-  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="offcanvas.js"></script>
-</body>
+  </div>

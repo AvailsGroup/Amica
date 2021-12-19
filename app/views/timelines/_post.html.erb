@@ -1,3 +1,4 @@
+<%= stylesheet_pack_tag 'timeline' %>
 <%= javascript_pack_tag 'timeline/main' %>
 <style>
     #back {
@@ -22,77 +23,63 @@
         object-fit: cover;
     }
 
-    .red{
+    .red {
         color: red;
     }
 </style>
-<div class="panel-content panel-activity">
-  <div class="d-flex text-muted">
-    <%= link_to profile_path(post.user.userid), style: "color:black" do %>
-      <% if post.user.image.nil? %>
-        <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
-      <% else %>
-        <%= image_tag "/user_images/#{post.user.image}", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
-      <% end %>
-    <% end %>
-    <p class="pb-3 mb-0 lh-sm w-100">
-      <strong class="text-dark" style="font-size:20px;margin: 0"><%= post.user.nickname %></strong>
-      <span class="text-gray small" style="margin: 0">@<%= post.user.userid %></span>
-      <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %></span>
-      <br/>
-      <br/>
-      <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= html_escape(html_with_link_to_hashtag(h(post.content).html_safe)).gsub(/\r\n|\r|\n/, "<br />").html_safe %></span>
-      <br/>
-    </p>
-  </div>
-  <div class="d-flex pb-3  justify-content-between" style="margin-left: 50px">
-    <% if post.image? %>
-      <%= image_tag post.image.url, "data-lity" => "data-lity", class: "im" %>
-    <% end %>
-  </div>
-  <div class="d-flex justify-content-between" style="margin-left: 45px">
-    <div class="d-flex flex-row">
-      <span class="likes">
+<div id="post_<%= post.id %>">
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <div class="panel-content panel-activity">
+      <div class="d-flex text-muted">
+        <%= link_to profile_path(post.user.userid), style: "color:black" do %>
+          <%= image_tag post.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+        <% end %>
+        <p class="pb-3 mb-0 lh-sm w-100">
+          <strong class="text-dark" style="font-size:20px;margin: 0"><%= post.user.nickname %></strong>
+          <span class="text-gray small" style="margin: 0">@<%= post.user.userid %></span>
+          <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %></span>
+          <br/>
+          <br/>
+          <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= html_escape(html_with_link_to_hashtag(h(post.content).html_safe)).gsub(/\r\n|\r|\n/, "<br />").html_safe %></span>
+          <br/>
+        </p>
+      </div>
+      <div class="d-flex pb-3  justify-content-between" style="margin-left: 50px">
+        <% if post.image? %>
+          <%= image_tag post.image.url, "data-lity" => "data-lity", class: "im" %>
+        <% end %>
+      </div>
+      <div class="d-flex justify-content-between" style="margin-left: 45px">
+        <div class="d-flex flex-row">
+      <span class="likes mx-1">
         <% if current_user.liked_by?(post.id) %>
-          <%= button_to timeline_like_path(post.id, current_user.id), method: :delete, remote: true, class: "send bg-white", style: "height: 15.5px;padding: 0", data: { disable_with: "<i class='fas fa-heart'></i>" } do %>
+          <%= button_to timeline_like_path(post.id, current_user.id), method: :delete, remote: true, class: "send bg-white", style: "height: 15.5px;padding: 0", data: { disable_with: "<i class='far fa-heart'></i> <span class='text-dark'>#{post.likes.size - 1}</span>" } do %>
             <i class="fas fa-heart"></i>
+            <span class='text-dark'><%= post.likes.size %></span>
           <% end %>
         <% else %>
-          <% case rand(1..65536) %>
-            <% when 1 then
-                 icon = '<i class="fas fa-hand-holding-heart red"></i>'
-                 current_user.achievement.change_rare_like #1/65536 %>
-            <% when 2..6 then icon = '<i class="fas fa-laugh-wink"></i>'#1/16384 %>
-            <% when 11..19 then icon = '<i class="fab fa-yarn"></i>'#1/8192 %>
-            <% when 20..28 then icon = '<i class="fab fa-node-js"></i>'#1/8192 %>
-            <% when 29..37 then icon = '<i class="fab fa-yarn"></i>'#1/8192 %>
-            <% when 38..103 then icon = '<i class="fas fa-rocket"></i>' #1/1000 %>
-            <% when 1000..1261 then icon = '<i class="fas fa-mug-hot"></i>' #1/250 %>
-            <% when 2000..2654 then icon = '<i class="fas fa-heartbeat"></i>' #1/100 %>
-            <% else icon = '<i class="fas fa-heart"></i>' %>
-          <% end %>
-          <%= button_to timeline_likes_path(post.id), method: :post, remote: true, class: "send bg-white", style: "height: 15.5px;padding: 0", data: { disable_with: icon } do %>
+          <%= button_to timeline_likes_path(post.id), method: :post, remote: true, class: "send bg-white", style: "height: 15.5px;padding: 0", data: { disable_with: "#{push(current_user)} <span class='text-dark'>#{post.likes.size + 1}</span>" } do %>
             <i class="far fa-heart"></i>
+            <span class='text-dark'><%= post.likes.size %></span>
           <% end %>
         <% end %>
       </span>
-      <span>
-        <%= post.likes.size %>
-        <span class="comments">
-          <%= link_to timeline_path(post.id) do %>
-            <i class="far fa-comment-alt" style="height: 15.5px"></i>
-            <span class="text-dark"><%= post.comments.size %></span>
-          <% end %>
-        </span>
-      </span>
-    </div>
-    <div>
-      <% if post.user == current_user %>
-        <%= button_to(timeline_path(post.id), class: "send bg-white", method: :delete, data: { disable_with: "削除中..." }) do %>
-          <i class="far fa-trash-alt"></i>
+
+          <span class="comments">
+        <%= link_to timeline_path(post.id) do %>
+          <i class="far fa-comment-alt" style="height: 15.5px"></i>
+          <span class="text-dark"><%= post.comments.size %></span>
         <% end %>
-      <% end %>
+      </span>
+        </div>
+        <div>
+          <% if post.user == current_user %>
+            <%= button_to(timeline_path(post.id), class: "send bg-white", method: :delete, data: { disable_with: "削除中..." }) do %>
+              <i class="far fa-trash-alt"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-

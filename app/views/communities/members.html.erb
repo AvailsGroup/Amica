@@ -1,8 +1,9 @@
-<main class="container">
-  <h2 class="text-center"><%= @community.name %>のメンバー</h2>
-  <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-0">ユーザーリスト (<%= @count %>)</h6>
-    <%= render partial:'layouts/user', collection:@member, as: :user %>
-  </div>
-  <%= render "layouts/pagenate", pagenate:@member %>
-</main>
+<div class="container">
+  <% if @community.user == @user %>
+    <%= link_to member_link_text(@page), member_link(@page,@community) %>
+  <% end %>
+  <h2 class="text-center"><%= @community.name %> <%= member_text(@page) %></h2>
+  <%= render partial: 'communities/user', collection: @member, as: :user,locals: { community:@community, fixed_current_user:@user, page:@page } %>
+
+  <%= render "layouts/pagenate", pagenate: @member %>
+</div>
