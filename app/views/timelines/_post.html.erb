@@ -68,7 +68,7 @@
           <span class="comments">
         <%= link_to timeline_path(post.id) do %>
           <i class="far fa-comment-alt" style="height: 15.5px"></i>
-          <span class="text-dark"><%= post.comments.size %></span>
+          <span class="text-dark" id="comment_count"><%= post.comments.size %></span>
         <% end %>
       </span>
         </div>

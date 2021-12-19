@@ -21,7 +21,7 @@ class BlockController < ApplicationController
   def current_user?
     if @user == current_user
       # TODO: redirect
-      return
+      nil
     end
   end
 end
