@@ -1,24 +1,11 @@
-# README
+# Amica
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### 令和3年度 卒業制作作品
 
-Things you may want to cover:
+AmicaはISC学生専用の友達作りサイトです。 
 
-* Ruby version
+Ruby on Railsで作成されており、AvailsGroupが制作、管理しています。 
 
-* System dependencies
+学生向けにOSSとして公開しています。
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+IssueやPullRequest等もお待ちしています。
