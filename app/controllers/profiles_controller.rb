@@ -50,13 +50,6 @@ class ProfilesController < ApplicationController
     @user = current_user
     permission
 
-    unless current_user.update(user_params)
-      @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-      @tag = current_user.tag_list.join(',')
-      render action: "edit"
-      return
-    end
-
     unless params["user"]["images"].nil?
       accepted_format = %w[.jpg .jpeg .png]
       unless accepted_format.include? File.extname(params["user"]["images"].original_filename)
@@ -64,6 +57,13 @@ class ProfilesController < ApplicationController
         redirect_to(edit_profile_path)
         return
       end
+    end
+
+    unless current_user.update(user_params)
+      @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+      @tag = current_user.tag_list.join(',')
+      render action: "edit"
+      return
     end
 
     if !params["user"]["images"].nil? && base64?(params["user"]["image"]['data:image/jpeg;base64,'.length .. -1])

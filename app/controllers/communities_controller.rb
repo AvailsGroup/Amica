@@ -44,7 +44,7 @@ class CommunitiesController < ApplicationController
     @community = Community.new(community_params)
     @community.user_id = current_user.id
 
-    check_format?(new_community_path)
+    check_format(new_community_path)
 
     unless @community.save
       @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
@@ -144,11 +144,11 @@ class CommunitiesController < ApplicationController
   def view_parameter
     @users = User.includes(:community_member, :tags)
     @user = @users.find(current_user.id)
-    @community = Community.includes(:community_members, :tags, :user,:favorites, :community_securities)
+    @community = Community.includes(:community_members, :tags, :user, :favorites, :community_securities)
   end
 
   def community_params
-    params.require(:community).permit(:name, :content, :image, :tag_list)
+    params.require(:community).permit(:name, :content, :tag_list)
   end
 
   def permission
