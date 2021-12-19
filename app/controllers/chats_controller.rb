@@ -24,7 +24,8 @@ private
 def latest_message?
   @room_partner = []
   @latest_message = []
-  @chatroom = Room.order(updated_at: :desc).where(started_userid: current_user.id).or(Room.order(updated_at: :desc).where(invited_userid: current_user.id))
+  @chatroom = Room.order(updated_at: :desc).where(started_userid: current_user.id)
+                  .or(Room.order(updated_at: :desc).where(invited_userid: current_user.id))
   if @chatroom.nil?
     redirect_to profiles_path, notice: '誰かとお話してみましょう！'
     return

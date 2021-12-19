@@ -56,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const content = document.getElementById('content');
   const submitButton = document.getElementById('submit_button');
   const room_id = document.getElementById('room_id');
+  const images = document.getElementById('image_uploader')
 
   //ブラウザがスクリーンサイズの50%以下or500px以下の時に相手の名前を消す
   const name = document.getElementById('user_name');
@@ -83,6 +84,19 @@ document.addEventListener("DOMContentLoaded", function() {
         $(this).height(0);
       }
     });
+  $('#image_uploader').click(function(e){
+    const preview = document.getElementById('image_preview');
+    $(this).val('');
+    images.addEventListener('change', function(e){
+      var file_reader = new FileReader();
+      file_reader.addEventListener('load', function(e) {
+      var img_element = document.createElement('img');
+      img_element.src = e.target.result;
+        preview.append(img_element);
+      });
+      file_reader.readAsDataURL(e.target.files[0]);
+    });
+  });
   //Shift+Enter or 紙飛行機ボタンでメッセ➖ジを送信させる
     $(document).on('keypress', '[data-behavior~=chat_speaker]', function(event) {
       if(event.shiftKey) {
@@ -103,6 +117,15 @@ document.addEventListener("DOMContentLoaded", function() {
         content.value = '';
         $($textarea).height(0);
         return content.preventDefault();
+      }else if( images.value) {
+        content.value = '';
+        $($textarea).height(0);
+        const image_data = images.value
+        ChatChannel.speak(image_data,room_id.value)
+        bottom_scroll()
+        return content.preventDefault();
+
+
       }
     });
 });
