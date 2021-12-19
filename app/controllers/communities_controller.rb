@@ -44,7 +44,7 @@ class CommunitiesController < ApplicationController
     @community = Community.new(community_params)
     @community.user_id = current_user.id
 
-    check_format?(new_community_path)
+    check_format(new_community_path)
 
     unless @community.save
       @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
