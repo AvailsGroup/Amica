@@ -6,10 +6,33 @@ class CommunitiesController < ApplicationController
 
   def index
     view_parameter
-    @community = @community.order(created_at: :desc)
-                          .page(params[:page])
-                          .per(36)
+    @community = @community.order(created_at: :desc).page(params[:page]).per(36)
     redirect('index')
+  end
+
+  def pickup
+    view_parameter
+    @community = @community.order(created_at: :desc).where.not(id: current_user.community_member.select(:community_id))
+    @community = @community.sort_by { |u| (@user.tags.pluck(:name) & u.tags.pluck(:name)).size }
+    @community = @community.reverse
+    @community = Kaminari.paginate_array(@community).page(params[:page]).per(36)
+    redirect('pickup')
+  end
+
+  def joined
+    view_parameter
+    @community = @community.where(id: current_user.community_member.select(:community_id)).order(created_at: :desc).page(params[:page]).per(36)
+    redirect('joined')
+  end
+
+  def show
+    @community = Community.includes(:user, :tags, :community_members, :community_securities,:favorites ).find(params[:id])
+    @users = User.includes(:community_member, :tags)
+    @user = @users.find(current_user.id)
+    @join = @community.community_members.any?{ |c| c.user_id == @user.id }
+    @leader = @community.user
+    @favorite = Favorite.all
+    exists_community_security
   end
 
   def new
@@ -36,16 +59,6 @@ class CommunitiesController < ApplicationController
     redirect_to(communities_path)
   end
 
-  def show
-    @community = Community.includes(:user, :tags, :community_members, :community_securities,:favorites ).find(params[:id])
-    @users = User.includes(:community_member, :tags)
-    @user = @users.find(current_user.id)
-    @join = @community.community_members.any?{ |c| c.user_id == @user.id }
-    @leader = @community.user
-    @favorite = Favorite.all
-    exists_community_security
-  end
-
   def edit
     @community = Community.find(params[:id])
     permission
@@ -56,18 +69,14 @@ class CommunitiesController < ApplicationController
   def update
     @community = Community.find(params[:id])
     permission
-
     check_format(edit_community_path)
-
     unless @community.update(community_params)
       @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
       @tag = @community.tag_list.join(',')
       render action: 'edit'
       return
     end
-
     check_image(true)
-
     flash[:notice] = 'ユーザー情報を編集しました'
     redirect_to community_path(@community.id)
   end
@@ -78,21 +87,6 @@ class CommunitiesController < ApplicationController
     @community.destroy
     flash[:notice] = 'コミュニティを削除しました！'
     redirect_to(communities_path)
-  end
-
-  def pickup
-    view_parameter
-    @community = @community.order(created_at: :desc).where.not(id: current_user.community_member.select(:community_id))
-    @community = @community.sort_by { |u| (@user.tags.pluck(:name) & u.tags.pluck(:name)).size }
-    @community = @community.reverse
-    @community = Kaminari.paginate_array(@community).page(params[:page]).per(36)
-    redirect('pickup')
-  end
-
-  def joined
-    view_parameter
-    @community = @community.where(id: current_user.community_member.select(:community_id)).order(created_at: :desc).page(params[:page]).per(36)
-    redirect('joined')
   end
 
   def members
@@ -138,11 +132,13 @@ class CommunitiesController < ApplicationController
     redirect_to(community_members_path)
   end
 
+
+
+  private
+
   def community_ban?(community)
     community.community_securities.any? { |c| c.user_id == @user.id}
   end
-
-  private
 
   def view_parameter
     @users = User.includes(:community_member, :tags)
