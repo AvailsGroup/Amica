@@ -54,10 +54,10 @@
                 </p>
               </div>
             </div>
-            <%= f.text_area :message, id: "message", class: "form-control" %><br>
+            <%= f.text_area :message,  placeholder: "通報内容を記載いしてください。",id: "message", class: "form-control" %><br>
             <div class="modal-footer">
-              <%= f.submit "送信", class: "btn btn-lg btn-secondary fw-bold border-white bg-danger", style: "margin-right: 10px; width: 150px;color:#FFF" %>
-              <%= f.submit "クリア", type: :reset, class: "btn btn-lg btn-secondary fw-bold border-white bg-blue", style: "margin-right: 10px; width: 150px;color:#FFF" %>
+              <%= f.submit "送信", class: "btn btn-lg btn-danger fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
+              <%= f.submit "クリア", type: :reset, class: "btn btn-lg btn-secondary fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
             </div>
           <% end %>
         </div>
@@ -109,7 +109,7 @@
           <span class="ms-2">
             <label>
               <button type="button" class="btn btn-primary" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal<%= post.id %>" data-bs-whatever=<%= post.id %>></button>
-              <i class="fas fa-bullhorn"></i>
+              <i class="fas fa-bullhorn" style="color: red"></i>
             </label>
       </span>
       </div>
