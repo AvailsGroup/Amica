@@ -11,6 +11,6 @@ class UserDecorator < ApplicationDecorator
   #   end
 
   def image
-    object.image.nil? ? 'default_icon.png' : "public/user_images/#{object.image}"
+    object.image.nil? ? 'default_icon.png' : "user_images/#{object.image}"
   end
 end
