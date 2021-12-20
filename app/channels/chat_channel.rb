@@ -15,10 +15,11 @@ class ChatChannel < ApplicationCable::Channel
       unless File.directory?("#{Rails.root}/public/chat_images/room#{@room_id}")
         Dir.mkdir("#{Rails.root}/public/chat_images/room#{@room_id}")
       end
+      File.open("public/chat_images/room#{@room_id}/#{@image_data}", 'wb') do |f|
+        f.write(Base64.decode64(data['message']['data:image/jpeg;base64,'.length..-1]))
+      end
       rand = rand(1_000_000..9_999_999)
-      @image_data = "#{current_user.id}#{rand}.jpg"
-      File.binwrite("public/chat_images/room#{@room_id}/#{@image_data}", data['image'].read)
-      @image_data = data['image']
+      @image_data = "#{@room_id}#{rand}.jpg"
       @content = '画像を投稿しました。'
     else
       @content = data['message']

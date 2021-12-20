@@ -5,6 +5,9 @@ class ChatsController < ApplicationController
 
   def index
     latest_message?
+    if @chatroom.nil?
+      redirect_to profiles_path, notice: '誰かとお話してみましょう！'
+    end
   end
 
   def show
@@ -26,11 +29,10 @@ def latest_message?
   @latest_message = []
   @chatroom = Room.order(updated_at: :desc).where(started_userid: current_user.id)
                   .or(Room.order(updated_at: :desc).where(invited_userid: current_user.id))
-  if @chatroom.nil?
-    redirect_to profiles_path, notice: '誰かとお話してみましょう！'
+  if @chatroom == []
+    @chatroom = nil
     return
   end
-
 
   @chatroom.each do |cr|
     @message = Message.order(updated_at: :desc).find_by(room_id: cr.id)
