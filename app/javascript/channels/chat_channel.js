@@ -108,7 +108,7 @@ window.addEventListener("DOMContentLoaded",function() {
     });
   $('#image_uploader').click(function(){
     var canvas = $("#canvas");
-    let base64 = "";
+    let base64
     $(this).val('');
     $(images).change(function() {
       var file = this.files[0];
@@ -121,7 +121,7 @@ window.addEventListener("DOMContentLoaded",function() {
           $(canvas).attr("height",image.height);
           var ctx = canvas[0].getContext("2d");
           ctx.drawImage(image, 0, 0); //canvasに画像を転写
-          base64 =  canvas[0].toDataURL('image/jpeg');
+         　base64 =  canvas[0].toDataURL('image/jpeg');
         }
         image.src = evt.target.result;
       }

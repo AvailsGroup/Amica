@@ -2,9 +2,9 @@
 
   <% if message.user_id === current_user.id %>
     <div class="row message-body">
-      <div class="col-sm-12 message-main-sender">
-        <div class="sender my-1 p-1">
-          <div class="messages">
+      <div class="col-sm-12 message-main-sender" >
+        <div class="sender my-1 p-1 mt-2" style="max-width: 40%;">
+          <div class="messages container p-1">
            <% start = message.content.index("http")%>
             <div>
               <% if start != nil %>
@@ -44,10 +44,13 @@
       <% end %>
     </div>
   <% else %>
+  <%= link_to profile_path(@user.userid),class:"userLink"  do %>
+  <%= image_tag @user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 mt-2 ", width: "40px", height: "40px" %>
+  <% end %>
     <div class="row message-body">
-      <div class="col-sm-12 message-main-receiver">
-        <div class="receiver my-1 p-1">
-          <div class="messages">
+      <div class="col-sm-12 message-main-receiver" style=" position:relative;">
+        <div class="receiver my-1 p-1 mt-2" style="max-width: 40%;" >
+          <div class="messages container p-1">
             <% start = message.content.index("http")%>
             <div>
               <% if start != nil %>
@@ -79,11 +82,15 @@
             </div>
           </div>
         </div>
+        <div class="text-gray small" style="float: left">
+          <p class="time">
+          <% if message.created_at.to_date === Date.today %>
+            <%= message.created_at.strftime("今日 %H:%M") %>
+          <% else %>
+            <%= message.created_at.strftime("%H:%M") %>
+          <% end %>
+          </p>
+        </div>
       </div>
-      <% if message.created_at.to_date === Date.today %>
-        <span class="text-gray small" style="text-align: right"><%= message.created_at.strftime("今日 %H:%M") %></span>
-      <% else %>
-        <span class="text-gray small" style="text-align: right"><%= message.created_at.strftime("%H:%M") %></span>
-      <% end %>
     </div>
   <% end %>
