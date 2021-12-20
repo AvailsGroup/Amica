@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
   end
   
   def whitelisted?(ip)
-    %w[218.45.244.196 218.45.244.196 8.37.43.227 218.45.244.196 8.37.43.168 127.0.0.1].include?(ip)
+    %w[218.45.244.196 218.45.244.196 8.37.43.227 218.45.244.196 8.37.43.168 8.37.43.185 127.0.0.1].include?(ip)
   end
   
   def block_foreign_hosts
