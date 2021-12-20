@@ -1,0 +1,6 @@
+/* line 5, app/assets/stylesheets/contacts.scss */
+textarea {
+  resize: none;
+  width: 600px;
+  height: 400px;
+}

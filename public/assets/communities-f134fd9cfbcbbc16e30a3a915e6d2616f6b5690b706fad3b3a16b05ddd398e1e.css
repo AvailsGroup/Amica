@@ -1,0 +1,228 @@
+@charset "UTF-8";
+/* line 3, app/assets/stylesheets/communities.scss */
+.nav {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  z-index: 9997;
+}
+
+/* line 11, app/assets/stylesheets/communities.scss */
+.nav div {
+  margin: 10px;
+}
+
+/* line 12, app/assets/stylesheets/communities.scss */
+.docs-data {
+  width: 300px;
+}
+
+/****************/
+/* line 17, app/assets/stylesheets/communities.scss */
+.img-target {
+  width: 800px;
+  height: 400px;
+}
+
+/* line 21, app/assets/stylesheets/communities.scss */
+img {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 25, app/assets/stylesheets/communities.scss */
+.docs-cropped .modal-body > canvas {
+  max-width: 100%;
+}
+
+/* x,y,scale,width,height 値を非表示にする */
+/* line 30, app/assets/stylesheets/communities.scss */
+.docs-data {
+  display: none;
+}
+
+/* line 34, app/assets/stylesheets/communities.scss */
+.flex-equal > * {
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  /* line 39, app/assets/stylesheets/communities.scss */
+  .flex-md-equal > * {
+    flex: 1;
+  }
+}
+
+/* line 44, app/assets/stylesheets/communities.scss */
+.ui-autocomplete.ui-front {
+  z-index: 1051;
+}
+
+/* Optional scoped theme for tag-it which mimics the zendesk widget. */
+/* line 52, app/assets/stylesheets/communities.scss */
+ul.tagit {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #C6C6C6;
+  background: inherit;
+}
+
+/* line 58, app/assets/stylesheets/communities.scss */
+ul.tagit li.tagit-choice {
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  background: #00bfff none;
+  font-weight: normal;
+}
+
+/* line 66, app/assets/stylesheets/communities.scss */
+ul.tagit li.tagit-choice .tagit-label:not(a) {
+  color: #555;
+}
+
+/* line 69, app/assets/stylesheets/communities.scss */
+ul.tagit li.tagit-choice a.tagit-close {
+  text-decoration: none;
+}
+
+/* line 72, app/assets/stylesheets/communities.scss */
+ul.tagit li.tagit-choice .tagit-close {
+  right: .4em;
+}
+
+/* line 75, app/assets/stylesheets/communities.scss */
+ul.tagit li.tagit-choice .ui-icon {
+  display: none;
+}
+
+/* line 78, app/assets/stylesheets/communities.scss */
+ul.tagit li.tagit-choice .tagit-close .text-icon {
+  display: inline;
+  font-family: arial, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  color: #777;
+}
+
+/* line 85, app/assets/stylesheets/communities.scss */
+ul.tagit li.tagit-choice:hover, ul.tagit li.tagit-choice.remove {
+  background-color: #bbcef1;
+  border-color: #6d95e0;
+}
+
+/* line 89, app/assets/stylesheets/communities.scss */
+ul.tagit li.tagit-choice a.tagLabel:hover,
+ul.tagit li.tagit-choice a.tagit-close .text-icon:hover {
+  color: #222;
+}
+
+/* line 93, app/assets/stylesheets/communities.scss */
+ul.tagit input[type="text"] {
+  color: #333333;
+  background: none;
+}
+
+/* line 97, app/assets/stylesheets/communities.scss */
+.ui-widget {
+  font-size: 1em;
+}
+
+/* Forked from a jQuery UI theme, so that we don't require the jQuery UI CSS as a dependency. */
+/* line 102, app/assets/stylesheets/communities.scss */
+.tagit-autocomplete.ui-autocomplete {
+  position: absolute;
+  cursor: default;
+}
+
+/* line 103, app/assets/stylesheets/communities.scss */
+* html .tagit-autocomplete.ui-autocomplete {
+  width: 1px;
+}
+
+/* without this, the menu expands to 100% in IE6 */
+/* line 104, app/assets/stylesheets/communities.scss */
+.tagit-autocomplete.ui-menu {
+  list-style: none;
+  padding: 2px;
+  margin: 0;
+  display: block;
+  float: left;
+}
+
+/* line 111, app/assets/stylesheets/communities.scss */
+.tagit-autocomplete.ui-menu .ui-menu {
+  margin-top: -3px;
+}
+
+/* line 114, app/assets/stylesheets/communities.scss */
+.tagit-autocomplete.ui-menu .ui-menu-item {
+  margin: 0;
+  padding: 0;
+  zoom: 1;
+  float: left;
+  clear: left;
+  width: 100%;
+}
+
+/* line 122, app/assets/stylesheets/communities.scss */
+.tagit-autocomplete.ui-menu .ui-menu-item a {
+  text-decoration: none;
+  display: block;
+  padding: .2em .4em;
+  line-height: 1.5;
+  zoom: 1;
+}
+
+/* line 129, app/assets/stylesheets/communities.scss */
+.tagit-autocomplete .ui-menu .ui-menu-item a.ui-state-hover,
+.tagit-autocomplete .ui-menu .ui-menu-item a.ui-state-active {
+  font-weight: normal;
+  margin: -1px;
+}
+
+/* line 134, app/assets/stylesheets/communities.scss */
+.tagit-autocomplete.ui-widget-content {
+  border: 1px solid #aaaaaa;
+  background: #ffffff 50% 50% repeat-x;
+  color: #222222;
+}
+
+/* line 135, app/assets/stylesheets/communities.scss */
+.tagit-autocomplete.ui-corner-all, .tagit-autocomplete .ui-corner-all {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
+}
+
+/* line 136, app/assets/stylesheets/communities.scss */
+.tagit-autocomplete .ui-state-hover, .tagit-autocomplete .ui-state-focus {
+  border: 1px solid #999999;
+  background: #dadada;
+  font-weight: normal;
+  color: #212121;
+}
+
+/* line 137, app/assets/stylesheets/communities.scss */
+.tagit-autocomplete .ui-state-active {
+  border: 1px solid #aaaaaa;
+}
+
+/* line 139, app/assets/stylesheets/communities.scss */
+.tagit-autocomplete .ui-widget-content {
+  border: 1px solid #aaaaaa;
+}
+
+/* line 140, app/assets/stylesheets/communities.scss */
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+/* line 142, app/assets/stylesheets/communities.scss */
+.icon {
+  width: 200px;
+  height: 200px;
+}
