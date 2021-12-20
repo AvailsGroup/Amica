@@ -1,0 +1,134 @@
+<%= stylesheet_link_tag 'chats', media: 'all', 'data-turbolinks-track': 'reload' %>
+<script>
+    document.addEventListener("DOMContentLoaded",function bottom_scroll(){
+        var elm = document.documentElement;
+        var bottom = elm.scrollHeight - elm.clientHeight;
+        window.scroll(0, bottom);
+    });
+</script>
+
+<div id="body">
+  <div id="chat" style="margin:1% 1% 70px 1%">
+      <div id="messages">
+        <% last_message = nil %>
+        <% @message.each do |m| %>
+          <% if last_message == nil %>
+            <% last_message = m.created_at %>
+          <% end %>
+          <% if m.created_at - last_message == 0 %>
+            <div class="date"><%= m.created_at.strftime("%m月%d日") %></div>
+          <% elsif (m.created_at.to_date - last_message.to_date).to_i >= 1 %>
+            <div class="date"><%= m.created_at.strftime("%m月%d日") %></div>
+          <% end %>
+             <%= render 'chats/chat_message',message:m %>
+          <% last_message = m.created_at %>
+        <% end %>
+        <div id="append" class="col-sm-12"></div>
+      </div>
+  </div>
+
+
+  <div class="mt-2 row messageBox reply d-flex justify-content-center">
+    <div class="col-sm-12 messageBox-inner">
+       <h4 class="m-0" style="float: left">
+         To:
+         <%= link_to profile_path(@user.userid) do %>
+           <% if @user .image.nil? %>
+             <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
+           <% else %>
+             <%= image_tag "/user_images/#{  @user .image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
+           <% end %>
+         <% end %>
+       </h4>
+      <h4 id="user_name" class="m-0" style="float: left">
+         <%=  @user.name %>
+       </h4>
+       <span class="clear"></span>
+       <div class="row ">
+         <div class="w-100 d-flex ">
+           <label>
+             <button id="image_button" style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#imageModal"></button>
+             <span class="m-1" style="font-size: 1.6rem;color: #f0c065"> <i class="fas fa-image"></i></span>
+           </label>
+          <input type="hidden" id="room_id" value= <%= @room.id %> data-behavior="chat_speaker">
+          <input type="hidden" id="user_id" value= <%= current_user.id %> data-behavior="chat_speaker">
+          <%= text_area_tag  :content, nil, class:"form-control", placeholder:"message", data: {behavior: "chat_speaker"},id:"content" %>
+          <label><!-- Button trigger modal -->
+             <button id="submit_button" style="display: none" type="submit" class="btn btn-primary form-control" ></button>
+             <span class="m-1" style="font-size: 1.6rem;color: #1b8798"><i class="fas fa-paper-plane"></i></span>
+           </label>
+           <label>
+             <button style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#menuModal"></button>
+             <span class="m-1" style="font-size: 1.6rem;color: #5e5e5e"> <i class="fas fa-th-large"></i></span>
+           </label>
+         </div>
+       </div>
+    </div>
+  </div>
+</div>
+
+<!-- menuModal -->
+<div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="menuModalLabel">menu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+        <div class=" mb-0 d-flex ">
+          <div class="modal-item shadow-sm mb-5 bg-body rounded">
+            <%= link_to  chats_path,class: " modal-icons nav-link" do %>
+              <i class="fas fa-comments"></i>
+              <p class="small">チャット</p>
+            <% end %>
+          </div>
+          <div class="modal-item shadow-sm mb-5 bg-body rounded">
+            <%= link_to  communities_path,class: "modal-icons nav-link" do %>
+              <i class="fas fa-users"></i>
+              <p class="small">コミュニティ</p>
+            <% end %>
+          </div>
+        </div>
+          <div class="mb-0 d-flex ">
+          <div class="modal-item shadow-sm  mb-5 bg-body rounded">
+            <%= link_to  timelines_path,class: "modal-icons nav-link" do %>
+              <i class="fas fa-clock"></i>
+              <p class="small">タイムライン</p>
+            <% end %>
+          </div>
+          <div class="modal-item shadow-sm  mb-5 bg-body rounded">
+            <%= link_to  profiles_path,class: "modal-icons nav-link" do %>
+              <i class="fas fa-address-card"></i>
+              <p class="small">友達</p>
+            <% end %>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- iamgeModal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="imageModalLabel">画像送信</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <input type="file" id="image_uploader" accept="image/jpg,image/jpeg,image/png" data-behavior="chat_speaker">
+      </div>
+      <div id="image_preview" style="text-align: center;"></div>
+      <div class="modal-footer">
+        <label><!-- Button trigger modal -->
+          <button id="image_submit_button" style="display: none" type="submit" class="btn btn-primary form-control" ></button>
+          <span class="m-1" style="font-size: 1.6rem;color: #1b8798"><i class="fas fa-paper-plane"></i></span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

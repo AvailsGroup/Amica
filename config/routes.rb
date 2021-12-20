@@ -75,7 +75,7 @@ Rails.application.routes.draw do
 
   #chats--------------
   resources :chats
-
+  
   #searches-----------
   resources :searches, only: [:index] do
     get '/tag' => 'searches#tag'
