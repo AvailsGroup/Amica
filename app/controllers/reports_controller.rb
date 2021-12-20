@@ -16,11 +16,15 @@ class ReportsController < ApplicationController
     @report.save
     ContactMailer.report_mail(@report).deliver
 
+    unless @report.post == nil
+      redirect_to timelines_path, notice: "送信しました"
+    end
     unless @report.community == nil
       redirect_to communities_path, notice: "送信しました"
     end
-    redirect_to timelines_path, notice: "送信しました"
-
+    unless @report.comment == nil
+      redirect_to timelines_path, notice: "送信しました"
+    end
   end
 
   private
