@@ -84,20 +84,6 @@ document.addEventListener("DOMContentLoaded", function() {
         $(this).height(0);
       }
     });
-  $('#image_button').click(function(e){
-    const preview = document.getElementById('image_preview');
-    $('#image_uploader').val('');
-    var img_element = document.createElement('img');
-    img_element = '';
-    images.addEventListener('change', function(e){
-      var file_reader = new FileReader();
-      file_reader.addEventListener('load', function(e) {
-      img_element.src = e.target.result;
-        preview.append(img_element);
-      });
-      file_reader.readAsDataURL(e.target.files[0]);
-    });
-  });
   //Shift+Enter or 紙飛行機ボタンでメッセ➖ジを送信させる
     $(document).on('keypress', '[data-behavior~=chat_speaker]', function(event) {
       if(event.shiftKey) {
@@ -119,21 +105,18 @@ document.addEventListener("DOMContentLoaded", function() {
         $($textarea).height(0);
         return content.preventDefault();
       }
-
-      $('#image_submit_button').click('[data-behavior~=chat_speaker]', function () {
-        if ( content.value ) {
-          content.value = '';
-          $($textarea).height(0);
-          const image_data = images.value
-          ChatChannel.speak(image_data,room_id.value)
-          bottom_scroll()
-          return content.preventDefault();
-            }
-        });
-
-
-
     });
+  $('#image_uploader').click(function(){
+    const preview = document.getElementById('image_preview');
+    $(this).val('');
+      images.addEventListener('change', function(e){
+        var file_reader = new FileReader();
+        file_reader.addEventListener('load', function(e) {
+          preview.src = e.target.result;
+        });
+      file_reader.readAsDataURL(e.target.files[0]);
+    });
+  });
 });
 
 function AutoLink(str) {
