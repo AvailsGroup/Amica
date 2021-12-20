@@ -32,6 +32,7 @@ class CommunitiesController < ApplicationController
     @join = @community.community_members.any?{ |c| c.user_id == @user.id }
     @leader = @community.user
     @favorite = Favorite.all
+    @report = Report.new
     exists_community_security
   end
 
