@@ -126,7 +126,6 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   email = Rails.application.credentials.gmail[:email]
   password = Rails.application.credentials.gmail[:password]
-  pp password
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
     domain: 'gmail.com',
