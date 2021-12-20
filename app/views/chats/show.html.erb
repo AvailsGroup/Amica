@@ -47,7 +47,7 @@
        <div class="row ">
          <div class="w-100 d-flex ">
            <label>
-             <button style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#imageModal"></button>
+             <button id="image_button" style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#imageModal"></button>
              <span class="m-1" style="font-size: 1.6rem;color: #f0c065"> <i class="fas fa-image"></i></span>
            </label>
           <input type="hidden" id="room_id" value= <%= @room.id %> data-behavior="chat_speaker">
@@ -125,7 +125,7 @@
       <div id="image_preview" style="text-align: center;"></div>
       <div class="modal-footer">
         <label><!-- Button trigger modal -->
-          <button id="submit_button" style="display: none" type="submit" class="btn btn-primary form-control" ></button>
+          <button id="image_submit_button" style="display: none" type="submit" class="btn btn-primary form-control" ></button>
           <span class="m-1" style="font-size: 1.6rem;color: #1b8798"><i class="fas fa-paper-plane"></i></span>
         </label>
       </div>

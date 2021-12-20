@@ -84,13 +84,14 @@ document.addEventListener("DOMContentLoaded", function() {
         $(this).height(0);
       }
     });
-  $('#image_uploader').click(function(e){
+  $('#image_button').click(function(e){
     const preview = document.getElementById('image_preview');
-    $(this).val('');
+    $('#image_uploader').val('');
+    var img_element = document.createElement('img');
+    img_element = '';
     images.addEventListener('change', function(e){
       var file_reader = new FileReader();
       file_reader.addEventListener('load', function(e) {
-      var img_element = document.createElement('img');
       img_element.src = e.target.result;
         preview.append(img_element);
       });
@@ -117,16 +118,21 @@ document.addEventListener("DOMContentLoaded", function() {
         content.value = '';
         $($textarea).height(0);
         return content.preventDefault();
-      }else if( images.value) {
-        content.value = '';
-        $($textarea).height(0);
-        const image_data = images.value
-        ChatChannel.speak(image_data,room_id.value)
-        bottom_scroll()
-        return content.preventDefault();
-
-
       }
+
+      $('#image_submit_button').click('[data-behavior~=chat_speaker]', function () {
+        if ( content.value ) {
+          content.value = '';
+          $($textarea).height(0);
+          const image_data = images.value
+          ChatChannel.speak(image_data,room_id.value)
+          bottom_scroll()
+          return content.preventDefault();
+            }
+        });
+
+
+
     });
 });
 
