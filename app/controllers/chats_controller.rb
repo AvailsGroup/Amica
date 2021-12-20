@@ -30,6 +30,8 @@ def latest_message?
     redirect_to profiles_path, notice: '誰かとお話してみましょう！'
     return
   end
+
+
   @chatroom.each do |cr|
     @message = Message.order(updated_at: :desc).find_by(room_id: cr.id)
     if @message.nil?

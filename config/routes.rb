@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  mount ActionCable.server => '/cable'
   #devise--------------
   get 'users/controller'
 
@@ -75,9 +74,7 @@ Rails.application.routes.draw do
   end
 
   #chats--------------
-  resources :chats do
-    mount ActionCable.server => '/cable'
-  end
+  resources :chats
   
   #searches-----------
   resources :searches, only: [:index] do
