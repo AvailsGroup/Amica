@@ -10,11 +10,22 @@
           <%= f.hidden_field :user_id, id: "user_id ", class: "form-control", value: current_user.id %>
           <%= f.hidden_field :comment_id, id: "comment_id", class: "form-control", value: comment.id %>
           <%= f.hidden_field :reported_user_id, id: "reported_user_id ", class: "form-control", value: comment.user.id %>
-          <div> <%= comment.user.nickname %></div>
-          <div> <%= comment.comment %></div>
+          <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <div class="d-flex text-muted">
+              <%= image_tag post.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+              <p class="pb-3 mb-0 lh-sm w-100">
+                <strong class="text-dark" style="font-size:20px;margin: 0"><%= post.user.nickname %></strong>
+                <span class="text-gray small" style="margin: 0">@<%= post.user.userid %></span>
+                <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(comment.created_at) %></span>
+                <br/>
+                <br/>
+                <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= comment.comment %></span>
+              </p>
+            </div>
+          </div>
           <%= f.text_area :message, id: "message", class: "form-control" %><br>
           <div class="modal-footer">
-            <%= f.submit "送信", class: "btn btn-lg btn-secondary fw-bold border-white bg-blue", style: "margin-right: 10px; width: 150px;color:#FFF" %>
+            <%= f.submit "送信", class: "btn btn-lg btn-secondary fw-bold border-white bg-danger", style: "margin-right: 10px; width: 150px;color:#FFF" %>
             <%= f.submit "クリア", type: :reset, class: "btn btn-lg btn-secondary fw-bold border-white bg-blue", style: "margin-right: 10px; width: 150px;color:#FFF" %>
           </div>
         <% end %>
@@ -41,17 +52,17 @@
   </div>
 
   <div class="text-end">
+    <% if post.user == current_user %>
+      <%= link_to timeline_comment_path(post.id, comment.id), method: :delete, remote: true do %>
+        <i class="far fa-trash-alt"></i>
+      <% end %>
+    <% end %>
     <span class="ms-2">
             <label>
               <button type="button" class="btn btn-primary" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal2<%= comment.id %>" data-bs-whatever=<%= comment.id %>></button>
               <i class="fas fa-bullhorn"></i>
             </label>
           </span>
-    <% if post.user == current_user %>
-      <%= link_to timeline_comment_path(post.id, comment.id), method: :delete, remote: true do %>
-        <i class="far fa-trash-alt"></i>
-      <% end %>
-    <% end %>
   </div>
 </div>
 <hr class="d-none">

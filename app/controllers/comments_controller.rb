@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comment_params)
     @comment.user_id = current_user.id
     flash.now[:notice] = @comment.save ? "コメントの投稿に成功しました。" : "コメントの投稿に失敗しました。"
+    @report = Report.new
     render "comments/index"
   end
 
@@ -16,6 +17,7 @@ class CommentsController < ApplicationController
 
     @user = User.all
     @post = Post.find(params[:timeline_id])
+    @report = Report.new
     render "comments/index"
   end
 
