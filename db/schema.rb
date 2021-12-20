@@ -9,8 +9,35 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
+ActiveRecord::Schema.define(version: 2021_12_19_025958) do
 
-ActiveRecord::Schema.define(version: 2021_12_19_121743) do
+  create_table "achievements", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.boolean "niceLv1", default: false
+    t.boolean "niceLv2", default: false
+    t.boolean "niceLv3", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "rare_like", default: false
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text "comment"
@@ -25,7 +52,7 @@ ActiveRecord::Schema.define(version: 2021_12_19_121743) do
     t.string "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "icon"
+    t.string "image"
     t.integer "user_id"
   end
 
@@ -36,6 +63,21 @@ ActiveRecord::Schema.define(version: 2021_12_19_121743) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["community_id"], name: "index_community_members_on_community_id"
     t.index ["user_id"], name: "index_community_members_on_user_id"
+  end
+
+  create_table "community_securities", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "community_id"
+    t.text "reason"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "community_tags", force: :cascade do |t|
+    t.integer "community_id"
+    t.string "tag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -81,7 +123,8 @@ ActiveRecord::Schema.define(version: 2021_12_19_121743) do
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "userid"
+    t.integer "user_id"
+    t.string "image"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -92,6 +135,9 @@ ActiveRecord::Schema.define(version: 2021_12_19_121743) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "birthday"
+    t.text "twitter_id"
+    t.integer "enrolled_year"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

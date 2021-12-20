@@ -6,7 +6,7 @@ ruby '3.0.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
+gem 'puma', '>= 5.5.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -30,7 +30,6 @@ gem 'rails-i18n'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'bullet'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'sqlite3', '~> 1.4'
 end
@@ -90,3 +89,7 @@ gem 'cropper_rails'
 gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
 
 gem 'dotenv-rails'
+
+gem 'activesupport'
+
+gem 'draper'

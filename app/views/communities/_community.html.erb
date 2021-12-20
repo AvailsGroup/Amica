@@ -1,32 +1,24 @@
-<div class="col mb-3">
-  <%= link_to community_path(community.id), style: "text-decoration: none" do %>
-    <div class="card rounded shadow-sm">
-      <% if community.icon? %>
-        <%= image_tag "/communities_image/#{community.icon}",class: "img-fluid" %><br>
-      <% else %>
-        <%= image_tag "default_icon", class: "img-fluid" %><br>
-      <% end %>
-      <div class="card">
-        <h5 class="card-title"><%= community.name %></h5>
-        <p><span class="far fa-user" style="margin-right: 3px"></span><%= community.community_members.size %> </p>
-      </div>
-      <div class="card">
-        <ul class="list-group list-group-flush">
-          <% community.tags.pluck(:name).shuffle.first(3).each do |t| %>
-            <%= link_to search_tag_path(t),class:"text-decoration-none" do %>
-              <li class="list-group-item">#<%= t %></li>
+<% unless community_ban?(community) %>
+  <%= stylesheet_link_tag "community_index" %>
+  <div class="community">
+    <%= link_to community_path(community.id), class: "text-dark", style: "text-decoration: none" do %>
+      <div class="col">
+        <div class="carbon-example flex-wrapper">
+          <%= image_tag community.decorate.image, class: "img-fluid", style: "width:200px" %><br>
+          <div class="inner-wrapper text-center w-100">
+            <h5><%= community.name %> </h5>
+            <p class="my-0 fine-print"><i class="far fa-user fine-print"></i> <%= community.community_members.size %>
+            </p>
+            <% community.tags.pluck(:name).shuffle.first(3).each do |t| %>
+              <%= link_to "\##{t}", search_tag_path(t), class: "fine-print text-decoration-none my-0" %>
             <% end %>
-          <% end %>
-          <% tag_count =  community.tags.pluck(:name).size %>
-          <% while tag_count < 3 do%>
-            <li class="list-group-item">－</li>
-            <% tag_count += 1 %>
-          <% end %>
-        </ul>
+          </div>
+          <div class="inner-wrapper text-right w-25 h-auto" style="bottom: 0; left: 0;margin-bottom: 0;padding: 0;">
+
+            <span class="small my-0" style="font-size: 13px"></span>
+          </div>
+        </div>
       </div>
-      <div class="card-footer">
-        <small class="text-muted"><%= link_to community.user.name ,profile_path(community.user.userid),class:"text-decoration-none text-dark"%></small>
-      </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>

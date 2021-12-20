@@ -24,6 +24,32 @@ class ApplicationController < ActionController::Base
     value.is_a?(String) && Base64.strict_encode64(Base64.decode64(value)) == value
   end
 
+  #友達の配列を返す
+  def matchers(user)
+    user.followings & user.followers
+  end
+
+  def matchers?(user, other_user)
+    matchers(user).include?(other_user)
+  end
+
+  # 相手をフォローしていればtrueを返す
+  def following?(user_followings_list, other_user)
+    user_followings_list.any? { |u| u == other_user }
+  end
+
+  def liked_by?(post, user)
+    post.likes.any? { |l| l.user == user }
+  end
+
+  def is_user_favorite?(favorite, user, other_user)
+    favorite.any? { |u| u.user_id == user.id } && favorite.any? { |u| u.favorite_user_id == other_user.id }
+  end
+
+  def is_community_favorite?(favorite , user, community)
+    favorite.any? { |u| u.user_id == user.id } && favorite.any? { |u| u.community_id == community.id }
+  end
+
   private
   def sign_in_required
     redirect_to new_user_session_url unless user_signed_in?

@@ -1,0 +1,24 @@
+<div class="my-3 p-3 bg-white rounded shadow-sm">
+  <div class="d-flex text-muted">
+    <%= link_to profile_path(post.user), style: "color:black" do %>
+        <%= image_tag post.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+    <% end %>
+
+    <p class="pb-3 mb-0 lh-sm w-100">
+      <strong class="text-dark" style="font-size:20px;margin: 0"><%= post.user.nickname %></strong>
+      <span class="text-gray small" style="margin: 0">@<%= post.user.userid %></span>
+      <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(comment.created_at) %></span>
+      <br/>
+      <br/>
+      <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= comment.comment %></span>
+    </p>
+  </div>
+  <div class="text-end">
+    <% if post.user == current_user %>
+      <%= link_to timeline_comment_path(post.id, comment.id), method: :delete, remote: true do %>
+        <i class="far fa-trash-alt"></i>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<hr class="d-none">

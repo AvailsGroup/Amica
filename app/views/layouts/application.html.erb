@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang = "ja">
+<html lang="ja">
 <head>
   <title>Amica</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,108 +14,146 @@
 </head>
 
 <body>
-  <header class="w-auto">
-    <nav class="navbar navbar-expand-lg navbar-light p-0 m-0" id="main-nav">
-      <div class="container-fluid">
-        <% if user_signed_in? %>
-          <%= link_to pages_path,class: "link" do%>
-            <%= image_tag "/user_images/default_icon.png",class:"amica_icon" %>
-          <% end %>
-          <%= link_to pages_path,class: "link" do%>
-            <h2 style="margin-left:2px;margin-top: 8px;color: rgba(29,144,190,0.8)">Amica</h2>
-          <% end %>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="navbar-nav me-auto m-0 mb-lg-0"></div>
-            <ul class="navbar-nav d-flex">
-              <li class="nav-item">
-                <%= link_to pages_path,class: "icons nav-link" do%>
-                  <i class="fas fa-bell"></i>通知<span class="notice badge bg-light text-dark rounded-pill align-text-bottom">100</span>
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to  chats_path,class: "icons nav-link" do %>
-                  <i class="fas fa-comments"></i>チャット
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to  communities_path,class: "icons nav-link" do %>
-                  <i class="fas fa-users"></i>コミュニティ
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to  timelines_path,class: "icons nav-link" do %>
-                  <i class="fas fa-clock"></i>タイムライン
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to  profiles_path,class: "icons nav-link" do %>
-                  <i class="fas fa-address-card"></i>友達
-                <% end %>
-              </li>
-
-              <li class="nav-item dropdown d-flex" >
-                <a class="nav-link dropdown-toggle icons" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fas fa-box-open"></i>その他
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <% if current_user.try(:admin?) %>
-                    <li>
-                      <%= link_to '管理者コンソールを表示', rails_admin_path, class: "link nav-link" %>
-                    </li>
-                  <% end %>
-                  <li>
-                    <%= link_to profile_path(current_user.userid),class:"link" do %>
-                    <span class="link nav-link">マイページ</span>
-                    <% end %>
-                  </li>
-                  <li>
-                    <%= link_to users_setting_path,class:"link" do %>
-                      <span class="link nav-link">設定</span>
-                    <% end %>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,style:"color: #FFF;",class: "link nav-link btn btn-primary"%>
-              </li>
-            </ul>
-          </div>
-        <% else %>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <%=link_to("Amica","/",class:"mb-0 lh-sm text-dark",style: "margin-left:7px;font-size:24px;text-decoration: none;font-weight:bold") %>
-            <ul class="navbar-nav me-auto m-0 mb-lg-0">
-              <li class="nav-item">
-                <%= link_to  "新規登録",new_user_registration_path,class: "icons nav-link" %>
-              </li>
-              <li class="nav-item">
-              <%= link_to  "ログイン",new_user_session_path,class: "icons nav-link" %>
-              </li>
-            </ul>
-          </div>
+<header class="w-auto">
+  <nav class="navbar navbar-expand-lg navbar-light p-0 m-0" id="main-nav">
+    <div class="container-fluid">
+      <% if user_signed_in? %>
+        <%= link_to pages_path, class: "link" do %>
+          <%= image_tag "/user_images/default_icon.png", class: "amica_icon" %>
         <% end %>
-      </div>
-    </nav>
-    <% if user_signed_in? %>
-      <nav id="sub-nav" style="background-color: #666666;height: 30px">
-        <p style="color: white;margin-left: 12px"><%=current_user.name %> (@<%=current_user.userid%>) </p>
-      </nav>
-     <% end %>
-  </header>
-  <main>
-  <!-- ここに追加 -->
-    <div class="flash text-center">
-      <p class="notice"><%= notice %></p>
-      <p class="notice"><%= alert %></p>
+        <%= link_to pages_path, class: "link" do %>
+          <h2 style="margin-left:2px;margin-top: 8px;color: rgba(29,144,190,0.8)">Amica</h2>
+        <% end %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="navbar-nav me-auto m-0 mb-lg-0"></div>
+          <ul class="navbar-nav d-flex">
+            <li class="nav-item">
+              <%= link_to pages_path, class: "icons nav-link" do %>
+                <i class="fas fa-bell"></i>通知<span class="notice badge bg-light text-dark rounded-pill align-text-bottom">100</span>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to chats_path, class: "icons nav-link" do %>
+                <i class="fas fa-comments"></i>チャット
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to communities_path, class: "icons nav-link" do %>
+                <i class="fas fa-users"></i>コミュニティ
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to timelines_path, class: "icons nav-link" do %>
+                <i class="fas fa-clock"></i>タイムライン
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to profiles_path, class: "icons nav-link" do %>
+                <i class="fas fa-address-card"></i>友達
+              <% end %>
+            </li>
+
+            <li class="nav-item dropdown d-flex">
+              <a class="nav-link dropdown-toggle icons" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-box-open"></i>その他
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <% if current_user.try(:admin?) %>
+                  <li>
+                    <%= link_to '管理者コンソールを表示', rails_admin_path, class: "link nav-link" %>
+                  </li>
+                <% end %>
+                <li>
+                  <%= link_to profile_path(current_user.userid), class: "link" do %>
+                    <span class="link nav-link">マイページ</span>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to setting_path, class: "link" do %>
+                    <span class="link nav-link">設定</span>
+                  <% end %>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, style: "color: #FFF;", class: "link nav-link btn btn-primary" %>
+            </li>
+          </ul>
+        </div>
+      <% else %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <%= link_to("Amica", "/", class: "mb-0 lh-sm text-dark", style: "margin-left:7px;font-size:24px;text-decoration: none;font-weight:bold") %>
+          <ul class="navbar-nav me-auto m-0 mb-lg-0">
+            <li class="nav-item">
+              <%= link_to "新規登録", new_user_registration_path, class: "icons nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログイン", new_user_session_path, class: "icons nav-link" %>
+            </li>
+          </ul>
+        </div>
+      <% end %>
     </div>
-    <%= yield %>
-  </main>
+  </nav>
+  <% if user_signed_in? %>
+    <nav id="sub-nav" class="bg-gray" style="height: 30px">
+      <p style="color: white;margin-left: 12px"><%= current_user.name %> (@<%= current_user.userid %>) </p>
+    </nav>
+  <% end %>
+</header>
+<main>
+  <!-- ここに追加 -->
+  <div class="flash text-center">
+    <p class="notice"><%= notice %></p>
+    <p class="notice"><%= alert %></p>
+  </div>
+  <%= yield %>
+</main>
+
+<footer class="text-center bg-gray text-light" style="margin-top:100px">
+  <div class="container">
+    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-4 mx-0">
+      <div class="col mt-3">
+        <h5 class="mb-2">ガイド</h5>
+        <p class="mb-1 small"><%= link_to "Amicaについて", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "利用規約", static_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "プライバシーポリシー", privacy_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "Q&A", faq_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "ヘルプ", about_path, class: "text-decoration-none text-light" %></p>
+      </div>
+      <div class="col mt-3">
+        <h5 class="mb-2">コンテンツ</h5>
+        <p class="mb-1 small"><%= link_to "通知", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "ランキング", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "運営からのお知らせ", about_path, class: "text-decoration-none text-light" %></p>
+      </div>
+      <div class="col mt-3">
+        <h5 class="mb-2">アカウント</h5>
+        <% if current_user %>
+          <p class="mb-1 small"><%= link_to "プロフィール設定", edit_profile_path(current_user.userid), class: "text-decoration-none text-light" %></p>
+        <% end %>
+        <p class="mb-1 small"><%= link_to "アカウント設定", edit_user_registration_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "ログアウト", destroy_user_session_path, class: "text-decoration-none text-light" %></p>
+      </div>
+      <div class="col mt-3">
+        <h5 class="mb-2">運営</h5>
+        <p class="mb-1 small"><%= link_to "Avails", about_path, class: "text-decoration-none text-light" %></p>
+      </div>
+    </div>
+  </div>
+  <hr/>
+  <div class="p-3">
+    <h1 class="mb-0">Amica</h1>
+    <p class="mb-0">©Avails Group. All rights reserved.</p>
+  </div>
+</footer>
 </body>
 
 </html>
