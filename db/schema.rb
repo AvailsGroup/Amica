@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_223425) do
+ActiveRecord::Schema.define(version: 2021_12_19_025958) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -80,13 +80,6 @@ ActiveRecord::Schema.define(version: 2021_12_15_223425) do
     t.integer "user_id"
     t.integer "community_id"
     t.text "reason"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "community_tags", force: :cascade do |t|
-    t.integer "community_id"
-    t.string "tag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

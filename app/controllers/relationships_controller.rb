@@ -5,6 +5,8 @@ class RelationshipsController < ApplicationController
   def create
     @user = User.find_by(userid: params[:profile_id])
     Relationship.create(follower_id: current_user.id, followed_id: @user.id)
+    @notification = Notification.new(visitor_id: current_user.id, visited_id: @user.id,action: "follow",checked: false)
+    @notification.save
     redirect_to profile_path(params[:profile_id]), notice: "フォローしました!"
   end
 

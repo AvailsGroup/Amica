@@ -1,12 +1,11 @@
  <% visitor = notification.visitor %>
  <% visited = notification.visited %>
-  <div calss="col-md-6 mx-auto">
+  <div class="col-md-6 mx-auto">
   <div class="form-inline">
-      <span>
-   <%= link_to user_path(visitor) do %>
-   <%= image_tag avatar_url(visitor).to_s, class: "icon_mini" %>
-      </span>
-  <strong>
+
+   <%= link_to profile_path(visitor.userid) do %>
+<%= image_tag @user.decorate.image , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+  <strong style="color:greenyellow">
    <%= visitor.name %>
    <%= 'さんが' %>
   </strong>
@@ -15,31 +14,32 @@
    <% when 'follow' then %>
    <%= "あなたをフォローしました" %>
    <% when 'like' then %>
-   <%= link_to 'あなたの投稿', notification.post, style: "font-weight: bold;" %>
+            <%= "あなたの投稿id:#{notification.post_id}" %>
    <%= "にいいねしました" %>
+        <hr>
    <% when 'comment' then %>
-   <% if notification.post.user_id == visited.id %>
-    <%= link_to "あなたの投稿", notification.post, style: "font-weight: bold;" %>
+   <% if notification.id == visited.id %>
+                          <%= "あなたの投稿id:#{notification.post_id}" %>
    <% else %>
       <span>
-       <%= link_to post_path(notification.post) do %>
-       <%= image_tag avatar_url(notification.post.user).to_s, class: "icon_mini" %>
+       <%= link_to timelines_path(notification.post_id) do %>
+<%= image_tag @user.decorate.image , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
           </span>
       <strong>
-       <%= notification.post.user.name + 'さんの投稿' %>
+       <%= 'さんの投稿' %>
        <%= "にコメントしました" %>
       </strong>
-          </div>
 
           <P class="text-muted mb-0">
        <%= Comment.find_by(id: notification.comment_id)&.comment %>
       </p>
       <div class="small text-muted text-right">
        <%= time_ago_in_words(notification.created_at).upcase %>
+        <hr>
       </div>
-      <hr>
       <%end %>
     <%end %>
-             <%end %>
-           <%end %>
+          <% end %>
+        <%end %>
       </div>
+ </div>
