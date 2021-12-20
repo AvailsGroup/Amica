@@ -7,11 +7,7 @@
         <div class="userprofile social">
           <div class="userdata">
             <div class="userpic">
-              <% if @user.image.nil? %>
-                <%= image_tag "default_icon", :size => '100x100', class: "userpicimg icon flex-shrink-0 question-icon" %>
-              <% else %>
-                <%= image_tag "/user_images/#{@user.image}", style: "width: 100px;height:100px;", class: "userpicimg icon bd-placeholder-img flex-shrink-0 question-icon" %>
-              <% end %>
+                <%= image_tag @user.decorate.image, :size => '100x100', class: "userpicimg icon flex-shrink-0 question-icon" %>
             </div>
             <div class="names">
               <h2 class="username"><%= @user.name %></h2>
@@ -56,6 +52,7 @@
             </li>
           </ul>
 
+
           <div class="actions">
             <% if current_user.id != @user.id %>
               <% if following?(@following, @user) %>
@@ -63,6 +60,7 @@
               <% else %>
                   <%= link_to 'フォロー', profile_relationships_path(@user.userid), method: :post, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
               <% end %>
+              <%= link_to 'チャット',chat_path(@user.userid),style: "color:#FFF;",class:"btn btn-primary followbtn"%>
             <% else %>
               <%= link_to '編集', edit_profile_path, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
             <% end %>

@@ -77,8 +77,6 @@ class User < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
-  has_many :report
-
   has_one :favorite
 
   has_one :achievement, dependent: :destroy
@@ -99,6 +97,10 @@ class User < ApplicationRecord
 
   has_many :passive_reports, class_name: "Report", foreign_key: "reported_user_id"
   has_many :reported_users, through: :passive_reports, source: :reported_user
+
+  has_many :rooms
+  has_many :messages
+
 
   def password_required?
     super && confirmed?

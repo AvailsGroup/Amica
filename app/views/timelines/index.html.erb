@@ -1,32 +1,10 @@
 <%= stylesheet_link_tag 'timelines' %>
-<%= javascript_pack_tag 'timeline/main' %>
+<%= javascript_pack_tag 'timeline/main'%>
 
-<style>
-    .lity {
-        z-index: 10002;
-    }
-
-    .send {
-        margin-right: 2px;
-        margin-bottom: 2px;
-        color: #0d6efd;
-        border: none;
-    }
-</style>
-<%= render 'timelines/nav', page: "friends" %>
-
+<%= render 'timelines/nav', page:@page %>
 
 <div class="container">
-  <%= render "timelines/form", create: @create %>
-  <% @posts.each do |p| %>
-    <% if matchers?(@user, p.user) || p.user == current_user %>
-      <%= link_to timeline_path(p.id) do %>
-        <div class="my-3 p-3 bg-white rounded shadow-sm">
-          <%= render "timelines/post", post: p, post_model: @post, report: @report %>
-        </div>
-      <% end %>
-    <% end %>
-  <% end %>
+  <%= render "timelines/form", create:@create %>
+  <%= render partial:"timelines/post", collection:@posts , as: :post, locals: { post_model: @post } %>
   <%= render "layouts/pagenate", pagenate: @posts %>
 </div>
-

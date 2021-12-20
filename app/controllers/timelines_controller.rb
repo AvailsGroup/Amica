@@ -10,14 +10,38 @@ class TimelinesController < ApplicationController
   def index
     view_parameter
     @report = Report.new
+    @posts = @posts.select { |p| matchers?(@user, p.user) || p.user == current_user }
+    @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(30)
+    redirect 'friends'
+  end
+
+  def follow
+    view_parameter
+    @posts = @posts.select { |p| following?(@user.followings_list, p.user) || p.user == current_user }
+    @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(30)
+    redirect  'follow'
+  end
+
+  def latest
+    view_parameter
+    @posts = @post.order(created_at: :desc).page(params[:page]).per(30)
+    redirect 'latest'
+  end
+
+  def pickup
+    view_parameter
+    @post = @post.where(created_at: 1.week.ago.beginning_of_day..Time.zone.now.end_of_day)
+                 .reject { |p| p.user == current_user }
+    @posts = @post.sort_by { |p| p.likes.size }
+    @posts = @posts.reverse
+    @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(30)
+    redirect 'pickup'
   end
 
   def show
-    @post_m = Post.includes(:user, :likes, :comments)
-    @post = @post_m.find(params[:id])
-    # コメント一覧表示で使用する全コメントデータを代入（新着順で表示）
+    @posts = Post.includes(:user, :likes, :comments)
+    @post = @posts.find(params[:id])
     @comments = @post.comments.order(created_at: :desc).page(params[:page]).per(10)
-    # コメントの作成
     @comment = Comment.new
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
@@ -27,7 +51,7 @@ class TimelinesController < ApplicationController
   def create
     @create = Post.new(post_params)
     @create.user = current_user
-    flash[:alert] = "投稿の文字数は1~280文字までです<br/>画像はjpg jpeg png gifのみ対応しています。<br/>画像は10MBまでです。" unless @create.save!
+    flash[:alert] = '投稿の文字数は1~280文字までです<br/>画像はjpg jpeg png gifのみ対応しています。<br/>画像は10MBまでです。' unless @create.save!
     redirect_to(timelines_path)
   end
 
@@ -49,44 +73,27 @@ class TimelinesController < ApplicationController
   def search
     @post = params[:q]
     @posts = Post.search_content_for(params[:q]).order(created_at: :desc).page(params[:page]).per(10)
-    @user = User.all
-  end
-
-  def follow
-    view_parameter
-  end
-
-  def latest
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
-    @post = Post.includes(:user, :likes, :comments)
-    @posts = @post.order(created_at: :desc).page(params[:page]).per(30)
-    @create = Post.new
-  end
-
-  def pickup
-    @post = Post.includes(:user, :likes, :comments).where(created_at: 1.week.ago.beginning_of_day..Time.zone.now.end_of_day)
-    @posts = @post.sort_by { | p | p.likes.size }
-    @posts = @posts.reverse
-    @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(30)
-    @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
-    @user = @users.find(current_user.id)
-    @create = Post.new
+    @post_m = Post.includes(:user, :likes, :comments)
   end
 
   private
 
   def view_parameter
     @post = Post.includes(:user, :likes, :comments)
-    @posts = @post.order(created_at: :desc).page(params[:page]).per(30)
+    @posts = @post.order(created_at: :desc)
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
     @create = Post.new
   end
 
-  def post_params()
+  def post_params
     params.require(:post).permit(:content, :image)
   end
 
-
+  def redirect(page)
+    @page = page
+    render 'timelines/index'
+  end
 end

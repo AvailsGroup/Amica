@@ -1,11 +1,1 @@
-<%= stylesheet_link_tag 'profiles', media: 'all', 'data-turbolinks-track': 'reload' %>
-<div class="container">
-  <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-0">おすすめユーザー (<%= @count %>) </h6>
-    　 <% if @users.size == 0 %>
-      <p class="text-gray-dark">現在はいないようです！</p>
-      <% end %>
-    <%= render partial: "profiles/user", collection: @users, as: :user %>
-  </div>
-  <%= render 'layouts/pagenate', pagenate: @users %>
-</div>
+<%= render "profiles/page", content:@users, pagenate:@pagenate, name: "おすすめ" %>

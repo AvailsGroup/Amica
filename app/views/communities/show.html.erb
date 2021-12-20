@@ -24,12 +24,7 @@
 
 <div class="position-relative overflow-hidden p-1 p-md-5 m-md-3 text-center bg-light">
   <div class="col-md-5 p-lg-1 mx-auto my-1">
-    <% if @community.icon? %>
-      <%= image_tag "/communities_image/#{@community.icon}", class: "img-fluid rounded", style: "width: 150px;height: 150px;" %>
-      <br>
-    <% else %>
-      <%= image_tag "default_icon", class: "img-fluid rounded", style: "width: 150px;height: 150px;" %><br>
-    <% end %>
+      <%= image_tag @community.decorate.image, class: "img-fluid rounded", style: "width: 150px;height: 150px;" %>
     <h1 class="display-4 fw-normal"><%= @community.name %></h1>
     <% if @leader == current_user %>
       <%= link_to "チャット", chats_path, class: "btn btn-outline-dark mx-2" %>

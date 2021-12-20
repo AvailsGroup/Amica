@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_223425) do
+ActiveRecord::Schema.define(version: 2021_12_19_121743) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2021_12_15_223425) do
     t.string "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "icon"
+    t.string "image"
     t.integer "user_id"
   end
 
@@ -114,12 +114,20 @@ ActiveRecord::Schema.define(version: 2021_12_15_223425) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer "room_id"
+    t.integer "user_id"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
-    t.string "image"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -153,6 +161,13 @@ ActiveRecord::Schema.define(version: 2021_12_15_223425) do
     t.integer "post_id"
     t.integer "comment_id"
     t.integer "community_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer "started_userid"
+    t.integer "invited_userid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,11 +1,1 @@
-<%= stylesheet_link_tag 'profiles', media: 'all', 'data-turbolinks-track': 'reload' %>
-<main class="container">
-  <h2 class="text-center pb-2 mb-0">フォロー (<%= @following.size %>)</h2>
-  <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <% if @following.size == 0 %>
-      <p class="text-gray-dark">現在はいないようです！</p>
-    <% end %>
-    　<%= render partial: "profiles/user", collection: @pagenate, as: :user %>
-  </div>
-  <%= render 'layouts/pagenate', pagenate: @pagenate %>
-</main>
+<%= render "profiles/page", content:@following, pagenate:@pagenate,name: "フォロー" %>
