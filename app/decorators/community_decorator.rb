@@ -11,6 +11,6 @@ class CommunityDecorator < ApplicationDecorator
   #   end
 
   def image
-    object.image.nil? ? "default_icon" : "/communities_image/#{object.image}"
+    object.image.nil? ? 'default_icon.png' : "/communities_image/#{object.image}"
   end
 end
