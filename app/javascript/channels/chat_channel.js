@@ -52,7 +52,7 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
   }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+window.addEventListener("DOMContentLoaded",function() {
   const content = document.getElementById('content');
   const submitButton = document.getElementById('submit_button');
   const room_id = document.getElementById('room_id');
@@ -107,14 +107,26 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   $('#image_uploader').click(function(){
-    const preview = document.getElementById('image_preview');
+    var canvas = $("#canvas");
+    let base64 = "";
     $(this).val('');
-      images.addEventListener('change', function(e){
-        var file_reader = new FileReader();
-        file_reader.addEventListener('load', function(e) {
-          preview.src = e.target.result;
-        });
-      file_reader.readAsDataURL(e.target.files[0]);
+    $(images).change(function() {
+      var file = this.files[0];
+      if (!file.type.match(/^image\/(png|jpeg|gif)$/)) return;
+      var image = new Image();
+      var reader = new FileReader();
+      reader.onload = function(evt) {
+        image.onload = function() {
+          $(canvas).attr("width",image.width);
+          $(canvas).attr("height",image.height);
+          var ctx = canvas[0].getContext("2d");
+          ctx.drawImage(image, 0, 0); //canvasに画像を転写
+          base64 =  canvas[0].toDataURL('image/jpeg');
+        }
+        image.src = evt.target.result;
+      }
+      reader.readAsDataURL(file);
+      console.log(base64)
     });
   });
 });
@@ -122,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function AutoLink(str) {
   var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
   var regexp_makeLink = function(all, url, h, href) {
-    return '<a href="h' + href + '">' + url + '</a>';
+    return '<a href="h' + href + '" target="_blank">' + url + '</a>';
 
   }
   let content;
