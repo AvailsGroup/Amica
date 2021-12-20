@@ -57,10 +57,11 @@ class ApplicationController < ActionController::Base
   end
   
   def whitelisted?(ip)
-    ['123.456.789.101'].include?(ip)
+    ['218.45.244.196','127.0.0.1'].include?(ip)
   end
   
   def block_foreign_hosts
+    pp request.remote_ip
     redirect_to 'https://www.google.com' unless whitelisted?(request.remote_ip)
   end
 
