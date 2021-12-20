@@ -52,7 +52,7 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
   }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+window.addEventListener("DOMContentLoaded",function() {
   const content = document.getElementById('content');
   const submitButton = document.getElementById('submit_button');
   const room_id = document.getElementById('room_id');
@@ -84,20 +84,6 @@ document.addEventListener("DOMContentLoaded", function() {
         $(this).height(0);
       }
     });
-  $('#image_button').click(function(e){
-    const preview = document.getElementById('image_preview');
-    $('#image_uploader').val('');
-    var img_element = document.createElement('img');
-    img_element = '';
-    images.addEventListener('change', function(e){
-      var file_reader = new FileReader();
-      file_reader.addEventListener('load', function(e) {
-      img_element.src = e.target.result;
-        preview.append(img_element);
-      });
-      file_reader.readAsDataURL(e.target.files[0]);
-    });
-  });
   //Shift+Enter or 紙飛行機ボタンでメッセ➖ジを送信させる
     $(document).on('keypress', '[data-behavior~=chat_speaker]', function(event) {
       if(event.shiftKey) {
@@ -119,27 +105,36 @@ document.addEventListener("DOMContentLoaded", function() {
         $($textarea).height(0);
         return content.preventDefault();
       }
-
-      $('#image_submit_button').click('[data-behavior~=chat_speaker]', function () {
-        if ( content.value ) {
-          content.value = '';
-          $($textarea).height(0);
-          const image_data = images.value
-          ChatChannel.speak(image_data,room_id.value)
-          bottom_scroll()
-          return content.preventDefault();
-            }
-        });
-
-
-
     });
+  $('#image_uploader').click(function(){
+    var canvas = $("#canvas");
+    let base64 = "";
+    $(this).val('');
+    $(images).change(function() {
+      var file = this.files[0];
+      if (!file.type.match(/^image\/(png|jpeg|gif)$/)) return;
+      var image = new Image();
+      var reader = new FileReader();
+      reader.onload = function(evt) {
+        image.onload = function() {
+          $(canvas).attr("width",image.width);
+          $(canvas).attr("height",image.height);
+          var ctx = canvas[0].getContext("2d");
+          ctx.drawImage(image, 0, 0); //canvasに画像を転写
+          base64 =  canvas[0].toDataURL('image/jpeg');
+        }
+        image.src = evt.target.result;
+      }
+      reader.readAsDataURL(file);
+      console.log(base64)
+    });
+  });
 });
 
 function AutoLink(str) {
   var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
   var regexp_makeLink = function(all, url, h, href) {
-    return '<a href="h' + href + '">' + url + '</a>';
+    return '<a href="h' + href + '" target="_blank">' + url + '</a>';
 
   }
   let content;
