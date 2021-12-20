@@ -50,13 +50,6 @@ class ProfilesController < ApplicationController
     @user = current_user
     permission
 
-    unless current_user.update(user_params)
-      @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-      @tag = current_user.tag_list.join(',')
-      render action: "edit"
-      return
-    end
-
     unless params["user"]["images"].nil?
       accepted_format = %w[.jpg .jpeg .png]
       unless accepted_format.include? File.extname(params["user"]["images"].original_filename)
@@ -64,6 +57,13 @@ class ProfilesController < ApplicationController
         redirect_to(edit_profile_path)
         return
       end
+    end
+
+    unless current_user.update(user_params)
+      @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+      @tag = current_user.tag_list.join(',')
+      render action: "edit"
+      return
     end
 
     if !params["user"]["images"].nil? && base64?(params["user"]["image"]['data:image/jpeg;base64,'.length .. -1])
@@ -90,7 +90,7 @@ class ProfilesController < ApplicationController
     @users = User.preload(:profile, :favorite, :followers, :followings, :tags)
     @user = @users.find(current_user.id)
     @friends = @user.matchers
-    @pagenate = Kaminari.paginate_array(@friends).page(params[:page]).per(20)
+    @pagenate = Kaminari.paginate_array(@friends).page(params[:page]).per(30)
     @favorite = Favorite.all
   end
 
@@ -98,14 +98,14 @@ class ProfilesController < ApplicationController
     @users = User.preload(:profile, :favorite, :followers, :tags)
     @user = @users.find(current_user.id)
     @follower = @user.followers_list
-    @pagenate = @follower.page(params[:page]).per(20)
+    @pagenate = @follower.page(params[:page]).per(30)
   end
 
   def follow
     @users = User.preload(:profile, :favorite,  :followings, :tags)
     @user = @users.find(current_user.id)
     @following = @user.followings_list
-    @pagenate =  @following.page(params[:page]).per(20)
+    @pagenate =  @following.page(params[:page]).per(30)
   end
 
   def pickup
@@ -113,9 +113,8 @@ class ProfilesController < ApplicationController
     @user = @users.find(current_user.id)
     @users -= matchers(@user)
     @users -= [@user]
-    @count = @users.size
     sort_pickup
-    @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
+    @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(30)
   end
 
   private

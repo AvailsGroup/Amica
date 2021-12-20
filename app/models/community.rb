@@ -6,14 +6,14 @@ class Community < ApplicationRecord
   validates :name,
             presence: true,
             length: { minimum: 2, maximum: 20 },
-            format: { with: %r{\A[a-zA-Z0-9ぁ-んァ-ヶ一-龥々ー!?~<>=]+\z}u },
+            format: { with: %r{\A[a-zA-Z0-9ぁ-んァ-ヶ一-龥々ー０-９!?~<>=_ 　]+\z}u },
             uniqueness: { case_sensitive: false }
 
   validate :validate_tag
 
   validate :content_length
 
-  attr_accessor :image,:image_x,:image_y,:image_w,:image_h,:aspect_numerator,:aspect_denominator
+  attr_accessor :image_x,:image_y,:image_w,:image_h,:aspect_numerator,:aspect_denominator
 
   has_many :community_members, dependent: :destroy
 

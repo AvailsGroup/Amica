@@ -4,7 +4,7 @@
   <h3 class="notice"><%= alert %></h3>
 </div>
 
-<main class="mx-3">
+<div class="mx-3">
   <div class="container">
 
     <div class="row">
@@ -12,7 +12,7 @@
         <div class="page-header" style="text-align: center">
           <h1>友だち</h1>
         </div>
-        <% if @mates.size == 0 %>
+        <% if @favorite_users==0 && @mates.size == 0 %>
           <div class="text-center " style="font-size: 18px; margin-top: 60px;">
             <%= link_to "あなたに合った友だちを探してみましょう！", profiles_path %>
           </div>
@@ -31,8 +31,9 @@
             </div>
           </div>
 
+          <div id="user_search_result"></div>
+
           <% if @favorite_users.size > 0 %>
-            <div id="favorite_user"></div>
             <button type="button" class="btn btn-secondary btn-lg w-100 mt-2 mb-3" style="background-color: #00bfff" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
               お気に入り
             </button>
@@ -58,7 +59,7 @@
         <div class="page-header" style="text-align: center">
           <h1>コミュニティ</h1>
         </div>
-        <% if @communities.size == 0 %>
+        <% if @favorite_communities.size == 0 && @communities.size == 0 %>
           <div class="text-center " style="font-size: 18px; margin-top: 60px;">
             <%= link_to "あなたに合ったコミュニティを見つけてみましょう！", "/communities/pickup" %>
           </div>
@@ -76,9 +77,9 @@
               </nav>
             </div>
           </div>
-
+          <div id="community_search_result"></div>
           <% if @favorite_communities.size > 0 %>
-            <div id="favorite_community"></div>
+
             <button type="button" class="btn btn-secondary btn-lg w-100 mt-2 mb-3" style="background-color: #00bfff" data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">お気に入り</button>
             <div class="collapse show mb-1" id="collapseExample3">
               <%= render partial: 'pages/community', collection: @favorite_communities, as: :community, locals: { fixed_current_user: @user, favorite_model: @favorite } %>
@@ -92,4 +93,4 @@
       </div>
     </div>
   </div>
-</main>
+</div>

@@ -1,2 +1,2 @@
-class CommunityChatController < ApplicationController
+class CommunitiesChatController < ApplicationController
 end

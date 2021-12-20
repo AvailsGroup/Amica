@@ -1,11 +1,7 @@
 <div class="my-3 p-3 bg-white rounded shadow-sm">
   <div class="d-flex text-muted">
     <%= link_to profile_path(post.user), style: "color:black" do %>
-      <% if post.user.image.nil? %>
-        <%= image_tag "/user_images/default_icon.png", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
-      <% else %>
-        <%= image_tag "/user_images/#{post.user.image}", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
-      <% end %>
+        <%= image_tag post.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
     <% end %>
 <
     <p class="pb-3 mb-0 lh-sm w-100">

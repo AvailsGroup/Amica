@@ -7,6 +7,9 @@ class CommunitiesSecurityController < ApplicationController
     if @community.community_members.any? { |m| m.user_id == @user.id }
       @cm = CommunityMember.find_by(user_id: @user.id, community_id: @community.id)
       @cm.destroy
+      if Favorite.exists?(user_id: @user.id, community_id: @community.id)
+        Favorite.find_by(user_id: @user.id, community_id: @community.id).destroy
+      end
     end
     flash[:notice] = "ユーザーを参加禁止にしました。"
     redirect_to(community_members_path)
