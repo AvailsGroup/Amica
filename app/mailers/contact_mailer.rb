@@ -12,7 +12,7 @@ class ContactMailer < ApplicationMailer
       @reported_content = Post.find_by(id: report.post_id).content
     end
     unless report[:community_id]==nil
-      @reported_content = Community.find_by(id: report.community_id).name
+      @reported_user = Community.find_by(id: report.community_id).name
     end
     unless report[:comment_id]==nil
       @reported_user = User.find_by(id: report.reported_user_id).nickname

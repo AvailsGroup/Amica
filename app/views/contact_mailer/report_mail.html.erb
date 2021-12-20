@@ -13,8 +13,12 @@
 <p>-------------------------------------------</p>
 <p>通報相手</p>
 <p><%= @reported_user %></p>
+
+<% unless @reported_content ==nil%>
 <p>該当内容</p>
 <p><%= @reported_content %></p>
+<% end %>
+
 <p>通報内容</p>
 <p><%= @report.message %></p>
 <p>-------------------------------------------</p>

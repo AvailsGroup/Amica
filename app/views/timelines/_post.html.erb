@@ -54,7 +54,7 @@
                 </p>
               </div>
             </div>
-            <%= f.text_area :message,  placeholder: "通報内容を記載してください。",id: "message", class: "form-control" %><br>
+            <%= f.text_area :message, placeholder: "通報内容を記載してください。", id: "message", class: "form-control" %><br>
             <div class="modal-footer">
               <%= f.submit "送信", class: "btn btn-lg btn-danger fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
               <%= f.submit "クリア", type: :reset, class: "btn btn-lg btn-secondary fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
@@ -100,7 +100,7 @@
           <% end %>
         <% end %>
       </span>
-      <span class="comments">
+          <span class="comments">
         <%= link_to timeline_path(post.id) do %>
           <i class="far fa-comment-alt" style="height: 15.5px"></i>
           <span class="text-dark"><%= post.comments.size %></span>
@@ -112,7 +112,7 @@
               <i class="fas fa-bullhorn" style="color: red"></i>
             </label>
       </span>
-      </div>
+        </div>
         <div>
           <% if post.user == current_user %>
             <%= button_to(timeline_path(post.id), class: "send bg-white", method: :delete, data: { disable_with: "削除中..." }) do %>
@@ -120,8 +120,8 @@
             <% end %>
           <% end %>
         </div>
-        </div>
       </div>
     </div>
   </div>
+</div>
 

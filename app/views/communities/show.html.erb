@@ -12,23 +12,24 @@
           <%= f.hidden_field :user_id, id: "user_id", class: "form-control", value: @user.id %>
           <%= f.hidden_field :community_id, id: "community_id", class: "form-control", value: @community.id %>
           <div class="col">
-          <div class="carbon-example flex-wrapper">
-            <%= image_tag @community.decorate.image, class: "img-fluid", style: "width:200px" %><br>
-            <div class="inner-wrapper text-center w-100">
-              <h5><%= @community.name %> </h5>
-              <p class="my-0 fine-print"><i class="far fa-user fine-print"></i> <%= @community.community_members.size %>
-              </p>
-              <% @community.tags.pluck(:name).shuffle.first(3).each do |t| %>
-                <%= link_to "\##{t}", search_tag_path(t), class: "fine-print text-decoration-none my-0" %>
-              <% end %>
-            </div>
-            <div class="inner-wrapper text-right w-25 h-auto" style="bottom: 0; left: 0;margin-bottom: 0;padding: 0;">
+            <div class="carbon-example flex-wrapper">
+              <%= image_tag @community.decorate.image, class: "img-fluid", style: "width:200px" %><br>
+              <div class="inner-wrapper text-center w-100">
+                <h5><%= @community.name %> </h5>
+                <p class="my-0 fine-print">
+                  <i class="far fa-user fine-print"></i> <%= @community.community_members.size %>
+                </p>
+                <% @community.tags.pluck(:name).shuffle.first(3).each do |t| %>
+                  <%= link_to "\##{t}", search_tag_path(t), class: "fine-print text-decoration-none my-0" %>
+                <% end %>
+              </div>
+              <div class="inner-wrapper text-right w-25 h-auto" style="bottom: 0; left: 0;margin-bottom: 0;padding: 0;">
 
-              <span class="small my-0" style="font-size: 13px"></span>
+                <span class="small my-0" style="font-size: 13px"></span>
+              </div>
             </div>
           </div>
-          </div>
-          <%= f.text_area :message,  placeholder: "通報内容を記載してください。",id: "message", class: "form-control mt-3" %><br>
+          <%= f.text_area :message, placeholder: "通報内容を記載してください。", id: "message", class: "form-control mt-3" %><br>
           <div class="modal-footer">
             <%= f.submit "送信", class: "btn btn-lg btn-danger fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
             <%= f.submit "クリア", type: :reset, class: "btn btn-lg btn-secondary fw-bold border-whitey", style: "margin-right: 10px; width: 150px;color:#FFF" %>
@@ -41,7 +42,7 @@
 
 <div class="position-relative overflow-hidden p-1 p-md-5 m-md-3 text-center bg-light">
   <div class="col-md-5 p-lg-1 mx-auto my-1">
-      <%= image_tag @community.decorate.image, class: "img-fluid rounded", style: "width: 150px;height: 150px;" %>
+    <%= image_tag @community.decorate.image, class: "img-fluid rounded", style: "width: 150px;height: 150px;" %>
     <h1 class="display-4 fw-normal"><%= @community.name %></h1>
     <% if @leader == current_user %>
       <%= link_to "チャット", chats_path, class: "btn btn-outline-dark mx-2" %>
@@ -49,7 +50,7 @@
       <% if is_community_favorite?(@favorite, @user, @community) %>
         <%= link_to "お気に入り解除", page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'btn btn-outline-dark mx-2 bg-dark text-light', style: "", data: { disable_with: 'お気に入り解除' } %>
       <% else %>
-        <%= link_to page_favorite_community_create_path(@community.id), method: :post, class: 'mx-2', style: "", data: { disable_with: 'お気に入り登録' } do%>
+        <%= link_to page_favorite_community_create_path(@community.id), method: :post, class: 'mx-2', style: "", data: { disable_with: 'お気に入り登録' } do %>
           <i class="far fa-star fa-2x"></i>
         <% end %>
       <% end %>

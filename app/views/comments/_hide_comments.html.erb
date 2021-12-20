@@ -23,7 +23,7 @@
               </p>
             </div>
           </div>
-          <%= f.text_area :message,  placeholder: "通報内容を記載してください。",id: "message", class: "form-control" %><br>
+          <%= f.text_area :message, placeholder: "通報内容を記載してください。", id: "message", class: "form-control" %><br>
           <div class="modal-footer">
             <%= f.submit "送信", class: "btn btn-lg btn-danger fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
             <%= f.submit "クリア", type: :reset, class: "btn btn-lg btn-secondary fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
@@ -38,7 +38,7 @@
 <div class="my-3 p-3 bg-white rounded shadow-sm">
   <div class="d-flex text-muted">
     <%= link_to profile_path(post.user), style: "color:black" do %>
-        <%= image_tag post.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+      <%= image_tag post.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
     <% end %>
 
     <p class="pb-3 mb-0 lh-sm w-100">
@@ -58,11 +58,11 @@
       <% end %>
     <% end %>
     <span class="ms-2">
-            <label>
-              <button type="button" class="btn btn-primary" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal2<%= comment.id %>" data-bs-whatever=<%= comment.id %>></button>
-              <i class="fas fa-bullhorn" style="color: red"></i>
-            </label>
-          </span>
+      <label>
+        <button type="button" class="btn btn-primary" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal2<%= comment.id %>" data-bs-whatever=<%= comment.id %>></button>
+        <i class="fas fa-bullhorn" style="color: red"></i>
+      </label>
+    </span>
   </div>
 </div>
 <hr class="d-none">
