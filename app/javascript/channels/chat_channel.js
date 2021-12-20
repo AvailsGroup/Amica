@@ -14,32 +14,38 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
     const room_id = document.getElementById("room_id").value
     if (data.room_id === Number(room_id)){
       if (data.user_id === Number(user_id)) {
-        $('#append').append('<div class="message-body" style="white-space: pre;">'+
-                              '<div class="sender my-1 p-1">' +
-                                '<div class="messages">' +
-                                  AutoLink(data.content)+
-                                '</div>' +
-                              '</div>'+
-                            '</div>'+
-                            '<div class="clear"></div>'+
-                              '<span class="small" style="float: right">'+
-                                 '今日 '+data.created_at.slice(11,16)+
-                              '</span>'+
-                            '<div class="clear"></div>'
+        $('#append').append('<div class="row message-body" style="white-space: pre;">'+
+                              ' <div class="col-sm-12 message-main-sender" >'+
+                                  '<div class="sender my-1 p-1 mt-2" style="max-width: 40%;">' +
+                                    '<div class="messages container p-1">' +
+                                      AutoLink(data.content)+
+                                    '</div>' +
+                                  '</div>'+
+                                 '</div>'+
+                                '</div>'+
+                                '<div class="clear"></div>'+
+                                  '<span class="small" style="float: right">'+
+                                     '今日 '+data.created_at.slice(11,16)+
+                                  '</span>'+
+                                '<div class="clear"></div>'
         )
         bottom_scroll();
       } else {
-        $('#append').append('<div class="message-body" style="white-space: pre;">'+
-                              '<div class="receiver my-1 p-1">' +
-                                '<div class="messages">' +
-                                   AutoLink(data.content)+
-                                '</div>' +
+        $('#append').append(
+                            '<div class="row message-body" style="white-space: pre;">'+
+                              '<div class="col-sm-12 message-main-receiver" style=" position:relative;">'+
+                                '<div class="receiver my-1 p-1 mt-2" style="max-width: 40%;">' +
+                                  '<div class="messages container p-1">' +
+                                     AutoLink(data.content)+
+                                  '</div>' +
+                                '</div>'+
+                               '<div class="text-gray small" style="float: left">' +
+                                  '<p class="time">'+
+                                  '今日 '+data.created_at.slice(11,16)+
+                                  '</p>'+
+                                '</div>'+
                               '</div>'+
-                            '</div>'+
-                            '<div class="clear"></div>'+
-                              '<span class="small">'+
-                              '今日 '+data.created_at.slice(11,16)+
-                              '</span>'+
+                             '</div>'+
                             '<div class="clear"></div>'
         )
         bottom_scroll();
@@ -54,9 +60,9 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
 
 window.addEventListener("DOMContentLoaded",function() {
   const content = document.getElementById('content');
-  const submitButton = document.getElementById('submit_button');
   const room_id = document.getElementById('room_id');
   const images = document.getElementById('image_uploader')
+  let send_image = document.getElementById('send_image')
 
   //ブラウザがスクリーンサイズの50%以下or500px以下の時に相手の名前を消す
   const name = document.getElementById('user_name');
@@ -96,7 +102,7 @@ window.addEventListener("DOMContentLoaded",function() {
         }
       }
     });
-    $(submitButton).click('[data-behavior~=chat_speaker]', function () {
+    $('#submit_button').click('[data-behavior~=chat_speaker]', function () {
       if ( content.value && content.value.match(/\S/g)) {
         const message = content.value
         ChatChannel.speak(message, room_id.value);
@@ -107,6 +113,7 @@ window.addEventListener("DOMContentLoaded",function() {
       }
     });
   $('#image_uploader').click(function(){
+    send_image.value =""
     var canvas = $("#canvas");
     let base64
     $(this).val('');
@@ -122,12 +129,22 @@ window.addEventListener("DOMContentLoaded",function() {
           var ctx = canvas[0].getContext("2d");
           ctx.drawImage(image, 0, 0); //canvasに画像を転写
          　base64 =  canvas[0].toDataURL('image/jpeg');
+         send_image.value = base64
         }
         image.src = evt.target.result;
       }
       reader.readAsDataURL(file);
-      console.log(base64)
     });
+  });
+  $('#image_submit_button').click('[data-behavior~=chat_speaker]', function () {
+    if ( send_image.value ) {
+      const send_image = send_image.value
+      ChatChannel.speak(send_image, room_id.value);
+      bottom_scroll()
+      send_image.value = '';
+      $($textarea).height(0);
+      return content.preventDefault();
+    }
   });
 });
 
