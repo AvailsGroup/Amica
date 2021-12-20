@@ -92,6 +92,10 @@ class User < ApplicationRecord
   has_many :communities, dependent: :destroy
   has_many :community_member, dependent: :destroy
 
+  has_many :rooms
+  has_many :messages
+
+
   def password_required?
     super && confirmed?
   end
