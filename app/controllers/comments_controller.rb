@@ -9,6 +9,8 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     flash.now[:notice] = @comment.save ? "コメントの投稿に成功しました。" : "コメントの投稿に失敗しました。"
     redirect_to(timeline_path(@post.id))
+    @report = Report.new
+    render "comments/index"
   end
 
   def destroy
@@ -19,6 +21,8 @@ class CommentsController < ApplicationController
     @user = User.all
     @post = Post.find(params[:timeline_id])
     redirect_to(timeline_path(@post.id))
+    @report = Report.new
+    render "comments/index"
   end
 
   private
