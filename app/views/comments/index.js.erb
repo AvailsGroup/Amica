@@ -1,2 +1,0 @@
-$("#comments_area").html("<%= j(render 'comments/index', comments: @post.comments.order(created_at: :desc), post:@post,user:@user) %>");
-$("textarea").val('');

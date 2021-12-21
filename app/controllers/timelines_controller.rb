@@ -41,7 +41,9 @@ class TimelinesController < ApplicationController
   def show
     @posts = Post.includes(:user, :likes, :comments)
     @post = @posts.find(params[:id])
-    @comments = @post.comments.order(created_at: :desc).page(params[:page]).per(10)
+    @comments = @post.comments.includes(:user)
+    @count = @comments.size
+    @comments = @comments.order(created_at: :desc).page(params[:page]).per(10)
     @comment = Comment.new
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
