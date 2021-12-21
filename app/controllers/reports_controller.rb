@@ -6,6 +6,7 @@ class ReportsController < ApplicationController
     @communities = Community.all
     @comments = Comment.all
     @report = Report.new
+    @post_id = @comments.find(params[:report][:comment_id]).post_id
 
     @report.user = current_user
     @report.message = params[:report][:message]
@@ -23,7 +24,7 @@ class ReportsController < ApplicationController
       redirect_to communities_path, notice: "送信しました"
     end
     unless @report.comment == nil
-      redirect_to timelines_path, notice: "送信しました"
+      redirect_to timeline_path(@post_id), notice: "送信しました"
     end
   end
 

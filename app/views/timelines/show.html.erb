@@ -2,7 +2,7 @@
 <%= javascript_pack_tag 'timeline/main', 'data-turbolinks-track': 'reload' %>
 
 <%= render 'timelines/nav' %>
-
+<div style="text-align: center"><%= flash[:notice] %></div>
 <div class="container light">
   <div class="my-5 p-3 bg-white rounded shadow-sm ">
     <%= render "timelines/post", post: @post, post_model: @posts%>
