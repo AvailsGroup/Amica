@@ -23,7 +23,7 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
             content = AutoLink(data.content);
           }
         $('#append').append('<div class="row message-body" style="white-space: pre;">'+
-                              ' <div class="col-sm-12 message-main-sender" >'+
+                              ' <div class="col-sm-12 message-main-sender" style=" position:relative;">'+
                                   '<div class="sender my-1 p-1 mt-2" style="max-width: 40%;">' +
                                     '<div class="messages container p-1">' +
                                       content+
@@ -164,6 +164,7 @@ window.addEventListener("DOMContentLoaded",function() {
       send_image.value = '';
       $($textarea).height(0);
       $('#imageModal').modal('hide');
+      $('#image_uploader').val('');
       bottom_scroll()
     }
   });
