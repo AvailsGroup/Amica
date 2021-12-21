@@ -2,4 +2,20 @@
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.bg-blue { background-color: #00A1AE; }
+html {
+  overflow-y: scroll;
+}
+
+.flash{
+  display: none;
+}
+
+main .icon{
+  border: solid 1.5px;
+  border-radius: 30%;
+}
+
+main a{
+  text-decoration: none;
+}
+

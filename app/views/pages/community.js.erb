@@ -1,0 +1,1 @@
+$("#community_search_result").empty().append("<%= j(render partial:'pages/community' , collection: @result, as: :community, locals: {favorite_model:@favorite, fixed_current_user:@user}) %>");

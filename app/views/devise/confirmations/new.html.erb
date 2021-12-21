@@ -1,17 +1,19 @@
-<h2>Resend confirmation instructions</h2>
+<p class="h1 mt-4" style="font-weight: normal; text-align: center;">確認のメールが届きませんでしたか？</p>
+<div class="text-center mt-5">
+  <p class="vw"><%= "送信先メールアドレスは間違っていませんか？＠の後に、指定された「gn.iwasaki.ac.jp」" %>
+    <br>
+    <%= "をきちんと入れていますか？ここではメールアドレスが存在するかどうかを確認できます。" %></p>
 
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <br />
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+  <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="form-check-inline w-50 mt-5">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", id: "inputEmail", class: "form-control",:placeholder=>"email" ,style: "margin-bottom: 30px" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
+  <div class="actions mt-3">
+    <%= f.submit "メールアドレスを確認する" , class:"w-25 btn btn-lg btn-primary "%>
   </div>
 <% end %>
-
+  <br>
 <%= render "devise/shared/links" %>
+</div>

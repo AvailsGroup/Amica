@@ -1,0 +1,89 @@
+<%# views/messages/_chat_message.html.erb %>
+
+  <% if message.user_id === current_user.id %>
+    <div class="row message-body">
+      <div class="col-sm-12 message-main-sender">
+        <div class="sender my-1 p-1">
+          <div class="messages">
+           <% start = message.content.index("http")%>
+            <div>
+              <% if start != nil %>
+                <% messages = message.content %>
+                <% while start != nil do%>
+                  <% ends = messages.index(/\r\n|\r|\n|\s|　|\t/,start) %>
+                  <% url = messages[start.to_i..ends.to_i - 1] %>
+                  <% if start == 0 %>
+                    <% messages = messages.sub("#{url}","") %>
+                    <a href="<%= url %>" target="_blank" rel="noopener noreferrer"><%= url %></a>
+                    <% start = messages.index("http")%>
+                    <% if start == nil %>
+                      <%= safe_join(messages.split("\n"),tag(:br))%>
+                    <% end %>
+                  <% else %>
+                    <% first = messages[0..start.to_i-1] %>
+                    <% messages = messages.sub("#{first}", "").sub("#{url}", "") %>
+                    <%= safe_join(first.split("\n"),tag(:br)) %><br>
+                    <a href="<%= url %>" target="_blank" rel="noopener noreferrer"><%= url %></a>
+                    <% start = messages.index("http")%>
+                    <% if start == nil %>
+                      <%= safe_join(messages.split("\n"),tag(:br))%>
+                    <% end %>
+                   <% end %>
+                <% end %>
+            <% else %>
+            <%=safe_join(message.content.split("\n"),tag(:br))%>
+            <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% if message.created_at.to_date === Date.today %>
+        <span class="text-gray small" style="text-align: right"><%= message.created_at.strftime("今日 %H:%M") %></span>
+      <% else %>
+        <span class="text-gray small" style="text-align: right"><%= message.created_at.strftime("%H:%M") %></span>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="row message-body">
+      <div class="col-sm-12 message-main-receiver">
+        <div class="receiver my-1 p-1">
+          <div class="messages">
+            <% start = message.content.index("http")%>
+            <div>
+              <% if start != nil %>
+                <% messages = message.content %>
+                <% while start != nil do%>
+                  <% ends = messages.index(/\r\n|\r|\n|\s|\t/,start) %>
+                  <% url = messages[start.to_i..ends.to_i - 1] %>
+                  <% if start == 0 %>
+                    <% messages = messages.sub("#{url}","") %>
+                    <a href="<%= url %>" target="_blank" rel="noopener noreferrer"><%= url %></a>
+                    <% start = messages.index("http")%>
+                    <% if start == nil %>
+                      <%= safe_join(messages.split("\n"),tag(:br))%>
+                    <% end %>
+                  <% else %>
+                    <% first = messages[0..start.to_i-1] %>
+                    <% messages = messages.sub("#{first}", "").sub("#{url}", "") %>
+                    <%= safe_join(first.split("\n"),tag(:br)) %><br>
+                    <a href="<%= url %>" target="_blank" rel="noopener noreferrer"><%= url %></a>
+                    <% start = messages.index("http")%>
+                    <% if start == nil %>
+                      <%= safe_join(messages.split("\n"),tag(:br))%>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%=safe_join(message.content.split("\n"),tag(:br))%>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% if message.created_at.to_date === Date.today %>
+        <span class="text-gray small" style="text-align: right"><%= message.created_at.strftime("今日 %H:%M") %></span>
+      <% else %>
+        <span class="text-gray small" style="text-align: right"><%= message.created_at.strftime("%H:%M") %></span>
+      <% end %>
+    </div>
+  <% end %>

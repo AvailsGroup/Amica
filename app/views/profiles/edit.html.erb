@@ -18,9 +18,51 @@
     });
 </script>
 
-<div class="container" style="max-width: 960px">
-  <main>
-    <%= form_with model: current_user, url:profile_path,method: :put, multipart:true do |f| %>
+<%= form_with model: current_user, url: profile_path, method: :put, multipart: true do |f| %>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-right: 0">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">画像トリミング</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h4 class="modal-text">画像を選択してください</h4>
+          <div class="form_wrapper">
+            <div id="image-wrapper">
+              <%= f.file_field :images, id: "trim_img_uploder", value: "assets/default", accept: 'image/jpg,image/jpeg,image/png' %>
+              <%= f.hidden_field :image, id: "image" %>
+              <%= f.hidden_field :image_x, id: "image_x" %>
+              <%= f.hidden_field :image_y, id: "image_y" %>
+              <%= f.hidden_field :image_w, id: "image_w" %>
+              <%= f.hidden_field :image_h, id: "image_h" %>
+              <%= f.hidden_field :aspect_numerator, id: "aspect_numerator", value: "1.0" %>
+              <%= f.hidden_field :aspect_denominator, id: "aspect_denominator", value: "1.0" %>'
+
+              <div id="prev_img">
+                  <%= image_tag current_user.decorate.image, :size => '200x200', class: "user_image" %>
+              </div>
+            </div>
+          </div>
+          <div id="modal_area" style="display: none;">
+            <div class="modal_wrapper">
+              <div class="modal_padding modal_title_wrapper">
+                <h4>範囲を選択してください</h4>
+              </div>
+              <div class="canvas_wrapper">
+                <canvas id="source_canvas" width="1" height="1"></canvas>
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="close_button" class="btn btn-primary" data-bs-dismiss="modal">画像を切り取る</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="max-width: 960px">
     <div class="py-5 text-center">
       <h2>プロフィール編集</h2>
       <%= render 'layouts/error_messages', model: f.object %>
@@ -29,11 +71,7 @@
       <div id="user_icon">
         <label>
           <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-          <% if current_user.image.nil? %>
-            <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
-          <% else %>
-            <%= image_tag "/user_images/#{current_user.image}", :size => '200x200', class:"user_image"%>
-          <% end %>
+          <%= image_tag current_user.decorate.image, :size => '200x200', class: "user_image" %>
         </label>
       </div>
       <label>
@@ -42,143 +80,65 @@
         <img src="" id="result-img" style="display:none;width: 200px;height: 200px;">
       </label>
     </div>
-      <div class="row g-3">
-        <div class="col-md-12">
-          <div class="row g-3">
-            <div class="col-sm-6">
-              <%= f.label "本名(2~20文字)", class:"form-label" %>
-              <%= f.text_field :name, class:"form-control" ,id:"name",placeholder: "Name",maxlength:"20"%>
-            </div>
-            <div class="col-sm-6">
-              <%= f.label "ニックネーム(2~20文字)" , class:"form-label"%>
-              <%= f.text_field :nickname, class:"form-control" ,id:"nickname",placeholder: "NickName",maxlength:"20"%>
-            </div>
+    <div class="row g-3">
+      <div class="col-md-12">
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <%= f.label "本名(2~20文字)", class: "form-label" %>
+            <%= f.text_field :name, class: "form-control", id: "name", placeholder: "Name", maxlength: "20" %>
+          </div>
+          <div class="col-sm-6">
+            <%= f.label "ニックネーム(2~20文字)", class: "form-label" %>
+            <%= f.text_field :nickname, class: "form-control", id: "nickname", placeholder: "NickName", maxlength: "20" %>
+          </div>
 
+          <div class="col-12">
+            <%= f.label "ユーザーID(先頭のみ英語 半角英数字(アンダーバー) 1~20文字)", class: "form-label" %>
+            <div class="input-group">
+              <span class="input-group-text">@</span>
+              <%= f.text_field :userid, class: "form-control", id: "userid", placeholder: "UserID", maxlength: "20" %>
+            </div>
+          </div>
+
+          <hr class="my-4">
+          <%= f.fields_for :profile do |pf| %>
             <div class="col-12">
-              <%= f.label "ユーザーID(先頭のみ英語 半角英数字(_) 1~20文字)", class:"form-label" %>
-              <div class="input-group">
-                <span class="input-group-text">@</span>
-                <%= f.text_field :userid ,class:"form-control",id:"userid",placeholder: "UserID" ,maxlength:"20"%>
-              </div>
+              <%= pf.label "学科", class: "form-label" %>
+              <br/>
+              <%= pf.select :grade, grade, {}, class: 'form-select', id: "grade", include_blank: "", autocomplete: "grade" %>
+            </div>
+            <div class="col-sm-6">
+              <%= pf.label "クラス 例:2T1→1を入力 (無い場合は0を入力)", class: "form-label" %>
+              <%= pf.text_field :school_class, class: "form-control", id: "school_class", placeholder: "クラス", maxlength: "1" %>
             </div>
 
+            <div class="col-sm-6">
+              <%= pf.label "出席番号 (無い場合は0を入力)", class: "form-label" %>
+              <%= pf.text_field :number, class: "form-control", id: "number", placeholder: "出席番号", maxlength: "2" %>
+            </div>
+            <div class="col-sm-6">
+              <%= pf.label "学籍番号 (無い場合は0000000を入力)", class: "form-label" %>
+              <%= pf.text_field :student_id, class: "form-control", id: "student_number", placeholder: "学籍番号", maxlength: "7" %>
+            </div>
             <hr class="my-4">
-            <%= f.fields_for :profile do |pf|%>
-              <div class="col-12">
-                <%= pf.label "学科" , class:"form-label"%>
-                <br />
-                <%= pf.select :grade,
-                              [%w[情報処理科1年 情報処理科1年],
-                               %w[情報処理科2年 情報処理科2年],
-                               %w[実践IoT1年 実践IoT1年],
-                               %w[実践IoT2年 実践IoT2年],
-                               %w[Web技術科1年 Web技術科1年],
-                               %w[Web技術科2年 Web技術科2年],
-                               %w[ビジネス科1年 ビジネス科1年],
-                               %w[ビジネス科2年 ビジネス科2年],
-                               %w[先端ITシステム1年 先端ITシステム1年],
-                               %w[先端ITシステム2年 先端ITシステム2年],
-                               %w[先端ITシステム3年 先端ITシステム3年],
-                               %w[ITライセンス1年 ITライセンス1年],
-                               %w[実践AI科1年 実践AI科1年],
-                               %w[実践AI科2年 実践AI科2年],
-                               %w[実践AI科3年 実践AI科3年],
-                               %w[実践AI科4年 実践AI科4年],
-                               %w[情報セキュリティ学科1年 情報セキュリティ学科1年],
-                               %w[情報セキュリティ学科2年 情報セキュリティ学科2年],
-                               %w[情報セキュリティ学科3年 情報セキュリティ学科3年],
-                               %w[情報セキュリティ学科4年 情報セキュリティ学科4年],
-                               %w[教員 教員],
-                               %w[OB OB]],
-                              {},
-                              class:'form-select',
-                              id: "grade",
-                              include_blank: "",
-                              autocomplete:"grade"
-                %>
-              </div>
-              <div class="col-sm-6">
-                <%= pf.label "クラス 例:2T1→1を入力 (無い場合は0を入力)", class:"form-label" %>
-                <%= pf.text_field :school_class, class:"form-control" ,id:"school_class",placeholder: "クラス",maxlength:"1"%>
-              </div>
 
-              <div class="col-sm-6">
-                <%= pf.label "出席番号 (無い場合は0を入力)" , class:"form-label"%>
-                <%= pf.text_field :number, class:"form-control" ,id:"number",placeholder: "出席番号",maxlength:"2"%>
-              </div>
-              <div class="col-sm-6">
-                <%= pf.label "学籍番号 (無い場合は0000000を入力)" , class:"form-label"%>
-                <%= pf.text_field :student_id, class:"form-control" ,id:"student_number",placeholder: "学籍番号",maxlength:"7"%>
-              </div>
-              <hr class="my-4">
-
-              <div class="col-sm-12">
-                <div class="search-area-colum form-contents">
-                  <%= f.label "資格 (1つ2~20文字)" , class:"form-label"%>
-                  <%= f.text_field :accreditation_list, id:"accreditation",value: @accreditation_tag %>
-                </div>
-              </div>
-
-              <div class="col-sm-12">
-                <div class="search-area-colum form-contents">
-                  <%= f.label "タグ (1つ2~20文字)" , class:"form-label"%>
-                  <%= f.text_field :tag_list, id:"tag",value: @tag %>
-                </div>
-              </div>
-
-            <% end %>
-            <%= f.submit "変更",class:"w-100 btn btn-primary btn-lg mb-5"%>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">画像トリミング</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <h4 class="modal-text">画像を選択してください</h4>
-              <div class="form_wrapper">
-                <div id="image-wrapper">
-                  <%= f.file_field :images, id: "trim_img_uploder", value: "assets/default",accept: 'image/jpg,image/jpeg,image/png' %>
-                  <%= f.hidden_field :image, id: "image" %>
-                  <%= f.hidden_field :image_x, id: "image_x" %>
-                  <%= f.hidden_field :image_y, id: "image_y" %>
-                  <%= f.hidden_field :image_w, id: "image_w" %>
-                  <%= f.hidden_field :image_h, id: "image_h" %>
-                  <%= f.hidden_field :aspect_numerator, id: "aspect_numerator", value: "1.0" %>
-                  <%= f.hidden_field :aspect_denominator ,id: "aspect_denominator", value: "1.0" %>'
-                <% end %>
-                <div id="prev_img">
-                  <% if current_user.image.nil? %>
-                    <%= image_tag "default_icon" , :size => '200x200', class: "user_image"%>
-                  <% else %>
-                    <%= image_tag "/user_images/#{current_user.image}", :size => '200x200', class:"user_image"%>
-                  <% end %>
-                </div>
+            <div class="col-sm-12">
+              <div class="search-area-colum form-contents">
+                <%= f.label "資格 (1つ2~20文字 半角英数字,ひらがな,カタカナ,漢字)", class: "form-label" %>
+                <%= f.text_field :accreditation_list, id: "accreditation", value: @accreditation_tag %>
               </div>
             </div>
-            <div id="modal_area" style="display: none;">
-              <div class="modal_wrapper">
-                <div class="modal_padding modal_title_wrapper">
-                  <h4>範囲を選択してください</h4>
-                </div>
-                <div class="canvas_wrapper">
-                  <canvas id="source_canvas" width="1" height="1"></canvas>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" id="close_button" class="btn btn-primary" data-bs-dismiss="modal">画像を切り取る</button>
-                </div>
+
+            <div class="col-sm-12">
+              <div class="search-area-colum form-contents">
+                <%= f.label "タグ (1つ2~20文字 半角英数字,ひらがな,カタカナ,漢字)", class: "form-label" %>
+                <%= f.text_field :tag_list, id: "tag", value: @tag %>
               </div>
             </div>
-          </div>
+          <% end %>
+          <%= f.submit "変更", class: "w-100 btn btn-primary btn-lg mb-5" %>
         </div>
       </div>
     </div>
-  </main>
-</div>
+  </div>
+<% end %>

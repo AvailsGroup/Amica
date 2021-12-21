@@ -1,104 +1,83 @@
 <%= stylesheet_link_tag 'profiles', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag 'profiles_show', media: 'all', 'data-turbolinks-track': 'reload' %>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container">
+<div class="main container">
   <div class="row">
     <div class="col-md-12 text-center" style="z-index: 1;">
       <div class="panel panel-default">
         <div class="userprofile social">
           <div class="userdata">
             <div class="userpic">
-              <% if @user.image.nil? %>
-                <%= image_tag "default_icon" , :size => '100x100', class: "userpicimg icon flex-shrink-0 show-icon"%>
-              <% else %>
-                <%= image_tag "/user_images/#{@user.image}",style: "width: 100px;height:100px;",class:"userpicimg icon bd-placeholder-img flex-shrink-0 show-icon"%>
-              <% end %>
+                <%= image_tag @user.decorate.image, :size => '100x100', class: "userpicimg icon flex-shrink-0 question-icon" %>
             </div>
             <div class="names">
               <h2 class="username"><%= @user.name %></h2>
-              <p style="margin-bottom: 0">(<%= @user.nickname %>)</p>
-              <p>@<%=@user.userid%></p>
+              <p style="margin-bottom: 0">(<%= @user.nickname %>)
+                <% if following?(@user.followings_list, @current) && !matchers?(@user,@current) %>
+                  <i class="fas fa-user-plus"></i>
+                <% elsif matchers?(@user,@current) %>
+                    <i class="fas fa-user-friends"></i>
+                <% end %>
+              </p>
+              <p>@<%= @user.userid %></p>
+
             </div>
           </div>
         </div>
+
         <div class="col-md-12 border-top border-bottom">
-          <ul class="nav nav-pills pull-left countlist" role="tablist">
+          <ul class="nav nav-pills float-start countlist" role="tablist">
             <li role="presentation">
-              <h3><%= @user.followings_list.count %><br>
-                <small>Followers</small> </h3>
+              <h3><%= @user.followers_list.size %><br>
+                <small>フォロー</small></h3>
             </li>
             <li role="presentation">
-              <h3><%= @user.followers_list.count %><br>
-                <small>Follow</small> </h3>
+              <h3><%= @user.followings_list.size %><br>
+                <small>フォロワー</small></h3>
             </li>
             <li role="presentation">
               <h3><%= @profile.grade %><br>
-                <small>学科</small> </h3>
+                <small>学科</small></h3>
             </li>
             <li role="presentation">
               <h3><%= @profile.school_class %><br>
-                <small>クラス</small> </h3>
+                <small>クラス</small></h3>
             </li>
             <li role="presentation">
               <h3><%= @profile.number %><br>
-                <small>出席番号</small> </h3>
+                <small>出席番号</small></h3>
             </li>
             <li role="presentation">
               <h3><%= @profile.student_id %><br>
-                <small>学籍番号</small> </h3>
+                <small>学籍番号</small></h3>
             </li>
           </ul>
-          <% if current_user.id != @user.id %>
-            <% unless current_user.following?(@user) %>
-              <div class="actions ">
-                <%= link_to 'フォロー',
-                            profile_relationships_path(@user.userid),
-                            method: :post,
-                            style: "color:#FFF;",
-                            class:"btn btn-primary followbtn"
-                %>
-              </div>
+
+
+          <div class="actions">
+            <% if current_user.id != @user.id %>
+              <% if following?(@following, @user) %>
+                  <%= link_to 'フォロー解除', profile_relationship_path(@user.userid), method: :delete, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
+              <% else %>
+                  <%= link_to 'フォロー', profile_relationships_path(@user.userid), method: :post, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
+              <% end %>
+              <%= link_to 'チャット',chat_path(@user.userid),style: "color:#FFF;",class:"btn btn-primary followbtn"%>
             <% else %>
-              <div class="actions">
-                <%= link_to 'フォロー解除',
-                            profile_relationship_path(@user.userid),
-                            method: :delete,
-                            style: "color:#FFF;",
-                            class:"btn btn-primary followbtn"
-                %>
-              </div>
+              <%= link_to '編集', edit_profile_path, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
             <% end %>
-          <% end %>
-           <% if current_user.id == @user.id %>
-              <div class="actions">
-                <%= link_to '編集',
-                            edit_profile_path,
-                            style: "color:#FFF;",
-                            class:"btn btn-primary followbtn" %>
-              </div>
-          <% end %>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
-
-
   <!-- /.col-md-12 -->
   <div class="row d-flex justify-content-around center-block">
+
     <div class="col-md-3 col-sm-12 w-100">
       <div class="panel panel-default">
         <div class="panel-heading m-3">
           <h3 class="page-header">バッジ</h3>
-          <div class="amica-badge register-badge">
-            <span class="at-badge"><i class="fas fa-smile-wink"></i></span>
-            <div class="register-badge-description"><%= @user.created_at.strftime('%Y/%m/%d') %> Amicaに登録した記念バッジ</div>
-          </div>
-          <% if @user.admin %>
-            <div class="amica-badge admin-badge">
-              <span class="at-badge"><i class="fas fa-crown"></i></span>
-              <div class="admin-badge-description">Amica運営バッジ</div>
-            </div>
-          <% end %>
+          <%= render 'profiles/badge' %>
         </div>
       </div>
     </div>
@@ -127,13 +106,13 @@
         <div class="panel-heading m-3">
           <h3 class="page-header">タグ、趣味</h3>
           <p class="page-subtitle">
-            <% @user.tag_list.each do |t| %>
+            <% @user.tags.pluck(:name).each do |t| %>
               <%= link_to search_tag_path(t) do %>
                 <span>#<%= t %></span>
               <% end %>
             <% end %>
 
-            <% if @user.tag_list.empty? %>
+            <% if @user.tags.pluck(:name).empty? %>
               まだタグを入力していないようです！
             <% end %>
           </p>

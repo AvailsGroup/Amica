@@ -10,89 +10,86 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  * require_tree .
- *= require cropper.min.css
  *= require_self
  */
 
 
-
-html{
+html {
   font-family: 'Kiwi Maru', serif;
 }
 
-body{
+body {
   margin: 0;
 }
 
-#main-nav{
+#main-nav {
+  z-index: 3;
+}
+
+#sub-nav {
+  z-index: 2;
+}
+
+#main-nav, #sub-nav {
+  font-family: 'Rubik', 'M PLUS Rounded 1c', sans-serif;
+  border: rgba(166, 145, 113, 0.2) solid 1px;
+}
+
+#main-nav .dropdown-menu {
   z-index: 9999;
 }
 
-#sub-nav{
-  z-index: 9998;
-}
-
-#main-nav,#sub-nav{
-  background-color: #ffffff;
-  font-family: 'Rubik','M PLUS Rounded 1c', sans-serif;
-  border: rgba(166,145,113,0.2) solid 1px;
-}
-
-#main-nav .dropdown-menu{
-  z-index: 9999;
-}
-
-#main-nav .btn{
+#main-nav .btn {
   border: 0 solid transparent;
-  padding:3px;
+  padding: 3px;
   margin-top: 5px;
   margin-left: 3px;
   margin-bottom: 5px;
 }
 
-#main-nav .btn-primary{
-  background-color: rgba(29,144,190,0.8);
-  border-color: rgba(29,144,190,0.8);
+#main-nav .btn-primary {
+  background-color: rgba(29, 144, 190, 0.8);
+  border-color: rgba(29, 144, 190, 0.8);
 }
 
-#main-nav svg{
+#main-nav svg {
   margin-right: 3px;
 }
 
-.notice{
+.notice {
   font-family: 'Kiwi Maru', serif;
 }
 
-.box{
+.box {
   display: inline-block;
 }
 
-.amica_icon{
+.amica_icon {
   width: 50px;
 }
 
-.icons{
+.icons {
   font-size: 1rem;
   margin-left: 7px;
 }
 
-.link{
+.link {
   color: #212529;
   text-decoration: none;
 }
 
-.link:hover{
+.link:hover {
   color: #FFFFFF;
 }
 
-.default_icon{
+.default_icon {
   background-color: #FFFFFF;
   border: solid 2px;
   border-radius: 30%;
   width: 45px;
 }
 
-.user_icon{
+.user_icon {
   background: #FFF;
   border: solid 2px;
   border-radius: 30%;
@@ -101,20 +98,31 @@ body{
   margin-left: 7px;
 }
 
-.name{
+.name {
   font-size: 1.1rem;
 }
 
-.user_id{
+.user_id {
   font-size: 0.9rem;
 }
 
-table{
+table {
   margin-left: 7px;
 }
 
-main{
+main {
   z-index: 1;
+  min-height: 100vh;
 }
 
+.bg-gray {
+  background-color: #666666
+}
 
+.modal-open {
+  padding-right: 0 !important;
+}
+
+.modal {
+  padding-right: 0 !important;
+}

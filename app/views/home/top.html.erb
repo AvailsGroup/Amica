@@ -1,5 +1,7 @@
 <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag 'top', media: 'all', 'data-turbolinks-track': 'reload' %>
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
 <%= javascript_pack_tag 'home/index' %>
 
 
@@ -33,6 +35,7 @@
   <p>Amicaはあなたの生活に<u>新たな出会いをプラス</u>する</p>
   <p><u>コミュニケーションツール</u>です</p>
 </div>
+
 <p class="lead buttons" style="opacity:0">
   <%= link_to "新規登録",
               new_user_registration_path,
@@ -44,7 +47,6 @@
               class: "btn btn-lg btn-secondary fw-bold border-white bg-blue",
               style: "width: 150px;color:#FFF"
   %>
-
 </p>
 
 

@@ -1,0 +1,9 @@
+<div class="container">
+  <% if @community.user == @user %>
+    <%= link_to member_link_text(@page), member_link(@page,@community) %>
+  <% end %>
+  <h2 class="text-center"><%= @community.name %> <%= member_text(@page) %></h2>
+  <%= render partial: 'communities/user', collection: @member, as: :user,locals: { community:@community, fixed_current_user:@user, page:@page } %>
+
+  <%= render "layouts/pagenate", pagenate: @member %>
+</div>

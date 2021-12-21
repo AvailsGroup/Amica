@@ -1,0 +1,19 @@
+<%= stylesheet_link_tag 'timelines', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'timeline/main', 'data-turbolinks-track': 'reload' %>
+
+<%= render 'timelines/nav' %>
+<div style="text-align: center"><%= flash[:notice] %></div>
+<div class="container light">
+  <div class="my-5 p-3 bg-white rounded shadow-sm ">
+    <%= render "timelines/post", post: @post, post_model: @posts%>
+    <div class="mt-3 py-3 bg-white ">
+      <%= render 'comments/form', post: @post, comment: @comment %>
+    </div>
+  </div>
+  <div id="comments_area">
+    <%= render 'comments/index', comments: @comments, count:@count %>
+  </div>
+  <%= render "layouts/pagenate", pagenate: @comments %>
+</div>
+
+

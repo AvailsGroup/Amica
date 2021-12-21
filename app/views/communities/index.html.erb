@@ -1,17 +1,21 @@
-<%= stylesheet_link_tag 'communities', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_link_tag 'communities' %>
 <style>
-    .flash{
+    .flash {
         display: none;
     }
 </style>
 
 <div class="nav-scroller bg-white shadow-sm">
   <nav class="nav nav-underline" aria-label="Secondary navigation">
-    <%= link_to "最新", communities_path,class: "nav-link"%>
-    <%= link_to "おすすめ", community_pickup_path,class: "nav-link",'aria-current': "page", remote: true %>
-    <%= link_to community_joined_path,class: "nav-link",'aria-current': "page", remote: true do%>
-      参加中
-      <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= @join %></span>
+    <% page_active = "nav-link text-dark" %>
+    <% if defined?(@page) %>
+      <% not_active_class = "nav-link" %>
+      <%= link_to "最新", communities_path, "aria-current": "page", class: @page == "index" ? page_active : not_active_class %>
+      <%= link_to "おすすめ", pickup_communities_path, "aria-current": "page", class: @page == "pickup" ? page_active : not_active_class %>
+      <%= link_to joined_communities_path, "aria-current": "page", class: @page == "joined" ? page_active : not_active_class do %>
+        参加中
+        <span class="badge bg-light text-dark rounded-pill align-text-bottom"><%= @user.community_member.size %></span>
+      <% end %>
     <% end %>
   </nav>
 </div>
@@ -22,30 +26,25 @@
 <div class="container">
   <div class="p-3 my-3 text-dark bg-blue rounded shadow-sm">
     <div class="lh-1">
-      <%= form_with url: profile_search_path,:method => 'get',class: "container-fluid" do |f| %>
+      <%= form_with url: search_community_path, class: "container-fluid" do |f| %>
         <div class="input-group">
           <div class="d-flex flex-column w-100">
             <div class="p-2 bd-highlight">
-              <%= f.text_field :name, class: "form-control w-100",placeholder: "コミュニティを検索",aria: {label:"Username",describedby: "basic-addon1"}%>
+              <%= f.text_field :name, class: "form-control w-100", placeholder: "コミュニティを検索", aria: { label: "Username", describedby: "basic-addon1" } %>
             </div>
             <div class="p-2 bd-highlight text-center">
               <p>or</p>
-              <%=link_to "コミュニティ新規作成",new_community_path,class:"btn btn-primary"%>
+              <%= link_to "コミュニティ新規作成", new_community_path, class: "btn btn-primary" %>
             </div>
           </div>
-        <% end %>
+      <% end %>
       </div>
     </div>
   </div>
 
-  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2
-              row-cols-lg-2  row-cols-xl-3 row-cols-xxl-4
-              g-4　g-lg-4　p-3　my-3" id="community">
-
-     <% @community.each do |community| %>
-      <div id="communities">
-        <%= render "communities/community",community:community,user:@user,member:@member %>
-      </div>
-    <% end %>
+  <div class="row row-cols-xs-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-3">
+    <%= render partial: 'communities/community', collection: @community, as: :community %>
   </div>
+
+  <%= render "layouts/pagenate", pagenate: @community %>
 </div>

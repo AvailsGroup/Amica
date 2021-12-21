@@ -1,0 +1,2 @@
+class CommunitiesChatController < ApplicationController
+end
