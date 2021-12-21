@@ -5,7 +5,7 @@ class LikesController < ApplicationController
     Like.create(user_id: current_user.id, post_id: params[:timeline_id])
     @like = Post.find_by(id: params[:timeline_id])
     unless @like.user_id == current_user.id
-      @notification = Notification.new(visitor_id: current_user.id, visited_id: @like.user_id, post_id: params[:timeline_id],action: "like", checked: false)
+      @notification = Notification.new(visitor_id: current_user.id, visited_id: @like.user_id, post_id: params[:timeline_id],action: "like")
       @notification.save
     end
     @posts = Post.includes(:user, :likes, :comments)

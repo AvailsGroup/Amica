@@ -8,3 +8,6 @@
   <% end %>
 <% end %>
 <span style="color:lightseagreen">にコメントしました</span>
+<div class="p-3 my-3 text-dark bg-blue rounded shadow-sm" style="margin-left: 40px">
+  <span><%= notification.comment.post.content[0..25] %><%= "..." if notification.comment.post.content.length > 25 %></span>
+</div>
