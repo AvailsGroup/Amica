@@ -54,7 +54,8 @@
                 </p>
               </div>
             </div>
-            <%= f.text_area :message, placeholder: "通報内容を記載してください。", id: "message", class: "form-control", required: true%><br>
+            <%= f.text_area :message, placeholder: "通報内容を記載してください。", id: "message", class: "form-control", required: true %>
+            <br>
             <div class="modal-footer">
               <%= f.submit "送信", class: "btn btn-lg btn-danger fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
               <%= f.submit "クリア", type: :reset, class: "btn btn-lg btn-secondary fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
@@ -108,12 +109,21 @@
         <% end %>
       </span>
         </div>
-          <div class="d-flex">
+        <div class="d-flex">
           <% if post.user == current_user %>
             <%= button_to(timeline_path(post.id), class: "send bg-white", method: :delete, data: { disable_with: "削除中..." }) do %>
               <i class="far fa-trash-alt"></i>
             <% end %>
           <% else %>
+            <% if mute?(post, current_user) %>
+              <%= button_to(timeline_mute_path(post.id), class: "send bg-white", style:"padding-right:0px", method: :delete, data: { disable_with: '<i class="fas fa-volume-mute" style="color: red"></i>'}) do %>
+                <i class="fas fa-volume-up"></i>
+              <% end %>
+            <% else %>
+              <%= button_to(timeline_mute_index_path(post.id), class: "send bg-white", style:"padding-right:0px", method: :post, data: { disable_with: '<i class="fas fa-volume-up"></i>' }) do %>
+                <i class="fas fa-volume-mute" style="color: red"></i>
+              <% end %>
+            <% end %>
             <span class="ms-2">
             <label>
               <button type="button" class="btn btn-primary" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal<%= post.id %>" data-bs-whatever=<%= post.id %>></button>

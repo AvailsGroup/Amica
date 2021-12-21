@@ -6,6 +6,7 @@ class TimelinesController < ApplicationController
   helper_method :liked_by?
   helper_method :matchers
   helper_method :matchers?
+  helper_method :mute?
 
   def index
     view_parameter
@@ -18,7 +19,7 @@ class TimelinesController < ApplicationController
     view_parameter
     @posts = @posts.select { |p| following?(@user.followings_list, p.user) || p.user == current_user }
     @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(30)
-    redirect  'follow'
+    redirect 'follow'
   end
 
   def latest
@@ -78,7 +79,7 @@ class TimelinesController < ApplicationController
   private
 
   def view_parameter
-    @post = Post.includes(:user, :likes, :comments)
+    @post = Post.includes(:user, :likes, :comments, :mutes)
     @posts = @post.order(created_at: :desc)
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
