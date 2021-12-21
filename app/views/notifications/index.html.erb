@@ -1,6 +1,8 @@
 <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
-<% if notifications.exists? %>
-  <%= render notifications %>
-<% else %>
-  <p>通知はありません</p>
-<% end %>
+<div class="container">
+  <% if notifications.exists? %>
+    <%= render notifications %>
+  <% else %>
+    <p class="text-center">通知はありません</p>
+  <% end %>
+</div>
