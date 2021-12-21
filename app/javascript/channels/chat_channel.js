@@ -12,6 +12,8 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
   received: function(data) {
     const user_id = document.getElementById("user_id").value
     const room_id = document.getElementById("room_id").value
+    let partneruserid = document.getElementById("partner_userid").value
+    let partnerimage = document.getElementById("partner_image").value
     if (data.room_id === Number(room_id)){
       if (data.user_id === Number(user_id)) {
         $('#append').append('<div class="row message-body" style="white-space: pre;">'+
@@ -31,7 +33,17 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
         )
         bottom_scroll();
       } else {
-        $('#append').append(
+        console.log(partnerimage)
+        if (partnerimage === ""){
+          partnerimage = "/assets/default_icon.png"
+        }else {
+          partnerimage = "/user_images/"+partnerimage
+        }
+        console.log(partnerimage)
+      $('#append').append(
+                          '<a class="userLink" href="/profiles/'+ partneruserid + '">'+
+                          '  <img class="icon bd-placeholder-img flex-shrink-0 me-2 mt-2 " width="40px" height="40px" src='+ partnerimage+'>' +
+                          '</a>'+
                             '<div class="row message-body" style="white-space: pre;">'+
                               '<div class="col-sm-12 message-main-receiver" style=" position:relative;">'+
                                 '<div class="receiver my-1 p-1 mt-2" style="max-width: 40%;">' +

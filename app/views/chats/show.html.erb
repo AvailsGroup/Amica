@@ -42,7 +42,8 @@
            </label>
           <input type="hidden" id="room_id" value= <%= @room.id %> data-behavior="chat_speaker">
           <input type="hidden" id="user_id" value= <%= current_user.id %> data-behavior="chat_speaker">
-           <input type="hidden" id="partner_image" value= <%= @user.image %> data-behavior="chat_speaker">
+           <input type="hidden" id="partner_userid" value= <%= @user.userid %> >
+           <input type="hidden" id="partner_image" value= <%= @user.image %> >
           <%= text_area_tag  :content, nil, class:"form-control", placeholder:"message", data: {behavior: "chat_speaker"},id:"content" %>
           <label><!-- Button trigger modal -->
              <button id="submit_button" style="display: none" type="submit" class="btn btn-primary form-control" ></button>
