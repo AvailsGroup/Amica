@@ -1,4 +1,3 @@
-<% pp notification %>
 <% if notification.comment.post.user.id == visited.id %>
   <%= link_to timeline_path(notification.comment.post.id), class: "text-decoration-none" do %>
     <%= "あなたの投稿" %>

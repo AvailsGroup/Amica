@@ -100,11 +100,12 @@ class User < ApplicationRecord
   has_many :rooms
   has_many :messages
 
-
   # 通知を送るユーザー
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   # 通知をうけるユーザー
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+
+  has_many :mutes
 
   def password_required?
     super && confirmed?

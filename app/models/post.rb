@@ -14,7 +14,7 @@ class Post < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
-  has_many :reports
+  has_many :mutes
 
   mount_uploader :image, ImgUploader
 
