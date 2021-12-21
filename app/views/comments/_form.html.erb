@@ -9,7 +9,7 @@
     }
 </style>
 
-<%= form_with model: comment, url: timeline_comments_path(post.id), local: false do |f| %>
+<%= form_with model: comment, url: timeline_comments_path(post.id) do |f| %>
   <div class="FlexTextarea form-group mb-2">
     <div class="FlexTextarea__dummy" aria-hidden="true"></div>
     <%= f.text_area :comment, placeholder: "面白い投稿にコメントしてみよう！", maxlength: "280", id: "FlexTextarea", class: "FlexTextarea__textarea form-control" %>

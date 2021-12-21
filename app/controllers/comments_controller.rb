@@ -2,10 +2,13 @@ class CommentsController < ApplicationController
   def create
     @user = User.all
     @post = Post.find(params[:timeline_id])
-
-    @comment = @post.comments.new(comment_params)
+    @comments = @post.comments.includes(:user)
+    @count = @comments.size
+    @comments = @comments.order(created_at: :desc).page(params[:page]).per(10)
+    @comment = @comments.new(comment_params)
     @comment.user_id = current_user.id
     flash.now[:notice] = @comment.save ? "コメントの投稿に成功しました。" : "コメントの投稿に失敗しました。"
+    redirect_to(timeline_path(@post.id))
     @report = Report.new
     render "comments/index"
   end
@@ -17,6 +20,7 @@ class CommentsController < ApplicationController
 
     @user = User.all
     @post = Post.find(params[:timeline_id])
+    redirect_to(timeline_path(@post.id))
     @report = Report.new
     render "comments/index"
   end
