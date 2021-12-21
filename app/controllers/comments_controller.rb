@@ -2,25 +2,23 @@ class CommentsController < ApplicationController
   def create
     @user = User.all
     @post = Post.find(params[:timeline_id])
-    if params[:comment][:comment].nil? || params[:comment][:comment] == ''
-      return
-    end
-    @comment = @post.comments.new(comment_params)
+    @comments = @post.comments.includes(:user)
+    @count = @comments.size
+    @comments = @comments.order(created_at: :desc).page(params[:page]).per(10)
+    @comment = @comments.new(comment_params)
     @comment.user_id = current_user.id
-    flash.now[:notice] = @comment.save ? 'コメントの投稿に成功しました。' : 'コメントの投稿に失敗しました。'
-    @count = @post.comments.size
-    render 'comments/index'
+    flash.now[:notice] = @comment.save ? "コメントの投稿に成功しました。" : "コメントの投稿に失敗しました。"
+    redirect_to(timeline_path(@post.id))
   end
 
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    flash.now[:notice] = 'コメントを削除しました。'
+    flash.now[:notice] = "コメントを削除しました。"
 
     @user = User.all
     @post = Post.find(params[:timeline_id])
-    @count = @post.comments.size
-    render 'comments/index'
+    redirect_to(timeline_path(@post.id))
   end
 
   private
