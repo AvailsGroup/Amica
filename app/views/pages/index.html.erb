@@ -12,7 +12,7 @@
         <div class="page-header" style="text-align: center">
           <h1>友だち</h1>
         </div>
-        <% if @favorite_users==0 && @mates.size == 0 %>
+        <% if @favorite_users.size == 0 && @mates.size == 0 %>
           <div class="text-center " style="font-size: 18px; margin-top: 60px;">
             <%= link_to "あなたに合った友だちを探してみましょう！", profiles_path %>
           </div>

@@ -65,8 +65,6 @@ class User < ApplicationRecord
             length: { minimum: 1, maximum: 20 },
             allow_nil: true
 
-  has_many :report
-
   has_one :profile
   accepts_nested_attributes_for :profile, update_only: true
 

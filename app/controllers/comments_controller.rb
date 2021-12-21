@@ -22,6 +22,8 @@ class CommentsController < ApplicationController
     end
 
     redirect_to(timeline_path(@post.id))
+    @report = Report.new
+    render "comments/index"
   end
 
   def destroy
@@ -35,6 +37,8 @@ class CommentsController < ApplicationController
       Notification.find_by(visitor_id: current_user.id, visited_id: @post.user_id, comment_id: @comment.id, action: 'comment', checked: false).destroy
     end
     redirect_to(timeline_path(@post.id))
+    @report = Report.new
+    render "comments/index"
   end
 
   private

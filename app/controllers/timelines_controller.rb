@@ -9,7 +9,6 @@ class TimelinesController < ApplicationController
 
   def index
     view_parameter
-    @report = Report.new
     @posts = @posts.select { |p| matchers?(@user, p.user) || p.user == current_user }
     @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(30)
     redirect 'friends'
@@ -57,10 +56,6 @@ class TimelinesController < ApplicationController
     redirect_to(timelines_path)
   end
 
-  def edit
-    @post = Post.find(params[:id])
-  end
-
   def update
     @post = Post.find(params[:id])
     @post.update(timeline_params)
@@ -88,6 +83,7 @@ class TimelinesController < ApplicationController
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
     @create = Post.new
+    @report = Report.new
   end
 
   def post_params
