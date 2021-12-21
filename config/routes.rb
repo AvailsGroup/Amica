@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get 'block/create'
-  get 'block/destroy'
-  # devise--------------
+  #devise--------------
   get 'users/controller'
 
   devise_for :users, controllers: {
@@ -27,6 +25,7 @@ Rails.application.routes.draw do
   resources :communities do
     resources :manage, only: %i[create destroy]
     resources :communities_security, only: %i[create destroy]
+    resources :reports,only:[:create]
     get :members
     delete :kick
     put :change
@@ -42,6 +41,7 @@ Rails.application.routes.draw do
   resources :timelines do
     resources :likes, only: %i[create destroy]
     resources :comments, only: %i[create destroy]
+    resources :reports,only:[:new,:create]
     collection do
       get :search
       get :follow

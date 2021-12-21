@@ -65,6 +65,7 @@ class User < ApplicationRecord
             length: { minimum: 1, maximum: 20 },
             allow_nil: true
 
+  has_many :report
 
   has_one :profile
   accepts_nested_attributes_for :profile, update_only: true
@@ -91,6 +92,15 @@ class User < ApplicationRecord
 
   has_many :communities, dependent: :destroy
   has_many :community_member, dependent: :destroy
+
+  has_many :reports
+
+  has_many :passive_reports, class_name: "Report", foreign_key: "reported_user_id"
+  has_many :reported_users, through: :passive_reports, source: :reported_user
+
+  has_many :rooms
+  has_many :messages
+
 
   def password_required?
     super && confirmed?
