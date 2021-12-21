@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   belongs_to :user
 
   has_many :notifications, dependent: :destroy
+  has_many :report
   has_many :comments, dependent: :destroy
   has_many :likes
 
@@ -12,6 +13,8 @@ class Post < ApplicationRecord
   scope :search_content_for, ->(query) { where('content like ?', "%#{query}%") }
 
   has_many :comments, dependent: :destroy
+
+  has_many :reports
 
   mount_uploader :image, ImgUploader
 

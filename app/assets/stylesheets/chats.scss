@@ -1,3 +1,109 @@
 // Place all the styles related to the chats controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#menuModal,#imageModal{
+  z-index: 10000;
+}
+
+footer{
+  display: none;
+}
+
+.receiver {
+  float: left;
+  width: auto !important;
+  padding: 4px 10px 7px !important;
+  border-radius: 10px 10px 10px 0;
+  background: #ffffff;
+  font-size: 16px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+  word-wrap: break-word;
+  border: 1px solid #C6C6C6;
+}
+
+.sender {
+  float: right;
+  width: auto !important;
+  background: #ffbf00;
+  border-radius: 10px 10px 0 10px;
+  padding: 4px 10px 7px !important;
+  font-size: 16px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+  word-wrap: break-word;
+}
+
+.clear{
+  clear:both;
+}
+
+.reply {
+  position: fixed;
+  bottom: 0;
+  left:0;
+  height: auto;
+  width: 100%;
+  background-color: #f5f1ee;
+  padding: 10px 5px 10px 5px !important;
+  margin: 0 !important;
+}
+
+.chat_inside{
+  color: #6c757d;
+  width: auto !important;
+  padding: 4px 10px 0px !important;
+  border-radius: 10px;
+  background: #ffffff;
+  font-size: 12px;
+  word-wrap: break-word;
+  border: 1px solid #C6C6C6;
+}
+
+.userinfo{
+  position: fixed;
+  top: 10%;
+  left:0;
+}
+.modal-icons{
+  color: #6c757d;
+}
+
+.modal-item{
+  width: 50%;
+}
+
+#content{
+  height: 38px;
+  line-height: 20px;
+  resize: none;
+}
+
+.chat_heading{
+  margin-left: 3%;
+  position: relative;
+  padding: 0.6em;
+  background: #e0edff;
+  display: inline-block;
+}
+
+.chat_heading:after {
+  position: absolute;
+  content: '';
+  top: 100%;
+  left: 30%;
+  border: 15px solid transparent;
+  border-top: 15px solid #e0edff;
+  width: 0;
+  height: 0;
+}
+
+.date {
+  text-align:center;
+  width: auto !important;
+  padding: 4px 10px 7px !important;
+  border-radius: 10px 10px 10px 10px;
+  background: #ffffff;
+  font-size: 16px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+  border: 1px solid #C6C6C6;
+}

@@ -1,12 +1,13 @@
 class CommentsController < ApplicationController
-  
+
   def create
     @user = User.all
     @post = Post.find(params[:timeline_id])
-
-    @comment = @post.comments.new(comment_params)
+    @comments = @post.comments.includes(:user)
+    @count = @comments.size
+    @comments = @comments.order(created_at: :desc).page(params[:page]).per(10)
+    @comment = @comments.new(comment_params)
     @comment.user_id = current_user.id
-    flash[:notice] = @comment.save ? 'コメントの投稿に成功しました。' : 'コメントの投稿に失敗しました。'
     users = [@post.user]
     @notification = Notification.create(visitor_id: current_user.id, visited_id: users[0].id, comment_id: @comment.id, action: 'comment')
     @post.comments.each do |c|
@@ -16,7 +17,8 @@ class CommentsController < ApplicationController
         @notification = Notification.create(visitor_id: current_user.id, visited_id: user.id, comment_id: @comment.id, action: 'comment')
       end
     end
-    render 'comments/index'
+    flash.now[:notice] = @comment.save ? "コメントの投稿に成功しました。" : "コメントの投稿に失敗しました。"
+    redirect_to(timeline_path(@post.id))
   end
 
   def destroy
@@ -29,7 +31,7 @@ class CommentsController < ApplicationController
     if Notification.exists?(visitor_id: current_user.id, visited_id: @post.user_id, comment_id: @comment.id, action: 'comment', checked: false)
       Notification.find_by(visitor_id: current_user.id, visited_id: @post.user_id, comment_id: @comment.id, action: 'comment', checked: false).destroy
     end
-    render 'comments/index'
+    redirect_to(timeline_path(@post.id))
   end
 
   private

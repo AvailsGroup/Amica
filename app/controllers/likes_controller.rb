@@ -11,7 +11,7 @@ class LikesController < ApplicationController
     @posts = Post.includes(:user, :likes, :comments)
     @post = @posts.find_by(id: params[:timeline_id])
     @user = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
-    #redirect_to timelines_path
+    @report = Report.new
   end
 
   def destroy
@@ -23,6 +23,6 @@ class LikesController < ApplicationController
     end
     @post = @posts.find_by(id: params[:timeline_id])
     @user = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
-    #redirect_to timelines_path
+    @report = Report.new
   end
 end

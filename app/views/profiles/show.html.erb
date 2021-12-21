@@ -52,6 +52,7 @@
             </li>
           </ul>
 
+
           <div class="actions">
             <% if current_user.id != @user.id %>
               <% if following?(@following, @user) %>
@@ -59,6 +60,7 @@
               <% else %>
                   <%= link_to 'フォロー', profile_relationships_path(@user.userid), method: :post, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
               <% end %>
+              <%= link_to 'チャット',chat_path(@user.userid),style: "color:#FFF;",class:"btn btn-primary followbtn"%>
             <% else %>
               <%= link_to '編集', edit_profile_path, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
             <% end %>
