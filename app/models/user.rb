@@ -69,7 +69,7 @@ class User < ApplicationRecord
   has_one :profile
   accepts_nested_attributes_for :profile, update_only: true
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_many :likes
 
   has_many :community_securities
@@ -80,7 +80,6 @@ class User < ApplicationRecord
 
   has_one :achievement, dependent: :destroy
 
-  # アソシエーションの定義
   # フォローしている側のユーザー (active relationship)
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :active_relationships, source: :followed
@@ -92,22 +91,10 @@ class User < ApplicationRecord
   has_many :communities, dependent: :destroy
   has_many :community_member, dependent: :destroy
 
-  # 通知するユーザー（いいね、コメント、フォローする側）
-
-  # 通知をうけるユーザー
+  # 通知を送るユーザー
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  # 通知をうけるユーザー
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
-
-  def create_notification_follow!(current_user)
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
-    if temp.blank?
-      notification = current_user.active_notifications.new(
-        visited_id: id,
-        action: 'follow'
-      )
-      notification.save if notification.valid?
-    end
-  end
 
   def password_required?
     super && confirmed?
@@ -167,11 +154,6 @@ class User < ApplicationRecord
   def liked_by?(post_id)
     likes.any? { |p| p.post_id == post_id }
   end
-
-  has_many :posts, dependent: :destroy
-  has_many :comments, dependent: :destroy
-
-  before_create :build_default_profile
 
   private
 

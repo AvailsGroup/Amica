@@ -1,54 +1,16 @@
-<% visitor = notification.visitor %>
-<% visited = notification.visited %>
-<div class="p-3 my-3 text-dark bg-blue rounded shadow-sm">
-  <div class="form-inline">
-
-    <%= link_to profile_path(visitor.userid), class: "text-decoration-none" do %>
-      <%= image_tag visitor.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "30px", height: "30px" %>
-      <strong>
-        <%= visitor.name %>
-      </strong>
-    <% end %>
-    <%= 'さんが' %>
-    <% case notification.action %>
-    <% when 'follow' then %>
-      <strong style="color:lightseagreen">
-        <%= "あなたをフォローしました" %>
-      </strong>
-      <hr style="color: #4b5155">
-    <% when 'like' then %>
-      <strong style="color:lightseagreen">
-        <%= link_to timeline_path(notification.post_id), class: "text-decoration-none" do %>
-          <%= "あなたの投稿" %>
-        <% end %>
-        <%= "にいいねしました" %>
-      </strong>
-    <% when 'comment' then %>
-      <% if notification.id == visited.id %>
-        <%= link_to timeline_path(notification.post_id), class: "text-decoration-none" do %>
-          <%= "あなたの投稿" %>
-        <% end %>
-      <% else %>
-       <span>
-         <%= link_to timelines_path(notification.post_id) do %>
-           <%= image_tag visited.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "30px", height: "30px" %>
-         <% end %>
-       </span>
-       <strong style="color:lightseagreen">
-         <%= visited.name %>
-         <%= 'さんの投稿' %>
-         <%= "にコメントしました" %>
-       </strong>
-
-       <p class="text-muted mb-0">
-          <%= @comments.find_by(id: notification.comment_id).comment %>
-        </p>
-        <div class="small text-muted text-right">
-          <%= time_ago_in_words(notification.created_at).upcase %>
-        </div>
-
+<div class="p-3 my-3 text-dark bg-blue rounded shadow-sm" style="<%= "background-color: rgba(29,144,190,0.1)" if new_notification.include?(notification.id) %>">
+  <div class="d-flex justify-content-between">
+    <div class="form-inline">
+      <%= link_to profile_path(notification.visitor.userid), class: "text-decoration-none" do %>
+        <%= image_tag notification.visitor.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "30px", height: "30px" %>
+        <span><%= icon(notification.action).html_safe %></span>
+        <strong><%= notification.visitor.name %></strong>
       <% end %>
-    <% else %>
-    <% end %>
+      <span style="color:lightseagreen"><%= 'さんが' %></span>
+      <%= render "notifications/#{notification.action}", notification: notification, visited: notification.visited, visitor: notification.visitor %>
+    </div>
+    <div class="small">
+      <span class="text-gray" style="text-align: right"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(notification.created_at) %></span>
+    </div>
   </div>
 </div>

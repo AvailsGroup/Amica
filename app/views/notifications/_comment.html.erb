@@ -1,0 +1,10 @@
+<% if notification.comment.post.user.id == visited.id %>
+  <%= link_to timeline_path(notification.comment.post.id), class: "text-decoration-none" do %>
+    <%= "あなたの投稿" %>
+  <% end %>
+<% else %>
+  <%= link_to timeline_path(notification.comment.post.id), class: "text-decoration-none" do %>
+    <%= "#{visited.name}さんの投稿" %>
+  <% end %>
+<% end %>
+<span style="color:lightseagreen">にコメントしました</span>

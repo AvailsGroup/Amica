@@ -1,7 +1,15 @@
-<% notifications = @notifications.where.not(visitor_id: current_user.id) %>
+<style>
+  .flash{
+      display: none;
+  }
+</style>
+
+<%= render "notifications/nav", notifications:@notifications %>
+
 <div class="container">
-  <% if notifications.exists? %>
-    <%= render notifications %>
+  <% if @notification.exists? %>
+    <%= render partial: "notifications/notification", collection: @pagenate, as: :notification, locals: {new_notification: @new_notification} %>
+    <%= render "layouts/pagenate", pagenate:@pagenate %>
   <% else %>
     <p class="text-center">通知はありません</p>
   <% end %>
