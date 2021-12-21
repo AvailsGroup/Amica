@@ -15,15 +15,13 @@ class CommentsController < ApplicationController
     @notification = Notification.create(visitor_id: current_user.id, visited_id: users[0].id, comment_id: @comment.id, action: 'comment')
     @post.comments.each do |c|
       user = c.user
-      if user != current_user && !users.include?(user)
+      if user != current_user && !users.include?(user) && !mute?(@post, user)
         users.push(user)
         @notification = Notification.create(visitor_id: current_user.id, visited_id: user.id, comment_id: @comment.id, action: 'comment')
       end
     end
-
-    redirect_to(timeline_path(@post.id))
     @report = Report.new
-    render "comments/index"
+    redirect_to(timeline_path(@post.id))
   end
 
   def destroy
@@ -36,9 +34,8 @@ class CommentsController < ApplicationController
     if Notification.exists?(visitor_id: current_user.id, visited_id: @post.user_id, comment_id: @comment.id, action: 'comment', checked: false)
       Notification.find_by(visitor_id: current_user.id, visited_id: @post.user_id, comment_id: @comment.id, action: 'comment', checked: false).destroy
     end
-    redirect_to(timeline_path(@post.id))
     @report = Report.new
-    render "comments/index"
+    redirect_to(timeline_path(@post.id))
   end
 
   private

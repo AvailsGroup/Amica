@@ -23,7 +23,8 @@
               </p>
             </div>
           </div>
-          <%= f.text_area :message, placeholder: "通報内容を記載してください。", id: "message", class: "form-control", required: true %><br>
+          <%= f.text_area :message, placeholder: "通報内容を記載してください。", id: "message", class: "form-control", required: true %>
+          <br>
           <div class="modal-footer">
             <%= f.submit "送信", class: "btn btn-lg btn-danger fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
             <%= f.submit "クリア", type: :reset, class: "btn btn-lg btn-secondary fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
@@ -38,9 +39,8 @@
 <div class="my-3 p-3 bg-white rounded shadow-sm">
   <div class="d-flex text-muted">
     <%= link_to profile_path(comment.user), style: "color:black" do %>
-        <%= image_tag comment.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+      <%= image_tag comment.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
     <% end %>
-<
     <p class="pb-3 mb-0 lh-sm w-100">
       <strong class="text-dark" style="font-size:20px;margin: 0"><%= comment.user.nickname %></strong>
       <span class="text-gray small" style="margin: 0">@<%= comment.user.userid %></span>
@@ -55,12 +55,13 @@
       <%= link_to timeline_comment_path(comment.post.id, comment.id), method: :delete, remote: true do %>
         <i class="far fa-trash-alt"></i>
       <% end %>
+    <% else %>
+      <span class="ms-2">
+        <label>
+          <button type="button" class="btn btn-primary" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal2<%= comment.id %>" data-bs-whatever=<%= comment.id %>></button>
+          <i class="fas fa-bullhorn" style="color: red"></i>
+        </label>
+      </span>
     <% end %>
-    <span class="ms-2">
-      <label>
-        <button type="button" class="btn btn-primary" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal2<%= comment.id %>" data-bs-whatever=<%= comment.id %>></button>
-        <i class="fas fa-bullhorn" style="color: red"></i>
-      </label>
-    </span>
   </div>
 </div>

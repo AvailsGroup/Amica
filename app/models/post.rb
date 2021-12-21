@@ -17,5 +17,4 @@ class Post < ApplicationRecord
   has_many :mutes
 
   mount_uploader :image, ImgUploader
-
 end
