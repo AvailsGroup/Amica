@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_19_070501) do
+ActiveRecord::Schema.define(version: 2021_12_19_121743) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -129,10 +129,12 @@ ActiveRecord::Schema.define(version: 2021_12_19_070501) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.text "content", null: false
+    t.integer "room_id"
+    t.integer "user_id"
+    t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -165,6 +167,24 @@ ActiveRecord::Schema.define(version: 2021_12_19_070501) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.integer "reported_user_id"
+    t.integer "user_id"
+    t.string "message"
+    t.integer "post_id"
+    t.integer "comment_id"
+    t.integer "community_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer "started_userid"
+    t.integer "invited_userid"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "taggings", force: :cascade do |t|
