@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   post 'page/user'=>'pages#user'
   post 'page/community'=>'pages#community'
   get 'setting' => 'pages#setting'
+  get 'help' => 'pages#help'
   get 'faq' => 'pages#faq'
 
   #profiles------------
