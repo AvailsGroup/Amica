@@ -23,12 +23,11 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
                                       AutoLink(data.content)+
                                     '</div>' +
                                   '</div>'+
+                                    '<div class="text-gray small sender_time">'+
+                                     '今日 '+data.created_at.slice(11,16)+
+                                    '</div>'+
                                  '</div>'+
                                 '</div>'+
-                                '<div class="clear"></div>'+
-                                  '<span class="small" style="float: right">'+
-                                     '今日 '+data.created_at.slice(11,16)+
-                                  '</span>'+
                                 '<div class="clear"></div>'
         )
         bottom_scroll();
@@ -41,11 +40,11 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
         }
         console.log(partnerimage)
       $('#append').append(
-                          '<a class="userLink" href="/profiles/'+ partneruserid + '">'+
-                          '  <img class="icon bd-placeholder-img flex-shrink-0 me-2 mt-2 " width="40px" height="40px" src='+ partnerimage+'>' +
-                          '</a>'+
                             '<div class="row message-body" style="white-space: pre;">'+
                               '<div class="col-sm-12 message-main-receiver" style=" position:relative;">'+
+                                '<a class="userLink" href="/profiles/'+ partneruserid + '">'+
+                                '  <img class="icon bd-placeholder-img flex-shrink-0 me-2 mt-2" style="float: left" width="40px" height="40px" src='+ partnerimage+'>' +
+                                '</a>'+
                                 '<div class="receiver my-1 p-1 mt-2" style="max-width: 40%;">' +
                                   '<div class="messages container p-1">' +
                                      AutoLink(data.content)+
@@ -74,7 +73,7 @@ window.addEventListener("DOMContentLoaded",function() {
   const content = document.getElementById('content');
   const room_id = document.getElementById('room_id');
   const images = document.getElementById('image_uploader')
-  let send_image = document.getElementById('send_image')
+  const send_image = document.getElementById('send_image')
 
   //ブラウザがスクリーンサイズの50%以下or500px以下の時に相手の名前を消す
   const name = document.getElementById('user_name');
@@ -149,13 +148,12 @@ window.addEventListener("DOMContentLoaded",function() {
     });
   });
   $('#image_submit_button').click('[data-behavior~=chat_speaker]', function () {
-    if ( send_image.value ) {
-      const send_image = send_image.value
-      ChatChannel.speak(send_image, room_id.value);
-      bottom_scroll()
+    if ( send_image.value != null ) {
+      ChatChannel.speak(send_image.value,room_id.value);
       send_image.value = '';
       $($textarea).height(0);
-      return content.preventDefault();
+      $('#imageModal').modal('hide');
+      bottom_scroll()
     }
   });
 });

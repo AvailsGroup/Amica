@@ -22,7 +22,6 @@ footer{
 .receiver {
   float: left;
   width: auto !important;
-  margin-left: 40px;
   padding: 4px 10px 7px !important;
   border-radius: 0 10px 10px 10px;
   background: #ffffff;
@@ -125,5 +124,14 @@ footer{
 .time{
   position:absolute;
   bottom:0;
+  margin: 5px;
+}
+
+.sender_time{
+  display: flex;
+  width: auto;
+  height: 85%;
+  float: right;
+  align-items: flex-end;
   margin: 5px;
 }

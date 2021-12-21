@@ -11,14 +11,14 @@ class ChatChannel < ApplicationCable::Channel
   def speak(data)
     @room_id = data['room_id']
     @user_id = current_user.id
-    if !data['send_image'].nil?
+    if data['message'][0..21] == 'data:image/jpeg;base64'
       unless File.directory?("#{Rails.root}/public/chat_images/room#{@room_id}")
         Dir.mkdir("#{Rails.root}/public/chat_images/room#{@room_id}")
       end
       rand = rand(1_000_000..9_999_999)
-      @image_data = "#{@room_id}#{rand}.jpg"
+      @image_data = "#{@user_id}#{rand}.jpg"
       File.open("public/chat_images/room#{@room_id}/#{@image_data}", 'wb') do |f|
-        f.write(Base64.decode64(data['send_image']['data:image/jpeg;base64,'.length..-1]))
+        f.write(Base64.decode64(data['message']['data:image/jpeg;base64,'.length..-1]))
       end
       @content = '画像を投稿しました。'
     else
