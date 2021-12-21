@@ -6,8 +6,11 @@ class CommentsController < ApplicationController
     @comments = @post.comments.includes(:user)
     @count = @comments.size
     @comments = @comments.order(created_at: :desc).page(params[:page]).per(10)
+
     @comment = @comments.new(comment_params)
     @comment.user_id = current_user.id
+    flash.now[:notice] = @comment.save ? "コメントの投稿に成功しました。" : "コメントの投稿に失敗しました。"
+
     users = [@post.user]
     @notification = Notification.create(visitor_id: current_user.id, visited_id: users[0].id, comment_id: @comment.id, action: 'comment')
     @post.comments.each do |c|
@@ -17,7 +20,7 @@ class CommentsController < ApplicationController
         @notification = Notification.create(visitor_id: current_user.id, visited_id: user.id, comment_id: @comment.id, action: 'comment')
       end
     end
-    flash.now[:notice] = @comment.save ? "コメントの投稿に成功しました。" : "コメントの投稿に失敗しました。"
+
     redirect_to(timeline_path(@post.id))
   end
 
