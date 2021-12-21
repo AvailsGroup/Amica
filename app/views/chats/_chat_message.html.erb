@@ -5,6 +5,9 @@
       <div class="col-sm-12 message-main-sender"  style=" position:relative; " >
         <div class="sender my-1 p-1 mt-2" style="max-width: 40%;">
           <div class="messages container p-1">
+            <% if message.image != nil %>
+                <%= image_tag message.decorate.images ,style:"max-width:100%" %>
+            <% else %>
            <% start = message.content.index("http")%>
             <div>
               <% if start != nil %>
@@ -34,14 +37,11 @@
             <%=safe_join(message.content.split("\n"),tag(:br))%>
             <% end %>
             </div>
+            <% end %>
           </div>
         </div>
           <div class="text-gray small sender_time">
-            <% if message.created_at.to_date === Date.today %>
-              <%= message.created_at.strftime("今日 %H:%M") %>
-            <% else %>
-              <%= message.created_at.strftime("%H:%M") %>
-            <% end %>
+            <%= message.decorate.time %>
           </div>
       </div>
     </div>
@@ -51,8 +51,11 @@
         <%= link_to profile_path(@user.userid),class:"userLink"  do %>
           <%= image_tag @user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 mt-2 ",style: "float: left;", width: "40px", height: "40px" %>
         <% end %>
-        <div class="receiver my-1 p-1 mt-2" style="max-width: 40%;" >
+          <div class="receiver my-1 p-1 mt-2" style="max-width: 40%;" >
           <div class="messages container p-1">
+            <% if message.image != nil %>
+              <%= image_tag message.decorate.images ,style:"max-width:100%" %>
+            <% else %>
             <% start = message.content.index("http")%>
             <div>
               <% if start != nil %>
@@ -66,6 +69,9 @@
                     <% start = messages.index("http")%>
                     <% if start == nil %>
                       <%= safe_join(messages.split("\n"),tag(:br))%>
+                    <% end %>
+                    <% if message.image != nil %>>
+                      <%= image_tag message.decorate.images, style: "float: left;", width: "25%", height: "25%"%>
                     <% end %>
                   <% else %>
                     <% first = messages[0..start.to_i-1] %>
@@ -82,15 +88,12 @@
                 <%=safe_join(message.content.split("\n"),tag(:br))%>
               <% end %>
             </div>
+            <% end %>
           </div>
         </div>
         <div class="text-gray small" style="float: left">
           <p class="time">
-          <% if message.created_at.to_date === Date.today %>
-            <%= message.created_at.strftime("今日 %H:%M") %>
-          <% else %>
-            <%= message.created_at.strftime("%H:%M") %>
-          <% end %>
+            <%= message.decorate.time %>
           </p>
         </div>
       </div>

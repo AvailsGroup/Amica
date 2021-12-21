@@ -16,11 +16,17 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
     let partnerimage = document.getElementById("partner_image").value
     if (data.room_id === Number(room_id)){
       if (data.user_id === Number(user_id)) {
+        var content ="";
+          if( data.image !== null){
+            content = '<img style="max-width:100%" src="/chat_images/room'+room_id+'/'+data.image+'">';
+          }else{
+            content = AutoLink(data.content);
+          }
         $('#append').append('<div class="row message-body" style="white-space: pre;">'+
                               ' <div class="col-sm-12 message-main-sender" >'+
                                   '<div class="sender my-1 p-1 mt-2" style="max-width: 40%;">' +
                                     '<div class="messages container p-1">' +
-                                      AutoLink(data.content)+
+                                      content+
                                     '</div>' +
                                   '</div>'+
                                     '<div class="text-gray small sender_time">'+
@@ -38,7 +44,12 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
         }else {
           partnerimage = "/user_images/"+partnerimage
         }
-        console.log(partnerimage)
+        var content ="";
+        if( data.image !== null){
+          content = '<img style="max-width:100%" src="/chat_images/room'+room_id+'/'+data.image+'">';
+        }else{
+          content = AutoLink(data.content);
+        }
       $('#append').append(
                             '<div class="row message-body" style="white-space: pre;">'+
                               '<div class="col-sm-12 message-main-receiver" style=" position:relative;">'+
@@ -47,7 +58,7 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
                                 '</a>'+
                                 '<div class="receiver my-1 p-1 mt-2" style="max-width: 40%;">' +
                                   '<div class="messages container p-1">' +
-                                     AutoLink(data.content)+
+                                     content+
                                   '</div>' +
                                 '</div>'+
                                '<div class="text-gray small" style="float: left">' +
@@ -64,8 +75,8 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
     }
   },
 
-  speak: function(message,room_id) {
-    return this.perform('speak', {message: message,room_id: room_id});
+  speak: function(message,room_id,send_image) {
+    return this.perform('speak', {message: message,room_id: room_id,send_image: send_image});
   }
 });
 
