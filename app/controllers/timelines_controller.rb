@@ -19,7 +19,7 @@ class TimelinesController < ApplicationController
     view_parameter
     @posts = @posts.select { |p| following?(@user.followings_list, p.user) || p.user == current_user }
     @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(30)
-    redirect  'follow'
+    redirect 'follow'
   end
 
   def latest
