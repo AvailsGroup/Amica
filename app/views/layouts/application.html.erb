@@ -33,7 +33,10 @@
           <ul class="navbar-nav d-flex">
             <li class="nav-item">
               <%= link_to notifications_path, class: "icons nav-link" do %>
-                <i class="fas fa-bell"></i>通知<span class="notice badge bg-light text-dark rounded-pill align-text-bottom">100</span>
+                <i class="fas fa-bell"></i>通知
+                <span class="notice badge bg-light text-dark rounded-pill align-text-bottom">
+                  <%= current_user.passive_notifications.where(checked: false).size %>
+                </span>
               <% end %>
             </li>
             <li class="nav-item">
