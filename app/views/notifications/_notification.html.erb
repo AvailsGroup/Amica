@@ -3,43 +3,51 @@
   <div class="col-md-6 mx-auto">
   <div class="form-inline">
 
-   <%= link_to profile_path(visitor.userid) do %>
-<%= image_tag @user.decorate.image , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
-  <strong style="color:greenyellow">
-   <%= visitor.name %>
-   <%= 'さんが' %>
-  </strong>
-
-   <% case notification.action %>
-   <% when 'follow' then %>
-   <%= "あなたをフォローしました" %>
-   <% when 'like' then %>
-            <%= "あなたの投稿id:#{notification.post_id}" %>
-   <%= "にいいねしました" %>
-        <hr>
-   <% when 'comment' then %>
-   <% if notification.id == visited.id %>
-                          <%= "あなたの投稿id:#{notification.post_id}" %>
-   <% else %>
-      <span>
-       <%= link_to timelines_path(notification.post_id) do %>
-<%= image_tag @user.decorate.image , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
-          </span>
-      <strong>
-       <%= 'さんの投稿' %>
-       <%= "にコメントしました" %>
+    <%= link_to profile_path(visitor.userid) do %>
+      <%= image_tag visitor.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "30px", height: "30px" %>
+      <strong style="color:lightseagreen">
+        <%= visitor.name %>
+        <%= 'さんが' %>
       </strong>
 
+      <% case notification.action %>
+    <% when 'follow' then %>
+        <strong style="color:lightseagreen">
+          <%= "あなたをフォローしました" %>
+        </strong>
+        <hr style="color: #4b5155">
+      <% when 'like' then %>
+        <strong style="color:lightseagreen">
+          <%= "あなたの投稿" %>
+          <%= "にいいねしました" %>
+        </strong>
+        <hr style="color: #4b5155">
+      <% when 'comment' then %>
+        <% if notification.id == visited.id %>
+          <%= "あなたの投稿:#{notification.post_id}" %>
+        <% else %>
+       <span>
+         <%= link_to timelines_path(notification.post_id) do %>
+          <%= image_tag visited.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "30px", height: "30px" %>
+           <% end %>
+            </span>
+          <strong style="color:lightseagreen">
+            <%= visited.name %>
+            <%= 'さんの投稿' %>
+            <%= "にコメントしました" %>
+          </strong>
+
           <P class="text-muted mb-0">
-       <%= Comment.find_by(id: notification.comment_id)&.comment %>
-      </p>
-      <div class="small text-muted text-right">
-       <%= time_ago_in_words(notification.created_at).upcase %>
-        <hr>
-      </div>
-      <%end %>
-    <%end %>
-          <% end %>
-        <%end %>
-      </div>
- </div>
+            <%= @comments.find_by(id: notification.comment_id).comment %>
+          </p>
+          <div class="small text-muted text-right">
+            <%= time_ago_in_words(notification.created_at).upcase %>
+            <hr style="color: #4b5155 ">
+          </div>
+
+        <% end %>
+      <% else %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
