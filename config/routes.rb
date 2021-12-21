@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   #communities---------
   resources :communities do
     resources :manage, only: [:create, :destroy]
+    resources :reports,only:[:create]
+    get '/members' => 'communities#members'
     resources :communities_security, only: [:create,:destroy]
     get :members
     delete :kick
@@ -34,12 +36,15 @@ Rails.application.routes.draw do
       get :joined
     end
   end
+  get 'community/pickup' => 'communities#pickup'
+  get 'community/joined' => 'communities#joined'
 
 
   #timelines-----------
   resources :timelines do
     resources :likes,only:[:create,:destroy]
     resources :comments, only: [:create, :destroy]
+    resources :reports,only:[:new,:create]
     collection do
       get :search
       get :follow
@@ -60,7 +65,6 @@ Rails.application.routes.draw do
   post 'page/community'=>'pages#community'
   get 'setting' => 'pages#setting'
   get 'faq' => 'pages#faq'
-
   #profiles------------
   resources :profiles do
     resources :relationships, only: [:create,:destroy]

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   #protect_from_forgery with: :exception
+  before_action :block_foreign_hosts
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def banned
@@ -10,13 +11,13 @@ class ApplicationController < ActionController::Base
 
     if current_user.ban
       sign_out current_user
-      flash.alert = "あなたはアカウント停止処分を受けています。"
-      redirect_to "/"
+      flash.alert = 'あなたはアカウント停止処分を受けています。'
+      redirect_to '/'
     end
   end
 
   def after_sign_in_path_for(resource)
-    flash[:alert] = "ようこそAmicaへ！ "
+    flash[:alert] = 'ようこそAmicaへ！ '
     pages_path
   end
 
@@ -53,6 +54,14 @@ class ApplicationController < ActionController::Base
   private
   def sign_in_required
     redirect_to new_user_session_url unless user_signed_in?
+  end
+  
+  def whitelisted?(ip)
+    %w[218.45.244.196 218.45.244.196 8.37.43.227 218.45.244.196 8.37.43.168 8.37.43.185 127.0.0.1].include?(ip)
+  end
+  
+  def block_foreign_hosts
+    redirect_to 'https://www.google.com' unless whitelisted?(request.remote_ip)
   end
 
   protected

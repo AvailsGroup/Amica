@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 2021_12_19_121743) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.string "image"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -152,6 +153,17 @@ ActiveRecord::Schema.define(version: 2021_12_19_121743) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.integer "reported_user_id"
+    t.integer "user_id"
+    t.string "message"
+    t.integer "post_id"
+    t.integer "comment_id"
+    t.integer "community_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "rooms", force: :cascade do |t|
