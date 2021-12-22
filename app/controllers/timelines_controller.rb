@@ -6,6 +6,7 @@ class TimelinesController < ApplicationController
   helper_method :liked_by?
   helper_method :matchers
   helper_method :matchers?
+  helper_method :mute?
 
   def index
     view_parameter
@@ -18,7 +19,7 @@ class TimelinesController < ApplicationController
     view_parameter
     @posts = @posts.select { |p| following?(@user.followings_list, p.user) || p.user == current_user }
     @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(30)
-    redirect  'follow'
+    redirect 'follow'
   end
 
   def latest
@@ -40,10 +41,13 @@ class TimelinesController < ApplicationController
   def show
     @posts = Post.includes(:user, :likes, :comments)
     @post = @posts.find(params[:id])
-    @comments = @post.comments.order(created_at: :desc).page(params[:page]).per(10)
+    @comments = @post.comments.includes(:user)
+    @count = @comments.size
+    @comments = @comments.order(created_at: :desc).page(params[:page]).per(10)
     @comment = Comment.new
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
+    @report = Report.new
   end
 
   def create
@@ -51,10 +55,6 @@ class TimelinesController < ApplicationController
     @create.user = current_user
     flash[:alert] = '投稿の文字数は1~280文字までです<br/>画像はjpg jpeg png gifのみ対応しています。<br/>画像は10MBまでです。' unless @create.save!
     redirect_to(timelines_path)
-  end
-
-  def edit
-    @post = Post.find(params[:id])
   end
 
   def update
@@ -79,11 +79,12 @@ class TimelinesController < ApplicationController
   private
 
   def view_parameter
-    @post = Post.includes(:user, :likes, :comments)
+    @post = Post.includes(:user, :likes, :comments, :mutes)
     @posts = @post.order(created_at: :desc)
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
     @create = Post.new
+    @report = Report.new
   end
 
   def post_params

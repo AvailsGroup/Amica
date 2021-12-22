@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  visitor: one
+  visited: one
+  micropost: one
+  comment: one
+  action: MyString
+  checked: false
+
+two:
+  visitor: two
+  visited: two
+  micropost: two
+  comment: two
+  action: MyString
+  checked: false

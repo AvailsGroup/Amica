@@ -65,11 +65,10 @@ class User < ApplicationRecord
             length: { minimum: 1, maximum: 20 },
             allow_nil: true
 
-
   has_one :profile
   accepts_nested_attributes_for :profile, update_only: true
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_many :likes
 
   has_many :community_securities
@@ -80,7 +79,6 @@ class User < ApplicationRecord
 
   has_one :achievement, dependent: :destroy
 
-  # アソシエーションの定義
   # フォローしている側のユーザー (active relationship)
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :active_relationships, source: :followed
@@ -92,9 +90,20 @@ class User < ApplicationRecord
   has_many :communities, dependent: :destroy
   has_many :community_member, dependent: :destroy
 
+  has_many :reports
+
+  has_many :passive_reports, class_name: "Report", foreign_key: "reported_user_id"
+  has_many :reported_users, through: :passive_reports, source: :reported_user
+
   has_many :rooms
   has_many :messages
 
+  # 通知を送るユーザー
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  # 通知をうけるユーザー
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+
+  has_many :mutes
 
   def password_required?
     super && confirmed?
@@ -154,11 +163,6 @@ class User < ApplicationRecord
   def liked_by?(post_id)
     likes.any? { |p| p.post_id == post_id }
   end
-
-  has_many :posts, dependent: :destroy
-  has_many :comments, dependent: :destroy
-
-  before_create :build_default_profile
 
   private
 

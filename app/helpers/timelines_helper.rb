@@ -19,9 +19,11 @@ module TimelinesHelper
   def push(user)
     case rand(1..65536)
     when 1
-      user.achievement.change_rare_like
+      user.achievement.change_hand_like
       '<i class="fas fa-hand-holding-heart red"></i>' # 1/65536
-    when 2..6 then '<i class="fas fa-laugh-wink"></i>' # 1/16384
+    when 2..6
+      user.achievement.change_wink_like
+      '<i class="fas fa-laugh-wink"></i>' # 1/16384
     when 11..19 then '<i class="fab fa-yarn"></i>' # 1/8192
     when 20..28 then '<i class="fab fa-node-js"></i>' # 1/8192
     when 29..37 then '<i class="fab fa-yarn"></i>' # 1/8192
