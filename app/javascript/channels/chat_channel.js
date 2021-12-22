@@ -20,7 +20,7 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
           if( data.image !== null){
             content = '<img style="max-width:100%" data-lity="data-lity" src="/chats/room'+room_id+'/images/'+data.image+'">';
           }else if (data.file_name !== null) {
-            content = '【' + data.file_name +'】を送信しました。'
+            content = '<a href="/chats/room1/files/' + data.file_name +'" download="'+ data.file_name +'">'+data.file_name+'</a>'
           }else{
             content = AutoLink(data.content);
           }
@@ -54,7 +54,7 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
           content = AutoLink(data.content);
         }
       $('#append').append(
-                            '<div class="row message-body" style="white-space: pre;">'+
+                            '<div class="row message-body text-wrap " style="white-space: pre;">'+
                               '<div class="col-sm-12 message-main-receiver" style=" position:relative;">'+
                                 '<a class="userLink" href="/profiles/'+ partneruserid + '">'+
                                 '  <img class="icon bd-placeholder-img flex-shrink-0 me-2 mt-2" style="float: left" width="40px" height="40px" src='+ partnerimage+'>' +

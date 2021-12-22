@@ -16,4 +16,8 @@ class MessageDecorator < ApplicationDecorator
   def time
     object.created_at.to_date === Date.today ? object.created_at.strftime("今日 %H:%M") : message.created_at.strftime("%H:%M")
   end
+
+  def files
+    object.file_name.nil? ? nil : "/chats/room#{object.room_id}/files/#{object.file_name}"
+  end
 end

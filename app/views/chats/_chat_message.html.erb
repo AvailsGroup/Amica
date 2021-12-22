@@ -7,6 +7,8 @@
           <div class="messages container p-1">
             <% if message.image != nil %>
                 <%= image_tag message.decorate.images ,style:"max-width:100%", "data-lity" => "data-lity" %>
+            <% elsif message.file_name != nil %>
+              <a href=<%= message.decorate.files %> download="<%= message.file_name%>"><%= message.file_name%></a>
             <% else %>
            <% start = message.content.index("http")%>
             <div>
