@@ -10,17 +10,28 @@ class ChatChannel < ApplicationCable::Channel
 
   def speak(data)
     @room_id = data['room_id']
+    @file = data['uploaded_file']
     @user_id = current_user.id
     if data['message'][0..21] == 'data:image/jpeg;base64'
-      unless File.directory?("#{Rails.root}/public/chat_images/room#{@room_id}")
-        Dir.mkdir("#{Rails.root}/public/chat_images/room#{@room_id}")
+      unless File.directory?("#{Rails.root}/public/chats/room#{@room_id}")
+        Dir.mkdir("#{Rails.root}/public/chats/room#{@room_id}")
       end
       rand = rand(1_000_000..9_999_999)
       @image_data = "#{@user_id}#{rand}.jpg"
-      File.open("public/chat_images/room#{@room_id}/#{@image_data}", 'wb') do |f|
+      File.open("public/chats/room#{@room_id}/#{@image_data}", 'wb') do |f|
         f.write(Base64.decode64(data['message']['data:image/jpeg;base64,'.length..-1]))
       end
       @content = '画像を投稿しました。'
+    elsif FileTest.directory? data['message']
+      @file = data['message']
+      File.open("public/chats/room#{@room_id}/#{@file.name}", 'wb') do |f|
+        f.write(@file)
+      end
+    elsif FileTest.file? data['message']
+      @file = data['message']
+      File.open("public/chats/room#{@room_id}/#{@file.name}", 'wb') do |f|
+        f.write(@file)
+      end
     else
       @content = data['message']
       @image_data = nil

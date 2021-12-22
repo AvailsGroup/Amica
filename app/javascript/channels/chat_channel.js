@@ -18,7 +18,7 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
       if (data.user_id === Number(user_id)) {
         var content ="";
           if( data.image !== null){
-            content = '<img style="max-width:100%" data-lity="data-lity" src="/chat_images/room'+room_id+'/'+data.image+'">';
+            content = '<img style="max-width:100%" data-lity="data-lity" src="/chats/room'+room_id+'/'+data.image+'">';
           }else{
             content = AutoLink(data.content);
           }
@@ -46,7 +46,7 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
         }
         var content ="";
         if( data.image !== null){
-          content = '<img style="max-width:100%" data-lity="data-lity" src="/chat_images/room'+room_id+'/'+data.image+'">';
+          content = '<img style="max-width:100%" data-lity="data-lity" src="/chats/room'+room_id+'/'+data.image+'">';
         }else{
           content = AutoLink(data.content);
         }
@@ -75,8 +75,8 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
     }
   },
 
-  speak: function(message,room_id,send_image) {
-    return this.perform('speak', {message: message,room_id: room_id,send_image: send_image});
+  speak: function(message,room_id,send_image,uploaded_file) {
+    return this.perform('speak', {message: message,room_id: room_id,send_image: send_image,uploaded_file: uploaded_file});
   }
 });
 
@@ -175,15 +175,20 @@ window.addEventListener("DOMContentLoaded",function() {
       const maxFileSize=10485760 //アップロードできる最大サイズを指定(1048576=1MB 10485760=10MB)
       $(files).change(function(){ //ファイルがアップロードされたら
         $(".error_msg").remove()　//エラーメッセージ削除
-        let uploaded_file=$(this).prop('files')[0]; //アップロードファイル取得
+        let uploaded_file = $(this).prop('files')[0]; //アップロードファイル取得
         if(maxFileSize < uploaded_file.size){ //もし上限値を超えた場合
           $(this).val("")　//画像を空にする
           $(this).before("<p class='error_msg'>アップロードできる画像の最大サイズは10MBです</p>") //エラーメッセージ表示
         }else {
-
-
-        }
-      })
+          $('#file_submit_button').click('[data-behavior~=chat_speaker]', function () {
+            ChatChannel.speak(uploaded_file, room_id.value);
+            $($textarea).height(0);
+            $('#fileModal').modal('hide');
+            $('#file_uploader').val('');
+            bottom_scroll()
+        })
+      }
+    });
   });
 });
 
