@@ -18,7 +18,7 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
       if (data.user_id === Number(user_id)) {
         var content ="";
           if( data.image !== null){
-            content = '<img style="max-width:100%" src="/chat_images/room'+room_id+'/'+data.image+'">';
+            content = '<img style="max-width:100%" data-lity="data-lity" src="/chat_images/room'+room_id+'/'+data.image+'">';
           }else{
             content = AutoLink(data.content);
           }
@@ -46,7 +46,7 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
         }
         var content ="";
         if( data.image !== null){
-          content = '<img style="max-width:100%" src="/chat_images/room'+room_id+'/'+data.image+'">';
+          content = '<img style="max-width:100%" data-lity="data-lity" src="/chat_images/room'+room_id+'/'+data.image+'">';
         }else{
           content = AutoLink(data.content);
         }
