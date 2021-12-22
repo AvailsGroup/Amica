@@ -5,4 +5,6 @@ class Comment < ApplicationRecord
   has_many :reports
 
   validates :comment, presence: true, length: { maximum: 300 }
+
+  has_many :notifications, dependent: :destroy
 end

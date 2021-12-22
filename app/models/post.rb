@@ -1,7 +1,9 @@
 class Post < ApplicationRecord
 
   belongs_to :user
-  has_many :report
+
+  has_many :notifications, dependent: :destroy
+  has_many :reports
   has_many :comments, dependent: :destroy
   has_many :likes
 
@@ -12,8 +14,7 @@ class Post < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
-  has_many :reports
+  has_many :mutes
 
   mount_uploader :image, ImgUploader
-
 end

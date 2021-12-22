@@ -41,7 +41,8 @@ Rails.application.routes.draw do
   resources :timelines do
     resources :likes, only: %i[create destroy]
     resources :comments, only: %i[create destroy]
-    resources :reports,only:[:new,:create]
+    resources :reports, only:[:new,:create]
+    resources :mute, only: %i[create destroy]
     collection do
       get :search
       get :follow
@@ -83,6 +84,9 @@ Rails.application.routes.draw do
   end
   post 'search/user' => 'searches#user'
   post 'search/community' => 'searches#community'
+
+  #notification--------
+  resources :notifications, only: %i[index destroy]
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'
