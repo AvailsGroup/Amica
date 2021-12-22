@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   #top----------------
   get '/' => 'home#top'
   get '/about' => 'home#about'
-  get '/contact' => 'maller#new'
+  get '/contact' => 'mailer#new'
   get '/static' => 'home#static'
   get '/privacy' => 'home#privacy'
   get '/help_page' => 'home#help_page'
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   #communities---------
   resources :communities do
     resources :manage, only: %i[create destroy]
-    resources :reports,only:[:create]
+    resources :reports, only:[:create]
     get '/members' => 'communities#members'
     resources :communities_security, only: %i[create destroy]
     get :members
@@ -92,6 +92,6 @@ Rails.application.routes.draw do
   resources :notifications, only: %i[index destroy]
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  mount LetterOpenerWeb::Engine, at: '/letter_opener'
+  # mount LetterOpenerWeb::Engine, at: '/letter_opener'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

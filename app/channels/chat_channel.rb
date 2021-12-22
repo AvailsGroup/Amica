@@ -15,6 +15,9 @@ class ChatChannel < ApplicationCable::Channel
       unless File.directory?("#{Rails.root}/public/chat_images/room#{@room_id}")
         Dir.mkdir("#{Rails.root}/public/chat_images/room#{@room_id}")
       end
+      File.open("public/chat_images/room#{@room_id}/#{@image_data}", 'wb') do |f|
+        f.write(Base64.decode64(data['message']['data:image/jpeg;base64,'.length..-1]))
+      end
       rand = rand(1_000_000..9_999_999)
       @image_data = "#{@user_id}#{rand}.jpg"
       File.open("public/chat_images/room#{@room_id}/#{@image_data}", 'wb') do |f|

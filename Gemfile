@@ -7,6 +7,8 @@ ruby '3.0.1'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 # Use Puma as the app server
 gem 'puma', '>= 5.5.1'
+
+gem 'channels'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
