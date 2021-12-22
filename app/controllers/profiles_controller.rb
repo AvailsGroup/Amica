@@ -4,6 +4,7 @@ class ProfilesController < ApplicationController
   helper_method :following?
   helper_method :matchers?
   helper_method :is_user_favorite?
+  helper_method :mute?
 
   def index
     @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags).where.not(userid: nil)
