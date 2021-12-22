@@ -55,3 +55,4 @@ class ChatChannel < ApplicationCable::Channel
     ActionCable.server.broadcast 'chat_channel', @message
   end
 end
+

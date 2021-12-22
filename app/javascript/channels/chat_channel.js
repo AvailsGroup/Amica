@@ -181,15 +181,15 @@ window.addEventListener("DOMContentLoaded",function() {
         let uploaded_file = $(this).prop('files')[0]; //アップロードファイル取得
         if(maxFileSize < uploaded_file.size){ //もし上限値を超えた場合
           $(this).val("")　//画像を空にする
-          $(this).before("<p class='error_msg'>アップロードできる画像の最大サイズは10MBです</p>") //エラーメッセージ表示
+          $(this).before("<p class='error_msg'>アップロードできる最大サイズは10MBです</p>") //エラーメッセージ表示
         }else {
           var reader = new FileReader;
           reader.readAsDataURL(uploaded_file);
           reader.onload = function() {
             var val = reader.result;
           $('#file_submit_button').click('[data-behavior~=chat_speaker]', function () {
-            send_file.value = uploaded_file.name
-            val = val + "@"+ send_file.value
+            let file_name = uploaded_file.name
+            val = val + "@"+ file_name
             ChatChannel.speak(val, room_id.value);
             $($textarea).height(0);
             $('#fileModal').modal('hide');
