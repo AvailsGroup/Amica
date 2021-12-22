@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag 'chats', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 <script>
     document.addEventListener("DOMContentLoaded",function bottom_scroll(){
         var elm = document.documentElement;
@@ -10,6 +11,8 @@
 <div id="body">
   <div id="chat" style="margin:1% 1% 70px 1%">
       <div id="messages">
+        <span class="pb-3 mb-0"><strong style="color: black"><%= @user.name %> </strong></span>
+        <span class="small" style="color: gray">(<%= @user.nickname %>)</span>
         <% last_message = nil %>
         <% @message.each do |m| %>
           <% if last_message == nil %>
@@ -30,19 +33,6 @@
 
   <div class="mt-2 row messageBox reply d-flex justify-content-center">
     <div class="col-sm-12 messageBox-inner">
-       <h4 class="m-0" style="float: left">
-         To:
-         <%= link_to profile_path(@user.userid) do %>
-           <% if @user .image.nil? %>
-             <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-           <% else %>
-             <%= image_tag "/user_images/#{  @user .image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
-           <% end %>
-         <% end %>
-       </h4>
-      <h4 id="user_name" class="m-0" style="float: left">
-         <%=  @user.name %>
-       </h4>
        <span class="clear"></span>
        <div class="row ">
          <div class="w-100 d-flex ">
@@ -52,6 +42,8 @@
            </label>
           <input type="hidden" id="room_id" value= <%= @room.id %> data-behavior="chat_speaker">
           <input type="hidden" id="user_id" value= <%= current_user.id %> data-behavior="chat_speaker">
+           <input type="hidden" id="partner_userid" value= <%= @user.userid %> >
+           <input type="hidden" id="partner_image" value= <%= @user.image %> >
           <%= text_area_tag  :content, nil, class:"form-control", placeholder:"message", data: {behavior: "chat_speaker"},id:"content" %>
           <label><!-- Button trigger modal -->
              <button id="submit_button" style="display: none" type="submit" class="btn btn-primary form-control" ></button>
@@ -120,9 +112,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-          <input type="file" id="image_uploader" accept="image/jpg,image/jpeg,image/png" data-behavior="chat_speaker">
+          <input type="file" id="image_uploader" data-behavior="chat_speaker">
+        <input type="hidden" id="send_image" value="" >
       </div>
-      <div id="image_preview" style="text-align: center;"></div>
+      <canvas id="canvas" style="text-align: center;"></canvas>
       <div class="modal-footer">
         <label><!-- Button trigger modal -->
           <button id="image_submit_button" style="display: none" type="submit" class="btn btn-primary form-control" ></button>
