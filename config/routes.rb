@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :communities do
     resources :manage, only: %i[create destroy]
     resources :communities_security, only: %i[create destroy]
-    resources :reports,only:[:create]
+    resources :reports, only: [:create]
     get :members
     delete :kick
     put :change
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   resources :timelines do
     resources :likes, only: %i[create destroy]
     resources :comments, only: %i[create destroy]
-    resources :reports, only:[:new,:create]
+    resources :reports, only: [:create]
     resources :mute, only: %i[create destroy]
     collection do
       get :search

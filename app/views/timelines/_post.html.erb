@@ -116,11 +116,11 @@
             <% end %>
           <% else %>
             <% if mute?(post, current_user) %>
-              <%= button_to(timeline_mute_path(post.id), class: "send bg-white", style:"padding-right:0px", method: :delete, data: { disable_with: '<i class="fas fa-volume-mute" style="color: red"></i>'}) do %>
+              <%= button_to timeline_mute_path(post.id,current_user.id), class: "send bg-white", style:"padding-right:0px", method: :delete, data: { disable_with: '<i class="fas fa-volume-mute" style="color: red"></i>' } do %>
                 <i class="fas fa-volume-up"></i>
               <% end %>
             <% else %>
-              <%= button_to(timeline_mute_index_path(post.id), class: "send bg-white", style:"padding-right:0px", method: :post, data: { disable_with: '<i class="fas fa-volume-up"></i>' }) do %>
+              <%= button_to timeline_mute_index_path(post.id), class: "send bg-white", style:"padding-right:0px", method: :post, data: { disable_with: '<i class="fas fa-volume-up"></i>' } do %>
                 <i class="fas fa-volume-mute" style="color: red"></i>
               <% end %>
             <% end %>
