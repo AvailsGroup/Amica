@@ -189,7 +189,7 @@ window.addEventListener("DOMContentLoaded",function() {
             var val = reader.result;
           $('#file_submit_button').click('[data-behavior~=chat_speaker]', function () {
             send_file.value = uploaded_file.name
-            val = val + "@"+ send_file.value +"@"
+            val = val + "@"+ send_file.value
             ChatChannel.speak(val, room_id.value);
             $($textarea).height(0);
             $('#fileModal').modal('hide');

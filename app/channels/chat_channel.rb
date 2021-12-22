@@ -38,12 +38,11 @@ class ChatChannel < ApplicationCable::Channel
       r_end = data['message'].index(',')
       @replace = data['message'][r_start..r_end]
       n_start = data['message'].index('@')
-      n_end = data['message'].rindex('@')
-      @f_replace = data['message'][n_start..n_end]
-      @f_name = data['message'][n_start.to_i + 1..n_end.to_i - 1]
-      data['message'].gsub(/#{@f_replace}/, '')
+      @f_replace = data['message'][n_start..data['message'].length]
+      @f_name = data['message'][n_start.to_i + 1..data['message'].length - 1]
+      @base64 = data['message'][r_end.to_i + 1..n_start.to_i - 1]
       File.open("public/chats/room#{@room_id}/files/#{@f_name}", 'wb') do |f|
-        f.write(Base64.decode64(data['message'][@replace.length..-2]))
+        f.write(Base64.decode64(@base64))
       end
       @content = "【#{@f_name}】を送信しました。"
     else
