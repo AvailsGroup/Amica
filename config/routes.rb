@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   #top----------------
   get '/' => 'home#top'
   get '/about' => 'home#about'
-  get '/contact' => 'maller#new'
+  get '/contact' => 'mailer#new'
   get '/static' => 'home#static'
   get '/privacy' => 'home#privacy'
   get '/help_page' => 'home#help_page'
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   #communities---------
   resources :communities do
     resources :manage, only: %i[create destroy]
-    resources :reports,only:[:create]
+    resources :reports, only:[:create]
     get '/members' => 'communities#members'
     resources :communities_security, only: %i[create destroy]
     get :members
