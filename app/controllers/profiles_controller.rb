@@ -4,6 +4,7 @@ class ProfilesController < ApplicationController
   helper_method :following?
   helper_method :matchers?
   helper_method :is_user_favorite?
+  helper_method :mute?
 
   def index
     @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags).where.not(userid: nil)
@@ -18,7 +19,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+    @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :posts, :tags)
     @user = @users.find_by(userid: params[:id])
     @current = @users.find(current_user.id)
     if @user.nil?
@@ -27,7 +28,7 @@ class ProfilesController < ApplicationController
     end
     @profile = @user.profile
     @following = @current.followings_list
-    @communities = Community.includes([:community_members, :user, :tags]).where(id: @user.community_member.select(:community_id))
+    @communities = Community.includes(%i[community_members user tags]).where(id: @user.community_member.select(:community_id))
 
     @friends_count = @user.matchers.size
     @community_count = @user.community_member.size
@@ -35,6 +36,7 @@ class ProfilesController < ApplicationController
     @days = (sec / 60 / 60 / 24).floor
     @comments_count = @user.comments.size
     @achievement = @user.achievement
+    @report = Report.new
   end
 
   def edit
@@ -96,14 +98,24 @@ class ProfilesController < ApplicationController
 
   def follower
     @users = User.preload(:profile, :favorite, :followers, :tags)
-    @user = @users.find(current_user.id)
+    unless @users.exists?(userid: params[:profile_id])
+      flash[:notice] = "ユーザーが見つかりませんでした。"
+      redirect_back fallback_location: pages_path
+      return
+    end
+    @user = @users.find_by(userid: params[:profile_id])
     @follower = @user.followers_list
     @pagenate = @follower.page(params[:page]).per(30)
   end
 
   def follow
-    @users = User.preload(:profile, :favorite,  :followings, :tags)
-    @user = @users.find(current_user.id)
+    @users = User.preload(:profile, :favorite, :followings, :tags)
+    unless @users.exists?(userid: params[:profile_id])
+      flash[:notice] = "ユーザーが見つかりませんでした。"
+      redirect_back fallback_location: pages_path
+      return
+    end
+    @user = @users.find_by(userid: params[:profile_id])
     @following = @user.followings_list
     @pagenate =  @following.page(params[:page]).per(30)
   end
@@ -120,8 +132,8 @@ class ProfilesController < ApplicationController
   private
 
   def user_params
-    attrs = [:nickname,:name,:userid,:tag_list,:accreditation_list]
-    params.require(:user).permit(attrs, profile_attributes:%i[grade school_class number student_id accreditation hobby])
+    attrs = %i[nickname name userid tag_list accreditation_list]
+    params.require(:user).permit(attrs, profile_attributes: %i[grade school_class number student_id accreditation hobby intro])
   end
 
   def permission

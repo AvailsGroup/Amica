@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_21_160552) do
+ActiveRecord::Schema.define(version: 2021_12_22_045454) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(version: 2021_12_21_160552) do
     t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "blocks", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "blocked_user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -161,6 +168,7 @@ ActiveRecord::Schema.define(version: 2021_12_21_160552) do
     t.date "birthday"
     t.text "twitter_id"
     t.integer "enrolled_year"
+    t.text "intro"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
