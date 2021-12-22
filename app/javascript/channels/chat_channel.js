@@ -49,7 +49,7 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
         if( data.image !== null){
           content = '<img style="max-width:100%" data-lity="data-lity" src="/chats/room'+room_id+'/images/'+data.image+'">';
         }else if (data.file_name !== null) {
-          content ='【' + data.file_name +'】を送信しました。'
+          content = '<a href="/chats/room1/files/' + data.file_name +'" download="'+ data.file_name +'">'+data.file_name+'</a>'
         }else{
           content = AutoLink(data.content);
         }
