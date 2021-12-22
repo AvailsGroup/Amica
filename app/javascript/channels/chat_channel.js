@@ -183,14 +183,20 @@ window.addEventListener("DOMContentLoaded",function() {
           $(this).val("")　//画像を空にする
           $(this).before("<p class='error_msg'>アップロードできる画像の最大サイズは10MBです</p>") //エラーメッセージ表示
         }else {
+          var reader = new FileReader;
+          reader.readAsDataURL(uploaded_file);
+          reader.onload = function() {
+            var val = reader.result;
+            console.log(val)
           $('#file_submit_button').click('[data-behavior~=chat_speaker]', function () {
-            send_file.value = "file:" + uploaded_file.name
-            ChatChannel.speak(send_file.value, room_id.value);
+            send_file.value = uploaded_file.name
+            ChatChannel.speak(val, room_id.value);
             $($textarea).height(0);
             $('#fileModal').modal('hide');
             $('#file_uploader').val('');
             bottom_scroll()
-        })
+          })
+        }
       }
     });
   });
