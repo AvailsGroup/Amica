@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_19_121743) do
+ActiveRecord::Schema.define(version: 2021_12_21_160552) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -19,7 +19,8 @@ ActiveRecord::Schema.define(version: 2021_12_19_121743) do
     t.boolean "niceLv3", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "rare_like", default: false
+    t.boolean "hand_like", default: false
+    t.boolean "wink_like", default: false
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -121,6 +122,24 @@ ActiveRecord::Schema.define(version: 2021_12_19_121743) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
+  end
+
+  create_table "mutes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "post_id"
+    t.integer "comment_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "posts", force: :cascade do |t|

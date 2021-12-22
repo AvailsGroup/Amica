@@ -1,0 +1,16 @@
+<style>
+  .flash{
+      display: none;
+  }
+</style>
+
+<%= render "notifications/nav", notifications:@notifications %>
+
+<div class="container">
+  <% if @notification.exists? %>
+    <%= render partial: "notifications/notification", collection: @pagenate, as: :notification, locals: { new_notification: @new_notification } %>
+    <%= render "layouts/pagenate", pagenate:@pagenate %>
+  <% else %>
+    <p class="text-center my-4">通知はありません</p>
+  <% end %>
+</div>
