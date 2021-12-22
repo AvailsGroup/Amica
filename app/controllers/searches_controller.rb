@@ -8,13 +8,16 @@ class SearchesController < ApplicationController
   end
 
   def user
-    @user = User.includes(:profile,:tags,:taggings)
+    @user = User.includes(:profile, :tags, :taggings)
     @users = []
     unless params[:name] == ""
       @user.each do |u|
+        pp u
         unless u == current_user
-          if u.name.downcase.include?(params[:name].downcase) || u.nickname.downcase.include?(params[:name].downcase) || u.userid.downcase.include?(params[:name].downcase)
-            @users.push(u)
+          unless u.name.nil?
+            if u.name.downcase.include?(params[:name].downcase) || u.nickname.downcase.include?(params[:name].downcase) || u.userid.downcase.include?(params[:name].downcase)
+              @users.push(u)
+            end
           end
         end
       end
