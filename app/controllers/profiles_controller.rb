@@ -18,7 +18,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+    @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :posts, :tags)
     @user = @users.find_by(userid: params[:id])
     @current = @users.find(current_user.id)
     if @user.nil?
@@ -35,6 +35,7 @@ class ProfilesController < ApplicationController
     @days = (sec / 60 / 60 / 24).floor
     @comments_count = @user.comments.size
     @achievement = @user.achievement
+    @report = Report.new
   end
 
   def edit
