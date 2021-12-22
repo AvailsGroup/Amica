@@ -25,14 +25,18 @@
 
         <div class="col-md-12 border-top border-bottom">
           <ul class="nav nav-pills float-start countlist" role="tablist">
-            <li role="presentation">
-              <h3><%= @user.followers_list.size %><br>
-                <small>フォロー</small></h3>
-            </li>
-            <li role="presentation">
-              <h3><%= @user.followings_list.size %><br>
-                <small>フォロワー</small></h3>
-            </li>
+            <%= link_to profile_follow_path(@user.userid), class:"text-dark" do %>
+              <li role="presentation">
+                <h3><%= @user.followers_list.size %><br>
+                  <small>フォロー</small></h3>
+              </li>
+            <% end %>
+            <%= link_to profile_follower_path(@user.userid), class:"text-dark" do %>
+              <li role="presentation">
+                <h3><%= @user.followings_list.size %><br>
+                  <small>フォロワー</small></h3>
+              </li>
+            <% end %>
             <li role="presentation">
               <h3><%= @profile.grade %><br>
                 <small>学科</small></h3>
@@ -56,7 +60,6 @@
             <% if current_user.id != @user.id %>
               <% if following?(@following, @user) %>
                 <%= link_to 'フォロー解除', profile_relationship_path(@user.userid), method: :delete, class: "btn btn-primary followbtn", style: "color:#FFF;margin-left:4px;margin-right:22px" %>
-
                 <%= link_to 'チャット', chat_path(@user.userid), style: "color:#FFF;", class: "btn btn-primary followbtn mx-1" %>
               <% else %>
                 <%= link_to 'フォロー', profile_relationships_path(@user.userid), method: :post, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
@@ -120,7 +123,6 @@
                 <span>#<%= t %></span>
               <% end %>
             <% end %>
-
             <% if @user.tags.pluck(:name).empty? %>
               まだタグを入力していないようです！
             <% end %>
@@ -137,7 +139,6 @@
             <% @user.posts.includes(:likes, :comments).order(created_at: :desc).first(10).each do |p| %>
               <%= render "timelines/post", post: p, report: @report %>
             <% end %>
-
             <% if @user.posts.empty? %>
               まだ投稿がありません！
             <% end %>

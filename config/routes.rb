@@ -67,9 +67,9 @@ Rails.application.routes.draw do
   resources :profiles do
     resources :relationships, only: %i[create destroy]
     resources :block, only: %i[create destroy]
+    get :follow
+    get :follower
     collection do
-      get :follow
-      get :follower
       get :friends
       get :pickup
     end

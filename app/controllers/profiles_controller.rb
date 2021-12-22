@@ -98,14 +98,24 @@ class ProfilesController < ApplicationController
 
   def follower
     @users = User.preload(:profile, :favorite, :followers, :tags)
-    @user = @users.find(current_user.id)
+    unless @users.exists?(userid: params[:profile_id])
+      flash[:notice] = "ユーザーが見つかりませんでした。"
+      redirect_back fallback_location: pages_path
+      return
+    end
+    @user = @users.find_by(userid: params[:profile_id])
     @follower = @user.followers_list
     @pagenate = @follower.page(params[:page]).per(30)
   end
 
   def follow
     @users = User.preload(:profile, :favorite, :followings, :tags)
-    @user = @users.find(current_user.id)
+    unless @users.exists?(userid: params[:profile_id])
+      flash[:notice] = "ユーザーが見つかりませんでした。"
+      redirect_back fallback_location: pages_path
+      return
+    end
+    @user = @users.find_by(userid: params[:profile_id])
     @following = @user.followings_list
     @pagenate =  @following.page(params[:page]).per(30)
   end
