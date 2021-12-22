@@ -100,8 +100,16 @@
             </div>
           </div>
 
+
+
           <hr class="my-4">
           <%= f.fields_for :profile do |pf| %>
+
+            <div class="col-sm-12">
+              <%= pf.label "自己紹介", class: "form-label" %>
+              <%= pf.text_area :intro, autocomplete: "intro", class: "form-control", style: "height:100px", :placeholder => "自己紹介" %>
+            </div>
+
             <div class="col-12">
               <%= pf.label "学科", class: "form-label" %>
               <br/>

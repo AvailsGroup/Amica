@@ -27,7 +27,7 @@ class ProfilesController < ApplicationController
     end
     @profile = @user.profile
     @following = @current.followings_list
-    @communities = Community.includes([:community_members, :user, :tags]).where(id: @user.community_member.select(:community_id))
+    @communities = Community.includes(%i[community_members user tags]).where(id: @user.community_member.select(:community_id))
 
     @friends_count = @user.matchers.size
     @community_count = @user.community_member.size
@@ -121,8 +121,8 @@ class ProfilesController < ApplicationController
   private
 
   def user_params
-    attrs = [:nickname,:name,:userid,:tag_list,:accreditation_list]
-    params.require(:user).permit(attrs, profile_attributes:%i[grade school_class number student_id accreditation hobby])
+    attrs = %i[nickname name userid tag_list accreditation_list]
+    params.require(:user).permit(attrs, profile_attributes: %i[grade school_class number student_id accreditation hobby intro])
   end
 
   def permission
