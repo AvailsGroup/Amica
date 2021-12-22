@@ -10,13 +10,13 @@ class ApplicationController < ActionController::Base
 
     if current_user.ban
       sign_out current_user
-      flash.alert = "あなたはアカウント停止処分を受けています。"
-      redirect_to "/"
+      flash.alert = 'あなたはアカウント停止処分を受けています。'
+      redirect_to '/'
     end
   end
 
   def after_sign_in_path_for(resource)
-    flash[:alert] = "ようこそAmicaへ！ "
+    flash[:alert] = 'ようこそAmicaへ！ '
     pages_path
   end
 
@@ -38,6 +38,10 @@ class ApplicationController < ActionController::Base
     user_followings_list.any? { |u| u == other_user }
   end
 
+  def mute?(post, user)
+    post.mutes.any? { |p| p.user == user }
+  end
+
   def liked_by?(post, user)
     post.likes.any? { |l| l.user == user }
   end
@@ -46,20 +50,20 @@ class ApplicationController < ActionController::Base
     favorite.any? { |u| u.user_id == user.id } && favorite.any? { |u| u.favorite_user_id == other_user.id }
   end
 
-  def is_community_favorite?(favorite , user, community)
+  def is_community_favorite?(favorite, user, community)
     favorite.any? { |u| u.user_id == user.id } && favorite.any? { |u| u.community_id == community.id }
   end
 
   private
+
   def sign_in_required
     redirect_to new_user_session_url unless user_signed_in?
   end
 
   protected
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:agreement_terms])
   end
-
-
 
 end

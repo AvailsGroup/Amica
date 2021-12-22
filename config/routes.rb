@@ -23,8 +23,10 @@ Rails.application.routes.draw do
 
   #communities---------
   resources :communities do
-    resources :manage, only: [:create, :destroy]
-    resources :communities_security, only: [:create,:destroy]
+    resources :manage, only: %i[create destroy]
+    resources :reports, only:[:create]
+    get '/members' => 'communities#members'
+    resources :communities_security, only: %i[create destroy]
     get :members
     delete :kick
     put :change
@@ -34,12 +36,16 @@ Rails.application.routes.draw do
       get :joined
     end
   end
+  get 'community/pickup' => 'communities#pickup'
+  get 'community/joined' => 'communities#joined'
 
 
   #timelines-----------
   resources :timelines do
-    resources :likes,only:[:create,:destroy]
-    resources :comments, only: [:create, :destroy]
+    resources :likes, only: %i[create destroy]
+    resources :comments, only: %i[create destroy]
+    resources :reports, only: %i[new create]
+    resources :mute, only: %i[create destroy]
     collection do
       get :search
       get :follow
@@ -60,10 +66,9 @@ Rails.application.routes.draw do
   post 'page/community'=>'pages#community'
   get 'setting' => 'pages#setting'
   get 'faq' => 'pages#faq'
-
   #profiles------------
   resources :profiles do
-    resources :relationships, only: [:create,:destroy]
+    resources :relationships, only: %i[create destroy]
     resources :achievements, only: [:update]
     collection do
       get :follow
@@ -75,13 +80,16 @@ Rails.application.routes.draw do
 
   #chats--------------
   resources :chats
-
+  
   #searches-----------
   resources :searches, only: [:index] do
     get '/tag' => 'searches#tag'
   end
   post 'search/user' => 'searches#user'
   post 'search/community' => 'searches#community'
+
+  #notification--------
+  resources :notifications, only: %i[index destroy]
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'

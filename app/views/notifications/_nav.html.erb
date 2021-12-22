@@ -1,0 +1,16 @@
+<div class="nav-scroller bg-white shadow-sm">
+  <nav class="nav nav-underline" aria-label="Secondary navigation">
+    <%= link_to notifications_path, "aria-current": "page", class: "nav-link" do %>
+      通知
+      <span class="badge bg-light text-dark rounded-pill align-text-bottom">
+          <%= notifications.where(checked: false).size %>
+        </span>
+    <% end %>
+    <%= link_to follow_timelines_path, "aria-current": "page", class: "nav-link" do %>
+      運営からのメッセージ
+      <span class="badge bg-light text-dark rounded-pill align-text-bottom">
+          0
+        </span>
+    <% end %>
+  </nav>
+</div>

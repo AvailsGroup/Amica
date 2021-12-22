@@ -10,7 +10,7 @@
                 <%= image_tag @user.decorate.image, :size => '100x100', class: "userpicimg icon flex-shrink-0 question-icon" %>
             </div>
             <div class="names">
-              <h2 class="username"><%= @user.name %></h2>
+              <h2 class="username"><%= '<i class="fas fa-crown" style="color: yellow; stroke: #82a5c8;stroke-width: 18px;"></i>'.html_safe if @user.admin %><%= @user.name %></h2>
               <p style="margin-bottom: 0">(<%= @user.nickname %>)
                 <% if following?(@user.followings_list, @current) && !matchers?(@user,@current) %>
                   <i class="fas fa-user-plus"></i>
@@ -19,7 +19,6 @@
                 <% end %>
               </p>
               <p>@<%= @user.userid %></p>
-
             </div>
           </div>
         </div>
@@ -52,6 +51,7 @@
             </li>
           </ul>
 
+
           <div class="actions">
             <% if current_user.id != @user.id %>
               <% if following?(@following, @user) %>
@@ -59,6 +59,7 @@
               <% else %>
                   <%= link_to 'フォロー', profile_relationships_path(@user.userid), method: :post, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
               <% end %>
+              <%= link_to 'チャット',chat_path(@user.userid),style: "color:#FFF;",class:"btn btn-primary followbtn"%>
             <% else %>
               <%= link_to '編集', edit_profile_path, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
             <% end %>
