@@ -143,3 +143,15 @@ ul.tagit input[type="text"] {
   width: 200px;
   height: 200px;
 }
+.fav_star{
+  position: absolute;
+  z-index: 1;
+  top:3%;
+  right: 3%;
+}
+.report_icon{
+  position: absolute;
+  z-index: 1;
+  top:6%;
+  right: 3%;
+}
