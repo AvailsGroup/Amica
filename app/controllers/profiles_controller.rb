@@ -103,7 +103,7 @@ class ProfilesController < ApplicationController
   end
 
   def follow
-    @users = User.preload(:profile, :favorite,  :followings, :tags)
+    @users = User.preload(:profile, :favorite, :followings, :tags)
     @user = @users.find(current_user.id)
     @following = @user.followings_list
     @pagenate =  @following.page(params[:page]).per(30)
