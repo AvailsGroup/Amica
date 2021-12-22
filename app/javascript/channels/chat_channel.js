@@ -19,6 +19,8 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
         var content ="";
           if( data.image !== null){
             content = '<img style="max-width:100%" data-lity="data-lity" src="/chats/room'+room_id+'/'+data.image+'">';
+          }else if (data.file_name !== null) {
+            content = data.file_name +'を送信しました。'
           }else{
             content = AutoLink(data.content);
           }
@@ -44,9 +46,10 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
         }else {
           partnerimage = "/user_images/"+partnerimage
         }
-        var content ="";
         if( data.image !== null){
           content = '<img style="max-width:100%" data-lity="data-lity" src="/chats/room'+room_id+'/'+data.image+'">';
+        }else if (data.file_name !== null) {
+          content = data.file_name +'を送信しました。'
         }else{
           content = AutoLink(data.content);
         }
@@ -181,7 +184,8 @@ window.addEventListener("DOMContentLoaded",function() {
           $(this).before("<p class='error_msg'>アップロードできる画像の最大サイズは10MBです</p>") //エラーメッセージ表示
         }else {
           $('#file_submit_button').click('[data-behavior~=chat_speaker]', function () {
-            ChatChannel.speak(uploaded_file, room_id.value);
+            send_file.value = "file:" + uploaded_file.name
+            ChatChannel.speak(send_file.value, room_id.value);
             $($textarea).height(0);
             $('#fileModal').modal('hide');
             $('#file_uploader').val('');
