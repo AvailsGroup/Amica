@@ -18,9 +18,9 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
       if (data.user_id === Number(user_id)) {
         var content ="";
           if( data.image !== null){
-            content = '<img style="max-width:100%" data-lity="data-lity" src="/chats/room'+room_id+'/'+data.image+'">';
+            content = '<img style="max-width:100%" data-lity="data-lity" src="/chats/room'+room_id+'/images/'+data.image+'">';
           }else if (data.file_name !== null) {
-            content = data.file_name +'を送信しました。'
+            content = '【' + data.file_name +'】を送信しました。'
           }else{
             content = AutoLink(data.content);
           }
@@ -47,9 +47,9 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
           partnerimage = "/user_images/"+partnerimage
         }
         if( data.image !== null){
-          content = '<img style="max-width:100%" data-lity="data-lity" src="/chats/room'+room_id+'/'+data.image+'">';
+          content = '<img style="max-width:100%" data-lity="data-lity" src="/chats/room'+room_id+'/images/'+data.image+'">';
         }else if (data.file_name !== null) {
-          content = data.file_name +'を送信しました。'
+          content ='【' + data.file_name +'】を送信しました。'
         }else{
           content = AutoLink(data.content);
         }
@@ -187,9 +187,9 @@ window.addEventListener("DOMContentLoaded",function() {
           reader.readAsDataURL(uploaded_file);
           reader.onload = function() {
             var val = reader.result;
-            console.log(val)
           $('#file_submit_button').click('[data-behavior~=chat_speaker]', function () {
             send_file.value = uploaded_file.name
+            val = val + "@"+ send_file.value +"@"
             ChatChannel.speak(val, room_id.value);
             $($textarea).height(0);
             $('#fileModal').modal('hide');
