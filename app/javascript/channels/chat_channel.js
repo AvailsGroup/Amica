@@ -85,6 +85,8 @@ window.addEventListener("DOMContentLoaded",function() {
   const room_id = document.getElementById('room_id');
   const images = document.getElementById('image_uploader')
   const send_image = document.getElementById('send_image')
+  const files = document.getElementById('file_uploader')
+  const send_file = document.getElementById('send_file')
 
   //ブラウザがスクリーンサイズの50%以下or500px以下の時に相手の名前を消す
   const name = document.getElementById('user_name');
@@ -167,6 +169,21 @@ window.addEventListener("DOMContentLoaded",function() {
       $('#image_uploader').val('');
       bottom_scroll()
     }
+  });
+  $('#file_uploader').click(function(){
+    $(this).val('');
+      const maxFileSize=10485760 //アップロードできる最大サイズを指定(1048576=1MB 10485760=10MB)
+      $(files).change(function(){ //ファイルがアップロードされたら
+        $(".error_msg").remove()　//エラーメッセージ削除
+        let uploaded_file=$(this).prop('files')[0]; //アップロードファイル取得
+        if(maxFileSize < uploaded_file.size){ //もし上限値を超えた場合
+          $(this).val("")　//画像を空にする
+          $(this).before("<p class='error_msg'>アップロードできる画像の最大サイズは10MBです</p>") //エラーメッセージ表示
+        }else {
+
+
+        }
+      })
   });
 });
 
