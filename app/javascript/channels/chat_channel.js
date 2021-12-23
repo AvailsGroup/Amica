@@ -24,7 +24,8 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
           }else{
             content = AutoLink(data.content);
           }
-        $('#append').append('<div class="row message-body" style="white-space: pre;">'+
+
+        $('#append').append('<div class="row message-body text-wrap " style="white-space: pre;">'+
                               ' <div class="col-sm-12 message-main-sender" style=" position:relative;">'+
                                   '<div class="sender my-1 p-1 mt-2" style="max-width: 40%;">' +
                                     '<div class="messages container p-1">' +
@@ -89,20 +90,8 @@ window.addEventListener("DOMContentLoaded",function() {
   const images = document.getElementById('image_uploader')
   const send_image = document.getElementById('send_image')
   const files = document.getElementById('file_uploader')
-  const send_file = document.getElementById('send_file')
 
-  //ブラウザがスクリーンサイズの50%以下or500px以下の時に相手の名前を消す
-  const name = document.getElementById('user_name');
-  let screen_50width = screen.availWidth * 0.5 ;
-  window.addEventListener('resize', resizeWindow);
-  function  resizeWindow(){
-    let width_size = window.innerWidth;
-      if (screen_50width > width_size || screen_50width * 2 < 500 ) {
-        name.style.display = "none";
-      } else {
-        name.style.display = "";
-      }
-  }
+
   //改行や文字数に応じてtextareaを伸び縮みさせる
     let $textarea = $('#content');
     const lineHeight = parseInt($textarea.css('lineHeight'));
@@ -145,7 +134,8 @@ window.addEventListener("DOMContentLoaded",function() {
     let base64
     $(this).val('');
     $(images).change(function() {
-      var file = this.files[0];
+      let file = ""
+      file = this.files[0];
       if (!file.type.match(/^image\/(png|jpeg|gif)$/)) return;
       var image = new Image();
       var reader = new FileReader();
@@ -164,40 +154,50 @@ window.addEventListener("DOMContentLoaded",function() {
     });
   });
   $('#image_submit_button').click('[data-behavior~=chat_speaker]', function () {
-    if ( send_image.value != null ) {
+    if ( send_image.value != null && !content.value.match(/\S/g) ) {
       ChatChannel.speak(send_image.value,room_id.value);
       send_image.value = '';
       $($textarea).height(0);
       $('#imageModal').modal('hide');
       $('#image_uploader').val('');
       bottom_scroll()
+      location.reload()
     }
   });
-  $('#file_uploader').click(function(){
+  $(files).click(function(){
+    var val = ""
+    let file_name = ""
     $(this).val('');
       const maxFileSize=10485760 //アップロードできる最大サイズを指定(1048576=1MB 10485760=10MB)
-      $(files).change(function(){ //ファイルがアップロードされたら
+      $(files).change(function(){//アップロードファイル取得//ファイルがアップロードされたら
+        let uploaded_file = ""
         $(".error_msg").remove()　//エラーメッセージ削除
-        let uploaded_file = $(this).prop('files')[0]; //アップロードファイル取得
-        if(maxFileSize < uploaded_file.size){ //もし上限値を超えた場合
+        uploaded_file = $(this).prop('files')[0] //アップロードファイル取得
+        console.log(uploaded_file)
+        if (uploaded_file.type.match(/^image\/(png|jpeg|gif)$/)) {
+          $(this).val("")　//画像を空にする
+          $(this).before("<p class='error_msg'>こちらから画像は送信できません。</p>") //エラーメッセージ表示
+        }else if(maxFileSize < uploaded_file.size){ //もし上限値を超えた場合
           $(this).val("")　//画像を空にする
           $(this).before("<p class='error_msg'>アップロードできる最大サイズは10MBです</p>") //エラーメッセージ表示
+          console.log(uploaded_file)
         }else {
-          var reader = new FileReader;
-          reader.readAsDataURL(uploaded_file);
-          reader.onload = function() {
-            var val = reader.result;
           $('#file_submit_button').click('[data-behavior~=chat_speaker]', function () {
-            let file_name = uploaded_file.name
-            val = val + "@"+ file_name
-            ChatChannel.speak(val, room_id.value);
-            $($textarea).height(0);
-            $('#fileModal').modal('hide');
-            $('#file_uploader').val('');
-            bottom_scroll()
+            var reader = new FileReader;
+            reader.readAsDataURL(uploaded_file);
+            reader.onload = function() {
+              val = reader.result;
+              file_name = uploaded_file.name
+              val = val + "@" + file_name
+              ChatChannel.speak(val, room_id.value);
+              $($textarea).height(0);
+              $('#fileModal').modal('hide');
+              $('#file_uploader').val('');
+              bottom_scroll()
+              location.reload()
+            }
           })
         }
-      }
     });
   });
 });
