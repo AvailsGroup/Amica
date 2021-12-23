@@ -4,7 +4,7 @@ class BlockController < ApplicationController
     @user = @users.find(params[:profile_id])
     current_user?
     Block.create(user_id: current_user.id, blocked_user_id: @user.id)
-    # TODO: destroy follow and favorite
+    destroy_db
     flash[:notice] = "ユーザーをブロックしました"
     redirect_back fallback_location: pages_path
   end
@@ -24,6 +24,21 @@ class BlockController < ApplicationController
     if @user == current_user
       # TODO: redirect
       nil
+    end
+  end
+
+  def destroy_db
+    if Favorite.exists?(user_id: current_user.id, favorite_user_id: @user.id)
+      Favorite.find_by(user_id: current_user.id, favorite_user_id: @user.id).destroy
+    end
+    if Favorite.exists?(favorite_user_id: current_user.id, user_id: @user.id)
+      Favorite.find_by(favorite_user_id: current_user.id, user_id: @user.id).destroy
+    end
+    if Relationship.exists?(follower_id: current_user.id, followed_id: @user.id)
+      Relationship.find_by(follower_id: current_user.id, followed_id: @user.id).destroy
+    end
+    if Relationship.exists?(followed_id: current_user.id, follower_id: @user.id)
+      Relationship.find_by(followed_id: current_user.id, follower_id: @user.id).destroy
     end
   end
 end
