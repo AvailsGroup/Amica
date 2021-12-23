@@ -24,7 +24,6 @@ class ApplicationController < ActionController::Base
     value.is_a?(String) && Base64.strict_encode64(Base64.decode64(value)) == value
   end
 
-  #友達の配列を返す
   def matchers(user)
     user.followings & user.followers
   end
@@ -33,7 +32,10 @@ class ApplicationController < ActionController::Base
     matchers(user).include?(other_user)
   end
 
-  # 相手をフォローしていればtrueを返す
+  def blocked?(user, other_user)
+    user.blocks.any? { |u| u.blocked_user_id == other_user.id }
+  end
+
   def following?(user_followings_list, other_user)
     user_followings_list.any? { |u| u == other_user }
   end

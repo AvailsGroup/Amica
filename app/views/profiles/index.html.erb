@@ -16,8 +16,8 @@
 
   <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-2 row-cols-xxl-2 g-4　g-lg-4　p-3　my-3" id="community">
     <%= render 'profiles/list', name: "友達", count: @friends.size, list: @friends.first(5), path: friends_profiles_path %>
-    <%= render 'profiles/list', name: "フォロー", count: @following.size, list: @following.first(5), path: follow_profiles_path %>
-    <%= render 'profiles/list', name: "フォロワー", count: @follower.size, list: @follower.first(5), path: follower_profiles_path %>
+    <%= render 'profiles/list', name: "フォロー", count: @following.size, list: @following.first(5), path: profile_follow_path(current_user.userid) %>
+    <%= render 'profiles/list', name: "フォロワー", count: @follower.size, list: @follower.first(5), path: profile_follower_path(current_user.userid) %>
 
     <div class="col-md-6">
       <div class="my-3 p-3 bg-white rounded shadow-sm">
@@ -33,7 +33,6 @@
           <% end %>
         <% end %>
         <small class="d-block text-end mt-3">
-          <!-- TODO -->
           <%= link_to "すべて表示", pickup_profiles_path %>
         </small>
       </div>

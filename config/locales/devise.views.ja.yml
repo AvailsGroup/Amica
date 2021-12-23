@@ -33,6 +33,8 @@ ja:
         school_class: クラス
         number: 出席番号
         student_id: 学籍番号
+        twitter_id: twitterID
+        enrolled_year: 入学年
     models:
       user: ユーザー
   devise:

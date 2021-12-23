@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :banned
 
   def create
     @user = User.all
