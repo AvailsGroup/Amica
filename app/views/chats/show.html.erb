@@ -42,28 +42,7 @@
     </div>
   </div>
 </div>
-<!-- iamgeModal -->
-<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="imageModalLabel">画像送信</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <input type="file" id="image_uploader"  accept="image/*" data-behavior="chat_speaker">
-        <input type="hidden" id="send_image" value="" >
-      </div>
-      <canvas id="canvas" style="text-align: center;"></canvas>
-      <div class="modal-footer">
-        <label><!-- Button trigger modal -->
-          <button id="image_submit_button" style="display: none" type="submit" class="btn btn-primary form-control" ></button>
-          <span class="m-1" style="font-size: 1.6rem;color: #1b8798"><i class="fas fa-paper-plane"></i></span>
-        </label>
-      </div>
-    </div>
-  </div>
-</div>
+
 <!-- fileModal -->
 <div class="modal fade" id="fileModal" tabindex="-1" aria-labelledby="fileModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -74,8 +53,8 @@
       </div>
       <div class="modal-body">
         <input type="file" id="file_uploader" data-behavior="chat_speaker">
-        <input type="hidden" id="send_file" value="" >
       </div>
+      <img id="preview" src="" style="text-align: center; display: none;">
       <div class="modal-footer">
         <label><!-- Button trigger modal -->
           <button id="file_submit_button" style="display: none" type="submit" class="btn btn-primary form-control" ></button>
@@ -86,7 +65,7 @@
   </div>
 </div>
 <script>
-    document.addEventListener("DOMContentLoaded",function bottom_scroll(){
+    window.addEventListener('load', function bottom_scroll(){
         var elm = document.documentElement;
         var bottom = elm.scrollHeight - elm.clientHeight;
         window.scroll(0, bottom);
@@ -95,55 +74,52 @@
 
 <div id="body">
   <div id="chat" style="margin:1% 1% 70px 1%">
-      <div id="messages">
-        <span class="pb-3 mb-0"><strong style="color: black"><%= @user.name %> </strong></span>
-        <span class="small" style="color: gray">(<%= @user.nickname %>)</span>
-        <% last_message = nil %>
-        <% @message.each do |m| %>
-          <% if last_message == nil %>
-            <% last_message = m.created_at %>
-          <% end %>
-          <% if m.created_at - last_message == 0 %>
-            <div class="date"><%= m.created_at.strftime("%m月%d日") %></div>
-          <% elsif (m.created_at.to_date - last_message.to_date).to_i >= 1 %>
-            <div class="date"><%= m.created_at.strftime("%m月%d日") %></div>
-          <% end %>
-             <%= render 'chats/chat_message',message:m %>
+    <div id="messages">
+      <span class="pb-3 mb-0"><strong style="color: black"><%= @user.name %> </strong></span>
+      <span class="small" style="color: gray">(<%= @user.nickname %>)</span>
+      <% last_message = nil %>
+      <% @message.each do |m| %>
+        <% if last_message == nil %>
           <% last_message = m.created_at %>
         <% end %>
-        <div id="append" class="col-sm-12"></div>
-      </div>
+        <% if m.created_at - last_message == 0 %>
+          <div class="date"><%= m.created_at.strftime("%m月%d日") %></div>
+        <% elsif (m.created_at.to_date - last_message.to_date).to_i >= 1 %>
+          <div class="date"><%= m.created_at.strftime("%m月%d日") %></div>
+        <% end %>
+        <%= render 'chats/chat_message',message:m %>
+        <% last_message = m.created_at %>
+      <% end %>
+      <div id="append" class="col-sm-12"></div>
+    </div>
   </div>
 
 
   <div class="mt-2 row messageBox reply d-flex justify-content-center">
     <div class="col-sm-12 messageBox-inner">
-       <span class="clear"></span>
-       <div class="row ">
-         <div class="w-100 d-flex ">
-           <label>
-             <button id="image_button" style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#imageModal"></button>
-             <span class="m-1" style="font-size: 1.6rem;color: #f0c065"> <i class="fas fa-image"></i></span>
-           </label>
-           <label>
-             <button id="file_button" style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#fileModal"></button>
-             <span class="m-1" style="font-size: 1.4rem;color: #f0c065"><i class="fas fa-upload"></i></span>
-           </label>
+      <span class="clear"></span>
+      <div class="row ">
+        <div class="w-100 d-flex ">
+
+          <label>
+            <button id="file_button" style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#fileModal"></button>
+            <span class="m-1" style="font-size: 1.4rem;color: #f0c065"><i class="fas fa-upload"></i></span>
+          </label>
           <input type="hidden" id="room_id" value= <%= @room.id %> data-behavior="chat_speaker">
           <input type="hidden" id="user_id" value= <%= current_user.id %> data-behavior="chat_speaker">
-           <input type="hidden" id="partner_userid" value= <%= @user.userid %> >
-           <input type="hidden" id="partner_image" value= <%= @user.image %> >
+          <input type="hidden" id="partner_userid" value= <%= @user.userid %> >
+          <input type="hidden" id="partner_image" value= <%= @user.image %> >
           <%= text_area_tag  :content, nil, class:"form-control", placeholder:"message", data: {behavior: "chat_speaker"},id:"content" %>
           <label><!-- Button trigger modal -->
-             <button id="submit_button" style="display: none" type="submit" class="btn btn-primary form-control" ></button>
-             <span class="m-1" style="font-size: 1.6rem;color: #1b8798"><i class="fas fa-paper-plane"></i></span>
-           </label>
-           <label>
-             <button style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#menuModal"></button>
-             <span class="m-1" style="font-size: 1.6rem;color: #5e5e5e"> <i class="fas fa-th-large"></i></span>
-           </label>
-         </div>
-       </div>
+            <button id="submit_button" style="display: none" type="submit" class="btn btn-primary form-control" ></button>
+            <span class="m-1" style="font-size: 1.6rem;color: #1b8798"><i class="fas fa-paper-plane"></i></span>
+          </label>
+          <label>
+            <button style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#menuModal"></button>
+            <span class="m-1" style="font-size: 1.6rem;color: #5e5e5e"> <i class="fas fa-th-large"></i></span>
+          </label>
+        </div>
+      </div>
     </div>
   </div>
 </div>
