@@ -10,6 +10,7 @@ class ProfilesController < ApplicationController
   def index
     @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags).where.not(userid: nil)
     @user = @users.find(current_user.id)
+    @users = @users.reject { |u| @user.blocks.any? { |user| user.blocked_user_id == u.id } }
     @friends = matchers(@user)
     @following = @user.followings_list
     @follower = @user.followers_list
@@ -128,9 +129,10 @@ class ProfilesController < ApplicationController
   end
 
   def pickup
-    @users = User.includes(:tags,:followings,:followers).where.not(userid: nil)
+    @users = User.includes(:tags, :followings, :followers, :blocks).where.not(userid: nil)
     @user = @users.find(current_user.id)
     @users -= matchers(@user)
+    @users = @users.reject { |u| @user.blocks.any? { |user| user.blocked_user_id == u.id } }
     @users -= [@user]
     sort_pickup
     @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(30)
