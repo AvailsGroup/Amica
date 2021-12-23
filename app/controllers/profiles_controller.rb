@@ -5,10 +5,12 @@ class ProfilesController < ApplicationController
   helper_method :matchers?
   helper_method :is_user_favorite?
   helper_method :mute?
+  helper_method :blocked?
 
   def index
     @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags).where.not(userid: nil)
     @user = @users.find(current_user.id)
+    @users = @users.reject { |u| @user.blocks.any? { |user| user.blocked_user_id == u.id } }
     @friends = matchers(@user)
     @following = @user.followings_list
     @follower = @user.followers_list
@@ -23,7 +25,7 @@ class ProfilesController < ApplicationController
     @user = @users.find_by(userid: params[:id])
     @current = @users.find(current_user.id)
     if @user.nil?
-      redirect_to profiles_path, notice: "そのユーザーidは存在しませんでした"
+      redirect_to profiles_path, notice: 'そのユーザーidは存在しませんでした'
       return
     end
     @profile = @user.profile
@@ -52,10 +54,10 @@ class ProfilesController < ApplicationController
     @user = current_user
     permission
 
-    unless params["user"]["images"].nil?
+    unless params['user']['images'].nil?
       accepted_format = %w[.jpg .jpeg .png]
-      unless accepted_format.include? File.extname(params["user"]["images"].original_filename)
-        flash[:alert] = "画像は jpg jpeg png 形式のみ対応しております。"
+      unless accepted_format.include? File.extname(params['user']['images'].original_filename)
+        flash[:alert] = '画像は jpg jpeg png 形式のみ対応しております。'
         redirect_to(edit_profile_path)
         return
       end
@@ -64,11 +66,11 @@ class ProfilesController < ApplicationController
     unless current_user.update(user_params)
       @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
       @tag = current_user.tag_list.join(',')
-      render action: "edit"
+      render action: 'edit'
       return
     end
 
-    if !params["user"]["images"].nil? && base64?(params["user"]["image"]['data:image/jpeg;base64,'.length .. -1])
+    if !params['user']['images'].nil? && base64?(params['user']['image']['data:image/jpeg;base64,'.length .. -1])
       unless current_user.image.nil?
         if File.exist?("public/user_images/#{current_user.image}")
           File.delete("public/user_images/#{current_user.image}")
@@ -77,10 +79,10 @@ class ProfilesController < ApplicationController
       rand = rand(1_000_000..9_999_999)
       current_user.update(image: "#{current_user.id}#{rand}.jpg")
       File.open("public/user_images/#{current_user.image}", 'wb') do |f|
-        f.write(Base64.decode64(params["user"]["image"]['data:image/jpeg;base64,'.length .. -1]))
+        f.write(Base64.decode64(params['user']['image']['data:image/jpeg;base64,'.length .. -1]))
       end
     end
-    flash[:notice] = "ユーザー情報を編集しました"
+    flash[:notice] = 'ユーザー情報を編集しました'
     redirect_to profile_path(current_user.userid)
   end
 
@@ -91,54 +93,63 @@ class ProfilesController < ApplicationController
   def friends
     @users = User.preload(:profile, :favorite, :followers, :followings, :tags)
     @user = @users.find(current_user.id)
-    @friends = @user.matchers
-    @pagenate = Kaminari.paginate_array(@friends).page(params[:page]).per(30)
+    @users = @user.matchers
+    @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(30)
     @favorite = Favorite.all
+    @name = '友達'
+    render 'profiles/panel'
   end
 
   def follower
     @users = User.preload(:profile, :favorite, :followers, :tags)
     unless @users.exists?(userid: params[:profile_id])
-      flash[:notice] = "ユーザーが見つかりませんでした。"
+      flash[:notice] = 'ユーザーが見つかりませんでした。'
       redirect_back fallback_location: pages_path
       return
     end
     @user = @users.find_by(userid: params[:profile_id])
-    @follower = @user.followers_list
-    @pagenate = @follower.page(params[:page]).per(30)
+    @users = @user.followers_list
+    @pagenate = @users.page(params[:page]).per(30)
+    @name = 'フォロワー'
+    render 'profiles/panel'
   end
 
   def follow
     @users = User.preload(:profile, :favorite, :followings, :tags)
     unless @users.exists?(userid: params[:profile_id])
-      flash[:notice] = "ユーザーが見つかりませんでした。"
+      flash[:notice] = 'ユーザーが見つかりませんでした。'
       redirect_back fallback_location: pages_path
       return
     end
     @user = @users.find_by(userid: params[:profile_id])
-    @following = @user.followings_list
-    @pagenate =  @following.page(params[:page]).per(30)
+    @users = @user.followings_list
+    @pagenate = @users.page(params[:page]).per(30)
+    @name = 'フォロー'
+    render 'profiles/panel'
   end
 
   def pickup
-    @users = User.includes(:tags,:followings,:followers).where.not(userid: nil)
+    @users = User.includes(:tags, :followings, :followers, :blocks).where.not(userid: nil)
     @user = @users.find(current_user.id)
     @users -= matchers(@user)
+    @users = @users.reject { |u| @user.blocks.any? { |user| user.blocked_user_id == u.id } }
     @users -= [@user]
     sort_pickup
     @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(30)
+    @name = 'おすすめ'
+    render 'profiles/panel'
   end
 
   private
 
   def user_params
     attrs = %i[nickname name userid tag_list accreditation_list]
-    params.require(:user).permit(attrs, profile_attributes: %i[grade school_class number student_id accreditation hobby intro])
+    params.require(:user).permit(attrs, profile_attributes: %i[grade school_class number student_id accreditation hobby intro twitter_id])
   end
 
   def permission
     unless params[:id] == @user.userid
-      flash[:notice] = "権限がありません"
+      flash[:notice] = '権限がありません'
       redirect_to profile_path
     end
   end

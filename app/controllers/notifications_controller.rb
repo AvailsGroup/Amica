@@ -1,4 +1,6 @@
 class NotificationsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :banned
 
   def index
     @users = User.includes(:tags)

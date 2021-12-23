@@ -39,7 +39,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
       :password,
       :password_confirmation,
       profile_attributes:
-        %i[grade school_class number student_id]
+        %i[grade school_class number student_id enrolled_year]
     )
   end
 

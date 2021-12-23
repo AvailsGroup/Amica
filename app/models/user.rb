@@ -105,6 +105,9 @@ class User < ApplicationRecord
 
   has_many :mutes
 
+  has_many :blocks
+  has_many :passive_blocks, class_name: "Block", foreign_key: "blocked_user_id", dependent: :destroy
+
   def password_required?
     super && confirmed?
   end
