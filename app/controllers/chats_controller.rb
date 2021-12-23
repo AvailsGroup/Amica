@@ -23,7 +23,6 @@ class ChatsController < ApplicationController
 end
 
 private
-
 def latest_message?
   @room_partner = []
   @latest_message = []
