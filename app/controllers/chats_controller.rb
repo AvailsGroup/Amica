@@ -1,7 +1,7 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
-  require "uri"
+  helper_method :blocked?
 
   def index
     latest_message?
@@ -65,3 +65,6 @@ def in_room?
   end
 end
 
+def blocked?
+
+end
