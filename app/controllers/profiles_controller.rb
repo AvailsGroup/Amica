@@ -142,7 +142,7 @@ class ProfilesController < ApplicationController
 
   def user_params
     attrs = %i[nickname name userid tag_list accreditation_list]
-    params.require(:user).permit(attrs, profile_attributes: %i[grade school_class number student_id accreditation hobby intro])
+    params.require(:user).permit(attrs, profile_attributes: %i[grade school_class number student_id accreditation hobby intro twitter_id])
   end
 
   def permission

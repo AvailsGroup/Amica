@@ -102,7 +102,7 @@
 
 
 
-          <hr class="my-4">
+
           <%= f.fields_for :profile do |pf| %>
 
             <div class="col-sm-12">
@@ -110,11 +110,14 @@
               <%= pf.text_area :intro, autocomplete: "intro", class: "form-control", style: "height:100px", :placeholder => "自己紹介" %>
             </div>
 
+            <hr class="my-4">
+
             <div class="col-12">
               <%= pf.label "学科", class: "form-label" %>
               <br/>
               <%= pf.select :grade, grade, {}, class: 'form-select', id: "grade", include_blank: "", autocomplete: "grade" %>
             </div>
+
             <div class="col-sm-6">
               <%= pf.label "クラス 例:2T1→1を入力 (無い場合は0を入力)", class: "form-label" %>
               <%= pf.text_field :school_class, class: "form-control", id: "school_class", placeholder: "クラス", maxlength: "1" %>
@@ -129,6 +132,14 @@
               <%= pf.text_field :student_id, class: "form-control", id: "student_number", placeholder: "学籍番号", maxlength: "7" %>
             </div>
             <hr class="my-4">
+
+            <div class="col-sm-6">
+              <%= pf.label "TwitterID(任意)", class: "form-label" %>
+              <div class="input-group">
+                <span class="input-group-text">@</span>
+                <%= pf.text_field :twitter_id, class: "form-control", id: "userid", placeholder: "Twitter", maxlength: "20" %>
+              </div>
+            </div>
 
             <div class="col-sm-12">
               <div class="search-area-colum form-contents">

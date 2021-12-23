@@ -65,6 +65,10 @@
               </li>
             <% end %>
             <li role="presentation">
+              <h3><%= @profile.enrolled_year %><br>
+                <small>入学年</small></h3>
+            </li>
+            <li role="presentation">
               <h3><%= @profile.grade %><br>
                 <small>学科</small></h3>
             </li>
@@ -82,19 +86,20 @@
             </li>
           </ul>
 
-
-          <div class="actions">
-            <% if current_user.id != @user.id %>
-              <% if following?(@following, @user) %>
-                <%= link_to 'フォロー解除', profile_relationship_path(@user.userid), method: :delete, class: "btn btn-primary followbtn", style: "color:#FFF;margin-left:4px;margin-right:22px" %>
-                <%= link_to 'チャット', chat_path(@user.userid), style: "color:#FFF;", class: "btn btn-primary followbtn mx-1" %>
+          <% unless blocked?(current_user, @user) || blocked?(@user, current_user) %>
+            <div class="actions">
+              <% if current_user.id != @user.id %>
+                <% if following?(@following, @user) %>
+                  <%= link_to 'フォロー解除', profile_relationship_path(@user.userid), method: :delete, class: "btn btn-primary followbtn", style: "color:#FFF;margin-left:4px;margin-right:22px" %>
+                  <%= link_to 'チャット', chat_path(@user.userid), style: "color:#FFF;", class: "btn btn-primary followbtn mx-1" %>
+                <% else %>
+                  <%= link_to 'フォロー', profile_relationships_path(@user.userid), method: :post, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
+                <% end %>
               <% else %>
-                <%= link_to 'フォロー', profile_relationships_path(@user.userid), method: :post, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
+                <%= link_to '編集', edit_profile_path, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
               <% end %>
-            <% else %>
-              <%= link_to '編集', edit_profile_path, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
@@ -105,6 +110,11 @@
       <h2>ユーザーをブロックしています</h2>
     </div>
   <% else %>
+    <% if blocked?(@user, current_user) %>
+      <div class="text-center">
+        <h3>ユーザーにブロックされています</h3>
+      </div>
+    <% end %>
     <div class="row d-flex justify-content-around center-block">
       <div class="col-md-12">
         <div class="panel panel-default">
@@ -112,6 +122,9 @@
             <h3 class="page-header">自己紹介</h3>
             <p class="page-subtitle">
               <%= @profile.intro %>
+              <% if @profile.intro.nil? %>
+                未入力です
+              <% end %>
             </p>
           </div>
         </div>
@@ -161,6 +174,18 @@
           </div>
         </div>
       </div>
+
+
+      <% unless @profile.twitter_id.nil? || @profile.twitter_id == '' %>
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading m-3">
+              <h3 class="page-header" style="color: #1da1f2"><i class="fab fa-twitter" style="margin-right: 3px"></i>Twitter</h3>
+              <%= link_to "@#{@profile.twitter_id}" , "https://twitter.com/#{@profile.twitter_id}" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
 
       <div class="col-md-12">
         <div class="panel panel-default">
