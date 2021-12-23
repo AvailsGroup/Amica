@@ -1,4 +1,7 @@
 class BlockController < ApplicationController
+  before_action :authenticate_user!
+  before_action :banned
+
   def create
     @users = User.includes(:blocks)
     @user = @users.find(params[:profile_id])
