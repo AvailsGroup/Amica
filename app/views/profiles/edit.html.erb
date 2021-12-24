@@ -52,7 +52,7 @@
               </div>
               <div class="canvas_wrapper">
                 <canvas id="source_canvas" width="1" height="1"></canvas>
-              </div>
+              </div>=
               <div class="modal-footer">
                 <button type="button" id="close_button" class="btn btn-primary" data-bs-dismiss="modal">画像を切り取る</button>
               </div>
@@ -83,6 +83,7 @@
     <div class="row g-3">
       <div class="col-md-12">
         <div class="row g-3">
+          <h3 class="text-center">プロフィール</h3>
           <div class="col-sm-6">
             <%= f.label "本名(2~20文字)", class: "form-label" %>
             <%= f.text_field :name, class: "form-control", id: "name", placeholder: "Name", maxlength: "20" %>
@@ -99,18 +100,13 @@
               <%= f.text_field :userid, class: "form-control", id: "userid", placeholder: "UserID", maxlength: "20" %>
             </div>
           </div>
-
-
-
-
           <%= f.fields_for :profile do |pf| %>
-
             <div class="col-sm-12">
               <%= pf.label "自己紹介", class: "form-label" %>
               <%= pf.text_area :intro, autocomplete: "intro", class: "form-control", style: "height:100px", :placeholder => "自己紹介" %>
             </div>
-
             <hr class="my-4">
+            <h3 class="text-center">学校</h3>
 
             <div class="col-12">
               <%= pf.label "学科", class: "form-label" %>
@@ -132,15 +128,38 @@
               <%= pf.text_field :student_id, class: "form-control", id: "student_number", placeholder: "学籍番号", maxlength: "7" %>
             </div>
             <hr class="my-4">
-
-            <div class="col-sm-6">
-              <%= pf.label "TwitterID(任意)", class: "form-label" %>
+            <h3 class="text-center">SNS</h3>
+            <div class="col-sm-12">
+              <%= pf.label "Twitter(任意)", class: "form-label" %>
               <div class="input-group">
                 <span class="input-group-text">@</span>
-                <%= pf.text_field :twitter_id, class: "form-control", id: "userid", placeholder: "Twitter", maxlength: "20" %>
+                <%= pf.text_field :twitter_id, class: "form-control", id: "userid", placeholder: "Twitter", maxlength: "15" %>
               </div>
             </div>
 
+            <div class="col-sm-12">
+              <%= pf.label "Instagram(任意)", class: "form-label" %>
+              <div class="input-group">
+                <%= pf.text_field :instagram_id, class: "form-control", id: "userid", placeholder: "Instagram", maxlength: "20" %>
+              </div>
+            </div>
+            <h5 class="text-center mb-0">Discord</h5>
+            <div class="col-sm-10 my-0">
+              <%= pf.label "name(任意)", class: "form-label" %>
+              <div class="input-group">
+                <%= pf.text_field :discord_name, class: "form-control", id: "userid", placeholder: "discord", maxlength: "30" %>
+              </div>
+            </div>
+            <div class="col-sm-2 my-0">
+              <%= pf.label "tag", class: "form-label" %>
+              <div class="input-group">
+                <span class="input-group-text">#</span>
+                <%= pf.text_field :discord_tag, class: "form-control", id: "userid", placeholder: "tag", maxlength: "4" %>
+              </div>
+            </div>
+
+            <hr class="my-4">
+            <h3 class="text-center">タグ</h3>
             <div class="col-sm-12">
               <div class="search-area-colum form-contents">
                 <%= f.label "資格 (1つ2~20文字 半角英数字,ひらがな,カタカナ,漢字)", class: "form-label" %>
