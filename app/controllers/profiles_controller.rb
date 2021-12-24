@@ -71,18 +71,18 @@ class ProfilesController < ApplicationController
     end
 
     if !params['user']['images'].nil? && base64?(params['user']['image']['data:image/jpeg;base64,'.length .. -1])
-      unless current_user.image.nil?
-        if File.exist?("public/user_images/#{current_user.image}")
-          File.delete("public/user_images/#{current_user.image}")
-        end
-      end
-      rand = rand(1_000_000..9_999_999)
-      current_user.update(image: "#{current_user.id}#{rand}.jpg")
-      File.open("public/user_images/#{current_user.image}", 'wb') do |f|
+      filename = "#{current_user.id}#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.jpg"
+      Dir.mkdir("#{Rails.root}/tmp/users_image/") unless Dir.exist?("#{Rails.root}/tmp/users_image/")
+      File.open("#{Rails.root}/tmp/users_image/#{filename}", 'wb+') do |f|
         f.write(Base64.decode64(params['user']['image']['data:image/jpeg;base64,'.length .. -1]))
       end
+      f = File.open("#{Rails.root}/tmp/users_image/#{filename}")
+      current_user.image.attach(io: f, filename: filename)
+      f.close
+      File.delete("#{Rails.root}/tmp/users_image/#{filename}")
     end
     flash[:notice] = 'ユーザー情報を編集しました'
+
     redirect_to profile_path(current_user.userid)
   end
 
