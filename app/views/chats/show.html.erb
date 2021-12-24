@@ -99,14 +99,12 @@
     <div class="col-sm-12 messageBox-inner">
       <span class="clear"></span>
       <div class="row ">
-        <div class="w-100 d-flex ">
-          <% if !blocked?(current_user, @user) %>
-            <div class="row align-items-end">
-              <div class="col">
-            <span class="" style="text-align: center">ユーザーをブロックしています</span>
-              </div>
-            </div>
+          <% if blocked?(current_user, @user) %>
+          <div style="text-align: center">
+            <span >ユーザーをブロックしています</span>
+          </div>
           <% else %>
+            <div class="w-100 d-flex ">
             <label>
               <button id="file_button" style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#fileModal"></button>
               <span class="m-1" style="font-size: 1.4rem;color: #f0c065"><i class="fas fa-upload"></i></span>
