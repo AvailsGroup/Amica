@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
   helper_method :blocked?
 
   def index
-    @users = User.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags).where.not(userid: nil)
+    @users = User.with_attached_image.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags).where.not(userid: nil)
     @user = @users.find(current_user.id)
     @users = @users.reject { |u| @user.blocks.any? { |user| user.blocked_user_id == u.id } }
     @friends = matchers(@user)

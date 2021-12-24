@@ -77,7 +77,7 @@ class CommunitiesController < ApplicationController
       render action: 'edit'
       return
     end
-    check_image(true)
+    check_image
     flash[:notice] = 'ユーザー情報を編集しました'
     redirect_to community_path(@community.id)
   end
@@ -107,7 +107,7 @@ class CommunitiesController < ApplicationController
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
     @page = 'banned'
-    render "communities/members"
+    render 'communities/members'
   end
 
   def kick
@@ -122,7 +122,7 @@ class CommunitiesController < ApplicationController
         Favorite.find_by(user_id: @user.id, community_id: @community.id).destroy
       end
     end
-    flash[:notice] = "ユーザーを強制退出させました。"
+    flash[:notice] = 'ユーザーを強制退出させました。'
     redirect_to(community_members_path(@community.id))
   end
 
@@ -139,7 +139,7 @@ class CommunitiesController < ApplicationController
   private
 
   def community_ban?(community)
-    community.community_securities.any? { |c| c.user_id == @user.id}
+    community.community_securities.any? { |c| c.user_id == @user.id }
   end
 
   def view_parameter
@@ -161,14 +161,14 @@ class CommunitiesController < ApplicationController
 
   def exists_community_security
     if CommunitySecurity.exists?(community_id:@community.id, user_id:@user.id)
-      flash[:alert] = "あなたはこのコミュニティから参加禁止にされています。"
+      flash[:alert] = 'あなたはこのコミュニティから参加禁止にされています。'
       redirect_to communities_path
     end
   end
 
   def redirect(page)
     @page = page
-    render "communities/index"
+    render 'communities/index'
   end
 
   def check_format(path)
@@ -181,26 +181,21 @@ class CommunitiesController < ApplicationController
     end
   end
 
-  def check_image(delete = false)
+  def check_image
     if !params['community']['images'].nil? && base64?(params['community']['image']['data:image/jpeg;base64,'.length .. -1])
-      delete_old_image if delete
       save_image
     end
   end
 
-  def delete_old_image
-    unless @community.image.nil?
-      if File.exist?("public/communities_image/#{@community.image}")
-        File.delete("public/communities_image/#{@community.image}")
-      end
-    end
-  end
-
   def save_image
-    rand = rand(1_000_000..9_999_999)
-    @community.update(image: "#{@community.id}#{rand}.jpg")
-    File.open("public/communities_image/#{@community.image}", 'wb') do |f|
+    filename = "#{@community.id}#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.jpg"
+    Dir.mkdir("#{Rails.root}/tmp/communities_image/") unless Dir.exist?("#{Rails.root}/tmp/communities_image/")
+    File.open("#{Rails.root}/tmp/communities_image/#{filename}", 'wb+') do |f|
       f.write(Base64.decode64(params['community']['image']['data:image/jpeg;base64,'.length .. -1]))
     end
+    f = File.open("#{Rails.root}/tmp/communities_image/#{filename}")
+    @community.image.attach(io: f, filename: filename)
+    f.close
+    File.delete("#{Rails.root}/tmp/communities_image/#{filename}")
   end
 end
