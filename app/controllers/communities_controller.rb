@@ -45,11 +45,19 @@ class CommunitiesController < ApplicationController
     @community = Community.new(community_params)
     @community.user_id = current_user.id
 
-    check_format(new_community_path)
+    unless params['community']['images'].nil?
+      accepted_format = %w[.jpg .jpeg .png]
+      unless accepted_format.include? File.extname(params['community']['images'].original_filename)
+        flash[:alert] = '画像は jpg jpeg png 形式のみ対応しております。'
+        @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+        @tag_list = params[:community][:tag_list]
+        render 'communities/new'
+        return
+      end
+    end
 
     unless @community.save
-      @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-      @tag_list = params[:community][:tag_list]
+      can_not_saved
       render 'communities/new'
       return
     end
@@ -71,13 +79,24 @@ class CommunitiesController < ApplicationController
   def update
     @community = Community.find(params[:id])
     permission
-    check_format(edit_community_path)
+
+    unless params['community']['images'].nil?
+      accepted_format = %w[.jpg .jpeg .png]
+      unless accepted_format.include? File.extname(params['community']['images'].original_filename)
+        flash[:alert] = '画像は jpg jpeg png 形式のみ対応しております。'
+        @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+        @tag_list = params[:community][:tag_list]
+        render 'communities/edit'
+        return
+      end
+    end
+
     unless @community.update(community_params)
-      @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-      @tag = @community.tag_list.join(',')
+      can_not_saved
       render action: 'edit'
       return
     end
+
     check_image
     flash[:notice] = 'ユーザー情報を編集しました'
     redirect_to community_path(@community.id)
@@ -172,18 +191,20 @@ class CommunitiesController < ApplicationController
     render 'communities/index'
   end
 
-  def check_format(path)
-    unless params['community']['images'].nil?
-      accepted_format = %w[.jpg .jpeg .png]
-      unless accepted_format.include? File.extname(params['community']['images'].original_filename)
-        flash[:alert] = '画像は jpg jpeg png 形式のみ対応しております。'
-        redirect_to(path)
-      end
+  def can_not_saved
+    @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+    @tag_list = params[:community][:tag_list]
+    if base64?(params['community']['image']['data:image/jpeg;base64,'.length .. -1])
+      @image = params[:community][:image]
+      @image_x = params[:community][:image_x]
+      @image_y = params[:community][:image_y]
+      @image_w = params[:community][:image_w]
+      @image_h = params[:community][:image_h]
     end
   end
 
   def check_image
-    if !params['community']['images'].nil? && base64?(params['community']['image']['data:image/jpeg;base64,'.length .. -1])
+    if !params[:community][:image].nil? && base64?(params[:community][:image]['data:image/jpeg;base64,'.length .. -1])
       save_image
     end
   end
