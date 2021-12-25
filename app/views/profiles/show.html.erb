@@ -181,7 +181,7 @@
           <div class="panel panel-default">
             <div class="panel-heading m-3">
               <h3 class="page-header" style="color: #1da1f2"><i class="fab fa-twitter" style="margin-right: 3px"></i>Twitter</h3>
-              <%= link_to "@#{@profile.twitter_id}" , "https://twitter.com/#{@profile.twitter_id}" %>
+              <div style="font-size: 18px"><%= link_to "@#{@profile.twitter_id}" , "https://twitter.com/#{@profile.twitter_id}" %></div>
             </div>
           </div>
         </div>
@@ -192,7 +192,7 @@
           <div class="panel panel-default">
             <div class="panel-heading m-3">
               <h3 class="page-header" style="color: #d93078"><i class="fab fa-instagram" style="margin-right: 3px"></i>Instagram</h3>
-              <%= link_to "#{@profile.instagram_id}" , "https://Instagram.com/#{@profile.instagram_id}" %>
+              <div style="font-size: 18px"><%= link_to "#{@profile.instagram_id}" , "https://instagram.com/#{@profile.instagram_id}" %></div>
             </div>
           </div>
         </div>
@@ -203,7 +203,7 @@
           <div class="panel panel-default">
             <div class="panel-heading m-3">
               <h3 class="page-header" style="color: #535FEE"><i class="fab fa-discord" style="margin-right: 3px"></i>Discord</h3>
-              <%= "#{@profile.discord_name}##{@profile.discord_tag}" %>
+              <div style="font-size: 18px"><%= "#{@profile.discord_name}##{@profile.discord_tag}" %></div>
             </div>
           </div>
         </div>
