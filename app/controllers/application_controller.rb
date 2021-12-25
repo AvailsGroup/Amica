@@ -40,10 +40,6 @@ class ApplicationController < ActionController::Base
     user_followings_list.any? { |u| u == other_user }
   end
 
-  def mute?(post, user)
-    post.mutes.any? { |p| p.user == user }
-  end
-
   def liked_by?(post, user)
     post.likes.any? { |l| l.user == user }
   end

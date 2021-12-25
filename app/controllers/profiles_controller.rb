@@ -4,7 +4,6 @@ class ProfilesController < ApplicationController
   helper_method :following?
   helper_method :matchers?
   helper_method :is_user_favorite?
-  helper_method :mute?
   helper_method :blocked?
 
   def index
