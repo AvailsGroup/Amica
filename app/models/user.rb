@@ -9,6 +9,8 @@ class User < ApplicationRecord
   acts_as_taggable
   acts_as_taggable_on :accreditations
 
+  has_one_attached :image
+
   before_create :build_default_profile
 
   validate :validate_tag

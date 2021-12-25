@@ -9,10 +9,6 @@ document.addEventListener("DOMContentLoaded", function(){
         $(this).val('');
         document.getElementById("prev_img").style.display = '';
         document.getElementById("cropped_canvas").style.display = 'none';
-        var result = document.getElementById('result-img');
-        result.style.display="none";
-        let base64 = "";
-        result.src = base64;
         $('#user_icon').fadeIn();
     });
 
