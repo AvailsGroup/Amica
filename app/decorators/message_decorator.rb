@@ -10,7 +10,7 @@ class MessageDecorator < ApplicationDecorator
   #     end
   #   end
   def images
-    object.image.nil? ? nil : "/chats/room#{object.room_id}/images/#{object.image}"
+    object.image.nil? ? nil : "/chats/room#{object.room_id}/files/#{object.image}"
   end
 
   def time

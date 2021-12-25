@@ -93,3 +93,5 @@ gem 'dotenv-rails'
 gem 'activesupport'
 
 gem 'draper'
+
+gem 'image_processing'
