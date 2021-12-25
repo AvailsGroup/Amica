@@ -50,7 +50,7 @@
         <div class="col-sm-12">
           <div class="search-area-colum form-contents">
             <%= f.label "タグ (1つ2~20文字)", class: "form-label" %>
-            <%= f.text_field :tag_list, id: "myTags", autocomplete: "tag_list" %>
+            <%= f.text_field :tag_list, id: "myTags", value: "#{@tag_list if defined?(@tag_list)}" %>
           </div>
         </div>
 

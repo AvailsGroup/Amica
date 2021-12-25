@@ -49,6 +49,7 @@ class CommunitiesController < ApplicationController
 
     unless @community.save
       @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+      @tag_list = params[:community][:tag_list]
       render 'communities/new'
       return
     end
