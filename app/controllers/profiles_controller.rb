@@ -52,25 +52,37 @@ class ProfilesController < ApplicationController
 
   def update
     @user = current_user
+    pp params
     permission
 
     unless params['user']['images'].nil?
       accepted_format = %w[.jpg .jpeg .png]
       unless accepted_format.include? File.extname(params['user']['images'].original_filename)
         flash[:alert] = '画像は jpg jpeg png 形式のみ対応しております。'
-        redirect_to(edit_profile_path)
+        @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+        @tag_list = params[:user][:tag_list]
+        @accreditation_list = params[:user][:accreditation_list]
+        render action: 'edit'
         return
       end
     end
 
     unless current_user.update(user_params)
       @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-      @tag = current_user.tag_list.join(',')
+      @tag_list = params[:user][:tag_list]
+      @accreditation_list = params[:user][:accreditation_list]
+      if base64?(params[:user][:image]['data:image/jpeg;base64,'.length .. -1])
+        @image = params[:user][:image]
+        @image_x = params[:user][:image_x]
+        @image_y = params[:user][:image_y]
+        @image_w = params[:user][:image_w]
+        @image_h = params[:user][:image_h]
+      end
       render action: 'edit'
       return
     end
 
-    if !params['user']['images'].nil? && base64?(params['user']['image']['data:image/jpeg;base64,'.length .. -1])
+    if !params['user']['image'].nil? && base64?(params['user']['image']['data:image/jpeg;base64,'.length .. -1])
       filename = "#{current_user.id}#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.jpg"
       Dir.mkdir("#{Rails.root}/tmp/users_image/") unless Dir.exist?("#{Rails.root}/tmp/users_image/")
       File.open("#{Rails.root}/tmp/users_image/#{filename}", 'wb+') do |f|
