@@ -80,10 +80,12 @@
               <h3><%= @profile.number %><br>
                 <small>出席番号</small></h3>
             </li>
-            <li role="presentation">
-              <h3><%= @profile.student_id %><br>
-                <small>学籍番号</small></h3>
-            </li>
+            <% if @user.setting.visible_enrolled_year %>
+              <li role="presentation">
+                <h3><%= @profile.student_id %><br>
+                  <small>学籍番号</small></h3>
+              </li>
+            <% end %>
           </ul>
 
           <% unless blocked?(current_user, @user) || blocked?(@user, current_user) %>
@@ -180,8 +182,9 @@
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading m-3">
-              <h3 class="page-header" style="color: #1da1f2"><i class="fab fa-twitter" style="margin-right: 3px"></i>Twitter</h3>
-              <div style="font-size: 18px"><%= link_to "@#{@profile.twitter_id}" , "https://twitter.com/#{@profile.twitter_id}" %></div>
+              <h3 class="page-header" style="color: #1da1f2"><i class="fab fa-twitter" style="margin-right: 3px"></i>Twitter
+              </h3>
+              <div style="font-size: 18px"><%= link_to "@#{@profile.twitter_id}", "https://twitter.com/#{@profile.twitter_id}" %></div>
             </div>
           </div>
         </div>
@@ -191,8 +194,9 @@
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading m-3">
-              <h3 class="page-header" style="color: #d93078"><i class="fab fa-instagram" style="margin-right: 3px"></i>Instagram</h3>
-              <div style="font-size: 18px"><%= link_to "#{@profile.instagram_id}" , "https://instagram.com/#{@profile.instagram_id}" %></div>
+              <h3 class="page-header" style="color: #d93078"><i class="fab fa-instagram" style="margin-right: 3px"></i>Instagram
+              </h3>
+              <div style="font-size: 18px"><%= link_to "#{@profile.instagram_id}", "https://instagram.com/#{@profile.instagram_id}" %></div>
             </div>
           </div>
         </div>
@@ -202,7 +206,8 @@
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading m-3">
-              <h3 class="page-header" style="color: #535FEE"><i class="fab fa-discord" style="margin-right: 3px"></i>Discord</h3>
+              <h3 class="page-header" style="color: #535FEE"><i class="fab fa-discord" style="margin-right: 3px"></i>Discord
+              </h3>
               <div style="font-size: 18px"><%= "#{@profile.discord_name}##{@profile.discord_tag}" %></div>
             </div>
           </div>

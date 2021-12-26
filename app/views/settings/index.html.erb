@@ -1,3 +1,29 @@
 <div class="container">
   <h1>設定</h1>
+  <br/>
+  <button type="button" class="btn btn-secondary btn-lg w-100 mt-2" style="background-color: #00bfff" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <span>プロフィール非表示設定</span>
+  </button>
+  <div class="collapse show mb-3" id="collapseExample">
+    <div class="mb-3 p-3 bg-white rounded shadow-sm">
+      <br />
+      <p>学籍番号を
+        <% if @user.setting.visible_enrolled_year %>
+          <%= link_to "非表示にする", disable_enrolled_year_settings_path, method: :delete, class: "btn btn-primary", data: { disable_with: '変更中...' } %>
+        <% else %>
+          <%= link_to "表示する", enable_enrolled_year_settings_path, method: :post, class: "btn btn-primary", data: { disable_with: '変更中...' } %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-secondary btn-lg w-100 mt-2" style="background-color: #00bfff" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+    <span>きせかえ</span>
+  </button>
+  <div class="collapse show mb-3" id="collapseExample2">
+    <div class="mb-3 p-3 bg-white rounded shadow-sm">
+      <br />
+      <p>Coming Soon...</p>
+    </div>
+  </div>
 </div>
