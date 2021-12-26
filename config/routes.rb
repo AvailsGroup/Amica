@@ -63,6 +63,13 @@ Rails.application.routes.draw do
   get 'setting' => 'pages#setting'
   get 'faq' => 'pages#faq'
 
+  resources :settings, only: %i[index] do
+    collection do
+      post :enable_enrolled_year
+      delete :disable_enrolled_year
+    end
+  end
+
   # profiles------------
   resources :profiles do
     resources :relationships, only: %i[create destroy]

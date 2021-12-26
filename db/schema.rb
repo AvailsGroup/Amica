@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_23_152903) do
+ActiveRecord::Schema.define(version: 2021_12_26_181101) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_152903) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
+    t.string "file_name"
   end
 
   create_table "mutes", force: :cascade do |t|
@@ -199,6 +200,13 @@ ActiveRecord::Schema.define(version: 2021_12_23_152903) do
   create_table "rooms", force: :cascade do |t|
     t.integer "started_userid"
     t.integer "invited_userid"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.boolean "visible_enrolled_year", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
