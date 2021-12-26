@@ -22,15 +22,17 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     self.resource = resource_class.find_by_confirmation_token!(confirmation_token)
     if resource.update(confirm_params)
       Achievement.create(user_id: resource.id)
+      Setting.create(user_id: resource.id)
       self.resource = resource_class.confirm_by_token(confirmation_token)
       set_flash_message :notice, :confirmed
       sign_in_and_redirect(resource_name, resource)
     else
-      render action: "show"
+      render action: 'show'
     end
   end
 
   private
+
   def confirm_params
     params.require(:user).permit(
       :name,
@@ -39,7 +41,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
       :password,
       :password_confirmation,
       profile_attributes:
-        %i[grade school_class number student_id]
+        %i[grade school_class number student_id enrolled_year]
     )
   end
 

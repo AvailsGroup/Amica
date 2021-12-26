@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   #protect_from_forgery with: :exception
-  before_action :block_foreign_hosts
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def banned
@@ -28,7 +27,6 @@ class ApplicationController < ActionController::Base
     value.is_a?(String) && Base64.strict_encode64(Base64.decode64(value)) == value
   end
 
-  #友達の配列を返す
   def matchers(user)
     user.followings & user.followers
   end
@@ -37,13 +35,12 @@ class ApplicationController < ActionController::Base
     matchers(user).include?(other_user)
   end
 
-  # 相手をフォローしていればtrueを返す
-  def following?(user_followings_list, other_user)
-    user_followings_list.any? { |u| u == other_user }
+  def blocked?(user, other_user)
+    user.blocks.any? { |u| u.blocked_user_id == other_user.id }
   end
 
-  def mute?(post, user)
-    post.mutes.any? { |p| p.user == user }
+  def following?(user_followings_list, other_user)
+    user_followings_list.any? { |u| u == other_user }
   end
 
   def liked_by?(post, user)
@@ -62,14 +59,6 @@ class ApplicationController < ActionController::Base
 
   def sign_in_required
     redirect_to new_user_session_url unless user_signed_in?
-  end
-
-  def whitelisted?(ip)
-    %w[218.45.244.196 218.45.244.196 8.37.43.227 218.45.244.196 8.37.43.168 8.37.43.185 127.0.0.1].include?(ip)
-  end
-
-  def block_foreign_hosts
-    redirect_to 'https://www.google.com' unless whitelisted?(request.remote_ip)
   end
 
   protected

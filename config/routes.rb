@@ -3,37 +3,29 @@ Rails.application.routes.draw do
   get 'users/controller'
 
   devise_for :users, controllers: {
-    :registrations => 'users/registrations',
-    :sessions => 'users/sessions',
-    :confirmations => 'users/confirmations',
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    confirmations: 'users/confirmations'
   }
 
   devise_scope :user do
     patch 'users/confirm' => 'users/confirmations#confirm'
   end
 
-  #top----------------
+  # top----------------
   get '/' => 'home#top'
   get '/about' => 'home#about'
-  get '/contact' => 'maller#new'
+  get '/contact' => 'mailer#new'
   get '/static' => 'home#static'
   get '/privacy' => 'home#privacy'
   get '/help_page' => 'home#help_page'
   post 'mailer/create', to: 'mailer#create'
 
-  resources :maller
-
-  #pages---------------
-  resources :pages
-  get 'users/setting' => 'pages#setting'
-  get 'users/tutorial'=> 'pages#tutorial'
-
-  #communities---------
+  # communities---------
   resources :communities do
     resources :manage, only: %i[create destroy]
-    resources :reports,only:[:create]
-    get '/members' => 'communities#members'
     resources :communities_security, only: %i[create destroy]
+    resources :reports, only: [:create]
     get :members
     delete :kick
     put :change
@@ -43,15 +35,13 @@ Rails.application.routes.draw do
       get :joined
     end
   end
-  get 'community/pickup' => 'communities#pickup'
-  get 'community/joined' => 'communities#joined'
 
 
-  #timelines-----------
+  # timelines-----------
   resources :timelines do
     resources :likes, only: %i[create destroy]
     resources :comments, only: %i[create destroy]
-    resources :reports, only: %i[new create]
+    resources :reports, only: [:create]
     resources :mute, only: %i[create destroy]
     collection do
       get :search
@@ -61,42 +51,62 @@ Rails.application.routes.draw do
     end
   end
 
-
-  #pages---------------
-  resources :pages, only:[:index] do
+  # pages---------------
+  resources :pages, only: [:index] do
     post 'favorite/user_create' => 'favorite#user_create'
     delete 'favorite/community_delete' => 'favorite#community_destroy'
     post 'favorite/community_create' => 'favorite#community_create'
     delete 'favorite/user_delete' => 'favorite#user_destroy'
   end
-  post 'page/user'=>'pages#user'
-  post 'page/community'=>'pages#community'
+  post 'page/user' => 'pages#user'
+  post 'page/community' => 'pages#community'
   get 'setting' => 'pages#setting'
   get 'faq' => 'pages#faq'
-  #profiles------------
+
+  resources :settings, only: %i[index] do
+    collection do
+      post :enable_enrolled_year
+      delete :disable_enrolled_year
+    end
+  end
+
+  # profiles------------
   resources :profiles do
     resources :relationships, only: %i[create destroy]
-    resources :achievements, only: [:update]
+    resources :block, only: %i[create destroy]
+    get :follow
+    get :follower
     collection do
-      get :follow
-      get :follower
       get :friends
       get :pickup
     end
   end
 
-  #chats--------------
+  # chats--------------
   resources :chats
 
-  #searches-----------
+  # searches-----------
   resources :searches, only: [:index] do
     get '/tag' => 'searches#tag'
   end
   post 'search/user' => 'searches#user'
   post 'search/community' => 'searches#community'
 
-  #notification--------
+  # notification--------
   resources :notifications, only: %i[index destroy]
+
+  # ranking------------
+  resources :ranking, only: %i[index] do
+    collection do
+      get :post
+      get :comment
+      get :follow
+      get :follower
+      get :friend
+      get :community
+      get :member
+    end
+  end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'

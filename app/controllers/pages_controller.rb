@@ -57,10 +57,6 @@ class PagesController < ApplicationController
     end
   end
 
-  def setting
-
-  end
-
   def faq
     @user = current_user
   end

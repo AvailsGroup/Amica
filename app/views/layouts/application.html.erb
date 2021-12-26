@@ -76,7 +76,12 @@
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to setting_path, class: "link" do %>
+                  <%= link_to ranking_index_path, class: "link" do %>
+                    <span class="link nav-link">ランキング</span>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to settings_path, class: "link" do %>
                     <span class="link nav-link">設定</span>
                   <% end %>
                 </li>
@@ -129,13 +134,13 @@
         <p class="mb-1 small"><%= link_to "利用規約", static_path, class: "text-decoration-none text-light" %></p>
         <p class="mb-1 small"><%= link_to "プライバシーポリシー", privacy_path, class: "text-decoration-none text-light" %></p>
         <p class="mb-1 small"><%= link_to "Q&A", faq_path, class: "text-decoration-none text-light" %></p>
-        <p class="mb-1 small"><%= link_to "ヘルプ", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "お問い合わせ", contact_path, class: "text-decoration-none text-light" %></p>
       </div>
       <div class="col mt-3">
         <h5 class="mb-2">コンテンツ</h5>
-        <p class="mb-1 small"><%= link_to "通知", about_path, class: "text-decoration-none text-light" %></p>
-        <p class="mb-1 small"><%= link_to "ランキング", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "通知", notifications_path, class: "text-decoration-none text-light" %></p>
         <p class="mb-1 small"><%= link_to "運営からのお知らせ", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "ランキング", ranking_index_path, class: "text-decoration-none text-light" %></p>
       </div>
       <div class="col mt-3">
         <h5 class="mb-2">アカウント</h5>
@@ -154,7 +159,7 @@
   <hr/>
   <div class="p-3">
     <h1 class="mb-0">Amica</h1>
-    <p class="mb-0">©Avails Group. All rights reserved.</p>
+    <p class="mb-0">©2021 - <%= DateTime.now.strftime('%Y') %> Avails Group. All rights reserved.</p>
   </div>
 </footer>
 </body>
