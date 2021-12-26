@@ -57,12 +57,13 @@ Rails.application.routes.draw do
     delete 'favorite/community_delete' => 'favorite#community_destroy'
     post 'favorite/community_create' => 'favorite#community_create'
     delete 'favorite/user_delete' => 'favorite#user_destroy'
-    resources :settings, only: :index
   end
   post 'page/user' => 'pages#user'
   post 'page/community' => 'pages#community'
   get 'setting' => 'pages#setting'
   get 'faq' => 'pages#faq'
+
+  resources :settings, only: [:index]
 
   # profiles------------
   resources :profiles do
