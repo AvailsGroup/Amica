@@ -11,6 +11,6 @@ class UserDecorator < ApplicationDecorator
   #   end
 
   def image
-    object.image.attached? ? object.image : "default_icon"
+    object.image.attached? ? object.image : 'default_icon'
   end
 end
