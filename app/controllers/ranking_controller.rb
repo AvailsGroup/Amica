@@ -9,54 +9,42 @@ class RankingController < ApplicationController
   def post
     get_users
     @users = @users.sort_by { |u| u.posts.size }
-    @users = @users.reverse
-    @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(30)
-    @title = '投稿数'
+    adjust_params('投稿数')
     render 'ranking/show'
   end
 
   def follow
     get_users
     @users = @users.sort_by { |u| u.followers.size }
-    @users = @users.reverse
-    @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(30)
-    @title = 'フォロー数'
+    adjust_params('フォロー数')
     render 'ranking/show'
   end
 
   def follower
     get_users
     @users = @users.sort_by { |u| u.followings.size }
-    @users = @users.reverse
-    @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(30)
-    @title = 'フォロワー数'
+    adjust_params('フォロワー数')
     render 'ranking/show'
   end
 
   def friend
     get_users
     @users = @users.sort_by { |u| u.matchers.size }
-    @users = @users.reverse
-    @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(30)
-    @title = '友達数'
+    adjust_params('友達数')
     render 'ranking/show'
   end
 
   def community
     get_users
     @users = @users.sort_by { |u| u.community_member.size }
-    @users = @users.reverse
-    @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(30)
-    @title = '参加コミュニティ数'
+    adjust_params('参加コミュニティ数')
     render 'ranking/show'
   end
 
   def comment
     get_users
     @users = @users.sort_by { |u| u.comments.size }
-    @users = @users.reverse
-    @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(30)
-    @title = 'コメント数'
+    adjust_params('コメント数')
     render 'ranking/show'
   end
 
@@ -67,7 +55,12 @@ class RankingController < ApplicationController
     @users = @users.reject { |u| u.userid.nil? }
     @user = User.find(current_user.id)
     @page = params[:page].nil? ? 1 : params[:page]
+  end
 
+  def adjust_params(title)
+    @users = @users.reverse
+    @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(30)
+    @title = title
   end
 
 end
