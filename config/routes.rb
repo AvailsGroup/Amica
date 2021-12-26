@@ -85,8 +85,20 @@ Rails.application.routes.draw do
   post 'search/user' => 'searches#user'
   post 'search/community' => 'searches#community'
 
-  #notification--------
+  # notification--------
   resources :notifications, only: %i[index destroy]
+
+  # ranking------------
+  resources :ranking, only: %i[index show] do
+    collection do
+      get :post
+      get :comment
+      get :follow
+      get :follower
+      get :friend
+      get :community
+    end
+  end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'
