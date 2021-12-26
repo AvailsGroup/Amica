@@ -89,7 +89,7 @@ Rails.application.routes.draw do
   resources :notifications, only: %i[index destroy]
 
   # ranking------------
-  resources :ranking, only: %i[index show] do
+  resources :ranking, only: %i[index] do
     collection do
       get :post
       get :comment

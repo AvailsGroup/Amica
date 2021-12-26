@@ -1,6 +1,6 @@
 <%= link_to profile_path(user.userid), style: "text-decoration: none;" do %>
   <div class="my-3 p-2 bg-white rounded shadow-sm">
-    <p class="mb-0"><%= user_counter+1 %>位</p>
+    <p class="mb-0"><%= (30 * (page.to_i - 1)) + user_counter + 1 %>位</p>
     <div class="d-flex justify-content-between">
       <div class="d-flex text-muted pt-3 justify-content-between">
         <%= image_tag user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
