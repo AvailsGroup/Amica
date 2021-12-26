@@ -97,6 +97,7 @@ Rails.application.routes.draw do
       get :follower
       get :friend
       get :community
+      get :member
     end
   end
 

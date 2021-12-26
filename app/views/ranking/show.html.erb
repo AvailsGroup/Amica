@@ -2,6 +2,10 @@
   <div class="text-center mt-4">
     <h2><%= @title %>のランキング</h2>
   </div>
-  <%= render partial:'ranking/user', collection: @pagenate, as: :user, locals: { title: @title, page: @page } %>
+  <% if defined? (@users) %>
+    <%= render partial: 'ranking/user', collection: @pagenate, as: :user, locals: { title: @title, page: @page } %>
+  <% else %>
+    <%= render partial: 'ranking/community', collection: @pagenate, as: :community, locals: { title: @title, page: @page } %>
+  <% end %>
   <%= render 'layouts/pagenate', pagenate: @pagenate %>
 </div>

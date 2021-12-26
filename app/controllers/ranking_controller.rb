@@ -8,6 +8,7 @@ class RankingController < ApplicationController
 
   def post
     get_users
+    @users = @users.reject { |u| u.posts.size <= 0 }
     @users = @users.sort_by { |u| u.posts.size }
     adjust_params('投稿数')
     render 'ranking/show'
@@ -15,6 +16,7 @@ class RankingController < ApplicationController
 
   def follow
     get_users
+    @users = @users.reject { |u| u.followers.size <= 0 }
     @users = @users.sort_by { |u| u.followers.size }
     adjust_params('フォロー数')
     render 'ranking/show'
@@ -22,6 +24,7 @@ class RankingController < ApplicationController
 
   def follower
     get_users
+    @users = @users.reject { |u| u.followings.size <= 0 }
     @users = @users.sort_by { |u| u.followings.size }
     adjust_params('フォロワー数')
     render 'ranking/show'
@@ -29,6 +32,7 @@ class RankingController < ApplicationController
 
   def friend
     get_users
+    @users = @users.reject { |u| u.matchers.size <= 0 }
     @users = @users.sort_by { |u| u.matchers.size }
     adjust_params('友達数')
     render 'ranking/show'
@@ -36,6 +40,7 @@ class RankingController < ApplicationController
 
   def community
     get_users
+    @users = @users.reject { |u| u.community_member.size <= 0 }
     @users = @users.sort_by { |u| u.community_member.size }
     adjust_params('参加コミュニティ数')
     render 'ranking/show'
@@ -43,8 +48,19 @@ class RankingController < ApplicationController
 
   def comment
     get_users
+    @users = @users.reject { |u| u.comments.size <= 0 }
     @users = @users.sort_by { |u| u.comments.size }
     adjust_params('コメント数')
+    render 'ranking/show'
+  end
+
+  def member
+    @page = params[:page].nil? ? 1 : params[:page]
+    @community = Community.includes(:user, :community_members)
+    @community = @community.sort_by { |c| c.community_members.size }
+    @community = @community.reverse
+    @pagenate = Kaminari.paginate_array(@community).page(params[:page]).per(30)
+    @title = 'コミュニティ人数'
     render 'ranking/show'
   end
 

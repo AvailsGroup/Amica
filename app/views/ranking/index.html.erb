@@ -1,9 +1,12 @@
 <div class="container">
   <h1 class="text-center">ランキング</h1>
+  <p class="text-center">各ユーザーのランキングや各コミュニティのランキングを閲覧することが出来ます！<br />amicaをたくさん使用して上位を目指してみましょう！</p>
+  <br />
   <%= render 'ranking/ranking', path: follow_ranking_index_path, title: "フォロー数ランキング" %>
   <%= render 'ranking/ranking', path: follower_ranking_index_path, title: "フォロワー数ランキング" %>
   <%= render 'ranking/ranking', path: friend_ranking_index_path, title: "友達数ランキング" %>
   <%= render 'ranking/ranking', path: community_ranking_index_path, title: "参加コミュニティ数ランキング" %>
   <%= render 'ranking/ranking', path: post_ranking_index_path, title: "投稿数ランキング" %>
   <%= render 'ranking/ranking', path: comment_ranking_index_path, title: "コメント数ランキング" %>
+  <%= render 'ranking/ranking', path: member_ranking_index_path, title: "コミュニティ人数ランキング" %>
 </div>
