@@ -1,6 +1,6 @@
 class ChatChannel < ApplicationCable::Channel
   require 'fileutils'
-
+  include Rails.application.routes.url_helpers
   def subscribed
     stream_from 'chat_channel'
   end
@@ -9,11 +9,13 @@ class ChatChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
+
   def speak(data)
     @room_id = data['room_id']
     @user_id = current_user.id
     @f_name = nil
     @image_name = nil
+    @url = nil
     unless File.directory?("#{Rails.root}/tmp/chats")
       Dir.mkdir("#{Rails.root}/tmp/chats/")
     end
@@ -38,6 +40,7 @@ class ChatChannel < ApplicationCable::Channel
           Message.first.images.attach(io: f, filename: @image_name)
           f.close
           File.delete("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}")
+          @url = url_for(Message.first.images)
         else
           @f_name = data['message'][n_start.to_i + 1..data['message'].length - 1]
           File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}", 'wb+') do |f|
@@ -53,7 +56,8 @@ class ChatChannel < ApplicationCable::Channel
     else
       @content = data['message']
     end
-    @message = Message.create content: @content, user_id: @user_id, room_id: @room_id, image: @image_name, file_name: @f_name
+    @message = Message.create content: @content, user_id: @user_id, room_id: @room_id, image: @image_name,
+                              file_name: @f_name, url: @url
     @message.save
     @room = Room.find_by(id: @room_id).touch(:created_at)
     ActionCable.server.broadcast 'chat_channel', @message

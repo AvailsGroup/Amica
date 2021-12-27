@@ -49,7 +49,7 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
           partnerimage = "/user_images/"+partnerimage
         }
         if( data.image !== null){
-          content = '<img style="max-width:100%" data-lity="data-lity" src="/chats/room'+room_id+'/images/'+data.image+'">';
+          content = '<img style="max-width:100%" data-lity="data-lity" src="'+url_for()+'">';
         }else if (data.file_name !== null) {
           content = '<a href="/chats/room1/files/' + data.file_name +'" download="'+ data.file_name +'">'+data.file_name+'</a>'
         }else{
