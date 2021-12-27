@@ -5,7 +5,6 @@ class TimelinesController < ApplicationController
   helper_method :liked_by?
   helper_method :matchers
   helper_method :matchers?
-  helper_method :mute?
 
   def index
     view_parameter

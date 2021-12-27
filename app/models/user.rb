@@ -9,6 +9,8 @@ class User < ApplicationRecord
   acts_as_taggable
   acts_as_taggable_on :accreditations
 
+  has_one_attached :image
+
   before_create :build_default_profile
 
   validate :validate_tag
@@ -67,6 +69,8 @@ class User < ApplicationRecord
 
   has_one :profile
   accepts_nested_attributes_for :profile, update_only: true
+
+  has_one :setting
 
   has_many :posts, dependent: :destroy
   has_many :likes

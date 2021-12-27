@@ -57,11 +57,22 @@ Rails.application.routes.draw do
     delete 'favorite/community_delete' => 'favorite#community_destroy'
     post 'favorite/community_create' => 'favorite#community_create'
     delete 'favorite/user_delete' => 'favorite#user_destroy'
+    collection do
+      get :tutorial
+    end
   end
   post 'page/user' => 'pages#user'
   post 'page/community' => 'pages#community'
   get 'setting' => 'pages#setting'
   get 'faq' => 'pages#faq'
+
+
+  resources :settings, only: %i[index] do
+    collection do
+      post :enable_enrolled_year
+      delete :disable_enrolled_year
+    end
+  end
 
   # profiles------------
   resources :profiles do
@@ -85,8 +96,21 @@ Rails.application.routes.draw do
   post 'search/user' => 'searches#user'
   post 'search/community' => 'searches#community'
 
-  #notification--------
+  # notification--------
   resources :notifications, only: %i[index destroy]
+
+  # ranking------------
+  resources :ranking, only: %i[index] do
+    collection do
+      get :post
+      get :comment
+      get :follow
+      get :follower
+      get :friend
+      get :community
+      get :member
+    end
+  end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'

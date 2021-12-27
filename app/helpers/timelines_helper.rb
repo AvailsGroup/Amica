@@ -33,4 +33,8 @@ module TimelinesHelper
     else '<i class="fas fa-heart"></i>'
     end
   end
+
+  def mute?(post, user)
+    post.mutes.any? { |p| p.user == user }
+  end
 end

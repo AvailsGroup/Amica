@@ -35,6 +35,9 @@ ja:
         student_id: 学籍番号
         twitter_id: twitterID
         enrolled_year: 入学年
+        instagram_id: InstagramID
+        discord_name: Discordの名前
+        discord_tag: Discordのタグ
     models:
       user: ユーザー
   devise:

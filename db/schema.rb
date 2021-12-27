@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_21_160552) do
+ActiveRecord::Schema.define(version: 2021_12_22_045454) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -170,6 +170,9 @@ ActiveRecord::Schema.define(version: 2021_12_21_160552) do
     t.text "twitter_id"
     t.integer "enrolled_year"
     t.text "intro"
+    t.string "instagram_id"
+    t.string "discord_name"
+    t.integer "discord_tag"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -197,6 +200,13 @@ ActiveRecord::Schema.define(version: 2021_12_21_160552) do
   create_table "rooms", force: :cascade do |t|
     t.integer "started_userid"
     t.integer "invited_userid"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.boolean "visible_enrolled_year", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

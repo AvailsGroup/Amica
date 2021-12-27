@@ -2,7 +2,7 @@
   <div class="form-inline">
     <%= link_to profile_path(notification.visitor.userid), class: "text-decoration-none" do %>
       <%= image_tag notification.visitor.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "30px", height: "30px" %>
-      <span><%= icon(notification.action).html_safe %></span>
+      <span><%= notification.decorate.icon %></span>
       <strong><%= notification.visitor.name %></strong>
     <% end %>
     <span style="color:lightseagreen"><%= 'さんが' %></span>
