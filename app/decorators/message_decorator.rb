@@ -9,8 +9,9 @@ class MessageDecorator < ApplicationDecorator
   #       object.created_at.strftime("%a %m/%d/%y")
   #     end
   #   end
-  def images
-    object.image.nil? ? nil : "/chats/room#{object.room_id}/files/#{object.image}"
+  def image
+    object.image.attached? ? object.image : "default_icon"
+    #object.image.nil? ? nil : "/chats/room#{object.room_id}/files/#{object.image}"
   end
 
   def time

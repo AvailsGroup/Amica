@@ -65,6 +65,4 @@ def in_room?
   end
 end
 
-def blocked?
 
-end
