@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
   #devise--------------
   get 'users/controller'
 
@@ -112,7 +113,6 @@ Rails.application.routes.draw do
     end
   end
 
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

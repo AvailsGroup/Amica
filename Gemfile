@@ -82,7 +82,7 @@ gem 'rake'
 
 gem 'jquery-rails'
 
-gem 'rails_admin'
+gem 'activeadmin'
 
 gem 'acts-as-taggable-on'
 
