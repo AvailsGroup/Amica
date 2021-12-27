@@ -1,19 +1,16 @@
 <%if current_user.admin==true %>
-  <h1>新規投稿</h1>
-  <table>
+  <div class="text-center">
+    <p class="h1 mb-5">新規投稿</p>
+
+
     <%=form_for(@post,url:{controller: 'operation_messages',action: 'create'})do |form|%>
-    <tr>
-      <th>タイトル</th>
-      <td><%= form.text_field :title %></td>
-    </tr>
-      <tr>
-        <th>投稿内容</th>
-        <td><%= form.text_field :content %></td>
-      </tr>
-      <tr>
-        <th></th>
-        <td><%= form.submit'投稿'%></td>
-      </tr>
+
+    <div class="form-check-inline w-50">
+    <%= form.text_field :title,class: "form-control mb-4",:placeholder=>"タイトル" %>
+          <%= form.text_area :content,class:"form-control mb-1",style:"height: 200px",:placeholder=>"投稿内容" %>
+        </div>
+      <div class="actions mb-1">
+    <%= form.submit'投稿',class:"btn btn-primary"%>
+      </div>
     <% end %>
-  </table>
 <%end %>

@@ -6,8 +6,8 @@
           <%= notifications.where(checked: false).size %>
         </span>
     <% end %>
-    <%= link_to follow_timelines_path, "aria-current": "page", class: "nav-link" do %>
-      運営からのメッセージ
+    <%= link_to operation_messages_path, "aria-current": "page", class: "nav-link" do %>
+      運営からのお知らせ
       <span class="badge bg-light text-dark rounded-pill align-text-bottom">
           0
         </span>

@@ -1,14 +1,22 @@
+<div class="nav-scroller bg-white shadow-sm">
+  <nav class="nav nav-underline" aria-label="Secondary navigation">
+    <%= link_to notifications_path, "aria-current": "page", class: "nav-link" do %>
+      通知
+      <span class="badge bg-light text-dark rounded-pill align-text-bottom">
 
-
-<div class="row">
-  <div class="col-6">
-    <h1>通知</h1>
-  </div>
-  <div class="col-6 m-auto">
-    <h1>運営からのお知らせ！！</h1>
-<%if current_user.admin==true %>
-  <%= link_to new_operation_message_path class: "icons nav-link" do %>
-    <i class="fas fa-exclamation-circle"></i>新規作成<br>
+        </span>
+    <% end %>
+    <%= link_to operation_messages_path, "aria-current": "page", class: "nav-link" do %>
+      運営からのお知らせ
+      <span class="badge bg-light text-dark rounded-pill align-text-bottom">
+          0
+        </span>
+    <% end %>
+  </nav>
+</div>
+<h1>運営からのお知らせ</h1>
+<%if current_user.admin==true %>管理者用
+  <%= link_to new_operation_message_path class: "icons nav-link" do %>新規作成<br>
   <% end %>
 <%end %>
     <table class="mt-1 w-100">
@@ -25,7 +33,7 @@
         <tr>
           <td>
             <%if current_user.admin==true %>
-    <%= link_to "編集", edit_operation_message_path(id:post)%>
+              管理者用<%= link_to "編集", edit_operation_message_path(id:post)%>
     <%= link_to "削除", operation_message_path(id:post),method: :delete%>
             <% end %>
           </td>

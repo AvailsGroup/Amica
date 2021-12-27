@@ -1,11 +1,19 @@
-<%= form_for(@post,url:operation_message_path(@post)) do |f| %>
-  <div>
-    <%= f.label :タイトル %><br>
-    <%= f.text_field :title, autofocus: true, :placeholder =>"#{@post.title}" %>
-  </div>
-  <div>
-    <%= f.label :中身 %><br>
-    <%= f.text_area :content,size:"50x30", :placeholder =>"#{@post.content}" %>
-  </div>
-  <div><%= f.submit "更新する" %></div>
-<% end %>
+
+<%if current_user.admin==true %>
+  <div class="text-center">
+    <p class="h1 mb-5">新規投稿</p>
+
+
+    <%= form_for(@post,url:operation_message_path(@post)) do |f| %>
+      <div class="form-check-inline w-50">
+        <%= f.label :タイトル %><br>
+        <%= f.text_field :title, autofocus: true, :placeholder =>"#{@post.title}",class: "form-control mb-3" %>
+        <%= f.label :中身 %><br>
+        <%= f.text_area :content, :placeholder =>"#{@post.content}",class:"form-control mb-1",style:"height: 200px" %>
+      </div>
+      <div class="actions mb-1">
+        <%= f.submit "更新",class:"btn btn-primary" %>
+      </div>
+    <% end %>
+<%end %>
+</div>
