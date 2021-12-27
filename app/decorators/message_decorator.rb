@@ -10,8 +10,8 @@ class MessageDecorator < ApplicationDecorator
   #     end
   #   end
   def image
-    #object.image.attached? ? object.image : "default_icon"
-    object.image.nil? ? nil : "/chats/room#{object.room_id}/files/#{object.image}"
+    object.images.attached? ? object.images[0] : nil
+    #object.image.nil? ? nil : "/chats/room#{object.room_id}/files/#{object.image}"
   end
 
   def time

@@ -14,7 +14,6 @@ class ChatChannel < ApplicationCable::Channel
     @user_id = current_user.id
     @f_name = nil
     @image_name = nil
-    @chat = Message.new
     unless File.directory?("#{Rails.root}/tmp/chats")
       Dir.mkdir("#{Rails.root}/tmp/chats/")
     end
@@ -36,7 +35,7 @@ class ChatChannel < ApplicationCable::Channel
           end
           @content = '画像を投稿しました。'
           f = File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}")
-          Message.first.files.attach(io: f, filename: @image_name)
+          Message.first.images.attach(io: f, filename: @image_name)
           f.close
           File.delete("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}")
         else
