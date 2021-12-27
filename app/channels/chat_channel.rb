@@ -14,15 +14,13 @@ class ChatChannel < ApplicationCable::Channel
     @user_id = current_user.id
     @f_name = nil
     @image_name = nil
+    @chat = Message.new
     unless File.directory?("#{Rails.root}/tmp/chats")
       Dir.mkdir("#{Rails.root}/tmp/chats/")
     end
     if data['message'][0..4] == 'data:'
       unless File.directory?("#{Rails.root}/tmp/chats/room#{@room_id}")
         Dir.mkdir("#{Rails.root}/tmp/chats/room#{@room_id}")
-      end
-      unless File.directory?("#{Rails.root}/tmp/chats/room#{@room_id}/files")
-        Dir.mkdir("#{Rails.root}/tmp/chats/room#{@room_id}/files")
       end
       r_end = data['message'].index(',')
       n_start = data['message'].index('@')
@@ -33,26 +31,24 @@ class ChatChannel < ApplicationCable::Channel
         if data['message'][0..10] == 'data:image/'
           rand = rand(1_000_000..9_999_999)
           @image_name = "#{@user_id}#{rand}.jpg"
-          File.open("#{Rails.root}/tmp/chats/room#{@room_id}/files/#{@image_name}", 'wb+') do |f|
+          File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}", 'wb+') do |f|
             f.write(Base64.decode64(@base64))
           end
           @content = '画像を投稿しました。'
-          @message = Message.new
-          f = File.open("#{Rails.root}/tmp/chats/room#{@room_id}/files/#{@image_name}")
-          @message.file.attach(io: f, filename: @image_name)
+          f = File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}")
+          Message.first.files.attach(io: f, filename: @image_name)
           f.close
-          File.delete("#{Rails.root}/tmp/chats/room#{@room_id}/files/#{@image_name}")
+          File.delete("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}")
         else
           @f_name = data['message'][n_start.to_i + 1..data['message'].length - 1]
-          File.open("#{Rails.root}/tmp/chats/room#{@room_id}/files/#{@f_name}", 'wb+') do |f|
+          File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}", 'wb+') do |f|
             f.write(Base64.decode64(@base64))
           end
           @content = "#{@f_name}を送信しました。"
-          @message = Message.new
-          f = File.open("#{Rails.root}/tmp/chats/room#{@room_id}/files/#{@f_name}")
-          @message.file.attach(io: f, filename: @f_name)
+          f = File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}")
+          Message.first.files.attach(io: f, filename: @f_name)
           f.close
-          File.delete("#{Rails.root}/tmp/chats/room#{@room_id}/files/#{@f_name}")
+          File.delete("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}")
         end
       end
     else
