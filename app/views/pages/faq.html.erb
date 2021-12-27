@@ -2,22 +2,22 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-
-      <div class="pt-5 mar-btm ">
+      <div class="pt-5 mar-btm">
         <h4 class="text-thin"><i class="fa fa-lightbulb-o fa-lg fa-fw text-warning"></i> ガイド </h4>
         <div class="list-group bg-trans">
           <p class="list-group-item">
-            <span class="badge badge-purple badge-icon badge-fw pull-left"></span><%= link_to "About", about_path %></p>
-          <p class="list-group-item">
-            <span class="badge badge-info badge-icon badge-fw pull-left"></span><%= link_to "利用規約", static_path %></p>
+            <span class="badge badge-info badge-icon badge-fw pull-left"></span><%= link_to "利用規約", static_path %>
+          </p>
           <p class="list-group-item">
             <span class="badge badge-pink badge-icon badge-fw pull-left"></span><%= link_to "プライバシーポリシー", privacy_path %>
           </p>
           <p class="list-group-item">
             <span class="badge badge-success badge-icon badge-fw pull-left"></span><%= link_to "Q&A", faq_path %>
           </p>
+          <p class="list-group-item">
+            <span class="badge badge-purple badge-icon badge-fw pull-left"></span><%= link_to "お問い合わせ", contact_path %>
+          </p>
         </div>
-
       </div>
     </div>
     <div class="col-md-9">
@@ -32,115 +32,115 @@
                     <div class="accordion faq-accordian" id="faqAccordion">
                       <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingTwo">
-                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseOne" role="button" aria-expanded="false" aria-controls="collapseOne">Q1.退会方法がわかりません。<span class="lni-chevron-up"></span>
+                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Q1.退会方法がわかりません。<span class="lni-chevron-up"></span>
                           </h6>
                         </div>
                         <div class="collapse" id="collapseOne" aria-labelledby="headingOne" data-parent="#faqAccordion">
                           <div class="card-body">
-                            <p>A.「その他」→「設定」→「ユーザー情報を編集」→アカウントの削除ボタンをクリック。</p>
+                            <p>A.<%= link_to "アカウント設定", edit_user_registration_path %>のアカウントの削除ボタンをクリックすると削除することが出来ます。削除後は同じメールアドレス再登録が出来ませんので注意してください。</p>
                           </div>
                         </div>
                       </div>
 
-                      <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                      <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInUp;">
                         <div class="card-header" id="headingTwo">
-                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseTwo" role="button" aria-expanded="false" aria-controls="collapseTwo">Q2.友達の作り方がわかりません。<span class="lni-chevron-up"></span>
+                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Q2.友達の作り方がわかりません。<span class="lni-chevron-up"></span>
                           </h6>
                         </div>
                         <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-parent="#faqAccordion">
                           <div class="card-body">
-                            <p>A.友だちを登録していない場合はホームにある「あなたに合った友だちを探してみましょう！」をクリックorタップし友だちを探してみよう。追加で他のユーザーをフォローしたい場合は上のバーにある友達からフォローできます。</p>
+                            <p>A.お互いがフォローしあってる状態(相互フォロー)が友達となります。ナビゲーションバーの「<%=link_to "友達", profiles_path %>」をクリックして趣味が合うユーザーをフォローしてみましょう。</p>
                           </div>
                         </div>
                       </div>
 
                       <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingThree">
-                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseThree" role="button" aria-expanded="false" aria-controls="collapseThree">Q3.コミュニティの作り方がわかりません。<span class="lni-chevron-up"></span>
+                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Q3.コミュニティの作り方がわかりません。<span class="lni-chevron-up"></span>
                           </h6>
                         </div>
                         <div class="collapse" id="collapseThree" aria-labelledby="headingThree" data-parent="#faqAccordion">
                           <div class="card-body">
-                            <p>A.コミュニティを作成または参加していない場合はホームにある「あなたに合ったコミュニティを見つけてみましょう！」をクリックorタップし、コミュニティを新規作成から作成ができます。追加で作成したい場合は上のバーにあるコミュニティから新規作成することができます。</p>
+                            <p>A.ナビゲーションバーの「<%= link_to "コミュニティ", communities_path %>」から作成、検索ができます。</p>
                           </div>
                         </div>
                       </div>
 
                       <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingFour">
-                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseFour" role="button" aria-expanded="false" aria-controls="collapseFour">Q4.友だちやコミュニティとチャットしたいとき。<span class="lni-chevron-up"></span>
+                            <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Q4.友だちやコミュニティとチャットしたいとき。<span class="lni-chevron-up"></span>
                           </h6>
                         </div>
                         <div class="collapse" id="collapseFour" aria-labelledby="headingFour" data-parent="#faqAccordion">
                           <div class="card-body">
-                            <p>A.ホームに追加されている友だちのバナーをクリックorタップすると、友だちのプロフィールページに移動します。そして右上にあるチャットをクリックorタップすることでチャットすることができます。コミュニティチャットは上段にあるコミュニティをクリックorタップし、チャットしたいコミュニティグループのバナーを開くことでチャットすることができます。</p>
+                            <p>A.ユーザー同士のチャットはフォローをしないとすることができません。初めてのチャットはフォローしてる相手のプロフィールページからすることができます。コミュニティチャットは参加するとできます。チャットしたいコミュニティグループのバナーを開くことでチャットすることができます。</p>
                           </div>
                         </div>
                       </div>
 
                       <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingFive">
-                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseFive" role="button" aria-expanded="false" aria-controls="collapseFive">Q5.通知に表示される内容は？<span class="lni-chevron-up"></span>
+                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">Q5.通知に表示される内容は？<span class="lni-chevron-up"></span>
                           </h6>
                         </div>
                         <div class="collapse" id="collapseFive" aria-labelledby="headingFive" data-parent="#faqAccordion">
                           <div class="card-body">
-                            <p>A.通知には相手からフォローされた場合、タイムラインの自分の投稿にコメントされた場合、またはいいねされたとき、またチャットが自分あてに届いた場合と自分が参加しているコミュニティのチャットなどを通知に表示します。</p>
+                            <p>A.通知には相手からフォローされた時、タイムラインの自分の投稿にいいねされた時、コメントされた時、コメントした他のユーザーの投稿に新規にチャットが投稿された時、新規チャットが来た時等が通知に表示されます。</p>
                           </div>
                         </div>
                       </div>
 
                       <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingSix">
-                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseSix" role="button" aria-expanded="false" aria-controls="collapseSix">Q6.パスワードの変更方法がわかりません。<span class="lni-chevron-up"></span>
+                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">Q6.パスワードの変更方法がわかりません。<span class="lni-chevron-up"></span>
                           </h6>
                         </div>
                         <div class="collapse" id="collapseSix" aria-labelledby="headingSix" data-parent="#faqAccordion">
                           <div class="card-body">
-                            <p>A.「その他」→「設定」→「ユーザー情報を編集」→から新しいパスワードを入力した後に現在のパスワードを入力→「変更」を押すと変更できます。</p>
+                            <p>A.<%= link_to "アカウント設定", edit_user_registration_path %>から新しいパスワードと現在のパスワードを入力し、「変更」を押すことでできます。</p>
                           </div>
                         </div>
                       </div>
 
                       <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingSeven">
-                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseSeven" role="button" aria-expanded="false" aria-controls="collapseSeven">Q7.タイムラインの機能について<span class="lni-chevron-up"></span>
+                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">Q7.タイムラインの機能について<span class="lni-chevron-up"></span>
                           </h6>
                         </div>
                         <div class="collapse" id="collapseSeven" aria-labelledby="headingSeven" data-parent="#faqAccordion">
                           <div class="card-body">
-                            <p>A.タイムラインでは自分が今何しているのかを追加している友だち全員にチャットや画像を通して共有することができます。また友だちの投稿も見ることができ、何をしているのかリアルタイムで確認できます。</p>
+                            <p>A.タイムラインでは自分が今何しているのかを追加している友だち全員にチャットや画像を通して共有することができます。また、友だちの投稿も見ることができたり、おすすめや最新の投稿を見ることができるので、今起きた面白いことや雑談、ゲーム募集などいろいろなことを自由にみんなに共有できます。</p>
                           </div>
                         </div>
                       </div>
 
                       <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingSix">
-                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseEight" role="button" aria-expanded="false" aria-controls="collapseEight">Q8.ログアウト、ログインについて。<span class="lni-chevron-up"></span>
+                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">Q8.嫌がらせや不快な投稿を見つけた場合<span class="lni-chevron-up"></span>
                           </h6>
                         </div>
                         <div class="collapse" id="collapseEight" aria-labelledby="headingEight" data-parent="#faqAccordion">
                           <div class="card-body">
-                            <p>A.右上にある「ログアウト」からログアウトすることができます。また複数のデバイスでAmicaを使用したい場合は、初回時の起動した際に表示される「ログイン」→使用しているメールアドレスとパスワードを入力することでログインすることができます。</p>
+                            <p>A.タイムラインやコメント、コミュニティは通報することが出来ます。それ以外にも嫌がらせ等があったらお問い合わせや運営にチャットを送ることでこちらで厳正に対処し、場合によっては学校に報告をします。また、ブロック機能も用意してますので、うまく活用してみてください。</p>
                           </div>
                         </div>
                       </div>
 
                       <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingNine">
-                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseNine" role="button" aria-expanded="false" aria-controls="collapseNine">Q9.ランキング機能とは<span class="lni-chevron-up"></span>
+                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">Q9.ランキング機能とは<span class="lni-chevron-up"></span>
                           </h6>
                         </div>
                         <div class="collapse" id="collapseNine" aria-labelledby="headingNine" data-parent="#faqAccordion">
                           <div class="card-body">
-                            <p>A.「その他」→「ランキング」から各ユーザーのランキングやコミュニティのランキングを閲覧することができます。</p>
+                            <p>A.ランキングはAmicaの遊び要素の一つです。<%= link_to "ランキング", ranking_index_path %>から各ユーザーのランキングやコミュニティのランキングを閲覧することができます。ぜひランキング上位を目指して見ましょう！</p>
                           </div>
                         </div>
                       </div>
 
                       <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingTen">
-                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseTen" role="button" aria-expanded="false" aria-controls="collapseTen">Q10.バッジに何か効果はありますか？<span class="lni-chevron-up"></span>
+                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">Q10.バッジに何か効果はありますか？<span class="lni-chevron-up"></span>
                           </h6>
                         </div>
                         <div class="collapse" id="collapseTen" aria-labelledby="headingTen" data-parent="#faqAccordion">
