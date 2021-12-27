@@ -15,7 +15,11 @@
           <% elsif message.content == "#{message.file_name}を送信しました。" %>
             <% file = ActiveStorage::Blob.find_by(filename: message.file_name) %>
             <% if file.nil?%>
-              <%=safe_join(message.content.split("\n"),tag(:br))%>
+              <% if file.nil?%>
+                <%=safe_join(message.content.split("\n"),tag(:br))%>
+              <% else %>
+<%= file %>
+              <% end %>
             <% else %>
               <a href=<%= message.decorate.files %> download="<%= message.file_name%>"><%= message.file_name%></a>
             <% end %>

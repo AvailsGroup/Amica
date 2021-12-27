@@ -51,6 +51,7 @@ class ChatChannel < ApplicationCable::Channel
           Message.first.files.attach(io: f, filename: @f_name)
           f.close
           File.delete("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}")
+          @url = data['message'][0..n_start.to_i - 1]
         end
       end
     else

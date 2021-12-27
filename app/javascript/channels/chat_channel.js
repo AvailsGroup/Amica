@@ -20,7 +20,7 @@ const ChatChannel =  consumer.subscriptions.create("ChatChannel", {
         if( data.image !== null){
           content = '<img style="max-width:100%" data-lity="data-lity" src="' + data.url +'">';
         }else if (data.file_name !== null) {
-          content = '<a href="/chats/room1/files/' + data.file_name +'" download="'+ data.file_name +'">'+data.file_name+'</a>'
+          content = data.url
         }else{
           content = AutoLink(data.content);
         }
