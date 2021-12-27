@@ -67,7 +67,7 @@
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <% if current_user.try(:admin?) %>
                   <li>
-                    <%= link_to '管理者コンソールを表示', rails_admin_path, class: "link nav-link" %>
+                    <%= link_to '管理者コンソールを表示', admin_dashboard_path, class: "link nav-link" %>
                   </li>
                 <% end %>
                 <li>
