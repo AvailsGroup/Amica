@@ -40,7 +40,7 @@ class ChatChannel < ApplicationCable::Channel
           Message.first.images.attach(io: f, filename: @image_name)
           f.close
           File.delete("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}")
-          @url = url_for(Message.first.images)
+          @url = data['message'][0..n_start.to_i - 1]
         else
           @f_name = data['message'][n_start.to_i + 1..data['message'].length - 1]
           File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}", 'wb+') do |f|
