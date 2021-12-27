@@ -52,7 +52,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <input type="file" id="file_uploader" data-behavior="chat_speaker">
+        <input type="file" id="file_uploader"  data-behavior="chat_speaker">
       </div>
       <img id="preview" src="" style="text-align: center; display: none;">
       <div class="modal-footer">
@@ -88,7 +88,7 @@
           <div class="date"><%= m.created_at.strftime("%m月%d日") %></div>
         <% end %>
         <%= render 'chats/chat_message',message:m %>
-        
+
         <% last_message = m.created_at %>
       <% end %>
       <div id="append" class="col-sm-12"></div>
