@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag 'profiles', media: 'all', 'data-turbolinks-track': 'reload' %>
 <div class="container">
-  <h2 class="text-center pb-2 mb-0"><%= name %> (<%= content.size %>)</h2>
+  <h2 class="text-center pb-2 mb-0"><%= user.name %>の<%= name %> (<%= content.size %>)</h2>
   <div class="my-3 p-3 bg-white rounded shadow-sm">
     <% if content.size == 0 %>
       <p class="text-gray-dark">現在はいないようです！</p>

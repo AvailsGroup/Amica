@@ -1,4 +1,7 @@
 class CommunitiesSecurityController < ApplicationController
+  before_action :authenticate_user!
+  before_action :banned
+
   def create
     @users = User.includes(:community_member, :tags)
     @user = @users.find(params[:id])
