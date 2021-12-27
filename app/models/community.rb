@@ -3,6 +3,8 @@ class Community < ApplicationRecord
 
   belongs_to :user
 
+  has_one_attached :image
+
   validates :name,
             presence: true,
             length: { minimum: 2, maximum: 20 },
@@ -20,6 +22,8 @@ class Community < ApplicationRecord
   has_many :community_securities
 
   has_many :favorites
+
+  has_many :reports
 
   private
 

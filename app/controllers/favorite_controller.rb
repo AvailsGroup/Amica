@@ -1,4 +1,7 @@
 class FavoriteController < ApplicationController
+  before_action :authenticate_user!
+  before_action :banned
+
   def user_create
     Favorite.create(user_id: current_user.id, favorite_user_id: params[:page_id])
     flash[:notice] = "お気に入り登録しました!"

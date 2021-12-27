@@ -4,27 +4,35 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def banned
-    if current_user.warning >= 3
-      current_user.ban = true
-    end
+    current_user.ban = true if current_user.warning >= 3
 
     if current_user.ban
       sign_out current_user
-      flash.alert = "あなたはアカウント停止処分を受けています。"
-      redirect_to "/"
+      flash.alert = 'あなたはアカウント停止処分を受けています。'
+      redirect_to '/'
     end
   end
 
   def after_sign_in_path_for(resource)
-    flash[:alert] = "ようこそAmicaへ！ "
+    return tutorial_pages_path if resource.sign_in_count == 1
+
+    flash[:alert] = 'ようこそAmicaへ！ '
     pages_path
+  end
+
+  def authenticate_admin_user!
+    authenticate_user!
+
+    unless current_user.admin
+      flash[:notice] = "管理者用ページです。権限があるアカウントでログインしてください。"
+      redirect_to pages_path
+    end
   end
 
   def base64?(value)
     value.is_a?(String) && Base64.strict_encode64(Base64.decode64(value)) == value
   end
 
-  #友達の配列を返す
   def matchers(user)
     user.followings & user.followers
   end
@@ -33,7 +41,10 @@ class ApplicationController < ActionController::Base
     matchers(user).include?(other_user)
   end
 
-  # 相手をフォローしていればtrueを返す
+  def blocked?(user, other_user)
+    user.blocks.any? { |u| u.blocked_user_id == other_user.id }
+  end
+
   def following?(user_followings_list, other_user)
     user_followings_list.any? { |u| u == other_user }
   end
@@ -46,20 +57,20 @@ class ApplicationController < ActionController::Base
     favorite.any? { |u| u.user_id == user.id } && favorite.any? { |u| u.favorite_user_id == other_user.id }
   end
 
-  def is_community_favorite?(favorite , user, community)
+  def is_community_favorite?(favorite, user, community)
     favorite.any? { |u| u.user_id == user.id } && favorite.any? { |u| u.community_id == community.id }
   end
 
   private
+
   def sign_in_required
     redirect_to new_user_session_url unless user_signed_in?
   end
 
   protected
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:agreement_terms])
   end
-
-
 
 end

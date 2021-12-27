@@ -18,7 +18,9 @@
   <nav class="navbar navbar-expand-lg navbar-light p-0 m-0" id="main-nav">
     <div class="container-fluid">
       <% if user_signed_in? %>
-
+        <%= link_to pages_path, class: "link" do %>
+          <%= image_tag "/user_images/default_icon.png", class: "amica_icon" %>
+        <% end %>
         <%= link_to pages_path, class: "link" do %>
           <h2 style="margin-left:2px;margin-top: 8px;color: rgba(29,144,190,0.8)">Amica</h2>
         <% end %>
@@ -30,8 +32,11 @@
           <div class="navbar-nav me-auto m-0 mb-lg-0"></div>
           <ul class="navbar-nav d-flex">
             <li class="nav-item">
-              <%= link_to operation_messages_path, class: "icons nav-link" do %>
-                <i class="fas fa-bell"></i>お知らせ<span class="notice badge bg-light text-dark rounded-pill align-text-bottom">100</span>
+              <%= link_to notifications_path, class: "icons nav-link" do %>
+                <i class="fas fa-bell"></i>通知
+                <span class="notice badge bg-light text-dark rounded-pill align-text-bottom">
+                  <%= current_user.passive_notifications.where(checked: false).size %>
+                </span>
               <% end %>
             </li>
             <li class="nav-item">
@@ -62,7 +67,7 @@
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <% if current_user.try(:admin?) %>
                   <li>
-                    <%= link_to '管理者コンソールを表示', rails_admin_path, class: "link nav-link" %>
+                    <%= link_to '管理者コンソールを表示', admin_dashboard_path, class: "link nav-link" %>
                   </li>
                 <% end %>
                 <li>
@@ -71,7 +76,12 @@
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to setting_path, class: "link" do %>
+                  <%= link_to ranking_index_path, class: "link" do %>
+                    <span class="link nav-link">ランキング</span>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to settings_path, class: "link" do %>
                     <span class="link nav-link">設定</span>
                   <% end %>
                 </li>
@@ -124,13 +134,14 @@
         <p class="mb-1 small"><%= link_to "利用規約", static_path, class: "text-decoration-none text-light" %></p>
         <p class="mb-1 small"><%= link_to "プライバシーポリシー", privacy_path, class: "text-decoration-none text-light" %></p>
         <p class="mb-1 small"><%= link_to "Q&A", faq_path, class: "text-decoration-none text-light" %></p>
-        <p class="mb-1 small"><%= link_to "ヘルプ", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "お問い合わせ", contact_path, class: "text-decoration-none text-light" %></p>
       </div>
       <div class="col mt-3">
         <h5 class="mb-2">コンテンツ</h5>
-        <p class="mb-1 small"><%= link_to "通知", about_path, class: "text-decoration-none text-light" %></p>
-        <p class="mb-1 small"><%= link_to "ランキング", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "通知", notifications_path, class: "text-decoration-none text-light" %></p>
         <p class="mb-1 small"><%= link_to "運営からのお知らせ", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "チュートリアル", tutorial_pages_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "ランキング", ranking_index_path, class: "text-decoration-none text-light" %></p>
       </div>
       <div class="col mt-3">
         <h5 class="mb-2">アカウント</h5>
@@ -149,7 +160,7 @@
   <hr/>
   <div class="p-3">
     <h1 class="mb-0">Amica</h1>
-    <p class="mb-0">©Avails Group. All rights reserved.</p>
+    <p class="mb-0">©2021 - <%= DateTime.now.strftime('%Y') %> Avails Group. All rights reserved.</p>
   </div>
 </footer>
 </body>

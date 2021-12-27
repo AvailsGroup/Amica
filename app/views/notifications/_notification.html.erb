@@ -1,0 +1,15 @@
+<div class="p-3 my-3 text-dark rounded shadow-sm" style="<%= "background-color: rgba(29,144,190,0.1)" if new_notification.include?(notification.id) %>">
+  <div class="form-inline">
+    <%= link_to profile_path(notification.visitor.userid), class: "text-decoration-none" do %>
+      <%= image_tag notification.visitor.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "30px", height: "30px" %>
+      <span><%= notification.decorate.icon %></span>
+      <strong><%= notification.visitor.name %></strong>
+    <% end %>
+    <span style="color:lightseagreen"><%= 'さんが' %></span>
+    <%= render "notifications/#{notification.action}", notification: notification, visited: notification.visited, visitor: notification.visitor %>
+  </div>
+  <div class="d-block">
+    <div class="text-gray small" style="text-align: right">
+      <i class="far fa-clock clock-icon"></i><%= time_ago_in_words(notification.created_at) %></div>
+  </div>
+</div>

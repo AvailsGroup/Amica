@@ -9,7 +9,6 @@ class MailerController < ApplicationController
     @name = params[:name]
     @email = params[:email]
     @content = params[:content]
-
     @contact = Inquiry.new(inquiry_params)
     if @contact.save
       ContactMailer.contact_mail(@contact).deliver

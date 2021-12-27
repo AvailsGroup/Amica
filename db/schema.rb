@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_19_025958) do
+ActiveRecord::Schema.define(version: 2021_12_27_083923) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -19,7 +19,22 @@ ActiveRecord::Schema.define(version: 2021_12_19_025958) do
     t.boolean "niceLv3", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "rare_like", default: false
+    t.boolean "hand_like", default: false
+    t.boolean "wink_like", default: false
+  end
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.integer "resource_id"
+    t.string "author_type"
+    t.integer "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -48,6 +63,25 @@ ActiveRecord::Schema.define(version: 2021_12_19_025958) do
     t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "admin_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "blocks", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "blocked_user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -84,13 +118,6 @@ ActiveRecord::Schema.define(version: 2021_12_19_025958) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "community_tags", force: :cascade do |t|
-    t.integer "community_id"
-    t.string "tag"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "favorite_user_id"
@@ -122,8 +149,28 @@ ActiveRecord::Schema.define(version: 2021_12_19_025958) do
   end
 
   create_table "messages", force: :cascade do |t|
+    t.integer "room_id"
+    t.integer "user_id"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
+  end
+
+  create_table "mutes", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.text "content", null: false
+    t.integer "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "post_id"
+    t.integer "comment_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -144,7 +191,7 @@ ActiveRecord::Schema.define(version: 2021_12_19_025958) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.text "grade", default: "0"
+    t.text "grade", default: "学科"
     t.integer "school_class", default: 0
     t.integer "number", default: 0
     t.text "student_id", default: "0000000"
@@ -154,6 +201,10 @@ ActiveRecord::Schema.define(version: 2021_12_19_025958) do
     t.date "birthday"
     t.text "twitter_id"
     t.integer "enrolled_year"
+    t.text "intro"
+    t.string "instagram_id"
+    t.string "discord_name"
+    t.integer "discord_tag"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -168,8 +219,26 @@ ActiveRecord::Schema.define(version: 2021_12_19_025958) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.integer "userid"
-    t.text "report"
+    t.integer "reported_user_id"
+    t.integer "user_id"
+    t.string "message"
+    t.integer "post_id"
+    t.integer "comment_id"
+    t.integer "community_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer "started_userid"
+    t.integer "invited_userid"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.boolean "visible_enrolled_year", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -236,8 +305,6 @@ ActiveRecord::Schema.define(version: 2021_12_19_025958) do
     t.string "nickname"
     t.string "userid"
     t.boolean "admin", default: false
-    t.integer "grade"
-    t.integer "class_number"
     t.string "image"
     t.boolean "ban", default: false
     t.integer "warning", default: 0

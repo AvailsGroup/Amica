@@ -9,6 +9,10 @@
             singleField: true,
             availableTags: <%= raw @all_tag_list %>
         });
+        <% if defined?(@image)%>
+          $('.user_image').hide()
+          $('#result-img').show()
+        <% end %>
     });
 </script>
 
@@ -29,7 +33,7 @@
         <label>
           <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
           <canvas id="cropped_canvas" style="display:none;width: 200px;height: 200px;"></canvas>
-          <img src="" id="result-img" style="display:none;width: 200px;height: 200px;">
+          <img src="<%=@image if defined?(@image) %>" id="result-img" style="display:none;width: 200px;height: 200px;">
         </label>
       </div>
     </div>
@@ -48,7 +52,7 @@
         <div class="col-sm-12">
           <div class="search-area-colum form-contents">
             <%= f.label "タグ (1つ2~20文字 半角英数字,ひらがな,カタカナ,漢字)", class: "form-label" %>
-            <%= f.text_field :tag_list, id: "myTags", value: @tag %>
+            <%= f.text_field :tag_list, id: "myTags", value: defined?(@tag_list) ? @tag_list : @tag %>
           </div>
         </div>
 
@@ -74,11 +78,11 @@
             <div class="form_wrapper">
               <div id="image-wrapper">
                 <%= f.file_field :images, id: "trim_img_uploder", value: "assets/default", accept: 'image/jpg,image/jpeg,image/png' %>
-                <%= f.hidden_field :image, id: "image" %>
-                <%= f.hidden_field :image_x, id: "image_x" %>
-                <%= f.hidden_field :image_y, id: "image_y" %>
-                <%= f.hidden_field :image_w, id: "image_w" %>
-                <%= f.hidden_field :image_h, id: "image_h" %>
+                <%= f.hidden_field :image, id: "image", value: defined?(@image) ? @image : nil%>
+                <%= f.hidden_field :image_x, id: "image_x", value: defined?(@image_x) ? @image_x : nil %>
+                <%= f.hidden_field :image_y, id: "image_y", value: defined?(@image_y) ? @image_y : nil %>
+                <%= f.hidden_field :image_w, id: "image_w", value: defined?(@image_w) ? @image_w : nil %>
+                <%= f.hidden_field :image_h, id: "image_h", value: defined?(@image_h) ? @image_h : nil %>
                 <%= f.hidden_field :aspect_numerator, id: "aspect_numerator", value: "1.0" %>
                 <%= f.hidden_field :aspect_denominator, id: "aspect_denominator", value: "1.0" %>'
                 <div id="prev_img">
