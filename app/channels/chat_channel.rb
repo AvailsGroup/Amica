@@ -40,7 +40,6 @@ class ChatChannel < ApplicationCable::Channel
           Message.first.images.attach(io: f, filename: @image_name)
           f.close
           File.delete("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}")
-          @url = data['message'][0..n_start.to_i - 1]
         else
           @f_name = "#{@room_id}#{data['message'][n_start.to_i + 1..data['message'].length - 1]}"
           File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}", 'wb+') do |f|
@@ -51,8 +50,9 @@ class ChatChannel < ApplicationCable::Channel
           Message.first.files.attach(io: f, filename: @f_name)
           f.close
           File.delete("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}")
-          @url = data['message'][0..n_start.to_i - 1]
+          file = ActiveStorage::Blob.find_by(filename: @f_name)
         end
+        @url = data['message'][0..n_start.to_i - 1]
       end
     else
       @content = data['message']
