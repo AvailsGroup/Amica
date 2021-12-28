@@ -155,6 +155,8 @@ ActiveRecord::Schema.define(version: 2021_12_27_083923) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
+    t.string "file_name"
+    t.string "url"
   end
 
   create_table "mutes", force: :cascade do |t|

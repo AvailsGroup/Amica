@@ -1,10 +1,13 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
-  require "uri"
+  helper_method :blocked?
 
   def index
     latest_message?
+    if @chatroom.nil?
+      redirect_to profiles_path, notice: '誰かとお話してみましょう！'
+    end
   end
 
   def show
@@ -20,17 +23,15 @@ class ChatsController < ApplicationController
 end
 
 private
-
 def latest_message?
   @room_partner = []
   @latest_message = []
   @chatroom = Room.order(updated_at: :desc).where(started_userid: current_user.id)
                   .or(Room.order(updated_at: :desc).where(invited_userid: current_user.id))
-  if @chatroom.nil?
-    redirect_to profiles_path, notice: '誰かとお話してみましょう！'
+  if @chatroom == []
+    @chatroom = nil
     return
   end
-
 
   @chatroom.each do |cr|
     @message = Message.order(updated_at: :desc).find_by(room_id: cr.id)
@@ -63,4 +64,5 @@ def in_room?
     end
   end
 end
+
 

@@ -1,5 +1,4 @@
 <%= stylesheet_link_tag 'chats', media: 'all', 'data-turbolinks-track': 'reload' %>
-
 <h4 class="chat_heading">Chat</h4>
 <div class="m-3">
 <% num = 0
@@ -8,11 +7,7 @@
           <%= link_to chat_path(@room_partner[num].userid) ,style:" text-decoration:none;" do %>
             <div class="my-3 p-3 bg-white rounded shadow-sm">
               <div class="d-flex pt-3">
-                <% if @room_partner[num].image.nil? %>
-                  <%= image_tag "default_icon", class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px" %>
-                <% else %>
-                  <%= image_tag "/user_images/#{ @room_partner[num].image}" , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded",width: "40px",height: "40px"%>
-                <% end %>
+                <%= image_tag @room_partner[num].decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
                 <p class="pb-3 mb-0  border-bottom w-100">
                   <strong class="d-block" style="color: black"><%= @room_partner[num].name %> (<%= @room_partner[num].nickname %>)</strong>
                   <% if @latest_message[num] === '' %>
