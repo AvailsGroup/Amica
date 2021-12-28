@@ -35,18 +35,18 @@ class ChatChannel < ApplicationCable::Channel
           File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}", 'wb+') do |f|
             f.write(Base64.decode64(@base64))
           end
-          @content = '画像を投稿しました。'
+          @content = '画像を送信しました。'
           f = File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}")
           Message.first.images.attach(io: f, filename: @image_name)
           f.close
           File.delete("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}")
           @url = data['message'][0..n_start.to_i - 1]
         else
-          @f_name = data['message'][n_start.to_i + 1..data['message'].length - 1]
+          @f_name = "#{@room_id}#{data['message'][n_start.to_i + 1..data['message'].length - 1]}"
           File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}", 'wb+') do |f|
             f.write(Base64.decode64(@base64))
           end
-          @content = "#{@f_name}を送信しました。"
+          @content = "ファイルを送信しました。"
           f = File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}")
           Message.first.files.attach(io: f, filename: @f_name)
           f.close

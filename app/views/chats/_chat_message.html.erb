@@ -5,23 +5,19 @@
     <div class="col-sm-12 message-main-sender"  style=" position:relative; " >
       <div class="sender my-1 p-1 mt-2" style="max-width: 40%;">
         <div class="messages container p-1">
-          <% if message.content == '画像を投稿しました。' %>
+          <% if message.content == '画像を送信しました。' %>
             <% image = ActiveStorage::Blob.find_by(filename: message.image) %>
             <% if image.nil?%>
               <%=safe_join(message.content.split("\n"),tag(:br))%>
             <% else %>
               <%= image_tag image, style:"max-width:100%", "data-lity" => "data-lity"%>
             <% end %>
-          <% elsif message.content == "#{message.file_name}を送信しました。" %>
+          <% elsif message.content == "ファイルを送信しました。" %>
             <% file = ActiveStorage::Blob.find_by(filename: message.file_name) %>
             <% if file.nil?%>
-              <% if file.nil?%>
                 <%=safe_join(message.content.split("\n"),tag(:br))%>
               <% else %>
-<%= file %>
-              <% end %>
-            <% else %>
-              <a href=<%= message.decorate.files %> download="<%= message.file_name%>"><%= message.file_name%></a>
+              <a href=<%= rails_blob_url(file, disposition: "attachment") %> download="<%= message.file_name[1..message.file_name.length]%>"><%= message.file_name[1..message.file_name.length]%></a>
             <% end %>
           <% else %>
             <% start = message.content.index("http")%>
@@ -69,9 +65,12 @@
       <% end %>
       <div class="receiver my-1 p-1 mt-2" style="max-width: 40%;" >
         <div class="messages container p-1">
-          <% if message.images.attached? %>
-            <% message.images.each do |image| %>
-              <%= image_tag image, style:"max-width:100%", "data-lity" => "data-lity"%> <br>
+          <% if message.content == '画像を送信しました。' %>
+            <% image = ActiveStorage::Blob.find_by(filename: message.image) %>
+            <% if image.nil?%>
+              <%=safe_join(message.content.split("\n"),tag(:br))%>
+            <% else %>
+              <%= image_tag image, style:"max-width:100%", "data-lity" => "data-lity"%>
             <% end %>
           <% elsif message.file_name != nil %>
             <a href=<%= message.decorate.files %> download="<%= message.file_name%>"><%= message.file_name%></a>
