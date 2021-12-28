@@ -44,3 +44,6 @@ yarn-debug.log*
 /public/user_images/*
 /public/communities_image/*
 /public/uploads/*
+
+/vendor/*
+!/vendor/.keep

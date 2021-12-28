@@ -20,6 +20,15 @@ class ApplicationController < ActionController::Base
     pages_path
   end
 
+  def authenticate_admin_user!
+    authenticate_user!
+
+    unless current_user.admin
+      flash[:notice] = "管理者用ページです。権限があるアカウントでログインしてください。"
+      redirect_to pages_path
+    end
+  end
+
   def base64?(value)
     value.is_a?(String) && Base64.strict_encode64(Base64.decode64(value)) == value
   end
