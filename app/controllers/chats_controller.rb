@@ -18,9 +18,6 @@ class ChatsController < ApplicationController
     end
     in_room?
     @message = Message.where(room_id: @room.id)
-    @message.each do |m|
-      m.update(url: nil)
-    end
   end
 
 end
