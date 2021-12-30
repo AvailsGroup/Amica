@@ -13,7 +13,7 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
         const user_id = document.getElementById("user_id").value
         const room_id = document.getElementById("room_id").value
         let partneruserid = document.getElementById("partner_userid").value
-        let partnerimage = document.getElementById("partner_image").value
+        let partnerimage = document.getElementById("partner_image").src
         if (data.room_id === Number(room_id)) {
             if (data.user_id === Number(user_id)) {
                 var content = "";

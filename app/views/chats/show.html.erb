@@ -79,8 +79,8 @@
 
 
 <nav class="nav nav-underline border-bottom w-100" id="chatnav" style="background-color: #fff; height: 30px; border-bottom: solid 1px rgba(29, 144, 190, 0.8);">
-  <div class="mx-3">
-    <span>チャット中 : </span>
+  <div style="margin-left:12px">
+    <span>チャット相手 : </span>
     <span><%= @user.name %></span>
     <span class="small" style="color: gray">(<%= @user.nickname %>)</span>
   </div>
@@ -115,6 +115,10 @@
           <div style="text-align: center">
             <span>ユーザーをブロックしています</span>
           </div>
+        <% elsif blocked?(@user, current_user) %>
+          <div style="text-align: center">
+            <span>ユーザーにブロックされています</span>
+          </div>
         <% else %>
           <div class="w-100 d-flex">
             <label>
@@ -124,7 +128,7 @@
             <input type="hidden" id="room_id" value=<%= @room.id %> data-behavior="chat_speaker">
             <input type="hidden" id="user_id" value=<%= current_user.id %> data-behavior="chat_speaker">
             <input type="hidden" id="partner_userid" value=<%= @user.userid %>>
-            <input type="hidden" id="partner_image" value=<%= @user.image %>>
+            <input type="hidden" id="partner_image" value=<%= @user.decorate.image %>>
             <%= text_area_tag :content, nil, class: "form-control", placeholder: "message", data: { behavior: "chat_speaker" }, id: "content" %>
             <label><!-- Button trigger modal -->
               <button id="submit_button" style="display: none" type="submit" class="btn btn-primary form-control"></button>
