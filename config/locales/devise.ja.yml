@@ -30,12 +30,12 @@ ja:
       signed_out: 'ログアウトしました。'
     #      signed_out: 'Signed out successfully.'
     passwords:
-      send_instructions: 'パスワードのリセット方法を数分以内にメールでご連絡します。'
+      send_instructions: 'パスワードのリセット方法をメールでご連絡しました。'
       #      send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
       updated: 'パスワードを変更しました。'
     #      updated: 'Your password was changed successfully. You are now signed in.'
     confirmations:
-      send_instructions: '登録方法を数分以内にメールでご連絡します。'
+      send_instructions: '登録方法をメールでご連絡しました。'
       #      send_instructions: 'You will receive an email with instructions about how to confirm your account in a few minutes.'
       confirmed: 'アカウントを登録しました。'
     #      confirmed: 'Your account was successfully confirmed. You are now signed in.'
@@ -48,7 +48,7 @@ ja:
       signed_up_but_needs_confirmation: "ご登録いただいたメールアドレスにメールを送信しました。メールを確認してアカウントを有効化してください。(迷惑メールに分類されている可能性があります。)"
     #      destroyed: 'Bye! Your account was successfully cancelled. We hope to see you again soon.'
     unlocks:
-      send_instructions: 'アカウントの凍結解除方法を数分以内にメールでご連絡します。'
+      send_instructions: 'アカウントの凍結解除方法をメールでご連絡しました。'
       #      send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
       unlocked: 'アカウントを凍結解除しました。'
     #      unlocked: 'Your account was successfully unlocked. You are now signed in.'
