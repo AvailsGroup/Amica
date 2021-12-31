@@ -18,5 +18,6 @@ class NotificationsController < ApplicationController
     informations = InformationShow.includes(:information, :user)
     information = informations.select { |i| i.user_id == user.id }
     @info_show_count = Information.all.size - information.size
+    @whispers = user.whispers.where(checked: false).size
   end
 end

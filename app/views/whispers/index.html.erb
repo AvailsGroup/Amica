@@ -1,2 +1,16 @@
-<h1>Whispers#index</h1>
-<p>Find me in app/views/whispers/index.html.erb</p>
+<style>
+    .flash {
+        display: none;
+    }
+</style>
+
+<%= render "notifications/nav", notifications: @notifications, information: @info_show_count, whisper: @new_whispers.size, page: "whisper" %>
+
+<div class="container">
+  <% if @whispers.exists? %>
+    <%= render partial: "whispers/whisper", collection: @pagenate, as: :whisper, locals: { new_whisper: @new_whispers } %>
+    <%= render "layouts/pagenate", pagenate: @pagenate %>
+  <% else %>
+    <p class="text-center my-4">通知はありません</p>
+  <% end %>
+</div>
