@@ -7,17 +7,15 @@ class InformationsController < ApplicationController
     @notification = @notifications.where.not(visitor_id: user.id)
     @informations = Information.all
     @information_show = InformationShow.includes(:information, :user)
-    @informations.each do |i|
+    @information = @information_show.select { |i| i.user_id == user.id }
+    @info_show_count = @informations.size - @information.size
+    @pagenate = @informations.page(params[:page]).per(2)
+    @pagenate.each do |i|
       unless InformationShow.exists?(user_id: user.id, information_id: i.id)
         InformationShow.create(user_id: user.id, information_id: i.id)
       end
     end
-    
-    @pagenate = @informations.page(params[:page]).per(20)
-    @information = @information_show.select { |i| i.user_id == user.id }
-    @info_show_count = @informations.size - @information.size
-    
-    
+
   end
 
   def show
