@@ -9,7 +9,7 @@ class InformationsController < ApplicationController
     @information_show = InformationShow.includes(:information, :user)
     @information = @information_show.select { |i| i.user_id == user.id }
     @info_show_count = @informations.size - @information.size
-    @pagenate = @informations.page(params[:page]).per(2)
+    @pagenate = @informations.page(params[:page]).per(20)
     @pagenate.each do |i|
       unless InformationShow.exists?(user_id: user.id, information_id: i.id)
         InformationShow.create(user_id: user.id, information_id: i.id)
