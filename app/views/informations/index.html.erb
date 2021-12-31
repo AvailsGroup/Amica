@@ -1,0 +1,16 @@
+<style>
+    .flash {
+        display: none;
+    }
+</style>
+
+<%= render "notifications/nav", notifications: @notifications, information: @info_show_count %>
+
+<div class="container">
+  <% if @informations.exists? %>
+    <%= render partial: "informations/information", collection: @pagenate, as: :information, locals: { information_show: @information_show } %>
+    <%= render "layouts/pagenate", pagenate: @pagenate %>
+  <% else %>
+    <p class="text-center my-4">メッセージはありません</p>
+  <% end %>
+</div>
