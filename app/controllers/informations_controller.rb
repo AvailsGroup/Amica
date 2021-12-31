@@ -4,7 +4,6 @@ class InformationsController < ApplicationController
     @users = User.includes(:tags)
     user = @users.find(current_user.id)
     @notifications = user.passive_notifications.includes(:visitor, :visited, :post, :comment)
-    @notification = @notifications.where.not(visitor_id: user.id)
     @informations = Information.all
     @information_show = InformationShow.includes(:information, :user)
     @information = @information_show.select { |i| i.user_id == user.id }
@@ -15,7 +14,7 @@ class InformationsController < ApplicationController
         InformationShow.create(user_id: user.id, information_id: i.id)
       end
     end
-
+    @whispers = user.whispers.where(checked: false).size
   end
 
   def show

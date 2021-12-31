@@ -315,7 +315,7 @@ ActiveRecord::Schema.define(version: 2021_12_31_014733) do
     t.integer "user_id", null: false
     t.string "title", null: false
     t.text "content", null: false
-    t.boolean "checked", default: true, null: false
+    t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
