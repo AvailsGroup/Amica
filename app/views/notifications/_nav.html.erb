@@ -1,16 +1,22 @@
 <div class="nav-scroller bg-white shadow-sm">
   <nav class="nav nav-underline" aria-label="Secondary navigation">
-    <%= link_to notifications_path, "aria-current": "page", class: "nav-link" do %>
+    <%= link_to notifications_path, "aria-current": "page", class: "nav-link #{"text-dark" if page == "notification"}" do %>
       通知
       <span class="badge bg-light text-dark rounded-pill align-text-bottom">
           <%= notifications.where(checked: false).size %>
-        </span>
+      </span>
     <% end %>
-    <%= link_to informations_path, "aria-current": "page", class: "nav-link" do %>
-      運営からのメッセージ
+    <%= link_to whispers_path, "aria-current": "page", class: "nav-link #{"text-dark" if page == "whisper"}" do %>
+    運営からのメッセージ
+      <span class="badge bg-light text-dark rounded-pill align-text-bottom">
+          <%= whisper %>
+      </span>
+    <% end %>
+    <%= link_to informations_path, "aria-current": "page", class: "nav-link #{"text-dark" if page == "information"}" do %>
+      お知らせ
       <span class="badge bg-light text-dark rounded-pill align-text-bottom">
           <%= information %>
-        </span>
+      </span>
     <% end %>
   </nav>
 </div>

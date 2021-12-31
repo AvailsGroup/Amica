@@ -99,6 +99,7 @@ Rails.application.routes.draw do
   # notification--------
   resources :notifications, only: %i[index destroy]
   resources :informations, only: %i[index show]
+  resources :whispers, only: %i[index show]
 
   # ranking------------
   resources :ranking, only: %i[index] do

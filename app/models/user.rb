@@ -112,6 +112,8 @@ class User < ApplicationRecord
 
   has_many :information_shows
 
+  has_many :whispers
+
   def password_required?
     super && confirmed?
   end
