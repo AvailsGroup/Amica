@@ -4,13 +4,19 @@
       通知
       <span class="badge bg-light text-dark rounded-pill align-text-bottom">
           <%= notifications.where(checked: false).size %>
-        </span>
+      </span>
+    <% end %>
+    <%= link_to whispers_path, "aria-current": "page", class: "nav-link" do %>
+    運営からのメッセージ
+      <span class="badge bg-light text-dark rounded-pill align-text-bottom">
+          0
+      </span>
     <% end %>
     <%= link_to informations_path, "aria-current": "page", class: "nav-link" do %>
-      運営からのメッセージ
+      お知らせ
       <span class="badge bg-light text-dark rounded-pill align-text-bottom">
           <%= information %>
-        </span>
+      </span>
     <% end %>
   </nav>
 </div>
