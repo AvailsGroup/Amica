@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  ActiveAdmin.routes(self)
   #devise--------------
   get 'users/controller'
 
@@ -99,6 +98,7 @@ Rails.application.routes.draw do
 
   # notification--------
   resources :notifications, only: %i[index destroy]
+  resources :informations, only: %i[index show]
 
   # ranking------------
   resources :ranking, only: %i[index] do
@@ -114,5 +114,6 @@ Rails.application.routes.draw do
   end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener'
+  ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
