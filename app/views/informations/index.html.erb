@@ -4,7 +4,7 @@
     }
 </style>
 
-<%= render "notifications/nav", notifications: @notifications, information: @info_show_count %>
+<%= render "notifications/nav", notifications: @notifications, information: @info_show_count, whisper: @whisper, page: "information" %>
 
 <div class="container">
   <% if @informations.exists? %>
