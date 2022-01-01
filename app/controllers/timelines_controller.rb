@@ -52,7 +52,7 @@ class TimelinesController < ApplicationController
   def create
     @create = Post.new(post_params)
     @create.user = current_user
-    flash[:alert] = '投稿の文字数は1~280文字までです<br/>画像はjpg jpeg png gifのみ対応しています。<br/>画像は10MBまでです。' unless @create.save!
+    flash[:alert] = '投稿の文字数は1~280文字までです<br/>画像はjpg jpeg png gifのみ対応しています。<br/>画像は10MBまでです。' unless @create.save
     redirect_to(timelines_path)
   end
 
