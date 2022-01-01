@@ -102,6 +102,7 @@ window.addEventListener("DOMContentLoaded", function () {
             $(this).height(0);
         }
     });
+
     //Shift+Enter or 紙飛行機ボタンでメッセ➖ジを送信させる
     $(document).on('keypress', '[data-behavior~=chat_speaker]', function (event) {
         if (event.shiftKey) {
@@ -130,11 +131,13 @@ window.addEventListener("DOMContentLoaded", function () {
         preview.src = null
         $(file_uploader).val('');
     });
+
     $(file_uploader).click(function () {
         preview.style.display = "none";
         preview.src = null
         $(this).val('');
     });
+
     $(file_uploader).change(function () {
         if ($(file_uploader).prop('files')[0].type.match(/^image\/(png|jpeg|gif)$/)) {
             preview.style.display = "";
@@ -145,6 +148,7 @@ window.addEventListener("DOMContentLoaded", function () {
             fileReader.readAsDataURL(this.files[0]);
         }
     });
+
     $('#file_submit_button').click('[data-behavior~=chat_speaker]', function () {
         const maxFileSize = 10485760 //アップロードできる最大サイズを指定(1048576=1MB 10485760=10MB)
         let val = null

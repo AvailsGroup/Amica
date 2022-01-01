@@ -11,7 +11,6 @@ class MessageDecorator < ApplicationDecorator
   #   end
   def image
     object.images.attached? ? object.images[0] : nil
-    #object.image.nil? ? nil : "/chats/room#{object.room_id}/files/#{object.image}"
   end
 
   def time
