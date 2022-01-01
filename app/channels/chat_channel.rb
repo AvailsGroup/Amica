@@ -31,7 +31,7 @@ class ChatChannel < ApplicationCable::Channel
         @base64 = data['message'][r_end.to_i + 1..n_start.to_i - 1]
         if data['message'][0..10] == 'data:image/'
           rand = rand(1_000_000..9_999_999)
-          @image_name = "#{@user_id}#{rand}.jpg"
+          @image_name = "#{rand}.jpg"
           File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}", 'wb+') do |f|
             f.write(Base64.decode64(@base64))
           end
@@ -43,7 +43,7 @@ class ChatChannel < ApplicationCable::Channel
           file = ActiveStorage::Blob.find_by(filename: @image_name)
           @url = url_for(file)
         else
-          @f_name = "#{@room_id}#{data['message'][n_start.to_i + 1..data['message'].length - 1]}"
+          @f_name = "#{data['message'][n_start.to_i + 1..data['message'].length - 1]}"
           File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}", 'wb+') do |f|
             f.write(Base64.decode64(@base64))
           end

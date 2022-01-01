@@ -12,19 +12,20 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
         received: function (data) {
             const user_id = document.getElementById("user_id").value
             const room_id = document.getElementById("room_id").value
-            let partneruserid = document.getElementById("partner_userid").value
-            let partnerimage = document.getElementById("partner_image").src
+            let partner_userid = document.getElementById("partner_userid").value
+            let partner_image = document.getElementById("partner_image").src
             if (data.room_id !== Number(room_id)) {
                 return
             }
+            let content = AutoLink(data.content);
             if (data.user_id === Number(user_id)) {
-                var content = AutoLink(data.content);
+
                 if (data.image !== null) {
                     content = '<img style="max-width:100%" data-lity="data-lity" src="' + data.url + '">';
                 }
 
                 if (data.file_name !== null) {
-                    content = '<a href="' + data.url + '" download="' + data.file_name.substr(1) + '">' + data.file_name.substr(1) + '</a>'
+                    content = '<a href="' + data.url + '" download="' + data.file_name + '">' + data.file_name + '</a>'
                 }
 
                 $('#append').append(
@@ -46,23 +47,22 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
                 return
             }
 
-            if (partnerimage === "") {
-                partnerimage = "/assets/default_icon.png"
+            if (partner_image === "") {
+                partner_image = "/assets/default_icon.png"
             }
 
-            content = AutoLink(data.content);
             if (data.image !== null) {
-                content = '<img style="max-width:100%" data-lity="data-lity" src="' + url_for() + '">';
+                content = '<img style="max-width:100%" data-lity="data-lity" src="' + data.url + '">';
             }
             if (data.file_name !== null) {
-                content = '<a href="/chats/room1/files/' + data.file_name + '" download="' + data.file_name.substr(1) + '">' + data.file_name.substr(1) + '</a>'
+                content = '<a href="' + data.url + '" download="' + data.file_name + '">' + data.file_name + '</a>'
             }
 
             $('#append').append(
                 '<div class="row message-body text-wrap " style="white-space: pre;">' +
                 '<div class="col-sm-12 message-main-receiver" style=" position:relative;">' +
-                '<a class="userLink" href="/profiles/' + partneruserid + '">' +
-                '<img class="icon bd-placeholder-img flex-shrink-0 me-2 mt-2" style="float: left" width="40px" height="40px" src=' + partnerimage + '>' +
+                '<a class="userLink" href="/profiles/' + partner_userid + '">' +
+                '<img class="icon bd-placeholder-img flex-shrink-0 me-2 mt-2" style="float: left" width="40px" height="40px" src=' + partner_image + '>' +
                 '</a>' +
                 '<div class="receiver my-1 p-1 mt-2" style="max-width: 40%;">' +
                 '<div class="messages container p-1">' +
