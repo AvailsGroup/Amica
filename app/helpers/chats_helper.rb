@@ -10,9 +10,9 @@ module ChatsHelper
   end
 
   def chat_content(message)
-    return content_image(message) if message.content == '画像を送信しました。'
+    return content_image(message) if message.content_type == 'image'
 
-    return content_file(message) if message.content == 'ファイルを送信しました。'
+    return content_file(message) if message.content_type == 'file'
 
     link(h(message.content).html_safe).gsub(/\r\n|\r|\n/, '<br />').html_safe
   end
@@ -32,8 +32,15 @@ module ChatsHelper
       safe_join(message.content.split("\n"), tag(:br))
     else
       link_to message.file_name, rails_blob_url(file, disposition: 'attachment'), download: message.file_name
-
     end
+  end
+
+  def not_send_message(user)
+    return 'ユーザーをブロックしています' if blocked?(current_user, user)
+
+    return 'ユーザーにブロックされています' if blocked?(@user, current_user)
+
+    '退会済みユーザーです'
   end
 
 end
