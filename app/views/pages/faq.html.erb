@@ -37,7 +37,11 @@
                         </div>
                         <div class="collapse" id="collapseOne" aria-labelledby="headingOne" data-parent="#faqAccordion">
                           <div class="card-body">
-                            <p>A.<%= link_to "アカウント設定", edit_user_registration_path %>のアカウントの削除ボタンをクリックすると削除することが出来ます。削除後は同じメールアドレス再登録が出来ませんので注意してください。</p>
+                            <p>A.<%= link_to "アカウント設定", edit_user_registration_path %>のアカウントの削除ボタンをクリックすると退会することが出来ます。<br />
+                              退会後は同じメールアドレス再登録が出来ませんので注意してください。<br />
+                              (もしものことがあればお問い合わせで対応します。)<br />
+                              自分がリーダーのコミュニティやフォロー関係等はすべて削除されますので注意してください。
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -150,12 +154,23 @@
                         </div>
                       </div>
 
+                      <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                        <div class="card-header" id="headingTen">
+                          <h6 class="text-dark" data-bs-toggle="collapse" href="#collapse11" aria-expanded="false" aria-controls="collapse11">Q11.バグを見つけた！<span class="lni-chevron-up"></span>
+                          </h6>
+                        </div>
+                        <div class="collapse" id="collapse11" aria-labelledby="headingTen" data-parent="#faqAccordion">
+                          <div class="card-body">
+                            <p>A.ご協力ありがとうございます！バグを見つけた際は<%= link_to "お問い合わせ", contact_path %>での報告をお願いします。度合いによっては特別なバッジを付与します。</p>
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                     <div class="mt-5 mar-btm">
                       <h4 class="text-thin"><i class="fa fa-question-circle fa-lg fa-fw text-primary "></i> 問題は解決されましたか？
                       </h4>
-                      <p class="text-muted mar-top ms-3 fs-6">問題が解決されない場合は<%= link_to "お問い合わせ", contact_path %>
-                        までお願い致します。</p>
+                      <p class="text-muted mar-top ms-3 fs-6">問題が解決されない場合は<%= link_to "お問い合わせ", contact_path %>までお願い致します。</p>
                     </div>
                   </div>
                 </div>
