@@ -15,6 +15,8 @@ class User < ApplicationRecord
 
   validate :validate_tag
 
+  validate :image_size
+
   # TODO: 本番環境に移行する際は最低でも英語数字が含まれるように
   validates :password, format: { with: /\A[a-zA-Z0-9.$!@_%^*&()]{8,24}\z/ }, allow_nil: true
 
@@ -186,6 +188,15 @@ class User < ApplicationRecord
     tag_list.each do |tag|
       errors.add(:tag_list, 'は1つ2~20文字です。') if (tag.length < 2) || (tag.length > 20)
       errors.add(:tag_list, "には記号やスペースを入れることが出来ません [#{tag}]") unless /\A[a-zA-Z0-9ぁ-んァ-ヶ一-龥々ー]+\z/u.match?(tag)
+    end
+  end
+
+  def image_size
+    return unless image.attached?
+
+    if image.blob.byte_size > 10.megabytes
+      image.purge
+      errors.add(:image, "は10MB以内にしてください")
     end
   end
 end

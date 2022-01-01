@@ -13,6 +13,8 @@ class Community < ApplicationRecord
 
   validate :validate_tag
 
+  validate :image_size
+
   validate :content_length
 
   attr_accessor :image_x,:image_y,:image_w,:image_h,:aspect_numerator,:aspect_denominator
@@ -41,5 +43,14 @@ class Community < ApplicationRecord
 
     content_for_validation = content.gsub(/\r\n/,"a")
     errors.add(:content, "は400文字以内で入力してください。") if content_for_validation.length > 400
+  end
+
+  def image_size
+    return unless image.attached?
+
+    if image.blob.byte_size > 10.megabytes
+      image.purge
+      errors.add(:image, "は10MB以内にしてください")
+    end
   end
 end
