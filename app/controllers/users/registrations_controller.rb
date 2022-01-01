@@ -28,9 +28,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    delete_user
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました。Amicaのご利用ありがとうございました。"
+    redirect_to "/"
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -62,4 +65,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def delete_user
+    current_user.communities.delete_all
+    current_user.followings.delete_all
+    current_user.followers.delete_all
+    current_user.discard
+  end
 end

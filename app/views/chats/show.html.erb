@@ -81,8 +81,8 @@
 <nav class="nav nav-underline border-bottom w-100" id="chatnav" style="background-color: #fff; height: 30px; border-bottom: solid 1px rgba(29, 144, 190, 0.8);">
   <div style="margin-left:12px">
     <span>チャット相手 : </span>
-    <span><%= @user.name %></span>
-    <span class="small" style="color: gray">(<%= @user.nickname %>)</span>
+    <span><%= @user.decorate.name %></span>
+    <span class="small" style="color: gray">(<%= @user.decorate.nickname %>)</span>
   </div>
 </nav>
 
@@ -118,6 +118,10 @@
         <% elsif blocked?(@user, current_user) %>
           <div style="text-align: center">
             <span>ユーザーにブロックされています</span>
+          </div>
+        <% elsif @user.discarded? %>
+          <div style="text-align: center">
+            <span>退会済みユーザーです</span>
           </div>
         <% else %>
           <div class="w-100 d-flex">

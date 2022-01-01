@@ -1,2 +1,0 @@
-class AdminCustomController < ApplicationController
-end
