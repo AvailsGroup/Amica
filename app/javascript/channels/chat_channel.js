@@ -1,28 +1,30 @@
 import consumer from "./consumer"
 
 const ChatChannel = consumer.subscriptions.create("ChatChannel", {
-    connected() {
-        // Called when the subscription is ready for use on the server
-    },
+        connected() {
+            // Called when the subscription is ready for use on the server
+        },
 
-    disconnected() {
-        // Called when the subscription has been terminated by the server
-    },
+        disconnected() {
+            // Called when the subscription has been terminated by the server
+        },
 
-    received: function (data) {
-        const user_id = document.getElementById("user_id").value
-        const room_id = document.getElementById("room_id").value
-        let partneruserid = document.getElementById("partner_userid").value
-        let partnerimage = document.getElementById("partner_image").src
-        if (data.room_id === Number(room_id)) {
+        received: function (data) {
+            const user_id = document.getElementById("user_id").value
+            const room_id = document.getElementById("room_id").value
+            let partneruserid = document.getElementById("partner_userid").value
+            let partnerimage = document.getElementById("partner_image").src
+            if (data.room_id !== Number(room_id)) {
+                return
+            }
             if (data.user_id === Number(user_id)) {
-                var content = "";
+                var content = AutoLink(data.content);
                 if (data.image !== null) {
                     content = '<img style="max-width:100%" data-lity="data-lity" src="' + data.url + '">';
-                } else if (data.file_name !== null) {
+                }
+
+                if (data.file_name !== null) {
                     content = '<a href="' + data.url + '" download="' + data.file_name.substr(1) + '">' + data.file_name.substr(1) + '</a>'
-                } else {
-                    content = AutoLink(data.content);
                 }
 
                 $('#append').append(
@@ -33,7 +35,7 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
                     content +
                     '</div>' +
                     '</div>' +
-                    '<div class="text-gray small sender_time">' +
+                    '<div class="text-gray small sender_time h-100" style="padding-bottom: 5px">' +
                     '今日 ' + data.created_at.slice(11, 16) +
                     '</div>' +
                     '</div>' +
@@ -41,51 +43,54 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
                     '<div class="clear"></div>'
                 )
                 bottom_scroll();
-            } else {
-                if (partnerimage === "") {
-                    partnerimage = "/assets/default_icon.png"
-                }
-                if (data.image !== null) {
-                    content = '<img style="max-width:100%" data-lity="data-lity" src="' + url_for() + '">';
-                } else if (data.file_name !== null) {
-                    content = '<a href="/chats/room1/files/' + data.file_name + '" download="' + data.file_name + '">' + data.file_name + '</a>'
-                } else {
-                    content = AutoLink(data.content);
-                }
-                $('#append').append(
-                    '<div class="row message-body text-wrap " style="white-space: pre;">' +
-                    '<div class="col-sm-12 message-main-receiver" style=" position:relative;">' +
-                    '<a class="userLink" href="/profiles/' + partneruserid + '">' +
-                    '<img class="icon bd-placeholder-img flex-shrink-0 me-2 mt-2" style="float: left" width="40px" height="40px" src=' + partnerimage + '>' +
-                    '</a>' +
-                    '<div class="receiver my-1 p-1 mt-2" style="max-width: 40%;">' +
-                    '<div class="messages container p-1">' +
-                    content +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="text-gray small" style="float: left">' +
-                    '<p class="time">' +
-                    '今日 ' + data.created_at.slice(11, 16) +
-                    '</p>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="clear"></div>'
-                )
-                bottom_scroll();
+                return
             }
-        }
-    },
 
-    speak: function (message, room_id, send_image, uploaded_file) {
-        return this.perform('speak', {
-            message: message,
-            room_id: room_id,
-            send_image: send_image,
-            uploaded_file: uploaded_file
-        });
-    }
-});
+            if (partnerimage === "") {
+                partnerimage = "/assets/default_icon.png"
+            }
+
+            content = AutoLink(data.content);
+            if (data.image !== null) {
+                content = '<img style="max-width:100%" data-lity="data-lity" src="' + url_for() + '">';
+            }
+            if (data.file_name !== null) {
+                content = '<a href="/chats/room1/files/' + data.file_name + '" download="' + data.file_name.substr(1) + '">' + data.file_name.substr(1) + '</a>'
+            }
+
+            $('#append').append(
+                '<div class="row message-body text-wrap " style="white-space: pre;">' +
+                '<div class="col-sm-12 message-main-receiver" style=" position:relative;">' +
+                '<a class="userLink" href="/profiles/' + partneruserid + '">' +
+                '<img class="icon bd-placeholder-img flex-shrink-0 me-2 mt-2" style="float: left" width="40px" height="40px" src=' + partnerimage + '>' +
+                '</a>' +
+                '<div class="receiver my-1 p-1 mt-2" style="max-width: 40%;">' +
+                '<div class="messages container p-1">' +
+                content +
+                '</div>' +
+                '</div>' +
+                '<div class="text-gray small" style="float: left">' +
+                '<p class="time">' +
+                '今日 ' + data.created_at.slice(11, 16) +
+                '</p>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="clear"></div>'
+            )
+            bottom_scroll();
+        },
+
+        speak: function (message, room_id, send_image, uploaded_file) {
+            return this.perform('speak', {
+                message: message,
+                room_id: room_id,
+                send_image: send_image,
+                uploaded_file: uploaded_file
+            });
+        }
+    })
+;
 
 
 window.addEventListener("DOMContentLoaded", function () {
@@ -130,7 +135,6 @@ window.addEventListener("DOMContentLoaded", function () {
             $($textarea).height(0);
         }
     });
-
 
     $('#file_button').click(function () {
         preview.style.display = "none";
