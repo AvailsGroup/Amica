@@ -64,7 +64,7 @@
             <hr class="my-4">
 
             <div class="col-12">
-              <%= f.label "パスワード(8~24文字 半角英数字(大文字小文字)、記号 [$!@_%^*&()] が使用できます)" %>
+              <%= f.label "パスワード (8~24文字 半角英数字が使用できます。) ※大文字、小文字、数字が各1つずつ必須です。" %>
               <%= f.password_field :password, class: "form-control", autocomplete: "off", maxlength: "24" %>
             </div>
 
