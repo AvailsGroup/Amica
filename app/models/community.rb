@@ -19,7 +19,7 @@ class Community < ApplicationRecord
 
   has_many :community_members, dependent: :destroy
 
-  has_many :community_securities
+  has_many :community_securities, dependent: :destroy
 
   has_many :favorites
 

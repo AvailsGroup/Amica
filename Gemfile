@@ -99,3 +99,5 @@ gem 'activesupport'
 gem 'draper'
 
 gem 'bundler-audit'
+
+gem 'discard'
