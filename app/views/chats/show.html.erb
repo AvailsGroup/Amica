@@ -15,7 +15,7 @@
 
 <%= render "chats/menu_modal" %>
 <%= render "chats/file_modal" %>
-<%= render "chats/nav", user:@user %>
+<%= render "chats/nav", user: @user %>
 
 
 <div class="container" id="body">
@@ -24,15 +24,15 @@
       <% date_time = nil %>
       <% @message.each do |m| %>
         <% date_time = m.created_at if date_time == nil %>
-          <% if m.created_at - date_time == 0 || (m.created_at.to_date - date_time.to_date).to_i >= 1 %>
-            <div class="date"><%= m.created_at.strftime("%m月%d日") %></div>
-          <% end %>
+        <% if m.created_at - date_time == 0 || (m.created_at.to_date - date_time.to_date).to_i >= 1 %>
+          <div class="date"><%= m.created_at.strftime("%m月%d日") %></div>
+        <% end %>
         <%= render 'chats/chat_message', message: m, user: m.user_id === current_user.id %>
         <% date_time = m.created_at %>
       <% end %>
       <div id="append" class="col-sm-12"></div>
     </div>
   </div>
-  <%= render "chats/form", user:@user, room: @room%>
+  <%= render "chats/form", user: @user, room: @room %>
 </div>
 
