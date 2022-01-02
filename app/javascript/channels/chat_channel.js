@@ -86,7 +86,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
     const file_uploader = document.getElementById('file_uploader')
     const preview = document.getElementById("preview")
 
-    //改行や文字数に応じてtextareaを伸び縮みさせる
+
     let $textarea = $('#content');
     const lineHeight = parseInt($textarea.css('lineHeight'));
 
@@ -149,11 +149,11 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
     $('#file_submit_button').click('[data-behavior~=chat_speaker]', function () {
         const maxFileSize = 10485760 //アップロードできる最大サイズを指定(1048576=1MB 10485760=10MB)
         let val = null
-        $(".error_msg").remove()　//エラーメッセージ削除
+        $(".error_msg").remove()
         let file = $(file_uploader).prop('files')[0];
         if (maxFileSize < file.size) {
             $(file_uploader).val("")
-            $(file_uploader).before("<p class='error_msg'>アップロードできる最大サイズは10MBです</p>") //エラーメッセージ表示
+            $(file_uploader).before("<p class='error_msg'>アップロードできる最大サイズは10MBです</p>")
         } else {
             $(file_uploader).click(function () {
                 $(this).val("")
@@ -175,7 +175,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
 });
 
 function AutoLink(str) {
-    var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
+    var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g;
     var regexp_makeLink = function (all, url, h, href) {
         return '<a href="h' + href + '" target="_blank">' + url + '</a>';
     }
