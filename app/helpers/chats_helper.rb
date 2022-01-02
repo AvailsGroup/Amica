@@ -1,6 +1,20 @@
 module ChatsHelper
   require 'uri'
 
+  def index_message(message)
+    return '※このユーザーとはまだ会話したことがないようです！会話してみましょう！※' if message == ''
+
+    '※このユーザーがあなたと会話したいようです！会話してみましょう！※'
+  end
+
+  def index_date_format(message)
+    if message.created_at.to_date == Date.today
+      message.created_at.strftime("今日 %H:%M")
+    else
+      message.created_at.strftime("%m月%d日")
+    end
+  end
+
   def html_main_class(user)
     "message-main-#{html_sub_class(user)}"
   end
