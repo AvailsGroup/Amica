@@ -2,7 +2,7 @@
   <div class="col-sm-12 messageBox-inner">
     <span class="clear"></span>
     <div class="row">
-      <% if blocked?(user, current_user) || user.discarded? || blocked?(current_user, user) %>
+      <% if blocked?(user, current_user) || user.discarded? || blocked?(current_user, user) || !current_user.followings.include?(user) %>
         <div style="text-align: center">
           <span><%= not_send_message(user) %></span>
         </div>

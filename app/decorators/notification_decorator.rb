@@ -15,6 +15,7 @@ class NotificationDecorator < ApplicationDecorator
     when 'comment' then "<i class='fas fa-comment-alt'></i>".html_safe
     when 'like' then "<i class='fas fa-heart'></i>".html_safe
     when 'follow' then "<i class='fas fa-user-plus'></i>".html_safe
+    when 'chat' then "<i class='fas fa-comment-medical'></i>".html_safe
     else
       '<i class="fas fa-ellipsis-h"></i>'.html_safe
     end

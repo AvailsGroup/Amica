@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_01_222611) do
+ActiveRecord::Schema.define(version: 2022_01_02_010511) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -228,8 +228,8 @@ ActiveRecord::Schema.define(version: 2022_01_01_222611) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.integer "started_userid"
-    t.integer "invited_userid"
+    t.integer "started_user_id"
+    t.integer "invited_user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

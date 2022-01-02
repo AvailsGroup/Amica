@@ -12,7 +12,6 @@ class ChatChannel < ApplicationCable::Channel
 
   def speak(data)
     @room_id = data['room_id']
-    @user_id = current_user.id
     @image_name, @url, @f_name = nil
     @type = data['content_type']
     @content = data['message']
@@ -49,10 +48,18 @@ class ChatChannel < ApplicationCable::Channel
       end
       @content = 'content'
     end
-    @message = Message.create content: @content, user_id: @user_id, room_id: @room_id, image: @image_name,
+    @message = Message.create content: @content, user_id: current_user.id, room_id: @room_id, image: @image_name,
                               file_name: @f_name, url: @url, content_type: @type
 
-    @room = Room.find_by(id: @room_id).touch(:created_at)
+    room = Room.find_by(id: @room_id)
+
+    other_user_id = room.started_user_id == current_user.id ? room.invited_user_id : room.started_user_id
+
+    unless Notification.exists?(visitor_id: current_user.id, visited_id: other_user_id, action: 'chat', checked: false)
+      Notification.create(visitor_id: current_user.id, visited_id: other_user_id, action: 'chat')
+    end
+
+    @room = room.touch(:created_at)
     ActionCable.server.broadcast 'chat_channel', @message
   end
 end

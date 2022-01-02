@@ -4,7 +4,7 @@ class ChatsController < ApplicationController
   helper_method :blocked?
 
   def index
-    latest_message?
+    latest_message
     if @chatroom.nil?
       redirect_to profiles_path, notice: '誰かとお話してみましょう！'
     end
@@ -20,49 +20,39 @@ class ChatsController < ApplicationController
     @message = Message.where(room_id: @room.id)
   end
 
-end
+  private
 
-private
-def latest_message?
-  @room_partner = []
-  @latest_message = []
-  @chatroom = Room.order(updated_at: :desc).where(started_userid: current_user.id)
-                  .or(Room.order(updated_at: :desc).where(invited_userid: current_user.id))
-  if @chatroom == []
-    @chatroom = nil
-    return
-  end
+  def latest_message
+    @room_partner = []
+    @latest_message = []
+    @chatroom = Room.order(updated_at: :desc).where(started_user_id: current_user.id)
+                    .or(Room.order(updated_at: :desc).where(invited_user_id: current_user.id))
+    if @chatroom == [] || @chatroom.nil?
+      @chatroom = nil
+      return
+    end
 
-  @chatroom.each do |cr|
-    @message = Message.order(updated_at: :desc).find_by(room_id: cr.id)
-    if @message.nil?
-      if cr.started_userid == current_user.id
-        @latest_message << ''
+    @chatroom.each do |cr|
+      @message = Message.order(updated_at: :desc).find_by(room_id: cr.id)
+      if @message.nil?
+        cr.started_user_id == current_user.id ? @latest_message << '' : @latest_message << []
       else
-        @latest_message << nil
+        @latest_message << @message
       end
-    else
-      @latest_message << @message
+
+      @userid = cr.started_user_id == current_user.id ? cr.invited_user_id : cr.started_user_id
+      @room_partner << User.find_by(id: @userid)
     end
-    if cr.started_userid == current_user.id
-      @userid = cr.invited_userid
-    else
-      @userid = cr.started_userid
-    end
-    @room_partner << User.find_by(id: @userid)
   end
-end
 
-
-def in_room?
-  @room = Room.find_by(started_userid: current_user.id, invited_userid: @user.id)
-  if @room.nil?
-    @room = Room.find_by(started_userid: @user.id, invited_userid: current_user.id)
+  def in_room?
+    @room = Room.find_by(started_user_id: current_user.id, invited_user_id: @user.id)
     if @room.nil?
-      @room = Room.create(started_userid: current_user.id, invited_userid: @user.id)
-      @room.save
+      @room = Room.find_by(started_user_id: @user.id, invited_user_id: current_user.id)
+      if @room.nil?
+        @room = Room.create(started_user_id: current_user.id, invited_user_id: @user.id)
+        @room.save
+      end
     end
   end
 end
-
-
