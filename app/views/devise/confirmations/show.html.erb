@@ -6,9 +6,9 @@
 
 <div class="container" style="max-width: 960px">
   <div class="py-5 text-center">
-    <%= image_tag "/user_images/default_icon.png", class: "d-block mx-auto mb-4", width: "100" %>
+    <%= image_tag "default_icon.png", class: "d-block mx-auto mb-4", width: "100" %>
     <h2>新規登録</h2>
-    <p class="lead">Amicaへようこそ！<br/>Amicaを利用する前にあなたのことを教えて下さい！</p>
+    <p class="lead">Amicaへようこそ！<br/>Amicaを利用する前にあなたのことを教えて下さい！<br/>公平性を保つため、虚偽の入力はしないでください。</p>
   </div>
   <p><%= devise_error_messages! %></p>
   <%= form_for(resource, as: resource_name, url: users_confirm_path) do |f| %>
@@ -35,6 +35,11 @@
           <hr class="my-4">
 
           <%= f.fields_for :profile do |pf| %>
+            <div class="col-sm-6">
+              <%= pf.label "入学年(西暦) ※一度入力したら変更できません", class: "form-label" %>
+              <%= pf.text_field :enrolled_year, class: "form-control", id: "school_class", placeholder: "クラス", maxlength: "4" %>
+            </div>
+
             <div class="col-12">
               <%= pf.label "学科", class: "form-label" %>
               <br/>
@@ -59,7 +64,7 @@
             <hr class="my-4">
 
             <div class="col-12">
-              <%= f.label "パスワード(8~24文字 半角英数字(大文字小文字)、記号 [$!@_%^*&()] が使用できます)" %>
+              <%= f.label "パスワード (8~24文字 半角英数字が使用できます。) ※大文字、小文字、数字が各1つずつ必須です。" %>
               <%= f.password_field :password, class: "form-control", autocomplete: "off", maxlength: "24" %>
             </div>
 

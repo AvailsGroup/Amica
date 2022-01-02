@@ -1,4 +1,7 @@
 class MuteController < ApplicationController
+  before_action :authenticate_user!
+  before_action :banned
+
   def create
     @post = Post.find(params[:timeline_id])
     @mute = Mute.new

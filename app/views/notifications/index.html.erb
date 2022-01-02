@@ -1,15 +1,15 @@
 <style>
-  .flash{
-      display: none;
-  }
+    .flash {
+        display: none;
+    }
 </style>
 
-<%= render "notifications/nav", notifications:@notifications %>
+<%= render "notifications/nav", notification: @notification_count, information: @info_show_count, whisper: @whispers, page: @page %>
 
 <div class="container">
-  <% if @notification.exists? %>
-    <%= render partial: "notifications/notification", collection: @pagenate, as: :notification, locals: { new_notification: @new_notification } %>
-    <%= render "layouts/pagenate", pagenate:@pagenate %>
+  <% if @content.exists? %>
+    <%= render partial: @path, collection: @pagenate, as: :value, locals: { new_value: @new_content } %>
+    <%= render "layouts/pagenate", pagenate: @pagenate %>
   <% else %>
     <p class="text-center my-4">通知はありません</p>
   <% end %>

@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :banned
 
   def create
     @users = User.all

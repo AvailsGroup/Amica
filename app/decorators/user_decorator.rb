@@ -11,6 +11,16 @@ class UserDecorator < ApplicationDecorator
   #   end
 
   def image
-    object.image.nil? ? "default_icon" : "/user_images/#{object.image}"
+    return 'default_icon' if object.discarded?
+
+    object.image.attached? ? object.image : 'default_icon'
+  end
+
+  def name
+    object.discarded? ? '退会済みユーザー' : object.name
+  end
+
+  def nickname
+    object.discarded? ? 'Deleted User' : object.nickname
   end
 end

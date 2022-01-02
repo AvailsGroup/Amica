@@ -9,11 +9,16 @@ class MessageDecorator < ApplicationDecorator
   #       object.created_at.strftime("%a %m/%d/%y")
   #     end
   #   end
-  def images
-    object.image.nil? ? nil : "/chat_images/room#{object.room_id}/#{object.image}"
+
+  def image
+    object.image.attached? ? object.image[0] : nil
   end
 
   def time
-    object.created_at.to_date === Date.today ? object.created_at.strftime("今日 %H:%M") : message.created_at.strftime("%H:%M")
+    object.created_at.to_date == Date.today ? object.created_at.strftime('今日 %H:%M') : message.created_at.strftime('%H:%M')
+  end
+
+  def files
+    object.file_name.nil? ? nil : "/chats/room#{object.room_id}/files/#{object.file_name}"
   end
 end

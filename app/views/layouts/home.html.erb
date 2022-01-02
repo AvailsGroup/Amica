@@ -5,6 +5,7 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <title>Amica</title>
+  <%= favicon_link_tag('amica.ico') %>
   <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
 
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -12,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
+  <meta name=”description” content=”ISC学生向けの友達作りサイトです。” />
 </head>
 
   <body class="d-flex h-100 text-center text-dark">
@@ -35,7 +37,7 @@
       </main>
 
       <footer class="mt-auto text-dark">
-        <p>©Avails Group
+        <p>©2021 - <%= DateTime.now.strftime('%Y') %> Avails Group
         <%= link_to("利用規約",static_path,class:"text-dark") %>
         <%= link_to("プライバシーポリシー",privacy_path,class:"text-dark")%></p>
       </footer>

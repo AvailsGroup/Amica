@@ -76,6 +76,8 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.action_mailer.default_url_options = { host: 'localhost:3000' } # 追加
+  host = 'http://127.0.0.1:3000' #←先ほどの上のコードのhost名と合わせる
+  Rails.application.routes.default_url_options[:host] = host
 
   #以下のコードは会員登録のテスト時に使ってください
   config.action_mailer.delivery_method = :letter_opener_web

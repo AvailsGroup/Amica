@@ -33,6 +33,11 @@ ja:
         school_class: クラス
         number: 出席番号
         student_id: 学籍番号
+        twitter_id: twitterID
+        enrolled_year: 入学年
+        instagram_id: InstagramID
+        discord_name: Discordの名前
+        discord_tag: Discordのタグ
     models:
       user: ユーザー
   devise:
@@ -44,7 +49,7 @@ ja:
       send_paranoid_instructions: メールアドレスが登録済みの場合、本人確認用のメールが数分以内に送信されます。
     failure:
       already_authenticated: すでにログインしています。
-      inactive: アカウントが有効化されていません。メールに記載された手順にしたがって、アカウントを有効化してください。
+      inactive: 本登録されていないかすでに退会しています。未登録の場合はメールに記載された手順にしたがって、本登録してください。
       invalid: "%{authentication_keys}またはパスワードが違います。"
       last_attempt: もう一回誤るとアカウントがロックされます。
       locked: アカウントはロックされています。

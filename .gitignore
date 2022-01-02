@@ -43,3 +43,9 @@ yarn-debug.log*
 /vendor/bundle/*
 /public/user_images/*
 /public/communities_image/*
+/public/uploads/*
+
+/vendor/*
+!/vendor/.keep
+
+/.Dockerfile.swp

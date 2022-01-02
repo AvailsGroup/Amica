@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  include Discard::Model
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable,
@@ -9,18 +9,22 @@ class User < ApplicationRecord
   acts_as_taggable
   acts_as_taggable_on :accreditations
 
+  has_one_attached :image
+
   before_create :build_default_profile
 
   validate :validate_tag
 
-  validates :password, format: { with: /\A[a-zA-Z0-9.$!@_%^*&()]{8,24}\z/ }, allow_nil: true
+  validate :image_size
+
+  # TODO: 本番環境に移行する際は最低でも英語数字が含まれるように
+  validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,24}+\z/ }, allow_nil: true
 
   validates :agreement_terms, allow_nil: false, acceptance: true, on: :create
 
   validates :email,
             uniqueness: { case_sensitive: false },
             format: { with: /\A[A-Za-z]{4}[0-9]{7}@gn.iwasaki.ac.jp\z/ }
-  #上記の正規表現は行頭から大小英語が4文字、数字が7文字、その後はドメインがそのとおりに入力されているかチェックようになっています
 
   validates :name,
             length: { minimum: 2, maximum: 20 },
@@ -33,8 +37,6 @@ class User < ApplicationRecord
   validates :userid,
             uniqueness: { case_sensitive: false },
             format: { with: /\A[A-Za-z][A-Za-z0-9_]*\z/ },
-            #上記の正規表現は行頭半角英語、それ以外は半角英数字が入力できるようになってます。
-            # TODO: 本番環境に移行する際は最低でも英語数字が含まれるように
             length: { minimum: 1, maximum: 20 },
             allow_nil: true
 
@@ -67,6 +69,8 @@ class User < ApplicationRecord
 
   has_one :profile
   accepts_nested_attributes_for :profile, update_only: true
+
+  has_one :setting
 
   has_many :posts, dependent: :destroy
   has_many :likes
@@ -105,12 +109,19 @@ class User < ApplicationRecord
 
   has_many :mutes
 
+  has_many :blocks
+  has_many :passive_blocks, class_name: "Block", foreign_key: "blocked_user_id", dependent: :destroy
+
+  has_many :information_shows
+
+  has_many :whispers
+
   def password_required?
     super && confirmed?
   end
 
   def active_for_authentication?
-    super && confirmed?
+    super && confirmed? && !discarded?
   end
 
   def inactive_message
@@ -177,6 +188,15 @@ class User < ApplicationRecord
     tag_list.each do |tag|
       errors.add(:tag_list, 'は1つ2~20文字です。') if (tag.length < 2) || (tag.length > 20)
       errors.add(:tag_list, "には記号やスペースを入れることが出来ません [#{tag}]") unless /\A[a-zA-Z0-9ぁ-んァ-ヶ一-龥々ー]+\z/u.match?(tag)
+    end
+  end
+
+  def image_size
+    return unless image.attached?
+
+    if image.blob.byte_size > 10.megabytes
+      image.purge
+      errors.add(:image, "は10MB以内にしてください")
     end
   end
 end

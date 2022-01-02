@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_21_160552) do
+ActiveRecord::Schema.define(version: 2022_01_02_014017) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -21,6 +21,21 @@ ActiveRecord::Schema.define(version: 2021_12_21_160552) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "hand_like", default: false
     t.boolean "wink_like", default: false
+    t.boolean "debugger", default: false
+  end
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.integer "resource_id"
+    t.string "author_type"
+    t.integer "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -49,6 +64,13 @@ ActiveRecord::Schema.define(version: 2021_12_21_160552) do
     t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "blocks", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "blocked_user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -100,6 +122,20 @@ ActiveRecord::Schema.define(version: 2021_12_21_160552) do
     t.index ["hashname"], name: "index_hashtags_on_hashname", unique: true
   end
 
+  create_table "information", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "information_shows", force: :cascade do |t|
+    t.integer "information_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "inquiries", force: :cascade do |t|
     t.string "name"
     t.string "message"
@@ -122,6 +158,9 @@ ActiveRecord::Schema.define(version: 2021_12_21_160552) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
+    t.string "file_name"
+    t.string "url"
+    t.string "content_type", default: "text"
   end
 
   create_table "mutes", force: :cascade do |t|
@@ -161,6 +200,10 @@ ActiveRecord::Schema.define(version: 2021_12_21_160552) do
     t.date "birthday"
     t.text "twitter_id"
     t.integer "enrolled_year"
+    t.text "intro"
+    t.string "instagram_id"
+    t.string "discord_name"
+    t.integer "discord_tag"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -186,8 +229,15 @@ ActiveRecord::Schema.define(version: 2021_12_21_160552) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.integer "started_userid"
-    t.integer "invited_userid"
+    t.integer "started_user_id"
+    t.integer "invited_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.boolean "visible_enrolled_year", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -257,10 +307,22 @@ ActiveRecord::Schema.define(version: 2021_12_21_160552) do
     t.string "image"
     t.boolean "ban", default: false
     t.integer "warning", default: 0
+    t.boolean "is_deleted", default: false
+    t.datetime "discarded_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["discarded_at"], name: "index_users_on_discarded_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+  end
+
+  create_table "whispers", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "title", null: false
+    t.text "content", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

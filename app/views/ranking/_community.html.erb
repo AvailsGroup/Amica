@@ -1,0 +1,14 @@
+<%= link_to community_path(community.id), style: "text-decoration: none;" do %>
+  <div class="my-3 p-2 bg-white rounded shadow-sm">
+    <p class="mb-0"><%= (30 * (page.to_i - 1)) + community_counter + 1 %>位</p>
+    <div class="d-flex justify-content-between">
+      <div class="d-flex text-muted pt-3 justify-content-between">
+        <%= image_tag community.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+        <p class="pb-3 mb-0 small lh-sm  w-100">
+          <strong class="d-block text-gray-dark"><%= community.name %></strong>
+        </p>
+      </div>
+      <p><%= rank_count(nil ,community, title) %></p>
+    </div>
+  </div>
+<% end %>
