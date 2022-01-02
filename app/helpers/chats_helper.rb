@@ -40,6 +40,8 @@ module ChatsHelper
 
     return 'ユーザーにブロックされています' if blocked?(@user, current_user)
 
+    return 'ユーザーをフォローしてないとチャットが出来ません' unless current_user.followings.include?(user)
+
     '退会済みユーザーです'
   end
 
