@@ -48,3 +48,8 @@ OS:Windows10, 11, Ubuntu 20.04 LTS(docker)
 
 [Tag-it](https://github.com/aehlke/tag-it)
 
+## License
+
+本プログラムはGNU General Public License v3.0に基づき配布されています。 
+
+ライセンスの規定を守れば、誰でも自由に複製、改変、配布することができます。
