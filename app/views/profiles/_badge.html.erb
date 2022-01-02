@@ -6,7 +6,7 @@
 
 <% if @user.posts.size >= 100 %>
   <div class="amica-badge posts-badge">
-    <span class="at-badge" style="color: green"><i class="fas fa-bullhorn"></i></span>
+    <span class="at-badge" style="color: deepskyblue"><i class="fas fa-bullhorn"></i></span>
     <div class="badge-description">投稿数100個達成記念!</div>
   </div>
   <% if @user.posts.size >= 1000 %>
@@ -25,7 +25,7 @@
 
 <% if @friends_count >= 10 %>
   <div class="amica-badge friends10-badge">
-    <span class="at-badge" style="color: green"><i class="fas fa-icons"></i></span>
+    <span class="at-badge" style="color: deepskyblue"><i class="fas fa-icons"></i></span>
     <div class="badge-description">友達人数10人達成記念！</div>
   </div>
   <% if @friends_count >= 50 %>
@@ -44,7 +44,7 @@
 
 <% if @community_count >= 1 %>
   <div class="amica-badge communities1-badge">
-    <span class="at-badge" style="color: green"><i class="fas fa-map-marked-alt"></i></span>
+    <span class="at-badge" style="color: deepskyblue"><i class="fas fa-map-marked-alt"></i></span>
     <div class="badge-description">コミュニティ参加記念！</div>
   </div>
   <% if @community_count >= 5 %>
@@ -63,7 +63,7 @@
 
 <% if @days >= 100 %>
   <div class="amica-badge registrationDays10-badge">
-    <span class="at-badge" style="color: green"><i class="fas fa-sign-in-alt"></i></span>
+    <span class="at-badge" style="color: deepskyblue"><i class="fas fa-sign-in-alt"></i></span>
     <div class="badge-description">amica登録から100日経過記念！</div>
   </div>
   <% if @days >= 200 %>
@@ -82,7 +82,7 @@
 
 <% if @comments_count >= 10 %>
   <div class="amica-badge comments10-badge">
-    <span class="at-badge" style="color: orange"><i class="fas fa-handshake"></i></span>
+    <span class="at-badge" style="color: deepskyblue"><i class="fas fa-handshake"></i></span>
     <div class="badge-description">コメント数10個記念！</div>
   </div>
   <% if @comments_count >= 50 %>
@@ -131,6 +131,14 @@
     <% end %>
   <% end %>
 <% end %>
+
+<% if @achievement.debugger %>
+  <div class="amica-badge admin-badge">
+    <span class="at-badge" style="color: red"><i class="fas fa-bug"></i></span>
+    <div class="badge-description">バグを報告してくれた人に与えられるバッジ</div>
+  </div>
+<% end %>
+
 
 
 <% if @user.admin %>
