@@ -11,19 +11,12 @@
             <%= image_tag r.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
             <p class="pb-3 mb-0 w-100">
               <strong class="d-block" style="color: black"><%= r.decorate.name %> (<%= r.decorate.nickname %>)</strong>
-              <% if @latest_message[i] == '' %>
-                <span class="medium lh-sm" style="float: right;color: black">※このユーザーとはまだ会話したことがないようです！会話してみましょう！※</span>
-                <span class="clear"></span>
-              <% elsif @latest_message[i] == [] %>
-                <span class="medium lh-sm" style="float: right;color: black">※このユーザーがあなたと会話したいようです！会話してみましょう！※</span>
+              <% if @latest_message[i] == '' || @latest_message[i] == [] %>
+                <span class="medium lh-sm" style="float: right;color: black"><%= index_message(@latest_message[i]) %></span>
                 <span class="clear"></span>
               <% else %>
                 <span class="text-muted medium lh-sm"> <%= @latest_message[i].content.delete("\n").slice(0..50) %></span>
-                <% if @latest_message[i].created_at.to_date == Date.today %>
-                  <span class="small" style="float: right;color:gray;"><%= @latest_message[i].created_at.strftime("今日 %H:%M") %></span>
-                <% else %>
-                  <span class="small" style="float: right;color:gray;"><%= @latest_message[i].created_at.strftime("%m月%d日") %></span>
-                <% end %>
+                <span class="small" style="float: right;color:gray;"><%= index_date_format(@latest_message[i]) %></span>
               <% end %>
             </p>
           </div>
