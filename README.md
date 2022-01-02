@@ -21,3 +21,30 @@ IssueやPullRequest等もお待ちしています。
 
 ## URL
 https://avails-amica.com
+
+## 開発環境 
+
+OS:Windows10, 11, Ubuntu 20.04 LTS(docker)
+
+### バックエンド
+
+言語:[Ruby](https://github.com/ruby/ruby)　
+
+フレームワーク:[Rails](https://github.com/rails/rails) 
+
+### フロントエンド 
+
+### CSS
+
+[Bootstrap](https://github.com/twbs/bootstrap)
+
+### Javascript
+
+[JQuery](https://github.com/jquery/jquery)
+
+[CropperJS](https://github.com/fengyuanchen/cropperjs)
+
+[Lity](https://github.com/jsor/lity)
+
+[Tag-it](https://github.com/aehlke/tag-it)
+
