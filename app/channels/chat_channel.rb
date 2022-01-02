@@ -17,11 +17,12 @@ class ChatChannel < ApplicationCable::Channel
     @type = data['content_type']
     @content = data['message']
     Dir.mkdir("#{Rails.root}/tmp/chats/") unless File.directory?("#{Rails.root}/tmp/chats")
-
+    unless File.directory?("#{Rails.root}/tmp/chats/room#{@room_id}")
+      Dir.mkdir("#{Rails.root}/tmp/chats/room#{@room_id}")
+    end
     if @type == 'file'
-      unless File.directory?("#{Rails.root}/tmp/chats/room#{@room_id}")
-        Dir.mkdir("#{Rails.root}/tmp/chats/room#{@room_id}")
-      end
+      r_end = data['message'].index(',')
+      n_start = data['message'].index('@')
       @base64 = @content[r_end.to_i + 1..n_start.to_i - 1]
       if @content[0..10] == 'data:image/'
         rand = rand(1_000_000..9_999_999)
@@ -29,25 +30,22 @@ class ChatChannel < ApplicationCable::Channel
         File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}", 'wb+') do |f|
           f.write(Base64.decode64(@base64))
         end
-        @type = 'image'
         f = File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}")
         Message.first.images.attach(io: f, filename: @image_name)
         f.close
         File.delete("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}")
-        file = ActiveStorage::Blob.find_by(filename: @image_name)
-        @url = url_for(file)
+        @type = 'image'
+        @url = url_for(ActiveStorage::Blob.find_by(filename: @image_name))
       else
-        @f_name = "#{data['message'][n_start.to_i + 1..data['message'].length - 1]}"
+        @f_name = (data['message'][n_start.to_i + 1..data['message'].length - 1]).to_s
         File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}", 'wb+') do |f|
           f.write(Base64.decode64(@base64))
         end
-        @type = 'file'
         f = File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}")
         Message.first.files.attach(io: f, filename: @f_name)
         f.close
         File.delete("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}")
-        file = ActiveStorage::Blob.find_by(filename: @f_name)
-        @url = rails_blob_url(file, disposition: 'attachment')
+        @url = rails_blob_url(ActiveStorage::Blob.find_by(filename: @f_name), disposition: 'attachment')
       end
       @content = 'content'
     end

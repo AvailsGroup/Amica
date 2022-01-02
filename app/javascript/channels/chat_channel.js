@@ -89,9 +89,8 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
     //改行や文字数に応じてtextareaを伸び縮みさせる
     let $textarea = $('#content');
     const lineHeight = parseInt($textarea.css('lineHeight'));
-    // 最低行数を指定
+
     let minHeight = lineHeight;
-    // 最高幅を指定
     let maxHeight = parseInt($(window).height() * 0.5);
     $textarea.on('input', function () {
         let lines = ($(this).val() + '\n').match(/\n/g).length;
