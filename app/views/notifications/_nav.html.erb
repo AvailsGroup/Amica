@@ -3,7 +3,7 @@
     <%= link_to notifications_path, "aria-current": "page", class: "nav-link #{"text-dark" if page == "notification"}" do %>
       通知
       <span class="badge bg-light text-dark rounded-pill align-text-bottom">
-          <%= notifications.where(checked: false).size %>
+          <%= notification %>
       </span>
     <% end %>
     <%= link_to whispers_path, "aria-current": "page", class: "nav-link #{"text-dark" if page == "whisper"}" do %>
