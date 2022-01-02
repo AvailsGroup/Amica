@@ -1,0 +1,42 @@
+<div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="menuModalLabel">menu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class=" mb-0 d-flex ">
+            <div class="modal-item shadow-sm mb-5 bg-body rounded">
+              <%= link_to chats_path, class: " modal-icons nav-link" do %>
+                <i class="fas fa-comments"></i>
+                <p class="small">チャット</p>
+              <% end %>
+            </div>
+            <div class="modal-item shadow-sm mb-5 bg-body rounded">
+              <%= link_to communities_path, class: "modal-icons nav-link" do %>
+                <i class="fas fa-users"></i>
+                <p class="small">コミュニティ</p>
+              <% end %>
+            </div>
+          </div>
+          <div class="mb-0 d-flex ">
+            <div class="modal-item shadow-sm  mb-5 bg-body rounded">
+              <%= link_to timelines_path, class: "modal-icons nav-link" do %>
+                <i class="fas fa-clock"></i>
+                <p class="small">タイムライン</p>
+              <% end %>
+            </div>
+            <div class="modal-item shadow-sm  mb-5 bg-body rounded">
+              <%= link_to profiles_path, class: "modal-icons nav-link" do %>
+                <i class="fas fa-address-card"></i>
+                <p class="small">友達</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

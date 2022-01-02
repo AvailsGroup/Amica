@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_01_001245) do
+ActiveRecord::Schema.define(version: 2022_01_01_222611) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(version: 2022_01_01_001245) do
     t.string "image"
     t.string "file_name"
     t.string "url"
+    t.string "content_type", default: "text"
   end
 
   create_table "mutes", force: :cascade do |t|

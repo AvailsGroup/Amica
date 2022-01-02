@@ -1,125 +1,25 @@
-<%# views/messages/_chat_message.html.erb %>
-
-<% if message.user_id === current_user.id %>
-  <div class="row message-body">
-    <div class="col-sm-12 message-main-sender"  style=" position:relative; " >
-      <div class="sender my-1 p-1 mt-2" style="max-width: 40%;">
-        <div class="messages container p-1">
-          <% if message.content == '画像を送信しました。' %>
-            <% image = ActiveStorage::Blob.find_by(filename: message.image) %>
-            <% if image.nil?%>
-              <%=safe_join(message.content.split("\n"),tag(:br))%>
-            <% else %>
-              <%= image_tag image, style:"max-width:100%", "data-lity" => "data-lity"%>
-            <% end %>
-          <% elsif message.content == "ファイルを送信しました。" %>
-            <% file = ActiveStorage::Blob.find_by(filename: message.file_name) %>
-            <% if file.nil?%>
-                <%=safe_join(message.content.split("\n"),tag(:br))%>
-              <% else %>
-              <a href=<%= rails_blob_url(file, disposition: "attachment") %> download="<%= message.file_name[1..message.file_name.length]%>"><%= message.file_name[1..message.file_name.length]%></a>
-            <% end %>
-          <% else %>
-            <% start = message.content.index("http")%>
-            <div>
-              <% if start != nil %>
-                <% messages = message.content %>
-                <% while start != nil do%>
-                  <% ends = messages.index(/\r\n|\r|\n|\s|　|\t/,start) %>
-                  <% url = messages[start.to_i..ends.to_i - 1] %>
-                  <% if start == 0 %>
-                    <% messages = messages.sub("#{url}","") %>
-                    <a href="<%= url %>" target="_blank" rel="noopener noreferrer"><%= url %></a>
-                    <% start = messages.index("http")%>
-                    <% if start == nil %>
-                      <%= safe_join(messages.split("\n"),tag(:br))%>
-                    <% end %>
-                  <% else %>
-                    <% first = messages[0..start.to_i-1] %>
-                    <% messages = messages.sub("#{first}", "").sub("#{url}", "") %>
-                    <%= safe_join(first.split("\n"),tag(:br)) %><br>
-                    <a href="<%= url %>" target="_blank" rel="noopener noreferrer"><%= url %></a>
-                    <% start = messages.index("http")%>
-                    <% if start == nil %>
-                      <%= safe_join(messages.split("\n"),tag(:br))%>
-                    <% end %>
-                  <% end %>
-                <% end %>
-              <% else %>
-                <%=safe_join(message.content.split("\n"),tag(:br))%>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
+<div class="row message-body">
+  <div class="col-sm-12 <%= html_main_class(user) %>" style=" position:relative;">
+    <% unless user %>
+      <%= link_to profile_path(@user.userid), class: "userLink" do %>
+        <%= image_tag @user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 mt-2 ", style: "float: left;", width: "40px", height: "40px" %>
+      <% end %>
+    <% end %>
+    <div class="<%= html_sub_class(user) %> my-1 p-1 mt-2" style="max-width: 40%;">
+      <div class="messages container p-1">
+        <%= chat_content(message) %>
       </div>
+    </div>
+    <% if user %>
       <div class="text-gray small sender_time h-100" style="padding-bottom: 5px">
         <%= message.decorate.time %>
       </div>
-    </div>
-  </div>
-<% else %>
-  <div class="row message-body">
-    <div class="col-sm-12 message-main-receiver" style=" position:relative;">
-      <%= link_to profile_path(@user.userid),class:"userLink"  do %>
-        <%= image_tag @user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 mt-2 ",style: "float: left;", width: "40px", height: "40px" %>
-      <% end %>
-      <div class="receiver my-1 p-1 mt-2" style="max-width: 40%;" >
-        <div class="messages container p-1">
-          <% if message.content == '画像を送信しました。' %>
-            <% image = ActiveStorage::Blob.find_by(filename: message.image) %>
-            <% if image.nil?%>
-              <%=safe_join(message.content.split("\n"),tag(:br))%>
-            <% else %>
-              <%= image_tag image, style:"max-width:100%", "data-lity" => "data-lity"%>
-            <% end %>
-            <% elsif message.content == "ファイルを送信しました。" %>
-            <% file = ActiveStorage::Blob.find_by(filename: message.file_name) %>
-            <% if file.nil?%>
-              <%=safe_join(message.content.split("\n"),tag(:br))%>
-            <% else %>
-              <a href=<%= rails_blob_url(file, disposition: "attachment") %> download="<%= message.file_name[1..message.file_name.length]%>"><%= message.file_name[1..message.file_name.length]%></a>
-            <% end %>
-          <% else %>
-            <% start = message.content.index("http")%>
-            <div>
-              <% if start != nil %>
-                <% messages = message.content %>
-                <% while start != nil do%>
-                  <% ends = messages.index(/\r\n|\r|\n|\s|\t/,start) %>
-                  <% url = messages[start.to_i..ends.to_i - 1] %>
-                  <% if start == 0 %>
-                    <% messages = messages.sub("#{url}","") %>
-                    <a href="<%= url %>" target="_blank" rel="noopener noreferrer"><%= url %></a>
-                    <% start = messages.index("http")%>
-                    <% if start == nil %>
-                      <%= safe_join(messages.split("\n"),tag(:br))%>
-                    <% end %>
-                    <% if message.image != nil %>>
-                      <%= image_tag message.decorate.images, style: "float: left;", width: "25%", height: "25%", "data-lity" => "data-lity"%>
-                    <% end %>
-                  <% else %>
-                    <% first = messages[0..start.to_i-1] %>
-                    <% messages = messages.sub("#{first}", "").sub("#{url}", "") %>
-                    <%= safe_join(first.split("\n"),tag(:br)) %><br>
-                    <a href="<%= url %>" target="_blank" rel="noopener noreferrer"><%= url %></a>
-                    <% start = messages.index("http")%>
-                    <% if start == nil %>
-                      <%= safe_join(messages.split("\n"),tag(:br))%>
-                    <% end %>
-                  <% end %>
-                <% end %>
-              <% else %>
-                <%=safe_join(message.content.split("\n"),tag(:br))%>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      </div>
+    <% else %>
       <div class="text-gray small" style="float: left">
         <p class="time">
           <%= message.decorate.time %>
         </p>
       </div>
-    </div>
+    <% end %>
   </div>
-<% end %>
+</div>
