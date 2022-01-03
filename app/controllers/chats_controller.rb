@@ -19,8 +19,7 @@ class ChatsController < ApplicationController
       return
     end
     in_room?
-    @message = Message.where(room_id: @room.id).limit(50)
-    @chat_page = @message.page(params[:page]).per(10)
+    @message = Message.where(room_id: @room.id)
   end
 
   private
