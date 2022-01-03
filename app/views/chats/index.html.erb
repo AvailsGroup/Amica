@@ -15,7 +15,7 @@
                 <span class="medium lh-sm" style="float: right;color: black"><%= index_message(@latest_message[i]) %></span>
                 <span class="clear"></span>
               <% else %>
-                <span class="text-muted medium lh-sm"> <%= @latest_message[i].content.delete("\n").slice(0..50) %></span>
+                <span class="text-muted medium lh-sm"> <%= @latest_message[i].decorate.type %></span>
                 <span class="small" style="float: right;color:gray;"><%= index_date_format(@latest_message[i]) %></span>
               <% end %>
             </p>

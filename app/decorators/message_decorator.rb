@@ -21,4 +21,15 @@ class MessageDecorator < ApplicationDecorator
   def files
     object.file_name.nil? ? nil : "/chats/room#{object.room_id}/files/#{object.file_name}"
   end
+
+  def type
+    case object.content_type
+    when 'text'
+      object.content.delete("\n").slice(0..50)
+    when 'image'
+      '画像を送信しました。'
+    else
+      'ファイルを送信しました。'
+    end
+  end
 end
