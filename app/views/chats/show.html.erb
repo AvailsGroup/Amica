@@ -1,3 +1,4 @@
+<%= javascript_pack_tag 'chat/show', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag 'chats', media: 'all', 'data-turbolinks-track': 'reload' %>
 <style>
     .flash {
@@ -12,6 +13,7 @@
         });
 </script>
 <input id="messagesJson" type="hidden" data-messages="<%= @message.to_json %>">
+
 <%= render "chats/menu_modal" %>
 <%= render "chats/file_modal" %>
 <%= render "chats/nav", user: @user %>

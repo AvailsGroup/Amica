@@ -99,26 +99,15 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             $(this).height(0);
         }
     });
-    //もっとみるで前の50件を表示
-    let testHash = $('#messagesJson').data('messages');
-    let startnum = Number(testHash.length) - 5
-    $('.morebtn').click(function () {
-        startnum = startnum - 5
-        let num = startnum + 4
-        testHash.slice(startnum,startnum + 5).forEach(function ()
-        {
-            $('<p>' + testHash[num].content + '</p>'+'<p>' + testHash[num].id + '</p>').prependTo('#messages');
-            console.log(testHash[num])
-            num = num - 1
-        })
-    })
+
 
     //Shift+Enter or 紙飛行機ボタンでメッセ➖ジを送信させる
     $(document).on('keypress', '[data-behavior~=chat_speaker]', function (event) {
         if (event.shiftKey) {
             if (event.key === 'Enter' && content.value) {
                 $(file_uploader).val('');
-                ChatChannel.speak(content.value, room_id.value, 'text');
+                Ch
+                atChannel.speak(content.value, room_id.value, 'text');
                 bottom_scroll();
                 event.target.value = '';
                 $($textarea).height(0);
