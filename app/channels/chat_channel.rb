@@ -35,7 +35,6 @@ class ChatChannel < ApplicationCable::Channel
         File.delete("#{Rails.root}/tmp/chats/room#{@room_id}/#{@image_name}")
         @type = 'image'
         @url = url_for(ActiveStorage::Blob.find_by(filename: @image_name))
-        @content = '画像を送信しました。'
       else
         @f_name = (data['message'][n_start.to_i + 1..data['message'].length - 1]).to_s
         File.open("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}", 'wb+') do |f|
@@ -46,8 +45,8 @@ class ChatChannel < ApplicationCable::Channel
         f.close
         File.delete("#{Rails.root}/tmp/chats/room#{@room_id}/#{@f_name}")
         @url = rails_blob_url(ActiveStorage::Blob.find_by(filename: @f_name), disposition: 'attachment')
-        @content = 'ファイルを送信しました。'
       end
+      @content = 'content'
     end
     @message = Message.create content: @content, user_id: current_user.id, room_id: @room_id, image: @image_name,
                               file_name: @f_name, url: @url, content_type: @type

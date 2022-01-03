@@ -16,8 +16,11 @@
 <%= render "chats/menu_modal" %>
 <%= render "chats/file_modal" %>
 <%= render "chats/nav", user: @user %>
-
-<%= render "layouts/pagenate", pagenate: @chat_page %>
+<% if @message.size > 50 %>
+<div class="container" style="text-align: center">
+<button type="button"  class="btn btn-link">もっと見る</button>
+</div>
+<% end %>
 <div class="container" id="body">
   <div id="chat" style="margin:1% 1% 70px 1%">
     <div id="messages">
