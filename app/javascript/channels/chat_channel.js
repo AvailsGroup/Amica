@@ -100,6 +100,10 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
         }
     });
 
+    //もっとみるで前の50件を表示
+    $('.morebtn').click(function () {
+        $("<p>追加する内容</p>").prependTo('#messages');
+    })
     //Shift+Enter or 紙飛行機ボタンでメッセ➖ジを送信させる
     $(document).on('keypress', '[data-behavior~=chat_speaker]', function (event) {
         if (event.shiftKey) {
