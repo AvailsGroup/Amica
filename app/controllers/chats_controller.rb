@@ -8,6 +8,7 @@ class ChatsController < ApplicationController
     if @chatroom.nil?
       redirect_to profiles_path, notice: '誰かとお話してみましょう！'
     end
+    @chat = @chatroom.page(params[:page]).per(1)
   end
 
   def show

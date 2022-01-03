@@ -307,7 +307,6 @@ ActiveRecord::Schema.define(version: 2022_01_02_014017) do
     t.string "image"
     t.boolean "ban", default: false
     t.integer "warning", default: 0
-    t.boolean "is_deleted", default: false
     t.datetime "discarded_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["discarded_at"], name: "index_users_on_discarded_at"
