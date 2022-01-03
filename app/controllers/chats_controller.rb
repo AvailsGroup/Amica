@@ -8,6 +8,7 @@ class ChatsController < ApplicationController
     if @chatroom.nil?
       redirect_to profiles_path, notice: '誰かとお話してみましょう！'
     end
+    pp @chatroom
     @chat = @chatroom.page(params[:page]).per(1)
   end
 
@@ -18,7 +19,8 @@ class ChatsController < ApplicationController
       return
     end
     in_room?
-    @message = Message.where(room_id: @room.id)
+    @message = Message.where(room_id: @room.id).limit(50)
+    @chat_page = @message.page(params[:page]).per(10)
   end
 
   private
