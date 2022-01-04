@@ -24,18 +24,21 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             }
             let today = new Date();
             let time
+            let send_time = new Date(messageHash[num].created_at) - new Date(messageHash[num - 1].created_at)
+            let time_ber = ''
+            if(Math.floor(send_time/1000/60/60/24) >= 1 || num === startnum){
+                time_ber = '<div id="'+messageHash[num].created_at.slice(0, 10)+'" class="date">'+messageHash[num].created_at.slice(0, 10)+'</div>'
+            }
             today = today.getFullYear() + "-" +  ("0" + (today.getMonth()+1)).slice(-2) + "-"+ ("0" + (today.getDate())).slice(-2)
             if (messageHash[num].created_at.slice(0, 10) === today) {
-                time = '今日 ' + messageHash[num].created_at.slice(11, 16)}
+                 time = '今日 ' + messageHash[num].created_at.slice(11, 16)}
             else {
                 time = messageHash[num].created_at.slice(11, 16)
             }
-             if (messageHash[num].created_at.slice(0, 10) - today === 0 || messageHash[num].created_at.slice(0, 10) - today >= 1) {
-                alert("ok")
-            }
 
 
-            let html = '<div class="row message-body text-wrap" style="white-space: pre;">' +
+            let html = time_ber+
+                '<div class="row message-body text-wrap" style="white-space: pre;">' +
                 '<div class="col-sm-12 message-main-receiver" style=" position:relative;">' +
                 '<a class="userLink" href="/profiles/' + partner_userid + '">' +
                 '<img class="icon bd-placeholder-img flex-shrink-0 me-2 mt-2" style="float: left" width="40px" height="40px" src=' + partner_image + '>' +
@@ -54,7 +57,8 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
                 '</div>' +
                 '<div class="clear"></div>'
             if (Number(messageHash[num].user_id) === Number(user_id.value)){
-                html = '<div class="row message-body text-wrap" style="white-space: pre;">' +
+                html = time_ber+
+                    '<div class="row message-body text-wrap" style="white-space: pre;">' +
                     ' <div class="col-sm-12 message-main-sender" style=" position:relative;">' +
                     '<div class="sender my-1 p-1 mt-2" style="max-width: 40%;">' +
                     '<div class="messages container p-1">' +
