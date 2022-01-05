@@ -34,15 +34,9 @@
               <div></div>
               <div style="margin-right: 10px">
                 <% unless current_user == @user %>
-                  <% if blocked?(current_user, @user) %>
-                    <button type="button" class="send" data-bs-toggle="modal" data-bs-target="#Modal">
-                      <i class="fas fa-ban" style="color: blue;width: 20px;height: 20px"></i>
-                    </button>
-                  <% else %>
-                    <button type="button" class="send" data-bs-toggle="modal" data-bs-target="#Modal">
-                      <i class="fas fa-ban" style="color: red;width: 20px;height: 20px"></i>
-                    </button>
-                  <% end %>
+                  <button type="button" class="send" data-bs-toggle="modal" data-bs-target="#Modal">
+                    <i class="fas fa-ban" style="<%= blocked?(current_user, @user) ? "color: blue" : "color: red" %>;width: 20px;height: 20px"></i>
+                  </button>
                 <% end %>
               </div>
             </div>
@@ -69,14 +63,14 @@
             <ul class="nav nav-pills float-start countlist" role="tablist">
               <%= link_to profile_follow_path(@user.userid), class: "text-dark" do %>
                 <li role="presentation">
-                  <h3><%= @user.followers_list.size %><br>
+                  <h3><%= @user.followings_list.size %><br>
                     <small>フォロー</small></h3>
                 </li>
               <% end %>
               <%= link_to profile_follower_path(@user.userid), class: "text-dark" do %>
                 <li role="presentation">
                   <h3>
-                    <%= @user.followings_list.size %><br>
+                    <%= @user.followers_list.size %><br>
                     <small>フォロワー</small>
                   </h3>
                 </li>
