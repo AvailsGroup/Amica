@@ -5,15 +5,15 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
 
 //もっとみるで前の50件を表示
     let messageHash = $('#messagesJson').data('messages');
-    let startnum = Number(messageHash.length) - 50
+    let startnum = Number(messageHash.length) - 5
     let num
     $('.morebtn').click(function () {
         startnum = startnum - 50
         if(startnum<0){
-            num = startnum + 50
+            num = startnum + 49
             startnum = 0
         }else {
-            num = startnum + 50
+            num = startnum + 49
         }
         messageHash.slice(startnum, num + 1).forEach(function () {
             let content = AutoLink(messageHash[num].content);
