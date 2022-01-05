@@ -100,6 +100,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
         }
     });
 
+
     //Shift+Enter or 紙飛行機ボタンでメッセ➖ジを送信させる
     $(document).on('keypress', '[data-behavior~=chat_speaker]', function (event) {
         if (event.shiftKey) {
@@ -115,7 +116,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
 
     $('#submit_button').click('[data-behavior~=chat_speaker]', function () {
         if (content.value && content.value.match(/\S/g)) {
-            const message = content.value
+            $(file_uploader).val('');
             ChatChannel.speak(content.value, room_id.value, 'text');
             bottom_scroll()
             content.value = '';
