@@ -5,19 +5,18 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
 
 //もっとみるで前の50件を表示
     let messageHash = $('#messagesJson').data('messages');
-    let startnum = Number(messageHash.length) - 10
+    let startnum = Number(messageHash.length) - 50
     let num
     $('.morebtn').click(function () {
-        startnum = startnum - 10
+        startnum = startnum - 50
         if(startnum<0){
-            num = 9 + startnum,
+            num = startnum + 50
             startnum = 0
         }else {
-            num = startnum + 9
+            num = startnum + 50
         }
         messageHash.slice(startnum, num + 1).forEach(function () {
             let content = AutoLink(messageHash[num].content);
-            console.log(messageHash[num].id)
             if (messageHash[num].image !== null) {
                 content = '<img style="max-width:100%" data-lity="data-lity" src="' + messageHash[num].url + '">';
             }
@@ -32,7 +31,8 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             }
             let today = new Date();
             let time
-            let send_time = new Date(messageHash[num].created_at) - new Date(messageHash[num - 1].created_at)
+            let send_time
+            num > 0 ? send_time = new Date(messageHash[num].created_at) - new Date(messageHash[num - 1].created_at) : send_time = new Date(messageHash[num].created_at)
             let time_ber = ''
             let time_flag = document.getElementById(messageHash[num].created_at.slice(0, 10))
             if(Math.floor(send_time/1000/60/60/24) >= 1 || num === startnum){

@@ -106,8 +106,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
         if (event.shiftKey) {
             if (event.key === 'Enter' && content.value) {
                 $(file_uploader).val('');
-                Ch
-                atChannel.speak(content.value, room_id.value, 'text');
+                ChatChannel.speak(content.value, room_id.value, 'text');
                 bottom_scroll();
                 event.target.value = '';
                 $($textarea).height(0);
@@ -117,7 +116,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
 
     $('#submit_button').click('[data-behavior~=chat_speaker]', function () {
         if (content.value && content.value.match(/\S/g)) {
-            const message = content.value
+            $(file_uploader).val('');
             ChatChannel.speak(content.value, room_id.value, 'text');
             bottom_scroll()
             content.value = '';
