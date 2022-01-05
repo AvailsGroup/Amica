@@ -40,6 +40,11 @@
   </div>
 </div>
 
+<%= render 'layouts/modal', id: "Modal",
+           title: "確認", content: "#{@community.name}を脱退します。本当によろしいですか？",
+           negative: "いいえ",
+           affirmmative_path: community_manage_path(@community.id, current_user.id), affirmmative_method: :delete, affirmative: "はい" %>
+
 <div class="position-relative overflow-hidden p-1 p-md-5 m-md-3 text-center bg-light">
   <div class="col-md-5 p-lg-1 mx-auto my-1">
     <%= image_tag @community.decorate.image, class: "img-fluid rounded", style: "width: 150px;height: 150px;" %>
@@ -57,7 +62,9 @@
     <% else %>
       <% if @join %>
         <%= link_to "チャット", chats_path, class: "btn btn-outline-dark mx-2" %>
-        <%= link_to "脱退", community_manage_path(@community.id, current_user.id), method: :delete, class: "btn btn-outline-dark mx-2", data: { confirm: "本当に脱退しますか？" } %>
+        <button type="button" class="btn btn-outline-dark mx-2" data-bs-toggle="modal" data-bs-target="#Modal">
+          脱退
+        </button>
         <% if is_community_favorite?(@favorite, @user, @community) %>
           <%= link_to "お気に入り解除", page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'btn btn-outline-dark mx-2 bg-dark text-light', style: "", data: { disable_with: 'お気に入り解除' } %>
         <% else %>

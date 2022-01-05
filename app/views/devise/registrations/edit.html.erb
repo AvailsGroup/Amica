@@ -30,5 +30,10 @@
 
   <h3>アカウント削除</h3>
 
-  <p><%= button_to "削除", registration_path(resource_name), data: { confirm: "本当によろしいですか？" }, method: :delete  , class:"w-25 btn btn-lg btn-primary"%></p>
+  <button type="button" class="w-25 btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#Modal">削除</button>
 </div>
+
+<%= render 'layouts/modal', id: "Modal",
+           title: "アカウント削除", content: "本当に削除しますか？(注意: 同じメールアドレスでは再登録が出来ません。 タイムラインの投稿などは自動削除されません。)",
+           negative: "いいえ",
+           affirmmative_path: registration_path(resource_name), affirmmative_method: :delete, affirmative: "はい" %>
