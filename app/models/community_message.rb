@@ -1,0 +1,2 @@
+class CommunityMessage < ApplicationRecord
+end
