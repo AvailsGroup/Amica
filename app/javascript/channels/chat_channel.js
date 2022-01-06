@@ -110,6 +110,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
                 bottom_scroll();
                 event.target.value = '';
                 $($textarea).height(0);
+                return false;
             }
         }
     });
