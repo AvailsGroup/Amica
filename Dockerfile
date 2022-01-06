@@ -1,6 +1,6 @@
 FROM node:12.14.0 as node
 FROM ruby:3.0.1
-RUN apt-get update -qq && apt-get install -y nodejs sqlite3 libsqlite3-dev yarn chromium-driver locales
+RUN apt-get update -qq && apt-get install -y nodejs sqlite3 libsqlite3-dev yarn chromium-driver locales vim
 
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/include/node /usr/local/include/node
