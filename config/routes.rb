@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       get :pickup
       get :joined
     end
+    resources :communities_room, only: %i[show]
   end
 
 
