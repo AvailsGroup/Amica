@@ -11,10 +11,10 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
 
         received: function (data) {
             const user_id = document.getElementById("user_id").value
-            const room_id = document.getElementById("room_id").value
+            let roomHash = $('#roomsJson').data('room');
             let partner_userid = document.getElementById("partner_userid").value
             let partner_image = document.getElementById("partner_image").value
-            if (data.room_id !== Number(room_id)) {
+            if (data.room_id !== Number(roomHash.id)) {
                 return
             }
 
@@ -82,10 +82,10 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
 
 window.addEventListener("DOMContentLoaded", function (utterance) {
     const content = document.getElementById('content');
-    const room_id = document.getElementById('room_id');
     const file_uploader = document.getElementById('file_uploader')
     const preview = document.getElementById("preview")
-
+    let roomHash = $('#roomsJson').data('room');
+    console.log(roomHash)
 
     let $textarea = $('#content');
     const lineHeight = parseInt($textarea.css('lineHeight'));
@@ -106,7 +106,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
         if (event.shiftKey) {
             if (event.key === 'Enter' && content.value) {
                 $(file_uploader).val('');
-                ChatChannel.speak(content.value, room_id.value, 'text');
+                ChatChannel.speak(content.value, roomHash.id, 'text');
                 bottom_scroll();
                 event.target.value = '';
                 $($textarea).height(0);
@@ -118,7 +118,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
     $('#submit_button').click('[data-behavior~=chat_speaker]', function () {
         if (content.value && content.value.match(/\S/g)) {
             $(file_uploader).val('');
-            ChatChannel.speak(content.value, room_id.value, 'text');
+            ChatChannel.speak(content.value, roomHash.id, 'text');
             bottom_scroll()
             content.value = '';
             $($textarea).height(0);
@@ -166,7 +166,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
                 val = reader.result;
                 let file_name = file.name
                 val = val + "@" + file_name
-                ChatChannel.speak(val, room_id.value, 'file');
+                ChatChannel.speak(val, roomHash.id, 'file');
                 $($textarea).height(0);
                 $('#fileModal').modal('hide');
                 $('#file_uploader').val('');

@@ -13,8 +13,8 @@
             <button id="file_button" style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#fileModal"></button>
             <span class="m-1" style="font-size: 1.4rem;color: #f0c065"><i class="fas fa-upload"></i></span>
           </label>
-          <input type="hidden" id="room_id" value=<%= room.id %> data-behavior="chat_speaker">
           <input type="hidden" id="user_id" value=<%= current_user.id %> data-behavior="chat_speaker">
+          <input id="roomsJson" type="hidden" data-room="<%= @room.to_json %>">
           <input type="hidden" id="partner_userid" value=<%= user.userid %>>
           <input type="hidden" id="partner_image" value=<%= user.image.attached? ? url_for(user.image) : "/default_icon.png" %>>
           <%= text_area_tag :content, nil, class: "form-control", placeholder: "message", data: { behavior: "chat_speaker" }, id: "content" %>
