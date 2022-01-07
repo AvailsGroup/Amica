@@ -61,7 +61,7 @@
       <% end %>
     <% else %>
       <% if @join %>
-        <%= link_to "チャット", chats_path, class: "btn btn-outline-dark mx-2" %>
+        <%= link_to "チャット", community_chat_path(@community.id), class: "btn btn-outline-dark mx-2" %>
         <button type="button" class="btn btn-outline-dark mx-2" data-bs-toggle="modal" data-bs-target="#Modal">
           脱退
         </button>
