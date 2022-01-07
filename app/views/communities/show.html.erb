@@ -50,7 +50,7 @@
     <%= image_tag @community.decorate.image, class: "img-fluid rounded", style: "width: 150px;height: 150px;" %>
     <h1 class="display-4 fw-normal"><%= @community.name %></h1>
     <% if @leader == current_user %>
-      <%= link_to "チャット", chats_path, class: "btn btn-outline-dark mx-2" %>
+      <%= link_to "チャット", community_chat_path(@community.id), class: "btn btn-outline-dark mx-2" %>
       <%= link_to "編集", edit_community_path, class: "btn btn-outline-dark mx-2" %>
       <% if is_community_favorite?(@favorite, @user, @community) %>
         <%= link_to "お気に入り解除", page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'btn btn-outline-dark mx-2 bg-dark text-light', style: "", data: { disable_with: 'お気に入り解除' } %>

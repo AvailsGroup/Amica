@@ -1,13 +1,13 @@
 class CommunityMessageBroadcastJob < ApplicationJob
   queue_as :default
 
-  def perform(message)
-    ActionCable.server.broadcast 'communities_room_channel', message: render_message(message)
+  def perform(data)
+    ActionCable.server.broadcast "communities_room_channel_#{data.community_id}", render_message(data)
   end
 
   private
 
-  def render_message(message)
-    ApplicationController.renderer.render partial: 'communities_room/message', locals: { message: message }
+  def render_message(data)
+    ApplicationController.renderer.render partial: 'communities_room/message', locals: { message: data }
   end
 end
