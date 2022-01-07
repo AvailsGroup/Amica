@@ -8,7 +8,8 @@ class CommunitiesRoomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    CommunityMessage.create(content: data['message'], user_id: current_user.id, community_id: data['community_id'])
+    @community = CommunityMessage.create(content: data['message'], user_id: current_user.id, community_id: data['community_id'])
+    CommunityMessageBroadcastJob.perform_later @community, current_user.id
   end
 
 end
