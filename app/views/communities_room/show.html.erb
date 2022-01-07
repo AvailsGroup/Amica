@@ -1,6 +1,41 @@
-<h1>わっさー</h1>
-<div id='messages' data-community="<%= @community.id %>">
-  <%= render partial: 'communities_room/message', collection: @messages, as: :message %>
+<%= javascript_pack_tag 'chat/show', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_link_tag 'chats', media: 'all', 'data-turbolinks-track': 'reload' %>
+<style>
+    .flash {
+        display: none;
+    }
+</style>
+<script>
+    window.addEventListener('load', function bottom_scroll() {
+        var elm = document.documentElement;
+        var bottom = elm.scrollHeight - elm.clientHeight;
+        window.scroll(0, bottom);
+    });
+</script>
+<input id="messagesJson" type="hidden" data-messages="<%= @messages.select(:content,:image,:file_name,:created_at,:url).to_json %>">
+
+<%= render "chats/menu_modal" %>
+<%= render "chats/file_modal" %>
+<%= render "communities_room/nav", community: @community %>
+<% if @messages.size > 50 %>
+  <div class="container" style="text-align: center">
+    <button type="button"  class="morebtn btn btn-link">もっと見る</button>
+  </div>
+<% end %>
+<div class="container" id="body">
+  <div id="chat" style="margin:1% 1% 70px 1%">
+    <div id="messages" data-community="<%= @community.id %>">
+      <% date_time = nil %>
+      <% @messages.limit(50).offset((@messages.size).to_i - 50).each do |m| %>
+        <% date_time = m.created_at if date_time.nil? %>
+        <% if m.created_at - date_time == 0 || (m.created_at.to_date - date_time.to_date).to_i >= 1 %>
+          <div id="<%= m.created_at.strftime("%Y-%m-%d") %>" class="date"><%= m.created_at.strftime("%Y-%m-%d") %></div>
+        <% end %>
+        <%= render 'communities_room/message', message: m, user: m.user_id === current_user.id %>
+        <% date_time = m.created_at %>
+      <% end %>
+      <div id="append" class="col-sm-12"></div>
+    </div>
+  </div>
+  <%= render "communities_room/form", user: @user, room: @room %>
 </div>
-<%= label_tag :content, 'Say something:' %>
-<%= text_field_tag :content, nil, data: { behavior: 'communities_room_speaker'} %>

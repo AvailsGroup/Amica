@@ -1,4 +1,4 @@
-class CommunitiesRoomDecorator < ApplicationDecorator
+class CommunityMessageDecorator < ApplicationDecorator
   delegate_all
 
   # Define presentation-specific methods here. Helpers are accessed through
@@ -10,4 +10,8 @@ class CommunitiesRoomDecorator < ApplicationDecorator
   #     end
   #   end
 
+
+  def time
+    object.created_at.to_date == Date.today ? object.created_at.strftime('今日 %H:%M') : message.created_at.strftime('%H:%M')
+  end
 end

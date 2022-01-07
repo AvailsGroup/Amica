@@ -1,4 +1,26 @@
-<div class='message'>
-  <p><%= message.user.name %></p>
-  <p><%= message.content %></p>
+<div class="row message-body">
+  <% user = message.user_id === current_user.id %>
+  <div class="col-sm-12 <%= html_main_class(user) %>" style=" position:relative;">
+    <% unless user %>
+      <%= link_to profile_path(message.user.userid), class: "userLink" do %>
+        <%= image_tag message.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 mt-2 ", style: "float: left;", width: "40px", height: "40px" %>
+      <% end %>
+    <% end %>
+    <div class="<%= html_sub_class(user) %> my-1 p-1 mt-2" style="max-width: 40%;">
+      <div class="messages container p-1">
+        <%= message.content %>
+      </div>
+    </div>
+    <% if user %>
+      <div class="text-gray small sender_time h-100" style="padding-bottom: 5px">
+        <%= message.decorate.time %>
+      </div>
+    <% else %>
+      <div class="text-gray small" style="float: left">
+        <p class="time">
+          <%= message.decorate.time %>
+        </p>
+      </div>
+    <% end %>
+  </div>
 </div>

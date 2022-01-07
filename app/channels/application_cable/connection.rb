@@ -3,11 +3,7 @@ module ApplicationCable
     identified_by :current_user
 
     def connect
-      reject_unauthorized_connection unless find_verified_user
-    end
-
-    def find_verified_user
-      self.current_user = env['warden'].user
+      self.current_user = env["warden"].user(:user) || reject_unauthorized_connection
     end
   end
 end
