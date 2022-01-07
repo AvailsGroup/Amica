@@ -3,6 +3,7 @@ class CommunitiesRoomController < ApplicationController
   before_action :banned
 
   def show
-    @messages = CommunityMessage.all
+    @community = Community.find(params[:community_id])
+    @messages = @community.community_messages
   end
 end

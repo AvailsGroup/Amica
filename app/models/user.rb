@@ -93,6 +93,7 @@ class User < ApplicationRecord
 
   has_many :communities, dependent: :destroy
   has_many :community_member, dependent: :destroy
+  has_many :community_messages, dependent: :destroy
 
   has_many :reports
 

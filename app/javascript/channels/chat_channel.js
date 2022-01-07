@@ -1,83 +1,83 @@
 import consumer from "./consumer"
 
 const ChatChannel = consumer.subscriptions.create("ChatChannel", {
-        connected() {
-            // Called when the subscription is ready for use on the server
-        },
+    connected() {
+        // Called when the subscription is ready for use on the server
+    },
 
-        disconnected() {
-            // Called when the subscription has been terminated by the server
-        },
+    disconnected() {
+        // Called when the subscription has been terminated by the server
+    },
 
-        received: function (data) {
-            const user_id = document.getElementById("user_id").value
-            const room_id = document.getElementById("room_id").value
-            let partner_userid = document.getElementById("partner_userid").value
-            let partner_image = document.getElementById("partner_image").value
-            if (data.room_id !== Number(room_id)) {
-                return
-            }
+    received: function (data) {
+        const user_id = document.getElementById("user_id").value
+        const room_id = document.getElementById("room_id").value
+        let partner_userid = document.getElementById("partner_userid").value
+        let partner_image = document.getElementById("partner_image").value
+        if (data.room_id !== Number(room_id)) {
+            return
+        }
 
-            let content = AutoLink(data.content);
-            if (data.image !== null) {
-                content = '<img style="max-width:100%" data-lity="data-lity" src="' + data.url + '">';
-            }
+        let content = AutoLink(data.content);
+        if (data.image !== null) {
+            content = '<img style="max-width:100%" data-lity="data-lity" src="' + data.url + '">';
+        }
 
-            if (data.file_name !== null) {
-                content = '<a href="' + data.url + '" download="' + data.file_name + '">' + data.file_name + '</a>'
-            }
+        if (data.file_name !== null) {
+            content = '<a href="' + data.url + '" download="' + data.file_name + '">' + data.file_name + '</a>'
+        }
 
-            if (partner_image === "") {
-                partner_image = "/assets/default_icon.png"
-            }
+        if (partner_image === "") {
+            partner_image = "/assets/default_icon.png"
+        }
 
-            let html = '<div class="row message-body text-wrap" style="white-space: pre;">' +
-                '<div class="col-sm-12 message-main-receiver" style=" position:relative;">' +
-                '<a class="userLink" href="/profiles/' + partner_userid + '">' +
-                '<img class="icon bd-placeholder-img flex-shrink-0 me-2 mt-2" style="float: left" width="40px" height="40px" src=' + partner_image + '>' +
-                '</a>' +
-                '<div class="receiver my-1 p-1 mt-2" style="max-width: 40%;">' +
+        let html = '<div class="row message-body text-wrap" style="white-space: pre;">' +
+            '<div class="col-sm-12 message-main-receiver" style=" position:relative;">' +
+            '<a class="userLink" href="/profiles/' + partner_userid + '">' +
+            '<img class="icon bd-placeholder-img flex-shrink-0 me-2 mt-2" style="float: left" width="40px" height="40px" src=' + partner_image + '>' +
+            '</a>' +
+            '<div class="receiver my-1 p-1 mt-2" style="max-width: 40%;">' +
+            '<div class="messages container p-1">' +
+            content +
+            '</div>' +
+            '</div>' +
+            '<div class="text-gray small" style="float: left">' +
+            '<p class="time">' +
+            '今日 ' + data.created_at.slice(11, 16) +
+            '</p>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="clear"></div>'
+
+        if (data.user_id === Number(user_id)) {
+            html = '<div class="row message-body text-wrap" style="white-space: pre;">' +
+                ' <div class="col-sm-12 message-main-sender" style=" position:relative;">' +
+                '<div class="sender my-1 p-1 mt-2" style="max-width: 40%;">' +
                 '<div class="messages container p-1">' +
                 content +
                 '</div>' +
                 '</div>' +
-                '<div class="text-gray small" style="float: left">' +
-                '<p class="time">' +
+                '<div class="text-gray small sender_time h-100" style="padding-bottom: 5px">' +
                 '今日 ' + data.created_at.slice(11, 16) +
-                '</p>' +
                 '</div>' +
                 '</div>' +
                 '</div>' +
                 '<div class="clear"></div>'
-
-            if (data.user_id === Number(user_id)) {
-                html = '<div class="row message-body text-wrap" style="white-space: pre;">' +
-                    ' <div class="col-sm-12 message-main-sender" style=" position:relative;">' +
-                    '<div class="sender my-1 p-1 mt-2" style="max-width: 40%;">' +
-                    '<div class="messages container p-1">' +
-                    content +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="text-gray small sender_time h-100" style="padding-bottom: 5px">' +
-                    '今日 ' + data.created_at.slice(11, 16) +
-                    '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="clear"></div>'
-            }
-
-            $('#append').append(html)
-            bottom_scroll();
-        },
-
-        speak(message, room_id, type) {
-            return this.perform('speak', {
-                message: message,
-                room_id: room_id,
-                content_type: type
-            });
         }
-    });
+
+        $('#append').append(html)
+        bottom_scroll();
+    },
+
+    speak(message, room_id, type) {
+        return this.perform('speak', {
+            message: message,
+            room_id: room_id,
+            content_type: type
+        });
+    }
+});
 
 
 window.addEventListener("DOMContentLoaded", function (utterance) {

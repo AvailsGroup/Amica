@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :manage, only: %i[create destroy]
     resources :communities_security, only: %i[create destroy]
     resources :reports, only: [:create]
-    resources :communities_room, only: %i[show]
+    get 'chat' => 'communities_room#show'
     get :members
     delete :kick
     put :change
