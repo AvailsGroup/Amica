@@ -1,4 +1,6 @@
 <h1>わっさー</h1>
 <div id='messages'>
-  <%= render @messages %>
+  <%= render partial: 'communities_room/message', collection: @messages, as: :message %>
 </div>
+<%= label_tag :content, 'Say something:' %>
+<%= text_field_tag :content, nil, data: { behavior: 'communities_room_speaker' } %>
