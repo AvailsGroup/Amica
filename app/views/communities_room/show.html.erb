@@ -1,4 +1,4 @@
-<%= javascript_pack_tag 'chat/show', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'community_chat/show', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag 'chats', media: 'all', 'data-turbolinks-track': 'reload' %>
 <style>
     .flash {
@@ -12,19 +12,22 @@
         window.scroll(0, bottom);
     });
 </script>
-<input id="messagesJson" type="hidden" data-messages="<%= @messages.select(:content,:image,:file_name,:created_at,:url).to_json %>">
+<input id="messagesJson" type="hidden" data-messages="<%= @messages.select(:content, :image, :file_name, :created_at, :url).to_json %>">
 
 <%= render "chats/menu_modal" %>
 <%= render "chats/file_modal" %>
 <%= render "communities_room/nav", community: @community %>
 <% if @messages.size > 50 %>
   <div class="container" style="text-align: center">
-    <button type="button"  class="morebtn btn btn-link">もっと見る</button>
+    <button type="button" class="morebtn btn btn-link">もっと見る</button>
   </div>
 <% end %>
 <div class="container" id="body">
   <div id="chat" style="margin:1% 1% 70px 1%">
-    <div id="messages" data-community="<%= @community.id %>">
+    <div id="messages"
+         data-user="<%= current_user.to_json(only: [:id, :userid]) %>"
+         data-user-image="<%= current_user.image.attached? ? url_for(current_user.user.image) : "/assets/default_icon.png" %>"
+         data-community="<%= @community.id %>">
       <% date_time = nil %>
       <% @messages.limit(50).offset((@messages.size).to_i - 50).each do |m| %>
         <% date_time = m.created_at if date_time.nil? %>

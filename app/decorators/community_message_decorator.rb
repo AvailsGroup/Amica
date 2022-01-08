@@ -12,6 +12,6 @@ class CommunityMessageDecorator < ApplicationDecorator
 
 
   def time
-    object.created_at.to_date == Date.today ? object.created_at.strftime('今日 %H:%M') : message.created_at.strftime('%H:%M')
+    object.created_at.to_date == Date.today ? object.created_at.strftime('今日 %H:%M') : object.created_at.strftime('%H:%M')
   end
 end
