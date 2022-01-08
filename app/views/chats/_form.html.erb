@@ -13,7 +13,6 @@
             <button id="file_button" style="display: none" type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#fileModal"></button>
             <span class="m-1" style="font-size: 1.4rem;color: #f0c065"><i class="fas fa-upload"></i></span>
           </label>
-          <% text_field_tag :content, nil ,data: {behavior: 'chat_speaker',room_id: room.id} %>>
           <input type="hidden" id="room_id" value=<%= room.id %> data-behavior="chat_speaker">
           <input type="hidden" id="user_id" value=<%= current_user.id %> data-behavior="chat_speaker">
           <input type="hidden" id="partner_userid" value=<%= user.userid %>>
