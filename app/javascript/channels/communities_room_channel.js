@@ -1,9 +1,11 @@
 import consumer from "./consumer"
 
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("DOMContentLoaded", function (utterance) {
+    const content = $('#community_content')
+
     const CommunitiesRoomChannel = consumer.subscriptions.create({
         channel: "CommunitiesRoomChannel",
-        room: $('#messages').data('community')
+        room: $('#community_messages').data('community')
     }, {
         connected() {
             // Called when the subscription is ready for use on the server
@@ -14,7 +16,7 @@ window.addEventListener("DOMContentLoaded", function () {
         },
 
         received: function (data) {
-            const messages = $('#messages')
+            const messages = $('#community_messages')
             const current_user = messages.data('user')
             const current_user_image = messages.data('user-image')
             let html = '<div class="row message-body text-wrap" style="white-space: pre;">' +
@@ -39,7 +41,7 @@ window.addEventListener("DOMContentLoaded", function () {
             if (data.user_id === current_user.id) {
                 html =
                     '<div class="row message-body text-wrap" style="white-space: pre;">' +
-                    ' <div class="col-sm-12 message-main-sender" style=" position:relative;">' +
+                    '<div class="col-sm-12 message-main-sender" style=" position:relative;">' +
                     '<div class="sender my-1 p-1 mt-2" style="max-width: 40%;">' +
                     '<div class="messages container p-1">' +
                     data.content +
@@ -52,10 +54,11 @@ window.addEventListener("DOMContentLoaded", function () {
                     '</div>' +
                     '<div class="clear"></div>'
             }
-            return messages.append(html);
+            messages.append(html);
+            bottom_scroll()
         },
 
-        speak: function (message, community_id) {
+        speak: function (message, community_id, type) {
             return this.perform('speak', {
                 message: message,
                 community_id: community_id
@@ -63,12 +66,46 @@ window.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-
-    $(document).on('keypress', '[data-behavior~=communities_room_speaker]', function (event) {
-        if (event.key === 'Enter') {
-            CommunitiesRoomChannel.speak(event.target.value, $("#messages").data('community'));
-            event.target.value = '';
-            return event.preventDefault();
+    const lineHeight = parseInt(content.css('lineHeight'));
+    let minHeight = lineHeight;
+    let maxHeight = parseInt($(window).height() * 0.5);
+    content.on('input', function () {
+        let lines = ($(this).val() + '\n').match(/\n/g).length;
+        $(this).height(Math.min(maxHeight, Math.max(lineHeight * lines, minHeight)));
+        if (content.val() === "") {
+            $(this).height(0);
         }
     });
-})
+
+
+    $(document).on('keypress', '[data-behavior~=communities_room_speaker]', function (event) {
+        if (event.shiftKey) {
+            if (event.key === 'Enter' && content.val()) {
+                sendText()
+                return false;
+            }
+        }
+    });
+
+    $('#community_submit_button').click('[data-behavior~=communities_room_speaker]', function () {
+        if (content.val() && content.val().match(/\S/g)) {
+            sendText()
+        }
+    });
+
+
+    function sendText() {
+        const content = $('#community_content')
+        //$(file_uploader).val('');
+        CommunitiesRoomChannel.speak(content.val(), $("#community_messages").data('community'), 'text');
+        bottom_scroll()
+        content.val('');
+        content.height(0);
+    }
+
+    function bottom_scroll() {
+        var elm = document.documentElement;
+        var bottom = elm.scrollHeight - elm.clientHeight;
+        window.scroll(0, bottom);
+    }
+});
