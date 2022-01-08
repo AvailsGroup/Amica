@@ -11,6 +11,8 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def speak(data)
+    room = Room.find_by(id: data['room_id'])
+    if room.started_user_id == current_user.id || room.invited_user_id == current_user.id
     @room_id = data['room_id']
     @image_name, @url, @f_name = nil
     @type = data['content_type']
@@ -61,7 +63,8 @@ class ChatChannel < ApplicationCable::Channel
 
     @room = room.touch(:created_at)
     ActionCable.server.broadcast 'chat_channel', @message
-  end
+    end
+    end
 end
 
 
