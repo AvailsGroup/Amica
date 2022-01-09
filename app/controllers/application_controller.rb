@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def banned
-    cookies.signed["user_id"] = current_user.id
     current_user.ban = true if current_user.warning >= 3
 
     if current_user.ban
