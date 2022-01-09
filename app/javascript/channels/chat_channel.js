@@ -10,21 +10,19 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
         },
 
         received: function (data) {
-            const user_id = document.getElementById("user_id").value
-            const room_id = document.getElementById("room_id").value
-            let partner_userid = document.getElementById("partner_userid").value
+            const content = document.getElementById('content');
             let partner_image = document.getElementById("partner_image").value
-            if (data.room_id !== Number(room_id)) {
+            if (data.room_id !== Number(content.dataset.roomid)) {
                 return
             }
 
-            let content = AutoLink(data.content);
+            let text = AutoLink(data.content);
             if (data.image !== null) {
-                content = '<img style="max-width:100%" data-lity="data-lity" src="' + data.url + '">';
+                text = '<img style="max-width:100%" data-lity="data-lity" src="' + data.url + '">';
             }
 
             if (data.file_name !== null) {
-                content = '<a href="' + data.url + '" download="' + data.file_name + '">' + data.file_name + '</a>'
+                text = '<a href="' + data.url + '" download="' + data.file_name + '">' + data.file_name + '</a>'
             }
 
             if (partner_image === "") {
@@ -33,12 +31,12 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
 
             let html = '<div class="row message-body text-wrap" style="white-space: pre;">' +
                 '<div class="col-sm-12 message-main-receiver" style=" position:relative;">' +
-                '<a class="userLink" href="/profiles/' + partner_userid + '">' +
+                '<a class="userLink" href="/profiles/' + content.dataset.partnerid + '">' +
                 '<img class="icon bd-placeholder-img flex-shrink-0 me-2 mt-2" style="float: left" width="40px" height="40px" src=' + partner_image + '>' +
                 '</a>' +
                 '<div class="receiver my-1 p-1 mt-2" style="max-width: 40%;">' +
                 '<div class="messages container p-1">' +
-                content +
+                text +
                 '</div>' +
                 '</div>' +
                 '<div class="text-gray small" style="float: left">' +
@@ -50,12 +48,12 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
                 '</div>' +
                 '<div class="clear"></div>'
 
-            if (data.user_id === Number(user_id)) {
+            if (data.user_id === Number(content.dataset.userid)) {
                 html = '<div class="row message-body text-wrap" style="white-space: pre;">' +
                     ' <div class="col-sm-12 message-main-sender" style=" position:relative;">' +
                     '<div class="sender my-1 p-1 mt-2" style="max-width: 40%;">' +
                     '<div class="messages container p-1">' +
-                    content +
+                    text +
                     '</div>' +
                     '</div>' +
                     '<div class="text-gray small sender_time h-100" style="padding-bottom: 5px">' +
@@ -82,10 +80,8 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
 
 window.addEventListener("DOMContentLoaded", function (utterance) {
     const content = document.getElementById('content');
-    const room_id = document.getElementById('room_id');
     const file_uploader = document.getElementById('file_uploader')
     const preview = document.getElementById("preview")
-
 
     let $textarea = $('#content');
     const lineHeight = parseInt($textarea.css('lineHeight'));
@@ -106,7 +102,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
         if (event.shiftKey) {
             if (event.key === 'Enter' && content.value) {
                 $(file_uploader).val('');
-                ChatChannel.speak(content.value, room_id.value, 'text');
+                ChatChannel.speak(content.value, content.dataset.roomid, 'text');
                 bottom_scroll();
                 event.target.value = '';
                 $($textarea).height(0);
@@ -118,7 +114,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
     $('#submit_button').click('[data-behavior~=chat_speaker]', function () {
         if (content.value && content.value.match(/\S/g)) {
             $(file_uploader).val('');
-            ChatChannel.speak(content.value, room_id.value, 'text');
+            ChatChannel.speak(content.value, content.dataset.roomid, 'text');
             bottom_scroll()
             content.value = '';
             $($textarea).height(0);
@@ -166,7 +162,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
                 val = reader.result;
                 let file_name = file.name
                 val = val + "@" + file_name
-                ChatChannel.speak(val, room_id.value, 'file');
+                ChatChannel.speak(val, content.dataset.roomid, 'file');
                 $($textarea).height(0);
                 $('#fileModal').modal('hide');
                 $('#file_uploader').val('');

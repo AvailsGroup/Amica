@@ -1,6 +1,4 @@
 window.addEventListener("DOMContentLoaded", function (utterance) {
-    const user_id = document.getElementById('user_id');
-    let partner_userid = document.getElementById("partner_userid").value
     let partner_image = document.getElementById("partner_image").value
 
 //もっとみるで前の50件を表示
@@ -50,7 +48,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             let html = time_ber+
                 '<div class="row message-body text-wrap" style="white-space: pre;">' +
                 '<div class="col-sm-12 message-main-receiver" style=" position:relative;">' +
-                '<a class="userLink" href="/profiles/' + partner_userid + '">' +
+                '<a class="userLink" href="/profiles/' + content.dataset.partnerid + '">' +
                 '<img class="icon bd-placeholder-img flex-shrink-0 me-2 mt-2" style="float: left" width="40px" height="40px" src=' + partner_image + '>' +
                 '</a>' +
                 '<div class="receiver my-1 p-1 mt-2" style="max-width: 40%;">' +
@@ -66,7 +64,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
                 '</div>' +
                 '</div>' +
                 '<div class="clear"></div>'
-            if (Number(messageHash[num].user_id) === Number(user_id.value)){
+            if (Number(messageHash[num].user_id) === Number(content.dataset.userid)){
                 html = time_ber+
                     '<div class="row message-body text-wrap" style="white-space: pre;">' +
                     ' <div class="col-sm-12 message-main-sender" style=" position:relative;">' +
