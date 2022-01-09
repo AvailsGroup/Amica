@@ -8,6 +8,9 @@ class CommunitiesRoomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
+    unless current_user.community_member.any? { |c| c.community_id == data['community_id'] }
+      return
+    end
     @community_msg = CommunityMessage.new(content: data['message'], user_id: current_user.id, community_id: data['community_id'])
     @community_msg.save
   end
