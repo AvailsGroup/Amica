@@ -16,6 +16,12 @@ class UserDecorator < ApplicationDecorator
     object.image.attached? ? object.image : 'default_icon'
   end
 
+  def image_message
+    return 'default_icon' if object.discarded?
+
+    object.image.attached? ? object.image : '/assets/default_icon.png'
+  end
+
   def name
     object.discarded? ? '退会済みユーザー' : object.name
   end
