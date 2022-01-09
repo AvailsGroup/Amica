@@ -68,10 +68,11 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
             bottom_scroll();
         },
 
-        speak(message, room_id, type) {
+        speak(message, room_id,file_name, type) {
             return this.perform('speak', {
                 message: message,
                 room_id: room_id,
+                file_name: file_name,
                 content_type: type
             });
         }
@@ -102,7 +103,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
         if (event.shiftKey) {
             if (event.key === 'Enter' && content.value) {
                 $(file_uploader).val('');
-                ChatChannel.speak(content.value, content.dataset.roomid, 'text');
+                ChatChannel.speak(content.value, content.dataset.roomid, null,'text');
                 bottom_scroll();
                 event.target.value = '';
                 $($textarea).height(0);
@@ -114,7 +115,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
     $('#submit_button').click('[data-behavior~=chat_speaker]', function () {
         if (content.value && content.value.match(/\S/g)) {
             $(file_uploader).val('');
-            ChatChannel.speak(content.value, content.dataset.roomid, 'text');
+            ChatChannel.speak(content.value, content.dataset.roomid,null, 'text');
             bottom_scroll()
             content.value = '';
             $($textarea).height(0);
@@ -161,8 +162,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             reader.onload = function () {
                 val = reader.result;
                 let file_name = file.name
-                val = val + "@" + file_name
-                ChatChannel.speak(val, content.dataset.roomid, 'file');
+                ChatChannel.speak(val, content.dataset.roomid,file_name, 'file');
                 $($textarea).height(0);
                 $('#fileModal').modal('hide');
                 $('#file_uploader').val('');
