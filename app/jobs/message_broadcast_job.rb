@@ -2,7 +2,7 @@ class MessageBroadcastJob < ApplicationJob
   queue_as :default
   def perform(data)
     ActionCable.server.broadcast 'chat_channel', [data, render_message(data), render_other_message(data)]
-    pp  render_message(data)
+    pp render_message(data)
   end
 
   private
