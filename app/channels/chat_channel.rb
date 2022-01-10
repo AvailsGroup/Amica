@@ -49,8 +49,8 @@ class ChatChannel < ApplicationCable::Channel
         end
         @content = 'content'
       end
-      @message = Message.create content: @content, user_id: current_user.id, room_id: @room_id, image: @image_name,
-                                file_name: @f_name, url: @url, content_type: @type
+      @message = Message.new( content: @content, user_id: current_user.id, room_id: @room_id, image: @image_name,
+                                file_name: @f_name, url: @url, content_type: @type)
 
       room = Room.find_by(id: @room_id)
 
@@ -61,8 +61,8 @@ class ChatChannel < ApplicationCable::Channel
       end
 
       @room = room.touch(:created_at)
-      ActionCable.server.broadcast 'chat_channel', @message
-      end
+      @message.save
+    end
   end
 end
 

@@ -9,64 +9,17 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
             // Called when the subscription has been terminated by the server
         },
 
-        received: function (data) {
-            const content = document.getElementById('content');
-            let partner_image = document.getElementById("partner_image").value
-            if (data.room_id !== Number(content.dataset.roomid)) {
-                return
+    received: function (data) {
+        const content = document.getElementById('content');
+        const messages = document.getElementById('messages');
+        const current_user = content.dataset.userid
+            if(Number(current_user) === Number(data[0].user_id)){
+              messages.append(data[1])
+            }else{
+              messages.append(data[2])
             }
-
-            let text = AutoLink(data.content);
-            if (data.image !== null) {
-                text = '<img style="max-width:100%" data-lity="data-lity" src="' + data.url + '">';
-            }
-
-            if (data.file_name !== null) {
-                text = '<a href="' + data.url + '" download="' + data.file_name + '">' + data.file_name + '</a>'
-            }
-
-            if (partner_image === "") {
-                partner_image = "/assets/default_icon.png"
-            }
-
-            let html = '<div class="row message-body text-wrap" style="white-space: pre;">' +
-                '<div class="col-sm-12 message-main-receiver" style=" position:relative;">' +
-                '<a class="userLink" href="/profiles/' + content.dataset.partnerid + '">' +
-                '<img class="icon bd-placeholder-img flex-shrink-0 me-2 mt-2" style="float: left" width="40px" height="40px" src=' + partner_image + '>' +
-                '</a>' +
-                '<div class="receiver my-1 p-1 mt-2" style="max-width: 40%;">' +
-                '<div class="messages container p-1">' +
-                text +
-                '</div>' +
-                '</div>' +
-                '<div class="text-gray small" style="float: left">' +
-                '<p class="time">' +
-                '今日 ' + data.created_at.slice(11, 16) +
-                '</p>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '<div class="clear"></div>'
-
-            if (data.user_id === Number(content.dataset.userid)) {
-                html = '<div class="row message-body text-wrap" style="white-space: pre;">' +
-                    ' <div class="col-sm-12 message-main-sender" style=" position:relative;">' +
-                    '<div class="sender my-1 p-1 mt-2" style="max-width: 40%;">' +
-                    '<div class="messages container p-1">' +
-                    text +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="text-gray small sender_time h-100" style="padding-bottom: 5px">' +
-                    '今日 ' + data.created_at.slice(11, 16) +
-                    '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="clear"></div>'
-            }
-
-            $('#append').append(html)
-            bottom_scroll();
-        },
+        bottom_scroll()
+     },
 
         speak(message, room_id,file_name, type) {
             return this.perform('speak', {

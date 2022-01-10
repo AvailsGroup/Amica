@@ -34,7 +34,6 @@
         <%= render 'chats/chat_message', message: m, user: m.user_id === current_user.id %>
         <% date_time = m.created_at %>
       <% end %>
-      <div id="append" class="col-sm-12"></div>
     </div>
   </div>
   <%= render "chats/form", user: @user, room: @room %>
