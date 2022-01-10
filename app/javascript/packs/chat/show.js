@@ -14,13 +14,14 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             num = startnum + 49
         }
         messageHash.slice(startnum, num + 1).forEach(function () {
-            let content = AutoLink(messageHash[num].content);
+            const content = document.getElementById('content');
+            let text = AutoLink(messageHash[num].content);
             if (messageHash[num].image !== null) {
-                content = '<img style="max-width:100%" data-lity="data-lity" src="' + messageHash[num].url + '">';
+                text = '<img style="max-width:100%" data-lity="data-lity" src="' + messageHash[num].url + '">';
             }
 
             if (messageHash[num].file_name !== null) {
-                content = '<a href="' + messageHash[num].url + '" download="' + messageHash[num].file_name.slice(1,messageHash[num].file_name.length) + '">'
+                text = '<a href="' + messageHash[num].url + '" download="' + messageHash[num].file_name.slice(1,messageHash[num].file_name.length) + '">'
                     + messageHash[num].file_name.slice(1,messageHash[num].file_name.length) + '</a>'
             }
 
@@ -45,7 +46,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             }
 
 
-            let html = time_ber+
+            let html = time_ber +
                 '<div class="row message-body text-wrap" style="white-space: pre;">' +
                 '<div class="col-sm-12 message-main-receiver" style=" position:relative;">' +
                 '<a class="userLink" href="/profiles/' + content.dataset.partnerid + '">' +
@@ -53,7 +54,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
                 '</a>' +
                 '<div class="receiver my-1 p-1 mt-2" style="max-width: 40%;">' +
                 '<div class="messages container p-1">' +
-                content +
+                text +
                 '</div>' +
                 '</div>' +
                 '<div class="text-gray small" style="float: left">' +
@@ -70,7 +71,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
                     ' <div class="col-sm-12 message-main-sender" style=" position:relative;">' +
                     '<div class="sender my-1 p-1 mt-2" style="max-width: 40%;">' +
                     '<div class="messages container p-1">' +
-                    content +
+                    text +
                     '</div>' +
                     '</div>' +
                     '<div class="text-gray small sender_time h-100" style="padding-bottom: 5px">' +
@@ -91,8 +92,8 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
         var regexp_makeLink = function (all, url, h, href) {
             return '<a href="h' + href + '" target="_blank">' + url + '</a>';
         }
-        let content;
-        content = str.replace(regexp_url, regexp_makeLink)
-        return content.replace(/\r?\n/g, '<br>');
+        let link_text;
+        link_text = str.replace(regexp_url, regexp_makeLink)
+        return link_text.replace(/\r?\n/g, '<br>');
     }
 })
