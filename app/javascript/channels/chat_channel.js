@@ -11,7 +11,7 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
 
     received: function (data) {
         const content = document.getElementById('content');
-        const messages = document.getElementById('messages');
+        const messages = $('#messages');
         const current_user = content.dataset.userid
             if(Number(current_user) === Number(data[0].user_id)){
               messages.append(data[1])
@@ -124,16 +124,6 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
         }
     });
 });
-
-function AutoLink(str) {
-    var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g;
-    var regexp_makeLink = function (all, url, h, href) {
-        return '<a href="h' + href + '" target="_blank">' + url + '</a>';
-    }
-    let content;
-    content = str.replace(regexp_url, regexp_makeLink)
-    return content.replace(/\r?\n/g, '<br>');
-}
 
 function files_bottom_scroll() {
     window.addEventListener('load', function () {
