@@ -7,7 +7,7 @@
     <% end %>
     <div class="<%= html_sub_class(user) %> my-1 p-1 mt-2" style="max-width: 40%;">
       <div class="messages container p-1">
-        <%= message.content %>
+        <%= chat_content(message) %>
       </div>
     </div>
     <% if user %>

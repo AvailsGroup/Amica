@@ -5,5 +5,6 @@ class CommunitiesRoomController < ApplicationController
   def show
     @community = Community.find(params[:community_id])
     @messages = @community.community_messages
+    @messages.to_json(only: [:content, :image, :file_name, :created_at, :url])
   end
 end
