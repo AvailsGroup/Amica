@@ -11,14 +11,16 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
 
     received: function (data) {
         const content = document.getElementById('content');
-        const messages = $('#messages');
-        const current_user = content.dataset.userid
-            if(Number(current_user) === Number(data[0].user_id)){
-              messages.append(data[1])
-            }else{
-              messages.append(data[2])
+            if(Number(data[0].room_id) ===  Number(content.dataset.roomid)) {
+                const messages = $('#messages');
+                const current_user = content.dataset.userid
+                if (Number(current_user) === Number(data[0].user_id)) {
+                    messages.append(data[1])
+                } else {
+                    messages.append(data[2])
+                }
+                bottom_scroll()
             }
-        bottom_scroll()
      },
 
         speak(message, room_id,file_name, type) {
