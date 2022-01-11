@@ -16,6 +16,11 @@
     });
 </script>
 
+<%= render 'layouts/modal', id: "Modal",
+           title: "確認", content: "#{@community.name}を削除します。本当によろしいですか？",
+           negative: "いいえ",
+           affirmmative_path: community_path, affirmmative_method: :delete, affirmative: "はい" %>
+
 <div class="container">
   <%= form_for(@community, url: community_path, method: "put", multipart: true, class: "needs-validation") do |f| %>
     <div class="py-5 text-center">
@@ -63,7 +68,9 @@
 
       <div class="col-sm-12 text-center mt-5">
         <h2>DANGER ZONE</h2>
-        <%= link_to "コミュニティを削除する", community_path, method: :delete, class: "btn btn-primary mb-5", data: { confirm: "本当に削除しますか？" } %>
+        <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#Modal">
+          コミュニティを削除する
+        </button>
       </div>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index:10000">

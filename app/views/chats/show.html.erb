@@ -12,7 +12,7 @@
             window.scroll(0, bottom);
         });
 </script>
-<input id="messagesJson" type="hidden" data-messages="<%= @message.to_json %>">
+<input id="messagesJson" type="hidden" data-messages="<%= @message.select(:content,:image,:file_name,:created_at,:url).to_json %>">
 
 <%= render "chats/menu_modal" %>
 <%= render "chats/file_modal" %>

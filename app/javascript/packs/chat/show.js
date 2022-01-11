@@ -7,10 +7,10 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
     let num
     $('.morebtn').click(function () {
         startnum = startnum - 50
-        if(startnum<0){
+        if (startnum < 0) {
             num = startnum + 49
             startnum = 0
-        }else {
+        } else {
             num = startnum + 49
         }
         messageHash.slice(startnum, num + 1).forEach(function () {
@@ -26,7 +26,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             }
 
             if (partner_image === "") {
-                partner_image = "/assets/default_icon.png"
+                partner_image = "/public/default_icon.png"
             }
             let today = new Date();
             let time
@@ -34,14 +34,14 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             num > 0 ? send_time = new Date(messageHash[num].created_at) - new Date(messageHash[num - 1].created_at) : send_time = new Date(messageHash[num].created_at)
             let time_ber = ''
             let time_flag = document.getElementById(messageHash[num].created_at.slice(0, 10))
-            if(Math.floor(send_time/1000/60/60/24) >= 1 || num === startnum){
-                time_ber = '<div id="'+messageHash[num].created_at.slice(0, 10)+'" class="date">'+messageHash[num].created_at.slice(0, 10)+'</div>'
+            if (Math.floor(send_time / 1000 / 60 / 60 / 24) >= 1 || num === startnum) {
+                time_ber = '<div id="' + messageHash[num].created_at.slice(0, 10) + '" class="date">' + messageHash[num].created_at.slice(0, 10) + '</div>'
             }
-            if(time_flag != null)time_flag.style.display="none";
-            today = today.getFullYear() + "-" +  ("0" + (today.getMonth()+1)).slice(-2) + "-"+ ("0" + (today.getDate())).slice(-2)
+            if (time_flag != null) time_flag.style.display = "none";
+            today = today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2) + "-" + ("0" + (today.getDate())).slice(-2)
             if (messageHash[num].created_at.slice(0, 10) === today) {
-                 time = '今日 ' + messageHash[num].created_at.slice(11, 16)}
-            else {
+                time = '今日 ' + messageHash[num].created_at.slice(11, 16)
+            } else {
                 time = messageHash[num].created_at.slice(11, 16)
             }
 
@@ -82,11 +82,11 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
                     '<div class="clear"></div>'
             }
 
-                $(html).prependTo('#messages');
-
+            $(html).prependTo('#messages');
             num = num - 1
         })
     })
+
     function AutoLink(str) {
         var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g;
         var regexp_makeLink = function (all, url, h, href) {
