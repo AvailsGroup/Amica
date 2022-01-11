@@ -36,7 +36,7 @@ module ChatsHelper
     if image.nil?
       safe_join(message.content.split("\n"), tag(:br))
     else
-      image_tag image, style: 'max-width:100%', 'data-lity' => 'data-lity'
+      image_tag rails_blob_path(image), style: 'max-width:100%', 'data-lity' => 'data-lity'
     end
   end
 
@@ -45,7 +45,7 @@ module ChatsHelper
     if file.nil?
       safe_join(message.content.split("\n"), tag(:br))
     else
-      link_to message.file_name, rails_blob_url(file, disposition: 'attachment'), download: message.file_name
+      link_to message.file_name, rails_blob_path(file, disposition: 'attachment'), download: message.file_name
     end
   end
 
