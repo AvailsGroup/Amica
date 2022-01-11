@@ -1,6 +1,4 @@
 window.addEventListener("DOMContentLoaded", function (utterance) {
-    const user_id = document.getElementById('user_id');
-    let partner_userid = document.getElementById("partner_userid").value
     let partner_image = document.getElementById("partner_image").value
 
 //もっとみるで前の50件を表示
@@ -16,14 +14,15 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             num = startnum + 49
         }
         messageHash.slice(startnum, num + 1).forEach(function () {
-            let content = AutoLink(messageHash[num].content);
+            const content = document.getElementById('content');
+            let text = AutoLink(messageHash[num].content);
             if (messageHash[num].image !== null) {
-                content = '<img style="max-width:100%" data-lity="data-lity" src="' + messageHash[num].url + '">';
+                text = '<img style="max-width:100%" data-lity="data-lity" src="' + messageHash[num].url + '">';
             }
 
             if (messageHash[num].file_name !== null) {
-                content = '<a href="' + messageHash[num].url + '" download="' + messageHash[num].file_name.slice(1, messageHash[num].file_name.length) + '">'
-                    + messageHash[num].file_name.slice(1, messageHash[num].file_name.length) + '</a>'
+                text = '<a href="' + messageHash[num].url + '" download="' + messageHash[num].file_name.slice(1,messageHash[num].file_name.length) + '">'
+                    + messageHash[num].file_name.slice(1,messageHash[num].file_name.length) + '</a>'
             }
 
             if (partner_image === "") {
@@ -50,12 +49,12 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             let html = time_ber +
                 '<div class="row message-body text-wrap" style="white-space: pre;">' +
                 '<div class="col-sm-12 message-main-receiver" style=" position:relative;">' +
-                '<a class="userLink" href="/profiles/' + partner_userid + '">' +
+                '<a class="userLink" href="/profiles/' + content.dataset.partnerid + '">' +
                 '<img class="icon bd-placeholder-img flex-shrink-0 me-2 mt-2" style="float: left" width="40px" height="40px" src=' + partner_image + '>' +
                 '</a>' +
                 '<div class="receiver my-1 p-1 mt-2" style="max-width: 40%;">' +
                 '<div class="messages container p-1">' +
-                content +
+                text +
                 '</div>' +
                 '</div>' +
                 '<div class="text-gray small" style="float: left">' +
@@ -66,13 +65,13 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
                 '</div>' +
                 '</div>' +
                 '<div class="clear"></div>'
-            if (Number(messageHash[num].user_id) === Number(user_id.value)) {
-                html = time_ber +
+            if (Number(messageHash[num].user_id) === Number(content.dataset.userid)){
+                html = time_ber+
                     '<div class="row message-body text-wrap" style="white-space: pre;">' +
                     ' <div class="col-sm-12 message-main-sender" style=" position:relative;">' +
                     '<div class="sender my-1 p-1 mt-2" style="max-width: 40%;">' +
                     '<div class="messages container p-1">' +
-                    content +
+                    text +
                     '</div>' +
                     '</div>' +
                     '<div class="text-gray small sender_time h-100" style="padding-bottom: 5px">' +
@@ -93,8 +92,8 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
         var regexp_makeLink = function (all, url, h, href) {
             return '<a href="h' + href + '" target="_blank">' + url + '</a>';
         }
-        let content;
-        content = str.replace(regexp_url, regexp_makeLink)
-        return content.replace(/\r?\n/g, '<br>');
+        let link_text;
+        link_text = str.replace(regexp_url, regexp_makeLink)
+        return link_text.replace(/\r?\n/g, '<br>');
     }
 })
