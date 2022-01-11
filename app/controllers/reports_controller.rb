@@ -16,6 +16,7 @@ class ReportsController < ApplicationController
       redirect_back fallback_location: pages_path, notice: 'すでに送信しています'
       return
     end
+
     @report = Report.new
     @report.user = current_user
     @report.message = params[:report][:message]
