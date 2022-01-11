@@ -1,9 +1,9 @@
-
 <div class="row message-body">
   <div class="col-sm-12 <%= html_main_class(user) %>" style=" position:relative;">
     <% unless user %>
-      <%= link_to profile_path(@user.userid), class: "userLink" do %>
-        <%= image_tag @user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 mt-2 ", style: "float: left;", width: "40px", height: "40px" %>
+      <%= link_to profile_path(message.user.userid), class: "userLink" do %>
+        <%= image_tag message.user.image.attached? ? url_for(message.user.image) : '/assets/default_icon.png',
+                      class: "icon bd-placeholder-img flex-shrink-0 me-2 mt-2 ", style: "float: left;", width: "40px", height: "40px" %>
       <% end %>
     <% end %>
     <div class="<%= html_sub_class(user) %> my-1 p-1 mt-2" style="max-width: 40%;">
