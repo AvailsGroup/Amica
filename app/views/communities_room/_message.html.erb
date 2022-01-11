@@ -1,0 +1,31 @@
+<div class="row message-body">
+  <div class="col-sm-12 <%= html_main_class(user) %>" style=" position:relative;">
+    <% unless user %>
+      <%= link_to profile_path(message.user.userid), class: "userLink" do %>
+        <%= image_tag message.user.image.attached? ? url_for(message.user.image) : '/assets/default_icon.png', class: "icon bd-placeholder-img flex-shrink-0 me-2 mt-2 ", style: "float: left;", width: "40px", height: "40px" %>
+      <% end %>
+    <% end %>
+
+    <% unless user %>
+      <div class="text-gray small">
+        <%= message.user.name %>
+      </div>
+    <% end %>
+    <div class="<%= html_sub_class(user) %> my-1 p-1" style="max-width: 40%;">
+      <div class="messages container p-1">
+        <%= chat_content(message) %>
+      </div>
+    </div>
+    <% if user %>
+      <div class="text-gray small sender_time h-100" style="padding-bottom: 5px">
+        <%= message.decorate.time %>
+      </div>
+    <% else %>
+      <div class="text-gray small" style="float: left">
+        <p class="time">
+          <%= message.decorate.time %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>

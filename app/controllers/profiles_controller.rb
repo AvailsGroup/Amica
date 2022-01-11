@@ -7,9 +7,9 @@ class ProfilesController < ApplicationController
   helper_method :blocked?
 
   def index
-    @users = User.with_attached_image.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags).where.not(userid: nil)
+    @users = User.with_attached_image.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+
     @user = @users.find(current_user.id)
-    @users = @users.reject { |u| @user.blocks.any? { |user| user.blocked_user_id == u.id } }
     @friends = matchers(@user)
     @following = @user.followings_list
     @follower = @user.followers_list
@@ -18,7 +18,9 @@ class ProfilesController < ApplicationController
     @users &&= User.kept
     @users -= @friends
     @users -= [@user]
-
+    @users = @users.reject { |u| u.userid.nil? }
+    @users = @users.reject { |u| @user.blocks.any? { |user| user.blocked_user_id == u.id } }
+    @users = @users.reject { |u| following?(@following, u) }
   end
 
   def show
@@ -53,7 +55,6 @@ class ProfilesController < ApplicationController
 
   def update
     @user = current_user
-    pp params
     permission
 
     unless params['user']['images'].nil?

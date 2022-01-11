@@ -73,6 +73,7 @@ class TimelinesController < ApplicationController
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
     @post_m = Post.includes(:user, :likes, :comments)
+    @report = Report.new
   end
 
   private

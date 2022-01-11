@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_02_014017) do
+ActiveRecord::Schema.define(version: 2022_01_11_104711) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -97,6 +97,18 @@ ActiveRecord::Schema.define(version: 2022_01_02_014017) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["community_id"], name: "index_community_members_on_community_id"
     t.index ["user_id"], name: "index_community_members_on_user_id"
+  end
+
+  create_table "community_messages", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.integer "community_id", null: false
+    t.string "image"
+    t.string "file_name"
+    t.string "url"
+    t.string "content_type", default: "text", null: false
   end
 
   create_table "community_securities", force: :cascade do |t|
