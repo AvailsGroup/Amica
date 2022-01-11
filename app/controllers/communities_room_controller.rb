@@ -8,6 +8,6 @@ class CommunitiesRoomController < ApplicationController
       redirect_back fallback_location: communities_path, notice: "コミュニティに参加していません"
     end
     @messages = @community.community_messages
-    @messages.to_json(only: [:content, :image, :file_name, :created_at, :url])
+    @pagenate = @messages.order(updated_at: :desc).page(params[:page]).per(50)
   end
 end

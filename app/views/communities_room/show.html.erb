@@ -12,23 +12,24 @@
         window.scroll(0, bottom);
     });
 </script>
-<input id="messagesJson" type="hidden" data-messages="<%= @json %>">
 
 <%= render "chats/menu_modal" %>
 <%= render "communities_room/file_modal" %>
 <%= render "communities_room/nav", community: @community %>
-<% if @messages.size > 50 %>
-  <div class="container" style="text-align: center">
-    <button type="button" class="morebtn btn btn-link">もっと見る</button>
-  </div>
-<% end %>
+
 <div class="container" id="body">
+  <% if @messages.size > 50 %>
+    <div class="mt-3">
+      <%= render "layouts/pagenate", pagenate: @pagenate %>
+    </div>
+  <% end %>
+
   <div id="chat" style="margin:1% 1% 70px 1%">
     <div id="community_messages"
          data-user="<%= current_user.id %>"
          data-community="<%= @community.id %>">
       <% date_time = nil %>
-      <% @messages.limit(50).offset((@messages.size).to_i - 50).each do |m| %>
+      <% @pagenate.reverse.each do |m| %>
         <% date_time = m.created_at if date_time.nil? %>
         <% if m.created_at - date_time == 0 || (m.created_at.to_date - date_time.to_date).to_i >= 1 %>
           <div id="<%= m.created_at.strftime("%Y-%m-%d") %>" class="date"><%= m.created_at.strftime("%Y-%m-%d") %></div>
