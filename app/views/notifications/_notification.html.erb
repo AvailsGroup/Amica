@@ -3,7 +3,7 @@
     <%= link_to profile_path(value.visitor.userid), class: "text-decoration-none" do %>
       <%= image_tag value.visitor.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "30px", height: "30px" %>
       <span><%= value.decorate.icon %></span>
-      <strong><%= value.visitor.name %></strong>
+      <strong><%= value.visitor.nickname %></strong>
     <% end %>
     <span style="color:lightseagreen"><%= 'さんが' %></span>
     <%= render "notifications/#{value.action}", value: value, visited: value.visited, visitor: value.visitor %>
