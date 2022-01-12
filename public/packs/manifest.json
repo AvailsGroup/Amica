@@ -1,0 +1,84 @@
+{
+  "active_admin.js": "/packs/js/active_admin-3a9029fb0fb335a7c4e8.js",
+  "active_admin.js.map": "/packs/js/active_admin-3a9029fb0fb335a7c4e8.js.map",
+  "active_admin/print.js": "/packs/js/active_admin/print-9e3a679e38133f3ef737.js",
+  "active_admin/print.js.map": "/packs/js/active_admin/print-9e3a679e38133f3ef737.js.map",
+  "application.js": "/packs/js/application-fd3ab055887e8e59a575.js",
+  "application.js.map": "/packs/js/application-fd3ab055887e8e59a575.js.map",
+  "chat/show.js": "/packs/js/chat/show-4223876ef5c0f060fb7f.js",
+  "chat/show.js.map": "/packs/js/chat/show-4223876ef5c0f060fb7f.js.map",
+  "communities/new.js": "/packs/js/communities/new-69eb3d53cbe905a3d65f.js",
+  "communities/new.js.map": "/packs/js/communities/new-69eb3d53cbe905a3d65f.js.map",
+  "entrypoints": {
+    "active_admin": {
+      "js": [
+        "/packs/js/active_admin-3a9029fb0fb335a7c4e8.js"
+      ],
+      "js.map": [
+        "/packs/js/active_admin-3a9029fb0fb335a7c4e8.js.map"
+      ]
+    },
+    "active_admin/print": {
+      "js": [
+        "/packs/js/active_admin/print-9e3a679e38133f3ef737.js"
+      ],
+      "js.map": [
+        "/packs/js/active_admin/print-9e3a679e38133f3ef737.js.map"
+      ]
+    },
+    "application": {
+      "js": [
+        "/packs/js/application-fd3ab055887e8e59a575.js"
+      ],
+      "js.map": [
+        "/packs/js/application-fd3ab055887e8e59a575.js.map"
+      ]
+    },
+    "chat/show": {
+      "js": [
+        "/packs/js/chat/show-4223876ef5c0f060fb7f.js"
+      ],
+      "js.map": [
+        "/packs/js/chat/show-4223876ef5c0f060fb7f.js.map"
+      ]
+    },
+    "communities/new": {
+      "js": [
+        "/packs/js/communities/new-69eb3d53cbe905a3d65f.js"
+      ],
+      "js.map": [
+        "/packs/js/communities/new-69eb3d53cbe905a3d65f.js.map"
+      ]
+    },
+    "home/index": {
+      "js": [
+        "/packs/js/home/index-df1228679153ede4c0be.js"
+      ],
+      "js.map": [
+        "/packs/js/home/index-df1228679153ede4c0be.js.map"
+      ]
+    },
+    "profiles/edit": {
+      "js": [
+        "/packs/js/profiles/edit-4c8cdedac329c0be8e3d.js"
+      ],
+      "js.map": [
+        "/packs/js/profiles/edit-4c8cdedac329c0be8e3d.js.map"
+      ]
+    },
+    "timeline/main": {
+      "js": [
+        "/packs/js/timeline/main-72a8aed18498364685bd.js"
+      ],
+      "js.map": [
+        "/packs/js/timeline/main-72a8aed18498364685bd.js.map"
+      ]
+    }
+  },
+  "home/index.js": "/packs/js/home/index-df1228679153ede4c0be.js",
+  "home/index.js.map": "/packs/js/home/index-df1228679153ede4c0be.js.map",
+  "profiles/edit.js": "/packs/js/profiles/edit-4c8cdedac329c0be8e3d.js",
+  "profiles/edit.js.map": "/packs/js/profiles/edit-4c8cdedac329c0be8e3d.js.map",
+  "timeline/main.js": "/packs/js/timeline/main-72a8aed18498364685bd.js",
+  "timeline/main.js.map": "/packs/js/timeline/main-72a8aed18498364685bd.js.map"
+}
