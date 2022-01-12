@@ -37,8 +37,7 @@
           <%= f.fields_for :profile do |pf| %>
             <div class="col-sm-6">
               <%= pf.label "入学年(西暦) ※一度入力したら変更できません", class: "form-label" %>
-              <%= pf.text_field :enrolled_year, class: "form-control", id: "school_class", placeholder: "入学年
-", maxlength: "4" %>
+              <%= pf.text_field :enrolled_year, class: "form-control", id: "school_class", placeholder: "入学年", maxlength: "4" %>
             </div>
 
             <div class="col-12">
