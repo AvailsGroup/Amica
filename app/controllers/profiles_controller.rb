@@ -47,7 +47,7 @@ class ProfilesController < ApplicationController
   def edit
     @user = current_user
     permission
-    @profile = Profile.find(current_user.id)
+    @profile = current_user.profile
     @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
     @tag = current_user.tag_list.join(',')
     @accreditation_tag = current_user.accreditation_list.join(',')
