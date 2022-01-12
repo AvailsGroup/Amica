@@ -9,7 +9,6 @@ class ReportsController < ApplicationController
     @comments = Comment.all
 
     if Report.exists?(user: current_user,
-                      reported_user: params[:report][:reported_user_id].nil? ? nil : @users.find(params[:report][:reported_user_id]),
                       post: params[:report][:post_id].nil? ? nil : @posts.find(params[:report][:post_id]),
                       community: params[:report][:community_id].nil? ? nil : @communities.find(params[:report][:community_id]),
                       comment: params[:report][:comment_id].nil? ? nil : @comments.find(params[:report][:comment_id]))
