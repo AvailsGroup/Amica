@@ -23,7 +23,8 @@ module CommunitiesRoomHelper
     if file.nil?
       safe_join(message.content.split("\n"), tag(:br))
     else
-      link_to message.file_name, url_for(file), download: message.file_name
+      index = message.file_name.index('-')
+      link_to message.file_name.slice(index + 1..-1), url_for(file), download: message.file_name.slice(index + 1..-1)
     end
   end
 end
