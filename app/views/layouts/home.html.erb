@@ -5,14 +5,10 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <title>Amica</title>
-
   <meta name="viewport" content="width=320,height=480,initial-scale=1.0,minimum-scale=1.0, maximum-scale=2.0,user-scalable=yes"/>
-
   <%= favicon_link_tag('amica.ico') %>
   <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
-
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
@@ -33,9 +29,8 @@
         <div>
           <a class="float-md-start mb-0" href="/" style="font-size:30px; color: #037394;font-weight: bold;text-decoration: none;">Amica</a>
           <nav class="nav nav-masthead　bg-blue justify-content-center float-md-end">
-            <a class="nav-link" href="<%= new_user_registration_path %>">新規登録</a>
-            <a class="nav-link" href="<%= new_user_session_path %>">ログイン</a>
-            <a class="nav-link" href="<%= about_path %>">Amicaについて</a>
+            <a class="nav-link" href="/">トップ</a>
+            <a class="nav-link" href="<%= about_path %>">概要</a>
             <a class="nav-link" href="<%= contact_path %>">お問い合わせ</a>
           </nav>
         </div>
@@ -47,8 +42,8 @@
         <%= yield %>
       </main>
 
-      <footer class="mt-auto text-dark">
-        <p>©2021 - <%= DateTime.now.strftime('%Y') %> Avails Group
+      <footer class="mt-auto text-dark mb-3">
+        <p>©2021 - <%= DateTime.now.strftime('%Y') %> Avails Group<br />
         <%= link_to("利用規約",static_path,class:"text-dark") %>
         <%= link_to("プライバシーポリシー",privacy_path,class:"text-dark")%></p>
       </footer>
