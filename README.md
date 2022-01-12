@@ -20,7 +20,7 @@ Ruby on Railsで作成されており、AvailsGroupが制作、管理してい�
 IssueやPullRequest等もお待ちしています。 
 
 ## URL
-https://avails-amica.com
+https://www.avails-amica.com
 
 ## 開発環境 
 
