@@ -3,15 +3,15 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
 
 //もっとみるで前の50件を表示
     let messageHash = $('#messagesJson').data('messages');
-    let startnum = Number(messageHash.length) - 2
+    let startnum = Number(messageHash.length) - 50
     let num
     $('.morebtn').click(function () {
-        startnum = startnum - 2
+        startnum = startnum - 50
         if (startnum < 0) {
-            num = startnum + 1
+            num = startnum + 49
             startnum = 0
         } else {
-            num = startnum + 1
+            num = startnum + 49
         }
         messageHash.slice(startnum, num + 1).forEach(function () {
             const content = document.getElementById('content');
