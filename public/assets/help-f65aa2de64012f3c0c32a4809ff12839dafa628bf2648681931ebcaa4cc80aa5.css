@@ -1,0 +1,368 @@
+/* line 1, app/assets/stylesheets/help.scss */
+.faq-accordian .card {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 1.5rem;
+}
+
+/* line 6, app/assets/stylesheets/help.scss */
+.faq-accordian .card:last-child {
+  margin-bottom: 0;
+}
+
+/* line 9, app/assets/stylesheets/help.scss */
+.faq-accordian .card .card-header {
+  background-color: #ffffff;
+  padding: 0;
+  border-bottom-color: #ebebeb;
+}
+
+/* line 14, app/assets/stylesheets/help.scss */
+.faq-accordian .card .card-header h6 {
+  cursor: pointer;
+  padding: 1.75rem 2rem;
+  color: #3f43fd;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -ms-grid-row-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+/* line 29, app/assets/stylesheets/help.scss */
+.faq-accordian .card .card-header h6 span {
+  font-size: 1.5rem;
+}
+
+/* line 32, app/assets/stylesheets/help.scss */
+.faq-accordian .card .card-header h6.collapsed {
+  color: #070a57;
+}
+
+/* line 35, app/assets/stylesheets/help.scss */
+.faq-accordian .card .card-header h6.collapsed span {
+  -webkit-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+
+/* line 39, app/assets/stylesheets/help.scss */
+.faq-accordian .card .card-body {
+  padding: 1.75rem 2rem;
+}
+
+/* line 42, app/assets/stylesheets/help.scss */
+.faq-accordian .card .card-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* line 46, app/assets/stylesheets/help.scss */
+body {
+  background: #eee;
+}
+
+/* line 50, app/assets/stylesheets/help.scss */
+.mar-btm {
+  margin-bottom: 15px;
+}
+
+/* line 55, app/assets/stylesheets/help.scss */
+.list-group.bg-trans .list-group-item:not(.active):not(.disabled) {
+  background-color: transparent;
+  border-color: transparent;
+  color: inherit;
+}
+
+/* line 61, app/assets/stylesheets/help.scss */
+.list-group.bg-trans .list-group-item .disabled {
+  opacity: .5;
+}
+
+/* line 65, app/assets/stylesheets/help.scss */
+.list-group.bg-trans a.list-group-item:hover:not(.active) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* line 69, app/assets/stylesheets/help.scss */
+.list-group.bord-no .list-group-item {
+  border-color: transparent;
+}
+
+/* line 73, app/assets/stylesheets/help.scss */
+.list-group .list-divider {
+  display: block;
+}
+
+/* line 77, app/assets/stylesheets/help.scss */
+.list-group-item {
+  border-color: #e9e9e9;
+}
+
+/* line 81, app/assets/stylesheets/help.scss */
+.list-group-item-heading {
+  margin-top: 5px;
+}
+
+/* line 85, app/assets/stylesheets/help.scss */
+.list-group-item:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* line 90, app/assets/stylesheets/help.scss */
+.list-group-item:last-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* line 95, app/assets/stylesheets/help.scss */
+.list-group-item .list-group-item.disabled,
+.list-group-item .list-group-item.disabled:hover,
+.list-group-item .list-group-item.disabled:focus {
+  background-color: rgba(0, 0, 0, 0.07);
+  border-color: transparent;
+}
+
+/* line 102, app/assets/stylesheets/help.scss */
+.list-group-item.active,
+.list-group-item.active:hover,
+.list-group-item.active:focus {
+  background-color: #54abd9;
+  border-color: #54abd9;
+  color: #fff;
+}
+
+/* line 110, app/assets/stylesheets/help.scss */
+.list-group-item.active .list-group-item-text,
+.list-group-item.active:hover .list-group-item-text,
+.list-group-item.active:focus .list-group-item-text {
+  color: #fff;
+}
+
+/* line 116, app/assets/stylesheets/help.scss */
+a.list-group-item:hover,
+a.list-group-item:focus {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* line 121, app/assets/stylesheets/help.scss */
+a.list-group-item-primary,
+.list-group-item-primary {
+  background-color: #7cb3e3;
+  border-color: transparent;
+  color: #fff;
+}
+
+/* line 128, app/assets/stylesheets/help.scss */
+a.list-group-item-primary:hover,
+a.list-group-item-primary:focus {
+  background-color: #89bae6;
+  color: #fff;
+}
+
+/* line 134, app/assets/stylesheets/help.scss */
+a.list-group-item-info,
+.list-group-item-info {
+  background-color: #64c6e2;
+  border-color: transparent;
+  color: #fff;
+}
+
+/* line 141, app/assets/stylesheets/help.scss */
+a.list-group-item-info:hover,
+a.list-group-item-info:focus {
+  background-color: #71cbe4;
+  color: #fff;
+}
+
+/* line 147, app/assets/stylesheets/help.scss */
+a.list-group-item-success,
+.list-group-item-success {
+  background-color: #a3d272;
+  border-color: transparent;
+  color: #fff;
+}
+
+/* line 154, app/assets/stylesheets/help.scss */
+a.list-group-item-success:hover,
+a.list-group-item-success:focus {
+  background-color: #aad57e;
+  color: #fff;
+}
+
+/* line 160, app/assets/stylesheets/help.scss */
+a.list-group-item-warning,
+.list-group-item-warning {
+  background-color: #f3b961;
+  border-color: transparent;
+  color: #fff;
+}
+
+/* line 167, app/assets/stylesheets/help.scss */
+a.list-group-item-warning:hover,
+a.list-group-item-warning:focus {
+  background-color: #f4bf70;
+  color: #fff;
+}
+
+/* line 173, app/assets/stylesheets/help.scss */
+a.list-group-item-danger,
+.list-group-item-danger {
+  background-color: #f9826b;
+  border-color: transparent;
+  color: #fff;
+}
+
+/* line 180, app/assets/stylesheets/help.scss */
+a.list-group-item-danger:hover,
+a.list-group-item-danger:focus {
+  background-color: #f98e7a;
+  color: #fff;
+}
+
+/* line 186, app/assets/stylesheets/help.scss */
+a.list-group-item-mint,
+.list-group-item-mint {
+  background-color: #5ed4b2;
+  border-color: transparent;
+  color: #fff;
+}
+
+/* line 193, app/assets/stylesheets/help.scss */
+a.list-group-item-mint:hover,
+a.list-group-item-mint:focus {
+  background-color: #6ad7b8;
+  color: #fff;
+}
+
+/* line 199, app/assets/stylesheets/help.scss */
+a.list-group-item-purple,
+.list-group-item-purple {
+  background-color: #af69a4;
+  border-color: transparent;
+  color: #fff;
+}
+
+/* line 206, app/assets/stylesheets/help.scss */
+a.list-group-item-purple:hover,
+a.list-group-item-purple:focus {
+  background-color: #b473aa;
+  color: #fff;
+}
+
+/* line 212, app/assets/stylesheets/help.scss */
+a.list-group-item-pink,
+.list-group-item-pink {
+  background-color: #e899bb;
+  border-color: transparent;
+  color: #fff;
+}
+
+/* line 219, app/assets/stylesheets/help.scss */
+a.list-group-item-pink:hover,
+a.list-group-item-pink:focus {
+  background-color: #eba5c3;
+  color: #fff;
+}
+
+/* line 225, app/assets/stylesheets/help.scss */
+a.list-group-item-dark,
+.list-group-item-dark {
+  background-color: #44494d;
+  border-color: transparent;
+  color: #fff;
+}
+
+/* line 232, app/assets/stylesheets/help.scss */
+a.list-group-item-dark:hover,
+a.list-group-item-dark:focus {
+  background-color: #4b5155;
+  color: #fff;
+}
+
+/* line 239, app/assets/stylesheets/help.scss */
+.badge.badge-icon:empty {
+  display: inline-block;
+  width: .7em;
+  height: .7em;
+  padding: 0;
+  min-width: 5px;
+  margin: .5em;
+  border-radius: 50%;
+}
+
+/* line 249, app/assets/stylesheets/help.scss */
+.badge.badge-fw,
+.badge.badge-fw:empty {
+  margin-right: 1em;
+}
+
+/* line 254, app/assets/stylesheets/help.scss */
+.badge-default {
+  background-color: #e3e8ee;
+  color: #333;
+}
+
+/* line 259, app/assets/stylesheets/help.scss */
+.badge-primary {
+  background-color: #5fa2dd;
+}
+
+/* line 263, app/assets/stylesheets/help.scss */
+.badge-info {
+  background-color: #46bbdc;
+}
+
+/* line 267, app/assets/stylesheets/help.scss */
+.badge-success {
+  background-color: #91c957;
+}
+
+/* line 271, app/assets/stylesheets/help.scss */
+.badge-warning {
+  background-color: #f1aa40;
+}
+
+/* line 275, app/assets/stylesheets/help.scss */
+.badge-danger {
+  background-color: #f76549;
+}
+
+/* line 279, app/assets/stylesheets/help.scss */
+.badge-mint {
+  background-color: #42cca5;
+}
+
+/* line 283, app/assets/stylesheets/help.scss */
+.badge-purple {
+  background-color: #9f5594;
+}
+
+/* line 287, app/assets/stylesheets/help.scss */
+.badge-pink {
+  background-color: #e17ca7;
+}
+
+/* line 291, app/assets/stylesheets/help.scss */
+.badge-dark {
+  background-color: #33373a;
+}
+
+/* line 295, app/assets/stylesheets/help.scss */
+.pad-all {
+  padding: 15px;
+}
+
+/* line 298, app/assets/stylesheets/help.scss */
+.text-thin {
+  font-weight: 300;
+}
+
+/* line 301, app/assets/stylesheets/help.scss */
+.bord-btm {
+  border-bottom: 1px solid #e9e9e9;
+}
