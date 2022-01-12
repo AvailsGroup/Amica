@@ -15,7 +15,11 @@ class Profile < ApplicationRecord
   private
 
   def can_register_enrolled_year
-    return if enrolled_year == nil?
+    return if enrolled_year.nil?
+
+    if enrolled_year =~ /A[0-9]+z/
+      errors.add(:enrolled_year,"は不正な値です")
+    end
     if enrolled_year < 2000 || enrolled_year > DateTime.now.strftime('%Y').to_i
       errors.add(:enrolled_year,"は不正な値です")
     end

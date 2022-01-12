@@ -17,7 +17,6 @@ class User < ApplicationRecord
 
   validate :image_size
 
-  # TODO: 本番環境に移行する際は最低でも英語数字が含まれるように
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,24}+\z/ }, allow_nil: true
 
   validates :agreement_terms, allow_nil: false, acceptance: true, on: :create
