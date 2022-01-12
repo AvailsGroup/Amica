@@ -3,7 +3,7 @@
   <h4 class="chat_heading">Chat</h4>
 </div>
 <div class="m-3">
-  <% @room_partner.each_with_index do |r, i| %>
+  <% @chat.each_with_index do |r, i| %>
     <div class="container">
       <%= link_to chat_path(r.userid), style: " text-decoration:none;" do %>
         <div class="my-3 p-1 px-3 bg-white rounded shadow-sm">
