@@ -16,13 +16,26 @@ class ReportsController < ApplicationController
       redirect_back fallback_location: pages_path, notice: 'すでに送信しています'
       return
     end
+
     @report = Report.new
     @report.user = current_user
     @report.message = params[:report][:message]
-    @report.reported_user = params[:report][:reported_user_id].nil? ? nil : @users.find(params[:report][:reported_user_id])
     @report.post = params[:report][:post_id].nil? ? nil : @posts.find(params[:report][:post_id])
     @report.community = params[:report][:community_id].nil? ? nil : @communities.find(params[:report][:community_id])
     @report.comment = params[:report][:comment_id].nil? ? nil : @comments.find(params[:report][:comment_id])
+
+    if params[:report][:post_id].nil? && params[:report][:community_id].nil?
+      return unless Comment.exists?(id: params[:report][:comment_id])
+      comment = Comment.find(params[:report][:comment_id])
+      @report.reported_user = comment.user
+    end
+
+    if params[:report][:comment_id].nil? && params[:report][:community_id].nil?
+      return unless Post.exists?(id: params[:report][:post_id])
+      post = Post.find(params[:report][:post_id])
+      @report.reported_user = post.user
+    end
+
     @report.save
 
     ContactMailer.report_mail(@report).deliver

@@ -1,0 +1,36 @@
+<div id="post_<%= post.id %>">
+  <div class="modal fade" id="exampleModal<%= post.id %>" tabindex="-1" aria-labelledby="exampleModalLabel<%= post.id %>" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">通報</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= form_for(@report, url: timeline_reports_path(post.id)) do |f| %>
+            <%= f.hidden_field :post_id, id: "post_id", class: "form-control", value: post.id %>
+            <div class="my-3 p-3 bg-white rounded shadow-sm">
+              <div class="d-flex text-muted">
+                <%= image_tag post.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+                <p class="pb-3 mb-0 lh-sm w-100">
+                  <strong class="text-dark" style="font-size:20px;margin: 0"><%= post.user.nickname %></strong>
+                  <span class="text-gray small" style="margin: 0">@<%= post.user.userid %></span>
+                  <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %></span>
+                  <br/>
+                  <br/>
+                  <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= post.content %></span>
+                </p>
+              </div>
+            </div>
+            <%= f.text_area :message, placeholder: "通報内容を記載してください。", id: "message", class: "form-control", required: true %>
+            <br>
+            <div class="modal-footer">
+              <%= f.submit "送信", class: "btn btn-lg btn-danger fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
+              <%= f.submit "クリア", type: :reset, class: "btn btn-lg btn-secondary fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,44 +1,6 @@
 <%= stylesheet_link_tag 'communities', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag "community_index" %>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">通報</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <%= form_for(@report, url: community_reports_path(@community.id)) do |f| %>
-          <%= f.hidden_field :user_id, id: "user_id", class: "form-control", value: @user.id %>
-          <%= f.hidden_field :community_id, id: "community_id", class: "form-control", value: @community.id %>
-          <div class="col">
-            <div class="carbon-example flex-wrapper">
-              <%= image_tag @community.decorate.image, class: "img-fluid", style: "width:200px" %><br>
-              <div class="inner-wrapper text-center w-100">
-                <h5><%= @community.name %> </h5>
-                <p class="my-0 fine-print">
-                  <i class="far fa-user fine-print"></i> <%= @community.community_members.size %>
-                </p>
-                <% @community.tags.pluck(:name).shuffle.first(3).each do |t| %>
-                  <%= link_to "\##{t}", search_tag_path(t), class: "fine-print text-decoration-none my-0" %>
-                <% end %>
-              </div>
-              <div class="inner-wrapper text-right w-25 h-auto" style="bottom: 0; left: 0;margin-bottom: 0;padding: 0;">
-
-                <span class="small my-0" style="font-size: 13px"></span>
-              </div>
-            </div>
-          </div>
-          <%= f.text_area :message, placeholder: "通報内容を記載してください。", id: "message", class: "form-control mt-3", required: true %><br>
-          <div class="modal-footer">
-            <%= f.submit "送信", class: "btn btn-lg btn-danger fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
-            <%= f.submit "クリア", type: :reset, class: "btn btn-lg btn-secondary fw-bold border-whitey", style: "margin-right: 10px; width: 150px;color:#FFF" %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render "communities/report_modal" , community:@community.id %>
 
 <%= render 'layouts/modal', id: "Modal",
            title: "確認", content: "#{@community.name}を脱退します。本当によろしいですか？",
