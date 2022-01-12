@@ -1,4 +1,11 @@
-
+<style>
+    .send {
+        margin-right: 2px;
+        margin-bottom: 2px;
+        color: #0d6efd;
+        border: none;
+    }
+</style>
 <%= render "comments/report_modal" , comment:comment %>
 
 <div class="my-3 p-3 bg-white rounded shadow-sm">
@@ -17,7 +24,7 @@
   </div>
   <div class="text-end">
     <% if comment.user == current_user %>
-      <%= link_to timeline_comment_path(comment.post.id, comment.id), method: :delete do %>
+      <%= button_to timeline_comment_path(comment.post.id, comment.id),class: "send bg-white", method: :delete, data: { disable_with: "削除中..." } do %>
         <i class="far fa-trash-alt"></i>
       <% end %>
     <% else %>
