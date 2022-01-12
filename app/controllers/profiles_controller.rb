@@ -143,14 +143,16 @@ class ProfilesController < ApplicationController
   end
 
   def pickup
-    @users = User.includes(:tags, :followings, :followers, :blocks).where.not(userid: nil)
+    @users = User.includes(:tags, :followings, :followers, :blocks)
     @user = @users.find(current_user.id)
+    sort_pickup
     @users &&= User.kept
     @users -= matchers(@user)
-    @users = @users.reject { |u| @user.blocks.any? { |user| user.blocked_user_id == u.id } }
     @users -= [@user]
+    @users = @users.reject { |u| u.userid.nil? }
+    @users = @users.reject { |u| @user.blocks.any? { |user| user.blocked_user_id == u.id } }
+    @users = @users.reject { |u| following?(@following, u) }
 
-    sort_pickup
     @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(30)
     @name = 'おすすめ'
     render 'profiles/panel'
