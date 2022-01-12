@@ -232,7 +232,7 @@
               <h3 class="page-header">最近の投稿</h3>
               <p class="page-subtitle">
                 <% @user.posts.includes(:likes, :comments).order(created_at: :desc).first(10).each do |p| %>
-                  <%= render "timelines/post", post: p, report: @report %>
+                  <%= render "profiles/post", post: p, report: @report %>
                 <% end %>
                 <% if @user.posts.empty? %>
                   まだ投稿がありません！

@@ -27,9 +27,11 @@
         color: red;
     }
 </style>
+
 <% if post.user != current_user %>
   <%= render "timelines/report_modal", post: post %>
 <% end %>
+
 <div id="post_<%= post.id %>">
   <div class="my-3 p-3 bg-white rounded shadow-sm">
     <div class="panel-content panel-activity">
@@ -91,13 +93,14 @@
                   <i class="fas fa-volume-mute" style="color: red"></i>
                 <% end %>
               <% end %>
-              <span class="ms-2">
-
-              <label>
-                <button type="button" class="btn btn-primary" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal<%= post.id %>" data-bs-whatever=<%= post.id %>></button>
-                <i class="fas fa-bullhorn" style="color: red"></i>
-              </label>
-            </span>
+              <% unless current_page?(profile_path(post.user.userid)) %>
+                <span class="ms-2">
+                  <label>
+                    <button type="button" class="btn btn-primary" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal<%= post.id %>" data-bs-whatever=<%= post.id %>></button>
+                    <i class="fas fa-bullhorn" style="color: red"></i>
+                  </label>
+                </span>
+              <% end %>
             <% end %>
           </div>
         </div>
