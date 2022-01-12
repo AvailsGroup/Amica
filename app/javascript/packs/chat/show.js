@@ -3,15 +3,15 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
 
 //もっとみるで前の50件を表示
     let messageHash = $('#messagesJson').data('messages');
-    let startnum = Number(messageHash.length) - 50
+    let startnum = Number(messageHash.length) - 2
     let num
     $('.morebtn').click(function () {
-        startnum = startnum - 50
+        startnum = startnum - 2
         if (startnum < 0) {
-            num = startnum + 49
+            num = startnum + 1
             startnum = 0
         } else {
-            num = startnum + 49
+            num = startnum + 1
         }
         messageHash.slice(startnum, num + 1).forEach(function () {
             const content = document.getElementById('content');
@@ -21,8 +21,10 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             }
 
             if (messageHash[num].file_name !== null) {
-                text = '<a href="' + messageHash[num].url + '" download="' + messageHash[num].file_name.slice(1,messageHash[num].file_name.length) + '">'
-                    + messageHash[num].file_name.slice(1,messageHash[num].file_name.length) + '</a>'
+                const index = messageHash[num].file_name.indexOf('-')
+                console.log(messageHash[num].file_name.slice(index + 1))
+                text = '<a href="' + messageHash[num].url + '" download="' + messageHash[num].file_name.slice(index + 1) + '">'
+                    + messageHash[num].file_name.slice(index + 1)+ '</a>'
             }
 
             if (partner_image === "") {
