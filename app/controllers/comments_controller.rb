@@ -14,10 +14,12 @@ class CommentsController < ApplicationController
     flash.now[:notice] = @comment.save ? "コメントの投稿に成功しました。" : "コメントの投稿に失敗しました。"
 
     users = [@post.user]
-    @notification = Notification.create(visitor_id: current_user.id, visited_id: users[0].id, comment_id: @comment.id, action: 'comment')
+    unless @post.user == current_user
+      @notification = Notification.create(visitor_id: current_user.id, visited_id: users[0].id, comment_id: @comment.id, action: 'comment')
+    end
     @post.comments.each do |c|
       user = c.user
-      if user != current_user && !users.include?(user) && !mute?(@post, user)
+      unless @post.user == c.user || users.include?(user) || @post.mutes.any? { |p| p.user == user }
         users.push(user)
         @notification = Notification.create(visitor_id: current_user.id, visited_id: user.id, comment_id: @comment.id, action: 'comment')
       end
