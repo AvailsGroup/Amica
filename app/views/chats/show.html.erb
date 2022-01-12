@@ -17,7 +17,7 @@
 <%= render "chats/menu_modal" %>
 <%= render "chats/file_modal" %>
 <%= render "chats/nav", user: @user %>
-<% if @message.size > 2 %>
+<% if @message.size > 50 %>
   <div class="container" style="text-align: center">
   <button type="button"  class="morebtn btn btn-link">もっと見る</button>
   </div>
@@ -26,7 +26,7 @@
   <div id="chat" style="margin:1% 1% 70px 1%">
     <div id="messages">
       <% date_time = nil %>
-      <% @message.limit(2).offset((@message.size).to_i - 2).each do |m| %>
+      <% @message.limit(50).offset((@message.size).to_i - 50).each do |m| %>
         <% date_time = m.created_at if date_time == nil %>
         <% if m.created_at - date_time == 0 || (m.created_at.to_date - date_time.to_date).to_i >= 1 %>
           <div id="<%= m.created_at.strftime("%Y-%m-%d") %>" class="date"><%= m.created_at.strftime("%Y-%m-%d") %></div>
