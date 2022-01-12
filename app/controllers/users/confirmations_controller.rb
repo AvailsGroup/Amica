@@ -20,6 +20,11 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   def confirm
     confirmation_token = params[resource_name][:confirmation_token]
     self.resource = resource_class.find_by_confirmation_token!(confirmation_token)
+    if params[:user][:password] != params[:user][:password_confirmation]
+      flash[:notice] = 'パスワードが一致しません'
+      render 'devise/confirmations/show'
+      return
+    end
     if resource.update(confirm_params)
       Achievement.create(user_id: resource.id)
       Setting.create(user_id: resource.id)
