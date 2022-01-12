@@ -55,7 +55,6 @@ class ProfilesController < ApplicationController
 
   def update
     @user = current_user
-    pp params
     permission
 
     unless params['user']['images'].nil?

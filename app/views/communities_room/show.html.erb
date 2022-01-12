@@ -1,0 +1,43 @@
+<%= stylesheet_link_tag 'chats', media: 'all', 'data-turbolinks-track': 'reload' %>
+<style>
+    .flash {
+        display: none;
+    }
+</style>
+<script>
+    window.addEventListener('load', function bottom_scroll() {
+        var elm = document.documentElement;
+        var bottom = elm.scrollHeight - elm.clientHeight;
+        window.scroll(0, bottom);
+    });
+</script>
+
+<%= render "chats/menu_modal" %>
+<%= render "communities_room/file_modal" %>
+<%= render "communities_room/nav", community: @community %>
+
+<div class="container" id="body">
+  <% if @messages.size > 50 %>
+    <div class="mt-3">
+      <%= render "layouts/pagenate", pagenate: @pagenate %>
+    </div>
+  <% end %>
+
+  <div id="chat" style="margin:1% 1% 70px 1%">
+    <div id="community_messages"
+         data-user="<%= current_user.id %>"
+         data-community="<%= @community.id %>">
+      <% date_time = nil %>
+      <% @pagenate.reverse.each do |m| %>
+        <% date_time = m.created_at if date_time.nil? %>
+        <% if m.created_at - date_time == 0 || (m.created_at.to_date - date_time.to_date).to_i >= 1 %>
+          <div id="<%= m.created_at.strftime("%Y-%m-%d") %>" class="date"><%= m.created_at.strftime("%Y-%m-%d") %></div>
+        <% end %>
+        <%= render 'communities_room/message', message: m, user: m.user_id === current_user.id %>
+        <% date_time = m.created_at %>
+      <% end %>
+      <div id="append" class="col-sm-12"></div>
+    </div>
+  </div>
+  <%= render "communities_room/form", user: @user, room: @room %>
+</div>

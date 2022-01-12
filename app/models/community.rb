@@ -27,6 +27,8 @@ class Community < ApplicationRecord
 
   has_many :reports
 
+  has_many :community_messages
+
   private
 
   def validate_tag
