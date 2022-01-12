@@ -29,4 +29,8 @@ class UserDecorator < ApplicationDecorator
   def nickname
     object.discarded? ? 'Deleted User' : object.nickname
   end
+
+  def user_blocked?(user)
+    object.blocks.any? { |u| u.blocked_user_id == user.id }
+  end
 end

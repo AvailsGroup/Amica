@@ -17,7 +17,7 @@
   </div>
   <div class="text-end">
     <% if comment.user == current_user %>
-      <%= link_to timeline_comment_path(comment.post.id, comment.id), method: :delete, remote: true do %>
+      <%= link_to timeline_comment_path(comment.post.id, comment.id), method: :delete do %>
         <i class="far fa-trash-alt"></i>
       <% end %>
     <% else %>

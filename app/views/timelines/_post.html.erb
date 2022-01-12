@@ -27,7 +27,9 @@
         color: red;
     }
 </style>
-<%= render "timelines/report_modal" , post:post %>
+<% if post.user != current_user %>
+  <%= render "timelines/report_modal", post: post %>
+<% end %>
 <div id="post_<%= post.id %>">
   <div class="my-3 p-3 bg-white rounded shadow-sm">
     <div class="panel-content panel-activity">
@@ -55,7 +57,7 @@
         <div class="d-flex justify-content-between" style="margin-left: 45px">
           <div class="d-flex">
             <span class="likes mx-1">
-              <% if current_user.liked_by?(post.id) %>
+              <% if current_user.liked_by?(post.id) && !current_user.decorate.user_blocked?(post.user) && !post.user.decorate.user_blocked?(current_user) %>
                 <%= button_to timeline_like_path(post.id, current_user.id), method: :delete, remote: true, class: "send bg-white", style: "height: 15.5px;padding: 0", data: { disable_with: "<i class='far fa-heart'></i> <span class='text-dark'>#{post.likes.size - 1}</span>" } do %>
                   <i class="fas fa-heart"></i>
                   <span class='text-dark'><%= post.likes.size %></span>
