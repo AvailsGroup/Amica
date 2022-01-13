@@ -50,11 +50,20 @@ class TimelinesController < ApplicationController
   end
 
   def create
-    @image = nil
-    save_image unless post_params[:image].nil?
-    @create = Post.new(content: post_params[:content], user_id: current_user.id, image: @image)
+    @create = Post.new(content: post_params[:content])
     @create.user = current_user
-    flash[:alert] = '投稿の文字数は1~280文字までです<br/>画像はjpg jpeg png gifのみ対応しています。<br/>画像は10MBまでです。' unless @create.save
+    unless @create.save
+      flash[:alert] = '投稿の文字数は1~280文字までです<br/>画像はjpg jpeg png gifのみ対応しています。<br/>画像は10MBまでです。'
+      redirect_to(timelines_path)
+      return
+    end
+    @post = Post.find(@create.id)
+    unless post_params[:image].nil?
+      unless save_image?
+        @post.destroy
+        flash[:alert] = '画像が破損しているようです。'
+      end
+    end
     redirect_to(timelines_path)
   end
 
@@ -94,16 +103,27 @@ class TimelinesController < ApplicationController
     params.require(:post).permit(:content, :image)
   end
 
-  def save_image
+  def save_image?
     Dir.mkdir("#{Rails.root}/tmp/timeline/") unless File.directory?("#{Rails.root}/tmp/timeline")
-    rand = rand(0..9999)
+    rand = rand(1000..9999)
     @image_name = "#{Time.zone.now.strftime('%Y%m%d%H%M%S')}#{rand}.jpg"
     File.binwrite("#{Rails.root}/tmp/timeline/#{@image_name}", post_params[:image].read)
+    file_check = check_broken_file("#{Rails.root}/tmp/timeline/#{@image_name}")
+    unless file_check[0] != :unknown && file_check[1] == :clean
+      File.delete("#{Rails.root}/tmp/timeline/#{@image_name}")
+      return false
+    end
     f = File.open("#{Rails.root}/tmp/timeline/#{@image_name}")
-    Post.first.images.attach(io: f, filename: @image_name)
+    begin
+      @post.image.attach(io: f, filename: @image_name)
+    rescue StandardError
+      f.close
+      File.delete("#{Rails.root}/tmp/timeline/#{@image_name}")
+      return false
+    end
     f.close
     File.delete("#{Rails.root}/tmp/timeline/#{@image_name}")
-    @image = url_for(ActiveStorage::Blob.find_by(filename: @image_name))
+    true
   end
 
 
