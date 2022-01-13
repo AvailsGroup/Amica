@@ -106,7 +106,6 @@ class TimelinesController < ApplicationController
     @image = url_for(ActiveStorage::Blob.find_by(filename: @image_name))
   end
 
-
   def redirect(page)
     @page = page
     render 'timelines/index'
