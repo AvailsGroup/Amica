@@ -4,7 +4,7 @@
   <% end %>
 <% else %>
   <%= link_to timeline_path(value.comment.post.id), class: "text-decoration-none" do %>
-    <%= "#{visited.name}さんの投稿" %>
+    <%= "#{value.comment.post.user.decorate.nickname}さんの投稿" %>
   <% end %>
 <% end %>
 <span style="color:lightseagreen">にコメントしました</span>
