@@ -116,6 +116,9 @@ class User < ApplicationRecord
 
   has_many :whispers
 
+  has_many :active_favorites, class_name: 'Favorite', foreign_key: 'user_id', dependent: :destroy
+  has_many :passive_favorites, class_name: 'Favorite', foreign_key: 'favorite_user_id', dependent: :destroy
+
   def password_required?
     super && confirmed?
   end
