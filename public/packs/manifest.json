@@ -1,21 +1,19 @@
 {
-  "active_admin.js": "/packs/js/active_admin-3a9029fb0fb335a7c4e8.js",
-  "active_admin.js.map": "/packs/js/active_admin-3a9029fb0fb335a7c4e8.js.map",
+  "active_admin.js": "/packs/js/active_admin-e3d7722d0cbd0eaab548.js",
+  "active_admin.js.map": "/packs/js/active_admin-e3d7722d0cbd0eaab548.js.map",
   "active_admin/print.js": "/packs/js/active_admin/print-9e3a679e38133f3ef737.js",
   "active_admin/print.js.map": "/packs/js/active_admin/print-9e3a679e38133f3ef737.js.map",
-  "application.js": "/packs/js/application-3d01fb151033e4ee6e81.js",
-  "application.js.map": "/packs/js/application-3d01fb151033e4ee6e81.js.map",
-  "chat/show.js": "/packs/js/chat/show-4223876ef5c0f060fb7f.js",
-  "chat/show.js.map": "/packs/js/chat/show-4223876ef5c0f060fb7f.js.map",
-  "communities/new.js": "/packs/js/communities/new-69eb3d53cbe905a3d65f.js",
-  "communities/new.js.map": "/packs/js/communities/new-69eb3d53cbe905a3d65f.js.map",
+  "application.js": "/packs/js/application-6218d6c4d0b8222b74f8.js",
+  "application.js.map": "/packs/js/application-6218d6c4d0b8222b74f8.js.map",
+  "communities/new.js": "/packs/js/communities/new-b11bee2712982e08be28.js",
+  "communities/new.js.map": "/packs/js/communities/new-b11bee2712982e08be28.js.map",
   "entrypoints": {
     "active_admin": {
       "js": [
-        "/packs/js/active_admin-3a9029fb0fb335a7c4e8.js"
+        "/packs/js/active_admin-e3d7722d0cbd0eaab548.js"
       ],
       "js.map": [
-        "/packs/js/active_admin-3a9029fb0fb335a7c4e8.js.map"
+        "/packs/js/active_admin-e3d7722d0cbd0eaab548.js.map"
       ]
     },
     "active_admin/print": {
@@ -28,57 +26,49 @@
     },
     "application": {
       "js": [
-        "/packs/js/application-3d01fb151033e4ee6e81.js"
+        "/packs/js/application-6218d6c4d0b8222b74f8.js"
       ],
       "js.map": [
-        "/packs/js/application-3d01fb151033e4ee6e81.js.map"
-      ]
-    },
-    "chat/show": {
-      "js": [
-        "/packs/js/chat/show-4223876ef5c0f060fb7f.js"
-      ],
-      "js.map": [
-        "/packs/js/chat/show-4223876ef5c0f060fb7f.js.map"
+        "/packs/js/application-6218d6c4d0b8222b74f8.js.map"
       ]
     },
     "communities/new": {
       "js": [
-        "/packs/js/communities/new-69eb3d53cbe905a3d65f.js"
+        "/packs/js/communities/new-b11bee2712982e08be28.js"
       ],
       "js.map": [
-        "/packs/js/communities/new-69eb3d53cbe905a3d65f.js.map"
+        "/packs/js/communities/new-b11bee2712982e08be28.js.map"
       ]
     },
     "home/index": {
       "js": [
-        "/packs/js/home/index-df1228679153ede4c0be.js"
+        "/packs/js/home/index-714dc605928b54bca9d6.js"
       ],
       "js.map": [
-        "/packs/js/home/index-df1228679153ede4c0be.js.map"
+        "/packs/js/home/index-714dc605928b54bca9d6.js.map"
       ]
     },
     "profiles/edit": {
       "js": [
-        "/packs/js/profiles/edit-4c8cdedac329c0be8e3d.js"
+        "/packs/js/profiles/edit-7d69de4ee4abea792ce1.js"
       ],
       "js.map": [
-        "/packs/js/profiles/edit-4c8cdedac329c0be8e3d.js.map"
+        "/packs/js/profiles/edit-7d69de4ee4abea792ce1.js.map"
       ]
     },
     "timeline/main": {
       "js": [
-        "/packs/js/timeline/main-72a8aed18498364685bd.js"
+        "/packs/js/timeline/main-c7eabc229e2e17666ad8.js"
       ],
       "js.map": [
-        "/packs/js/timeline/main-72a8aed18498364685bd.js.map"
+        "/packs/js/timeline/main-c7eabc229e2e17666ad8.js.map"
       ]
     }
   },
-  "home/index.js": "/packs/js/home/index-df1228679153ede4c0be.js",
-  "home/index.js.map": "/packs/js/home/index-df1228679153ede4c0be.js.map",
-  "profiles/edit.js": "/packs/js/profiles/edit-4c8cdedac329c0be8e3d.js",
-  "profiles/edit.js.map": "/packs/js/profiles/edit-4c8cdedac329c0be8e3d.js.map",
-  "timeline/main.js": "/packs/js/timeline/main-72a8aed18498364685bd.js",
-  "timeline/main.js.map": "/packs/js/timeline/main-72a8aed18498364685bd.js.map"
+  "home/index.js": "/packs/js/home/index-714dc605928b54bca9d6.js",
+  "home/index.js.map": "/packs/js/home/index-714dc605928b54bca9d6.js.map",
+  "profiles/edit.js": "/packs/js/profiles/edit-7d69de4ee4abea792ce1.js",
+  "profiles/edit.js.map": "/packs/js/profiles/edit-7d69de4ee4abea792ce1.js.map",
+  "timeline/main.js": "/packs/js/timeline/main-c7eabc229e2e17666ad8.js",
+  "timeline/main.js.map": "/packs/js/timeline/main-c7eabc229e2e17666ad8.js.map"
 }
