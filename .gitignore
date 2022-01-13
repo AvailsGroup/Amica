@@ -48,9 +48,3 @@ yarn-debug.log*
 
 /.Dockerfile.swp
 /config/credentials.yml.enc
-
-/public/packs-test
-/node_modules
-/yarn-error.log
-yarn-debug.log*
-.yarn-integrity
