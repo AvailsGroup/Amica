@@ -1,7 +1,8 @@
 class Message < ApplicationRecord
   has_many :room
-  has_many_attached :images
-  has_many_attached :files
+
+  has_one_attached :file
+
   belongs_to :user
   validates :user_id, :content, presence: true
 

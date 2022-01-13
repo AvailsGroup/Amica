@@ -23,22 +23,22 @@ const ChatChannel = consumer.subscriptions.create("ChatChannel", {
             }
      },
 
-        speak(message, room_id,file_name, type) {
-            return this.perform('speak', {
-                message: message,
-                room_id: room_id,
-                file_name: file_name,
-                content_type: type
-            });
-        }
-    });
+            speak: function (message, room_id, file_name, type, file = null) {
+                return this.perform('speak', {
+                    message: message,
+                    room_id: room_id,
+                    file_name: file_name,
+                    type: type,
+                    file: file
+                });
+            }
+        });
 
 
 window.addEventListener("DOMContentLoaded", function (utterance) {
     const content = document.getElementById('content');
     const file_uploader = document.getElementById('file_uploader')
     const preview = document.getElementById("preview")
-
     let $textarea = $('#content');
     const lineHeight = parseInt($textarea.css('lineHeight'));
 
@@ -102,7 +102,6 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
 
     $('#file_submit_button').click('[data-behavior~=chat_speaker]', function () {
         const maxFileSize = 10485760 //アップロードできる最大サイズを指定(1048576=1MB 10485760=10MB)
-        let val = null
         $(".error_msg").remove()
         let file = $(file_uploader).prop('files')[0];
         if (maxFileSize < file.size) {
@@ -112,17 +111,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             $(file_uploader).click(function () {
                 $(this).val("")
             })
-            let reader = new FileReader;
-            reader.readAsDataURL(file);
-            reader.onload = function () {
-                val = reader.result;
-                let file_name = file.name
-                ChatChannel.speak(val, content.dataset.roomid,file_name, 'file');
-                $($textarea).height(0);
-                $('#fileModal').modal('hide');
-                $('#file_uploader').val('');
-                files_bottom_scroll()
-            }
+            sendFile(file)
         }
     });
 });
@@ -141,3 +130,24 @@ function bottom_scroll() {
     window.scroll(0, bottom);
 }
 
+    function sendFile(file) {
+        const content = document.getElementById('content');
+        const jcontent = $('#content')
+        let reader = new FileReader;
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+            let value = reader.result;
+            ChatChannel.speak(checkImageFormat() ? 'image' : 'file', content.dataset.roomid, file.name, checkImageFormat() ? 'image' : 'file', value);
+            jcontent.height(0);
+            $('#fileModal').modal('hide');
+            $('#preview').val('');
+            bottom_scroll()
+        }
+    }
+
+    function checkImageFormat() {
+        const file_uploader = document.getElementById('file_uploader')
+        let file = $(file_uploader).prop('files')[0];
+        return file.type.match(/^image\/(png|jpeg|gif)$/)
+    }
+});
