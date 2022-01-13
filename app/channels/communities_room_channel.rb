@@ -26,6 +26,8 @@ class CommunitiesRoomChannel < ApplicationCable::Channel
     unless @type == 'text'
       save_file(data)
     end
+
+    CommunityMessageBroadcastJob.perform_later @community
   end
 
   private
@@ -54,6 +56,7 @@ class CommunitiesRoomChannel < ApplicationCable::Channel
     @community.file.attach(io: f, filename: data['file_name'])
     f.close
     File.delete("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{data['file_name']}")
+
   end
 
   def check_broken_file(filename)
