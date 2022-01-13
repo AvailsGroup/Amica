@@ -50,7 +50,9 @@ class TimelinesController < ApplicationController
   end
 
   def create
-    @create = Post.new(post_params)
+    @image = nil
+    save_image unless post_params[:image].nil?
+    @create = Post.new(content: post_params[:content], user_id: current_user.id, image: @image)
     @create.user = current_user
     flash[:alert] = '投稿の文字数は1~280文字までです<br/>画像はjpg jpeg png gifのみ対応しています。<br/>画像は10MBまでです。' unless @create.save
     redirect_to(timelines_path)
@@ -90,6 +92,18 @@ class TimelinesController < ApplicationController
 
   def post_params
     params.require(:post).permit(:content, :image)
+  end
+
+  def save_image
+    Dir.mkdir("#{Rails.root}/tmp/timeline/") unless File.directory?("#{Rails.root}/tmp/timeline")
+    rand = rand(0..9999)
+    @image_name = "#{Time.zone.now.strftime('%Y%m%d%H%M%S')}#{rand}.jpg"
+    File.binwrite("#{Rails.root}/tmp/timeline/#{@image_name}", post_params[:image].read)
+    f = File.open("#{Rails.root}/tmp/timeline/#{@image_name}")
+    Post.first.images.attach(io: f, filename: @image_name)
+    f.close
+    File.delete("#{Rails.root}/tmp/timeline/#{@image_name}")
+    @image = url_for(ActiveStorage::Blob.find_by(filename: @image_name))
   end
 
   def redirect(page)

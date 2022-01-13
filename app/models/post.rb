@@ -6,6 +6,7 @@ class Post < ApplicationRecord
   has_many :reports
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many_attached :images
 
   validates :content,
             length: { minimum: 1, maximum: 280 }
@@ -16,5 +17,4 @@ class Post < ApplicationRecord
 
   has_many :mutes, dependent: :destroy
 
-  mount_uploader :image, ImgUploader
 end
