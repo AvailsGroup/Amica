@@ -31,7 +31,7 @@ class CommunitiesController < ApplicationController
     @user = @users.find(current_user.id)
     @join = @community.community_members.any? { |c| c.user_id == @user.id }
     @leader = @community.user
-    @favorite = Favorite.all
+    @favorite = Favorite.where(user_id: @user.id).reject { |u| u.community_id.nil? }.map(&:community)
     @report = Report.new
     exists_community_security
   end
