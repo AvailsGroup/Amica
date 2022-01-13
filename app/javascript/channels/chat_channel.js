@@ -136,4 +136,3 @@ function bottom_scroll() {
         fileReader.readAsDataURL(upload.prop('files')[0]);
     }
 });
-
