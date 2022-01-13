@@ -6,7 +6,7 @@
         <%= image_tag user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
         <p class="pb-3 mb-0 small lh-sm  w-100">
           <strong class="d-block text-gray-dark"><%= user.name %> (<%= user.nickname %>)</strong>
-          @<%= user.userid %>
+          <%= user.userid %>
         </p>
       </div>
       <p><%= rank_count(user, nil, title) %></p>
