@@ -10,21 +10,18 @@ module CommunitiesRoomHelper
   end
 
   def content_image(message)
-    image = ActiveStorage::Blob.find_by(filename: message.image)
-    if image.nil?
-      safe_join(message.content.split("\n"), tag(:br))
+    if message.file.attached?
+      image_tag url_for(message.file), style: 'max-width:100%', 'data-lity' => 'data-lity'
     else
-      image_tag url_for(image), style: 'max-width:100%', 'data-lity' => 'data-lity'
+      safe_join(message.content.split("\n"), tag(:br))
     end
   end
 
   def content_file(message)
-    file = ActiveStorage::Blob.find_by(filename: message.file_name)
-    if file.nil?
-      safe_join(message.content.split("\n"), tag(:br))
+    if message.file.attached?
+      link_to message.file.filename, url_for(message.file), download: message.file.filename
     else
-      index = message.file_name.index('-')
-      link_to message.file_name.slice(index + 1..-1), url_for(file), download: message.file_name.slice(index + 1..-1)
+      safe_join(message.content.split("\n"), tag(:br))
     end
   end
 end
