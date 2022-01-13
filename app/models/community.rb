@@ -23,13 +23,11 @@ class Community < ApplicationRecord
 
   has_many :community_securities, dependent: :destroy
 
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
 
   has_many :reports
 
-  has_many :community_messages
-
-  has_many :favorites
+  has_many :community_messages, dependent: :destroy
 
   private
 
