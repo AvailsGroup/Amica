@@ -16,10 +16,9 @@ class CommunitiesRoomChannel < ApplicationCable::Channel
     @content = data['message']
     make_directories(data)
     if @type == 'file'
-      r_end = data['message'].index(',')
-      n_start = data['message'].index('@')
-      @base64 = @content[r_end.to_i + 1..n_start.to_i - 1]
-      @content[0..10] == 'data:image/' ? save_image(data) : save_file(data, n_start)
+      start = data['message'].index(',')
+      @base64 = @content[start + 1..data['message'].length - 1]
+      @content[0..10] == 'data:image/' ? save_image(data) : save_file(data)
       @content = 'content'
     end
     unless current_user.community_member.any? { |c| c.community_id == data['community_id'] }
@@ -45,20 +44,22 @@ class CommunitiesRoomChannel < ApplicationCable::Channel
   end
 
   def save_image(data)
-    @image_name = "#{rand(1_000_000..9_999_999)}.jpg"
+    rand = rand(0..999)
+    @image_name = "#{Time.zone.now.strftime('%Y%m%d%H%M%S')}#{rand}.jpg"
     File.open("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{@image_name}", 'wb+') do |f|
       f.write(Base64.decode64(@base64))
     end
     f = File.open("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{@image_name}")
-    CommunityMessage.first.images.attach(io: f, filename: @image_name)
+    Message.first.images.attach(io: f, filename: @image_name)
     f.close
     File.delete("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{@image_name}")
     @type = 'image'
     @url = url_for(ActiveStorage::Blob.find_by(filename: @image_name))
   end
 
-  def save_file(data, n_start)
-    @f_name = (data['message'][n_start.to_i + 1..data['message'].length - 1]).to_s
+  def save_file(data)
+    rand = rand(0..999)
+    @f_name = "#{Time.zone.now.strftime('%Y%m%d%H%M%S')}#{rand}-#{data['file_name']}"
     File.open("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{@f_name}", 'wb+') do |f|
       f.write(Base64.decode64(@base64))
     end
