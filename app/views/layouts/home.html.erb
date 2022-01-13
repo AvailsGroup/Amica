@@ -25,7 +25,7 @@
 
   <body class="d-flex h-100 text-center text-dark">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-      <header class="mb-auto">
+      <header class="<%=request.path_info == "/" ? "mb-auto" : "mb-3" %>">
         <div>
           <a class="float-md-start mb-0" href="/" style="font-size:30px; color: #037394;font-weight: bold;text-decoration: none;">Amica</a>
           <nav class="nav nav-masthead　bg-blue justify-content-center float-md-end">
@@ -42,7 +42,7 @@
         <%= yield %>
       </main>
 
-      <footer class="mt-auto text-dark mb-3">
+      <footer class="mt-auto text-dark border-top border-dark">
         <p>©2021 - <%= DateTime.now.strftime('%Y') %> Avails Group<br />
         <%= link_to("利用規約",static_path,class:"text-dark") %>
         <%= link_to("プライバシーポリシー",privacy_path,class:"text-dark")%></p>
