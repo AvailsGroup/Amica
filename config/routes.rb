@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get '/contact' => 'mailer#new'
   get '/static' => 'home#static'
   get '/privacy' => 'home#privacy'
-  get '/help_page' => 'home#help_page'
+  get '/avails' => 'home#avails'
   post 'mailer/create', to: 'mailer#create'
 
   # communities---------

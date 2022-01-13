@@ -16,16 +16,16 @@ class RankingController < ApplicationController
 
   def follow
     get_users
-    @users = @users.reject { |u| u.followers.size <= 0 }
-    @users = @users.sort_by { |u| u.followers.size }
+    @users = @users.reject { |u| u.followings.size <= 0 }
+    @users = @users.sort_by { |u| u.followings.size }
     adjust_params('フォロー数')
     render 'ranking/show'
   end
 
   def follower
     get_users
-    @users = @users.reject { |u| u.followings.size <= 0 }
-    @users = @users.sort_by { |u| u.followings.size }
+    @users = @users.reject { |u| u.followers.size <= 0 }
+    @users = @users.sort_by { |u| u.followers.size }
     adjust_params('フォロワー数')
     render 'ranking/show'
   end
