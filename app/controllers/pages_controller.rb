@@ -5,29 +5,22 @@ class PagesController < ApplicationController
   helper_method :is_community_favorite?
 
   def index
-    @user_db = User.includes(:favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
-    @user = @user_db.find(current_user.id)
+    users = User.includes(:favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+    @user = users.find(current_user.id)
     @favorite = Favorite.all
 
     @mates = matchers(@user)
-    @favorite_users = []
-    @mates.each do |m|
-      if @favorite.any? { |u| u.user_id == @user.id } && @favorite.any? { |u| u.favorite_user_id == m.id }
-        @favorite_users.push(m)
-      end
-    end
+    favorite = @favorite.where(user_id: @user.id)
+    @favorite_users = favorite.reject { |u| u.favorite_user_id.nil? }
+    @favorite_users = @favorite_users.map(&:favorite_user)
     @mates -= @favorite_users
-    @mates = @mates.shuffle.first(30)
+    @mates = @mates.sample(30)
 
     @communities = Community.includes([:community_members, :tags]).where(id:current_user.community_member.select(:community_id)).order(created_at: :desc)
-    @favorite_communities = []
-    @communities.each do |c|
-      if @favorite.any? { |u| u.user_id == @user.id } && @favorite.any? { |u| u.community_id == c.id }
-        @favorite_communities.push(c)
-      end
-    end
+    @favorite_communities = favorite.reject { |u| u.community_id.nil? }
+    @favorite_communities = @favorite_communities.map(&:community)
     @communities -= @favorite_communities
-    @communities = @communities.shuffle.first(30)
+    @communities = @communities.sample(30)
   end
 
   def user
@@ -55,10 +48,6 @@ class PagesController < ApplicationController
         @result.push(c) if c.name.downcase.include?(params[:name].downcase)
       end
     end
-  end
-
-  def faq
-    @user = current_user
   end
 
   protected
