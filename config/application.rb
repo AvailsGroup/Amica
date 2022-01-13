@@ -24,5 +24,8 @@ module AvailsAmica
     config.active_record.default_timezone = :local
 
     config.middleware.use Rack::Attack
+
+    config.assets.precompile += %w( /admin/active_admin.css.scss )
+    config.assets.precompile += %w( /admin/active_admin.js.coffee )
   end
 end
