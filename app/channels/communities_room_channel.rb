@@ -11,30 +11,26 @@ class CommunitiesRoomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    @image_name, @url, @f_name = nil
     @type = data['type']
     @content = data['message']
+    @file = data['file']
+
     make_directories(data)
-    if @type == 'file'
-      start = data['message'].index(',')
-      @base64 = @content[start + 1..data['message'].length - 1]
-      @content[0..10] == 'data:image/' ? save_image(data) : save_file(data)
-      @content = 'content'
-    end
     unless current_user.community_member.any? { |c| c.community_id == data['community_id'] }
       return
     end
 
-    CommunityMessage.create(
-      content: @content,
-      user_id: current_user.id,
-      community_id: data['community_id'],
-      image: @image_name,
-      file_name: @f_name,
-      url: @url,
-      content_type: @type
-    )
+    @community = CommunityMessage.new(content: @content, user_id: current_user.id, community_id: data['community_id'], content_type: @type)
+    @community.save!
+
+    unless @type == 'text'
+      save_file(data)
+    end
+
+    CommunityMessageBroadcastJob.perform_later @community
   end
+
+  private
 
   def make_directories(data)
     Dir.mkdir("#{Rails.root}/tmp/community_chats/") unless File.directory?("#{Rails.root}/tmp/community_chats")
@@ -43,30 +39,49 @@ class CommunitiesRoomChannel < ApplicationCable::Channel
     end
   end
 
-  def save_image(data)
-    rand = rand(0..999)
-    @image_name = "#{Time.zone.now.strftime('%Y%m%d%H%M%S')}#{rand}.jpg"
-    File.open("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{@image_name}", 'wb+') do |f|
-      f.write(Base64.decode64(@base64))
+  def save_file(data)
+    start = data['file'].index(',')
+    base64 = data['file'][start + 1..data['file'].length - 1]
+    File.open("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{data['file_name']}", 'wb+') do |f|
+      f.write(Base64.decode64(base64))
     end
-    f = File.open("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{@image_name}")
-    Message.first.images.attach(io: f, filename: @image_name)
+    file_check = check_broken_file("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{data['file_name']}")
+    if data['type'] == 'image'
+      unless file_check[0] != :unknown && file_check[1] == :clean
+        @community.update(content_type: 'file')
+      end
+    end
+
+    f = File.open("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{data['file_name']}")
+    @community.file.attach(io: f, filename: data['file_name'])
     f.close
-    File.delete("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{@image_name}")
-    @type = 'image'
-    @url = url_for(ActiveStorage::Blob.find_by(filename: @image_name))
+    File.delete("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{data['file_name']}")
+
   end
 
-  def save_file(data)
-    rand = rand(0..999)
-    @f_name = "#{Time.zone.now.strftime('%Y%m%d%H%M%S')}#{rand}-#{data['file_name']}"
-    File.open("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{@f_name}", 'wb+') do |f|
-      f.write(Base64.decode64(@base64))
+  def check_broken_file(filename)
+    result = [:unknown, :clean]
+    File.open(filename, 'rb') do |f|
+      begin
+        header = f.read(8)
+        f.seek(-12, IO::SEEK_END)
+        footer = f.read(12)
+      rescue
+        result[1] = :damaged
+        return result
+      end
+
+      if header[0,2].unpack('H*') == [ 'ffd8' ]
+        result[0] = :jpg
+        result[1] = :damaged unless footer[-2,2].unpack('H*') == [ 'ffd9' ]
+      elsif header[0,3].unpack('A*') == [ 'GIF' ]
+        result[0] = :gif
+        result[1] = :damaged unless footer[-1,1].unpack('H*') == [ '3b' ]
+      elsif header[0,8].unpack('H*') == [ '89504e470d0a1a0a' ]
+        result[0] = :png
+        result[1] = :damaged unless footer[-12,12].unpack('H*') == [ '0000000049454e44ae426082' ]
+      end
     end
-    f = File.open("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{@f_name}")
-    CommunityMessage.first.files.attach(io: f, filename: @f_name)
-    f.close
-    File.delete("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{@f_name}")
-    @url =rails_blob_url(ActiveStorage::Blob.find_by(filename: @f_name), disposition: 'attachment')
+    result
   end
 end

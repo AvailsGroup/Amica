@@ -29,12 +29,13 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             bottom_scroll()
         },
 
-        speak: function (message, community_id,file_name,type) {
+        speak: function (message, community_id, file_name, type, file = null) {
             return this.perform('speak', {
                 message: message,
                 community_id: community_id,
                 file_name: file_name,
-                type: type
+                type: type,
+                file: file
             });
         }
     });
@@ -52,11 +53,10 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
 
 
     $(document).on('keypress', '[data-behavior~=communities_room_speaker]', function (event) {
-            if (event.shiftKey && event.key === 'Enter' && content.val()) {
-                sendText()
-                return false;
-            }
-
+        if (event.shiftKey && event.key === 'Enter' && content.val()) {
+            sendText()
+            return false;
+        }
     });
 
     $('#community_submit_button').click('[data-behavior~=communities_room_speaker]', function () {
@@ -89,7 +89,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
 
     function sendText() {
         upload.val('');
-        CommunitiesRoomChannel.speak(content.val(), community,null, 'text');
+        CommunitiesRoomChannel.speak(content.val(), community, null, 'text');
         bottom_scroll()
         content.val('');
         content.height(0);
@@ -100,7 +100,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
         reader.readAsDataURL(file);
         reader.onload = function () {
             let value = reader.result;
-            CommunitiesRoomChannel.speak(value, community,file.name, 'file');
+            CommunitiesRoomChannel.speak(checkImageFormat() ? 'image' : 'file', community,file.name, checkImageFormat() ? 'image' : 'file', value);
             content.height(0);
             $('#fileModal').modal('hide');
             preview.val('');
