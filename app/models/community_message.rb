@@ -5,6 +5,4 @@ class CommunityMessage < ApplicationRecord
   has_one_attached :file
 
   validates :content, presence: true
-
-  after_create_commit { CommunityMessageBroadcastJob.perform_later self }
 end
