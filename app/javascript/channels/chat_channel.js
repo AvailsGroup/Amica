@@ -22,7 +22,6 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             },
 
             received: function (data) {
-                console.log(data)
                 const content = document.getElementById('content');
                 if (Number(data[0].room_id) === Number(room_id)) {
                     const current_user = content.dataset.userid
