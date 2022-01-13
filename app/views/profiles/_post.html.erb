@@ -43,8 +43,8 @@
         </p>
       </div>
       <div class="d-flex pb-3  justify-content-between" style="margin-left: 50px">
-        <% if post.image? %>
-          <%= image_tag post.image.url, "data-lity" => "data-lity", class: "im" %>
+        <% if post.image.attached? %>
+          <%= image_tag post.image, "data-lity" => "data-lity", class: "im" %>
         <% end %>
       </div>
 
