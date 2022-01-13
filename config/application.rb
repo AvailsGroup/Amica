@@ -23,8 +23,6 @@ module AvailsAmica
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
 
-    config.assets.precompile += %w[active_admin.css.scss active_admin.js]
-
     config.middleware.use Rack::Attack
   end
 end
