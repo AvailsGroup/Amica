@@ -29,10 +29,11 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
             bottom_scroll()
         },
 
-        speak: function (message, community_id, type) {
+        speak: function (message, community_id,file_name,type) {
             return this.perform('speak', {
                 message: message,
                 community_id: community_id,
+                file_name: file_name,
                 type: type
             });
         }
@@ -88,7 +89,7 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
 
     function sendText() {
         upload.val('');
-        CommunitiesRoomChannel.speak(content.val(), community, 'text');
+        CommunitiesRoomChannel.speak(content.val(), community,null, 'text');
         bottom_scroll()
         content.val('');
         content.height(0);
@@ -98,9 +99,8 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
         let reader = new FileReader;
         reader.readAsDataURL(file);
         reader.onload = function () {
-            let file_name = file.name;
-            let value = reader.result + "@" + file_name;
-            CommunitiesRoomChannel.speak(value, community, 'file');
+            let value = reader.result;
+            CommunitiesRoomChannel.speak(value, community,file.name, 'file');
             content.height(0);
             $('#fileModal').modal('hide');
             preview.val('');
