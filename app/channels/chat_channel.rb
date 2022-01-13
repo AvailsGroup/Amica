@@ -3,7 +3,7 @@ class ChatChannel < ApplicationCable::Channel
   include Rails.application.routes.url_helpers
 
   def subscribed
-    stream_from 'chat_channel'
+    stream_from "chat_channel_#{params['room']}"
   end
 
   def unsubscribed
