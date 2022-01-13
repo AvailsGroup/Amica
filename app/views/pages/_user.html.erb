@@ -9,7 +9,7 @@
         </p>
       </div>
       <div style="padding-top: 19px">
-        <% if favorite_user_list.any?{ |u| u == user } %>
+        <% if @favorite_users.any?{ |u| u == user } %>
           <%= link_to page_favorite_user_delete_path(user.id, current_user.id), method: :delete, class: 'bg-white', style: "border: none;color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="far fa-star"></i>' } do %>
             <i class="fas fa-star"></i>
           <% end %>

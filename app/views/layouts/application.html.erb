@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <title>Amica</title>
-  <meta name="viewport" content="width=320,height=480,initial-scale=1.0,minimum-scale=1.0, maximum-scale=2.0,user-scalable=yes"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <%= favicon_link_tag('amica.ico') %>
   <%= csrf_meta_tags %>
@@ -165,7 +165,7 @@
       </div>
       <div class="col mt-3">
         <h5 class="mb-2">運営</h5>
-        <p class="mb-1 small"><%= link_to "Avails", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "Avails", avails_path, class: "text-decoration-none text-light" %></p>
       </div>
     </div>
   </div>
