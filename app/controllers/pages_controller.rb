@@ -7,18 +7,15 @@ class PagesController < ApplicationController
   def index
     users = User.includes(:favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
     @user = users.find(current_user.id)
-    @favorite = Favorite.all
 
     @mates = matchers(@user)
-    favorite = @favorite.where(user_id: @user.id)
-    @favorite_users = favorite.reject { |u| u.favorite_user_id.nil? }
-    @favorite_users = @favorite_users.map(&:favorite_user)
+    favorite = Favorite.where(user_id: @user.id)
+    @favorite_users = favorite.reject { |u| u.favorite_user_id.nil? }.map(&:favorite_user)
     @mates -= @favorite_users
     @mates = @mates.sample(30)
 
     @communities = Community.includes([:community_members, :tags]).where(id:current_user.community_member.select(:community_id)).order(created_at: :desc)
-    @favorite_communities = favorite.reject { |u| u.community_id.nil? }
-    @favorite_communities = @favorite_communities.map(&:community)
+    @favorite_communities = favorite.reject { |u| u.community_id.nil? }.map(&:community)
     @communities -= @favorite_communities
     @communities = @communities.sample(30)
   end
@@ -49,16 +46,4 @@ class PagesController < ApplicationController
       end
     end
   end
-
-  protected
-
-  def is_user_favorite?(favorite, user, other_user)
-    favorite.any? { |u| u.user_id == user.id } && @favorite.any? { |u| u.favorite_user_id == other_user.id }
-  end
-
-  def is_community_favorite?(favorite , user, community)
-    favorite.any? { |u| u.user_id == user.id } && favorite.any? { |u| u.community_id == community.id }
-  end
-
-
 end
