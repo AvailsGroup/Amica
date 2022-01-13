@@ -59,7 +59,7 @@ class ChatChannel < ApplicationCable::Channel
       unless Notification.exists?(visitor_id: current_user.id, visited_id: other_user_id, action: 'chat', checked: false)
         Notification.create(visitor_id: current_user.id, visited_id: other_user_id, action: 'chat')
       end
-      @room = room.touch(:created_at)
+      room.touch(:updated_at)
       @message.save
     end
   end

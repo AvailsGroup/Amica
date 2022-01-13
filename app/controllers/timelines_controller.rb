@@ -126,6 +126,7 @@ class TimelinesController < ApplicationController
     true
   end
 
+
   def redirect(page)
     @page = page
     render 'timelines/index'
