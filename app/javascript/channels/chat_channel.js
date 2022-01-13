@@ -1,39 +1,50 @@
 import consumer from "./consumer"
 
 window.addEventListener("DOMContentLoaded", function (utterance) {
-    const ChatChannel = consumer.subscriptions.create("ChatChannel", {
-        connected() {
-            // Called when the subscription is ready for use on the server
-        },
+    const content = $('#content')
+    const upload = $('#file_uploader')
+    const preview = $('#preview')
+    const messages = $("#messages")
+    const room_id = content.data('roomid')
+    const maxFileSize = 10485760
 
-        disconnected() {
-            // Called when the subscription has been terminated by the server
+    const ChatChannel = consumer.subscriptions.create({
+            channel: "ChatChannel",
+            room: room_id
         },
+        {
+            connected() {
+                // Called when the subscription is ready for use on the server
+            },
 
-        received: function (data) {
-            const content = document.getElementById('content');
-            if (Number(data[0].room_id) === Number(content.dataset.roomid)) {
-                const messages = $('#messages');
-                const current_user = content.dataset.userid
-                if (Number(current_user) === Number(data[0].user_id)) {
-                    messages.append(data[1])
-                } else {
-                    messages.append(data[2])
+            disconnected() {
+                // Called when the subscription has been terminated by the server
+            },
+
+            received: function (data) {
+                console.log(data)
+                const content = document.getElementById('content');
+                if (Number(data[0].room_id) === Number(room_id)) {
+                    const current_user = content.dataset.userid
+                    if (Number(current_user) === Number(data[0].user_id)) {
+                        messages.append(data[1])
+                    } else {
+                        messages.append(data[2])
+                    }
+                    bottom_scroll()
                 }
-                bottom_scroll()
-            }
-        },
+            },
 
-        speak: function (message, room_id, file_name, type, file = null) {
-            return this.perform('speak', {
-                message: message,
-                room_id: room_id,
-                file_name: file_name,
-                type: type,
-                file: file
-            });
-        }
-    });
+            speak: function (message, room_id, file_name, type, file = null) {
+                return this.perform('speak', {
+                    message: message,
+                    room_id: room_id,
+                    file_name: file_name,
+                    type: type,
+                    file: file
+                });
+            }
+        });
 
     content.on('input', function () {
         const lineHeight = parseInt(content.css('lineHeight'));
@@ -81,12 +92,12 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
         sendFile(file)
     });
 
-    function files_bottom_scroll() {
-        window.addEventListener('load', function () {
-            var elm = document.documentElement;
-            var bottom = elm.scrollHeight - elm.clientHeight;
-            window.scroll(0, bottom);
-        })
+    function sendText() {
+        upload.val('');
+        ChatChannel.speak(content.val(), room_id, null, 'text');
+        bottom_scroll()
+        content.val('');
+        content.height(0);
     }
 
     function bottom_scroll() {
@@ -135,4 +146,4 @@ window.addEventListener("DOMContentLoaded", function (utterance) {
         });
         fileReader.readAsDataURL(upload.prop('files')[0]);
     }
-})
+});
