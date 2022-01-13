@@ -76,7 +76,7 @@
     <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center" style="height: 530px">
       <div class="my-3 py-3">
         <h2 class="display-5">タグ</h2>
-        <% @community.tags.each do |t| %>
+        <% @community.tags.pluck(:name).each do |t| %>
           <%= link_to search_tag_path(t), class: "text-decoration-none" do %>
             <span class="lead mb-0">#<%= t %> </span>
           <% end %>
