@@ -18,7 +18,8 @@ class ChatsController < ApplicationController
       return
     end
     in_room?
-    @message = Message.where(room_id: @room.id)
+    @messages = @room.messages
+    @pagenate = @messages.order(updated_at: :desc).page(params[:page]).per(50)
   end
 
   private
