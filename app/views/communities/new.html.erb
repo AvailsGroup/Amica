@@ -83,7 +83,7 @@
                 <%= f.hidden_field :image_w, id: "image_w", value: defined?(@image_w) ? @image_w : nil %>
                 <%= f.hidden_field :image_h, id: "image_h", value: defined?(@image_h) ? @image_h : nil %>
                 <%= f.hidden_field :aspect_numerator, id: "aspect_numerator", value: "1.0" %>
-                <%= f.hidden_field :aspect_denominator, id: "aspect_denominator", value: "1.0" %>'
+                <%= f.hidden_field :aspect_denominator, id: "aspect_denominator", value: "1.0" %>
                 <div id="prev_img">
                   <%= image_tag @community.decorate.image, :size => '200x200', class: "user_image" %>
                 </div>
