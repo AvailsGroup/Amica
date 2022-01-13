@@ -14,7 +14,7 @@
     <% if @leader == current_user %>
       <%= link_to "チャット", community_chat_path(@community.id), class: "btn btn-outline-dark mx-2" %>
       <%= link_to "編集", edit_community_path, class: "btn btn-outline-dark mx-2" %>
-      <% if is_community_favorite?(@favorite, @user, @community) %>
+      <% if @favorite.any? { |f| f == @community } %>
         <%= link_to page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'mx-2', style: "", data: { disable_with: 'お気に入り解除' } do %>
           <i class="fas fa-star fa-2x"></i>
         <% end %>
@@ -29,7 +29,7 @@
         <button type="button" class="btn btn-outline-dark mx-2" data-bs-toggle="modal" data-bs-target="#Modal">
           脱退
         </button>
-        <% if is_community_favorite?(@favorite, @user, @community) %>
+        <% if @favorite.any? { |f| f == @community } %>
           <%= link_to page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'mx-2 ', style: "", data: { disable_with: 'お気に入り解除' } do%>
             <i class="fas fa-star fa-2x"></i>
           <%end%>
