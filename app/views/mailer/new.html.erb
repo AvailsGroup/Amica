@@ -1,9 +1,17 @@
-
 <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag 'contacts', media: 'all', 'data-turbolinks-track': 'reload' %>
+<style>
+    body {
+        background: none;
+        background-repeat: no-repeat;
+        box-shadow: none;
+    }
+</style>
 <h4><%= flash.now[:notice] %></h4>
 
-<section class="ask">
+<div class="bg_pattern Polka"></div>
+
+<div class="container">
   <h2>お問い合わせ</h2>
   <div class="medium">
     <%= form_for(@inquiry, url: mailer_create_path) do |f|%>
@@ -17,5 +25,5 @@
       <%= f.submit "クリア" ,type: :reset , class:"btn btn-lg btn-secondary fw-bold border-white bg-blue",style: "margin-right: 10px; width: 150px;color:#FFF"%>
     <% end %>
   </div>
-</section>
+</div>
 
