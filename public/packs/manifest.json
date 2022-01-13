@@ -3,8 +3,8 @@
   "active_admin.js.map": "/packs/js/active_admin-fb3c09f930d517d37fbe.js.map",
   "active_admin/print.js": "/packs/js/active_admin/print-9e3a679e38133f3ef737.js",
   "active_admin/print.js.map": "/packs/js/active_admin/print-9e3a679e38133f3ef737.js.map",
-  "application.js": "/packs/js/application-1246c1ca074f6002539a.js",
-  "application.js.map": "/packs/js/application-1246c1ca074f6002539a.js.map",
+  "application.js": "/packs/js/application-fca76430e9eec78408a1.js",
+  "application.js.map": "/packs/js/application-fca76430e9eec78408a1.js.map",
   "communities/new.js": "/packs/js/communities/new-b11bee2712982e08be28.js",
   "communities/new.js.map": "/packs/js/communities/new-b11bee2712982e08be28.js.map",
   "entrypoints": {
@@ -26,10 +26,10 @@
     },
     "application": {
       "js": [
-        "/packs/js/application-1246c1ca074f6002539a.js"
+        "/packs/js/application-fca76430e9eec78408a1.js"
       ],
       "js.map": [
-        "/packs/js/application-1246c1ca074f6002539a.js.map"
+        "/packs/js/application-fca76430e9eec78408a1.js.map"
       ]
     },
     "communities/new": {
