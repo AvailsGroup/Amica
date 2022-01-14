@@ -11,6 +11,9 @@ import "channels"
 import '@fortawesome/fontawesome-free/js/all';
 import "lity"
 import "cropperjs"
+import "animon"
+import "particles.js"
+import "cookieconsent"
 
 
 Rails.start()
