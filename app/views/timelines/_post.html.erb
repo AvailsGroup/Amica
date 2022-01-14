@@ -59,12 +59,12 @@
           <div class="d-flex">
             <span class="likes mx-1">
               <% if current_user.liked_by?(post.id) && !current_user.decorate.user_blocked?(post.user) && !post.user.decorate.user_blocked?(current_user) %>
-                <%= button_to timeline_like_path(post.id, current_user.id), method: :delete, remote: true, class: "send bg-white", style: "height: 15.5px;padding: 0", data: { disable_with: "<i class='far fa-heart'></i> <span class='text-dark'>#{post.likes.size - 1}</span>" } do %>
+                <%= button_to timeline_like_path(post.id, current_user.id), method: :delete, remote: true, class: "send bg-white", style: "padding: 0", data: { disable_with: "<i class='far fa-heart'></i> <span class='text-dark'>#{post.likes.size - 1}</span>" } do %>
                   <i class="fas fa-heart"></i>
                   <span class='text-dark'><%= post.likes.size %></span>
                 <% end %>
               <% else %>
-                <%= button_to timeline_likes_path(post.id), method: :post, remote: true, class: "send bg-white", style: "height: 15.5px;padding: 0", data: { disable_with: "#{push(current_user)} <span class='text-dark'>#{post.likes.size + 1}</span>" } do %>
+                <%= button_to timeline_likes_path(post.id), method: :post, remote: true, class: "send bg-white", style: "padding: 0", data: { disable_with: "#{push(current_user)} <span class='text-dark'>#{post.likes.size + 1}</span>" } do %>
                   <i class="far fa-heart"></i>
                   <span class='text-dark'><%= post.likes.size %></span>
                 <% end %>
