@@ -1,6 +1,28 @@
 .icon{
+  width: 200px;
   border-radius: 50px;
   background: linear-gradient(145deg, #f0f0f0, #cacaca);
   box-shadow:  20px 20px 60px #bebebe,
   -20px -20px 60px #ffffff;
 }
+
+body {
+  font-size: 16px;
+}
+
+.full {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: image-url('background.jpg')
+  center / cover;
+}
+
+.arrow1{
+  width: 30px;
+  height: 30px;
+  border: 5px solid;
+  border-color:  transparent transparent #565656 #565656;
+  transform: rotate(-45deg);
+}
+
