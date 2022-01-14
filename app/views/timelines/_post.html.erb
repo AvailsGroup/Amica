@@ -37,13 +37,13 @@
            affirmmative_path: timeline_path(post.id), affirmmative_method: :delete, affirmative: "はい" %>
 
 <div id="post_<%= post.id %>">
-  <div class="my-3 p-3 bg-white rounded shadow-sm">
+  <div class="my-3 p-3 bg-white rounded shadow-sm" style="word-break: break-all">
     <div class="panel-content panel-activity">
       <div class="d-flex text-muted">
         <%= link_to profile_path(post.user.userid), style: "color:black" do %>
           <%= image_tag post.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
         <% end %>
-        <p class="pb-3 mb-0 lh-sm w-100">
+        <p class="pb-3 mb-0">
           <strong class="text-dark" style="font-size:20px;margin: 0"><%= post.user.decorate.nickname %></strong>
           <span class="text-gray small" style="margin: 0">@<%= post.user.userid %></span>
           <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %></span>
