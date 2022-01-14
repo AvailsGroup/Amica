@@ -1,74 +1,94 @@
 {
-  "active_admin.js": "/packs/js/active_admin-fb3c09f930d517d37fbe.js",
-  "active_admin.js.map": "/packs/js/active_admin-fb3c09f930d517d37fbe.js.map",
-  "active_admin/print.js": "/packs/js/active_admin/print-9e3a679e38133f3ef737.js",
-  "active_admin/print.js.map": "/packs/js/active_admin/print-9e3a679e38133f3ef737.js.map",
-  "application.js": "/packs/js/application-a41274b1b0ba6d75a3e8.js",
-  "application.js.map": "/packs/js/application-a41274b1b0ba6d75a3e8.js.map",
-  "communities/new.js": "/packs/js/communities/new-b11bee2712982e08be28.js",
-  "communities/new.js.map": "/packs/js/communities/new-b11bee2712982e08be28.js.map",
+  "active_admin.js": "/packs/js/active_admin-ffa993b7fc25ee4f0831.js",
+  "active_admin.js.map": "/packs/js/active_admin-ffa993b7fc25ee4f0831.js.map",
+  "active_admin/print.js": "/packs/js/active_admin/print-e6d6472fe27e3132f9cb.js",
+  "active_admin/print.js.map": "/packs/js/active_admin/print-e6d6472fe27e3132f9cb.js.map",
+  "application.js": "/packs/js/application-eb05c742f0e1b9cb1645.js",
+  "application.js.map": "/packs/js/application-eb05c742f0e1b9cb1645.js.map",
+  "communities/new.js": "/packs/js/communities/new-866f0a230ccf35b0afb8.js",
+  "communities/new.js.map": "/packs/js/communities/new-866f0a230ccf35b0afb8.js.map",
   "entrypoints": {
     "active_admin": {
       "js": [
-        "/packs/js/active_admin-fb3c09f930d517d37fbe.js"
+        "/packs/js/active_admin-ffa993b7fc25ee4f0831.js"
       ],
       "js.map": [
-        "/packs/js/active_admin-fb3c09f930d517d37fbe.js.map"
+        "/packs/js/active_admin-ffa993b7fc25ee4f0831.js.map"
       ]
     },
     "active_admin/print": {
       "js": [
-        "/packs/js/active_admin/print-9e3a679e38133f3ef737.js"
+        "/packs/js/active_admin/print-e6d6472fe27e3132f9cb.js"
       ],
       "js.map": [
-        "/packs/js/active_admin/print-9e3a679e38133f3ef737.js.map"
+        "/packs/js/active_admin/print-e6d6472fe27e3132f9cb.js.map"
       ]
     },
     "application": {
       "js": [
-        "/packs/js/application-a41274b1b0ba6d75a3e8.js"
+        "/packs/js/application-eb05c742f0e1b9cb1645.js"
       ],
       "js.map": [
-        "/packs/js/application-a41274b1b0ba6d75a3e8.js.map"
+        "/packs/js/application-eb05c742f0e1b9cb1645.js.map"
       ]
     },
     "communities/new": {
       "js": [
-        "/packs/js/communities/new-b11bee2712982e08be28.js"
+        "/packs/js/communities/new-866f0a230ccf35b0afb8.js"
       ],
       "js.map": [
-        "/packs/js/communities/new-b11bee2712982e08be28.js.map"
+        "/packs/js/communities/new-866f0a230ccf35b0afb8.js.map"
+      ]
+    },
+    "home/home": {
+      "js": [
+        "/packs/js/home/home-cd48ec9fa79306c3cc3b.js"
+      ],
+      "js.map": [
+        "/packs/js/home/home-cd48ec9fa79306c3cc3b.js.map"
       ]
     },
     "home/index": {
       "js": [
-        "/packs/js/home/index-714dc605928b54bca9d6.js"
+        "/packs/js/home/index-c260e3175801a36dfd31.js"
       ],
       "js.map": [
-        "/packs/js/home/index-714dc605928b54bca9d6.js.map"
+        "/packs/js/home/index-c260e3175801a36dfd31.js.map"
+      ]
+    },
+    "home/settings": {
+      "js": [
+        "/packs/js/home/settings-403b911171d932a9e3ca.js"
+      ],
+      "js.map": [
+        "/packs/js/home/settings-403b911171d932a9e3ca.js.map"
       ]
     },
     "profiles/edit": {
       "js": [
-        "/packs/js/profiles/edit-f4999936cdc521f8856a.js"
+        "/packs/js/profiles/edit-055908e2daeae2c8ecc9.js"
       ],
       "js.map": [
-        "/packs/js/profiles/edit-f4999936cdc521f8856a.js.map"
+        "/packs/js/profiles/edit-055908e2daeae2c8ecc9.js.map"
       ]
     },
     "timeline/main": {
       "js": [
-        "/packs/js/timeline/main-c7eabc229e2e17666ad8.js"
+        "/packs/js/timeline/main-eb3b649ee69a6ca39249.js"
       ],
       "js.map": [
-        "/packs/js/timeline/main-c7eabc229e2e17666ad8.js.map"
+        "/packs/js/timeline/main-eb3b649ee69a6ca39249.js.map"
       ]
     }
   },
-  "home/index.js": "/packs/js/home/index-714dc605928b54bca9d6.js",
-  "home/index.js.map": "/packs/js/home/index-714dc605928b54bca9d6.js.map",
-  "profiles/edit.js": "/packs/js/profiles/edit-f4999936cdc521f8856a.js",
-  "profiles/edit.js.map": "/packs/js/profiles/edit-f4999936cdc521f8856a.js.map",
-  "timeline/main.js": "/packs/js/timeline/main-c7eabc229e2e17666ad8.js",
-  "timeline/main.js.map": "/packs/js/timeline/main-c7eabc229e2e17666ad8.js.map"
+  "home/home.js": "/packs/js/home/home-cd48ec9fa79306c3cc3b.js",
+  "home/home.js.map": "/packs/js/home/home-cd48ec9fa79306c3cc3b.js.map",
+  "home/index.js": "/packs/js/home/index-c260e3175801a36dfd31.js",
+  "home/index.js.map": "/packs/js/home/index-c260e3175801a36dfd31.js.map",
+  "home/settings.js": "/packs/js/home/settings-403b911171d932a9e3ca.js",
+  "home/settings.js.map": "/packs/js/home/settings-403b911171d932a9e3ca.js.map",
+  "profiles/edit.js": "/packs/js/profiles/edit-055908e2daeae2c8ecc9.js",
+  "profiles/edit.js.map": "/packs/js/profiles/edit-055908e2daeae2c8ecc9.js.map",
+  "timeline/main.js": "/packs/js/timeline/main-eb3b649ee69a6ca39249.js",
+  "timeline/main.js.map": "/packs/js/timeline/main-eb3b649ee69a6ca39249.js.map"
 }

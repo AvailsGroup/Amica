@@ -1,0 +1,36 @@
+/* line 1, app/assets/stylesheets/top.scss */
+.body {
+  height: 100vh;
+}
+
+/* line 5, app/assets/stylesheets/top.scss */
+.icon {
+  width: 200px;
+  border-radius: 50px;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+}
+
+/* line 13, app/assets/stylesheets/top.scss */
+.full {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: url(/assets/background-ae7fcceedeb5c9270c4d292646853c16ba838466857182d79753460e185d932c.jpg) center/cover;
+}
+
+/* line 21, app/assets/stylesheets/top.scss */
+.arrow1 {
+  width: 30px;
+  height: 30px;
+  border: 5px solid;
+  border-color: transparent transparent #343434 #343434;
+  transform: rotate(-45deg);
+}
+
+/* line 29, app/assets/stylesheets/top.scss */
+#background {
+  position: fixed;
+  height: 100vh;
+  z-index: -1;
+}

@@ -1,0 +1,45 @@
+/* line 1, app/assets/stylesheets/registrations.scss */
+html {
+  font-family: 'Kiwi Maru', serif;
+}
+
+/* line 5, app/assets/stylesheets/registrations.scss */
+body {
+  background-image: url(/assets/background-ae7fcceedeb5c9270c4d292646853c16ba838466857182d79753460e185d932c.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/*Don't forget to add Font Awesome CSS : "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"*/
+/* line 12, app/assets/stylesheets/registrations.scss */
+.input {
+  width: 100%;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  margin: 8px 0;
+  outline: none;
+  padding: 8px;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+
+/* line 23, app/assets/stylesheets/registrations.scss */
+.input:focus {
+  border-color: dodgerBlue;
+  box-shadow: 0 0 8px 0 dodgerBlue;
+}
+
+/* line 29, app/assets/stylesheets/registrations.scss */
+.rememberCheckBox {
+  margin: 40px 0;
+}
+
+/* line 33, app/assets/stylesheets/registrations.scss */
+.links {
+  margin: 50px;
+}
+
+/* line 37, app/assets/stylesheets/registrations.scss */
+#background {
+  display: none;
+}
