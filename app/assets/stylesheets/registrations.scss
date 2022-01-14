@@ -2,6 +2,12 @@ html{
   font-family: 'Kiwi Maru', serif;
 }
 
+body{
+  background-image: image-url("background.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 /*Don't forget to add Font Awesome CSS : "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"*/
 .input{
   width: 100%;
@@ -26,4 +32,8 @@ html{
 
 .links{
   margin: 50px;
+}
+
+#background{
+  display: none;
 }
