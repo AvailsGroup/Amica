@@ -3,7 +3,7 @@
   <div class="community">
     <%= link_to community_path(community.id), class: "text-dark", style: "text-decoration: none" do %>
       <div class="col">
-        <div class="carbon-example flex-wrapper">
+        <div class="carbon-example flex-wrapper" style="word-break: break-word;">
           <%= image_tag community.decorate.image, class: "img-fluid", style: "width:200px" %><br>
           <div class="inner-wrapper text-center w-100">
             <h5><%= community.name %> </h5>
