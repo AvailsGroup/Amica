@@ -11,7 +11,6 @@ class ProfilesController < ApplicationController
 
     @user = @users.find(current_user.id)
     @friends = matchers(@user)
-    @following = @user.followings_list
     @follower = @user.followers_list
     @profile = @user.profile
     sort_pickup
@@ -160,6 +159,7 @@ class ProfilesController < ApplicationController
   end
 
   def sort_pickup
+    @following = @user.followings_list
     @users = @users.sort_by { |u| (@user.tags.pluck(:name) & u.tags.pluck(:name)).size }
     @users = @users.reverse
     @users &&= User.kept
