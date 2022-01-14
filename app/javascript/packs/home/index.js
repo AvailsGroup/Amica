@@ -1,25 +1,8 @@
+import { animon } from 'animon';
 import "cookieconsent"
 
-/*$(document).ready(function() {
-    $('#test').text('成功！！');
-});*/
-
 $(document).ready(function () {
-    $('#title-image').animate({paddingRight: 1}, {
-        duration: 1000,
-        step: function (now) {
-            $(this).css({transform: 'scale(' + now + ')'});
-        },
-        complete: function () {
-            $('#title-image').css('paddingRight', 0);
-            $('#step').fadeIn(1000);
-            $('#arrow').fadeIn(1000);
-        },
-    });
-});
-
-
-$(function () {
+    animon();
     window.cookieconsent.initialise({
         "palette": {
             "popup": {
@@ -38,4 +21,23 @@ $(function () {
             "href": "/privacy"
         }
     });
-})
+
+    $('#title-image').animate({paddingRight: 1}, {
+        duration: 1000,
+        step: function (now) {
+            $(this).css({transform: 'scale(' + now + ')'});
+        },
+        complete: function () {
+            $('#title-image').css('paddingRight', 0);
+            $('#step').fadeIn(1000);
+            $('#arrow').fadeIn(1000);
+        },
+    });
+
+    $(".goSection").on("click", function() {
+        const scrollTarget = $(this)[0].attributes[1].nodeValue;
+        const offsetTop = $(scrollTarget).offset().top;
+        $("html, body").animate({ scrollTop: offsetTop }, 200);
+        return false;
+    });
+});

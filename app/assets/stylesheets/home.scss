@@ -1,5 +1,4 @@
 html{
-  height: 100%
 }
 
 /*
@@ -21,6 +20,7 @@ html{
  */
 
 body {
+  overflow-x: hidden;
 }
 
 #background{
@@ -72,7 +72,3 @@ header{
   z-index: -1;
 }
 
-.Polka {
-  background-image: radial-gradient(rgba(29,144,190,0.3) 2px, rgba(255,255,255,0.2) 2px);
-  background-size: 20px 20px;
-}

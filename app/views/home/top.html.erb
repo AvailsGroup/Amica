@@ -82,28 +82,61 @@
   <p class="notice"><%= notice %></p>
   <p class="notice"><%= alert %></p>
   <div class="position-absolute h-75 w-100 m-0 d-flex align-items-center justify-content-center">
-    <%= image_tag("top_icon.png", class: "icon", id:"title-image") %>
+    <%= image_tag("top_icon.png", class: "icon", id: "title-image") %>
   </div>
-  <div class="position-absolute bottom-0 w-100 d-flex align-items-center justify-content-center" style="margin-bottom: 60px">
-    <span id="step" class="fw-bold" style="color: #343434;display: none">もっと見る</span>
-  </div>
-  <div class="position-absolute bottom-0 w-100 d-flex align-items-center justify-content-center" style="margin-bottom: 40px">
-    <div id="arrow" class="arrow1" style="display: none"></div>
-  </div>
+  <a class="goSection" href="#about">
+    <div class="position-absolute bottom-0 w-100 d-flex align-items-center justify-content-center" style="margin-bottom: 60px">
+      <span id="step" class="fw-bold" style="color: #343434;display: none">もっと見る</span>
+    </div>
+    <div class="position-absolute bottom-0 w-100 d-flex align-items-center justify-content-center" style="margin-bottom: 40px">
+      <div id="arrow" class="arrow1" style="display: none"></div>
+    </div>
+  </a>
 </header>
 
 <main>
   <div id="background"></div>
-  <div class="container">
-    <div id="about" class="mt-5 fs-5">
-      <h2>概要</h2>
-      <p>Amicaはあなたの生活に<u>新たな出会いをプラス</u>する</p>
-      <p><u>コミュニケーションツール</u>です</p>
+  <div class="container text-center" id="about">
+    <div class="my-5 fs-5 shadow-sm animonItem" data-effect="scaleDown">
+      <div class="px-3">
+        <h2 class="animonItem mb-5" data-effect="scaleDown">Amicaとは？</h2>
+        <p class="animonItem mb-3" data-effect="fadeInRight" data-delay="200">Amicaはあなたの学校生活に<u>新たな出会いをプラス</u>する<u>コミュニケーションツール</u>です
+        </p>
+        <p class="animonItem mb-3" data-effect="fadeInRight" data-delay="300">このアプリケーションはISC専用の友達出会い系アプリです。</p>
+        <p class="animonItem mb-3" data-effect="fadeInRight" data-delay="400">あなたの趣味や特技、知りたいこと、興味あることなどをタグとして入力し、タグを参照して自動的におすすめな友達を紹介してくれます。</p>
+        <p class="animonItem mb-3 pb-3" data-effect="fadeInRight" data-delay="500">さらに、気になっていた人の趣味や特技なども可視化されたり、呼んでほしいニックネームなども登録する等の機能を用意していますので会話につながる工夫もできています。</p>
+      </div>
+    </div>
+
+    <div class="my-5 fs-5 shadow-sm animonItem" data-effect="scaleDown">
+      <div class="px-3">
+        <h2 class="animonItem my-5" data-effect="scaleDown">どんな事ができるの？</h2>
+        <p class="animonItem mb-3" data-effect="fadeInRight" data-delay="200">Amicaでは新しい人脈が築けるような様々な機能が用意してあります。</p>
+        <ul class="mb-3" style="list-style: none">
+          <li class="animonItem" data-effect="fadeInRight" data-delay="300">・チャット機能</li>
+          <li class="animonItem" data-effect="fadeInRight" data-delay="350">・コミュニティ(公開グループチャット)機能</li>
+          <li class="animonItem" data-effect="fadeInRight" data-delay="400">・タイムライン機能</li>
+          <li class="animonItem" data-effect="fadeInRight" data-delay="450">・おすすめユーザー機能</li>
+          <li class="animonItem mb-3" data-effect="fadeInRight" data-delay="500">・自動マッチング機能　等</li>
+        </ul>
+        <p class="animonItem my-3" data-effect="fadeInRight" data-delay="600">さらに学園内ならではの機能もあります。</p>
+        <ul style="list-style: none">
+          <li class="animonItem" data-effect="fadeInRight" data-delay="650">・ランキング機能</li>
+          <li class="animonItem mb-3 pb-3" data-effect="fadeInRight" data-delay="700">・バッジ機能　等</li>
+        </ul>
+      </div>
+    </div>
+    <div class="my-5 fs-5 shadow-sm mb-3 animonItem" data-effect="scaleDown">
+      <div class="px-3">
+        <h2 class="animonItem my-5" data-effect="scaleDown">さっそく始めてみましょう</h2>
+        <p class="animonItem mb-3" data-effect="fadeInRight" data-delay="200">Amicaは学校のメールアドレスを認証するので、たくさんの個人情報を入力する本人確認が不要です。</p>
+        <%= link_to "会員登録", new_user_registration_path, class: "animonItem btn btn-primary mb-3", data: { effect: "fadeInRight", delay: "300" } %>
+      </div>
     </div>
   </div>
 </main>
 
-<footer class="footer py-3">
+<footer class="text-center bg-gray text-light" style="margin-top:100px">
   <div class="container">
     <span class="text-muted">
       ©2021 - <%= DateTime.now.strftime('%Y') %> <%= link_to("Avails Group", avails_path, class: "text-dark") %>
