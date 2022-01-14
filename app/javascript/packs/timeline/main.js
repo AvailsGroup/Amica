@@ -7,5 +7,4 @@ function flexTextarea(el) {
     })
 }
 
-
 document.querySelectorAll('.FlexTextarea').forEach(flexTextarea)
