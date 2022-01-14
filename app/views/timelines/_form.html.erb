@@ -1,16 +1,3 @@
-<script>
-$(function(){
-  $('#flexTextarea').keydown(function(e){
-    if(e.shiftKey){
-      if(e.keyCode === 13 && $(this).val()){
-        $('#timelineSubmit').submit();
-        return false;
-      }
-    }
-  });
-});
-</script>
-
 <div class="text-center">
   <p class="notice"><%= notice %></p>
   <% if flash[:alert] %>
@@ -23,7 +10,7 @@ $(function(){
       <div class="FlexTextarea__dummy" aria-hidden="true"></div>
       <%= f.text_area :content, placeholder: "今起こってることをみんなに共有しよう", maxlength: "280", id: "FlexTextarea", class: "FlexTextarea__textarea form-control" %>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <%= button_tag id: "timelineSubmit",class: 'send bg-white position-absolute bottom-0 end-0', data: { disable_with: "投稿中..." } do %>
+        <%= button_tag id: "timelineSubmit", class: 'send bg-white position-absolute bottom-0 end-0', data: { disable_with: "投稿中..." } do %>
           <i class="far fa-paper-plane"></i>
         <% end %>
       </div>

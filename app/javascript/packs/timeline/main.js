@@ -8,3 +8,12 @@ function flexTextarea(el) {
 }
 
 document.querySelectorAll('.FlexTextarea').forEach(flexTextarea)
+
+$(function () {
+    $(document).on('keypress', function (event) {
+        if (event.shiftKey && event.key === 'Enter' && $('#FlexTextarea').val()) {
+            $('#timelineSubmit').click()
+            return false;
+        }
+    })
+});
