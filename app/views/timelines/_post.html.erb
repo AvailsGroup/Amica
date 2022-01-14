@@ -31,6 +31,11 @@
   <%= render "timelines/report_modal", post: post %>
 <% end %>
 
+<%= render "layouts/modal",id: "delete_modal_#{post.id}",
+           title: "本当に削除しますか？",content: post.content,
+           negative: "いいえ",
+           affirmmative_path: timeline_path(post.id), affirmmative_method: :delete, affirmative: "はい" %>
+
 <div id="post_<%= post.id %>">
   <div class="my-3 p-3 bg-white rounded shadow-sm">
     <div class="panel-content panel-activity">
@@ -79,9 +84,9 @@
           </div>
           <div class="d-flex">
             <% if post.user == current_user %>
-              <%= button_to(timeline_path(post.id), class: "send bg-white", method: :delete, data: { disable_with: "削除中..." }) do %>
+              <button type="button" style="border: none; background-color: white; color:red" data-bs-toggle="modal" data-bs-target="#delete_modal_<%= post.id %>">
                 <i class="far fa-trash-alt"></i>
-              <% end %>
+              </button>
             <% else %>
               <% if mute?(post, current_user) %>
                 <%= button_to timeline_mute_path(post.id, current_user.id), class: "send bg-white", style: "padding-right:0px", method: :delete, data: { disable_with: '<i class="fas fa-volume-mute" style="color: red"></i>' } do %>
