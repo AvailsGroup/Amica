@@ -47,12 +47,12 @@ class ChatChannel < ApplicationCable::Channel
     File.open("#{Rails.root}/tmp/chats/room#{data['room_id']}/#{data['file_name']}", 'wb+') do |f|
       f.write(Base64.decode64(base64))
     end
-    file_check = check_broken_file("#{Rails.root}/tmp/chats/room#{data['room_id']}/#{data['file_name']}")
-    if data['type'] == 'image'
-      unless file_check[0] != :unknown && file_check[1] == :clean
-        @message.update(content_type: 'file')
-      end
-    end
+    # file_check = check_broken_file("#{Rails.root}/tmp/chats/room#{data['room_id']}/#{data['file_name']}")
+    # if data['type'] == 'image'
+    #   unless file_check[0] != :unknown && file_check[1] == :clean
+    #     @message.update(content_type: 'file')
+    #   end
+    # end
     f = File.open("#{Rails.root}/tmp/chats/room#{data['room_id']}/#{data['file_name']}")
     @message.file.attach(io: f, filename: data['file_name'])
     f.close
