@@ -37,7 +37,7 @@ $(document).ready(function () {
     $(".goSection").on("click", function() {
         const scrollTarget = $(this)[0].attributes[1].nodeValue;
         const offsetTop = $(scrollTarget).offset().top;
-        $("html, body").animate({ scrollTop: offsetTop }, 200);
+        $("html, body").animate({ scrollTop: offsetTop }, 600);
         return false;
     });
 });

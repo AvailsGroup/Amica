@@ -1,4 +1,5 @@
 html{
+  height: 100%;
 }
 
 /*
@@ -72,3 +73,8 @@ header{
   z-index: -1;
 }
 
+#background{
+  position:fixed;
+  height: 100vh;
+  z-index: -1;
+}

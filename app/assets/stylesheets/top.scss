@@ -1,3 +1,7 @@
+.body{
+  height: 100vh;
+}
+
 .icon{
   width: 200px;
   border-radius: 50px;
@@ -27,7 +31,9 @@ body {
   transform: rotate(-45deg);
 }
 
-.background{
+#background{
+  position:fixed;
+  height: 100vh;
   z-index: -1;
 }
 
