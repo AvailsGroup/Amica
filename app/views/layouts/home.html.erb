@@ -1,53 +1,72 @@
 <!DOCTYPE html>
-<html lang="ja" class="h-100">
+<html lang="ja">
+  <head>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <title>Amica</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= favicon_link_tag('amica.ico') %>
+    <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'home/settings' %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
+    <meta name=”description” content=”ISC学生向けの友達作りサイトです。”/>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FEWKYWJMZD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-<head>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <title>Amica</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <%= favicon_link_tag('amica.ico') %>
-  <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
-  <meta name=”description” content=”ISC学生向けの友達作りサイトです。” />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FEWKYWJMZD"></script>
-  <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
-      gtag('config', 'G-FEWKYWJMZD');
-  </script>
-</head>
+        gtag('js', new Date());
 
-  <body class="d-flex h-100 text-center text-dark">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-      <% path = request.path_info %>
-      <header class="<%= path == "/" || path == new_user_registration_path || path == new_user_session_path || path == avails_path ? "mb-auto" : "mb-3" %>">
-        <div>
-          <a class="float-md-start mb-0" href="/" style="font-size:30px; color: #037394;font-weight: bold;text-decoration: none;">Amica</a>
-          <nav class="nav nav-masthead　bg-blue justify-content-center float-md-end">
-            <a class="nav-link" href="/">トップ</a>
-            <a class="nav-link" href="<%= about_path %>">概要</a>
-            <a class="nav-link" href="<%= contact_path %>">お問い合わせ</a>
-          </nav>
+        gtag('config', 'G-FEWKYWJMZD');
+    </script>
+  </head>
+
+  <body class="d-flex flex-column h-100 text-center text-dark">
+    <div id="background"></div>
+    <% path = request.path_info %>
+    <header class="<%= path == "/" || path == new_user_registration_path || path == new_user_session_path || path == avails_path ? "mb-auto" : "mb-3" %>">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light px-4">
+        <%= link_to("Amica", "/", class: "mb-0 lh-sm text-light", style: "margin-left:7px;font-size:24px;text-decoration: none;font-weight:bold") %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarDropdown">
+          <div class="navbar-nav me-auto m-0 mb-lg-0"></div>
+          <ul class="navbar-nav d-flex">
+            <li class="nav-item active">
+              <a class="nav-link" href="<%= about_path %>">概要</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<%= contact_path %>">お問い合わせ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<%= new_user_registration_path %>">サインイン</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<%= new_user_session_path %>">ログイン</a>
+            </li>
+          </ul>
         </div>
-      </header>
+      </nav>
+    </header>
 
-      <main class="px-3">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-        <%= yield %>
-      </main>
-
-      <footer class="mt-auto text-dark border-top border-dark">
-        <p>©2021 - <%= DateTime.now.strftime('%Y') %> <%= link_to("Avails Group", avails_path, class: "text-dark") %><br />
-        <%= link_to("利用規約",static_path,class:"text-dark") %>
-        <%= link_to("プライバシーポリシー",privacy_path,class:"text-dark")%></p>
-      </footer>
-    </div>
+    <main class="px-3">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </main>
+    <footer class="footer mt-auto py-3">
+      <div class="container">
+          <span class="text-muted">©2021 - <%= DateTime.now.strftime('%Y') %> <%= link_to("Avails Group", avails_path, class: "text-dark") %>
+            <%= link_to("利用規約", static_path, class: "text-dark") %>
+            <%= link_to("プライバシーポリシー", privacy_path, class: "text-dark") %></span>
+      </div>
+    </footer>
   </body>
 </html>
