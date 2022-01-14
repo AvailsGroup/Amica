@@ -10,6 +10,12 @@ class ChatChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
+  def perform_action(data)
+    Rails.logger.silence do
+      super(data)
+    end
+  end
+
   def speak(data)
     room = Room.find_by(id: data['room_id'])
     unless room.started_user_id == current_user.id || room.invited_user_id == current_user.id
