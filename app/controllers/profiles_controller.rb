@@ -50,7 +50,7 @@ class ProfilesController < ApplicationController
     @user = current_user
     permission
 
-    unless params['user']['images'].nil?
+    unless params['user']['images'].nil? || params['user']['header'].nil?
       accepted_format = %w[.jpg .jpeg .png]
       unless accepted_format.include? File.extname(params['user']['images'].original_filename)
         flash[:alert] = '画像は jpg jpeg png 形式のみ対応しております。'
@@ -72,6 +72,12 @@ class ProfilesController < ApplicationController
         @image_y = params[:user][:image_y]
         @image_w = params[:user][:image_w]
         @image_h = params[:user][:image_h]
+      elsif base64?(params[:user][:header]['data:image/jpeg;base64,'.length .. -1])
+        @header = params[:user][:header]
+        @header_x = params[:user][:header_x]
+        @header_y = params[:user][:header_y]
+        @header_w = params[:user][:header_w]
+        @header_h = params[:user][:header_h]
       end
       render action: 'edit'
       return

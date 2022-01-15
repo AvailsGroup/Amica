@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function(){
                     let image_w = document.getElementById("image_w").value;
                     let image_h = document.getElementById("image_h").value;
                     ctx.drawImage(image, image_x/scale, image_y/scale, image_w/scale , image_h/scale ,0 ,0 , cropped_canvas.width ,cropped_canvas.height);
-                    document.getElementById("image_text").innerHTML = "選択した画像";
+                    document.getElementById("image_text").innerHTML = "選択したアイコン";
                     $('#user_icon').fadeOut();
                     document.getElementById("image").value = cropper.getCroppedCanvas().toDataURL('image/jpeg');
                     let base64 = cropper.getCroppedCanvas().toDataURL('image/jpeg');

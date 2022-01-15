@@ -5,24 +5,24 @@ import "jquery-ui/ui/widgets/autocomplete"
 import "tag-it"
 
 document.addEventListener("DOMContentLoaded", function(){
-    $('#trim_img_uploder').click(function(e){
+    $('#header_trim_img_uploder').click(function(e){
         $(this).val('');
-        document.getElementById("prev_img").style.display = '';
-        document.getElementById("cropped_canvas").style.display = 'none';
-        $('#user_icon').fadeIn();
+        document.getElementById("header_prev_img").style.display = '';
+        document.getElementById("header_cropped_canvas").style.display = 'none';
+        $('#user_header').fadeIn();
     });
 
-    $('#trim_img_uploder').change(function(e){
-        document.getElementById("prev_img").style.display = 'none';
-        $('#modal_area').fadeIn();
-        $('.modal-text').fadeOut();
+    $('#header_trim_img_uploder').change(function(e){
+        document.getElementById("header_prev_img").style.display = 'none';
+        $('#header_modal_area').fadeIn();
+        $('.header_modal-text').fadeOut();
        });
 
     let cropper = null;
-    const scaled_width = 500;
-    const aspect_numerator = parseFloat(document.getElementById("aspect_numerator").value)
-    const aspect_denominator = parseFloat(document.getElementById("aspect_denominator").value)
-    const crop_aspect_ratio = aspect_denominator / aspect_numerator;
+    const scaled_width = 1280;
+    const header_aspect_numerator = parseFloat(document.getElementById("header_aspect_numerator").value)
+    const header_aspect_denominator = parseFloat(document.getElementById("header_aspect_denominator").value)
+    const crop_aspect_ratio = header_aspect_denominator / header_aspect_numerator;
 
     const crop_image = function (e) {
         const files = e.target.files;
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function(){
             image.onload = function () {
 
                 let scale = scaled_width / image.width;
-                const canvas = document.getElementById("source_canvas");
+                const canvas = document.getElementById("header_source_canvas");
                 canvas.width = image.width * scale;
                 canvas.height = image.height * scale;
                 let ctx = canvas.getContext("2d");
@@ -52,38 +52,38 @@ document.addEventListener("DOMContentLoaded", function(){
                         aspectRatio: crop_aspect_ratio,
                         data: {width: canvas.width, height: canvas.width * crop_aspect_ratio},
                         crop: function (event) {
-                            document.getElementById("image_x").value = event.detail.x;
-                            document.getElementById("image_y").value = event.detail.y;
-                            document.getElementById("image_w").value = event.detail.width;
-                            document.getElementById("image_h").value = event.detail.height;
+                            document.getElementById("header_image_x").value = event.detail.x;
+                            document.getElementById("header_image_y").value = event.detail.y;
+                            document.getElementById("header_image_w").value = event.detail.width;
+                            document.getElementById("header_image_h").value = event.detail.height;
                         }
                     }
-                );
+                )
 
                 $('#close_button,#modal_back_area').click(function(){
-                    const cropped_canvas = document.getElementById("cropped_canvas");
+                    const cropped_canvas = document.getElementById("header_cropped_canvas");
                     let ctx = cropped_canvas.getContext("2d");
                     let cropped_image_width = image.height * crop_aspect_ratio;
                     cropped_canvas.width = cropped_image_width * scale;
                     cropped_canvas.height = image.height * scale;
 
-                    let image_x = document.getElementById("image_x").value;
-                    let image_y = document.getElementById("image_y").value;
-                    let image_w = document.getElementById("image_w").value;
-                    let image_h = document.getElementById("image_h").value;
+                    let image_x = document.getElementById("header_image_x").value;
+                    let image_y = document.getElementById("header_image_y").value;
+                    let image_w = document.getElementById("header_image_w").value;
+                    let image_h = document.getElementById("header_image_h").value;
                     ctx.drawImage(image, image_x/scale, image_y/scale, image_w/scale , image_h/scale ,0 ,0 , cropped_canvas.width ,cropped_canvas.height);
-                    document.getElementById("image_text").innerHTML = "選択した画像";
-                    $('#user_icon').fadeOut();
-                    document.getElementById("image").value = cropper.getCroppedCanvas().toDataURL('image/jpeg');
-                    let base64 = cropper.getCroppedCanvas().toDataURL('image/jpeg');
-                    var result = document.getElementById('result-img');
+                    document.getElementById("header_text").innerHTML = "選択したヘッダー";
+                    $('#user_header').fadeOut();
+                    document.getElementById("header").value = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+                    let header_base64 = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+                    var result = document.getElementById('header_result-img');
                     result.style.display = '';
-                    result.src = base64;
+                    result.src = header_base64;
                 });
             }
         }
     }
 
-    const uploader = document.getElementById('trim_img_uploder');
+    const uploader = document.getElementById('header_trim_img_uploder');
     uploader.addEventListener('change', crop_image);
 });
