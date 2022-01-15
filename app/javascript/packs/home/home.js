@@ -1,5 +1,5 @@
-import { animon } from 'animon';
+import sal from "sal.js";
 
 $(function (){
-    animon();
+    sal();
 })

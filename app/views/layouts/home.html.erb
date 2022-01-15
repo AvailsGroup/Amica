@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="h-100">
   <head>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -46,7 +46,7 @@
               <a class="nav-link" href="<%= contact_path %>">お問い合わせ</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<%= new_user_registration_path %>">サインイン</a>
+              <a class="nav-link" href="<%= new_user_registration_path %>">サインアップ</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<%= new_user_session_path %>">ログイン</a>
@@ -62,11 +62,13 @@
       <%= yield %>
     </main>
 
-    <footer class="footer mt-auto py-3">
+    <footer class="text-center bg-gray text-light mt-auto" style="margin-top:20px">
       <div class="container">
-          <span class="text-muted">©2021 - <%= DateTime.now.strftime('%Y') %> <%= link_to("Avails Group", avails_path, class: "text-dark") %>
-            <%= link_to("利用規約", static_path, class: "text-dark") %>
-            <%= link_to("プライバシーポリシー", privacy_path, class: "text-dark") %></span>
+        <span class="text-muted">
+          ©2021 - <%= DateTime.now.strftime('%Y') %> <%= link_to("Avails Group", avails_path, class: "text-dark") %>
+          <%= link_to("利用規約", static_path, class: "text-dark") %>
+          <%= link_to("プライバシーポリシー", privacy_path, class: "text-dark") %>
+        </span>
       </div>
     </footer>
   </body>
