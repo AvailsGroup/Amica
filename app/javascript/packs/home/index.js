@@ -1,8 +1,8 @@
-import { animon } from 'animon';
+import sal from "sal.js";
 import "cookieconsent"
 
 $(document).ready(function () {
-    animon();
+    sal();
     window.cookieconsent.initialise({
         "palette": {
             "popup": {
