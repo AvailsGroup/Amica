@@ -71,6 +71,18 @@
       <h2>プロフィール編集</h2>
       <%= render 'layouts/error_messages', model: f.object %>
       <p class="lead">ここではプロフィールを変更することが出来ます</p>
+      <p id="image_text">現在のヘッダー</p>
+      <div id="user_icon">
+        <label>
+          <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+          <%= image_tag current_user.decorate.header, :size => '320x180', class: "user_header" %>
+        </label>
+      </div>
+      <label>
+        <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+        <canvas id="cropped_canvas" style="display:none;width: 200px;height: 200px;"></canvas>
+        <img src="<%=@image if defined?(@image) %>" id="result-img" style="display:none;width: 200px;height: 200px;">
+      </label>
       <p id="image_text">現在のアイコン</p>
       <div id="user_icon">
         <label>

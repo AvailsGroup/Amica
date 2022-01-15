@@ -16,6 +16,12 @@ class UserDecorator < ApplicationDecorator
     object.image.attached? ? object.image : 'default_icon'
   end
 
+  def header
+    return 'no_image' if object.discarded?
+
+    object.header.attached? ? object.header : 'no_image'
+  end
+
   def image_message
     return 'default_icon' if object.discarded?
 
