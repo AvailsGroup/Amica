@@ -11,7 +11,7 @@ import "channels"
 import '@fortawesome/fontawesome-free/js/all';
 import "lity"
 import "cropperjs"
-import "animon"
+import "sal.js"
 import "particles.js"
 import "cookieconsent"
 
