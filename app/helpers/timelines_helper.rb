@@ -13,7 +13,7 @@ module TimelinesHelper
   def html_with_link_to_hashtag(content)
     html_escaped_content = h(content)
     content_with_hashtags = link_to_hashtag(html_escaped_content)
-    sanitize content_with_hashtags, tags: ['a'], attributes: ['href']
+    sanitize content_with_hashtags, tags: ['a'], attributes: %w[href target rel]
   end
 
   def push(user)
