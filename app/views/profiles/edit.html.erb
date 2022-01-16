@@ -68,7 +68,7 @@
   </div>
   <!-- Modal -->
   <div class="modal fade" id="headerModal" tabindex="-1" aria-labelledby="headerModalLabel" aria-hidden="true" style="padding-right: 0">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="headerModalLabel">ヘッダートリミング</h5>
@@ -88,7 +88,7 @@
               <%= f.hidden_field :header_aspect_denominator, id: "header_aspect_denominator", value: "4.0" %>
 
               <div id="header_prev_img">
-                <%= image_tag current_user.decorate.header, :size => '400x100', class: "user_header" %>
+                <%= image_tag current_user.decorate.header,  :width => '100%', :height => 'auto' , class: "user_header" %>
               </div>
             </div>
           </div>
