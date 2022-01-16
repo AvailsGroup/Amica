@@ -84,11 +84,11 @@
               <%= f.hidden_field :header_image_y, id: "header_image_y", value: defined?(@header_y) ? @header_y : nil %>
               <%= f.hidden_field :header_image_w, id: "header_image_w", value: defined?(@header_w) ? @header_w : nil %>
               <%= f.hidden_field :header_image_h, id: "header_image_h", value: defined?(@header_h) ? @header_h : nil %>
-              <%= f.hidden_field :header_aspect_numerator, id: "header_aspect_numerator", value: "9.0" %>
-              <%= f.hidden_field :header_aspect_denominator, id: "header_aspect_denominator", value: "16.0" %>
+              <%= f.hidden_field :header_aspect_numerator, id: "header_aspect_numerator", value: "1.0" %>
+              <%= f.hidden_field :header_aspect_denominator, id: "header_aspect_denominator", value: "3.0" %>
 
               <div id="header_prev_img">
-                <%= image_tag current_user.decorate.header, :size => '320x180', class: "user_header" %>
+                <%= image_tag current_user.decorate.header, :size => '300x100', class: "user_header" %>
               </div>
             </div>
           </div>
@@ -118,13 +118,13 @@
       <div id="user_header">
         <label>
           <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#headerModal"></button>
-          <%= image_tag current_user.decorate.header, :size => '320x180', class: "user_header" %>
+          <%= image_tag current_user.decorate.header, :size => '600x200', class: "user_header" %>
         </label>
       </div>
       <label>
         <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#headerModal"></button>
         <canvas id="header_cropped_canvas" style="display:none;width: 200px;height: 200px;"></canvas>
-        <img src="<%=@image if defined?(@image) %>" id="header_result-img" style="display:none;width: 320px;height: 180px;">
+        <img src="<%=@image if defined?(@image) %>" id="header_result-img" style="display:none;width: 600px;height: 200px;">
       </label>
       <p id="image_text">現在のアイコン</p>
       <div id="user_icon">

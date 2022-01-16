@@ -30,9 +30,8 @@
       <div class="col-md-12 text-center" style="z-index: 1;">
         <div class="panel panel-default">
           <div class="userprofile <%= @user.header.attached? ? '' : 'social' %>"style="background-image: url(<%= rails_blob_url(@user.decorate.header) %>);
-          background-size: contain; background-repeat: no-repeat;background-position: center;">
+          background-size: cover;background-position: center;">
             <div class="d-flex justify-content-between">
-              <div></div>
               <div style="margin-right: 10px">
                 <% unless current_user == @user %>
                   <button type="button" class="send" data-bs-toggle="modal" data-bs-target="#Modal">

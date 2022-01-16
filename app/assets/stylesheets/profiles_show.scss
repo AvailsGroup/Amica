@@ -15,16 +15,18 @@
   width: 100%;
   float: left;
   clear: both;
-  margin: 40px auto
+  margin-bottom: 40px;
 }
 .userheader{
-  width: 70%;
+  width: 100%;
+}
+.userpic{
+  margin: 40px auto;
 }
 .userprofile .userpic {
   height: 100px;
   width: 100px;
   clear: both;
-  margin: 0 auto;
   display: block;
   border-radius: 100%;
   box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
