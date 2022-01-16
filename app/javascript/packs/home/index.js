@@ -1,8 +1,8 @@
-import { animon } from 'animon';
+import sal from "sal.js";
 import "cookieconsent"
 
 $(document).ready(function () {
-    animon();
+    sal();
     window.cookieconsent.initialise({
         "palette": {
             "popup": {
@@ -40,4 +40,19 @@ $(document).ready(function () {
         $("html, body").animate({ scrollTop: offsetTop }, 800);
         return false;
     });
+
+});
+
+
+$(window).on('scroll',function(){
+
+    $(".JS_ScrollAnimationItem").each(function(){
+        var position = $(this).offset().top;
+        var scroll = $(window).scrollTop();
+        var windowHeight = $(window).height();
+        if (scroll > position - windowHeight){
+            $(this).addClass('isActive');
+        }
+    });
+
 });
