@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_13_152533) do
+ActiveRecord::Schema.define(version: 2022_01_16_141837) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -246,6 +246,7 @@ ActiveRecord::Schema.define(version: 2022_01_13_152533) do
     t.boolean "visible_enrolled_year", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "visible_student_id", default: true, null: false
   end
 
   create_table "taggings", force: :cascade do |t|
