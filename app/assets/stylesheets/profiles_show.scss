@@ -15,29 +15,29 @@
   width: 100%;
   float: left;
   clear: both;
-  margin-bottom: 40px;
 }
+
 .userheader{
   width: 100%;
-}
-.userpic{
-  margin: -15% auto auto auto;
-
 }
 
 .userprofile .userpic .userpicimg {
   height: auto;
-  max-width: 300px;
+  max-width: 100px;
   border-radius: 10%;
 }
+
+.userpicimg {
+  max-width: 100px;
+  border-radius: 10%;
+}
+
 .username {
   font-weight: 500;
   font-size: 24px;
   line-height: 25px;
   color: #000000;
-  margin-top: 10px;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 .username+p {

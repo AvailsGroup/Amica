@@ -1,19 +1,6 @@
 <%= stylesheet_link_tag 'profiles', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag 'profiles_show', media: 'all', 'data-turbolinks-track': 'reload' %>
-<script>
-    window.addEventListener("DOMContentLoaded", function () {
-        $('.userpicimg').css({
-          width:window.innerWidth/5
-        })
-    })
-    function resizeImage(){
-        $('.userpicimg').css({
-            width : window.innerWidth/5
-        });
-    }
 
-    window.onresize = resizeImage;
-</script>
 <style>
     .send {
         margin-right: 2px;
@@ -43,74 +30,44 @@
     <div class="row">
       <div class="col-md-12 text-center" style="z-index: 1;">
         <div class="panel panel-default">
-          <div class="userprofile">
-            <%= image_tag @user.decorate.header,style: 'max-width:100%', 'data-lity' => 'data-lity' %>
-            <div class="d-flex justify-content-between">
-              <div style="margin-right: 10px">
-                <% unless current_user == @user %>
-                  <button type="button" class="send" data-bs-toggle="modal" data-bs-target="#Modal">
-                    <i class="fas fa-ban" style="<%= blocked?(current_user, @user) ? "color: blue" : "color: red" %>;width: 20px;height: 20px"></i>
-                  </button>
-                <% end %>
-              </div>
-            </div>
 
-            <div class="userdata">
-              <div class="userpic">
-                <%= image_tag @user.decorate.image, class: "userpicimg icon flex-shrink-0 question-icon bg-white", 'data-lity' => 'data-lity' %>
-              </div>
-              <div class="names">
-                <h2 class="username"><%= '<i class="fas fa-crown" style="color: yellow; stroke: #82a5c8;stroke-width: 18px;"></i>'.html_safe if @user.admin %><%= @user.name %></h2>
-                <span>@<%= @user.userid %></span>
-                <p style="margin-bottom: 0">(<%= @user.nickname %>)
-                  <% if following?(@user.followings_list, @current) && !matchers?(@user, @current) %>
-                    <i class="fas fa-user-plus"></i>
-                  <% elsif matchers?(@user, @current) %>
-                    <i class="fas fa-user-friends"></i>
-                  <% end %>
-                </p>
-              </div>
+          <div class="userprofile position-relative border-bottom mb-3">
+            <%= image_tag @user.decorate.header, style: 'max-width:100%; max-height:100%', 'data-lity' => 'data-lity' %>
+            <div class="position-absolute h-100 w-100 bottom-0 text-center d-flex align-items-center justify-content-center">
+              <%= image_tag @user.decorate.image, class: "userpicimg icon bg-white position-absolute d-none d-sm-block" %>
+              <%= image_tag @user.decorate.image, class: "userpicimg icon bg-white position-absolute d-sm-none d-block", style: "max-width:70px" %>
             </div>
           </div>
 
-          <div class="col-md-12 border-top border-bottom">
+          <div class="userdata border-bottom">
+            <div class="names">
+              <span class="username"><%= '<i class="fas fa-crown" style="color: yellow; stroke: #82a5c8;stroke-width: 18px;"></i>'.html_safe if @user.admin %><%= @user.name %>
+                <br/></span>
+              <span>@<%= @user.userid %></span>
+              <p style="margin-bottom: 0">(<%= @user.nickname %>)
+                <% if following?(@user.followings_list, @current) && !matchers?(@user, @current) %>
+                  <i class="fas fa-user-plus"></i>
+                <% elsif matchers?(@user, @current) %>
+                  <i class="fas fa-user-friends"></i>
+                <% end %>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-12">
             <ul class="nav nav-pills float-start countlist" role="tablist">
               <%= link_to profile_follow_path(@user.userid), class: "text-dark" do %>
-                <li role="presentation">
-                  <h3><%= @user.followings_list.size %><br>
-                    <small>フォロー</small></h3>
-                </li>
+                <%= render "profiles/presentatiton", title: "フォロー", value: @user.followings_list.size %>
               <% end %>
               <%= link_to profile_follower_path(@user.userid), class: "text-dark" do %>
-                <li role="presentation">
-                  <h3>
-                    <%= @user.followers_list.size %><br>
-                    <small>フォロワー</small>
-                  </h3>
-                </li>
+                <%= render "profiles/presentatiton", title: "フォロワー", value: @user.followers_list.size %>
               <% end %>
-              <li role="presentation">
-                <h3><%= @profile.enrolled_year %><br>
-                  <small>入学年</small></h3>
-              </li>
-              <li role="presentation">
-                <h3><%= @profile.grade %><br>
-                  <small>学科</small></h3>
-              </li>
-              <li role="presentation">
-                <h3><%= @profile.school_class %><br>
-                  <small>クラス</small></h3>
-              </li>
-              <li role="presentation">
-                <h3><%= @profile.number %><br>
-                  <small>出席番号</small></h3>
-              </li>
-              <% if @user.setting.visible_enrolled_year %>
-                <li role="presentation">
-                  <h3><%= @profile.student_id %><br>
-                    <small>学籍番号</small></h3>
-                </li>
-              <% end %>
+              <%= render "profiles/presentatiton", title: "入学年", value: @profile.enrolled_year if @user.setting.visible_enrolled_year %>
+              <%= render "profiles/presentatiton", title: "学科", value: @profile.grade %>
+              <%= render "profiles/presentatiton", title: "クラス", value: @profile.school_class %>
+              <%= render "profiles/presentatiton", title: "出席番号", value: @profile.number %>
+              <%= render "profiles/presentatiton", title: "クラス", value: @profile.school_class %>
+              <%= render "profiles/presentatiton", title: "学籍番号", value: @profile.student_id if @user.setting.visible_student_id %>
             </ul>
 
             <% unless blocked?(current_user, @user) || blocked?(@user, current_user) %>
@@ -122,6 +79,9 @@
                   <% else %>
                     <%= link_to 'フォロー', profile_relationships_path(@user.userid), method: :post, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
                   <% end %>
+                  <button type="button" class="send" data-bs-toggle="modal" data-bs-target="#Modal">
+                    <i class="fas fa-ban" style="<%= blocked?(current_user, @user) ? "color: blue" : "color: red" %>;width: 20px;height: 20px"></i>
+                  </button>
                 <% else %>
                   <%= link_to '編集', edit_profile_path, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
                 <% end %>
