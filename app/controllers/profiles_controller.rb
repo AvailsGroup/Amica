@@ -49,8 +49,7 @@ class ProfilesController < ApplicationController
   def update
     @user = current_user
     permission
-
-    unless params['user']['images'].nil? || params['user']['header'].nil?
+    unless params['user']['images'].nil?
       accepted_format = %w[.jpg .jpeg .png]
       unless accepted_format.include? File.extname(params['user']['images'].original_filename)
         flash[:alert] = '画像は jpg jpeg png 形式のみ対応しております。'
@@ -82,7 +81,6 @@ class ProfilesController < ApplicationController
       render action: 'edit'
       return
     end
-
     if !params['user']['image'].nil? && base64?(params['user']['image']['data:image/jpeg;base64,'.length .. -1])
       filename = "#{current_user.id}#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.jpg"
       Dir.mkdir("#{Rails.root}/tmp/users_image/") unless Dir.exist?("#{Rails.root}/tmp/users_image/")
@@ -93,6 +91,17 @@ class ProfilesController < ApplicationController
       current_user.image.attach(io: f, filename: filename)
       f.close
       File.delete("#{Rails.root}/tmp/users_image/#{filename}")
+    end
+    if !params['user']['header'].nil? && base64?(params['user']['header']['data:image/jpeg;base64,'.length .. -1])
+      filename = "#{current_user.id}#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.jpg"
+      Dir.mkdir("#{Rails.root}/tmp/users_header/") unless Dir.exist?("#{Rails.root}/tmp/users_header/")
+      File.open("#{Rails.root}/tmp/users_header/#{filename}", 'wb+') do |f|
+        f.write(Base64.decode64(params['user']['header']['data:image/jpeg;base64,'.length .. -1]))
+      end
+      f = File.open("#{Rails.root}/tmp/users_header/#{filename}")
+      current_user.header.attach(io: f, filename: filename)
+      f.close
+      File.delete("#{Rails.root}/tmp/users_header/#{filename}")
     end
     flash[:notice] = 'ユーザー情報を編集しました'
 

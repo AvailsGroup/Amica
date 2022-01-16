@@ -17,6 +17,9 @@
   clear: both;
   margin: 40px auto
 }
+.userheader{
+  width: 70%;
+}
 .userprofile .userpic {
   height: 100px;
   width: 100px;
@@ -30,6 +33,7 @@
   -ms-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
   position: relative;
   background-color:#FFFFFF;
+  z-index: 100;
 }
 .userprofile .userpic .userpicimg {
   height: auto;
