@@ -72,6 +72,8 @@ Rails.application.routes.draw do
     collection do
       post :enable_enrolled_year
       delete :disable_enrolled_year
+      post :enable_student_id
+      delete :disable_student_id
     end
   end
 
