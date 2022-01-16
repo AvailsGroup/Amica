@@ -42,18 +42,18 @@
     },
     "home/home": {
       "js": [
-        "/packs/js/home/home-318dca93595b2ad4083c.js"
+        "/packs/js/home/home-7a9f20db9391fa5226e6.js"
       ],
       "js.map": [
-        "/packs/js/home/home-318dca93595b2ad4083c.js.map"
+        "/packs/js/home/home-7a9f20db9391fa5226e6.js.map"
       ]
     },
     "home/index": {
       "js": [
-        "/packs/js/home/index-3689085330ce3fcdc439.js"
+        "/packs/js/home/index-23b013e9f20d412fa291.js"
       ],
       "js.map": [
-        "/packs/js/home/index-3689085330ce3fcdc439.js.map"
+        "/packs/js/home/index-23b013e9f20d412fa291.js.map"
       ]
     },
     "home/settings": {
@@ -81,10 +81,10 @@
       ]
     }
   },
-  "home/home.js": "/packs/js/home/home-318dca93595b2ad4083c.js",
-  "home/home.js.map": "/packs/js/home/home-318dca93595b2ad4083c.js.map",
-  "home/index.js": "/packs/js/home/index-3689085330ce3fcdc439.js",
-  "home/index.js.map": "/packs/js/home/index-3689085330ce3fcdc439.js.map",
+  "home/home.js": "/packs/js/home/home-7a9f20db9391fa5226e6.js",
+  "home/home.js.map": "/packs/js/home/home-7a9f20db9391fa5226e6.js.map",
+  "home/index.js": "/packs/js/home/index-23b013e9f20d412fa291.js",
+  "home/index.js.map": "/packs/js/home/index-23b013e9f20d412fa291.js.map",
   "home/settings.js": "/packs/js/home/settings-78e266694c794031215a.js",
   "home/settings.js.map": "/packs/js/home/settings-78e266694c794031215a.js.map",
   "profiles/edit.js": "/packs/js/profiles/edit-1a28afd31f9ab6add8d3.js",

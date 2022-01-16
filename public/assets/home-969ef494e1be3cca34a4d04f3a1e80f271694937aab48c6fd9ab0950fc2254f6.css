@@ -1,0 +1,110 @@
+/* line 1, app/assets/stylesheets/home.scss */
+html {
+  height: 100%;
+  font-size: 16px;
+  font-family: 'Rubik', 'M PLUS Rounded 1c', sans-serif;
+  -webkit-appearance: none;
+  -webkit-text-size-adjust: 100%;
+}
+
+/*
+ * Globals
+ */
+/* Custom default button */
+/* line 15, app/assets/stylesheets/home.scss */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none;
+  /* Prevent inheritance from `body` */
+}
+
+/*
+ * Base structure
+ */
+/* line 27, app/assets/stylesheets/home.scss */
+main {
+  overflow-x: hidden;
+}
+
+/* line 31, app/assets/stylesheets/home.scss */
+#about {
+  overflow: hidden;
+}
+
+/* line 35, app/assets/stylesheets/home.scss */
+#background {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 42, app/assets/stylesheets/home.scss */
+.cover-container {
+  max-width: 42em;
+}
+
+/*
+ * Header
+ */
+/* line 51, app/assets/stylesheets/home.scss */
+header {
+  font-family: 'Rubik', 'M PLUS Rounded 1c', sans-serif;
+}
+
+/* line 56, app/assets/stylesheets/home.scss */
+.bg-blue {
+  background-color: #00A1AE;
+}
+
+/* line 58, app/assets/stylesheets/home.scss */
+#background {
+  position: fixed;
+  height: 100vh;
+  z-index: -1;
+}
+
+/* line 65, app/assets/stylesheets/home.scss */
+.Text-Span {
+  position: relative;
+  z-index: 1;
+}
+
+/* line 70, app/assets/stylesheets/home.scss */
+.Text-Span:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 1px;
+  background: rgba(29, 144, 190, 0.8);
+  z-index: -1;
+  transition: all 2.5s;
+}
+
+/* line 82, app/assets/stylesheets/home.scss */
+.Text-Span.isActive:after {
+  width: 100%;
+}
+
+/* line 86, app/assets/stylesheets/home.scss */
+.btn-neumorphism {
+  color: #7cabb5;
+  text-decoration: none;
+  background-color: #ddd;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  box-shadow: inset 0 0 15px rgba(55, 84, 170, 0), inset 0 0 20px rgba(255, 255, 255, 0), 7px 7px 15px rgba(147, 178, 185, 0.2), -7px -7px 20px white;
+}
+
+/* line 101, app/assets/stylesheets/home.scss */
+.btn-neumorphism:hover {
+  color: #f5ad75;
+  box-shadow: inset 7px 7px 15px rgba(55, 84, 170, 0.2), inset -7px -7px 20px white;
+}
