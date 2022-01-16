@@ -12,7 +12,7 @@
 <%= form_with model: comment, url: timeline_comments_path(post.id) do |f| %>
   <div class="FlexTextarea form-group mb-2">
     <div class="FlexTextarea__dummy" aria-hidden="true"></div>
-    <%= f.text_area :comment, placeholder: "面白い投稿にコメントしてみよう！", maxlength: "280", id: "FlexTextarea", class: "FlexTextarea__textarea form-control" %>
+    <%= f.text_area :comment, placeholder: "面白い投稿にコメントしてみよう！", maxlength: "280", id: "FlexTextarea", class: "FlexTextarea__textarea form-control"%>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <%= button_tag id: "timelineSubmit",class: 'send bg-white position-absolute bottom-0 end-0', data: { disable_with: "投稿中..." } do %>
         <i class="far fa-paper-plane"></i>
