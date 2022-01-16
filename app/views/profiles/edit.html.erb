@@ -23,102 +23,21 @@
 </script>
 
 <%= form_with model: current_user, url: profile_path, method: :put, multipart: true do |f| %>
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-right: 0">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">画像トリミング</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <h4 class="modal-text">画像を選択してください</h4>
-          <div class="form_wrapper">
-            <div id="image-wrapper">
-              <%= f.file_field :images, id: "trim_img_uploder", value: "assets/default", accept: 'image/jpg,image/jpeg,image/png' %>
-              <%= f.hidden_field :image, id: "image", value: defined?(@image) ? @image : nil%>
-              <%= f.hidden_field :image_x, id: "image_x", value: defined?(@image_x) ? @image_x : nil %>
-              <%= f.hidden_field :image_y, id: "image_y", value: defined?(@image_y) ? @image_y : nil %>
-              <%= f.hidden_field :image_w, id: "image_w", value: defined?(@image_w) ? @image_w : nil %>
-              <%= f.hidden_field :image_h, id: "image_h", value: defined?(@image_h) ? @image_h : nil %>
-              <%= f.hidden_field :aspect_numerator, id: "aspect_numerator", value: "1.0" %>
-              <%= f.hidden_field :aspect_denominator, id: "aspect_denominator", value: "1.0" %>
+  <%= render "profiles/image_model" , form:f%>
+  <%= render "profiles/header_modal", form:f %>
 
-              <div id="prev_img">
-                  <%= image_tag current_user.decorate.image, :size => '200x200', class: "user_image" %>
-              </div>
-            </div>
-          </div>
-          <div id="modal_area" style="display: none;">
-            <div class="modal_wrapper">
-              <div class="modal_padding modal_title_wrapper">
-                <h4>範囲を選択してください</h4>
-              </div>
-              <div class="canvas_wrapper">
-                <canvas id="source_canvas" width="1" height="1"></canvas>
-              </div>
-              <div class="modal-footer">
-                <button type="button" id="close_button" class="btn btn-primary" data-bs-dismiss="modal">画像を切り取る</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Modal -->
-  <div class="modal fade" id="headerModal" tabindex="-1" aria-labelledby="headerModalLabel" aria-hidden="true" style="padding-right: 0">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="headerModalLabel">ヘッダートリミング</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <h4 class="header_modal-text">画像を選択してください</h4>
-          <div class="form_wrapper">
-            <div id="image-wrapper">
-              <%= f.file_field :header_images, id: "header_trim_img_uploder", value: "assets/default", accept: 'image/jpg,image/jpeg,image/png' %>
-              <%= f.hidden_field :header, id: "header", value: defined?(@header) ? @header : nil%>
-              <%= f.hidden_field :header_image_x, id: "header_image_x", value: defined?(@header_x) ? @header_x : nil %>
-              <%= f.hidden_field :header_image_y, id: "header_image_y", value: defined?(@header_y) ? @header_y : nil %>
-              <%= f.hidden_field :header_image_w, id: "header_image_w", value: defined?(@header_w) ? @header_w : nil %>
-              <%= f.hidden_field :header_image_h, id: "header_image_h", value: defined?(@header_h) ? @header_h : nil %>
-              <%= f.hidden_field :header_aspect_numerator, id: "header_aspect_numerator", value: "1.0" %>
-              <%= f.hidden_field :header_aspect_denominator, id: "header_aspect_denominator", value: "4.0" %>
 
-              <div id="header_prev_img">
-                <%= image_tag current_user.decorate.header,  :width => '100%', :height => 'auto' , class: "user_header" %>
-              </div>
-            </div>
-          </div>
-          <div id="header_modal_area" style="display: none;">
-            <div class="modal_wrapper">
-              <div class="modal_padding modal_title_wrapper">
-                <h4>範囲を選択してください</h4>
-              </div>
-              <div class="canvas_wrapper">
-                <canvas id="header_source_canvas" width="1" height="1"></canvas>
-              </div>
-              <div class="modal-footer">
-                <button type="button" id="close_button" class="btn btn-primary" data-bs-dismiss="modal">画像を切り取る</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="container" style="max-width: 960px">
     <div class="py-5 text-center">
       <h2>プロフィール編集</h2>
       <%= render 'layouts/error_messages', model: f.object %>
       <p class="lead">ここではプロフィールを変更することが出来ます</p>
+
       <p id="header_text">現在のヘッダー</p>
       <div id="user_header">
         <label>
           <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#headerModal"></button>
-          <%= image_tag current_user.decorate.header, :size => '800x200', class: "user_header" %>
+          <%= image_tag current_user.decorate.header, class: "user_header w-100 h-auto" %>
         </label>
       </div>
       <label>
@@ -126,6 +45,7 @@
         <canvas id="header_cropped_canvas" style="display:none;width: 200px;height: 200px;"></canvas>
         <img src="<%=@image if defined?(@image) %>" id="header_result-img" style="display:none;width: 800px;height: 200px;">
       </label>
+
       <p id="image_text">現在のアイコン</p>
       <div id="user_icon">
         <label>
@@ -135,7 +55,7 @@
       </div>
       <label>
         <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-        <canvas id="cropped_canvas" style="display:none;width: 200px;height: 200px;"></canvas>
+        <canvas id="cropped_canvas" class="w-100 h-auto" style="display:none;width: 200px;height: 200px;"></canvas>
         <img src="<%=@image if defined?(@image) %>" id="result-img" style="display:none;width: 200px;height: 200px;">
       </label>
     </div>

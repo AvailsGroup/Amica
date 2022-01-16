@@ -49,62 +49,30 @@ class ProfilesController < ApplicationController
   def update
     @user = current_user
     permission
+    @accepted_format = %w[.jpg .jpeg .png]
     unless params['user']['images'].nil?
-      accepted_format = %w[.jpg .jpeg .png]
-      unless accepted_format.include? File.extname(params['user']['images'].original_filename)
-        flash[:alert] = '画像は jpg jpeg png 形式のみ対応しております。'
-        @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-        @tag_list = params[:user][:tag_list]
-        @accreditation_list = params[:user][:accreditation_list]
-        render action: 'edit'
+      unless @accepted_format.include? File.extname(params['user']['images'].original_filename)
+        reject_format(params)
+        return
+      end
+    end
+
+    unless params['user']['header'].nil?
+      unless @accepted_format.include? File.extname(params['user']['header'].original_filename)
+        reject_format(params)
         return
       end
     end
 
     unless current_user.update(user_params)
-      @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-      @tag_list = params[:user][:tag_list]
-      @accreditation_list = params[:user][:accreditation_list]
-      if base64?(params[:user][:image]['data:image/jpeg;base64,'.length .. -1])
-        @image = params[:user][:image]
-        @image_x = params[:user][:image_x]
-        @image_y = params[:user][:image_y]
-        @image_w = params[:user][:image_w]
-        @image_h = params[:user][:image_h]
-      elsif base64?(params[:user][:header]['data:image/jpeg;base64,'.length .. -1])
-        @header = params[:user][:header]
-        @header_x = params[:user][:header_x]
-        @header_y = params[:user][:header_y]
-        @header_w = params[:user][:header_w]
-        @header_h = params[:user][:header_h]
-      end
+      render_params(params)
       render action: 'edit'
       return
     end
-    if !params['user']['image'].nil? && base64?(params['user']['image']['data:image/jpeg;base64,'.length .. -1])
-      filename = "#{current_user.id}#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.jpg"
-      Dir.mkdir("#{Rails.root}/tmp/users_image/") unless Dir.exist?("#{Rails.root}/tmp/users_image/")
-      File.open("#{Rails.root}/tmp/users_image/#{filename}", 'wb+') do |f|
-        f.write(Base64.decode64(params['user']['image']['data:image/jpeg;base64,'.length .. -1]))
-      end
-      f = File.open("#{Rails.root}/tmp/users_image/#{filename}")
-      current_user.image.attach(io: f, filename: filename)
-      f.close
-      File.delete("#{Rails.root}/tmp/users_image/#{filename}")
-    end
-    if !params['user']['header'].nil? && base64?(params['user']['header']['data:image/jpeg;base64,'.length .. -1])
-      filename = "#{current_user.id}#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.jpg"
-      Dir.mkdir("#{Rails.root}/tmp/users_header/") unless Dir.exist?("#{Rails.root}/tmp/users_header/")
-      File.open("#{Rails.root}/tmp/users_header/#{filename}", 'wb+') do |f|
-        f.write(Base64.decode64(params['user']['header']['data:image/jpeg;base64,'.length .. -1]))
-      end
-      f = File.open("#{Rails.root}/tmp/users_header/#{filename}")
-      current_user.header.attach(io: f, filename: filename)
-      f.close
-      File.delete("#{Rails.root}/tmp/users_header/#{filename}")
-    end
-    flash[:notice] = 'ユーザー情報を編集しました'
+    save_image(params)
+    save_header(params)
 
+    flash[:notice] = 'ユーザー情報を編集しました'
     redirect_to profile_path(current_user.userid)
   end
 
@@ -183,5 +151,61 @@ class ProfilesController < ApplicationController
     @users = @users.reject { |u| u.userid.nil? }
     @users = @users.reject { |u| @user.blocks.any? { |user| user.blocked_user_id == u.id } }
     @users = @users.reject { |u| following?(@following, u) }
+  end
+
+  def reject_format(params)
+    flash[:alert] = '画像は jpg jpeg png 形式のみ対応しております。'
+    @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+    @tag_list = params[:user][:tag_list]
+    @accreditation_list = params[:user][:accreditation_list]
+    render action: 'edit'
+  end
+
+  def save_image(params)
+    if !params['user']['image'].nil? && base64?(params['user']['image']['data:image/jpeg;base64,'.length .. -1])
+      filename = "#{current_user.id}#{Time.zone.now.strftime('%Y%m%d%H%M%S')}_image.jpg"
+      Dir.mkdir("#{Rails.root}/tmp/users_image/") unless Dir.exist?("#{Rails.root}/tmp/users_image/")
+      File.open("#{Rails.root}/tmp/users_image/#{filename}", 'wb+') do |f|
+        f.write(Base64.decode64(params['user']['image']['data:image/jpeg;base64,'.length .. -1]))
+      end
+      f = File.open("#{Rails.root}/tmp/users_image/#{filename}")
+      current_user.image.attach(io: f, filename: filename)
+      f.close
+      File.delete("#{Rails.root}/tmp/users_image/#{filename}")
+    end
+  end
+
+  def save_header(params)
+    if !params['user']['header'].nil? && base64?(params['user']['header']['data:image/jpeg;base64,'.length .. -1])
+      filename = "#{current_user.id}#{Time.zone.now.strftime('%Y%m%d%H%M%S')}_header.jpg"
+      Dir.mkdir("#{Rails.root}/tmp/users_header/") unless Dir.exist?("#{Rails.root}/tmp/users_header/")
+      File.open("#{Rails.root}/tmp/users_header/#{filename}", 'wb+') do |f|
+        f.write(Base64.decode64(params['user']['header']['data:image/jpeg;base64,'.length .. -1]))
+      end
+      f = File.open("#{Rails.root}/tmp/users_header/#{filename}")
+      current_user.header.attach(io: f, filename: filename)
+      f.close
+      File.delete("#{Rails.root}/tmp/users_header/#{filename}")
+    end
+  end
+
+  def render_params(params)
+    @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+    @tag_list = params[:user][:tag_list]
+    @accreditation_list = params[:user][:accreditation_list]
+    if base64?(params[:user][:image]['data:image/jpeg;base64,'.length .. -1])
+      @image = params[:user][:image]
+      @image_x = params[:user][:image_x]
+      @image_y = params[:user][:image_y]
+      @image_w = params[:user][:image_w]
+      @image_h = params[:user][:image_h]
+    end
+    if base64?(params[:user][:header]['data:image/jpeg;base64,'.length .. -1])
+      @header = params[:user][:header]
+      @header_x = params[:user][:header_x]
+      @header_y = params[:user][:header_y]
+      @header_w = params[:user][:header_w]
+      @header_h = params[:user][:header_h]
+    end
   end
 end
