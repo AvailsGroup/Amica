@@ -2,9 +2,11 @@
   <div class="mb-5">
     <h2 data-sal="slide-down" data-sal-duration="500">このアプリについて</h2>
     <div>
-      <p class="mb-3" data-sal="flip-right" data-sal-delay="300" data-sal-duration="500">本アプリは<u>岩崎学園情報科学専門学校生に向けたアプリ</u>です。</p>
+      <p class="mb-3" data-sal="flip-right" data-sal-delay="300" data-sal-duration="500">本アプリは<span class="Text-Span JS_ScrollAnimationItem">岩崎学園情報科学専門学校生に向けたアプリ</span>です。
+      </p>
       <p class="mb-3" data-sal="flip-right" data-sal-delay="300" data-sal-duration="500">タグや呟きを元に検索を行い趣味の合う人を探してチャットを行ったり、</p>
-      <p class="mb-3" data-sal="flip-right" data-sal-delay="300" data-sal-duration="500">実際に学校で話しかける<u>きっかけを探す手助け</u>をします。</p>
+      <p class="mb-3" data-sal="flip-right" data-sal-delay="300" data-sal-duration="500">実際に学校で話しかける<span class="Text-Span JS_ScrollAnimationItem">きっかけを探す手助け</span>をします。
+      </p>
       <p class="mb-3" data-sal="flip-right" data-sal-delay="300" data-sal-duration="500">学生生活を新たな友人と共に。</p>
     </div>
   </div>
@@ -14,7 +16,9 @@
     <div>
       <p class="mb-3" data-sal="flip-right" data-sal-delay="300" data-sal-duration="500">本アプリケーションはオープンソースソフトウェアです。</p>
       <p class="mb-3" data-sal="flip-right" data-sal-delay="300" data-sal-duration="500">ライセンスの規定を守れば、誰でも自由に複製、改変、配布することができます。</p>
-      <%= link_to "github", "https://github.com/AvailsGroup/Amica", target: :_blank, rel: "noopener noreferrer"  %>
+      <%= link_to "https://github.com/AvailsGroup/Amica", target: :_blank, rel: "noopener noreferrer" do %>
+        <i class="fab fa-github text-dark" style="font-size: 40px"></i>
+      <% end %>
     </div>
   </div>
 </div>
