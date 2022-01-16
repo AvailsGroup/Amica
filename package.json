@@ -16,7 +16,6 @@
     "jquery": "^3.6.0",
     "jquery-ui": "^1.13.0",
     "lity": "^2.4.1",
-    "node-sass": "4.14.1",
     "particles.js": "^2.0.0",
     "popper.js": "^1.16.1",
     "sal.js": "^0.8.5",
