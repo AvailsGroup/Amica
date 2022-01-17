@@ -58,7 +58,7 @@ class ProfilesController < ApplicationController
     end
 
     unless params['user']['header'].nil?
-      unless @accepted_format.include? File.extname(params['user']['header'].original_filename)
+      unless @accepted_format.include? File.extname(params['user']['header_images'].original_filename)
         reject_format(params)
         return
       end
