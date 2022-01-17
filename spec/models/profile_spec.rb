@@ -118,6 +118,32 @@ RSpec.describe Profile, type: :model do
         expect(profile).to be_valid
       end
     end
+  end
+
+  describe '#discord_name' do
+    context '名前が32文字以上' do
+      it 'バリデーションエラーが出る' do
+        profile = Profile.new(
+          id: 1,
+          user: User.new(id: 1),
+          discord_name: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          enrolled_year: DateTime.now.strftime("%Y").to_i
+        )
+        expect(profile).not_to be_valid
+      end
+    end
+
+    context '名前が32文字以内' do
+      it '正常に保存される' do
+        profile = Profile.new(
+          id: 1,
+          user: User.new(id 1),
+          discord_name: "test",
+          enrolled_year: DateTime.now.strftime("%Y").to_i
+        )
+        expect(profile).to be_valid
+      end
+    end
 
   end
 
