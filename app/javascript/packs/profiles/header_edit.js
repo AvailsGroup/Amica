@@ -35,23 +35,25 @@ document.addEventListener("DOMContentLoaded", function(){
         reader.readAsDataURL(file);
         reader.onload = function (e) {
             image.src = e.target.result;
-            document.getElementById("header_source_canvas").src = image.src;
             image.onload = function () {
 
                 let scale = scaled_width / image.width;
-                const canvas = document.getElementById("header_source_canvas");
-             /*  const test = document.getElementById("test");
-                test.width = image.width * scale;
-                test.height = image.height * scale;
-                let ctx = test.getContext("2d");
-                ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);*/
+                const crop = document.getElementById("header_crop");
+               const canvas = document.getElementById("header_source_canvas");
+                canvas.width = image.width * scale;
+                canvas.height = image.height * scale;
+                let ctx = canvas.getContext("2d");
+                ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+                crop.src = canvas.toDataURL();
                 if (cropper != null) {
                     cropper.destroy();
                 }
-                cropper = new Cropper(canvas,
+                cropper = new Cropper(crop,
                     {
+                        minCropBoxWidth: 300,
+                        minCropBoxHeight: 75,
                         aspectRatio: crop_aspect_ratio,
-                        data: {width: canvas.width, height: canvas.width * crop_aspect_ratio},
+                        data: {width: crop.width, height: crop.width * crop_aspect_ratio},
                         crop: function (event) {
                             document.getElementById("header_image_x").value = event.detail.x;
                             document.getElementById("header_image_y").value = event.detail.y;
