@@ -14,6 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" href="public/apple-touch-icon.png">
   <meta name=”description” content=”ISC学生向けの友達作りサイトです。” />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FEWKYWJMZD"></script>
   <script>
@@ -161,7 +162,7 @@
           <p class="mb-1 small"><%= link_to "プロフィール設定", edit_profile_path(current_user.userid), class: "text-decoration-none text-light" %></p>
         <% end %>
         <p class="mb-1 small"><%= link_to "アカウント設定", edit_user_registration_path, class: "text-decoration-none text-light" %></p>
-        <p class="mb-1 small"><%= link_to "ログアウト", destroy_user_session_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-decoration-none text-light" %></p>
       </div>
       <div class="col mt-3">
         <h5 class="mb-2">運営</h5>
