@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(){
        });
 
     let cropper = null;
-    const scaled_width = 1280;
+    const scaled_width = 1920;
     const header_aspect_numerator = parseFloat(document.getElementById("header_aspect_numerator").value)
     const header_aspect_denominator = parseFloat(document.getElementById("header_aspect_denominator").value)
     const crop_aspect_ratio = header_aspect_denominator / header_aspect_numerator;
@@ -35,18 +35,19 @@ document.addEventListener("DOMContentLoaded", function(){
         reader.readAsDataURL(file);
         reader.onload = function (e) {
             image.src = e.target.result;
+            document.getElementById("header_source_canvas").src = image.src;
             image.onload = function () {
 
                 let scale = scaled_width / image.width;
                 const canvas = document.getElementById("header_source_canvas");
-                canvas.width = image.width * scale;
-                canvas.height = image.height * scale;
-                let ctx = canvas.getContext("2d");
-                ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+             /*  const test = document.getElementById("test");
+                test.width = image.width * scale;
+                test.height = image.height * scale;
+                let ctx = test.getContext("2d");
+                ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);*/
                 if (cropper != null) {
                     cropper.destroy();
                 }
-
                 cropper = new Cropper(canvas,
                     {
                         aspectRatio: crop_aspect_ratio,

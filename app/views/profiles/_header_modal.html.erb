@@ -19,7 +19,7 @@
             <%= form.hidden_field :header_aspect_denominator, id: "header_aspect_denominator", value: "4.0" %>
 
             <div id="header_prev_img">
-              <%= image_tag current_user.decorate.header,  :width => '100%', :height => 'auto' , class: "user_header" %>
+              <%= image_tag current_user.decorate.header, :width => '100%', :height => 'auto' , class: "user_header" %>
             </div>
           </div>
         </div>
@@ -28,9 +28,12 @@
             <div class="modal_padding modal_title_wrapper">
               <h4>範囲を選択してください</h4>
             </div>
+            <div class="container">
             <div class="canvas_wrapper" id="parent_header_source_canvas">
-              <canvas id="header_source_canvas" width="1" height="1"></canvas>
+              <canvas id="test" style="display: none"></canvas>
+              <img id="header_source_canvas" src="" width="100%" >
             </div>
+          </div>
             <div class="modal-footer">
               <button type="button" id="close_button" class="btn btn-primary" data-bs-dismiss="modal">画像を切り取る</button>
             </div>
