@@ -4,9 +4,9 @@ import "jquery-ui/ui/widget"
 import "jquery-ui/ui/widgets/autocomplete"
 import "tag-it"
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
     const crop = document.getElementById("header_crop");
-    $('#header_trim_img_uploder').click(function(e){
+    $('#header_trim_img_uploder').click(function (e) {
         $(this).val('');
         crop.src = "";
         document.getElementById("header_prev_img").style.display = '';
@@ -14,11 +14,11 @@ document.addEventListener("DOMContentLoaded", function(){
         $('#user_header').fadeIn();
     });
 
-    $('#header_trim_img_uploder').change(function(e){
+    $('#header_trim_img_uploder').change(function (e) {
         document.getElementById("header_prev_img").style.display = 'none';
         $('#header_modal_area').fadeIn();
         $('.header_modal-text').fadeOut();
-       });
+    });
 
     let cropper = null;
     const scaled_width = 1920;
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function(){
                     }
                 )
 
-                $('#close_button,#modal_back_area').click(function(){
+                $('#close_button,#modal_back_area').click(function () {
                     const cropped_canvas = document.getElementById("header_cropped_canvas");
                     let ctx = cropped_canvas.getContext("2d");
                     let cropped_image_width = image.height * crop_aspect_ratio;
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function(){
                     let image_y = document.getElementById("header_image_y").value;
                     let image_w = document.getElementById("header_image_w").value;
                     let image_h = document.getElementById("header_image_h").value;
-                    ctx.drawImage(image, image_x/scale, image_y/scale, image_w/scale , image_h/scale ,0 ,0 , cropped_canvas.width ,cropped_canvas.height);
+                    ctx.drawImage(image, image_x / scale, image_y / scale, image_w / scale, image_h / scale, 0, 0, cropped_canvas.width, cropped_canvas.height);
                     document.getElementById("header_text").innerHTML = "選択したヘッダー";
                     $('#user_header').fadeOut();
                     document.getElementById("header").value = cropper.getCroppedCanvas().toDataURL('image/jpeg');

@@ -1,15 +1,6 @@
 <%= stylesheet_link_tag 'profiles', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag 'profiles_show', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<style>
-    .send {
-        margin-right: 2px;
-        margin-bottom: 2px;
-        background-color: rgba(255, 255, 255, 0);
-        border: none;
-    }
-</style>
-
 <% if current_user != @user && blocked?(current_user, @user) %>
   <%= render "layouts/modal", id: "Modal",
              title: "ブロック", content: "ユーザーのブロックを解除しますか？",
@@ -73,23 +64,27 @@
               <%= render "profiles/presentation", title: "学籍番号", value: @profile.student_id if @user.setting.visible_student_id %>
             </ul>
 
-            <% unless blocked?(current_user, @user) || blocked?(@user, current_user) %>
-              <div class="actions">
+            <div class="actions">
+              <% if blocked?(current_user, @user) || blocked?(@user, current_user) %>
+                <button type="button" class="btn btn-primary followbtn" data-bs-toggle="modal" data-bs-target="#Modal" style="background-color:<%= block_color(@user) %>;border-color:<%= block_color(@user) %>;margin-left: 4px;margin-right: 22px">
+                  ブロック解除
+                </button>
+              <% else %>
                 <% if current_user.id != @user.id %>
                   <% if following?(@following, @user) %>
                     <%= link_to 'フォロー解除', profile_relationship_path(@user.userid), method: :delete, class: "btn btn-primary followbtn", style: "color:#FFF;margin-left:4px;margin-right:22px" %>
                     <%= link_to 'チャット', chat_path(@user.userid), style: "color:#FFF;", class: "btn btn-primary followbtn mx-1" %>
                   <% else %>
+                    <button type="button" class="btn btn-primary followbtn" data-bs-toggle="modal" data-bs-target="#Modal" style="background-color:<%= block_color(@user) %>;border-color:<%= block_color(@user) %>;margin-left: 4px;margin-right: 22px;">
+                      ブロック
+                    </button>
                     <%= link_to 'フォロー', profile_relationships_path(@user.userid), method: :post, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
                   <% end %>
-                  <button type="button" class="send" data-bs-toggle="modal" data-bs-target="#Modal">
-                    <i class="fas fa-ban" style="<%= blocked?(current_user, @user) ? "color: blue" : "color: red" %>;width: 20px;height: 20px"></i>
-                  </button>
                 <% else %>
                   <%= link_to '編集', edit_profile_path, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
                 <% end %>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
@@ -170,7 +165,8 @@
           <div class="col-md-12">
             <div class="panel panel-default">
               <div class="panel-heading m-3">
-                <h3 class="page-header" style="color: #1da1f2"><i class="fab fa-twitter" style="margin-right: 3px"></i>Twitter
+                <h3 class="page-header" style="color: #1da1f2">
+                  <i class="fab fa-twitter" style="margin-right: 3px"></i>Twitter
                 </h3>
                 <div style="font-size: 18px"><%= link_to "@#{@profile.twitter_id}", "https://twitter.com/#{@profile.twitter_id}" %></div>
               </div>
@@ -195,7 +191,8 @@
           <div class="col-md-12">
             <div class="panel panel-default">
               <div class="panel-heading m-3">
-                <h3 class="page-header" style="color: #535FEE"><i class="fab fa-discord" style="margin-right: 3px"></i>Discord
+                <h3 class="page-header" style="color: #535FEE">
+                  <i class="fab fa-discord" style="margin-right: 3px"></i>Discord
                 </h3>
                 <div style="font-size: 18px"><%= "#{@profile.discord_name}##{@profile.discord_tag}" %></div>
               </div>

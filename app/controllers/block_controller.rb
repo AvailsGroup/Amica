@@ -5,7 +5,7 @@ class BlockController < ApplicationController
   def create
     @users = User.includes(:blocks)
     @user = @users.find(params[:profile_id])
-    current_user?
+    return if current_user?
     Block.create(user_id: current_user.id, blocked_user_id: @user.id)
     destroy_db
     flash[:notice] = "ユーザーをブロックしました"
@@ -15,7 +15,7 @@ class BlockController < ApplicationController
   def destroy
     @users = User.includes(:blocks)
     @user = @users.find(params[:profile_id])
-    current_user?
+    return if current_user?
     Block.find_by(user_id: current_user.id, blocked_user_id: @user.id).destroy
     flash[:notice] = "ユーザーのブロックを解除しました"
     redirect_back fallback_location: pages_path
@@ -25,9 +25,11 @@ class BlockController < ApplicationController
 
   def current_user?
     if @user == current_user
-      # TODO: redirect
-      nil
+      flash[:alert] = "自分はブロックできません"
+      redirect_back fallback_location: profile_path(@user)
+      true
     end
+    false
   end
 
   def destroy_db

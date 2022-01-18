@@ -16,15 +16,15 @@
             availableTags: <%= raw @all_tag_list %>
         });
         <% if defined?(@image)%>
-          $('.user_image').hide()
-          $('#result-img').show()
+        $('.user_image').hide()
+        $('#result-img').show()
         <% end %>
     });
 </script>
 
 <%= form_with model: current_user, url: profile_path, method: :put, multipart: true do |f| %>
-  <%= render "profiles/image_model" , form:f%>
-  <%= render "profiles/header_modal", form:f %>
+  <%= render "profiles/image_model", form: f %>
+  <%= render "profiles/header_modal", form: f %>
 
 
   <div class="container" style="max-width: 960px">
@@ -43,7 +43,7 @@
       <label>
         <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#headerModal"></button>
         <canvas id="header_cropped_canvas" style="display:none;width: 200px;height: 200px;"></canvas>
-        <img src="<%=@image if defined?(@image) %>" id="header_result-img" style="display:none;width: 100%;height: auto;">
+        <img src="<%= @image if defined?(@image) %>" id="header_result-img" style="display:none;width: 100%;height: auto;">
       </label>
 
       <p id="image_text">現在のアイコン</p>
@@ -56,7 +56,7 @@
       <label>
         <button type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
         <canvas id="cropped_canvas" class="w-100 h-auto" style="display:none;width: 200px;height: 200px;"></canvas>
-        <img src="<%=@image if defined?(@image) %>" id="result-img" style="display:none;width: 200px;height: 200px;">
+        <img src="<%= @image if defined?(@image) %>" id="result-img" style="display:none;width: 200px;height: 200px;">
       </label>
     </div>
     <div class="row g-3">

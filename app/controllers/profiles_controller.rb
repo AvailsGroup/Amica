@@ -162,11 +162,11 @@ class ProfilesController < ApplicationController
   end
 
   def save_image(params)
-    if !params['user']['image'].nil? && base64?(params['user']['image']['data:image/jpeg;base64,'.length .. -1])
+    if !params['user']['image'].nil? && base64?(params['user']['image']['data:image/jpeg;base64,'.length..-1])
       filename = "#{current_user.id}#{Time.zone.now.strftime('%Y%m%d%H%M%S')}_image.jpg"
       Dir.mkdir("#{Rails.root}/tmp/users_image/") unless Dir.exist?("#{Rails.root}/tmp/users_image/")
       File.open("#{Rails.root}/tmp/users_image/#{filename}", 'wb+') do |f|
-        f.write(Base64.decode64(params['user']['image']['data:image/jpeg;base64,'.length .. -1]))
+        f.write(Base64.decode64(params['user']['image']['data:image/jpeg;base64,'.length..-1]))
       end
       f = File.open("#{Rails.root}/tmp/users_image/#{filename}")
       current_user.image.attach(io: f, filename: filename)
@@ -176,11 +176,11 @@ class ProfilesController < ApplicationController
   end
 
   def save_header(params)
-    if !params['user']['header'].nil? && base64?(params['user']['header']['data:image/jpeg;base64,'.length .. -1])
+    if !params['user']['header'].nil? && base64?(params['user']['header']['data:image/jpeg;base64,'.length..-1])
       filename = "#{current_user.id}#{Time.zone.now.strftime('%Y%m%d%H%M%S')}_header.jpg"
       Dir.mkdir("#{Rails.root}/tmp/users_header/") unless Dir.exist?("#{Rails.root}/tmp/users_header/")
       File.open("#{Rails.root}/tmp/users_header/#{filename}", 'wb+') do |f|
-        f.write(Base64.decode64(params['user']['header']['data:image/jpeg;base64,'.length .. -1]))
+        f.write(Base64.decode64(params['user']['header']['data:image/jpeg;base64,'.length..-1]))
       end
       f = File.open("#{Rails.root}/tmp/users_header/#{filename}")
       current_user.header.attach(io: f, filename: filename)
@@ -193,14 +193,14 @@ class ProfilesController < ApplicationController
     @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
     @tag_list = params[:user][:tag_list]
     @accreditation_list = params[:user][:accreditation_list]
-    if base64?(params[:user][:image]['data:image/jpeg;base64,'.length .. -1])
+    if base64?(params[:user][:image]['data:image/jpeg;base64,'.length..-1])
       @image = params[:user][:image]
       @image_x = params[:user][:image_x]
       @image_y = params[:user][:image_y]
       @image_w = params[:user][:image_w]
       @image_h = params[:user][:image_h]
     end
-    if base64?(params[:user][:header]['data:image/jpeg;base64,'.length .. -1])
+    if base64?(params[:user][:header]['data:image/jpeg;base64,'.length..-1])
       @header = params[:user][:header]
       @header_x = params[:user][:header_x]
       @header_y = params[:user][:header_y]
