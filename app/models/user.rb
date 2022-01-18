@@ -25,7 +25,7 @@ class User < ApplicationRecord
 
   validates :email,
             uniqueness: { case_sensitive: false },
-            format: { with: /\A[A-Za-z]{4}[0-9]{7}@gn.iwasaki.ac.jp\z/ }
+            format: { with: /\A[A-Za-z0-9]+@gn.iwasaki.ac.jp\z/ }
 
   validates :name,
             length: { minimum: 2, maximum: 20 },

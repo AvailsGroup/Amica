@@ -9,7 +9,7 @@ class Post < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_one_attached :image
 
-  validates :content,
+  validates :content,presence: true,
             length: { minimum: 1, maximum: 280 }
 
   scope :search_content_for, ->(query) { where('content like ?', "%#{query}%") }
