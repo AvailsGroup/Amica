@@ -10,11 +10,11 @@
       </div>
       <div style="padding-top: 19px">
         <% if @favorite_users.any?{ |u| u == user } %>
-          <%= link_to page_favorite_user_delete_path(user.id, current_user.id), method: :delete, class: 'bg-white', style: "border: none;color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="far fa-star"></i>' } do %>
+          <%= button_to page_favorite_user_delete_path(user.id, current_user.id), method: :delete, class: 'bg-white', style: "border: none;color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="far fa-star"></i>' } do %>
             <i class="fas fa-star"></i>
           <% end %>
         <% else %>
-          <%= link_to  page_favorite_user_create_path(user.id), method: :post, class: 'bg-white', style: "border: none;color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="fas fa-star"></i>' } do %>
+          <%= button_to  page_favorite_user_create_path(user.id), method: :post, class: 'bg-white', style: "border: none;color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="fas fa-star"></i>' } do %>
             <i class="far fa-star"></i>
           <% end %>
         <% end %>
