@@ -78,7 +78,7 @@
                     <button type="button" class="btn btn-primary followbtn" data-bs-toggle="modal" data-bs-target="#Modal" style="background-color:<%= block_color(@user) %>;border-color:<%= block_color(@user) %>;margin-left: 4px;margin-right: 22px;">
                       ブロック
                     </button>
-                    <%= link_to 'フォロー', profile_relationships_path(@user.userid), method: :post, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
+                    <%= link_to 'フォロー', profile_relationships_path(@user.userid), method: :post, style: "color:#FFF;margin-right: 4px;", class: "btn btn-primary followbtn" %>
                   <% end %>
                 <% else %>
                   <%= link_to '編集', edit_profile_path, style: "color:#FFF;", class: "btn btn-primary followbtn" %>
