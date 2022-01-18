@@ -1,0 +1,200 @@
+/* line 1, app/assets/stylesheets/community_index.scss */
+.carbon-example {
+  padding: 8px;
+  background-color: #fff;
+  width: auto;
+  box-sizing: border-box;
+  border-radius: 6px;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  align-items: flex-start;
+  position: relative;
+  z-index: 5;
+  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+/* line 18, app/assets/stylesheets/community_index.scss */
+.carbon-example img {
+  margin-right: 9px;
+  max-width: 125px;
+}
+
+/* line 23, app/assets/stylesheets/community_index.scss */
+.carbon-example .inner-wrapper {
+  text-align: left;
+}
+
+/* line 27, app/assets/stylesheets/community_index.scss */
+.carbon-example .inner-wrapper p {
+  font-size: 12px;
+  line-height: 1.33;
+  margin: 8px 0;
+}
+
+/* line 33, app/assets/stylesheets/community_index.scss */
+.carbon-example .inner-wrapper a.fine-print {
+  font-size: 8px;
+  color: #C5CDD0;
+  line-height: 1.25;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* line 41, app/assets/stylesheets/community_index.scss */
+.flex-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-around;
+  -moz-justify-content: space-around;
+  justify-content: space-around;
+}
+
+@media screen and (max-width: 991px) {
+  /* line 59, app/assets/stylesheets/community_index.scss */
+  .flex-wrapper.two-col {
+    display: block;
+    text-align: center;
+  }
+}
+
+/* line 65, app/assets/stylesheets/community_index.scss */
+.flex-wrapper.two-col > * {
+  width: 50%;
+}
+
+/* line 69, app/assets/stylesheets/community_index.scss */
+.flex-wrapper.two-col > *:first-of-type {
+  padding-right: 130px;
+}
+
+@media screen and (max-width: 991px) {
+  /* line 74, app/assets/stylesheets/community_index.scss */
+  .flex-wrapper.two-col > * {
+    width: 100%;
+  }
+  /* line 78, app/assets/stylesheets/community_index.scss */
+  .flex-wrapper.two-col > *:first-of-type {
+    padding-right: 0;
+  }
+}
+
+/* line 83, app/assets/stylesheets/community_index.scss */
+.flex-wrapper.two-col.reversed > *:first-of-type {
+  order: 2;
+  padding-right: 0;
+}
+
+@media screen and (min-width: 992px) {
+  /* line 88, app/assets/stylesheets/community_index.scss */
+  .flex-wrapper.two-col.reversed > *:first-of-type {
+    padding-left: 130px;
+  }
+}
+
+/* line 93, app/assets/stylesheets/community_index.scss */
+.flex-wrapper.three-col {
+  text-align: left;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  align-items: flex-start;
+  margin-top: 40px;
+}
+
+@media screen and (max-width: 767px) {
+  /* line 103, app/assets/stylesheets/community_index.scss */
+  .flex-wrapper.three-col {
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+}
+
+/* line 110, app/assets/stylesheets/community_index.scss */
+.flex-wrapper.three-col > * {
+  width: 33.3%;
+}
+
+@media screen and (max-width: 767px) {
+  /* line 114, app/assets/stylesheets/community_index.scss */
+  .flex-wrapper.three-col > * {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  /* line 119, app/assets/stylesheets/community_index.scss */
+  .flex-wrapper.three-col li {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  /* line 123, app/assets/stylesheets/community_index.scss */
+  .flex-wrapper.three-col li:first-child {
+    padding-left: 0;
+  }
+  /* line 126, app/assets/stylesheets/community_index.scss */
+  .flex-wrapper.three-col li:last-child {
+    padding-right: 0;
+  }
+}
+
+/* line 131, app/assets/stylesheets/community_index.scss */
+.flex-wrapper.three-col .flex-wrapper {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  align-items: flex-start;
+  margin-top: 0;
+}
+
+@media screen and (max-width: 767px) {
+  /* line 140, app/assets/stylesheets/community_index.scss */
+  .flex-wrapper.three-col .flex-wrapper {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+  }
+  /* line 148, app/assets/stylesheets/community_index.scss */
+  .flex-wrapper.three-col .flex-wrapper:not(:first-of-type) {
+    margin-top: 40px;
+  }
+}
+
+/* line 153, app/assets/stylesheets/community_index.scss */
+.flex-wrapper.three-col .flex-wrapper .icon {
+  top: 0;
+  transform: none;
+}
+
+/* line 158, app/assets/stylesheets/community_index.scss */
+.star {
+  position: absolute;
+  top: 3%;
+  right: 2%;
+}
+
+/* line 163, app/assets/stylesheets/community_index.scss */
+.fa-bullhorn {
+  position: absolute;
+  top: 6%;
+  right: 3.2%;
+  font-size: 1.6rem;
+}

@@ -1,0 +1,524 @@
+/*==============================*/
+/*====== siderbar user profile =====*/
+/*==============================*/
+/* line 5, app/assets/stylesheets/profiles_show.scss */
+.main {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  background-color: #FFFFFF;
+}
+
+/* line 11, app/assets/stylesheets/profiles_show.scss */
+.nav > li > a.userdd {
+  padding: 5px 15px;
+}
+
+/* line 14, app/assets/stylesheets/profiles_show.scss */
+.userprofile {
+  width: 100%;
+  float: left;
+  clear: both;
+}
+
+/* line 20, app/assets/stylesheets/profiles_show.scss */
+.userheader {
+  width: 100%;
+}
+
+/* line 24, app/assets/stylesheets/profiles_show.scss */
+.userprofile .userpic .userpicimg {
+  height: auto;
+  max-width: 100px;
+  border-radius: 10%;
+}
+
+/* line 30, app/assets/stylesheets/profiles_show.scss */
+.userpicimg {
+  max-width: 100px;
+  border-radius: 10%;
+}
+
+/* line 35, app/assets/stylesheets/profiles_show.scss */
+.username {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 25px;
+  color: #000000;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* line 43, app/assets/stylesheets/profiles_show.scss */
+.username + p {
+  color: #607d8b;
+  font-size: 13px;
+  line-height: 15px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* line 51, app/assets/stylesheets/profiles_show.scss */
+.settingbtn {
+  height: 30px;
+  width: 30px;
+  border-radius: 30px;
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  line-height: 30px;
+  vertical-align: middle;
+  text-align: center;
+  padding: 0;
+  box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.15);
+  -ms-box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* line 68, app/assets/stylesheets/profiles_show.scss */
+.userprofile.small {
+  width: auto;
+  clear: both;
+  margin: 0px auto;
+}
+
+/* line 73, app/assets/stylesheets/profiles_show.scss */
+.userprofile.small .userpic {
+  height: 40px;
+  width: 40px;
+  margin: 0 10px 0 0;
+  display: block;
+  border-radius: 100%;
+  box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
+  -ms-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
+  position: relative;
+  float: left;
+}
+
+/* line 86, app/assets/stylesheets/profiles_show.scss */
+.userprofile.small .textcontainer {
+  float: left;
+  max-width: 100px;
+  padding: 0;
+}
+
+/* line 91, app/assets/stylesheets/profiles_show.scss */
+.userprofile.small .userpic .userpicimg {
+  min-height: 100%;
+  width: 100%;
+  border-radius: 100%;
+}
+
+/* line 96, app/assets/stylesheets/profiles_show.scss */
+.userprofile.small .username {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  color: #000000;
+  margin: 0px;
+  float: left;
+  width: 100%;
+}
+
+/* line 105, app/assets/stylesheets/profiles_show.scss */
+.userprofile.small .username + p {
+  color: #607d8b;
+  font-size: 13px;
+  float: left;
+  width: 100%;
+  margin: 0;
+}
+
+/* line 113, app/assets/stylesheets/profiles_show.scss */
+.userdata {
+  z-index: 3;
+}
+
+/*==============================*/
+/*====== Social Profile css =====*/
+/*==============================*/
+/* line 120, app/assets/stylesheets/profiles_show.scss */
+.countlist h3 {
+  margin: 0;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+/* line 125, app/assets/stylesheets/profiles_show.scss */
+.countlist {
+  text-transform: uppercase;
+}
+
+/* line 128, app/assets/stylesheets/profiles_show.scss */
+.countlist li {
+  padding: 15px 30px 15px 0;
+  font-size: 14px;
+  text-align: left;
+}
+
+/* line 133, app/assets/stylesheets/profiles_show.scss */
+.countlist li small {
+  font-size: 12px;
+  margin: 0;
+}
+
+/* line 137, app/assets/stylesheets/profiles_show.scss */
+.followbtn {
+  float: right;
+  margin: 22px;
+}
+
+/* line 141, app/assets/stylesheets/profiles_show.scss */
+.userprofile.social {
+  background: url(https://www.bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg) no-repeat top center;
+  background-size: 100%;
+  padding: 50px 0;
+  margin: 0;
+  z-index: 2;
+}
+
+/* line 148, app/assets/stylesheets/profiles_show.scss */
+.userprofile.social .username {
+  color: #000;
+}
+
+/* line 151, app/assets/stylesheets/profiles_show.scss */
+.userprofile.social .username + p {
+  color: #000;
+  opacity: 0.8;
+}
+
+/* line 156, app/assets/stylesheets/profiles_show.scss */
+.postbtn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  z-index: 9;
+}
+
+/* line 162, app/assets/stylesheets/profiles_show.scss */
+.status-upload {
+  width: 100%;
+  float: left;
+  margin-bottom: 15px;
+}
+
+/* line 167, app/assets/stylesheets/profiles_show.scss */
+.posttimeline .panel {
+  margin-bottom: 15px;
+}
+
+/* line 170, app/assets/stylesheets/profiles_show.scss */
+.commentsblock {
+  background: #f8f9fb;
+}
+
+/* line 173, app/assets/stylesheets/profiles_show.scss */
+.nopaddingbtm {
+  margin-bottom: 0;
+}
+
+/*==============================*/
+/*====== Recently connected  heading =====*/
+/*==============================*/
+/* line 179, app/assets/stylesheets/profiles_show.scss */
+.memberblock {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 15px;
+}
+
+/* line 185, app/assets/stylesheets/profiles_show.scss */
+.member {
+  width: 24%;
+  float: left;
+  margin: 2px 1% 2px 0;
+  background: #ffffff;
+  border: 1px solid #d8d0c3;
+  padding: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* line 195, app/assets/stylesheets/profiles_show.scss */
+.memmbername {
+  position: absolute;
+  bottom: -30px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  line-height: 30px;
+  padding: 0 5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  font-size: 11px;
+  transition: 0.5s ease all;
+}
+
+/* line 209, app/assets/stylesheets/profiles_show.scss */
+.member:hover .memmbername {
+  bottom: 0;
+}
+
+/* line 212, app/assets/stylesheets/profiles_show.scss */
+.member img {
+  width: 100%;
+  transition: 0.5s ease all;
+}
+
+/* line 216, app/assets/stylesheets/profiles_show.scss */
+.member:hover img {
+  opacity: 0.8;
+  transform: scale(1.2);
+}
+
+/* line 221, app/assets/stylesheets/profiles_show.scss */
+.panel-default > .panel-heading {
+  color: #000000;
+  font-weight: 400;
+  font-size: 15px;
+  border-radius: 0;
+  border-color: #e1eaef;
+}
+
+/* line 231, app/assets/stylesheets/profiles_show.scss */
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.428571429;
+}
+
+/* line 241, app/assets/stylesheets/profiles_show.scss */
+.page-header.small {
+  position: relative;
+  line-height: 22px;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+/* line 248, app/assets/stylesheets/profiles_show.scss */
+.favorite i {
+  color: #eb3147;
+}
+
+/* line 252, app/assets/stylesheets/profiles_show.scss */
+.btn i {
+  font-size: 17px;
+}
+
+/* line 256, app/assets/stylesheets/profiles_show.scss */
+.panel {
+  box-shadow: 0px 2px 10px 0 rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0px 2px 10px 0 rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0px 2px 10px 0 rgba(0, 0, 0, 0.05);
+  -ms-box-shadow: 0px 2px 10px 0 rgba(0, 0, 0, 0.05);
+  transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
+  -webkit-transition: all ease 0.5s;
+  -ms-transition: all ease 0.5s;
+  margin-bottom: 35px;
+  border-radius: 0px;
+  position: relative;
+  border: 0;
+  display: inline-block;
+  width: 100%;
+  z-index: 1;
+}
+
+/* line 274, app/assets/stylesheets/profiles_show.scss */
+.panel-footer {
+  padding: 10px 15px;
+  background-color: #ffffff;
+  border-top: 1px solid #eef2f4;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  color: #607d8b;
+}
+
+/* line 283, app/assets/stylesheets/profiles_show.scss */
+.panel-blue {
+  color: #ffffff;
+  background-color: #03A9F4;
+}
+
+/* line 288, app/assets/stylesheets/profiles_show.scss */
+.panel-red.userlist .username, .panel-green.userlist .username, .panel-yellow.userlist .username, .panel-blue.userlist .username {
+  color: #ffffff;
+}
+
+/* line 292, app/assets/stylesheets/profiles_show.scss */
+.panel-red.userlist p, .panel-green.userlist p, .panel-yellow.userlist p, .panel-blue.userlist p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* line 296, app/assets/stylesheets/profiles_show.scss */
+.panel-red.userlist p a, .panel-green.userlist p a, .panel-yellow.userlist p a, .panel-blue.userlist p a {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* line 300, app/assets/stylesheets/profiles_show.scss */
+.progress-bar-success, .status.active, .panel-green, .panel-green > .panel-heading, .btn-success, .fc-event, .badge.green, .event_green {
+  color: white;
+  background-color: #8BC34A;
+}
+
+/* line 305, app/assets/stylesheets/profiles_show.scss */
+.progress-bar-warning, .panel-yellow, .status.pending, .panel-yellow > .panel-heading, .btn-warning, .fc-unthemed .fc-today, .badge.yellow, .event_yellow {
+  color: white;
+  background-color: #FFC107;
+}
+
+/* line 310, app/assets/stylesheets/profiles_show.scss */
+.progress-bar-danger, .panel-red, .status.inactive, .panel-red > .panel-heading, .btn-danger, .badge.red, .event_red {
+  color: white;
+  background-color: #F44336;
+}
+
+/* line 315, app/assets/stylesheets/profiles_show.scss */
+.media-object {
+  max-width: 50px;
+  border-radius: 50px;
+  box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
+  -ms-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* line 324, app/assets/stylesheets/profiles_show.scss */
+.media:first-child {
+  margin-top: 15px;
+}
+
+/* line 328, app/assets/stylesheets/profiles_show.scss */
+.media-object {
+  display: block;
+}
+
+/* line 332, app/assets/stylesheets/profiles_show.scss */
+.dotbtn {
+  height: 40px;
+  width: 40px;
+  background: none;
+  border: 0;
+  line-height: 40px;
+  vertical-align: middle;
+  padding: 0;
+  margin-right: -15px;
+}
+
+/* line 343, app/assets/stylesheets/profiles_show.scss */
+.dots {
+  height: 4px;
+  width: 4px;
+  position: relative;
+  display: block;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+/* line 353, app/assets/stylesheets/profiles_show.scss */
+.dots:after, .dots:before {
+  content: " ";
+  height: 4px;
+  width: 4px;
+  position: absolute;
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  top: -7px;
+  left: 0;
+}
+
+/* line 365, app/assets/stylesheets/profiles_show.scss */
+.dots:after {
+  content: " ";
+  top: auto;
+  bottom: -7px;
+  left: 0;
+}
+
+/* line 372, app/assets/stylesheets/profiles_show.scss */
+.photolist img {
+  width: 100%;
+}
+
+/* line 376, app/assets/stylesheets/profiles_show.scss */
+.photolist {
+  background: #e1eaef;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+/* line 382, app/assets/stylesheets/profiles_show.scss */
+.profilegallery .grid-item a {
+  height: 100%;
+  display: block;
+}
+
+/* line 387, app/assets/stylesheets/profiles_show.scss */
+.grid a {
+  width: 100%;
+  display: block;
+  float: left;
+}
+
+/* line 393, app/assets/stylesheets/profiles_show.scss */
+.media-body {
+  color: #607D8B;
+  overflow: visible;
+}
+
+/* line 398, app/assets/stylesheets/profiles_show.scss */
+.amica-badge {
+  margin-left: 3px;
+  margin-right: 3px;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* line 406, app/assets/stylesheets/profiles_show.scss */
+.at-badge .svg-inline--fa {
+  width: 30px;
+  height: 30px;
+}
+
+/* line 412, app/assets/stylesheets/profiles_show.scss */
+.badge-description {
+  display: none;
+  position: absolute;
+  padding: 5px;
+  font-size: 12px;
+  line-height: 1.6em;
+  color: #fff;
+  border-radius: 5px;
+  background: #000;
+  width: 100px;
+}
+
+/* line 424, app/assets/stylesheets/profiles_show.scss */
+.badge-description:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border: 15px solid transparent;
+  border-top: 15px solid #000;
+  margin-left: -15px;
+}
+
+/* line 434, app/assets/stylesheets/profiles_show.scss */
+.cropper-crop-box {
+  width: 100%;
+}
