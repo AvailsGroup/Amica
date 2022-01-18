@@ -1,0 +1,271 @@
+/* line 5, app/assets/stylesheets/profiles.scss */
+html,
+body {
+  overflow-x: hidden;
+  /* Prevent scroll on narrow devices */
+}
+
+@media (max-width: 991.98px) {
+  /* line 11, app/assets/stylesheets/profiles.scss */
+  .offcanvas-collapse {
+    position: fixed;
+    top: 56px;
+    /* Height of navbar */
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow-y: auto;
+    visibility: hidden;
+    background-color: #343a40;
+    transition: transform .3s ease-in-out, visibility .3s ease-in-out;
+  }
+  /* line 24, app/assets/stylesheets/profiles.scss */
+  .offcanvas-collapse.open {
+    visibility: visible;
+    transform: translateX(-100%);
+  }
+}
+
+/* line 30, app/assets/stylesheets/profiles.scss */
+.nav {
+  z-index: 9997;
+}
+
+/* line 34, app/assets/stylesheets/profiles.scss */
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+
+/* line 41, app/assets/stylesheets/profiles.scss */
+.nav-scroller .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* line 53, app/assets/stylesheets/profiles.scss */
+.nav-underline .nav-link {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: .875rem;
+  color: #6c757d;
+}
+
+/* line 60, app/assets/stylesheets/profiles.scss */
+.nav-underline .nav-link:hover {
+  color: #007bff;
+}
+
+/* line 64, app/assets/stylesheets/profiles.scss */
+.nav-underline .active {
+  font-weight: 500;
+  color: #343a40;
+}
+
+/* line 69, app/assets/stylesheets/profiles.scss */
+.icon {
+  border: solid 1px;
+  border-radius: 30%;
+}
+
+/* line 74, app/assets/stylesheets/profiles.scss */
+.text-white-50 {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* line 76, app/assets/stylesheets/profiles.scss */
+.bg-blue {
+  background-color: #00A1AE;
+}
+
+/* line 78, app/assets/stylesheets/profiles.scss */
+a {
+  text-decoration: none;
+}
+
+/* line 84, app/assets/stylesheets/profiles.scss */
+.schedule-item {
+  margin: 15px 0;
+}
+
+/* line 89, app/assets/stylesheets/profiles.scss */
+.ui-autocomplete.ui-front {
+  z-index: 1051;
+}
+
+/* Optional scoped theme for tag-it which mimics the zendesk widget. */
+/* line 97, app/assets/stylesheets/profiles.scss */
+ul.tagit {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #C6C6C6;
+  background: inherit;
+}
+
+/* line 103, app/assets/stylesheets/profiles.scss */
+ul.tagit li.tagit-choice {
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  background: #00bfff none;
+  font-weight: normal;
+}
+
+/* line 111, app/assets/stylesheets/profiles.scss */
+ul.tagit li.tagit-choice .tagit-label:not(a) {
+  color: #555;
+}
+
+/* line 114, app/assets/stylesheets/profiles.scss */
+ul.tagit li.tagit-choice a.tagit-close {
+  text-decoration: none;
+}
+
+/* line 117, app/assets/stylesheets/profiles.scss */
+ul.tagit li.tagit-choice .tagit-close {
+  right: .4em;
+}
+
+/* line 120, app/assets/stylesheets/profiles.scss */
+ul.tagit li.tagit-choice .ui-icon {
+  display: none;
+}
+
+/* line 123, app/assets/stylesheets/profiles.scss */
+ul.tagit li.tagit-choice .tagit-close .text-icon {
+  display: inline;
+  font-family: arial, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  color: #777;
+}
+
+/* line 130, app/assets/stylesheets/profiles.scss */
+ul.tagit li.tagit-choice:hover, ul.tagit li.tagit-choice.remove {
+  background-color: #bbcef1;
+  border-color: #6d95e0;
+}
+
+/* line 134, app/assets/stylesheets/profiles.scss */
+ul.tagit li.tagit-choice a.tagLabel:hover,
+ul.tagit li.tagit-choice a.tagit-close .text-icon:hover {
+  color: #222;
+}
+
+/* line 138, app/assets/stylesheets/profiles.scss */
+ul.tagit input[type="text"] {
+  color: #333333;
+  background: none;
+}
+
+/* line 142, app/assets/stylesheets/profiles.scss */
+.ui-widget {
+  font-size: 1em;
+}
+
+/* Forked from a jQuery UI theme, so that we don't require the jQuery UI CSS as a dependency. */
+/* line 147, app/assets/stylesheets/profiles.scss */
+.tagit-autocomplete.ui-autocomplete {
+  position: absolute;
+  cursor: default;
+}
+
+/* line 148, app/assets/stylesheets/profiles.scss */
+* html .tagit-autocomplete.ui-autocomplete {
+  width: 1px;
+}
+
+/* without this, the menu expands to 100% in IE6 */
+/* line 149, app/assets/stylesheets/profiles.scss */
+.tagit-autocomplete.ui-menu {
+  list-style: none;
+  padding: 2px;
+  margin: 0;
+  display: block;
+  float: left;
+}
+
+/* line 156, app/assets/stylesheets/profiles.scss */
+.tagit-autocomplete.ui-menu .ui-menu {
+  margin-top: -3px;
+}
+
+/* line 159, app/assets/stylesheets/profiles.scss */
+.tagit-autocomplete.ui-menu .ui-menu-item {
+  margin: 0;
+  padding: 0;
+  zoom: 1;
+  float: left;
+  clear: left;
+  width: 100%;
+}
+
+/* line 167, app/assets/stylesheets/profiles.scss */
+.tagit-autocomplete.ui-menu .ui-menu-item a {
+  text-decoration: none;
+  display: block;
+  padding: .2em .4em;
+  line-height: 1.5;
+  zoom: 1;
+}
+
+/* line 174, app/assets/stylesheets/profiles.scss */
+.tagit-autocomplete .ui-menu .ui-menu-item a.ui-state-hover,
+.tagit-autocomplete .ui-menu .ui-menu-item a.ui-state-active {
+  font-weight: normal;
+  margin: -1px;
+}
+
+/* line 179, app/assets/stylesheets/profiles.scss */
+.tagit-autocomplete.ui-widget-content {
+  border: 1px solid #aaaaaa;
+  background: #ffffff 50% 50% repeat-x;
+  color: #222222;
+}
+
+/* line 180, app/assets/stylesheets/profiles.scss */
+.tagit-autocomplete.ui-corner-all, .tagit-autocomplete .ui-corner-all {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
+}
+
+/* line 181, app/assets/stylesheets/profiles.scss */
+.tagit-autocomplete .ui-state-hover, .tagit-autocomplete .ui-state-focus {
+  border: 1px solid #999999;
+  background: #dadada;
+  font-weight: normal;
+  color: #212121;
+}
+
+/* line 182, app/assets/stylesheets/profiles.scss */
+.tagit-autocomplete .ui-state-active {
+  border: 1px solid #aaaaaa;
+}
+
+/* line 184, app/assets/stylesheets/profiles.scss */
+.tagit-autocomplete .ui-widget-content {
+  border: 1px solid #aaaaaa;
+}
+
+/* line 185, app/assets/stylesheets/profiles.scss */
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+/* line 188, app/assets/stylesheets/profiles.scss */
+.modal {
+  z-index: 10000;
+}

@@ -1,0 +1,165 @@
+/* line 1, app/assets/stylesheets/timelines.scss */
+html,
+body {
+  overflow-x: hidden;
+  /* Prevent scroll on narrow devices */
+}
+
+@media (max-width: 991.98px) {
+  /* line 7, app/assets/stylesheets/timelines.scss */
+  .offcanvas-collapse {
+    position: fixed;
+    top: 56px;
+    /* Height of navbar */
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow-y: auto;
+    visibility: hidden;
+    background-color: #343a40;
+    transition: transform .3s ease-in-out, visibility .3s ease-in-out;
+  }
+  /* line 20, app/assets/stylesheets/timelines.scss */
+  .offcanvas-collapse.open {
+    visibility: visible;
+    transform: translateX(-100%);
+  }
+}
+
+/* line 26, app/assets/stylesheets/timelines.scss */
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+
+/* line 33, app/assets/stylesheets/timelines.scss */
+.nav-scroller .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* line 45, app/assets/stylesheets/timelines.scss */
+.nav-underline .nav-link {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: .875rem;
+  color: #6c757d;
+}
+
+/* line 52, app/assets/stylesheets/timelines.scss */
+.nav-underline .nav-link:hover {
+  color: #007bff;
+}
+
+/* line 56, app/assets/stylesheets/timelines.scss */
+.nav-underline .active {
+  font-weight: 500;
+  color: #343a40;
+}
+
+/* line 61, app/assets/stylesheets/timelines.scss */
+.icon {
+  border: solid 1px;
+  border-radius: 30%;
+}
+
+/* line 66, app/assets/stylesheets/timelines.scss */
+.text-white-50 {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* line 68, app/assets/stylesheets/timelines.scss */
+.bg-blue {
+  background-color: #00A1AE;
+}
+
+/* line 70, app/assets/stylesheets/timelines.scss */
+a {
+  text-decoration: none;
+}
+
+/* line 74, app/assets/stylesheets/timelines.scss */
+.spans {
+  font-size: 20px;
+  margin: 0 10px;
+}
+
+/* line 79, app/assets/stylesheets/timelines.scss */
+.schedule-item {
+  margin: 15px 0;
+}
+
+/* line 83, app/assets/stylesheets/timelines.scss */
+.flash {
+  display: none;
+}
+
+/* line 87, app/assets/stylesheets/timelines.scss */
+.FlexTextarea {
+  position: relative;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* line 93, app/assets/stylesheets/timelines.scss */
+.FlexTextarea__dummy {
+  overflow: hidden;
+  visibility: hidden;
+  box-sizing: border-box;
+  padding: 5px 15px;
+  min-height: 120px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  border: 1px solid;
+}
+
+/* line 105, app/assets/stylesheets/timelines.scss */
+.FlexTextarea__textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 5px 15px;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: 1px solid #b6c3c6;
+  border-radius: 4px;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  resize: none;
+}
+
+/* line 124, app/assets/stylesheets/timelines.scss */
+.FlexTextarea__textarea:focus {
+  box-shadow: 0 0 0 4px rgba(35, 167, 195, 0.3);
+  outline: 0;
+}
+
+/* line 129, app/assets/stylesheets/timelines.scss */
+.lity {
+  z-index: 10002;
+}
+
+/* line 133, app/assets/stylesheets/timelines.scss */
+.send {
+  margin-right: 2px;
+  margin-bottom: 2px;
+  color: #0d6efd;
+  border: none;
+}

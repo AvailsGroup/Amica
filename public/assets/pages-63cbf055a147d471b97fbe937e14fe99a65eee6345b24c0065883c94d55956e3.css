@@ -1,0 +1,20 @@
+/* line 5, app/assets/stylesheets/pages.scss */
+html {
+  overflow-y: scroll;
+}
+
+/* line 9, app/assets/stylesheets/pages.scss */
+.flash {
+  display: none;
+}
+
+/* line 13, app/assets/stylesheets/pages.scss */
+main .icon {
+  border: solid 1px;
+  border-radius: 30%;
+}
+
+/* line 18, app/assets/stylesheets/pages.scss */
+main a {
+  text-decoration: none;
+}
