@@ -15,35 +15,29 @@
   width: 100%;
   float: left;
   clear: both;
-  margin: 40px auto
 }
-.userprofile .userpic {
-  height: 100px;
-  width: 100px;
-  clear: both;
-  margin: 0 auto;
-  display: block;
-  border-radius: 100%;
-  box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
-  -webkit-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
-  -ms-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
-  position: relative;
-  background-color:#FFFFFF;
+
+.userheader{
+  width: 100%;
 }
+
 .userprofile .userpic .userpicimg {
   height: auto;
-  width: 100%;
+  max-width: 100px;
   border-radius: 10%;
 }
+
+.userpicimg {
+  max-width: 100px;
+  border-radius: 10%;
+}
+
 .username {
   font-weight: 500;
   font-size: 24px;
   line-height: 25px;
   color: #000000;
-  margin-top: 10px;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 .username+p {
@@ -437,9 +431,7 @@
   margin-left: -15px;
 }
 
-
-.amica-badge:hover  .badge-description{
-  display: inline-block;
-  top: -75px;
-  left: -35px;
+.cropper-crop-box{
+  width: 100%;
 }
+

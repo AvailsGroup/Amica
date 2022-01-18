@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   has_one_attached :image
 
+  has_one_attached :header
+
   before_create :build_default_profile
 
   validate :validate_tag
