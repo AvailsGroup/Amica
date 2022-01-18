@@ -70,10 +70,8 @@ Rails.application.routes.draw do
 
   resources :settings, only: %i[index] do
     collection do
-      post :enable_enrolled_year
-      delete :disable_enrolled_year
-      post :enable_student_id
-      delete :disable_student_id
+      post :enrolled_year
+      post :student_id
     end
   end
 
