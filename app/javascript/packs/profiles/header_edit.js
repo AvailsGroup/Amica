@@ -5,8 +5,10 @@ import "jquery-ui/ui/widgets/autocomplete"
 import "tag-it"
 
 document.addEventListener("DOMContentLoaded", function(){
+    const crop = document.getElementById("header_crop");
     $('#header_trim_img_uploder').click(function(e){
         $(this).val('');
+        crop.src = "";
         document.getElementById("header_prev_img").style.display = '';
         document.getElementById("header_cropped_canvas").style.display = 'none';
         $('#user_header').fadeIn();
@@ -39,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
                 let scale = scaled_width / image.width;
                 const crop = document.getElementById("header_crop");
-               const canvas = document.getElementById("header_source_canvas");
+                const canvas = document.getElementById("header_source_canvas");
                 canvas.width = image.width * scale;
                 canvas.height = image.height * scale;
                 let ctx = canvas.getContext("2d");
