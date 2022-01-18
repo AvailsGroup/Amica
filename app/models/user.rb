@@ -19,6 +19,8 @@ class User < ApplicationRecord
 
   validate :image_size
 
+  validate :header_size
+
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,24}+\z/ }, allow_nil: true
 
   validates :agreement_terms, allow_nil: false, acceptance: true, on: :create
@@ -201,6 +203,15 @@ class User < ApplicationRecord
 
     if image.blob.byte_size > 10.megabytes
       image.purge
+      errors.add(:image, "は10MB以内にしてください")
+    end
+  end
+
+  def header_size
+    return unless header.attached?
+
+    if header.blob.byte_size > 10.megabytes
+      header.purge
       errors.add(:image, "は10MB以内にしてください")
     end
   end
