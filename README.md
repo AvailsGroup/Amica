@@ -50,6 +50,10 @@ OS:Windows10, 11, Ubuntu 20.04 LTS(docker)
 
 [Tag-it](https://github.com/aehlke/tag-it)
 
+[sal.js](https://github.com/mciastek/sal)
+
+[particles.js](https://github.com/VincentGarreau/particles.js/)
+
 ## License
 
 本プログラムはGNU General Public License v3.0に基づき配布されています。 
