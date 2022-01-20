@@ -2,6 +2,8 @@
 <html lang="ja">
 <head>
   <title>Amica</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
   <%= favicon_link_tag('amica.ico') %>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -12,7 +14,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" href="public/apple-touch-icon.png">
   <meta name=”description” content=”ISC学生向けの友達作りサイトです。” />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FEWKYWJMZD"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-FEWKYWJMZD');
+  </script>
 </head>
 
 <body>
@@ -37,7 +48,7 @@
               <%= link_to notifications_path, class: "icons nav-link" do %>
                 <i class="fas fa-bell"></i>通知
                 <span class="notice badge bg-light text-dark rounded-pill align-text-bottom">
-                  <%= current_user.passive_notifications.where(checked: false).size %>
+                  <%= current_user.passive_notifications.where(checked: false).size + current_user.whispers.where(checked: false).size %>
                 </span>
               <% end %>
             </li>
@@ -119,7 +130,6 @@
   <% end %>
 </header>
 <main>
-  <!-- ここに追加 -->
   <div class="flash text-center">
     <p class="notice"><%= notice %></p>
     <p class="notice"><%= alert %></p>
@@ -152,11 +162,11 @@
           <p class="mb-1 small"><%= link_to "プロフィール設定", edit_profile_path(current_user.userid), class: "text-decoration-none text-light" %></p>
         <% end %>
         <p class="mb-1 small"><%= link_to "アカウント設定", edit_user_registration_path, class: "text-decoration-none text-light" %></p>
-        <p class="mb-1 small"><%= link_to "ログアウト", destroy_user_session_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-decoration-none text-light" %></p>
       </div>
       <div class="col mt-3">
         <h5 class="mb-2">運営</h5>
-        <p class="mb-1 small"><%= link_to "Avails", about_path, class: "text-decoration-none text-light" %></p>
+        <p class="mb-1 small"><%= link_to "Avails", avails_path, class: "text-decoration-none text-light" %></p>
       </div>
     </div>
   </div>

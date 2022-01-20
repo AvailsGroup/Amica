@@ -1,13 +1,13 @@
-<% if notification.comment.post.user.id == visited.id %>
-  <%= link_to timeline_path(notification.comment.post.id), class: "text-decoration-none" do %>
+<% if value.comment.post.user.id == visited.id %>
+  <%= link_to timeline_path(value.comment.post.id), class: "text-decoration-none" do %>
     <%= "あなたの投稿" %>
   <% end %>
 <% else %>
-  <%= link_to timeline_path(notification.comment.post.id), class: "text-decoration-none" do %>
-    <%= "#{visited.name}さんの投稿" %>
+  <%= link_to timeline_path(value.comment.post.id), class: "text-decoration-none" do %>
+    <%= "#{value.comment.post.user.decorate.nickname}さんの投稿" %>
   <% end %>
 <% end %>
 <span style="color:lightseagreen">にコメントしました</span>
 <div class="p-3 my-3 text-dark bg-blue rounded shadow-sm" style="margin-left: 40px">
-  <span><%= notification.comment.post.content[0..25] %><%= "..." if notification.comment.post.content.length > 25 %></span>
+  <span><%= value.comment.post.content[0..25] %><%= "..." if value.comment.post.content.length > 25 %></span>
 </div>

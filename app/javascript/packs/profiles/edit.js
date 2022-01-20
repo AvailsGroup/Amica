@@ -4,19 +4,19 @@ import "jquery-ui/ui/widget"
 import "jquery-ui/ui/widgets/autocomplete"
 import "tag-it"
 
-document.addEventListener("DOMContentLoaded", function(){
-    $('#trim_img_uploder').click(function(e){
+document.addEventListener("DOMContentLoaded", function () {
+    $('#trim_img_uploder').click(function (e) {
         $(this).val('');
         document.getElementById("prev_img").style.display = '';
         document.getElementById("cropped_canvas").style.display = 'none';
         $('#user_icon').fadeIn();
     });
 
-    $('#trim_img_uploder').change(function(e){
+    $('#trim_img_uploder').change(function (e) {
         document.getElementById("prev_img").style.display = 'none';
         $('#modal_area').fadeIn();
         $('.modal-text').fadeOut();
-       });
+    });
 
     let cropper = null;
     const scaled_width = 500;
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function(){
                     }
                 );
 
-                $('#close_button,#modal_back_area').click(function(){
+                $('#close_button,#modal_back_area').click(function () {
                     const cropped_canvas = document.getElementById("cropped_canvas");
                     let ctx = cropped_canvas.getContext("2d");
                     let cropped_image_width = image.height * crop_aspect_ratio;
@@ -71,8 +71,8 @@ document.addEventListener("DOMContentLoaded", function(){
                     let image_y = document.getElementById("image_y").value;
                     let image_w = document.getElementById("image_w").value;
                     let image_h = document.getElementById("image_h").value;
-                    ctx.drawImage(image, image_x/scale, image_y/scale, image_w/scale , image_h/scale ,0 ,0 , cropped_canvas.width ,cropped_canvas.height);
-                    document.getElementById("image_text").innerHTML = "選択した画像";
+                    ctx.drawImage(image, image_x / scale, image_y / scale, image_w / scale, image_h / scale, 0, 0, cropped_canvas.width, cropped_canvas.height);
+                    document.getElementById("image_text").innerHTML = "選択したアイコン";
                     $('#user_icon').fadeOut();
                     document.getElementById("image").value = cropper.getCroppedCanvas().toDataURL('image/jpeg');
                     let base64 = cropper.getCroppedCanvas().toDataURL('image/jpeg');

@@ -1,0 +1,11 @@
+<div class="p-3 my-3 text-dark rounded shadow-sm " style="<%= "background-color: rgba(29,144,190,0.1)" unless new_value.any?{ |i| i.user_id == current_user.id && i.information_id == value.id }%>">
+  <%= link_to information_path(value.id), class: "text-decoration-none text-dark" do %>
+    <div class="form-inline">
+      <%= value.title %>
+    </div>
+    <div class="d-block">
+      <div class="text-gray small" style="text-align: right">
+        <i class="far fa-clock clock-icon" style="margin-right: 3px"></i><%= value.created_at.strftime('%F') %></div>
+    </div>
+  <% end %>
+</div>

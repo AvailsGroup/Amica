@@ -3,17 +3,17 @@ module TimelinesHelper
 
   def link_to_hashtag(content)
     URI.extract(content, %w[http https]).uniq.each do |url|
-      sub_text = ""
-      sub_text << "<a href=" << url << " target=\"_blank\">" << url << "</a>"
+      sub_text = ''
+      sub_text << '<a href=' << url << ' target="_blank" rel="noopener">' << url << '</a>'
       content.gsub!(url, sub_text)
     end
-    content.gsub(/(?<=\s|　|^)#.+?(?=(　|\s|$))/.freeze) { |hashtag| link_to(hashtag, search_timelines_path(q: hashtag)) }
+    content.gsub(/(?<=\s|　|^)#[^ <]+?(?=(　|\s|$))/.freeze) { |hashtag| link_to(hashtag, search_timelines_path(q: hashtag)) }
   end
 
   def html_with_link_to_hashtag(content)
     html_escaped_content = h(content)
     content_with_hashtags = link_to_hashtag(html_escaped_content)
-    sanitize content_with_hashtags, tags: ['a'], attributes: ['href']
+    sanitize content_with_hashtags, tags: ['a'], attributes: %w[href target rel]
   end
 
   def push(user)

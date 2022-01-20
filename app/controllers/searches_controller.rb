@@ -12,7 +12,6 @@ class SearchesController < ApplicationController
     @users = []
     unless params[:name] == ""
       @user.each do |u|
-        pp u
         unless u == current_user
           unless u.name.nil?
             if u.name.downcase.include?(params[:name].downcase) || u.nickname.downcase.include?(params[:name].downcase) || u.userid.downcase.include?(params[:name].downcase)

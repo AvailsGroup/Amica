@@ -12,7 +12,6 @@
 
     .send {
         margin-right: 2px;
-        margin-bottom: 2px;
         color: #0d6efd;
         border: none;
     }
@@ -28,50 +27,23 @@
     }
 </style>
 
+<% if post.user != current_user %>
+  <%= render "timelines/report_modal", post: post %>
+<% end %>
+
+<%= render "layouts/modal",id: "delete_modal_#{post.id}",
+           title: "本当に削除しますか？",content: post.content,
+           negative: "いいえ",
+           affirmmative_path: timeline_path(post.id), affirmmative_method: :delete, affirmative: "はい" %>
+
 <div id="post_<%= post.id %>">
-  <div class="modal fade" id="exampleModal<%= post.id %>" tabindex="-1" aria-labelledby="exampleModalLabel<%= post.id %>" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">通報</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <%= form_for(@report, url: timeline_reports_path(post.id)) do |f| %>
-            <%= f.hidden_field :user_id, id: "user_id ", class: "form-control", value: current_user.id %>
-            <%= f.hidden_field :post_id, id: "post_id", class: "form-control", value: post.id %>
-            <%= f.hidden_field :reported_user_id, id: "reported_user_id ", class: "form-control", value: post.user.id %>
-            <div class="my-3 p-3 bg-white rounded shadow-sm">
-              <div class="d-flex text-muted">
-                <%= image_tag post.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
-                <p class="pb-3 mb-0 lh-sm w-100">
-                  <strong class="text-dark" style="font-size:20px;margin: 0"><%= post.user.nickname %></strong>
-                  <span class="text-gray small" style="margin: 0">@<%= post.user.userid %></span>
-                  <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %></span>
-                  <br/>
-                  <br/>
-                  <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= post.content %></span>
-                </p>
-              </div>
-            </div>
-            <%= f.text_area :message, placeholder: "通報内容を記載してください。", id: "message", class: "form-control", required: true %>
-            <br>
-            <div class="modal-footer">
-              <%= f.submit "送信", class: "btn btn-lg btn-danger fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
-              <%= f.submit "クリア", type: :reset, class: "btn btn-lg btn-secondary fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="my-3 p-3 bg-white rounded shadow-sm">
+  <div class="my-3 p-3 bg-white rounded shadow-sm" style="word-break: break-all">
     <div class="panel-content panel-activity">
       <div class="d-flex text-muted">
         <%= link_to profile_path(post.user.userid), style: "color:black" do %>
           <%= image_tag post.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
         <% end %>
-        <p class="pb-3 mb-0 lh-sm w-100">
+        <p class="pb-3 mb-0">
           <strong class="text-dark" style="font-size:20px;margin: 0"><%= post.user.decorate.nickname %></strong>
           <span class="text-gray small" style="margin: 0">@<%= post.user.userid %></span>
           <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %></span>
@@ -82,8 +54,8 @@
         </p>
       </div>
       <div class="d-flex pb-3  justify-content-between" style="margin-left: 50px">
-        <% if post.image? %>
-          <%= image_tag post.image.url, "data-lity" => "data-lity", class: "im" %>
+        <% if post.image.attached? %>
+          <%= image_tag post.image, "data-lity" => "data-lity", class: "im" %>
         <% end %>
       </div>
 
@@ -91,13 +63,13 @@
         <div class="d-flex justify-content-between" style="margin-left: 45px">
           <div class="d-flex">
             <span class="likes mx-1">
-              <% if current_user.liked_by?(post.id) %>
-                <%= button_to timeline_like_path(post.id, current_user.id), method: :delete, remote: true, class: "send bg-white", style: "height: 15.5px;padding: 0", data: { disable_with: "<i class='far fa-heart'></i> <span class='text-dark'>#{post.likes.size - 1}</span>" } do %>
+              <% if current_user.liked_by?(post.id) && !current_user.decorate.user_blocked?(post.user) && !post.user.decorate.user_blocked?(current_user) %>
+                <%= button_to timeline_like_path(post.id, current_user.id), method: :delete, remote: true, class: "send bg-white", style: "padding: 0", data: { disable_with: "<i class='far fa-heart'></i> <span class='text-dark'>#{post.likes.size - 1}</span>" } do %>
                   <i class="fas fa-heart"></i>
                   <span class='text-dark'><%= post.likes.size %></span>
                 <% end %>
               <% else %>
-                <%= button_to timeline_likes_path(post.id), method: :post, remote: true, class: "send bg-white", style: "height: 15.5px;padding: 0", data: { disable_with: "#{push(current_user)} <span class='text-dark'>#{post.likes.size + 1}</span>" } do %>
+                <%= button_to timeline_likes_path(post.id), method: :post, remote: true, class: "send bg-white", style: "padding: 0", data: { disable_with: "#{push(current_user)} <span class='text-dark'>#{post.likes.size + 1}</span>" } do %>
                   <i class="far fa-heart"></i>
                   <span class='text-dark'><%= post.likes.size %></span>
                 <% end %>
@@ -112,9 +84,9 @@
           </div>
           <div class="d-flex">
             <% if post.user == current_user %>
-              <%= button_to(timeline_path(post.id), class: "send bg-white", method: :delete, data: { disable_with: "削除中..." }) do %>
+              <button type="button" style="border: none; background-color: white; color:red" data-bs-toggle="modal" data-bs-target="#delete_modal_<%= post.id %>">
                 <i class="far fa-trash-alt"></i>
-              <% end %>
+              </button>
             <% else %>
               <% if mute?(post, current_user) %>
                 <%= button_to timeline_mute_path(post.id, current_user.id), class: "send bg-white", style: "padding-right:0px", method: :delete, data: { disable_with: '<i class="fas fa-volume-mute" style="color: red"></i>' } do %>
@@ -125,12 +97,14 @@
                   <i class="fas fa-volume-mute" style="color: red"></i>
                 <% end %>
               <% end %>
-              <span class="ms-2">
-              <label>
-                <button type="button" class="btn btn-primary" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal<%= post.id %>" data-bs-whatever=<%= post.id %>></button>
-                <i class="fas fa-bullhorn" style="color: red"></i>
-              </label>
-            </span>
+              <% unless current_page?(profile_path(post.user.userid)) %>
+                <span class="ms-2">
+                  <label>
+                    <button type="button" class="btn btn-primary" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal<%= post.id %>" data-bs-whatever=<%= post.id %>></button>
+                    <i class="fas fa-bullhorn" style="color: red"></i>
+                  </label>
+                </span>
+              <% end %>
             <% end %>
           </div>
         </div>

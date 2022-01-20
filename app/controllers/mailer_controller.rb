@@ -20,6 +20,6 @@ class MailerController < ApplicationController
 
   private
   def inquiry_params
-    params.require(:inquiry).permit(:name,:message,:email)
+    params.require(:inquiry).permit(:name, :message, :email)
   end
 end

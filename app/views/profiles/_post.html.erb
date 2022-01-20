@@ -1,0 +1,81 @@
+<style>
+    #back {
+        display: none;
+        background: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 10000;
+    }
+
+    .send {
+        margin-right: 2px;
+        margin-bottom: 2px;
+        color: #0d6efd;
+        border: none;
+    }
+
+    .im {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .red {
+        color: red;
+    }
+</style>
+<div id="post_<%= post.id %>">
+  <div class="my-3 p-3 bg-white rounded shadow-sm" style="word-break: break-all">
+    <div class="panel-content panel-activity">
+      <div class="d-flex text-muted">
+        <%= link_to profile_path(post.user.userid), style: "color:black" do %>
+          <%= image_tag post.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
+        <% end %>
+        <p class="pb-3 mb-0 lh-sm w-100">
+          <strong class="text-dark" style="font-size:20px;margin: 0"><%= post.user.decorate.nickname %></strong>
+          <span class="text-gray small" style="margin: 0">@<%= post.user.userid %></span>
+          <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %></span>
+          <br/>
+          <br/>
+          <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= html_escape(html_with_link_to_hashtag(h(post.content).html_safe)).gsub(/\r\n|\r|\n/, "<br />").html_safe %></span>
+          <br/>
+        </p>
+      </div>
+      <div class="d-flex pb-3  justify-content-between" style="margin-left: 50px">
+        <% if post.image.attached? %>
+          <%= image_tag post.image, "data-lity" => "data-lity", class: "im" %>
+        <% end %>
+      </div>
+
+      <% unless post.user.discarded? %>
+        <div class="d-flex justify-content-between" style="margin-left: 45px">
+          <div class="d-flex">
+            <span class="likes mx-1">
+              <% if current_user.liked_by?(post.id) && !current_user.decorate.user_blocked?(post.user) && !post.user.decorate.user_blocked?(current_user) %>
+                <%= link_to timeline_path(post.id), style: "height: 15.5px;padding: 0" do %>
+                  <i class="fas fa-heart"></i>
+                  <span class='text-dark'><%= post.likes.size %></span>
+                <% end %>
+              <% else %>
+                <%= link_to timeline_path(post.id), class: "send bg-white", style: "height: 15.5px;padding: 0", data: { disable_with: "#{push(current_user)} <span class='text-dark'>#{post.likes.size + 1}</span>" } do %>
+                  <i class="far fa-heart"></i>
+                  <span class='text-dark'><%= post.likes.size %></span>
+                <% end %>
+              <% end %>
+            </span>
+            <span class="comments">
+              <%= link_to timeline_path(post.id) do %>
+                <i class="far fa-comment-alt" style="height: 15.5px"></i>
+                <span class="text-dark" id="comment_count"><%= post.comments.size %></span>
+              <% end %>
+            </span>
+          </div>
+          <div class="d-flex">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

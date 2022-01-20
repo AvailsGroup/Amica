@@ -11,20 +11,23 @@ class User < ApplicationRecord
 
   has_one_attached :image
 
+  has_one_attached :header
+
   before_create :build_default_profile
 
   validate :validate_tag
 
   validate :image_size
 
-  # TODO: 本番環境に移行する際は最低でも英語数字が含まれるように
+  validate :header_size
+
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,24}+\z/ }, allow_nil: true
 
   validates :agreement_terms, allow_nil: false, acceptance: true, on: :create
 
   validates :email,
             uniqueness: { case_sensitive: false },
-            format: { with: /\A[A-Za-z]{4}[0-9]{7}@gn.iwasaki.ac.jp\z/ }
+            format: { with: /\A[A-Za-z0-9]+@gn.iwasaki.ac.jp\z/ }
 
   validates :name,
             length: { minimum: 2, maximum: 20 },
@@ -93,6 +96,7 @@ class User < ApplicationRecord
 
   has_many :communities, dependent: :destroy
   has_many :community_member, dependent: :destroy
+  has_many :community_messages, dependent: :destroy
 
   has_many :reports
 
@@ -115,6 +119,9 @@ class User < ApplicationRecord
   has_many :information_shows
 
   has_many :whispers
+
+  has_many :active_favorites, class_name: 'Favorite', foreign_key: 'user_id', dependent: :destroy
+  has_many :passive_favorites, class_name: 'Favorite', foreign_key: 'favorite_user_id', dependent: :destroy
 
   def password_required?
     super && confirmed?
@@ -196,6 +203,15 @@ class User < ApplicationRecord
 
     if image.blob.byte_size > 10.megabytes
       image.purge
+      errors.add(:image, "は10MB以内にしてください")
+    end
+  end
+
+  def header_size
+    return unless header.attached?
+
+    if header.blob.byte_size > 10.megabytes
+      header.purge
       errors.add(:image, "は10MB以内にしてください")
     end
   end

@@ -1,21 +1,27 @@
-
 <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag 'contacts', media: 'all', 'data-turbolinks-track': 'reload' %>
+<style>
+    body {
+        background: none;
+        background-repeat: no-repeat;
+        box-shadow: none;
+    }
+</style>
 <h4><%= flash.now[:notice] %></h4>
 
-<section class="ask">
+<div class="container">
   <h2>お問い合わせ</h2>
   <div class="medium">
     <%= form_for(@inquiry, url: mailer_create_path) do |f|%>
       <%= f.label "名前" %>
-      <%= f.text_field :name, id: "inputEmail", class: "form-control",style: "height: 25px"%>
+      <%= f.text_field :name, id: "inputEmail", class: "form-control",style: "height: 25px",  required: true%>
       <%= f.label "email" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" , id: "inputEmail", class: "form-control",style: "height: 25px"%><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" , id: "inputEmail", class: "form-control",style: "height: 25px",  required: true%><br />
       <%= f.label "お問い合わせ内容" %><br />
       <%= f.text_area :message , id: "inputEmail", class: "form-control", required: true%><br>
       <%= f.submit "送信", class:"btn btn-lg btn-secondary fw-bold border-white bg-blue" ,style: "margin-right: 10px; width: 150px;color:#FFF", data: { disable_with: "送信中..." }%>
       <%= f.submit "クリア" ,type: :reset , class:"btn btn-lg btn-secondary fw-bold border-white bg-blue",style: "margin-right: 10px; width: 150px;color:#FFF"%>
     <% end %>
   </div>
-</section>
+</div>
 

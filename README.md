@@ -20,7 +20,7 @@ Ruby on Railsで作成されており、AvailsGroupが制作、管理してい�
 IssueやPullRequest等もお待ちしています。 
 
 ## URL
-https://avails-amica.com
+https://www.avails-amica.com
 
 ## 開発環境 
 
@@ -49,6 +49,10 @@ OS:Windows10, 11, Ubuntu 20.04 LTS(docker)
 [Lity](https://github.com/jsor/lity)
 
 [Tag-it](https://github.com/aehlke/tag-it)
+
+[sal.js](https://github.com/mciastek/sal)
+
+[particles.js](https://github.com/VincentGarreau/particles.js/)
 
 ## License
 

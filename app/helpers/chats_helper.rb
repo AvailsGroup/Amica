@@ -32,20 +32,18 @@ module ChatsHelper
   end
 
   def content_image(message)
-    image = ActiveStorage::Blob.find_by(filename: message.image)
-    if image.nil?
-      safe_join(message.content.split("\n"), tag(:br))
+    if message.file.attached?
+      image_tag url_for(message.file), style: 'max-width:100%', 'data-lity' => 'data-lity'
     else
-      image_tag image, style: 'max-width:100%', 'data-lity' => 'data-lity'
+      safe_join(message.content.split("\n"), tag(:br))
     end
   end
 
   def content_file(message)
-    file = ActiveStorage::Blob.find_by(filename: message.file_name)
-    if file.nil?
-      safe_join(message.content.split("\n"), tag(:br))
+    if message.file.attached?
+      link_to message.file.filename, url_for(message.file), download: message.file.filename
     else
-      link_to message.file_name, rails_blob_url(file, disposition: 'attachment'), download: message.file_name
+      safe_join(message.content.split("\n"), tag(:br))
     end
   end
 

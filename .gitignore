@@ -49,3 +49,4 @@ yarn-debug.log*
 !/vendor/.keep
 
 /.Dockerfile.swp
+/config/credentials.yml.enc

@@ -1,9 +1,33 @@
-<%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
-<%= stylesheet_link_tag 'top', media: 'all', 'data-turbolinks-track': 'reload' %>
-<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
-<%= javascript_pack_tag 'home/index' %>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <title>Amica</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= favicon_link_tag('amica.ico') %>
+  <%= stylesheet_link_tag 'home'%>
+  <%= stylesheet_link_tag 'top' %>
+  <%= javascript_pack_tag 'home/index' %>
+  <%= javascript_pack_tag 'application' %>
+  <%= javascript_pack_tag 'home/settings' %>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
+  <meta name=”description” content=”ISC学生向けの友達作りサイトです。”/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FEWKYWJMZD"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
 
+      function gtag() {
+          dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+
+      gtag('config', 'G-FEWKYWJMZD');
+  </script>
+</head>
 
 <!--
  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.
@@ -30,24 +54,98 @@
  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'
 -->
 
-<%= image_tag("top_icon.png",class: "icon title-image",style: "margin-bottom: 30px;display:none")%>
-<div class="title-text" style="margin-bottom: 30px;opacity:0">
-  <p>Amicaはあなたの生活に<u>新たな出会いをプラス</u>する</p>
-  <p><u>コミュニケーションツール</u>です</p>
-</div>
+<body class="h-100 text-center text-dark">
+<div id="background"></div>
+<header class="full mb-auto">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light px-4">
+    <%= link_to("Amica", "/", class: "mb-0 lh-sm text-light", style: "margin-left:7px;font-size:24px;text-decoration: none;font-weight:bold") %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarDropdown">
+      <div class="navbar-nav me-auto m-0 mb-lg-0"></div>
+      <ul class="navbar-nav d-flex">
+        <li class="nav-item active">
+          <a class="nav-link" href="<%= about_path %>">概要</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= contact_path %>">お問い合わせ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= new_user_registration_path %>">サインアップ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= new_user_session_path %>">ログイン</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <p class="notice mt-5"><%= notice %></p>
+  <p class="notice"><%= alert %></p>
+  <div class="position-absolute h-75 w-100 m-0 d-flex align-items-center justify-content-center">
+    <%= image_tag("top_icon.png", class: "icon", id: "title-image") %>
+  </div>
+  <a class="goSection" href="#about">
+    <div class="position-absolute bottom-0 w-100 d-flex align-items-center justify-content-center" style="margin-bottom: 13vh">
+      <span id="step" class="fw-bold" style="color: #343434;display: none">もっと見る</span>
+    </div>
+    <div class="position-absolute bottom-0 w-100 d-flex align-items-center justify-content-center" style="margin-bottom: 10vh">
+      <div id="arrow" class="arrow1" style="display: none"></div>
+    </div>
+  </a>
+</header>
 
-<p class="lead buttons" style="opacity:0">
-  <%= link_to "新規登録",
-              new_user_registration_path,
-              class: "btn btn-lg btn-secondary fw-bold border-white bg-blue",
-              style: "margin-right: 10px; width: 150px;color:#FFF"
-  %>
-  <%= link_to "ログイン",
-              new_user_session_path,
-              class: "btn btn-lg btn-secondary fw-bold border-white bg-blue",
-              style: "width: 150px;color:#FFF"
-  %>
-</p>
 
+<main>
+  <div class="container text-center" id="about">
+    <div class="my-5 fs-5 shadow-sm" data-sal="slide-down" data-sal-duration="500">
+      <div class="px-3">
+        <h2 class="mb-5" data-sal="slide-down" data-sal-duration="500">Amicaとは？</h2>
+        <p class="mb-3" data-sal="flip-right" data-sal-delay="200" data-sal-duration="500">Amicaはあなたの学校生活に<span class="Text-Span JS_ScrollAnimationItem">新たな出会いをプラス</span>する<span class="Text-Span JS_ScrollAnimationItem">コミュニケーションツール</span>です
+        </p>
+        <p class="mb-3" data-sal="flip-right" data-sal-delay="200" data-sal-duration="500">このアプリケーションはISC専用の友達出会い系アプリです。</p>
+        <p class="mb-3" data-sal="flip-right" data-sal-delay="200" data-sal-duration="500">あなたの<span class="Text-Span JS_ScrollAnimationItem">趣味や特技、知りたいこと、興味あること</span>などを<span class="Text-Span JS_ScrollAnimationItem">タグ</span>として入力し、タグを参照して自動的におすすめな友達を紹介してくれます。</p>
+        <p class="mb-3 pb-3" data-sal="flip-right" data-sal-delay="200" data-sal-duration="500">さらに、気になっていた人の趣味や特技なども可視化されたり、呼んでほしいニックネームなども登録するなどの更に親しくなれるような機能を用意していますので会話につながる工夫もできています。</p>
+      </div>
+    </div>
 
+    <div class="my-5 fs-5 shadow-sm" data-sal="slide-down" data-sal-duration="500">
+      <div class="px-3">
+        <h2 class="my-5" data-sal="slide-down" data-sal-duration="500">どんな事ができるの？</h2>
+        <p class="mb-3" data-sal="flip-right" data-sal-delay="200" data-sal-duration="500">Amicaでは<span class="Text-Span JS_ScrollAnimationItem">新しい人脈がしっかりと築ける</span>ような様々な機能が用意してあります。</p>
+        <div class="mb-3">
+          <p data-sal="flip-right" data-sal-delay="300" data-sal-duration="500">チャット機能</p>
+          <p data-sal="flip-right" data-sal-delay="300" data-sal-duration="500">コミュニティ(公開グループチャット)機能</p>
+          <p data-sal="flip-right" data-sal-delay="300" data-sal-duration="500">タイムライン機能</p>
+          <p data-sal="flip-right" data-sal-delay="300" data-sal-duration="500">おすすめユーザー機能</p>
+          <p class="mb-3" data-sal="flip-right" data-sal-delay="300" data-sal-duration="500">自動マッチング機能　等</p>
+        </div>
+        <p class="my-3" data-sal="slide-down" data-sal-delay="200" data-sal-duration="500">さらに<span class="Text-Span JS_ScrollAnimationItem">学園内限定ならではの機能</span>もあります。</p>
+        <div class="mb-3">
+          <p data-sal="flip-right" data-sal-delay="300" data-sal-duration="500">ランキング機能</p>
+          <p class="mb-3 pb-3" data-sal="flip-right" data-sal-delay="300" data-sal-duration="500">バッジ機能　等</p>
+        </div>
+      </div>
+    </div>
+    <div class="my-5 fs-5 shadow-sm mb-3" data-sal="slide-down" data-sal-duration="500">
+      <div class="px-3">
+        <h2 class="my-5" data-sal="slide-down" data-sal-duration="500">さっそく始めてみましょう</h2>
+        <p class="mb-3" data-sal="flip-right" data-sal-delay="200" data-sal-duration="500">Amicaは学校のメールアドレスで認証するので、たくさんの個人情報を入力する必要がありません。</p>
+        <p class="mb-3" data-sal="flip-right" data-sal-delay="200" data-sal-duration="500">登録後にはより良い出会いができるように、わかりやすいチュートリアルが表示されます。</p>
+        <%= link_to "会員登録", new_user_registration_path, class: "btn btn-neumorphism mb-3",style: "background-color: #ddd;", data: { sal: "fadeInRight", sal_delay: "200", sal_duration: "500" } %>
+      </div>
+    </div>
+  </div>
+</main>
 
+<footer class="text-center bg-gray text-light" style="margin-top:100px">
+  <div class="container">
+    <span class="text-muted">
+      ©2021 - <%= DateTime.now.strftime('%Y') %> <%= link_to("Avails Group", avails_path, class: "text-dark") %><br />
+      <%= link_to("利用規約", static_path, class: "text-dark") %>
+      <%= link_to("プライバシーポリシー", privacy_path, class: "text-dark") %>
+    </span>
+  </div>
+</footer>
+</body>
+</html>

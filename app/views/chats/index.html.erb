@@ -3,7 +3,7 @@
   <h4 class="chat_heading">Chat</h4>
 </div>
 <div class="m-3">
-  <% @room_partner.each_with_index do |r, i| %>
+  <% @chat.each_with_index do |r, i| %>
     <div class="container">
       <%= link_to chat_path(r.userid), style: " text-decoration:none;" do %>
         <div class="my-3 p-1 px-3 bg-white rounded shadow-sm">
@@ -15,7 +15,7 @@
                 <span class="medium lh-sm" style="float: right;color: black"><%= index_message(@latest_message[i]) %></span>
                 <span class="clear"></span>
               <% else %>
-                <span class="text-muted medium lh-sm"> <%= @latest_message[i].content.delete("\n").slice(0..50) %></span>
+                <span class="text-muted medium lh-sm"> <%= @latest_message[i].decorate.type %></span>
                 <span class="small" style="float: right;color:gray;"><%= index_date_format(@latest_message[i]) %></span>
               <% end %>
             </p>
@@ -26,4 +26,4 @@
   <% end %>
 </div>
 
-
+<%= render "layouts/pagenate", pagenate: @chat %>

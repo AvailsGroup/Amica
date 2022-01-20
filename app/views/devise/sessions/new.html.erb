@@ -1,5 +1,5 @@
 <%= stylesheet_link_tag 'registrations', media: 'all', 'data-turbolinks-track': 'reload' %>
-<div class="text-center">
+<div class="text-center container">
 <h2 style="margin-bottom: 50px">ログイン</h2>
 
   <div id="contact_form">
@@ -10,11 +10,11 @@
           <% if devise_mapping.rememberable? %>
           <div class="checkbox mb-3">
             <label>
-              <%= f.check_box :remember_me,style: "margin-bottom: 30px" %>パスワードを保存する
+              <%= f.check_box :remember_me,style: "margin-bottom: 30px" %>ログインを記憶する
             </label>
           </div>
           <% end %>
-        <%= f.submit "ログイン" , class:"w-25 btn btn-lg btn-primary"%>
+        <%= f.submit "ログイン" , class:"btn btn-lg btn-primary"%>
     <% end %>
   </div>
 

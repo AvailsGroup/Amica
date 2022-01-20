@@ -7,18 +7,13 @@ class ProfilesController < ApplicationController
   helper_method :blocked?
 
   def index
-    @users = User.with_attached_image.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags).where.not(userid: nil)
+    @users = User.with_attached_image.includes(:profile, :favorite, :followers, :passive_relationships, :active_relationships, :followings, :tags)
+
     @user = @users.find(current_user.id)
-    @users = @users.reject { |u| @user.blocks.any? { |user| user.blocked_user_id == u.id } }
     @friends = matchers(@user)
-    @following = @user.followings_list
     @follower = @user.followers_list
     @profile = @user.profile
     sort_pickup
-    @users &&= User.kept
-    @users -= @friends
-    @users -= [@user]
-
   end
 
   def show
@@ -45,7 +40,7 @@ class ProfilesController < ApplicationController
   def edit
     @user = current_user
     permission
-    @profile = Profile.find(current_user.id)
+    @profile = current_user.profile
     @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
     @tag = current_user.tag_list.join(',')
     @accreditation_tag = current_user.accreditation_list.join(',')
@@ -53,49 +48,31 @@ class ProfilesController < ApplicationController
 
   def update
     @user = current_user
-    pp params
     permission
-
+    @accepted_format = %w[.jpg .jpeg .png]
     unless params['user']['images'].nil?
-      accepted_format = %w[.jpg .jpeg .png]
-      unless accepted_format.include? File.extname(params['user']['images'].original_filename)
-        flash[:alert] = '画像は jpg jpeg png 形式のみ対応しております。'
-        @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-        @tag_list = params[:user][:tag_list]
-        @accreditation_list = params[:user][:accreditation_list]
-        render action: 'edit'
+      unless @accepted_format.include? File.extname(params['user']['images'].original_filename)
+        reject_format(params)
+        return
+      end
+    end
+
+    unless params['user']['header_images'].nil?
+      unless @accepted_format.include? File.extname(params['user']['header_images'].original_filename)
+        reject_format(params)
         return
       end
     end
 
     unless current_user.update(user_params)
-      @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-      @tag_list = params[:user][:tag_list]
-      @accreditation_list = params[:user][:accreditation_list]
-      if base64?(params[:user][:image]['data:image/jpeg;base64,'.length .. -1])
-        @image = params[:user][:image]
-        @image_x = params[:user][:image_x]
-        @image_y = params[:user][:image_y]
-        @image_w = params[:user][:image_w]
-        @image_h = params[:user][:image_h]
-      end
+      render_params(params)
       render action: 'edit'
       return
     end
+    save_image(params)
+    save_header(params)
 
-    if !params['user']['image'].nil? && base64?(params['user']['image']['data:image/jpeg;base64,'.length .. -1])
-      filename = "#{current_user.id}#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.jpg"
-      Dir.mkdir("#{Rails.root}/tmp/users_image/") unless Dir.exist?("#{Rails.root}/tmp/users_image/")
-      File.open("#{Rails.root}/tmp/users_image/#{filename}", 'wb+') do |f|
-        f.write(Base64.decode64(params['user']['image']['data:image/jpeg;base64,'.length .. -1]))
-      end
-      f = File.open("#{Rails.root}/tmp/users_image/#{filename}")
-      current_user.image.attach(io: f, filename: filename)
-      f.close
-      File.delete("#{Rails.root}/tmp/users_image/#{filename}")
-    end
     flash[:notice] = 'ユーザー情報を編集しました'
-
     redirect_to profile_path(current_user.userid)
   end
 
@@ -142,13 +119,8 @@ class ProfilesController < ApplicationController
   end
 
   def pickup
-    @users = User.includes(:tags, :followings, :followers, :blocks).where.not(userid: nil)
+    @users = User.includes(:tags, :followings, :followers, :blocks)
     @user = @users.find(current_user.id)
-    @users &&= User.kept
-    @users -= matchers(@user)
-    @users = @users.reject { |u| @user.blocks.any? { |user| user.blocked_user_id == u.id } }
-    @users -= [@user]
-
     sort_pickup
     @pagenate = Kaminari.paginate_array(@users).page(params[:page]).per(30)
     @name = 'おすすめ'
@@ -170,7 +142,70 @@ class ProfilesController < ApplicationController
   end
 
   def sort_pickup
+    @following = @user.followings_list
     @users = @users.sort_by { |u| (@user.tags.pluck(:name) & u.tags.pluck(:name)).size }
     @users = @users.reverse
+    @users &&= User.kept
+    @users -= matchers(@user)
+    @users -= [@user]
+    @users = @users.reject { |u| u.userid.nil? }
+    @users = @users.reject { |u| @user.blocks.any? { |user| user.blocked_user_id == u.id } }
+    @users = @users.reject { |u| following?(@following, u) }
+  end
+
+  def reject_format(params)
+    flash[:alert] = '画像は jpg jpeg png 形式のみ対応しております。'
+    @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+    @tag_list = params[:user][:tag_list]
+    @accreditation_list = params[:user][:accreditation_list]
+    render action: 'edit'
+  end
+
+  def save_image(params)
+    if !params['user']['image'].nil? && base64?(params['user']['image']['data:image/jpeg;base64,'.length..-1])
+      filename = "#{current_user.id}#{Time.zone.now.strftime('%Y%m%d%H%M%S')}_image.jpg"
+      Dir.mkdir("#{Rails.root}/tmp/users_image/") unless Dir.exist?("#{Rails.root}/tmp/users_image/")
+      File.open("#{Rails.root}/tmp/users_image/#{filename}", 'wb+') do |f|
+        f.write(Base64.decode64(params['user']['image']['data:image/jpeg;base64,'.length..-1]))
+      end
+      f = File.open("#{Rails.root}/tmp/users_image/#{filename}")
+      current_user.image.attach(io: f, filename: filename)
+      f.close
+      File.delete("#{Rails.root}/tmp/users_image/#{filename}")
+    end
+  end
+
+  def save_header(params)
+    if !params['user']['header'].nil? && base64?(params['user']['header']['data:image/jpeg;base64,'.length..-1])
+      filename = "#{current_user.id}#{Time.zone.now.strftime('%Y%m%d%H%M%S')}_header.jpg"
+      Dir.mkdir("#{Rails.root}/tmp/users_header/") unless Dir.exist?("#{Rails.root}/tmp/users_header/")
+      File.open("#{Rails.root}/tmp/users_header/#{filename}", 'wb+') do |f|
+        f.write(Base64.decode64(params['user']['header']['data:image/jpeg;base64,'.length..-1]))
+      end
+      f = File.open("#{Rails.root}/tmp/users_header/#{filename}")
+      current_user.header.attach(io: f, filename: filename)
+      f.close
+      File.delete("#{Rails.root}/tmp/users_header/#{filename}")
+    end
+  end
+
+  def render_params(params)
+    @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+    @tag_list = params[:user][:tag_list]
+    @accreditation_list = params[:user][:accreditation_list]
+    if base64?(params[:user][:image]['data:image/jpeg;base64,'.length..-1])
+      @image = params[:user][:image]
+      @image_x = params[:user][:image_x]
+      @image_y = params[:user][:image_y]
+      @image_w = params[:user][:image_w]
+      @image_h = params[:user][:image_h]
+    end
+    if base64?(params[:user][:header]['data:image/jpeg;base64,'.length..-1])
+      @header = params[:user][:header]
+      @header_x = params[:user][:header_x]
+      @header_y = params[:user][:header_y]
+      @header_w = params[:user][:header_w]
+      @header_h = params[:user][:header_h]
+    end
   end
 end

@@ -50,9 +50,20 @@ class TimelinesController < ApplicationController
   end
 
   def create
-    @create = Post.new(post_params)
+    @create = Post.new(content: post_params[:content])
     @create.user = current_user
-    flash[:alert] = '投稿の文字数は1~280文字までです<br/>画像はjpg jpeg png gifのみ対応しています。<br/>画像は10MBまでです。' unless @create.save
+    unless @create.save
+      flash[:alert] = '投稿の文字数は1~280文字までです<br/>画像はjpg jpeg png gifのみ対応しています。<br/>画像は10MBまでです。'
+      redirect_to(timelines_path)
+      return
+    end
+    @post = Post.find(@create.id)
+    unless post_params[:image].nil?
+      unless save_image?
+        @post.destroy
+        flash[:alert] = '画像が破損しているか、容量が大きすぎる可能性があります。<br />画像は10MBまでです。'
+      end
+    end
     redirect_to(timelines_path)
   end
 
@@ -73,6 +84,7 @@ class TimelinesController < ApplicationController
     @users = User.includes(:likes, :comments, :tags, :followings, :followers, :passive_relationships, :active_relationships)
     @user = @users.find(current_user.id)
     @post_m = Post.includes(:user, :likes, :comments)
+    @report = Report.new
   end
 
   private
@@ -90,6 +102,30 @@ class TimelinesController < ApplicationController
   def post_params
     params.require(:post).permit(:content, :image)
   end
+
+  def save_image?
+    Dir.mkdir("#{Rails.root}/tmp/timeline/") unless File.directory?("#{Rails.root}/tmp/timeline")
+    rand = rand(1000..9999)
+    @image_name = "#{Time.zone.now.strftime('%Y%m%d%H%M%S')}#{rand}.jpg"
+    File.binwrite("#{Rails.root}/tmp/timeline/#{@image_name}", post_params[:image].read)
+    # file_check = check_broken_file("#{Rails.root}/tmp/timeline/#{@image_name}")
+    # @unless file_check[0] != :unknown && file_check[1] == :clean
+    #   File.delete("#{Rails.root}/tmp/timeline/#{@image_name}")
+    #   return false
+    # end
+    f = File.open("#{Rails.root}/tmp/timeline/#{@image_name}")
+    begin
+      @post.image.attach(io: f, filename: @image_name)
+    rescue StandardError
+      f.close
+      File.delete("#{Rails.root}/tmp/timeline/#{@image_name}")
+      return false
+    end
+    f.close
+    File.delete("#{Rails.root}/tmp/timeline/#{@image_name}")
+    true
+  end
+
 
   def redirect(page)
     @page = page

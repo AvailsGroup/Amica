@@ -1,68 +1,47 @@
 <%= stylesheet_link_tag 'communities', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag "community_index" %>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">通報</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <%= form_for(@report, url: community_reports_path(@community.id)) do |f| %>
-          <%= f.hidden_field :user_id, id: "user_id", class: "form-control", value: @user.id %>
-          <%= f.hidden_field :community_id, id: "community_id", class: "form-control", value: @community.id %>
-          <div class="col">
-            <div class="carbon-example flex-wrapper">
-              <%= image_tag @community.decorate.image, class: "img-fluid", style: "width:200px" %><br>
-              <div class="inner-wrapper text-center w-100">
-                <h5><%= @community.name %> </h5>
-                <p class="my-0 fine-print">
-                  <i class="far fa-user fine-print"></i> <%= @community.community_members.size %>
-                </p>
-                <% @community.tags.pluck(:name).shuffle.first(3).each do |t| %>
-                  <%= link_to "\##{t}", search_tag_path(t), class: "fine-print text-decoration-none my-0" %>
-                <% end %>
-              </div>
-              <div class="inner-wrapper text-right w-25 h-auto" style="bottom: 0; left: 0;margin-bottom: 0;padding: 0;">
+<%= render "communities/report_modal", community: @community.id %>
 
-                <span class="small my-0" style="font-size: 13px"></span>
-              </div>
-            </div>
-          </div>
-          <%= f.text_area :message, placeholder: "通報内容を記載してください。", id: "message", class: "form-control mt-3", required: true %><br>
-          <div class="modal-footer">
-            <%= f.submit "送信", class: "btn btn-lg btn-danger fw-bold border-white", style: "margin-right: 10px; width: 150px;color:#FFF" %>
-            <%= f.submit "クリア", type: :reset, class: "btn btn-lg btn-secondary fw-bold border-whitey", style: "margin-right: 10px; width: 150px;color:#FFF" %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render 'layouts/modal', id: "Modal",
+           title: "確認", content: "#{@community.name}を脱退します。本当によろしいですか？",
+           negative: "いいえ",
+           affirmmative_path: community_manage_path(@community.id, current_user.id), affirmmative_method: :delete, affirmative: "はい" %>
 
 <div class="position-relative overflow-hidden p-1 p-md-5 m-md-3 text-center bg-light">
   <div class="col-md-5 p-lg-1 mx-auto my-1">
     <%= image_tag @community.decorate.image, class: "img-fluid rounded", style: "width: 150px;height: 150px;" %>
     <h1 class="display-4 fw-normal"><%= @community.name %></h1>
     <% if @leader == current_user %>
-      <%= link_to "チャット", chats_path, class: "btn btn-outline-dark mx-2" %>
+      <%= link_to "チャット", community_chat_path(@community.id), class: "btn btn-outline-dark mx-2" %>
       <%= link_to "編集", edit_community_path, class: "btn btn-outline-dark mx-2" %>
-      <% if is_community_favorite?(@favorite, @user, @community) %>
-        <%= link_to "お気に入り解除", page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'btn btn-outline-dark mx-2 bg-dark text-light', style: "", data: { disable_with: 'お気に入り解除' } %>
-      <% else %>
-        <%= link_to page_favorite_community_create_path(@community.id), method: :post, class: 'mx-2', style: "", data: { disable_with: 'お気に入り登録' } do %>
-          <i class="far fa-star fa-2x"></i>
+      <div class="star">
+        <% if @favorite.any? { |f| f == @community } %>
+          <%= button_to page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'bg-light', style: "border: none; color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="fas fa-star fa-2x"></i>' } do %>
+            <i class="fas fa-star fa-2x"></i>
+          <% end %>
+        <% else %>
+          <%= button_to page_favorite_community_create_path(@community.id), method: :post, class: 'bg-light', style: "border: none; color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="far fa-star fa-2x"></i>' } do %>
+            <i class="far fa-star fa-2x"></i>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     <% else %>
       <% if @join %>
-        <%= link_to "チャット", chats_path, class: "btn btn-outline-dark mx-2" %>
-        <%= link_to "脱退", community_manage_path(@community.id, current_user.id), method: :delete, class: "btn btn-outline-dark mx-2", data: { confirm: "本当に脱退しますか？" } %>
-        <% if is_community_favorite?(@favorite, @user, @community) %>
-          <%= link_to "お気に入り解除", page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'btn btn-outline-dark mx-2 bg-dark text-light', style: "", data: { disable_with: 'お気に入り解除' } %>
-        <% else %>
-          <%= link_to "お気に入り登録", page_favorite_community_create_path(@community.id), method: :post, class: 'btn btn-outline-dark mx-2', style: "", data: { disable_with: 'お気に入り登録' } %>
-        <% end %>
+        <%= link_to "チャット", community_chat_path(@community.id), class: "btn btn-outline-dark mx-2" %>
+        <button type="button" class="btn btn-outline-dark mx-2" data-bs-toggle="modal" data-bs-target="#Modal">
+          脱退
+        </button>
+        <div class="star">
+          <% if @favorite.any? { |f| f == @community } %>
+            <%= button_to page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'mx-2 bg-light', style: "border: none; color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="fas fa-star fa-2x"></i>' } do %>
+              <i class="fas fa-star fa-2x"></i>
+            <% end %>
+          <% else %>
+            <%= button_to page_favorite_community_create_path(@community.id), method: :post, class: 'mx-2 bg-light', style: "border: none; color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="far fa-star fa-2x"></i>' } do %>
+              <i class="far fa-star fa-2x"></i>
+            <% end %>
+          <% end %>
+        </div>
         <div class="ms-2">
           <label>
             <button type="button" class="btn btn-primary" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=
@@ -101,7 +80,7 @@
     <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center" style="height: 530px">
       <div class="my-3 py-3">
         <h2 class="display-5">タグ</h2>
-        <% @community.tags.each do |t| %>
+        <% @community.tags.pluck(:name).each do |t| %>
           <%= link_to search_tag_path(t), class: "text-decoration-none" do %>
             <span class="lead mb-0">#<%= t %> </span>
           <% end %>

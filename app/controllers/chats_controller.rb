@@ -8,6 +8,7 @@ class ChatsController < ApplicationController
     if @chatroom.nil?
       redirect_to profiles_path, notice: '誰かとお話してみましょう！'
     end
+    @chat = Kaminari.paginate_array(@room_partner).page(params[:page]).per(10)
   end
 
   def show
@@ -17,7 +18,8 @@ class ChatsController < ApplicationController
       return
     end
     in_room?
-    @message = Message.where(room_id: @room.id)
+    @messages = @room.messages
+    @pagenate = @messages.order(updated_at: :desc).page(params[:page]).per(50)
   end
 
   private

@@ -4,17 +4,17 @@
       <div class="d-flex text-muted pt-3">
         <%= image_tag user.decorate.image , class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
         <p class="pb-3 mb-0 small lh-sm w-100">
-          <strong class="d-block text-gray-dark"><%= user.name %> (<%= user.nickname %>)</strong>
-          @<%= user.userid %>
+          <strong class="d-block text-gray-dark"><%= user.decorate.name %> (<%= user.decorate.nickname %>)</strong>
+          @<%= user.decorate.userid %>
         </p>
       </div>
       <div style="padding-top: 19px">
-        <% if is_user_favorite?(favorite_model,fixed_current_user,user) %>
-          <%= link_to page_favorite_user_delete_path(user.id,fixed_current_user.id), method: :delete, class: 'bg-white', style: "border: none;color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="far fa-star"></i>' } do %>
+        <% if @favorite_users.any?{ |u| u == user } %>
+          <%= button_to page_favorite_user_delete_path(user.id, current_user.id), method: :delete, class: 'bg-white', style: "border: none;color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="far fa-star"></i>' } do %>
             <i class="fas fa-star"></i>
           <% end %>
         <% else %>
-          <%= link_to  page_favorite_user_create_path(user.id), method: :post, class: 'bg-white', style: "border: none;color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="fas fa-star"></i>' } do %>
+          <%= button_to  page_favorite_user_create_path(user.id), method: :post, class: 'bg-white', style: "border: none;color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="fas fa-star"></i>' } do %>
             <i class="far fa-star"></i>
           <% end %>
         <% end %>

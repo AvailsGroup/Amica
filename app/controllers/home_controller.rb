@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def top
-    render layout: 'home'
+    render layout: nil
   end
 
   def about
@@ -9,17 +9,5 @@ class HomeController < ApplicationController
 
   def contact
     render layout: 'home'
-  end
-
-  def help_page
-
-  end
-
-  def static
-
-  end
-
-  def privacy
-
   end
 end
