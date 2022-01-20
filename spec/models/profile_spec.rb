@@ -70,6 +70,26 @@ RSpec.describe Profile, type: :model do
     end
   end
 
+  describe '#intro' do
+    context '300文字を超える場合' do
+      it 'エラーを出す' do
+        hundred = '1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890'
+        profile = build(:profile)
+        profile.student_id = "#{hundred}#{hundred}#{hundred}1"
+        expect(profile).not_to be_valid
+      end
+    end
+
+
+    context 'ブランクの場合' do
+      it '正常に保存される' do
+        profile = build(:profile)
+        profile.student_id = ''
+        expect(profile).not_to be_valid
+      end
+    end
+  end
+
   describe '#enrolled_year' do
     context '規定の年未満の場合' do
       it 'エラーを出す' do
@@ -159,14 +179,6 @@ RSpec.describe Profile, type: :model do
   end
 
   describe '#discord_tag' do
-    context '0から始まる場合' do
-      it 'エラーを出す' do
-        profile = build(:profile)
-        profile.discord_tag = '0012'
-        expect(profile).not_to be_valid
-      end
-    end
-
     context 'ブランクの場合' do
       it '正常に保存される' do
         profile = build(:profile)
@@ -175,8 +187,8 @@ RSpec.describe Profile, type: :model do
       end
     end
 
-    context '4文字以内の場合' do
-      it '正常に保存される' do
+    context '4文字未満の場合' do
+      it 'エラーが出る' do
         profile = build(:profile)
         profile.discord_tag = '12'
         expect(profile).to be_valid
@@ -191,5 +203,4 @@ RSpec.describe Profile, type: :model do
       end
     end
   end
-
 end
