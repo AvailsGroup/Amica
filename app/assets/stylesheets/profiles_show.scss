@@ -396,39 +396,9 @@
 }
 
 .amica-badge{
-  margin-left: 3px;
-  margin-right: 3px;
+  font-size: 30px;
   position: relative;
-  cursor: pointer;
-  display:  inline-block;
-}
-
-.at-badge .svg-inline--fa{
-  width:  30px;
-  height: 30px;
-
-}
-
-.badge-description {
-  display: none;
-  position: absolute;
-  padding: 5px;
-  font-size: 12px;
-  line-height: 1.6em;
-  color: #fff;
-  border-radius: 5px;
-  background: #000;
-  width: 100px;
-}
-
-.badge-description:before {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  border: 15px solid transparent;
-  border-top: 15px solid #000;
-  margin-left: -15px;
+  display: inline-block;
 }
 
 .cropper-crop-box{
