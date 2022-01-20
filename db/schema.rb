@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_16_141837) do
+ActiveRecord::Schema.define(version: 2022_01_20_061334) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -209,7 +209,7 @@ ActiveRecord::Schema.define(version: 2022_01_16_141837) do
     t.text "intro"
     t.string "instagram_id"
     t.string "discord_name"
-    t.integer "discord_tag"
+    t.string "discord_tag"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
