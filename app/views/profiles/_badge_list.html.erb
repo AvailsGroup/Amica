@@ -1,0 +1,43 @@
+<%= stylesheet_link_tag 'profiles_show', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'profiles/badge' %>
+
+
+<%= render "badge", icon: "fas fa-smile", title: "#{@user.created_at.strftime('%Y/%m/%d')} 登録記念！", rare: "none" %>
+
+<%= render "badge", icon: "fas fa-bullhorn", title: "タイムライン初投稿記念!", rare: "none" if @user.posts.size >= 1 %>
+<%= render "badge", icon: "fas fa-bullhorn", title: "投稿数100個達成記念!", rare: "low" if @user.posts.size >= 100 %>
+<%= render "badge", icon: "fas fa-bullhorn", title: "投稿数1000個達成記念!", rare: "middle" if @user.posts.size >= 1000 %>
+<%= render "badge", icon: "fas fa-bullhorn", title: "投稿数10000個達成記念!", rare: "high" if @user.posts.size >= 10000 %>
+
+<%= render "badge", icon: "fas fa-icons", title: "初友達達成記念!", rare: "none" if @friends_count >= 1 %>
+<%= render "badge", icon: "fas fa-icons", title: "友達人数10人達成記念!", rare: "low" if @friends_count >= 10 %>
+<%= render "badge", icon: "fas fa-icons", title: "友達人数50人達成経過記念!", rare: "middle" if @friends_count >= 50 %>
+<%= render "badge", icon: "fas fa-icons", title: "友達人数100人達成記念!", rare: "high" if @friends_count >= 100 %>
+
+
+<%= render "badge", icon: "fas fa-map-marked-alt", title: "コミュニティ参加記念!", rare: "none" if @community_count >= 1 %>
+<%= render "badge", icon: "fas fa-map-marked-alt", title: "コミュニティ10個参加記念!", rare: "low" if @community_count >= 10 %>
+<%= render "badge", icon: "fas fa-map-marked-alt", title: "コミュニティ30個参加記念!", rare: "middle" if @community_count >= 30 %>
+<%= render "badge", icon: "fas fa-map-marked-alt", title: "コミュニティ50個参加記念!", rare: "high" if @community_count >= 50 %>
+
+<%= render "badge", icon: "fas fa-sign-in-alt", title: "amica登録から7日経過記念!", rare: "none" if @days >= 7 %>
+<%= render "badge", icon: "fas fa-sign-in-alt", title: "amica登録から100日経過記念!", rare: "low" if @days >= 100 %>
+<%= render "badge", icon: "fas fa-sign-in-alt", title: "amica登録から200日経過記念!", rare: "middle" if @days >= 200 %>
+<%= render "badge", icon: "fas fa-sign-in-alt", title: "amica登録から365日経過記念!", rare: "high" if @days >= 365 %>
+
+<%= render "badge", icon: "fas fa-handshake", title: "初コメント記念!", rare: "none" if @comments_count >= 1 %>
+<%= render "badge", icon: "fas fa-handshake", title: "コメント数10個記念!", rare: "low" if @comments_count >= 10 %>
+<%= render "badge", icon: "fas fa-handshake", title: "コメント数50個記念!", rare: "middle" if @comments_count >= 50 %>
+<%= render "badge", icon: "fas fa-handshake", title: "コメント数100個記念!", rare: "high" if @comments_count >= 100 %>
+
+<%= render "badge", icon: "fas fa-smile-wink", title: "超低確率のウインクいいねエフェクトを引いた!", rare: "high" if @achievement.wink_like %>
+<%= render "badge", icon: "fas fa-hand-holding-heart", title: "超低確率のハンドハートいいねエフェクトを引いた!", rare: "very_high" if @achievement.hand_like %>
+
+<%= render "badge", icon: "fas fa-thumbs-up", title: "運営からの特別バッジLv1", rare: "low" if @achievement.niceLv1 %>
+<%= render "badge", icon: "fas fa-thumbs-up", title: "運営からの特別バッジLv2", rare: "middle" if @achievement.niceLv2 %>
+<%= render "badge", icon: "fas fa-thumbs-up", title: "運営からの特別バッジLv3", rare: "high" if @achievement.niceLv3 %>
+
+<%= render "badge", icon: "fas fa-bug", title: "バグを報告してくれた人に与えられるバッジ", rare: "high" if @achievement.debugger %>
+
+<%= render "badge", icon: "fas fa-crown", title: "Amica運営", rare: "very_high" if @user.admin %>
+
