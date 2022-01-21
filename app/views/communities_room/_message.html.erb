@@ -11,9 +11,18 @@
         <%= message.user.name %>
       </div>
     <% end %>
-    <div class="<%= html_sub_class(user) %> my-1 p-1" style="max-width: 40%;">
-      <div class="messages container p-1">
-        <%= chat_content(message) %>
+    <div class="d-none d-lg-block d-xl-block d-xxl-block">
+      <div class="<%= html_sub_class(user) %> my-1 p-1" style="max-width: 50%;">
+        <div class="messages container p-1">
+          <%= chat_content(message) %>
+        </div>
+      </div>
+    </div>
+    <div class="d-block d-lg-none d-xl-none d-xxl-none">
+      <div class="<%= html_sub_class(user) %> my-1 p-1" style="max-width: 70%;">
+        <div class="messages container p-1">
+          <%= chat_content(message) %>
+        </div>
       </div>
     </div>
     <% if user %>

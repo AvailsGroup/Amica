@@ -1,0 +1,42 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-right: 0">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">画像トリミング</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4 class="modal-text">画像を選択してください</h4>
+        <div class="form_wrapper">
+          <div id="image-wrapper">
+            <%= form.file_field :images, id: "trim_img_uploder", value: "assets/default", accept: 'image/jpg,image/jpeg,image/png' %>
+            <%= form.hidden_field :image, id: "image", value: defined?(@image) ? @image : nil%>
+            <%= form.hidden_field :image_x, id: "image_x", value: defined?(@image_x) ? @image_x : nil %>
+            <%= form.hidden_field :image_y, id: "image_y", value: defined?(@image_y) ? @image_y : nil %>
+            <%= form.hidden_field :image_w, id: "image_w", value: defined?(@image_w) ? @image_w : nil %>
+            <%= form.hidden_field :image_h, id: "image_h", value: defined?(@image_h) ? @image_h : nil %>
+            <%= form.hidden_field :aspect_numerator, id: "aspect_numerator", value: "1.0" %>
+            <%= form.hidden_field :aspect_denominator, id: "aspect_denominator", value: "1.0" %>
+
+            <div id="prev_img">
+              <%= image_tag current_user.decorate.image, :size => '200x200', class: "user_image" %>
+            </div>
+          </div>
+        </div>
+        <div id="modal_area" style="display: none;">
+          <div class="modal_wrapper">
+            <div class="modal_padding modal_title_wrapper">
+              <h4>範囲を選択してください</h4>
+            </div>
+            <div class="canvas_wrapper">
+              <canvas id="source_canvas" width="1" height="1"></canvas>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="close_button" class="btn btn-primary" data-bs-dismiss="modal">画像を切り取る</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -61,7 +61,7 @@ class TimelinesController < ApplicationController
     unless post_params[:image].nil?
       unless save_image?
         @post.destroy
-        flash[:alert] = '画像が破損しているようです。'
+        flash[:alert] = '画像が破損しているか、容量が大きすぎる可能性があります。<br />画像は10MBまでです。'
       end
     end
     redirect_to(timelines_path)
@@ -108,11 +108,11 @@ class TimelinesController < ApplicationController
     rand = rand(1000..9999)
     @image_name = "#{Time.zone.now.strftime('%Y%m%d%H%M%S')}#{rand}.jpg"
     File.binwrite("#{Rails.root}/tmp/timeline/#{@image_name}", post_params[:image].read)
-    file_check = check_broken_file("#{Rails.root}/tmp/timeline/#{@image_name}")
-    unless file_check[0] != :unknown && file_check[1] == :clean
-      File.delete("#{Rails.root}/tmp/timeline/#{@image_name}")
-      return false
-    end
+    # file_check = check_broken_file("#{Rails.root}/tmp/timeline/#{@image_name}")
+    # @unless file_check[0] != :unknown && file_check[1] == :clean
+    #   File.delete("#{Rails.root}/tmp/timeline/#{@image_name}")
+    #   return false
+    # end
     f = File.open("#{Rails.root}/tmp/timeline/#{@image_name}")
     begin
       @post.image.attach(io: f, filename: @image_name)

@@ -7,12 +7,11 @@
   <div class="collapse show mb-3" id="collapseExample">
     <div class="mb-3 p-3 bg-white rounded shadow-sm">
       <br />
+      <p>入学年を
+        <%= link_to @user.setting.decorate.enrolled_year_value, enrolled_year_settings_path, method: :post, class: "btn btn-primary", data: { disable_with: '変更中...' } %>
+      </p>
       <p>学籍番号を
-        <% if @user.setting.visible_enrolled_year %>
-          <%= link_to "非表示にする", disable_enrolled_year_settings_path, method: :delete, class: "btn btn-primary", data: { disable_with: '変更中...' } %>
-        <% else %>
-          <%= link_to "表示する", enable_enrolled_year_settings_path, method: :post, class: "btn btn-primary", data: { disable_with: '変更中...' } %>
-        <% end %>
+        <%= link_to @user.setting.decorate.student_id_value, student_id_settings_path, method: :post, class: "btn btn-primary", data: { disable_with: '変更中...' } %>
       </p>
     </div>
   </div>

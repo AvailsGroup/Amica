@@ -11,11 +11,15 @@ class User < ApplicationRecord
 
   has_one_attached :image
 
+  has_one_attached :header
+
   before_create :build_default_profile
 
   validate :validate_tag
 
   validate :image_size
+
+  validate :header_size
 
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,24}+\z/ }, allow_nil: true
 
@@ -23,7 +27,7 @@ class User < ApplicationRecord
 
   validates :email,
             uniqueness: { case_sensitive: false },
-            format: { with: /\A[A-Za-z]{4}[0-9]{7}@gn.iwasaki.ac.jp\z/ }
+            format: { with: /\A[A-Za-z0-9]+@gn.iwasaki.ac.jp\z/ }
 
   validates :name,
             length: { minimum: 2, maximum: 20 },
@@ -199,6 +203,15 @@ class User < ApplicationRecord
 
     if image.blob.byte_size > 10.megabytes
       image.purge
+      errors.add(:image, "は10MB以内にしてください")
+    end
+  end
+
+  def header_size
+    return unless header.attached?
+
+    if header.blob.byte_size > 10.megabytes
+      header.purge
       errors.add(:image, "は10MB以内にしてください")
     end
   end

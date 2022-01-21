@@ -8,7 +8,6 @@ class Community < ApplicationRecord
   validates :name,
             presence: true,
             length: { minimum: 2, maximum: 20 },
-            format: { with: %r{\A[a-zA-Z0-9ぁ-んァ-ヶ一-龥々ー０-９!?~<>=_ 　]+\z}u },
             uniqueness: { case_sensitive: false }
 
   validate :validate_tag
@@ -23,13 +22,11 @@ class Community < ApplicationRecord
 
   has_many :community_securities, dependent: :destroy
 
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
 
   has_many :reports
 
-  has_many :community_messages
-
-  has_many :favorites
+  has_many :community_messages, dependent: :destroy
 
   private
 
@@ -38,7 +35,6 @@ class Community < ApplicationRecord
 
     tag_list.each do |tag|
       errors.add(:tag_list, 'は1つ2~20文字です。') if (tag.length < 2) || (tag.length > 20)
-      errors.add(:tag_list, "には記号やスペースを入れることが出来ません [#{tag}]") unless /\A[a-zA-Z0-9ぁ-んァ-ヶ一-龥々ー]+\z/u.match?(tag)
     end
   end
 

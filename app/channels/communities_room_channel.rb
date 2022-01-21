@@ -10,6 +10,12 @@ class CommunitiesRoomChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
+  def perform_action(data)
+    Rails.logger.silence do
+      super(data)
+    end
+  end
+
   def speak(data)
     @type = data['type']
     @content = data['message']
@@ -45,12 +51,12 @@ class CommunitiesRoomChannel < ApplicationCable::Channel
     File.open("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{data['file_name']}", 'wb+') do |f|
       f.write(Base64.decode64(base64))
     end
-    file_check = check_broken_file("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{data['file_name']}")
-    if data['type'] == 'image'
-      unless file_check[0] != :unknown && file_check[1] == :clean
-        @community.update(content_type: 'file')
-      end
-    end
+    # file_check = check_broken_file("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{data['file_name']}")
+    # if data['type'] == 'image'
+    #   unless file_check[0] != :unknown && file_check[1] == :clean
+    #     @community.update(content_type: 'file')
+    #   end
+    # end
 
     f = File.open("#{Rails.root}/tmp/community_chats/community_#{data['community_id']}/#{data['file_name']}")
     @community.file.attach(io: f, filename: data['file_name'])
@@ -71,15 +77,15 @@ class CommunitiesRoomChannel < ApplicationCable::Channel
         return result
       end
 
-      if header[0,2].unpack('H*') == [ 'ffd8' ]
+      if header[0, 2].unpack('H*') == ['ffd8']
         result[0] = :jpg
-        result[1] = :damaged unless footer[-2,2].unpack('H*') == [ 'ffd9' ]
-      elsif header[0,3].unpack('A*') == [ 'GIF' ]
+        result[1] = :damaged unless footer[-2, 2].unpack('H*') == ['ffd9']
+      elsif header[0, 3].unpack('A*') == ['GIF']
         result[0] = :gif
-        result[1] = :damaged unless footer[-1,1].unpack('H*') == [ '3b' ]
-      elsif header[0,8].unpack('H*') == [ '89504e470d0a1a0a' ]
+        result[1] = :damaged unless footer[-1, 1].unpack('H*') == ['3b']
+      elsif header[0, 8].unpack('H*') == ['89504e470d0a1a0a']
         result[0] = :png
-        result[1] = :damaged unless footer[-12,12].unpack('H*') == [ '0000000049454e44ae426082' ]
+        result[1] = :damaged unless footer[-12, 12].unpack('H*') == ['0000000049454e44ae426082']
       end
     end
     result

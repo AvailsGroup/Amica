@@ -1,0 +1,45 @@
+<div class="modal fade" id="headerModal" tabindex="-1" aria-labelledby="headerModalLabel" aria-hidden="true" style="padding-right: 0">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="headerModalLabel">ヘッダートリミング</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4 class="header_modal-text">画像を選択してください</h4>
+        <div class="form_wrapper">
+          <div id="image-wrapper">
+            <%= form.file_field :header_images, id: "header_trim_img_uploder", value: "assets/default", accept: 'image/jpg,image/jpeg,image/png' %>
+            <%= form.hidden_field :header, id: "header", value: defined?(@header) ? @header : nil%>
+            <%= form.hidden_field :header_image_x, id: "header_image_x", value: defined?(@header_x) ? @header_x : nil %>
+            <%= form.hidden_field :header_image_y, id: "header_image_y", value: defined?(@header_y) ? @header_y : nil %>
+            <%= form.hidden_field :header_image_w, id: "header_image_w", value: defined?(@header_w) ? @header_w : nil %>
+            <%= form.hidden_field :header_image_h, id: "header_image_h", value: defined?(@header_h) ? @header_h : nil %>
+            <%= form.hidden_field :header_aspect_numerator, id: "header_aspect_numerator", value: "1.0" %>
+            <%= form.hidden_field :header_aspect_denominator, id: "header_aspect_denominator", value: "4.0" %>
+
+            <div id="header_prev_img">
+              <%= image_tag current_user.decorate.header, :width => '100%', :height => 'auto' , class: "user_header" %>
+            </div>
+          </div>
+        </div>
+        <div id="header_modal_area" style="display: none;">
+          <div class="modal_wrapper">
+            <div class="modal_padding modal_title_wrapper">
+              <h4>範囲を選択してください</h4>
+            </div>
+            <div class="container">
+            <div class="canvas_wrapper" id="parent_header_source_canvas">
+              <canvas id="header_source_canvas" width="1" height="1" style="display: none"></canvas>
+              <img id="header_crop" src="" width="100%" >
+            </div>
+          </div>
+            <div class="modal-footer">
+              <button type="button" id="close_button" class="btn btn-primary" data-bs-dismiss="modal">画像を切り取る</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

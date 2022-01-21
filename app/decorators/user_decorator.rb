@@ -11,13 +11,19 @@ class UserDecorator < ApplicationDecorator
   #   end
 
   def image
-    return 'default_icon' if object.discarded?
+    return '/assets/default_icon.png' if object.discarded?
 
-    object.image.attached? ? object.image : 'default_icon'
+    object.image.attached? ? object.image : '/assets/default_icon.png'
+  end
+
+  def header
+    return '/assets/default_header.jpg' if object.discarded?
+
+    object.header.attached? ? object.header : '/assets/default_header.jpg'
   end
 
   def image_message
-    return 'default_icon' if object.discarded?
+    return '/assets/default_icon.png' if object.discarded?
 
     object.image.attached? ? object.image : '/assets/default_icon.png'
   end

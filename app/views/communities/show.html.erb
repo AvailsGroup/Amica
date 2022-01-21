@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag 'communities', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag "community_index" %>
-<%= render "communities/report_modal" , community:@community.id %>
+<%= render "communities/report_modal", community: @community.id %>
 
 <%= render 'layouts/modal', id: "Modal",
            title: "確認", content: "#{@community.name}を脱退します。本当によろしいですか？",
@@ -14,30 +14,34 @@
     <% if @leader == current_user %>
       <%= link_to "チャット", community_chat_path(@community.id), class: "btn btn-outline-dark mx-2" %>
       <%= link_to "編集", edit_community_path, class: "btn btn-outline-dark mx-2" %>
-      <% if is_community_favorite?(@favorite, @user, @community) %>
-        <%= link_to page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'mx-2', style: "", data: { disable_with: 'お気に入り解除' } do %>
-          <i class="fas fa-star fa-2x"></i>
+      <div class="star">
+        <% if @favorite.any? { |f| f == @community } %>
+          <%= button_to page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'bg-light', style: "border: none; color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="fas fa-star fa-2x"></i>' } do %>
+            <i class="fas fa-star fa-2x"></i>
+          <% end %>
+        <% else %>
+          <%= button_to page_favorite_community_create_path(@community.id), method: :post, class: 'bg-light', style: "border: none; color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="far fa-star fa-2x"></i>' } do %>
+            <i class="far fa-star fa-2x"></i>
+          <% end %>
         <% end %>
-      <% else %>
-        <%= link_to page_favorite_community_create_path(@community.id), method: :post, class: 'mx-2', style: "", data: { disable_with: 'お気に入り登録' } do %>
-          <i class="far fa-star fa-2x"></i>
-        <% end %>
-      <% end %>
+      </div>
     <% else %>
       <% if @join %>
         <%= link_to "チャット", community_chat_path(@community.id), class: "btn btn-outline-dark mx-2" %>
         <button type="button" class="btn btn-outline-dark mx-2" data-bs-toggle="modal" data-bs-target="#Modal">
           脱退
         </button>
-        <% if is_community_favorite?(@favorite, @user, @community) %>
-          <%= link_to page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'mx-2 ', style: "", data: { disable_with: 'お気に入り解除' } do%>
-            <i class="fas fa-star fa-2x"></i>
-          <%end%>
-        <% else %>
-          <%= link_to page_favorite_community_create_path(@community.id), method: :post, class: 'mx-2', style: "", data: { disable_with: 'お気に入り登録' } do%>
-            <i class="far fa-star fa-2x"></i>
-          <%end%>
-        <% end %>
+        <div class="star">
+          <% if @favorite.any? { |f| f == @community } %>
+            <%= button_to page_favorite_community_delete_path(@user.id, page_id: @community.id), method: :delete, class: 'mx-2 bg-light', style: "border: none; color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="fas fa-star fa-2x"></i>' } do %>
+              <i class="fas fa-star fa-2x"></i>
+            <% end %>
+          <% else %>
+            <%= button_to page_favorite_community_create_path(@community.id), method: :post, class: 'mx-2 bg-light', style: "border: none; color: rgba(29, 144, 190, 0.8);", data: { disable_with: '<i class="far fa-star fa-2x"></i>' } do %>
+              <i class="far fa-star fa-2x"></i>
+            <% end %>
+          <% end %>
+        </div>
         <div class="ms-2">
           <label>
             <button type="button" class="btn btn-primary" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=

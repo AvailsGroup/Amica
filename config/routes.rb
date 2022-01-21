@@ -70,8 +70,8 @@ Rails.application.routes.draw do
 
   resources :settings, only: %i[index] do
     collection do
-      post :enable_enrolled_year
-      delete :disable_enrolled_year
+      post :enrolled_year
+      post :student_id
     end
   end
 
@@ -115,7 +115,9 @@ Rails.application.routes.draw do
     end
   end
 
-  mount LetterOpenerWeb::Engine, at: '/letter_opener'
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: '/letter_opener'
+  end
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
