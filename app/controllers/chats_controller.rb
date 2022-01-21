@@ -8,6 +8,7 @@ class ChatsController < ApplicationController
     if @chatroom.nil?
       redirect_to profiles_path, notice: '誰かとお話してみましょう！'
     end
+
     @chat = Kaminari.paginate_array(@room_partner).page(params[:page]).per(10)
   end
 
