@@ -29,6 +29,7 @@ class ChatChannel < ApplicationCable::Channel
     @file = data['file']
     @message = Message.new(content: @content, user_id: current_user.id, room_id: @room_id, content_type: @type)
     @message.save!
+    room.touch
 
     unless @type == 'text'
       save_file(data)
