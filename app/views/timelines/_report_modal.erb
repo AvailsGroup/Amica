@@ -9,7 +9,7 @@
         <div class="modal-body">
           <%= form_for(@report, url: timeline_reports_path(post.id)) do |f| %>
             <%= f.hidden_field :post_id, id: "post_id", class: "form-control", value: post.id %>
-            <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <div class="my-3 p-3 bg-white rounded shadow-sm" style="word-break: break-all">
               <div class="d-flex text-muted">
                 <%= image_tag post.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
                 <p class="pb-3 mb-0 lh-sm w-100">
