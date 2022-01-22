@@ -35,4 +35,13 @@ module ApplicationHelper
      %w[OB OB]]
   end
 
+  def notification_count
+    informations = InformationShow.includes(:information, :user)
+    information = informations.select { |i| i.user_id == current_user.id }
+    information_count = Information.all.size - information.size
+    notification = current_user.passive_notifications.where(checked: false).size
+    whispers = current_user.whispers.where(checked: false).size
+    notification + whispers + information_count
+  end
+
 end
