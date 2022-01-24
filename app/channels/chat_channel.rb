@@ -29,6 +29,12 @@ class ChatChannel < ApplicationCable::Channel
     @file = data['file']
     @message = Message.new(content: @content, user_id: current_user.id, room_id: @room_id, content_type: @type)
     @message.save!
+
+    other_user_id = room.started_user_id == current_user.id ? room.invited_user_id : room.started_user_id
+    unless Notification.exists?(visitor_id: current_user.id, visited_id: other_user_id, action: 'chat', checked: false)
+      Notification.create(visitor_id: current_user.id, visited_id: other_user_id, action: 'chat')
+    end
+
     room.touch
 
     unless @type == 'text'
