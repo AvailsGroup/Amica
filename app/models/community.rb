@@ -28,6 +28,8 @@ class Community < ApplicationRecord
 
   has_many :community_messages, dependent: :destroy
 
+  has_many :notifications, dependent: :destroy
+
   private
 
   def validate_tag
