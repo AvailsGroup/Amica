@@ -81,8843 +81,6470 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./app/javascript/packs/profiles/badge.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./app/javascript/packs/profiles/edit.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./app/javascript/packs/profiles/badge.js":
-/*!************************************************!*\
-  !*** ./app/javascript/packs/profiles/badge.js ***!
-  \************************************************/
+/***/ "./app/javascript/packs/profiles/edit.js":
+/*!***********************************************!*\
+  !*** ./app/javascript/packs/profiles/edit.js ***!
+  \***********************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var cropperjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! cropperjs */ "./node_modules/cropperjs/dist/cropper.js");
+/* harmony import */ var cropperjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(cropperjs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/src/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var jquery_ui_ui_widget__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery-ui/ui/widget */ "./node_modules/jquery-ui/ui/widget.js");
+/* harmony import */ var jquery_ui_ui_widget__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widget__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var jquery_ui_ui_widgets_autocomplete__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jquery-ui/ui/widgets/autocomplete */ "./node_modules/jquery-ui/ui/widgets/autocomplete.js");
+/* harmony import */ var jquery_ui_ui_widgets_autocomplete__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_autocomplete__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var tag_it__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tag-it */ "./node_modules/tag-it/js/tag-it.min.js");
+/* harmony import */ var tag_it__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(tag_it__WEBPACK_IMPORTED_MODULE_4__);
 
 
-(function () {
-  window.addEventListener("load", function () {
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-      return new bootstrap.Tooltip(tooltipTriggerEl);
-    });
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  $('#trim_img_uploder').click(function (e) {
+    $(this).val('');
+    document.getElementById("prev_img").style.display = '';
+    document.getElementById("cropped_canvas").style.display = 'none';
+    $('#user_icon').fadeIn();
   });
-})();
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/createPopper.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/createPopper.js ***!
-  \*********************************************************/
-/*! exports provided: popperGenerator, createPopper, detectOverflow */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "popperGenerator", function() { return popperGenerator; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPopper", function() { return createPopper; });
-/* harmony import */ var _dom_utils_getCompositeRect_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dom-utils/getCompositeRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getCompositeRect.js");
-/* harmony import */ var _dom_utils_getLayoutRect_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dom-utils/getLayoutRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getLayoutRect.js");
-/* harmony import */ var _dom_utils_listScrollParents_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dom-utils/listScrollParents.js */ "./node_modules/@popperjs/core/lib/dom-utils/listScrollParents.js");
-/* harmony import */ var _dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dom-utils/getOffsetParent.js */ "./node_modules/@popperjs/core/lib/dom-utils/getOffsetParent.js");
-/* harmony import */ var _dom_utils_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dom-utils/getComputedStyle.js */ "./node_modules/@popperjs/core/lib/dom-utils/getComputedStyle.js");
-/* harmony import */ var _utils_orderModifiers_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/orderModifiers.js */ "./node_modules/@popperjs/core/lib/utils/orderModifiers.js");
-/* harmony import */ var _utils_debounce_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/debounce.js */ "./node_modules/@popperjs/core/lib/utils/debounce.js");
-/* harmony import */ var _utils_validateModifiers_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/validateModifiers.js */ "./node_modules/@popperjs/core/lib/utils/validateModifiers.js");
-/* harmony import */ var _utils_uniqueBy_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./utils/uniqueBy.js */ "./node_modules/@popperjs/core/lib/utils/uniqueBy.js");
-/* harmony import */ var _utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./utils/getBasePlacement.js */ "./node_modules/@popperjs/core/lib/utils/getBasePlacement.js");
-/* harmony import */ var _utils_mergeByName_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./utils/mergeByName.js */ "./node_modules/@popperjs/core/lib/utils/mergeByName.js");
-/* harmony import */ var _utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./utils/detectOverflow.js */ "./node_modules/@popperjs/core/lib/utils/detectOverflow.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "detectOverflow", function() { return _utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_11__["default"]; });
-
-/* harmony import */ var _dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./dom-utils/instanceOf.js */ "./node_modules/@popperjs/core/lib/dom-utils/instanceOf.js");
-/* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var INVALID_ELEMENT_ERROR = 'Popper: Invalid reference or popper argument provided. They must be either a DOM element or virtual element.';
-var INFINITE_LOOP_ERROR = 'Popper: An infinite loop in the modifiers cycle has been detected! The cycle has been interrupted to prevent a browser crash.';
-var DEFAULT_OPTIONS = {
-  placement: 'bottom',
-  modifiers: [],
-  strategy: 'absolute'
-};
-
-function areValidElements() {
-  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-    args[_key] = arguments[_key];
-  }
-
-  return !args.some(function (element) {
-    return !(element && typeof element.getBoundingClientRect === 'function');
+  $('#trim_img_uploder').change(function (e) {
+    document.getElementById("prev_img").style.display = 'none';
+    $('#modal_area').fadeIn();
+    $('.modal-text').fadeOut();
   });
-}
-
-function popperGenerator(generatorOptions) {
-  if (generatorOptions === void 0) {
-    generatorOptions = {};
-  }
-
-  var _generatorOptions = generatorOptions,
-      _generatorOptions$def = _generatorOptions.defaultModifiers,
-      defaultModifiers = _generatorOptions$def === void 0 ? [] : _generatorOptions$def,
-      _generatorOptions$def2 = _generatorOptions.defaultOptions,
-      defaultOptions = _generatorOptions$def2 === void 0 ? DEFAULT_OPTIONS : _generatorOptions$def2;
-  return function createPopper(reference, popper, options) {
-    if (options === void 0) {
-      options = defaultOptions;
-    }
-
-    var state = {
-      placement: 'bottom',
-      orderedModifiers: [],
-      options: Object.assign({}, DEFAULT_OPTIONS, defaultOptions),
-      modifiersData: {},
-      elements: {
-        reference: reference,
-        popper: popper
-      },
-      attributes: {},
-      styles: {}
-    };
-    var effectCleanupFns = [];
-    var isDestroyed = false;
-    var instance = {
-      state: state,
-      setOptions: function setOptions(setOptionsAction) {
-        var options = typeof setOptionsAction === 'function' ? setOptionsAction(state.options) : setOptionsAction;
-        cleanupModifierEffects();
-        state.options = Object.assign({}, defaultOptions, state.options, options);
-        state.scrollParents = {
-          reference: Object(_dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_12__["isElement"])(reference) ? Object(_dom_utils_listScrollParents_js__WEBPACK_IMPORTED_MODULE_2__["default"])(reference) : reference.contextElement ? Object(_dom_utils_listScrollParents_js__WEBPACK_IMPORTED_MODULE_2__["default"])(reference.contextElement) : [],
-          popper: Object(_dom_utils_listScrollParents_js__WEBPACK_IMPORTED_MODULE_2__["default"])(popper)
-        }; // Orders the modifiers based on their dependencies and `phase`
-        // properties
-
-        var orderedModifiers = Object(_utils_orderModifiers_js__WEBPACK_IMPORTED_MODULE_5__["default"])(Object(_utils_mergeByName_js__WEBPACK_IMPORTED_MODULE_10__["default"])([].concat(defaultModifiers, state.options.modifiers))); // Strip out disabled modifiers
-
-        state.orderedModifiers = orderedModifiers.filter(function (m) {
-          return m.enabled;
-        }); // Validate the provided modifiers so that the consumer will get warned
-        // if one of the modifiers is invalid for any reason
-
-        if (true) {
-          var modifiers = Object(_utils_uniqueBy_js__WEBPACK_IMPORTED_MODULE_8__["default"])([].concat(orderedModifiers, state.options.modifiers), function (_ref) {
-            var name = _ref.name;
-            return name;
-          });
-          Object(_utils_validateModifiers_js__WEBPACK_IMPORTED_MODULE_7__["default"])(modifiers);
-
-          if (Object(_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_9__["default"])(state.options.placement) === _enums_js__WEBPACK_IMPORTED_MODULE_13__["auto"]) {
-            var flipModifier = state.orderedModifiers.find(function (_ref2) {
-              var name = _ref2.name;
-              return name === 'flip';
-            });
-
-            if (!flipModifier) {
-              console.error(['Popper: "auto" placements require the "flip" modifier be', 'present and enabled to work.'].join(' '));
-            }
-          }
-
-          var _getComputedStyle = Object(_dom_utils_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_4__["default"])(popper),
-              marginTop = _getComputedStyle.marginTop,
-              marginRight = _getComputedStyle.marginRight,
-              marginBottom = _getComputedStyle.marginBottom,
-              marginLeft = _getComputedStyle.marginLeft; // We no longer take into account `margins` on the popper, and it can
-          // cause bugs with positioning, so we'll warn the consumer
-
-
-          if ([marginTop, marginRight, marginBottom, marginLeft].some(function (margin) {
-            return parseFloat(margin);
-          })) {
-            console.warn(['Popper: CSS "margin" styles cannot be used to apply padding', 'between the popper and its reference element or boundary.', 'To replicate margin, use the `offset` modifier, as well as', 'the `padding` option in the `preventOverflow` and `flip`', 'modifiers.'].join(' '));
-          }
-        }
-
-        runModifierEffects();
-        return instance.update();
-      },
-      // Sync update – it will always be executed, even if not necessary. This
-      // is useful for low frequency updates where sync behavior simplifies the
-      // logic.
-      // For high frequency updates (e.g. `resize` and `scroll` events), always
-      // prefer the async Popper#update method
-      forceUpdate: function forceUpdate() {
-        if (isDestroyed) {
-          return;
-        }
-
-        var _state$elements = state.elements,
-            reference = _state$elements.reference,
-            popper = _state$elements.popper; // Don't proceed if `reference` or `popper` are not valid elements
-        // anymore
-
-        if (!areValidElements(reference, popper)) {
-          if (true) {
-            console.error(INVALID_ELEMENT_ERROR);
-          }
-
-          return;
-        } // Store the reference and popper rects to be read by modifiers
-
-
-        state.rects = {
-          reference: Object(_dom_utils_getCompositeRect_js__WEBPACK_IMPORTED_MODULE_0__["default"])(reference, Object(_dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_3__["default"])(popper), state.options.strategy === 'fixed'),
-          popper: Object(_dom_utils_getLayoutRect_js__WEBPACK_IMPORTED_MODULE_1__["default"])(popper)
-        }; // Modifiers have the ability to reset the current update cycle. The
-        // most common use case for this is the `flip` modifier changing the
-        // placement, which then needs to re-run all the modifiers, because the
-        // logic was previously ran for the previous placement and is therefore
-        // stale/incorrect
-
-        state.reset = false;
-        state.placement = state.options.placement; // On each update cycle, the `modifiersData` property for each modifier
-        // is filled with the initial data specified by the modifier. This means
-        // it doesn't persist and is fresh on each update.
-        // To ensure persistent data, use `${name}#persistent`
-
-        state.orderedModifiers.forEach(function (modifier) {
-          return state.modifiersData[modifier.name] = Object.assign({}, modifier.data);
-        });
-        var __debug_loops__ = 0;
-
-        for (var index = 0; index < state.orderedModifiers.length; index++) {
-          if (true) {
-            __debug_loops__ += 1;
-
-            if (__debug_loops__ > 100) {
-              console.error(INFINITE_LOOP_ERROR);
-              break;
-            }
-          }
-
-          if (state.reset === true) {
-            state.reset = false;
-            index = -1;
-            continue;
-          }
-
-          var _state$orderedModifie = state.orderedModifiers[index],
-              fn = _state$orderedModifie.fn,
-              _state$orderedModifie2 = _state$orderedModifie.options,
-              _options = _state$orderedModifie2 === void 0 ? {} : _state$orderedModifie2,
-              name = _state$orderedModifie.name;
-
-          if (typeof fn === 'function') {
-            state = fn({
-              state: state,
-              options: _options,
-              name: name,
-              instance: instance
-            }) || state;
-          }
-        }
-      },
-      // Async and optimistically optimized update – it will not be executed if
-      // not necessary (debounced to run at most once-per-tick)
-      update: Object(_utils_debounce_js__WEBPACK_IMPORTED_MODULE_6__["default"])(function () {
-        return new Promise(function (resolve) {
-          instance.forceUpdate();
-          resolve(state);
-        });
-      }),
-      destroy: function destroy() {
-        cleanupModifierEffects();
-        isDestroyed = true;
-      }
-    };
-
-    if (!areValidElements(reference, popper)) {
-      if (true) {
-        console.error(INVALID_ELEMENT_ERROR);
-      }
-
-      return instance;
-    }
-
-    instance.setOptions(options).then(function (state) {
-      if (!isDestroyed && options.onFirstUpdate) {
-        options.onFirstUpdate(state);
-      }
-    }); // Modifiers have the ability to execute arbitrary code before the first
-    // update cycle runs. They will be executed in the same order as the update
-    // cycle. This is useful when a modifier adds some persistent data that
-    // other modifiers need to use, but the modifier is run after the dependent
-    // one.
-
-    function runModifierEffects() {
-      state.orderedModifiers.forEach(function (_ref3) {
-        var name = _ref3.name,
-            _ref3$options = _ref3.options,
-            options = _ref3$options === void 0 ? {} : _ref3$options,
-            effect = _ref3.effect;
-
-        if (typeof effect === 'function') {
-          var cleanupFn = effect({
-            state: state,
-            name: name,
-            instance: instance,
-            options: options
-          });
-
-          var noopFn = function noopFn() {};
-
-          effectCleanupFns.push(cleanupFn || noopFn);
-        }
-      });
-    }
-
-    function cleanupModifierEffects() {
-      effectCleanupFns.forEach(function (fn) {
-        return fn();
-      });
-      effectCleanupFns = [];
-    }
-
-    return instance;
-  };
-}
-var createPopper = /*#__PURE__*/popperGenerator(); // eslint-disable-next-line import/no-unused-modules
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/contains.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/contains.js ***!
-  \***************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return contains; });
-/* harmony import */ var _instanceOf_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./instanceOf.js */ "./node_modules/@popperjs/core/lib/dom-utils/instanceOf.js");
-
-function contains(parent, child) {
-  var rootNode = child.getRootNode && child.getRootNode(); // First, attempt with faster native method
-
-  if (parent.contains(child)) {
-    return true;
-  } // then fallback to custom implementation with Shadow DOM support
-  else if (rootNode && Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__["isShadowRoot"])(rootNode)) {
-    var next = child;
-
-    do {
-      if (next && parent.isSameNode(next)) {
-        return true;
-      } // $FlowFixMe[prop-missing]: need a better way to handle this...
-
-
-      next = next.parentNode || next.host;
-    } while (next);
-  } // Give up, the result is false
-
-
-  return false;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getBoundingClientRect.js":
-/*!****************************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getBoundingClientRect.js ***!
-  \****************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getBoundingClientRect; });
-/* harmony import */ var _instanceOf_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./instanceOf.js */ "./node_modules/@popperjs/core/lib/dom-utils/instanceOf.js");
-/* harmony import */ var _utils_math_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/math.js */ "./node_modules/@popperjs/core/lib/utils/math.js");
-
-
-function getBoundingClientRect(element, includeScale) {
-  if (includeScale === void 0) {
-    includeScale = false;
-  }
-
-  var rect = element.getBoundingClientRect();
-  var scaleX = 1;
-  var scaleY = 1;
-
-  if (Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__["isHTMLElement"])(element) && includeScale) {
-    var offsetHeight = element.offsetHeight;
-    var offsetWidth = element.offsetWidth; // Do not attempt to divide by 0, otherwise we get `Infinity` as scale
-    // Fallback to 1 in case both values are `0`
-
-    if (offsetWidth > 0) {
-      scaleX = Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_1__["round"])(rect.width) / offsetWidth || 1;
-    }
-
-    if (offsetHeight > 0) {
-      scaleY = Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_1__["round"])(rect.height) / offsetHeight || 1;
-    }
-  }
-
-  return {
-    width: rect.width / scaleX,
-    height: rect.height / scaleY,
-    top: rect.top / scaleY,
-    right: rect.right / scaleX,
-    bottom: rect.bottom / scaleY,
-    left: rect.left / scaleX,
-    x: rect.left / scaleX,
-    y: rect.top / scaleY
-  };
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getClippingRect.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getClippingRect.js ***!
-  \**********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getClippingRect; });
-/* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
-/* harmony import */ var _getViewportRect_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getViewportRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getViewportRect.js");
-/* harmony import */ var _getDocumentRect_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getDocumentRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getDocumentRect.js");
-/* harmony import */ var _listScrollParents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./listScrollParents.js */ "./node_modules/@popperjs/core/lib/dom-utils/listScrollParents.js");
-/* harmony import */ var _getOffsetParent_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getOffsetParent.js */ "./node_modules/@popperjs/core/lib/dom-utils/getOffsetParent.js");
-/* harmony import */ var _getDocumentElement_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./getDocumentElement.js */ "./node_modules/@popperjs/core/lib/dom-utils/getDocumentElement.js");
-/* harmony import */ var _getComputedStyle_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./getComputedStyle.js */ "./node_modules/@popperjs/core/lib/dom-utils/getComputedStyle.js");
-/* harmony import */ var _instanceOf_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./instanceOf.js */ "./node_modules/@popperjs/core/lib/dom-utils/instanceOf.js");
-/* harmony import */ var _getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./getBoundingClientRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getBoundingClientRect.js");
-/* harmony import */ var _getParentNode_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./getParentNode.js */ "./node_modules/@popperjs/core/lib/dom-utils/getParentNode.js");
-/* harmony import */ var _contains_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./contains.js */ "./node_modules/@popperjs/core/lib/dom-utils/contains.js");
-/* harmony import */ var _getNodeName_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./getNodeName.js */ "./node_modules/@popperjs/core/lib/dom-utils/getNodeName.js");
-/* harmony import */ var _utils_rectToClientRect_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../utils/rectToClientRect.js */ "./node_modules/@popperjs/core/lib/utils/rectToClientRect.js");
-/* harmony import */ var _utils_math_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../utils/math.js */ "./node_modules/@popperjs/core/lib/utils/math.js");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function getInnerBoundingClientRect(element) {
-  var rect = Object(_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_8__["default"])(element);
-  rect.top = rect.top + element.clientTop;
-  rect.left = rect.left + element.clientLeft;
-  rect.bottom = rect.top + element.clientHeight;
-  rect.right = rect.left + element.clientWidth;
-  rect.width = element.clientWidth;
-  rect.height = element.clientHeight;
-  rect.x = rect.left;
-  rect.y = rect.top;
-  return rect;
-}
-
-function getClientRectFromMixedType(element, clippingParent) {
-  return clippingParent === _enums_js__WEBPACK_IMPORTED_MODULE_0__["viewport"] ? Object(_utils_rectToClientRect_js__WEBPACK_IMPORTED_MODULE_12__["default"])(Object(_getViewportRect_js__WEBPACK_IMPORTED_MODULE_1__["default"])(element)) : Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_7__["isElement"])(clippingParent) ? getInnerBoundingClientRect(clippingParent) : Object(_utils_rectToClientRect_js__WEBPACK_IMPORTED_MODULE_12__["default"])(Object(_getDocumentRect_js__WEBPACK_IMPORTED_MODULE_2__["default"])(Object(_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_5__["default"])(element)));
-} // A "clipping parent" is an overflowable container with the characteristic of
-// clipping (or hiding) overflowing elements with a position different from
-// `initial`
-
-
-function getClippingParents(element) {
-  var clippingParents = Object(_listScrollParents_js__WEBPACK_IMPORTED_MODULE_3__["default"])(Object(_getParentNode_js__WEBPACK_IMPORTED_MODULE_9__["default"])(element));
-  var canEscapeClipping = ['absolute', 'fixed'].indexOf(Object(_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_6__["default"])(element).position) >= 0;
-  var clipperElement = canEscapeClipping && Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_7__["isHTMLElement"])(element) ? Object(_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_4__["default"])(element) : element;
-
-  if (!Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_7__["isElement"])(clipperElement)) {
-    return [];
-  } // $FlowFixMe[incompatible-return]: https://github.com/facebook/flow/issues/1414
-
-
-  return clippingParents.filter(function (clippingParent) {
-    return Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_7__["isElement"])(clippingParent) && Object(_contains_js__WEBPACK_IMPORTED_MODULE_10__["default"])(clippingParent, clipperElement) && Object(_getNodeName_js__WEBPACK_IMPORTED_MODULE_11__["default"])(clippingParent) !== 'body' && (canEscapeClipping ? Object(_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_6__["default"])(clippingParent).position !== 'static' : true);
-  });
-} // Gets the maximum area that the element is visible in due to any number of
-// clipping parents
-
-
-function getClippingRect(element, boundary, rootBoundary) {
-  var mainClippingParents = boundary === 'clippingParents' ? getClippingParents(element) : [].concat(boundary);
-  var clippingParents = [].concat(mainClippingParents, [rootBoundary]);
-  var firstClippingParent = clippingParents[0];
-  var clippingRect = clippingParents.reduce(function (accRect, clippingParent) {
-    var rect = getClientRectFromMixedType(element, clippingParent);
-    accRect.top = Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_13__["max"])(rect.top, accRect.top);
-    accRect.right = Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_13__["min"])(rect.right, accRect.right);
-    accRect.bottom = Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_13__["min"])(rect.bottom, accRect.bottom);
-    accRect.left = Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_13__["max"])(rect.left, accRect.left);
-    return accRect;
-  }, getClientRectFromMixedType(element, firstClippingParent));
-  clippingRect.width = clippingRect.right - clippingRect.left;
-  clippingRect.height = clippingRect.bottom - clippingRect.top;
-  clippingRect.x = clippingRect.left;
-  clippingRect.y = clippingRect.top;
-  return clippingRect;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getCompositeRect.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getCompositeRect.js ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getCompositeRect; });
-/* harmony import */ var _getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getBoundingClientRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getBoundingClientRect.js");
-/* harmony import */ var _getNodeScroll_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getNodeScroll.js */ "./node_modules/@popperjs/core/lib/dom-utils/getNodeScroll.js");
-/* harmony import */ var _getNodeName_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getNodeName.js */ "./node_modules/@popperjs/core/lib/dom-utils/getNodeName.js");
-/* harmony import */ var _instanceOf_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./instanceOf.js */ "./node_modules/@popperjs/core/lib/dom-utils/instanceOf.js");
-/* harmony import */ var _getWindowScrollBarX_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getWindowScrollBarX.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindowScrollBarX.js");
-/* harmony import */ var _getDocumentElement_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./getDocumentElement.js */ "./node_modules/@popperjs/core/lib/dom-utils/getDocumentElement.js");
-/* harmony import */ var _isScrollParent_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./isScrollParent.js */ "./node_modules/@popperjs/core/lib/dom-utils/isScrollParent.js");
-/* harmony import */ var _utils_math_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/math.js */ "./node_modules/@popperjs/core/lib/utils/math.js");
-
-
-
-
-
-
-
-
-
-function isElementScaled(element) {
-  var rect = element.getBoundingClientRect();
-  var scaleX = Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_7__["round"])(rect.width) / element.offsetWidth || 1;
-  var scaleY = Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_7__["round"])(rect.height) / element.offsetHeight || 1;
-  return scaleX !== 1 || scaleY !== 1;
-} // Returns the composite rect of an element relative to its offsetParent.
-// Composite means it takes into account transforms as well as layout.
-
-
-function getCompositeRect(elementOrVirtualElement, offsetParent, isFixed) {
-  if (isFixed === void 0) {
-    isFixed = false;
-  }
-
-  var isOffsetParentAnElement = Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_3__["isHTMLElement"])(offsetParent);
-  var offsetParentIsScaled = Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_3__["isHTMLElement"])(offsetParent) && isElementScaled(offsetParent);
-  var documentElement = Object(_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_5__["default"])(offsetParent);
-  var rect = Object(_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_0__["default"])(elementOrVirtualElement, offsetParentIsScaled);
-  var scroll = {
-    scrollLeft: 0,
-    scrollTop: 0
-  };
-  var offsets = {
-    x: 0,
-    y: 0
-  };
-
-  if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
-    if (Object(_getNodeName_js__WEBPACK_IMPORTED_MODULE_2__["default"])(offsetParent) !== 'body' || // https://github.com/popperjs/popper-core/issues/1078
-    Object(_isScrollParent_js__WEBPACK_IMPORTED_MODULE_6__["default"])(documentElement)) {
-      scroll = Object(_getNodeScroll_js__WEBPACK_IMPORTED_MODULE_1__["default"])(offsetParent);
-    }
-
-    if (Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_3__["isHTMLElement"])(offsetParent)) {
-      offsets = Object(_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_0__["default"])(offsetParent, true);
-      offsets.x += offsetParent.clientLeft;
-      offsets.y += offsetParent.clientTop;
-    } else if (documentElement) {
-      offsets.x = Object(_getWindowScrollBarX_js__WEBPACK_IMPORTED_MODULE_4__["default"])(documentElement);
-    }
-  }
-
-  return {
-    x: rect.left + scroll.scrollLeft - offsets.x,
-    y: rect.top + scroll.scrollTop - offsets.y,
-    width: rect.width,
-    height: rect.height
-  };
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getComputedStyle.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getComputedStyle.js ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getComputedStyle; });
-/* harmony import */ var _getWindow_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getWindow.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindow.js");
-
-function getComputedStyle(element) {
-  return Object(_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element).getComputedStyle(element);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getDocumentElement.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getDocumentElement.js ***!
-  \*************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getDocumentElement; });
-/* harmony import */ var _instanceOf_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./instanceOf.js */ "./node_modules/@popperjs/core/lib/dom-utils/instanceOf.js");
-
-function getDocumentElement(element) {
-  // $FlowFixMe[incompatible-return]: assume body is always available
-  return ((Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__["isElement"])(element) ? element.ownerDocument : // $FlowFixMe[prop-missing]
-  element.document) || window.document).documentElement;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getDocumentRect.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getDocumentRect.js ***!
-  \**********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getDocumentRect; });
-/* harmony import */ var _getDocumentElement_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getDocumentElement.js */ "./node_modules/@popperjs/core/lib/dom-utils/getDocumentElement.js");
-/* harmony import */ var _getComputedStyle_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getComputedStyle.js */ "./node_modules/@popperjs/core/lib/dom-utils/getComputedStyle.js");
-/* harmony import */ var _getWindowScrollBarX_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getWindowScrollBarX.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindowScrollBarX.js");
-/* harmony import */ var _getWindowScroll_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getWindowScroll.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindowScroll.js");
-/* harmony import */ var _utils_math_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/math.js */ "./node_modules/@popperjs/core/lib/utils/math.js");
-
-
-
-
- // Gets the entire size of the scrollable document area, even extending outside
-// of the `<html>` and `<body>` rect bounds if horizontally scrollable
-
-function getDocumentRect(element) {
-  var _element$ownerDocumen;
-
-  var html = Object(_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element);
-  var winScroll = Object(_getWindowScroll_js__WEBPACK_IMPORTED_MODULE_3__["default"])(element);
-  var body = (_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body;
-  var width = Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_4__["max"])(html.scrollWidth, html.clientWidth, body ? body.scrollWidth : 0, body ? body.clientWidth : 0);
-  var height = Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_4__["max"])(html.scrollHeight, html.clientHeight, body ? body.scrollHeight : 0, body ? body.clientHeight : 0);
-  var x = -winScroll.scrollLeft + Object(_getWindowScrollBarX_js__WEBPACK_IMPORTED_MODULE_2__["default"])(element);
-  var y = -winScroll.scrollTop;
-
-  if (Object(_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_1__["default"])(body || html).direction === 'rtl') {
-    x += Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_4__["max"])(html.clientWidth, body ? body.clientWidth : 0) - width;
-  }
-
-  return {
-    width: width,
-    height: height,
-    x: x,
-    y: y
-  };
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getHTMLElementScroll.js":
-/*!***************************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getHTMLElementScroll.js ***!
-  \***************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getHTMLElementScroll; });
-function getHTMLElementScroll(element) {
-  return {
-    scrollLeft: element.scrollLeft,
-    scrollTop: element.scrollTop
-  };
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getLayoutRect.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getLayoutRect.js ***!
-  \********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getLayoutRect; });
-/* harmony import */ var _getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getBoundingClientRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getBoundingClientRect.js");
- // Returns the layout rect of an element relative to its offsetParent. Layout
-// means it doesn't take into account transforms.
-
-function getLayoutRect(element) {
-  var clientRect = Object(_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element); // Use the clientRect sizes if it's not been transformed.
-  // Fixes https://github.com/popperjs/popper-core/issues/1223
-
-  var width = element.offsetWidth;
-  var height = element.offsetHeight;
-
-  if (Math.abs(clientRect.width - width) <= 1) {
-    width = clientRect.width;
-  }
-
-  if (Math.abs(clientRect.height - height) <= 1) {
-    height = clientRect.height;
-  }
-
-  return {
-    x: element.offsetLeft,
-    y: element.offsetTop,
-    width: width,
-    height: height
-  };
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getNodeName.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getNodeName.js ***!
-  \******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getNodeName; });
-function getNodeName(element) {
-  return element ? (element.nodeName || '').toLowerCase() : null;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getNodeScroll.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getNodeScroll.js ***!
-  \********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getNodeScroll; });
-/* harmony import */ var _getWindowScroll_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getWindowScroll.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindowScroll.js");
-/* harmony import */ var _getWindow_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getWindow.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindow.js");
-/* harmony import */ var _instanceOf_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./instanceOf.js */ "./node_modules/@popperjs/core/lib/dom-utils/instanceOf.js");
-/* harmony import */ var _getHTMLElementScroll_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getHTMLElementScroll.js */ "./node_modules/@popperjs/core/lib/dom-utils/getHTMLElementScroll.js");
-
-
-
-
-function getNodeScroll(node) {
-  if (node === Object(_getWindow_js__WEBPACK_IMPORTED_MODULE_1__["default"])(node) || !Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_2__["isHTMLElement"])(node)) {
-    return Object(_getWindowScroll_js__WEBPACK_IMPORTED_MODULE_0__["default"])(node);
-  } else {
-    return Object(_getHTMLElementScroll_js__WEBPACK_IMPORTED_MODULE_3__["default"])(node);
-  }
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getOffsetParent.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getOffsetParent.js ***!
-  \**********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getOffsetParent; });
-/* harmony import */ var _getWindow_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getWindow.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindow.js");
-/* harmony import */ var _getNodeName_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getNodeName.js */ "./node_modules/@popperjs/core/lib/dom-utils/getNodeName.js");
-/* harmony import */ var _getComputedStyle_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getComputedStyle.js */ "./node_modules/@popperjs/core/lib/dom-utils/getComputedStyle.js");
-/* harmony import */ var _instanceOf_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./instanceOf.js */ "./node_modules/@popperjs/core/lib/dom-utils/instanceOf.js");
-/* harmony import */ var _isTableElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./isTableElement.js */ "./node_modules/@popperjs/core/lib/dom-utils/isTableElement.js");
-/* harmony import */ var _getParentNode_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./getParentNode.js */ "./node_modules/@popperjs/core/lib/dom-utils/getParentNode.js");
-
-
-
-
-
-
-
-function getTrueOffsetParent(element) {
-  if (!Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_3__["isHTMLElement"])(element) || // https://github.com/popperjs/popper-core/issues/837
-  Object(_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_2__["default"])(element).position === 'fixed') {
-    return null;
-  }
-
-  return element.offsetParent;
-} // `.offsetParent` reports `null` for fixed elements, while absolute elements
-// return the containing block
-
-
-function getContainingBlock(element) {
-  var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') !== -1;
-  var isIE = navigator.userAgent.indexOf('Trident') !== -1;
-
-  if (isIE && Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_3__["isHTMLElement"])(element)) {
-    // In IE 9, 10 and 11 fixed elements containing block is always established by the viewport
-    var elementCss = Object(_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_2__["default"])(element);
-
-    if (elementCss.position === 'fixed') {
-      return null;
-    }
-  }
-
-  var currentNode = Object(_getParentNode_js__WEBPACK_IMPORTED_MODULE_5__["default"])(element);
-
-  while (Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_3__["isHTMLElement"])(currentNode) && ['html', 'body'].indexOf(Object(_getNodeName_js__WEBPACK_IMPORTED_MODULE_1__["default"])(currentNode)) < 0) {
-    var css = Object(_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_2__["default"])(currentNode); // This is non-exhaustive but covers the most common CSS properties that
-    // create a containing block.
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
-
-    if (css.transform !== 'none' || css.perspective !== 'none' || css.contain === 'paint' || ['transform', 'perspective'].indexOf(css.willChange) !== -1 || isFirefox && css.willChange === 'filter' || isFirefox && css.filter && css.filter !== 'none') {
-      return currentNode;
-    } else {
-      currentNode = currentNode.parentNode;
-    }
-  }
-
-  return null;
-} // Gets the closest ancestor positioned element. Handles some edge cases,
-// such as table ancestors and cross browser bugs.
-
-
-function getOffsetParent(element) {
-  var window = Object(_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element);
-  var offsetParent = getTrueOffsetParent(element);
-
-  while (offsetParent && Object(_isTableElement_js__WEBPACK_IMPORTED_MODULE_4__["default"])(offsetParent) && Object(_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_2__["default"])(offsetParent).position === 'static') {
-    offsetParent = getTrueOffsetParent(offsetParent);
-  }
-
-  if (offsetParent && (Object(_getNodeName_js__WEBPACK_IMPORTED_MODULE_1__["default"])(offsetParent) === 'html' || Object(_getNodeName_js__WEBPACK_IMPORTED_MODULE_1__["default"])(offsetParent) === 'body' && Object(_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_2__["default"])(offsetParent).position === 'static')) {
-    return window;
-  }
-
-  return offsetParent || getContainingBlock(element) || window;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getParentNode.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getParentNode.js ***!
-  \********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getParentNode; });
-/* harmony import */ var _getNodeName_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getNodeName.js */ "./node_modules/@popperjs/core/lib/dom-utils/getNodeName.js");
-/* harmony import */ var _getDocumentElement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getDocumentElement.js */ "./node_modules/@popperjs/core/lib/dom-utils/getDocumentElement.js");
-/* harmony import */ var _instanceOf_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./instanceOf.js */ "./node_modules/@popperjs/core/lib/dom-utils/instanceOf.js");
-
-
-
-function getParentNode(element) {
-  if (Object(_getNodeName_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element) === 'html') {
-    return element;
-  }
-
-  return (// this is a quicker (but less type safe) way to save quite some bytes from the bundle
-    // $FlowFixMe[incompatible-return]
-    // $FlowFixMe[prop-missing]
-    element.assignedSlot || // step into the shadow DOM of the parent of a slotted node
-    element.parentNode || ( // DOM Element detected
-    Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_2__["isShadowRoot"])(element) ? element.host : null) || // ShadowRoot detected
-    // $FlowFixMe[incompatible-call]: HTMLElement is a Node
-    Object(_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(element) // fallback
-
-  );
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getScrollParent.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getScrollParent.js ***!
-  \**********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getScrollParent; });
-/* harmony import */ var _getParentNode_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getParentNode.js */ "./node_modules/@popperjs/core/lib/dom-utils/getParentNode.js");
-/* harmony import */ var _isScrollParent_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./isScrollParent.js */ "./node_modules/@popperjs/core/lib/dom-utils/isScrollParent.js");
-/* harmony import */ var _getNodeName_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getNodeName.js */ "./node_modules/@popperjs/core/lib/dom-utils/getNodeName.js");
-/* harmony import */ var _instanceOf_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./instanceOf.js */ "./node_modules/@popperjs/core/lib/dom-utils/instanceOf.js");
-
-
-
-
-function getScrollParent(node) {
-  if (['html', 'body', '#document'].indexOf(Object(_getNodeName_js__WEBPACK_IMPORTED_MODULE_2__["default"])(node)) >= 0) {
-    // $FlowFixMe[incompatible-return]: assume body is always available
-    return node.ownerDocument.body;
-  }
-
-  if (Object(_instanceOf_js__WEBPACK_IMPORTED_MODULE_3__["isHTMLElement"])(node) && Object(_isScrollParent_js__WEBPACK_IMPORTED_MODULE_1__["default"])(node)) {
-    return node;
-  }
-
-  return getScrollParent(Object(_getParentNode_js__WEBPACK_IMPORTED_MODULE_0__["default"])(node));
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getViewportRect.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getViewportRect.js ***!
-  \**********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getViewportRect; });
-/* harmony import */ var _getWindow_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getWindow.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindow.js");
-/* harmony import */ var _getDocumentElement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getDocumentElement.js */ "./node_modules/@popperjs/core/lib/dom-utils/getDocumentElement.js");
-/* harmony import */ var _getWindowScrollBarX_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getWindowScrollBarX.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindowScrollBarX.js");
-
-
-
-function getViewportRect(element) {
-  var win = Object(_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element);
-  var html = Object(_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(element);
-  var visualViewport = win.visualViewport;
-  var width = html.clientWidth;
-  var height = html.clientHeight;
-  var x = 0;
-  var y = 0; // NB: This isn't supported on iOS <= 12. If the keyboard is open, the popper
-  // can be obscured underneath it.
-  // Also, `html.clientHeight` adds the bottom bar height in Safari iOS, even
-  // if it isn't open, so if this isn't available, the popper will be detected
-  // to overflow the bottom of the screen too early.
-
-  if (visualViewport) {
-    width = visualViewport.width;
-    height = visualViewport.height; // Uses Layout Viewport (like Chrome; Safari does not currently)
-    // In Chrome, it returns a value very close to 0 (+/-) but contains rounding
-    // errors due to floating point numbers, so we need to check precision.
-    // Safari returns a number <= 0, usually < -1 when pinch-zoomed
-    // Feature detection fails in mobile emulation mode in Chrome.
-    // Math.abs(win.innerWidth / visualViewport.scale - visualViewport.width) <
-    // 0.001
-    // Fallback here: "Not Safari" userAgent
-
-    if (!/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
-      x = visualViewport.offsetLeft;
-      y = visualViewport.offsetTop;
-    }
-  }
-
-  return {
-    width: width,
-    height: height,
-    x: x + Object(_getWindowScrollBarX_js__WEBPACK_IMPORTED_MODULE_2__["default"])(element),
-    y: y
-  };
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getWindow.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getWindow.js ***!
-  \****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getWindow; });
-function getWindow(node) {
-  if (node == null) {
-    return window;
-  }
-
-  if (node.toString() !== '[object Window]') {
-    var ownerDocument = node.ownerDocument;
-    return ownerDocument ? ownerDocument.defaultView || window : window;
-  }
-
-  return node;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getWindowScroll.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getWindowScroll.js ***!
-  \**********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getWindowScroll; });
-/* harmony import */ var _getWindow_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getWindow.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindow.js");
-
-function getWindowScroll(node) {
-  var win = Object(_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(node);
-  var scrollLeft = win.pageXOffset;
-  var scrollTop = win.pageYOffset;
-  return {
-    scrollLeft: scrollLeft,
-    scrollTop: scrollTop
-  };
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/getWindowScrollBarX.js":
-/*!**************************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/getWindowScrollBarX.js ***!
-  \**************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getWindowScrollBarX; });
-/* harmony import */ var _getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getBoundingClientRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getBoundingClientRect.js");
-/* harmony import */ var _getDocumentElement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getDocumentElement.js */ "./node_modules/@popperjs/core/lib/dom-utils/getDocumentElement.js");
-/* harmony import */ var _getWindowScroll_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getWindowScroll.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindowScroll.js");
-
-
-
-function getWindowScrollBarX(element) {
-  // If <html> has a CSS width greater than the viewport, then this will be
-  // incorrect for RTL.
-  // Popper 1 is broken in this case and never had a bug report so let's assume
-  // it's not an issue. I don't think anyone ever specifies width on <html>
-  // anyway.
-  // Browsers where the left scrollbar doesn't cause an issue report `0` for
-  // this (e.g. Edge 2019, IE11, Safari)
-  return Object(_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_0__["default"])(Object(_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(element)).left + Object(_getWindowScroll_js__WEBPACK_IMPORTED_MODULE_2__["default"])(element).scrollLeft;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/instanceOf.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/instanceOf.js ***!
-  \*****************************************************************/
-/*! exports provided: isElement, isHTMLElement, isShadowRoot */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isElement", function() { return isElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isHTMLElement", function() { return isHTMLElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isShadowRoot", function() { return isShadowRoot; });
-/* harmony import */ var _getWindow_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getWindow.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindow.js");
-
-
-function isElement(node) {
-  var OwnElement = Object(_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(node).Element;
-  return node instanceof OwnElement || node instanceof Element;
-}
-
-function isHTMLElement(node) {
-  var OwnElement = Object(_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(node).HTMLElement;
-  return node instanceof OwnElement || node instanceof HTMLElement;
-}
-
-function isShadowRoot(node) {
-  // IE 11 has no ShadowRoot
-  if (typeof ShadowRoot === 'undefined') {
-    return false;
-  }
-
-  var OwnElement = Object(_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(node).ShadowRoot;
-  return node instanceof OwnElement || node instanceof ShadowRoot;
-}
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/isScrollParent.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/isScrollParent.js ***!
-  \*********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return isScrollParent; });
-/* harmony import */ var _getComputedStyle_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getComputedStyle.js */ "./node_modules/@popperjs/core/lib/dom-utils/getComputedStyle.js");
-
-function isScrollParent(element) {
-  // Firefox wants us to check `-x` and `-y` variations as well
-  var _getComputedStyle = Object(_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element),
-      overflow = _getComputedStyle.overflow,
-      overflowX = _getComputedStyle.overflowX,
-      overflowY = _getComputedStyle.overflowY;
-
-  return /auto|scroll|overlay|hidden/.test(overflow + overflowY + overflowX);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/isTableElement.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/isTableElement.js ***!
-  \*********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return isTableElement; });
-/* harmony import */ var _getNodeName_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getNodeName.js */ "./node_modules/@popperjs/core/lib/dom-utils/getNodeName.js");
-
-function isTableElement(element) {
-  return ['table', 'td', 'th'].indexOf(Object(_getNodeName_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element)) >= 0;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/dom-utils/listScrollParents.js":
-/*!************************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/dom-utils/listScrollParents.js ***!
-  \************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return listScrollParents; });
-/* harmony import */ var _getScrollParent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getScrollParent.js */ "./node_modules/@popperjs/core/lib/dom-utils/getScrollParent.js");
-/* harmony import */ var _getParentNode_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getParentNode.js */ "./node_modules/@popperjs/core/lib/dom-utils/getParentNode.js");
-/* harmony import */ var _getWindow_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getWindow.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindow.js");
-/* harmony import */ var _isScrollParent_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./isScrollParent.js */ "./node_modules/@popperjs/core/lib/dom-utils/isScrollParent.js");
-
-
-
-
-/*
-given a DOM element, return the list of all scroll parents, up the list of ancesors
-until we get to the top window object. This list is what we attach scroll listeners
-to, because if any of these parent elements scroll, we'll need to re-calculate the
-reference element's position.
-*/
-
-function listScrollParents(element, list) {
-  var _element$ownerDocumen;
-
-  if (list === void 0) {
-    list = [];
-  }
-
-  var scrollParent = Object(_getScrollParent_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element);
-  var isBody = scrollParent === ((_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body);
-  var win = Object(_getWindow_js__WEBPACK_IMPORTED_MODULE_2__["default"])(scrollParent);
-  var target = isBody ? [win].concat(win.visualViewport || [], Object(_isScrollParent_js__WEBPACK_IMPORTED_MODULE_3__["default"])(scrollParent) ? scrollParent : []) : scrollParent;
-  var updatedList = list.concat(target);
-  return isBody ? updatedList : // $FlowFixMe[incompatible-call]: isBody tells us target will be an HTMLElement here
-  updatedList.concat(listScrollParents(Object(_getParentNode_js__WEBPACK_IMPORTED_MODULE_1__["default"])(target)));
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/enums.js":
-/*!**************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/enums.js ***!
-  \**************************************************/
-/*! exports provided: top, bottom, right, left, auto, basePlacements, start, end, clippingParents, viewport, popper, reference, variationPlacements, placements, beforeRead, read, afterRead, beforeMain, main, afterMain, beforeWrite, write, afterWrite, modifierPhases */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "top", function() { return top; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bottom", function() { return bottom; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "right", function() { return right; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "left", function() { return left; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "auto", function() { return auto; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "basePlacements", function() { return basePlacements; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "start", function() { return start; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "end", function() { return end; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clippingParents", function() { return clippingParents; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "viewport", function() { return viewport; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "popper", function() { return popper; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reference", function() { return reference; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "variationPlacements", function() { return variationPlacements; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "placements", function() { return placements; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "beforeRead", function() { return beforeRead; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "read", function() { return read; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "afterRead", function() { return afterRead; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "beforeMain", function() { return beforeMain; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "main", function() { return main; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "afterMain", function() { return afterMain; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "beforeWrite", function() { return beforeWrite; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "write", function() { return write; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "afterWrite", function() { return afterWrite; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "modifierPhases", function() { return modifierPhases; });
-var top = 'top';
-var bottom = 'bottom';
-var right = 'right';
-var left = 'left';
-var auto = 'auto';
-var basePlacements = [top, bottom, right, left];
-var start = 'start';
-var end = 'end';
-var clippingParents = 'clippingParents';
-var viewport = 'viewport';
-var popper = 'popper';
-var reference = 'reference';
-var variationPlacements = /*#__PURE__*/basePlacements.reduce(function (acc, placement) {
-  return acc.concat([placement + "-" + start, placement + "-" + end]);
-}, []);
-var placements = /*#__PURE__*/[].concat(basePlacements, [auto]).reduce(function (acc, placement) {
-  return acc.concat([placement, placement + "-" + start, placement + "-" + end]);
-}, []); // modifiers that need to read the DOM
-
-var beforeRead = 'beforeRead';
-var read = 'read';
-var afterRead = 'afterRead'; // pure-logic modifiers
-
-var beforeMain = 'beforeMain';
-var main = 'main';
-var afterMain = 'afterMain'; // modifier with the purpose to write to the DOM (or write into a framework state)
-
-var beforeWrite = 'beforeWrite';
-var write = 'write';
-var afterWrite = 'afterWrite';
-var modifierPhases = [beforeRead, read, afterRead, beforeMain, main, afterMain, beforeWrite, write, afterWrite];
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/index.js":
-/*!**************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/index.js ***!
-  \**************************************************/
-/*! exports provided: top, bottom, right, left, auto, basePlacements, start, end, clippingParents, viewport, popper, reference, variationPlacements, placements, beforeRead, read, afterRead, beforeMain, main, afterMain, beforeWrite, write, afterWrite, modifierPhases, applyStyles, arrow, computeStyles, eventListeners, flip, hide, offset, popperOffsets, preventOverflow, popperGenerator, detectOverflow, createPopperBase, createPopper, createPopperLite */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "top", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["top"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "bottom", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["bottom"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "right", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["right"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "left", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["left"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "auto", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["auto"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "basePlacements", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["basePlacements"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "start", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["start"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "end", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["end"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "clippingParents", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["clippingParents"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "viewport", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["viewport"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "popper", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["popper"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reference", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["reference"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "variationPlacements", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["variationPlacements"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "placements", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["placements"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "beforeRead", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["beforeRead"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "read", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["read"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "afterRead", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["afterRead"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "beforeMain", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["beforeMain"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "main", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["main"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "afterMain", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["afterMain"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "beforeWrite", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["beforeWrite"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "write", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["write"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "afterWrite", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["afterWrite"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "modifierPhases", function() { return _enums_js__WEBPACK_IMPORTED_MODULE_0__["modifierPhases"]; });
-
-/* harmony import */ var _modifiers_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modifiers/index.js */ "./node_modules/@popperjs/core/lib/modifiers/index.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "applyStyles", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_1__["applyStyles"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "arrow", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_1__["arrow"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "computeStyles", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_1__["computeStyles"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "eventListeners", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_1__["eventListeners"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "flip", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_1__["flip"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "hide", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_1__["hide"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "offset", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_1__["offset"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "popperOffsets", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_1__["popperOffsets"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "preventOverflow", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_1__["preventOverflow"]; });
-
-/* harmony import */ var _createPopper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./createPopper.js */ "./node_modules/@popperjs/core/lib/createPopper.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "popperGenerator", function() { return _createPopper_js__WEBPACK_IMPORTED_MODULE_2__["popperGenerator"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "detectOverflow", function() { return _createPopper_js__WEBPACK_IMPORTED_MODULE_2__["detectOverflow"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createPopperBase", function() { return _createPopper_js__WEBPACK_IMPORTED_MODULE_2__["createPopper"]; });
-
-/* harmony import */ var _popper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./popper.js */ "./node_modules/@popperjs/core/lib/popper.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createPopper", function() { return _popper_js__WEBPACK_IMPORTED_MODULE_3__["createPopper"]; });
-
-/* harmony import */ var _popper_lite_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./popper-lite.js */ "./node_modules/@popperjs/core/lib/popper-lite.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createPopperLite", function() { return _popper_lite_js__WEBPACK_IMPORTED_MODULE_4__["createPopper"]; });
-
-
- // eslint-disable-next-line import/no-unused-modules
-
- // eslint-disable-next-line import/no-unused-modules
-
- // eslint-disable-next-line import/no-unused-modules
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/modifiers/applyStyles.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/modifiers/applyStyles.js ***!
-  \******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _dom_utils_getNodeName_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../dom-utils/getNodeName.js */ "./node_modules/@popperjs/core/lib/dom-utils/getNodeName.js");
-/* harmony import */ var _dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dom-utils/instanceOf.js */ "./node_modules/@popperjs/core/lib/dom-utils/instanceOf.js");
-
- // This modifier takes the styles prepared by the `computeStyles` modifier
-// and applies them to the HTMLElements such as popper and arrow
-
-function applyStyles(_ref) {
-  var state = _ref.state;
-  Object.keys(state.elements).forEach(function (name) {
-    var style = state.styles[name] || {};
-    var attributes = state.attributes[name] || {};
-    var element = state.elements[name]; // arrow is optional + virtual elements
-
-    if (!Object(_dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_1__["isHTMLElement"])(element) || !Object(_dom_utils_getNodeName_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element)) {
-      return;
-    } // Flow doesn't support to extend this property, but it's the most
-    // effective way to apply styles to an HTMLElement
-    // $FlowFixMe[cannot-write]
-
-
-    Object.assign(element.style, style);
-    Object.keys(attributes).forEach(function (name) {
-      var value = attributes[name];
-
-      if (value === false) {
-        element.removeAttribute(name);
-      } else {
-        element.setAttribute(name, value === true ? '' : value);
-      }
-    });
-  });
-}
-
-function effect(_ref2) {
-  var state = _ref2.state;
-  var initialStyles = {
-    popper: {
-      position: state.options.strategy,
-      left: '0',
-      top: '0',
-      margin: '0'
-    },
-    arrow: {
-      position: 'absolute'
-    },
-    reference: {}
-  };
-  Object.assign(state.elements.popper.style, initialStyles.popper);
-  state.styles = initialStyles;
-
-  if (state.elements.arrow) {
-    Object.assign(state.elements.arrow.style, initialStyles.arrow);
-  }
-
-  return function () {
-    Object.keys(state.elements).forEach(function (name) {
-      var element = state.elements[name];
-      var attributes = state.attributes[name] || {};
-      var styleProperties = Object.keys(state.styles.hasOwnProperty(name) ? state.styles[name] : initialStyles[name]); // Set all values to an empty string to unset them
-
-      var style = styleProperties.reduce(function (style, property) {
-        style[property] = '';
-        return style;
-      }, {}); // arrow is optional + virtual elements
-
-      if (!Object(_dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_1__["isHTMLElement"])(element) || !Object(_dom_utils_getNodeName_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element)) {
-        return;
-      }
-
-      Object.assign(element.style, style);
-      Object.keys(attributes).forEach(function (attribute) {
-        element.removeAttribute(attribute);
-      });
-    });
-  };
-} // eslint-disable-next-line import/no-unused-modules
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'applyStyles',
-  enabled: true,
-  phase: 'write',
-  fn: applyStyles,
-  effect: effect,
-  requires: ['computeStyles']
-});
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/modifiers/arrow.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/modifiers/arrow.js ***!
-  \************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/getBasePlacement.js */ "./node_modules/@popperjs/core/lib/utils/getBasePlacement.js");
-/* harmony import */ var _dom_utils_getLayoutRect_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dom-utils/getLayoutRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getLayoutRect.js");
-/* harmony import */ var _dom_utils_contains_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../dom-utils/contains.js */ "./node_modules/@popperjs/core/lib/dom-utils/contains.js");
-/* harmony import */ var _dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../dom-utils/getOffsetParent.js */ "./node_modules/@popperjs/core/lib/dom-utils/getOffsetParent.js");
-/* harmony import */ var _utils_getMainAxisFromPlacement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/getMainAxisFromPlacement.js */ "./node_modules/@popperjs/core/lib/utils/getMainAxisFromPlacement.js");
-/* harmony import */ var _utils_within_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/within.js */ "./node_modules/@popperjs/core/lib/utils/within.js");
-/* harmony import */ var _utils_mergePaddingObject_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/mergePaddingObject.js */ "./node_modules/@popperjs/core/lib/utils/mergePaddingObject.js");
-/* harmony import */ var _utils_expandToHashMap_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/expandToHashMap.js */ "./node_modules/@popperjs/core/lib/utils/expandToHashMap.js");
-/* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
-/* harmony import */ var _dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../dom-utils/instanceOf.js */ "./node_modules/@popperjs/core/lib/dom-utils/instanceOf.js");
-
-
-
-
-
-
-
-
-
- // eslint-disable-next-line import/no-unused-modules
-
-var toPaddingObject = function toPaddingObject(padding, state) {
-  padding = typeof padding === 'function' ? padding(Object.assign({}, state.rects, {
-    placement: state.placement
-  })) : padding;
-  return Object(_utils_mergePaddingObject_js__WEBPACK_IMPORTED_MODULE_6__["default"])(typeof padding !== 'number' ? padding : Object(_utils_expandToHashMap_js__WEBPACK_IMPORTED_MODULE_7__["default"])(padding, _enums_js__WEBPACK_IMPORTED_MODULE_8__["basePlacements"]));
-};
-
-function arrow(_ref) {
-  var _state$modifiersData$;
-
-  var state = _ref.state,
-      name = _ref.name,
-      options = _ref.options;
-  var arrowElement = state.elements.arrow;
-  var popperOffsets = state.modifiersData.popperOffsets;
-  var basePlacement = Object(_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(state.placement);
-  var axis = Object(_utils_getMainAxisFromPlacement_js__WEBPACK_IMPORTED_MODULE_4__["default"])(basePlacement);
-  var isVertical = [_enums_js__WEBPACK_IMPORTED_MODULE_8__["left"], _enums_js__WEBPACK_IMPORTED_MODULE_8__["right"]].indexOf(basePlacement) >= 0;
-  var len = isVertical ? 'height' : 'width';
-
-  if (!arrowElement || !popperOffsets) {
-    return;
-  }
-
-  var paddingObject = toPaddingObject(options.padding, state);
-  var arrowRect = Object(_dom_utils_getLayoutRect_js__WEBPACK_IMPORTED_MODULE_1__["default"])(arrowElement);
-  var minProp = axis === 'y' ? _enums_js__WEBPACK_IMPORTED_MODULE_8__["top"] : _enums_js__WEBPACK_IMPORTED_MODULE_8__["left"];
-  var maxProp = axis === 'y' ? _enums_js__WEBPACK_IMPORTED_MODULE_8__["bottom"] : _enums_js__WEBPACK_IMPORTED_MODULE_8__["right"];
-  var endDiff = state.rects.reference[len] + state.rects.reference[axis] - popperOffsets[axis] - state.rects.popper[len];
-  var startDiff = popperOffsets[axis] - state.rects.reference[axis];
-  var arrowOffsetParent = Object(_dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_3__["default"])(arrowElement);
-  var clientSize = arrowOffsetParent ? axis === 'y' ? arrowOffsetParent.clientHeight || 0 : arrowOffsetParent.clientWidth || 0 : 0;
-  var centerToReference = endDiff / 2 - startDiff / 2; // Make sure the arrow doesn't overflow the popper if the center point is
-  // outside of the popper bounds
-
-  var min = paddingObject[minProp];
-  var max = clientSize - arrowRect[len] - paddingObject[maxProp];
-  var center = clientSize / 2 - arrowRect[len] / 2 + centerToReference;
-  var offset = Object(_utils_within_js__WEBPACK_IMPORTED_MODULE_5__["within"])(min, center, max); // Prevents breaking syntax highlighting...
-
-  var axisProp = axis;
-  state.modifiersData[name] = (_state$modifiersData$ = {}, _state$modifiersData$[axisProp] = offset, _state$modifiersData$.centerOffset = offset - center, _state$modifiersData$);
-}
-
-function effect(_ref2) {
-  var state = _ref2.state,
-      options = _ref2.options;
-  var _options$element = options.element,
-      arrowElement = _options$element === void 0 ? '[data-popper-arrow]' : _options$element;
-
-  if (arrowElement == null) {
-    return;
-  } // CSS selector
-
-
-  if (typeof arrowElement === 'string') {
-    arrowElement = state.elements.popper.querySelector(arrowElement);
-
-    if (!arrowElement) {
+  var cropper = null;
+  var scaled_width = 500;
+  var aspect_numerator = parseFloat(document.getElementById("aspect_numerator").value);
+  var aspect_denominator = parseFloat(document.getElementById("aspect_denominator").value);
+  var crop_aspect_ratio = aspect_denominator / aspect_numerator;
+
+  var crop_image = function crop_image(e) {
+    var files = e.target.files;
+
+    if (files.length === 0) {
       return;
     }
-  }
 
-  if (true) {
-    if (!Object(_dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_9__["isHTMLElement"])(arrowElement)) {
-      console.error(['Popper: "arrow" element must be an HTMLElement (not an SVGElement).', 'To use an SVG arrow, wrap it in an HTMLElement that will be used as', 'the arrow.'].join(' '));
-    }
-  }
-
-  if (!Object(_dom_utils_contains_js__WEBPACK_IMPORTED_MODULE_2__["default"])(state.elements.popper, arrowElement)) {
-    if (true) {
-      console.error(['Popper: "arrow" modifier\'s `element` must be a child of the popper', 'element.'].join(' '));
-    }
-
-    return;
-  }
-
-  state.elements.arrow = arrowElement;
-} // eslint-disable-next-line import/no-unused-modules
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'arrow',
-  enabled: true,
-  phase: 'main',
-  fn: arrow,
-  effect: effect,
-  requires: ['popperOffsets'],
-  requiresIfExists: ['preventOverflow']
-});
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/modifiers/computeStyles.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/modifiers/computeStyles.js ***!
-  \********************************************************************/
-/*! exports provided: mapToStyles, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapToStyles", function() { return mapToStyles; });
-/* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
-/* harmony import */ var _dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dom-utils/getOffsetParent.js */ "./node_modules/@popperjs/core/lib/dom-utils/getOffsetParent.js");
-/* harmony import */ var _dom_utils_getWindow_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../dom-utils/getWindow.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindow.js");
-/* harmony import */ var _dom_utils_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../dom-utils/getDocumentElement.js */ "./node_modules/@popperjs/core/lib/dom-utils/getDocumentElement.js");
-/* harmony import */ var _dom_utils_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../dom-utils/getComputedStyle.js */ "./node_modules/@popperjs/core/lib/dom-utils/getComputedStyle.js");
-/* harmony import */ var _utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/getBasePlacement.js */ "./node_modules/@popperjs/core/lib/utils/getBasePlacement.js");
-/* harmony import */ var _utils_getVariation_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/getVariation.js */ "./node_modules/@popperjs/core/lib/utils/getVariation.js");
-/* harmony import */ var _utils_math_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/math.js */ "./node_modules/@popperjs/core/lib/utils/math.js");
-
-
-
-
-
-
-
- // eslint-disable-next-line import/no-unused-modules
-
-var unsetSides = {
-  top: 'auto',
-  right: 'auto',
-  bottom: 'auto',
-  left: 'auto'
-}; // Round the offsets to the nearest suitable subpixel based on the DPR.
-// Zooming can change the DPR, but it seems to report a value that will
-// cleanly divide the values into the appropriate subpixels.
-
-function roundOffsetsByDPR(_ref) {
-  var x = _ref.x,
-      y = _ref.y;
-  var win = window;
-  var dpr = win.devicePixelRatio || 1;
-  return {
-    x: Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_7__["round"])(x * dpr) / dpr || 0,
-    y: Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_7__["round"])(y * dpr) / dpr || 0
-  };
-}
-
-function mapToStyles(_ref2) {
-  var _Object$assign2;
-
-  var popper = _ref2.popper,
-      popperRect = _ref2.popperRect,
-      placement = _ref2.placement,
-      variation = _ref2.variation,
-      offsets = _ref2.offsets,
-      position = _ref2.position,
-      gpuAcceleration = _ref2.gpuAcceleration,
-      adaptive = _ref2.adaptive,
-      roundOffsets = _ref2.roundOffsets,
-      isFixed = _ref2.isFixed;
-
-  var _ref3 = roundOffsets === true ? roundOffsetsByDPR(offsets) : typeof roundOffsets === 'function' ? roundOffsets(offsets) : offsets,
-      _ref3$x = _ref3.x,
-      x = _ref3$x === void 0 ? 0 : _ref3$x,
-      _ref3$y = _ref3.y,
-      y = _ref3$y === void 0 ? 0 : _ref3$y;
-
-  var hasX = offsets.hasOwnProperty('x');
-  var hasY = offsets.hasOwnProperty('y');
-  var sideX = _enums_js__WEBPACK_IMPORTED_MODULE_0__["left"];
-  var sideY = _enums_js__WEBPACK_IMPORTED_MODULE_0__["top"];
-  var win = window;
-
-  if (adaptive) {
-    var offsetParent = Object(_dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_1__["default"])(popper);
-    var heightProp = 'clientHeight';
-    var widthProp = 'clientWidth';
-
-    if (offsetParent === Object(_dom_utils_getWindow_js__WEBPACK_IMPORTED_MODULE_2__["default"])(popper)) {
-      offsetParent = Object(_dom_utils_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_3__["default"])(popper);
-
-      if (Object(_dom_utils_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_4__["default"])(offsetParent).position !== 'static' && position === 'absolute') {
-        heightProp = 'scrollHeight';
-        widthProp = 'scrollWidth';
-      }
-    } // $FlowFixMe[incompatible-cast]: force type refinement, we compare offsetParent with window above, but Flow doesn't detect it
-
-
-    offsetParent = offsetParent;
-
-    if (placement === _enums_js__WEBPACK_IMPORTED_MODULE_0__["top"] || (placement === _enums_js__WEBPACK_IMPORTED_MODULE_0__["left"] || placement === _enums_js__WEBPACK_IMPORTED_MODULE_0__["right"]) && variation === _enums_js__WEBPACK_IMPORTED_MODULE_0__["end"]) {
-      sideY = _enums_js__WEBPACK_IMPORTED_MODULE_0__["bottom"];
-      var offsetY = isFixed && win.visualViewport ? win.visualViewport.height : // $FlowFixMe[prop-missing]
-      offsetParent[heightProp];
-      y -= offsetY - popperRect.height;
-      y *= gpuAcceleration ? 1 : -1;
-    }
-
-    if (placement === _enums_js__WEBPACK_IMPORTED_MODULE_0__["left"] || (placement === _enums_js__WEBPACK_IMPORTED_MODULE_0__["top"] || placement === _enums_js__WEBPACK_IMPORTED_MODULE_0__["bottom"]) && variation === _enums_js__WEBPACK_IMPORTED_MODULE_0__["end"]) {
-      sideX = _enums_js__WEBPACK_IMPORTED_MODULE_0__["right"];
-      var offsetX = isFixed && win.visualViewport ? win.visualViewport.width : // $FlowFixMe[prop-missing]
-      offsetParent[widthProp];
-      x -= offsetX - popperRect.width;
-      x *= gpuAcceleration ? 1 : -1;
-    }
-  }
-
-  var commonStyles = Object.assign({
-    position: position
-  }, adaptive && unsetSides);
-
-  if (gpuAcceleration) {
-    var _Object$assign;
-
-    return Object.assign({}, commonStyles, (_Object$assign = {}, _Object$assign[sideY] = hasY ? '0' : '', _Object$assign[sideX] = hasX ? '0' : '', _Object$assign.transform = (win.devicePixelRatio || 1) <= 1 ? "translate(" + x + "px, " + y + "px)" : "translate3d(" + x + "px, " + y + "px, 0)", _Object$assign));
-  }
-
-  return Object.assign({}, commonStyles, (_Object$assign2 = {}, _Object$assign2[sideY] = hasY ? y + "px" : '', _Object$assign2[sideX] = hasX ? x + "px" : '', _Object$assign2.transform = '', _Object$assign2));
-}
-
-function computeStyles(_ref4) {
-  var state = _ref4.state,
-      options = _ref4.options;
-  var _options$gpuAccelerat = options.gpuAcceleration,
-      gpuAcceleration = _options$gpuAccelerat === void 0 ? true : _options$gpuAccelerat,
-      _options$adaptive = options.adaptive,
-      adaptive = _options$adaptive === void 0 ? true : _options$adaptive,
-      _options$roundOffsets = options.roundOffsets,
-      roundOffsets = _options$roundOffsets === void 0 ? true : _options$roundOffsets;
-
-  if (true) {
-    var transitionProperty = Object(_dom_utils_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_4__["default"])(state.elements.popper).transitionProperty || '';
-
-    if (adaptive && ['transform', 'top', 'right', 'bottom', 'left'].some(function (property) {
-      return transitionProperty.indexOf(property) >= 0;
-    })) {
-      console.warn(['Popper: Detected CSS transitions on at least one of the following', 'CSS properties: "transform", "top", "right", "bottom", "left".', '\n\n', 'Disable the "computeStyles" modifier\'s `adaptive` option to allow', 'for smooth transitions, or remove these properties from the CSS', 'transition declaration on the popper element if only transitioning', 'opacity or background-color for example.', '\n\n', 'We recommend using the popper element as a wrapper around an inner', 'element that can have any CSS property transitioned for animations.'].join(' '));
-    }
-  }
-
-  var commonStyles = {
-    placement: Object(_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_5__["default"])(state.placement),
-    variation: Object(_utils_getVariation_js__WEBPACK_IMPORTED_MODULE_6__["default"])(state.placement),
-    popper: state.elements.popper,
-    popperRect: state.rects.popper,
-    gpuAcceleration: gpuAcceleration,
-    isFixed: state.options.strategy === 'fixed'
-  };
-
-  if (state.modifiersData.popperOffsets != null) {
-    state.styles.popper = Object.assign({}, state.styles.popper, mapToStyles(Object.assign({}, commonStyles, {
-      offsets: state.modifiersData.popperOffsets,
-      position: state.options.strategy,
-      adaptive: adaptive,
-      roundOffsets: roundOffsets
-    })));
-  }
-
-  if (state.modifiersData.arrow != null) {
-    state.styles.arrow = Object.assign({}, state.styles.arrow, mapToStyles(Object.assign({}, commonStyles, {
-      offsets: state.modifiersData.arrow,
-      position: 'absolute',
-      adaptive: false,
-      roundOffsets: roundOffsets
-    })));
-  }
-
-  state.attributes.popper = Object.assign({}, state.attributes.popper, {
-    'data-popper-placement': state.placement
-  });
-} // eslint-disable-next-line import/no-unused-modules
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'computeStyles',
-  enabled: true,
-  phase: 'beforeWrite',
-  fn: computeStyles,
-  data: {}
-});
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/modifiers/eventListeners.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/modifiers/eventListeners.js ***!
-  \*********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _dom_utils_getWindow_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../dom-utils/getWindow.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindow.js");
- // eslint-disable-next-line import/no-unused-modules
-
-var passive = {
-  passive: true
-};
-
-function effect(_ref) {
-  var state = _ref.state,
-      instance = _ref.instance,
-      options = _ref.options;
-  var _options$scroll = options.scroll,
-      scroll = _options$scroll === void 0 ? true : _options$scroll,
-      _options$resize = options.resize,
-      resize = _options$resize === void 0 ? true : _options$resize;
-  var window = Object(_dom_utils_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(state.elements.popper);
-  var scrollParents = [].concat(state.scrollParents.reference, state.scrollParents.popper);
-
-  if (scroll) {
-    scrollParents.forEach(function (scrollParent) {
-      scrollParent.addEventListener('scroll', instance.update, passive);
-    });
-  }
-
-  if (resize) {
-    window.addEventListener('resize', instance.update, passive);
-  }
-
-  return function () {
-    if (scroll) {
-      scrollParents.forEach(function (scrollParent) {
-        scrollParent.removeEventListener('scroll', instance.update, passive);
-      });
-    }
-
-    if (resize) {
-      window.removeEventListener('resize', instance.update, passive);
-    }
-  };
-} // eslint-disable-next-line import/no-unused-modules
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'eventListeners',
-  enabled: true,
-  phase: 'write',
-  fn: function fn() {},
-  effect: effect,
-  data: {}
-});
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/modifiers/flip.js":
-/*!***********************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/modifiers/flip.js ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _utils_getOppositePlacement_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/getOppositePlacement.js */ "./node_modules/@popperjs/core/lib/utils/getOppositePlacement.js");
-/* harmony import */ var _utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/getBasePlacement.js */ "./node_modules/@popperjs/core/lib/utils/getBasePlacement.js");
-/* harmony import */ var _utils_getOppositeVariationPlacement_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/getOppositeVariationPlacement.js */ "./node_modules/@popperjs/core/lib/utils/getOppositeVariationPlacement.js");
-/* harmony import */ var _utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/detectOverflow.js */ "./node_modules/@popperjs/core/lib/utils/detectOverflow.js");
-/* harmony import */ var _utils_computeAutoPlacement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/computeAutoPlacement.js */ "./node_modules/@popperjs/core/lib/utils/computeAutoPlacement.js");
-/* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
-/* harmony import */ var _utils_getVariation_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/getVariation.js */ "./node_modules/@popperjs/core/lib/utils/getVariation.js");
-
-
-
-
-
-
- // eslint-disable-next-line import/no-unused-modules
-
-function getExpandedFallbackPlacements(placement) {
-  if (Object(_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(placement) === _enums_js__WEBPACK_IMPORTED_MODULE_5__["auto"]) {
-    return [];
-  }
-
-  var oppositePlacement = Object(_utils_getOppositePlacement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(placement);
-  return [Object(_utils_getOppositeVariationPlacement_js__WEBPACK_IMPORTED_MODULE_2__["default"])(placement), oppositePlacement, Object(_utils_getOppositeVariationPlacement_js__WEBPACK_IMPORTED_MODULE_2__["default"])(oppositePlacement)];
-}
-
-function flip(_ref) {
-  var state = _ref.state,
-      options = _ref.options,
-      name = _ref.name;
-
-  if (state.modifiersData[name]._skip) {
-    return;
-  }
-
-  var _options$mainAxis = options.mainAxis,
-      checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis,
-      _options$altAxis = options.altAxis,
-      checkAltAxis = _options$altAxis === void 0 ? true : _options$altAxis,
-      specifiedFallbackPlacements = options.fallbackPlacements,
-      padding = options.padding,
-      boundary = options.boundary,
-      rootBoundary = options.rootBoundary,
-      altBoundary = options.altBoundary,
-      _options$flipVariatio = options.flipVariations,
-      flipVariations = _options$flipVariatio === void 0 ? true : _options$flipVariatio,
-      allowedAutoPlacements = options.allowedAutoPlacements;
-  var preferredPlacement = state.options.placement;
-  var basePlacement = Object(_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(preferredPlacement);
-  var isBasePlacement = basePlacement === preferredPlacement;
-  var fallbackPlacements = specifiedFallbackPlacements || (isBasePlacement || !flipVariations ? [Object(_utils_getOppositePlacement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(preferredPlacement)] : getExpandedFallbackPlacements(preferredPlacement));
-  var placements = [preferredPlacement].concat(fallbackPlacements).reduce(function (acc, placement) {
-    return acc.concat(Object(_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(placement) === _enums_js__WEBPACK_IMPORTED_MODULE_5__["auto"] ? Object(_utils_computeAutoPlacement_js__WEBPACK_IMPORTED_MODULE_4__["default"])(state, {
-      placement: placement,
-      boundary: boundary,
-      rootBoundary: rootBoundary,
-      padding: padding,
-      flipVariations: flipVariations,
-      allowedAutoPlacements: allowedAutoPlacements
-    }) : placement);
-  }, []);
-  var referenceRect = state.rects.reference;
-  var popperRect = state.rects.popper;
-  var checksMap = new Map();
-  var makeFallbackChecks = true;
-  var firstFittingPlacement = placements[0];
-
-  for (var i = 0; i < placements.length; i++) {
-    var placement = placements[i];
-
-    var _basePlacement = Object(_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(placement);
-
-    var isStartVariation = Object(_utils_getVariation_js__WEBPACK_IMPORTED_MODULE_6__["default"])(placement) === _enums_js__WEBPACK_IMPORTED_MODULE_5__["start"];
-    var isVertical = [_enums_js__WEBPACK_IMPORTED_MODULE_5__["top"], _enums_js__WEBPACK_IMPORTED_MODULE_5__["bottom"]].indexOf(_basePlacement) >= 0;
-    var len = isVertical ? 'width' : 'height';
-    var overflow = Object(_utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_3__["default"])(state, {
-      placement: placement,
-      boundary: boundary,
-      rootBoundary: rootBoundary,
-      altBoundary: altBoundary,
-      padding: padding
-    });
-    var mainVariationSide = isVertical ? isStartVariation ? _enums_js__WEBPACK_IMPORTED_MODULE_5__["right"] : _enums_js__WEBPACK_IMPORTED_MODULE_5__["left"] : isStartVariation ? _enums_js__WEBPACK_IMPORTED_MODULE_5__["bottom"] : _enums_js__WEBPACK_IMPORTED_MODULE_5__["top"];
-
-    if (referenceRect[len] > popperRect[len]) {
-      mainVariationSide = Object(_utils_getOppositePlacement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(mainVariationSide);
-    }
-
-    var altVariationSide = Object(_utils_getOppositePlacement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(mainVariationSide);
-    var checks = [];
-
-    if (checkMainAxis) {
-      checks.push(overflow[_basePlacement] <= 0);
-    }
-
-    if (checkAltAxis) {
-      checks.push(overflow[mainVariationSide] <= 0, overflow[altVariationSide] <= 0);
-    }
-
-    if (checks.every(function (check) {
-      return check;
-    })) {
-      firstFittingPlacement = placement;
-      makeFallbackChecks = false;
-      break;
-    }
-
-    checksMap.set(placement, checks);
-  }
-
-  if (makeFallbackChecks) {
-    // `2` may be desired in some cases – research later
-    var numberOfChecks = flipVariations ? 3 : 1;
-
-    var _loop = function _loop(_i) {
-      var fittingPlacement = placements.find(function (placement) {
-        var checks = checksMap.get(placement);
-
-        if (checks) {
-          return checks.slice(0, _i).every(function (check) {
-            return check;
-          });
+    var file = files[0];
+    var image = new Image();
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = function (e) {
+      image.src = e.target.result;
+
+      image.onload = function () {
+        var scale = scaled_width / image.width;
+        var canvas = document.getElementById("source_canvas");
+        canvas.width = image.width * scale;
+        canvas.height = image.height * scale;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+
+        if (cropper != null) {
+          cropper.destroy();
         }
-      });
 
-      if (fittingPlacement) {
-        firstFittingPlacement = fittingPlacement;
-        return "break";
-      }
-    };
-
-    for (var _i = numberOfChecks; _i > 0; _i--) {
-      var _ret = _loop(_i);
-
-      if (_ret === "break") break;
-    }
-  }
-
-  if (state.placement !== firstFittingPlacement) {
-    state.modifiersData[name]._skip = true;
-    state.placement = firstFittingPlacement;
-    state.reset = true;
-  }
-} // eslint-disable-next-line import/no-unused-modules
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'flip',
-  enabled: true,
-  phase: 'main',
-  fn: flip,
-  requiresIfExists: ['offset'],
-  data: {
-    _skip: false
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/modifiers/hide.js":
-/*!***********************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/modifiers/hide.js ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
-/* harmony import */ var _utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/detectOverflow.js */ "./node_modules/@popperjs/core/lib/utils/detectOverflow.js");
-
-
-
-function getSideOffsets(overflow, rect, preventedOffsets) {
-  if (preventedOffsets === void 0) {
-    preventedOffsets = {
-      x: 0,
-      y: 0
-    };
-  }
-
-  return {
-    top: overflow.top - rect.height - preventedOffsets.y,
-    right: overflow.right - rect.width + preventedOffsets.x,
-    bottom: overflow.bottom - rect.height + preventedOffsets.y,
-    left: overflow.left - rect.width - preventedOffsets.x
-  };
-}
-
-function isAnySideFullyClipped(overflow) {
-  return [_enums_js__WEBPACK_IMPORTED_MODULE_0__["top"], _enums_js__WEBPACK_IMPORTED_MODULE_0__["right"], _enums_js__WEBPACK_IMPORTED_MODULE_0__["bottom"], _enums_js__WEBPACK_IMPORTED_MODULE_0__["left"]].some(function (side) {
-    return overflow[side] >= 0;
-  });
-}
-
-function hide(_ref) {
-  var state = _ref.state,
-      name = _ref.name;
-  var referenceRect = state.rects.reference;
-  var popperRect = state.rects.popper;
-  var preventedOffsets = state.modifiersData.preventOverflow;
-  var referenceOverflow = Object(_utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_1__["default"])(state, {
-    elementContext: 'reference'
-  });
-  var popperAltOverflow = Object(_utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_1__["default"])(state, {
-    altBoundary: true
-  });
-  var referenceClippingOffsets = getSideOffsets(referenceOverflow, referenceRect);
-  var popperEscapeOffsets = getSideOffsets(popperAltOverflow, popperRect, preventedOffsets);
-  var isReferenceHidden = isAnySideFullyClipped(referenceClippingOffsets);
-  var hasPopperEscaped = isAnySideFullyClipped(popperEscapeOffsets);
-  state.modifiersData[name] = {
-    referenceClippingOffsets: referenceClippingOffsets,
-    popperEscapeOffsets: popperEscapeOffsets,
-    isReferenceHidden: isReferenceHidden,
-    hasPopperEscaped: hasPopperEscaped
-  };
-  state.attributes.popper = Object.assign({}, state.attributes.popper, {
-    'data-popper-reference-hidden': isReferenceHidden,
-    'data-popper-escaped': hasPopperEscaped
-  });
-} // eslint-disable-next-line import/no-unused-modules
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'hide',
-  enabled: true,
-  phase: 'main',
-  requiresIfExists: ['preventOverflow'],
-  fn: hide
-});
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/modifiers/index.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/modifiers/index.js ***!
-  \************************************************************/
-/*! exports provided: applyStyles, arrow, computeStyles, eventListeners, flip, hide, offset, popperOffsets, preventOverflow */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _applyStyles_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./applyStyles.js */ "./node_modules/@popperjs/core/lib/modifiers/applyStyles.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "applyStyles", function() { return _applyStyles_js__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-/* harmony import */ var _arrow_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./arrow.js */ "./node_modules/@popperjs/core/lib/modifiers/arrow.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "arrow", function() { return _arrow_js__WEBPACK_IMPORTED_MODULE_1__["default"]; });
-
-/* harmony import */ var _computeStyles_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./computeStyles.js */ "./node_modules/@popperjs/core/lib/modifiers/computeStyles.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "computeStyles", function() { return _computeStyles_js__WEBPACK_IMPORTED_MODULE_2__["default"]; });
-
-/* harmony import */ var _eventListeners_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./eventListeners.js */ "./node_modules/@popperjs/core/lib/modifiers/eventListeners.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "eventListeners", function() { return _eventListeners_js__WEBPACK_IMPORTED_MODULE_3__["default"]; });
-
-/* harmony import */ var _flip_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./flip.js */ "./node_modules/@popperjs/core/lib/modifiers/flip.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "flip", function() { return _flip_js__WEBPACK_IMPORTED_MODULE_4__["default"]; });
-
-/* harmony import */ var _hide_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./hide.js */ "./node_modules/@popperjs/core/lib/modifiers/hide.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "hide", function() { return _hide_js__WEBPACK_IMPORTED_MODULE_5__["default"]; });
-
-/* harmony import */ var _offset_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./offset.js */ "./node_modules/@popperjs/core/lib/modifiers/offset.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "offset", function() { return _offset_js__WEBPACK_IMPORTED_MODULE_6__["default"]; });
-
-/* harmony import */ var _popperOffsets_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./popperOffsets.js */ "./node_modules/@popperjs/core/lib/modifiers/popperOffsets.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "popperOffsets", function() { return _popperOffsets_js__WEBPACK_IMPORTED_MODULE_7__["default"]; });
-
-/* harmony import */ var _preventOverflow_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./preventOverflow.js */ "./node_modules/@popperjs/core/lib/modifiers/preventOverflow.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "preventOverflow", function() { return _preventOverflow_js__WEBPACK_IMPORTED_MODULE_8__["default"]; });
-
-
-
-
-
-
-
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/modifiers/offset.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/modifiers/offset.js ***!
-  \*************************************************************/
-/*! exports provided: distanceAndSkiddingToXY, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "distanceAndSkiddingToXY", function() { return distanceAndSkiddingToXY; });
-/* harmony import */ var _utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/getBasePlacement.js */ "./node_modules/@popperjs/core/lib/utils/getBasePlacement.js");
-/* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
-
- // eslint-disable-next-line import/no-unused-modules
-
-function distanceAndSkiddingToXY(placement, rects, offset) {
-  var basePlacement = Object(_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(placement);
-  var invertDistance = [_enums_js__WEBPACK_IMPORTED_MODULE_1__["left"], _enums_js__WEBPACK_IMPORTED_MODULE_1__["top"]].indexOf(basePlacement) >= 0 ? -1 : 1;
-
-  var _ref = typeof offset === 'function' ? offset(Object.assign({}, rects, {
-    placement: placement
-  })) : offset,
-      skidding = _ref[0],
-      distance = _ref[1];
-
-  skidding = skidding || 0;
-  distance = (distance || 0) * invertDistance;
-  return [_enums_js__WEBPACK_IMPORTED_MODULE_1__["left"], _enums_js__WEBPACK_IMPORTED_MODULE_1__["right"]].indexOf(basePlacement) >= 0 ? {
-    x: distance,
-    y: skidding
-  } : {
-    x: skidding,
-    y: distance
-  };
-}
-
-function offset(_ref2) {
-  var state = _ref2.state,
-      options = _ref2.options,
-      name = _ref2.name;
-  var _options$offset = options.offset,
-      offset = _options$offset === void 0 ? [0, 0] : _options$offset;
-  var data = _enums_js__WEBPACK_IMPORTED_MODULE_1__["placements"].reduce(function (acc, placement) {
-    acc[placement] = distanceAndSkiddingToXY(placement, state.rects, offset);
-    return acc;
-  }, {});
-  var _data$state$placement = data[state.placement],
-      x = _data$state$placement.x,
-      y = _data$state$placement.y;
-
-  if (state.modifiersData.popperOffsets != null) {
-    state.modifiersData.popperOffsets.x += x;
-    state.modifiersData.popperOffsets.y += y;
-  }
-
-  state.modifiersData[name] = data;
-} // eslint-disable-next-line import/no-unused-modules
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'offset',
-  enabled: true,
-  phase: 'main',
-  requires: ['popperOffsets'],
-  fn: offset
-});
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/modifiers/popperOffsets.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/modifiers/popperOffsets.js ***!
-  \********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _utils_computeOffsets_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/computeOffsets.js */ "./node_modules/@popperjs/core/lib/utils/computeOffsets.js");
-
-
-function popperOffsets(_ref) {
-  var state = _ref.state,
-      name = _ref.name; // Offsets are the actual position the popper needs to have to be
-  // properly positioned near its reference element
-  // This is the most basic placement, and will be adjusted by
-  // the modifiers in the next step
-
-  state.modifiersData[name] = Object(_utils_computeOffsets_js__WEBPACK_IMPORTED_MODULE_0__["default"])({
-    reference: state.rects.reference,
-    element: state.rects.popper,
-    strategy: 'absolute',
-    placement: state.placement
-  });
-} // eslint-disable-next-line import/no-unused-modules
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'popperOffsets',
-  enabled: true,
-  phase: 'read',
-  fn: popperOffsets,
-  data: {}
-});
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/modifiers/preventOverflow.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/modifiers/preventOverflow.js ***!
-  \**********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
-/* harmony import */ var _utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/getBasePlacement.js */ "./node_modules/@popperjs/core/lib/utils/getBasePlacement.js");
-/* harmony import */ var _utils_getMainAxisFromPlacement_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/getMainAxisFromPlacement.js */ "./node_modules/@popperjs/core/lib/utils/getMainAxisFromPlacement.js");
-/* harmony import */ var _utils_getAltAxis_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/getAltAxis.js */ "./node_modules/@popperjs/core/lib/utils/getAltAxis.js");
-/* harmony import */ var _utils_within_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/within.js */ "./node_modules/@popperjs/core/lib/utils/within.js");
-/* harmony import */ var _dom_utils_getLayoutRect_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../dom-utils/getLayoutRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getLayoutRect.js");
-/* harmony import */ var _dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../dom-utils/getOffsetParent.js */ "./node_modules/@popperjs/core/lib/dom-utils/getOffsetParent.js");
-/* harmony import */ var _utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/detectOverflow.js */ "./node_modules/@popperjs/core/lib/utils/detectOverflow.js");
-/* harmony import */ var _utils_getVariation_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/getVariation.js */ "./node_modules/@popperjs/core/lib/utils/getVariation.js");
-/* harmony import */ var _utils_getFreshSideObject_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/getFreshSideObject.js */ "./node_modules/@popperjs/core/lib/utils/getFreshSideObject.js");
-/* harmony import */ var _utils_math_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../utils/math.js */ "./node_modules/@popperjs/core/lib/utils/math.js");
-
-
-
-
-
-
-
-
-
-
-
-
-function preventOverflow(_ref) {
-  var state = _ref.state,
-      options = _ref.options,
-      name = _ref.name;
-  var _options$mainAxis = options.mainAxis,
-      checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis,
-      _options$altAxis = options.altAxis,
-      checkAltAxis = _options$altAxis === void 0 ? false : _options$altAxis,
-      boundary = options.boundary,
-      rootBoundary = options.rootBoundary,
-      altBoundary = options.altBoundary,
-      padding = options.padding,
-      _options$tether = options.tether,
-      tether = _options$tether === void 0 ? true : _options$tether,
-      _options$tetherOffset = options.tetherOffset,
-      tetherOffset = _options$tetherOffset === void 0 ? 0 : _options$tetherOffset;
-  var overflow = Object(_utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_7__["default"])(state, {
-    boundary: boundary,
-    rootBoundary: rootBoundary,
-    padding: padding,
-    altBoundary: altBoundary
-  });
-  var basePlacement = Object(_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(state.placement);
-  var variation = Object(_utils_getVariation_js__WEBPACK_IMPORTED_MODULE_8__["default"])(state.placement);
-  var isBasePlacement = !variation;
-  var mainAxis = Object(_utils_getMainAxisFromPlacement_js__WEBPACK_IMPORTED_MODULE_2__["default"])(basePlacement);
-  var altAxis = Object(_utils_getAltAxis_js__WEBPACK_IMPORTED_MODULE_3__["default"])(mainAxis);
-  var popperOffsets = state.modifiersData.popperOffsets;
-  var referenceRect = state.rects.reference;
-  var popperRect = state.rects.popper;
-  var tetherOffsetValue = typeof tetherOffset === 'function' ? tetherOffset(Object.assign({}, state.rects, {
-    placement: state.placement
-  })) : tetherOffset;
-  var normalizedTetherOffsetValue = typeof tetherOffsetValue === 'number' ? {
-    mainAxis: tetherOffsetValue,
-    altAxis: tetherOffsetValue
-  } : Object.assign({
-    mainAxis: 0,
-    altAxis: 0
-  }, tetherOffsetValue);
-  var offsetModifierState = state.modifiersData.offset ? state.modifiersData.offset[state.placement] : null;
-  var data = {
-    x: 0,
-    y: 0
-  };
-
-  if (!popperOffsets) {
-    return;
-  }
-
-  if (checkMainAxis) {
-    var _offsetModifierState$;
-
-    var mainSide = mainAxis === 'y' ? _enums_js__WEBPACK_IMPORTED_MODULE_0__["top"] : _enums_js__WEBPACK_IMPORTED_MODULE_0__["left"];
-    var altSide = mainAxis === 'y' ? _enums_js__WEBPACK_IMPORTED_MODULE_0__["bottom"] : _enums_js__WEBPACK_IMPORTED_MODULE_0__["right"];
-    var len = mainAxis === 'y' ? 'height' : 'width';
-    var offset = popperOffsets[mainAxis];
-    var min = offset + overflow[mainSide];
-    var max = offset - overflow[altSide];
-    var additive = tether ? -popperRect[len] / 2 : 0;
-    var minLen = variation === _enums_js__WEBPACK_IMPORTED_MODULE_0__["start"] ? referenceRect[len] : popperRect[len];
-    var maxLen = variation === _enums_js__WEBPACK_IMPORTED_MODULE_0__["start"] ? -popperRect[len] : -referenceRect[len]; // We need to include the arrow in the calculation so the arrow doesn't go
-    // outside the reference bounds
-
-    var arrowElement = state.elements.arrow;
-    var arrowRect = tether && arrowElement ? Object(_dom_utils_getLayoutRect_js__WEBPACK_IMPORTED_MODULE_5__["default"])(arrowElement) : {
-      width: 0,
-      height: 0
-    };
-    var arrowPaddingObject = state.modifiersData['arrow#persistent'] ? state.modifiersData['arrow#persistent'].padding : Object(_utils_getFreshSideObject_js__WEBPACK_IMPORTED_MODULE_9__["default"])();
-    var arrowPaddingMin = arrowPaddingObject[mainSide];
-    var arrowPaddingMax = arrowPaddingObject[altSide]; // If the reference length is smaller than the arrow length, we don't want
-    // to include its full size in the calculation. If the reference is small
-    // and near the edge of a boundary, the popper can overflow even if the
-    // reference is not overflowing as well (e.g. virtual elements with no
-    // width or height)
-
-    var arrowLen = Object(_utils_within_js__WEBPACK_IMPORTED_MODULE_4__["within"])(0, referenceRect[len], arrowRect[len]);
-    var minOffset = isBasePlacement ? referenceRect[len] / 2 - additive - arrowLen - arrowPaddingMin - normalizedTetherOffsetValue.mainAxis : minLen - arrowLen - arrowPaddingMin - normalizedTetherOffsetValue.mainAxis;
-    var maxOffset = isBasePlacement ? -referenceRect[len] / 2 + additive + arrowLen + arrowPaddingMax + normalizedTetherOffsetValue.mainAxis : maxLen + arrowLen + arrowPaddingMax + normalizedTetherOffsetValue.mainAxis;
-    var arrowOffsetParent = state.elements.arrow && Object(_dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_6__["default"])(state.elements.arrow);
-    var clientOffset = arrowOffsetParent ? mainAxis === 'y' ? arrowOffsetParent.clientTop || 0 : arrowOffsetParent.clientLeft || 0 : 0;
-    var offsetModifierValue = (_offsetModifierState$ = offsetModifierState == null ? void 0 : offsetModifierState[mainAxis]) != null ? _offsetModifierState$ : 0;
-    var tetherMin = offset + minOffset - offsetModifierValue - clientOffset;
-    var tetherMax = offset + maxOffset - offsetModifierValue;
-    var preventedOffset = Object(_utils_within_js__WEBPACK_IMPORTED_MODULE_4__["within"])(tether ? Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_10__["min"])(min, tetherMin) : min, offset, tether ? Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_10__["max"])(max, tetherMax) : max);
-    popperOffsets[mainAxis] = preventedOffset;
-    data[mainAxis] = preventedOffset - offset;
-  }
-
-  if (checkAltAxis) {
-    var _offsetModifierState$2;
-
-    var _mainSide = mainAxis === 'x' ? _enums_js__WEBPACK_IMPORTED_MODULE_0__["top"] : _enums_js__WEBPACK_IMPORTED_MODULE_0__["left"];
-
-    var _altSide = mainAxis === 'x' ? _enums_js__WEBPACK_IMPORTED_MODULE_0__["bottom"] : _enums_js__WEBPACK_IMPORTED_MODULE_0__["right"];
-
-    var _offset = popperOffsets[altAxis];
-
-    var _len = altAxis === 'y' ? 'height' : 'width';
-
-    var _min = _offset + overflow[_mainSide];
-
-    var _max = _offset - overflow[_altSide];
-
-    var isOriginSide = [_enums_js__WEBPACK_IMPORTED_MODULE_0__["top"], _enums_js__WEBPACK_IMPORTED_MODULE_0__["left"]].indexOf(basePlacement) !== -1;
-
-    var _offsetModifierValue = (_offsetModifierState$2 = offsetModifierState == null ? void 0 : offsetModifierState[altAxis]) != null ? _offsetModifierState$2 : 0;
-
-    var _tetherMin = isOriginSide ? _min : _offset - referenceRect[_len] - popperRect[_len] - _offsetModifierValue + normalizedTetherOffsetValue.altAxis;
-
-    var _tetherMax = isOriginSide ? _offset + referenceRect[_len] + popperRect[_len] - _offsetModifierValue - normalizedTetherOffsetValue.altAxis : _max;
-
-    var _preventedOffset = tether && isOriginSide ? Object(_utils_within_js__WEBPACK_IMPORTED_MODULE_4__["withinMaxClamp"])(_tetherMin, _offset, _tetherMax) : Object(_utils_within_js__WEBPACK_IMPORTED_MODULE_4__["within"])(tether ? _tetherMin : _min, _offset, tether ? _tetherMax : _max);
-
-    popperOffsets[altAxis] = _preventedOffset;
-    data[altAxis] = _preventedOffset - _offset;
-  }
-
-  state.modifiersData[name] = data;
-} // eslint-disable-next-line import/no-unused-modules
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'preventOverflow',
-  enabled: true,
-  phase: 'main',
-  fn: preventOverflow,
-  requiresIfExists: ['offset']
-});
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/popper-lite.js":
-/*!********************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/popper-lite.js ***!
-  \********************************************************/
-/*! exports provided: createPopper, popperGenerator, defaultModifiers, detectOverflow */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPopper", function() { return createPopper; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultModifiers", function() { return defaultModifiers; });
-/* harmony import */ var _createPopper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createPopper.js */ "./node_modules/@popperjs/core/lib/createPopper.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "popperGenerator", function() { return _createPopper_js__WEBPACK_IMPORTED_MODULE_0__["popperGenerator"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "detectOverflow", function() { return _createPopper_js__WEBPACK_IMPORTED_MODULE_0__["detectOverflow"]; });
-
-/* harmony import */ var _modifiers_eventListeners_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modifiers/eventListeners.js */ "./node_modules/@popperjs/core/lib/modifiers/eventListeners.js");
-/* harmony import */ var _modifiers_popperOffsets_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modifiers/popperOffsets.js */ "./node_modules/@popperjs/core/lib/modifiers/popperOffsets.js");
-/* harmony import */ var _modifiers_computeStyles_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modifiers/computeStyles.js */ "./node_modules/@popperjs/core/lib/modifiers/computeStyles.js");
-/* harmony import */ var _modifiers_applyStyles_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modifiers/applyStyles.js */ "./node_modules/@popperjs/core/lib/modifiers/applyStyles.js");
-
-
-
-
-
-var defaultModifiers = [_modifiers_eventListeners_js__WEBPACK_IMPORTED_MODULE_1__["default"], _modifiers_popperOffsets_js__WEBPACK_IMPORTED_MODULE_2__["default"], _modifiers_computeStyles_js__WEBPACK_IMPORTED_MODULE_3__["default"], _modifiers_applyStyles_js__WEBPACK_IMPORTED_MODULE_4__["default"]];
-var createPopper = /*#__PURE__*/Object(_createPopper_js__WEBPACK_IMPORTED_MODULE_0__["popperGenerator"])({
-  defaultModifiers: defaultModifiers
-}); // eslint-disable-next-line import/no-unused-modules
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/popper.js":
-/*!***************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/popper.js ***!
-  \***************************************************/
-/*! exports provided: createPopper, popperGenerator, defaultModifiers, detectOverflow, createPopperLite, applyStyles, arrow, computeStyles, eventListeners, flip, hide, offset, popperOffsets, preventOverflow */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPopper", function() { return createPopper; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultModifiers", function() { return defaultModifiers; });
-/* harmony import */ var _createPopper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createPopper.js */ "./node_modules/@popperjs/core/lib/createPopper.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "popperGenerator", function() { return _createPopper_js__WEBPACK_IMPORTED_MODULE_0__["popperGenerator"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "detectOverflow", function() { return _createPopper_js__WEBPACK_IMPORTED_MODULE_0__["detectOverflow"]; });
-
-/* harmony import */ var _modifiers_eventListeners_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modifiers/eventListeners.js */ "./node_modules/@popperjs/core/lib/modifiers/eventListeners.js");
-/* harmony import */ var _modifiers_popperOffsets_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modifiers/popperOffsets.js */ "./node_modules/@popperjs/core/lib/modifiers/popperOffsets.js");
-/* harmony import */ var _modifiers_computeStyles_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modifiers/computeStyles.js */ "./node_modules/@popperjs/core/lib/modifiers/computeStyles.js");
-/* harmony import */ var _modifiers_applyStyles_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modifiers/applyStyles.js */ "./node_modules/@popperjs/core/lib/modifiers/applyStyles.js");
-/* harmony import */ var _modifiers_offset_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modifiers/offset.js */ "./node_modules/@popperjs/core/lib/modifiers/offset.js");
-/* harmony import */ var _modifiers_flip_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modifiers/flip.js */ "./node_modules/@popperjs/core/lib/modifiers/flip.js");
-/* harmony import */ var _modifiers_preventOverflow_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modifiers/preventOverflow.js */ "./node_modules/@popperjs/core/lib/modifiers/preventOverflow.js");
-/* harmony import */ var _modifiers_arrow_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modifiers/arrow.js */ "./node_modules/@popperjs/core/lib/modifiers/arrow.js");
-/* harmony import */ var _modifiers_hide_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modifiers/hide.js */ "./node_modules/@popperjs/core/lib/modifiers/hide.js");
-/* harmony import */ var _popper_lite_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./popper-lite.js */ "./node_modules/@popperjs/core/lib/popper-lite.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createPopperLite", function() { return _popper_lite_js__WEBPACK_IMPORTED_MODULE_10__["createPopper"]; });
-
-/* harmony import */ var _modifiers_index_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modifiers/index.js */ "./node_modules/@popperjs/core/lib/modifiers/index.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "applyStyles", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_11__["applyStyles"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "arrow", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_11__["arrow"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "computeStyles", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_11__["computeStyles"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "eventListeners", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_11__["eventListeners"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "flip", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_11__["flip"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "hide", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_11__["hide"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "offset", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_11__["offset"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "popperOffsets", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_11__["popperOffsets"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "preventOverflow", function() { return _modifiers_index_js__WEBPACK_IMPORTED_MODULE_11__["preventOverflow"]; });
-
-
-
-
-
-
-
-
-
-
-
-var defaultModifiers = [_modifiers_eventListeners_js__WEBPACK_IMPORTED_MODULE_1__["default"], _modifiers_popperOffsets_js__WEBPACK_IMPORTED_MODULE_2__["default"], _modifiers_computeStyles_js__WEBPACK_IMPORTED_MODULE_3__["default"], _modifiers_applyStyles_js__WEBPACK_IMPORTED_MODULE_4__["default"], _modifiers_offset_js__WEBPACK_IMPORTED_MODULE_5__["default"], _modifiers_flip_js__WEBPACK_IMPORTED_MODULE_6__["default"], _modifiers_preventOverflow_js__WEBPACK_IMPORTED_MODULE_7__["default"], _modifiers_arrow_js__WEBPACK_IMPORTED_MODULE_8__["default"], _modifiers_hide_js__WEBPACK_IMPORTED_MODULE_9__["default"]];
-var createPopper = /*#__PURE__*/Object(_createPopper_js__WEBPACK_IMPORTED_MODULE_0__["popperGenerator"])({
-  defaultModifiers: defaultModifiers
-}); // eslint-disable-next-line import/no-unused-modules
-
- // eslint-disable-next-line import/no-unused-modules
-
- // eslint-disable-next-line import/no-unused-modules
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/computeAutoPlacement.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/computeAutoPlacement.js ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return computeAutoPlacement; });
-/* harmony import */ var _getVariation_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getVariation.js */ "./node_modules/@popperjs/core/lib/utils/getVariation.js");
-/* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
-/* harmony import */ var _detectOverflow_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./detectOverflow.js */ "./node_modules/@popperjs/core/lib/utils/detectOverflow.js");
-/* harmony import */ var _getBasePlacement_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getBasePlacement.js */ "./node_modules/@popperjs/core/lib/utils/getBasePlacement.js");
-
-
-
-
-function computeAutoPlacement(state, options) {
-  if (options === void 0) {
-    options = {};
-  }
-
-  var _options = options,
-      placement = _options.placement,
-      boundary = _options.boundary,
-      rootBoundary = _options.rootBoundary,
-      padding = _options.padding,
-      flipVariations = _options.flipVariations,
-      _options$allowedAutoP = _options.allowedAutoPlacements,
-      allowedAutoPlacements = _options$allowedAutoP === void 0 ? _enums_js__WEBPACK_IMPORTED_MODULE_1__["placements"] : _options$allowedAutoP;
-  var variation = Object(_getVariation_js__WEBPACK_IMPORTED_MODULE_0__["default"])(placement);
-  var placements = variation ? flipVariations ? _enums_js__WEBPACK_IMPORTED_MODULE_1__["variationPlacements"] : _enums_js__WEBPACK_IMPORTED_MODULE_1__["variationPlacements"].filter(function (placement) {
-    return Object(_getVariation_js__WEBPACK_IMPORTED_MODULE_0__["default"])(placement) === variation;
-  }) : _enums_js__WEBPACK_IMPORTED_MODULE_1__["basePlacements"];
-  var allowedPlacements = placements.filter(function (placement) {
-    return allowedAutoPlacements.indexOf(placement) >= 0;
-  });
-
-  if (allowedPlacements.length === 0) {
-    allowedPlacements = placements;
-
-    if (true) {
-      console.error(['Popper: The `allowedAutoPlacements` option did not allow any', 'placements. Ensure the `placement` option matches the variation', 'of the allowed placements.', 'For example, "auto" cannot be used to allow "bottom-start".', 'Use "auto-start" instead.'].join(' '));
-    }
-  } // $FlowFixMe[incompatible-type]: Flow seems to have problems with two array unions...
-
-
-  var overflows = allowedPlacements.reduce(function (acc, placement) {
-    acc[placement] = Object(_detectOverflow_js__WEBPACK_IMPORTED_MODULE_2__["default"])(state, {
-      placement: placement,
-      boundary: boundary,
-      rootBoundary: rootBoundary,
-      padding: padding
-    })[Object(_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_3__["default"])(placement)];
-    return acc;
-  }, {});
-  return Object.keys(overflows).sort(function (a, b) {
-    return overflows[a] - overflows[b];
-  });
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/computeOffsets.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/computeOffsets.js ***!
-  \*****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return computeOffsets; });
-/* harmony import */ var _getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getBasePlacement.js */ "./node_modules/@popperjs/core/lib/utils/getBasePlacement.js");
-/* harmony import */ var _getVariation_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getVariation.js */ "./node_modules/@popperjs/core/lib/utils/getVariation.js");
-/* harmony import */ var _getMainAxisFromPlacement_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getMainAxisFromPlacement.js */ "./node_modules/@popperjs/core/lib/utils/getMainAxisFromPlacement.js");
-/* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
-
-
-
-
-function computeOffsets(_ref) {
-  var reference = _ref.reference,
-      element = _ref.element,
-      placement = _ref.placement;
-  var basePlacement = placement ? Object(_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(placement) : null;
-  var variation = placement ? Object(_getVariation_js__WEBPACK_IMPORTED_MODULE_1__["default"])(placement) : null;
-  var commonX = reference.x + reference.width / 2 - element.width / 2;
-  var commonY = reference.y + reference.height / 2 - element.height / 2;
-  var offsets;
-
-  switch (basePlacement) {
-    case _enums_js__WEBPACK_IMPORTED_MODULE_3__["top"]:
-      offsets = {
-        x: commonX,
-        y: reference.y - element.height
-      };
-      break;
-
-    case _enums_js__WEBPACK_IMPORTED_MODULE_3__["bottom"]:
-      offsets = {
-        x: commonX,
-        y: reference.y + reference.height
-      };
-      break;
-
-    case _enums_js__WEBPACK_IMPORTED_MODULE_3__["right"]:
-      offsets = {
-        x: reference.x + reference.width,
-        y: commonY
-      };
-      break;
-
-    case _enums_js__WEBPACK_IMPORTED_MODULE_3__["left"]:
-      offsets = {
-        x: reference.x - element.width,
-        y: commonY
-      };
-      break;
-
-    default:
-      offsets = {
-        x: reference.x,
-        y: reference.y
-      };
-  }
-
-  var mainAxis = basePlacement ? Object(_getMainAxisFromPlacement_js__WEBPACK_IMPORTED_MODULE_2__["default"])(basePlacement) : null;
-
-  if (mainAxis != null) {
-    var len = mainAxis === 'y' ? 'height' : 'width';
-
-    switch (variation) {
-      case _enums_js__WEBPACK_IMPORTED_MODULE_3__["start"]:
-        offsets[mainAxis] = offsets[mainAxis] - (reference[len] / 2 - element[len] / 2);
-        break;
-
-      case _enums_js__WEBPACK_IMPORTED_MODULE_3__["end"]:
-        offsets[mainAxis] = offsets[mainAxis] + (reference[len] / 2 - element[len] / 2);
-        break;
-
-      default:
-    }
-  }
-
-  return offsets;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/debounce.js":
-/*!***********************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/debounce.js ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return debounce; });
-function debounce(fn) {
-  var pending;
-  return function () {
-    if (!pending) {
-      pending = new Promise(function (resolve) {
-        Promise.resolve().then(function () {
-          pending = undefined;
-          resolve(fn());
+        cropper = new cropperjs__WEBPACK_IMPORTED_MODULE_0___default.a(canvas, {
+          aspectRatio: crop_aspect_ratio,
+          data: {
+            width: canvas.width,
+            height: canvas.width * crop_aspect_ratio
+          },
+          crop: function crop(event) {
+            document.getElementById("image_x").value = event.detail.x;
+            document.getElementById("image_y").value = event.detail.y;
+            document.getElementById("image_w").value = event.detail.width;
+            document.getElementById("image_h").value = event.detail.height;
+          }
         });
-      });
-    }
-
-    return pending;
+        $('#close_button,#modal_back_area').click(function () {
+          var cropped_canvas = document.getElementById("cropped_canvas");
+          var ctx = cropped_canvas.getContext("2d");
+          var cropped_image_width = image.height * crop_aspect_ratio;
+          cropped_canvas.width = cropped_image_width * scale;
+          cropped_canvas.height = image.height * scale;
+          var image_x = document.getElementById("image_x").value;
+          var image_y = document.getElementById("image_y").value;
+          var image_w = document.getElementById("image_w").value;
+          var image_h = document.getElementById("image_h").value;
+          ctx.drawImage(image, image_x / scale, image_y / scale, image_w / scale, image_h / scale, 0, 0, cropped_canvas.width, cropped_canvas.height);
+          document.getElementById("image_text").innerHTML = "選択した画像";
+          $('#user_icon').fadeOut();
+          document.getElementById("image").value = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+          var base64 = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+          var result = document.getElementById('result-img');
+          result.style.display = '';
+          result.src = base64;
+        });
+      };
+    };
   };
-}
+
+  var uploader = document.getElementById('trim_img_uploder');
+  uploader.addEventListener('change', crop_image);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery/src/jquery */ "./node_modules/jquery/src/jquery.js")))
 
 /***/ }),
 
-/***/ "./node_modules/@popperjs/core/lib/utils/detectOverflow.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/detectOverflow.js ***!
-  \*****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return detectOverflow; });
-/* harmony import */ var _dom_utils_getClippingRect_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../dom-utils/getClippingRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getClippingRect.js");
-/* harmony import */ var _dom_utils_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dom-utils/getDocumentElement.js */ "./node_modules/@popperjs/core/lib/dom-utils/getDocumentElement.js");
-/* harmony import */ var _dom_utils_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../dom-utils/getBoundingClientRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getBoundingClientRect.js");
-/* harmony import */ var _computeOffsets_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./computeOffsets.js */ "./node_modules/@popperjs/core/lib/utils/computeOffsets.js");
-/* harmony import */ var _rectToClientRect_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./rectToClientRect.js */ "./node_modules/@popperjs/core/lib/utils/rectToClientRect.js");
-/* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
-/* harmony import */ var _dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../dom-utils/instanceOf.js */ "./node_modules/@popperjs/core/lib/dom-utils/instanceOf.js");
-/* harmony import */ var _mergePaddingObject_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./mergePaddingObject.js */ "./node_modules/@popperjs/core/lib/utils/mergePaddingObject.js");
-/* harmony import */ var _expandToHashMap_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./expandToHashMap.js */ "./node_modules/@popperjs/core/lib/utils/expandToHashMap.js");
-
-
-
-
-
-
-
-
- // eslint-disable-next-line import/no-unused-modules
-
-function detectOverflow(state, options) {
-  if (options === void 0) {
-    options = {};
-  }
-
-  var _options = options,
-      _options$placement = _options.placement,
-      placement = _options$placement === void 0 ? state.placement : _options$placement,
-      _options$boundary = _options.boundary,
-      boundary = _options$boundary === void 0 ? _enums_js__WEBPACK_IMPORTED_MODULE_5__["clippingParents"] : _options$boundary,
-      _options$rootBoundary = _options.rootBoundary,
-      rootBoundary = _options$rootBoundary === void 0 ? _enums_js__WEBPACK_IMPORTED_MODULE_5__["viewport"] : _options$rootBoundary,
-      _options$elementConte = _options.elementContext,
-      elementContext = _options$elementConte === void 0 ? _enums_js__WEBPACK_IMPORTED_MODULE_5__["popper"] : _options$elementConte,
-      _options$altBoundary = _options.altBoundary,
-      altBoundary = _options$altBoundary === void 0 ? false : _options$altBoundary,
-      _options$padding = _options.padding,
-      padding = _options$padding === void 0 ? 0 : _options$padding;
-  var paddingObject = Object(_mergePaddingObject_js__WEBPACK_IMPORTED_MODULE_7__["default"])(typeof padding !== 'number' ? padding : Object(_expandToHashMap_js__WEBPACK_IMPORTED_MODULE_8__["default"])(padding, _enums_js__WEBPACK_IMPORTED_MODULE_5__["basePlacements"]));
-  var altContext = elementContext === _enums_js__WEBPACK_IMPORTED_MODULE_5__["popper"] ? _enums_js__WEBPACK_IMPORTED_MODULE_5__["reference"] : _enums_js__WEBPACK_IMPORTED_MODULE_5__["popper"];
-  var popperRect = state.rects.popper;
-  var element = state.elements[altBoundary ? altContext : elementContext];
-  var clippingClientRect = Object(_dom_utils_getClippingRect_js__WEBPACK_IMPORTED_MODULE_0__["default"])(Object(_dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_6__["isElement"])(element) ? element : element.contextElement || Object(_dom_utils_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(state.elements.popper), boundary, rootBoundary);
-  var referenceClientRect = Object(_dom_utils_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_2__["default"])(state.elements.reference);
-  var popperOffsets = Object(_computeOffsets_js__WEBPACK_IMPORTED_MODULE_3__["default"])({
-    reference: referenceClientRect,
-    element: popperRect,
-    strategy: 'absolute',
-    placement: placement
-  });
-  var popperClientRect = Object(_rectToClientRect_js__WEBPACK_IMPORTED_MODULE_4__["default"])(Object.assign({}, popperRect, popperOffsets));
-  var elementClientRect = elementContext === _enums_js__WEBPACK_IMPORTED_MODULE_5__["popper"] ? popperClientRect : referenceClientRect; // positive = overflowing the clipping rect
-  // 0 or negative = within the clipping rect
-
-  var overflowOffsets = {
-    top: clippingClientRect.top - elementClientRect.top + paddingObject.top,
-    bottom: elementClientRect.bottom - clippingClientRect.bottom + paddingObject.bottom,
-    left: clippingClientRect.left - elementClientRect.left + paddingObject.left,
-    right: elementClientRect.right - clippingClientRect.right + paddingObject.right
-  };
-  var offsetData = state.modifiersData.offset; // Offsets can be applied only to the popper element
-
-  if (elementContext === _enums_js__WEBPACK_IMPORTED_MODULE_5__["popper"] && offsetData) {
-    var offset = offsetData[placement];
-    Object.keys(overflowOffsets).forEach(function (key) {
-      var multiply = [_enums_js__WEBPACK_IMPORTED_MODULE_5__["right"], _enums_js__WEBPACK_IMPORTED_MODULE_5__["bottom"]].indexOf(key) >= 0 ? 1 : -1;
-      var axis = [_enums_js__WEBPACK_IMPORTED_MODULE_5__["top"], _enums_js__WEBPACK_IMPORTED_MODULE_5__["bottom"]].indexOf(key) >= 0 ? 'y' : 'x';
-      overflowOffsets[key] += offset[axis] * multiply;
-    });
-  }
-
-  return overflowOffsets;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/expandToHashMap.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/expandToHashMap.js ***!
-  \******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return expandToHashMap; });
-function expandToHashMap(value, keys) {
-  return keys.reduce(function (hashMap, key) {
-    hashMap[key] = value;
-    return hashMap;
-  }, {});
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/format.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/format.js ***!
-  \*********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return format; });
-function format(str) {
-  for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    args[_key - 1] = arguments[_key];
-  }
-
-  return [].concat(args).reduce(function (p, c) {
-    return p.replace(/%s/, c);
-  }, str);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/getAltAxis.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/getAltAxis.js ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getAltAxis; });
-function getAltAxis(axis) {
-  return axis === 'x' ? 'y' : 'x';
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/getBasePlacement.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/getBasePlacement.js ***!
-  \*******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getBasePlacement; });
-/* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
-
-function getBasePlacement(placement) {
-  return placement.split('-')[0];
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/getFreshSideObject.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/getFreshSideObject.js ***!
-  \*********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getFreshSideObject; });
-function getFreshSideObject() {
-  return {
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0
-  };
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/getMainAxisFromPlacement.js":
-/*!***************************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/getMainAxisFromPlacement.js ***!
-  \***************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getMainAxisFromPlacement; });
-function getMainAxisFromPlacement(placement) {
-  return ['top', 'bottom'].indexOf(placement) >= 0 ? 'x' : 'y';
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/getOppositePlacement.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/getOppositePlacement.js ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getOppositePlacement; });
-var hash = {
-  left: 'right',
-  right: 'left',
-  bottom: 'top',
-  top: 'bottom'
-};
-function getOppositePlacement(placement) {
-  return placement.replace(/left|right|bottom|top/g, function (matched) {
-    return hash[matched];
-  });
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/getOppositeVariationPlacement.js":
-/*!********************************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/getOppositeVariationPlacement.js ***!
-  \********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getOppositeVariationPlacement; });
-var hash = {
-  start: 'end',
-  end: 'start'
-};
-function getOppositeVariationPlacement(placement) {
-  return placement.replace(/start|end/g, function (matched) {
-    return hash[matched];
-  });
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/getVariation.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/getVariation.js ***!
-  \***************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getVariation; });
-function getVariation(placement) {
-  return placement.split('-')[1];
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/math.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/math.js ***!
-  \*******************************************************/
-/*! exports provided: max, min, round */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "max", function() { return max; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "min", function() { return min; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "round", function() { return round; });
-var max = Math.max;
-var min = Math.min;
-var round = Math.round;
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/mergeByName.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/mergeByName.js ***!
-  \**************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return mergeByName; });
-function mergeByName(modifiers) {
-  var merged = modifiers.reduce(function (merged, current) {
-    var existing = merged[current.name];
-    merged[current.name] = existing ? Object.assign({}, existing, current, {
-      options: Object.assign({}, existing.options, current.options),
-      data: Object.assign({}, existing.data, current.data)
-    }) : current;
-    return merged;
-  }, {}); // IE11 does not support Object.values
-
-  return Object.keys(merged).map(function (key) {
-    return merged[key];
-  });
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/mergePaddingObject.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/mergePaddingObject.js ***!
-  \*********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return mergePaddingObject; });
-/* harmony import */ var _getFreshSideObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getFreshSideObject.js */ "./node_modules/@popperjs/core/lib/utils/getFreshSideObject.js");
-
-function mergePaddingObject(paddingObject) {
-  return Object.assign({}, Object(_getFreshSideObject_js__WEBPACK_IMPORTED_MODULE_0__["default"])(), paddingObject);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/orderModifiers.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/orderModifiers.js ***!
-  \*****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return orderModifiers; });
-/* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
- // source: https://stackoverflow.com/questions/49875255
-
-function order(modifiers) {
-  var map = new Map();
-  var visited = new Set();
-  var result = [];
-  modifiers.forEach(function (modifier) {
-    map.set(modifier.name, modifier);
-  }); // On visiting object, check for its dependencies and visit them recursively
-
-  function sort(modifier) {
-    visited.add(modifier.name);
-    var requires = [].concat(modifier.requires || [], modifier.requiresIfExists || []);
-    requires.forEach(function (dep) {
-      if (!visited.has(dep)) {
-        var depModifier = map.get(dep);
-
-        if (depModifier) {
-          sort(depModifier);
-        }
-      }
-    });
-    result.push(modifier);
-  }
-
-  modifiers.forEach(function (modifier) {
-    if (!visited.has(modifier.name)) {
-      // check for visited object
-      sort(modifier);
-    }
-  });
-  return result;
-}
-
-function orderModifiers(modifiers) {
-  // order based on dependencies
-  var orderedModifiers = order(modifiers); // order based on phase
-
-  return _enums_js__WEBPACK_IMPORTED_MODULE_0__["modifierPhases"].reduce(function (acc, phase) {
-    return acc.concat(orderedModifiers.filter(function (modifier) {
-      return modifier.phase === phase;
-    }));
-  }, []);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/rectToClientRect.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/rectToClientRect.js ***!
-  \*******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return rectToClientRect; });
-function rectToClientRect(rect) {
-  return Object.assign({}, rect, {
-    left: rect.x,
-    top: rect.y,
-    right: rect.x + rect.width,
-    bottom: rect.y + rect.height
-  });
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/uniqueBy.js":
-/*!***********************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/uniqueBy.js ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return uniqueBy; });
-function uniqueBy(arr, fn) {
-  var identifiers = new Set();
-  return arr.filter(function (item) {
-    var identifier = fn(item);
-
-    if (!identifiers.has(identifier)) {
-      identifiers.add(identifier);
-      return true;
-    }
-  });
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/validateModifiers.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/validateModifiers.js ***!
-  \********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return validateModifiers; });
-/* harmony import */ var _format_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./format.js */ "./node_modules/@popperjs/core/lib/utils/format.js");
-/* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
-
-
-var INVALID_MODIFIER_ERROR = 'Popper: modifier "%s" provided an invalid %s property, expected %s but got %s';
-var MISSING_DEPENDENCY_ERROR = 'Popper: modifier "%s" requires "%s", but "%s" modifier is not available';
-var VALID_PROPERTIES = ['name', 'enabled', 'phase', 'fn', 'effect', 'requires', 'options'];
-function validateModifiers(modifiers) {
-  modifiers.forEach(function (modifier) {
-    [].concat(Object.keys(modifier), VALID_PROPERTIES) // IE11-compatible replacement for `new Set(iterable)`
-    .filter(function (value, index, self) {
-      return self.indexOf(value) === index;
-    }).forEach(function (key) {
-      switch (key) {
-        case 'name':
-          if (typeof modifier.name !== 'string') {
-            console.error(Object(_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(INVALID_MODIFIER_ERROR, String(modifier.name), '"name"', '"string"', "\"" + String(modifier.name) + "\""));
-          }
-
-          break;
-
-        case 'enabled':
-          if (typeof modifier.enabled !== 'boolean') {
-            console.error(Object(_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(INVALID_MODIFIER_ERROR, modifier.name, '"enabled"', '"boolean"', "\"" + String(modifier.enabled) + "\""));
-          }
-
-          break;
-
-        case 'phase':
-          if (_enums_js__WEBPACK_IMPORTED_MODULE_1__["modifierPhases"].indexOf(modifier.phase) < 0) {
-            console.error(Object(_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(INVALID_MODIFIER_ERROR, modifier.name, '"phase"', "either " + _enums_js__WEBPACK_IMPORTED_MODULE_1__["modifierPhases"].join(', '), "\"" + String(modifier.phase) + "\""));
-          }
-
-          break;
-
-        case 'fn':
-          if (typeof modifier.fn !== 'function') {
-            console.error(Object(_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(INVALID_MODIFIER_ERROR, modifier.name, '"fn"', '"function"', "\"" + String(modifier.fn) + "\""));
-          }
-
-          break;
-
-        case 'effect':
-          if (modifier.effect != null && typeof modifier.effect !== 'function') {
-            console.error(Object(_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(INVALID_MODIFIER_ERROR, modifier.name, '"effect"', '"function"', "\"" + String(modifier.fn) + "\""));
-          }
-
-          break;
-
-        case 'requires':
-          if (modifier.requires != null && !Array.isArray(modifier.requires)) {
-            console.error(Object(_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(INVALID_MODIFIER_ERROR, modifier.name, '"requires"', '"array"', "\"" + String(modifier.requires) + "\""));
-          }
-
-          break;
-
-        case 'requiresIfExists':
-          if (!Array.isArray(modifier.requiresIfExists)) {
-            console.error(Object(_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(INVALID_MODIFIER_ERROR, modifier.name, '"requiresIfExists"', '"array"', "\"" + String(modifier.requiresIfExists) + "\""));
-          }
-
-          break;
-
-        case 'options':
-        case 'data':
-          break;
-
-        default:
-          console.error("PopperJS: an invalid property has been provided to the \"" + modifier.name + "\" modifier, valid properties are " + VALID_PROPERTIES.map(function (s) {
-            return "\"" + s + "\"";
-          }).join(', ') + "; but \"" + key + "\" was provided.");
-      }
-
-      modifier.requires && modifier.requires.forEach(function (requirement) {
-        if (modifiers.find(function (mod) {
-          return mod.name === requirement;
-        }) == null) {
-          console.error(Object(_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(MISSING_DEPENDENCY_ERROR, String(modifier.name), requirement, requirement));
-        }
-      });
-    });
-  });
-}
-
-/***/ }),
-
-/***/ "./node_modules/@popperjs/core/lib/utils/within.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/@popperjs/core/lib/utils/within.js ***!
-  \*********************************************************/
-/*! exports provided: within, withinMaxClamp */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "within", function() { return within; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withinMaxClamp", function() { return withinMaxClamp; });
-/* harmony import */ var _math_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math.js */ "./node_modules/@popperjs/core/lib/utils/math.js");
-
-function within(min, value, max) {
-  return Object(_math_js__WEBPACK_IMPORTED_MODULE_0__["max"])(min, Object(_math_js__WEBPACK_IMPORTED_MODULE_0__["min"])(value, max));
-}
-function withinMaxClamp(min, value, max) {
-  var v = within(min, value, max);
-  return v > max ? max : v;
-}
-
-/***/ }),
-
-/***/ "./node_modules/bootstrap/dist/js/bootstrap.esm.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/bootstrap/dist/js/bootstrap.esm.js ***!
-  \*********************************************************/
-/*! exports provided: Alert, Button, Carousel, Collapse, Dropdown, Modal, Offcanvas, Popover, ScrollSpy, Tab, Toast, Tooltip */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Alert", function() { return Alert; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Button", function() { return Button; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Carousel", function() { return Carousel; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Collapse", function() { return Collapse; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Dropdown", function() { return Dropdown; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Modal", function() { return Modal; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Offcanvas", function() { return Offcanvas; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Popover", function() { return Popover; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ScrollSpy", function() { return ScrollSpy; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tab", function() { return Tab; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Toast", function() { return Toast; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tooltip", function() { return Tooltip; });
-/* harmony import */ var _popperjs_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @popperjs/core */ "./node_modules/@popperjs/core/lib/index.js");
-var _KEY_TO_DIRECTION;
-
-function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+/***/ "./node_modules/cropperjs/dist/cropper.js":
+/*!************************************************!*\
+  !*** ./node_modules/cropperjs/dist/cropper.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof2(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
 
 /*!
-  * Bootstrap v5.1.3 (https://getbootstrap.com/)
-  * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-  */
-
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): util/index.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-var MAX_UID = 1000000;
-var MILLISECONDS_MULTIPLIER = 1000;
-var TRANSITION_END = 'transitionend'; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
-
-var toType = function toType(obj) {
-  if (obj === null || obj === undefined) {
-    return "".concat(obj);
-  }
-
-  return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase();
-};
-/**
- * --------------------------------------------------------------------------
- * Public Util Api
- * --------------------------------------------------------------------------
- */
-
-
-var getUID = function getUID(prefix) {
-  do {
-    prefix += Math.floor(Math.random() * MAX_UID);
-  } while (document.getElementById(prefix));
-
-  return prefix;
-};
-
-var getSelector = function getSelector(element) {
-  var selector = element.getAttribute('data-bs-target');
-
-  if (!selector || selector === '#') {
-    var hrefAttr = element.getAttribute('href'); // The only valid content that could double as a selector are IDs or classes,
-    // so everything starting with `#` or `.`. If a "real" URL is used as the selector,
-    // `document.querySelector` will rightfully complain it is invalid.
-    // See https://github.com/twbs/bootstrap/issues/32273
-
-    if (!hrefAttr || !hrefAttr.includes('#') && !hrefAttr.startsWith('.')) {
-      return null;
-    } // Just in case some CMS puts out a full URL with the anchor appended
-
-
-    if (hrefAttr.includes('#') && !hrefAttr.startsWith('#')) {
-      hrefAttr = "#".concat(hrefAttr.split('#')[1]);
-    }
-
-    selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : null;
-  }
-
-  return selector;
-};
-
-var getSelectorFromElement = function getSelectorFromElement(element) {
-  var selector = getSelector(element);
-
-  if (selector) {
-    return document.querySelector(selector) ? selector : null;
-  }
-
-  return null;
-};
-
-var getElementFromSelector = function getElementFromSelector(element) {
-  var selector = getSelector(element);
-  return selector ? document.querySelector(selector) : null;
-};
-
-var getTransitionDurationFromElement = function getTransitionDurationFromElement(element) {
-  if (!element) {
-    return 0;
-  } // Get transition-duration of the element
-
-
-  var _window$getComputedSt = window.getComputedStyle(element),
-      transitionDuration = _window$getComputedSt.transitionDuration,
-      transitionDelay = _window$getComputedSt.transitionDelay;
-
-  var floatTransitionDuration = Number.parseFloat(transitionDuration);
-  var floatTransitionDelay = Number.parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
-
-  if (!floatTransitionDuration && !floatTransitionDelay) {
-    return 0;
-  } // If multiple durations are defined, take the first
-
-
-  transitionDuration = transitionDuration.split(',')[0];
-  transitionDelay = transitionDelay.split(',')[0];
-  return (Number.parseFloat(transitionDuration) + Number.parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
-};
-
-var triggerTransitionEnd = function triggerTransitionEnd(element) {
-  element.dispatchEvent(new Event(TRANSITION_END));
-};
-
-var isElement = function isElement(obj) {
-  if (!obj || _typeof(obj) !== 'object') {
-    return false;
-  }
-
-  if (typeof obj.jquery !== 'undefined') {
-    obj = obj[0];
-  }
-
-  return typeof obj.nodeType !== 'undefined';
-};
-
-var getElement = function getElement(obj) {
-  if (isElement(obj)) {
-    // it's a jQuery object or a node element
-    return obj.jquery ? obj[0] : obj;
-  }
-
-  if (typeof obj === 'string' && obj.length > 0) {
-    return document.querySelector(obj);
-  }
-
-  return null;
-};
-
-var typeCheckConfig = function typeCheckConfig(componentName, config, configTypes) {
-  Object.keys(configTypes).forEach(function (property) {
-    var expectedTypes = configTypes[property];
-    var value = config[property];
-    var valueType = value && isElement(value) ? 'element' : toType(value);
-
-    if (!new RegExp(expectedTypes).test(valueType)) {
-      throw new TypeError("".concat(componentName.toUpperCase(), ": Option \"").concat(property, "\" provided type \"").concat(valueType, "\" but expected type \"").concat(expectedTypes, "\"."));
-    }
-  });
-};
-
-var isVisible = function isVisible(element) {
-  if (!isElement(element) || element.getClientRects().length === 0) {
-    return false;
-  }
-
-  return getComputedStyle(element).getPropertyValue('visibility') === 'visible';
-};
-
-var isDisabled = function isDisabled(element) {
-  if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-    return true;
-  }
-
-  if (element.classList.contains('disabled')) {
-    return true;
-  }
-
-  if (typeof element.disabled !== 'undefined') {
-    return element.disabled;
-  }
-
-  return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
-};
-
-var findShadowRoot = function findShadowRoot(element) {
-  if (!document.documentElement.attachShadow) {
-    return null;
-  } // Can find the shadow root otherwise it'll return the document
-
-
-  if (typeof element.getRootNode === 'function') {
-    var root = element.getRootNode();
-    return root instanceof ShadowRoot ? root : null;
-  }
-
-  if (element instanceof ShadowRoot) {
-    return element;
-  } // when we don't find a shadow root
-
-
-  if (!element.parentNode) {
-    return null;
-  }
-
-  return findShadowRoot(element.parentNode);
-};
-
-var noop = function noop() {};
-/**
- * Trick to restart an element's animation
+ * Cropper.js v1.5.12
+ * https://fengyuanchen.github.io/cropperjs
  *
- * @param {HTMLElement} element
- * @return void
+ * Copyright 2015-present Chen Fengyuan
+ * Released under the MIT license
  *
- * @see https://www.charistheo.io/blog/2021/02/restart-a-css-animation-with-javascript/#restarting-a-css-animation
+ * Date: 2021-06-12T08:00:17.411Z
  */
+(function (global, factory) {
+  ( false ? undefined : _typeof2(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = factory() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : (undefined);
+})(this, function () {
+  'use strict';
 
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
 
-var reflow = function reflow(element) {
-  // eslint-disable-next-line no-unused-expressions
-  element.offsetHeight;
-};
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
 
-var getjQuery = function getjQuery() {
-  var _window = window,
-      jQuery = __webpack_provided_window_dot_jQuery;
-
-  if (jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
-    return jQuery;
-  }
-
-  return null;
-};
-
-var DOMContentLoadedCallbacks = [];
-
-var onDOMContentLoaded = function onDOMContentLoaded(callback) {
-  if (document.readyState === 'loading') {
-    // add listener on the first call when the document is in loading state
-    if (!DOMContentLoadedCallbacks.length) {
-      document.addEventListener('DOMContentLoaded', function () {
-        DOMContentLoadedCallbacks.forEach(function (callback) {
-          return callback();
+      if (enumerableOnly) {
+        symbols = symbols.filter(function (sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
         });
+      }
+
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+
+    return target;
+  }
+
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      _typeof = function _typeof(obj) {
+        return typeof obj;
+      };
+    } else {
+      _typeof = function _typeof(obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+    }
+
+    return _typeof(obj);
+  }
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  function _defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+  }
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+  }
+
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+  }
+
+  function _iterableToArray(iter) {
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  var IS_BROWSER = typeof window !== 'undefined' && typeof window.document !== 'undefined';
+  var WINDOW = IS_BROWSER ? window : {};
+  var IS_TOUCH_DEVICE = IS_BROWSER && WINDOW.document.documentElement ? 'ontouchstart' in WINDOW.document.documentElement : false;
+  var HAS_POINTER_EVENT = IS_BROWSER ? 'PointerEvent' in WINDOW : false;
+  var NAMESPACE = 'cropper'; // Actions
+
+  var ACTION_ALL = 'all';
+  var ACTION_CROP = 'crop';
+  var ACTION_MOVE = 'move';
+  var ACTION_ZOOM = 'zoom';
+  var ACTION_EAST = 'e';
+  var ACTION_WEST = 'w';
+  var ACTION_SOUTH = 's';
+  var ACTION_NORTH = 'n';
+  var ACTION_NORTH_EAST = 'ne';
+  var ACTION_NORTH_WEST = 'nw';
+  var ACTION_SOUTH_EAST = 'se';
+  var ACTION_SOUTH_WEST = 'sw'; // Classes
+
+  var CLASS_CROP = "".concat(NAMESPACE, "-crop");
+  var CLASS_DISABLED = "".concat(NAMESPACE, "-disabled");
+  var CLASS_HIDDEN = "".concat(NAMESPACE, "-hidden");
+  var CLASS_HIDE = "".concat(NAMESPACE, "-hide");
+  var CLASS_INVISIBLE = "".concat(NAMESPACE, "-invisible");
+  var CLASS_MODAL = "".concat(NAMESPACE, "-modal");
+  var CLASS_MOVE = "".concat(NAMESPACE, "-move"); // Data keys
+
+  var DATA_ACTION = "".concat(NAMESPACE, "Action");
+  var DATA_PREVIEW = "".concat(NAMESPACE, "Preview"); // Drag modes
+
+  var DRAG_MODE_CROP = 'crop';
+  var DRAG_MODE_MOVE = 'move';
+  var DRAG_MODE_NONE = 'none'; // Events
+
+  var EVENT_CROP = 'crop';
+  var EVENT_CROP_END = 'cropend';
+  var EVENT_CROP_MOVE = 'cropmove';
+  var EVENT_CROP_START = 'cropstart';
+  var EVENT_DBLCLICK = 'dblclick';
+  var EVENT_TOUCH_START = IS_TOUCH_DEVICE ? 'touchstart' : 'mousedown';
+  var EVENT_TOUCH_MOVE = IS_TOUCH_DEVICE ? 'touchmove' : 'mousemove';
+  var EVENT_TOUCH_END = IS_TOUCH_DEVICE ? 'touchend touchcancel' : 'mouseup';
+  var EVENT_POINTER_DOWN = HAS_POINTER_EVENT ? 'pointerdown' : EVENT_TOUCH_START;
+  var EVENT_POINTER_MOVE = HAS_POINTER_EVENT ? 'pointermove' : EVENT_TOUCH_MOVE;
+  var EVENT_POINTER_UP = HAS_POINTER_EVENT ? 'pointerup pointercancel' : EVENT_TOUCH_END;
+  var EVENT_READY = 'ready';
+  var EVENT_RESIZE = 'resize';
+  var EVENT_WHEEL = 'wheel';
+  var EVENT_ZOOM = 'zoom'; // Mime types
+
+  var MIME_TYPE_JPEG = 'image/jpeg'; // RegExps
+
+  var REGEXP_ACTIONS = /^e|w|s|n|se|sw|ne|nw|all|crop|move|zoom$/;
+  var REGEXP_DATA_URL = /^data:/;
+  var REGEXP_DATA_URL_JPEG = /^data:image\/jpeg;base64,/;
+  var REGEXP_TAG_NAME = /^img|canvas$/i; // Misc
+  // Inspired by the default width and height of a canvas element.
+
+  var MIN_CONTAINER_WIDTH = 200;
+  var MIN_CONTAINER_HEIGHT = 100;
+  var DEFAULTS = {
+    // Define the view mode of the cropper
+    viewMode: 0,
+    // 0, 1, 2, 3
+    // Define the dragging mode of the cropper
+    dragMode: DRAG_MODE_CROP,
+    // 'crop', 'move' or 'none'
+    // Define the initial aspect ratio of the crop box
+    initialAspectRatio: NaN,
+    // Define the aspect ratio of the crop box
+    aspectRatio: NaN,
+    // An object with the previous cropping result data
+    data: null,
+    // A selector for adding extra containers to preview
+    preview: '',
+    // Re-render the cropper when resize the window
+    responsive: true,
+    // Restore the cropped area after resize the window
+    restore: true,
+    // Check if the current image is a cross-origin image
+    checkCrossOrigin: true,
+    // Check the current image's Exif Orientation information
+    checkOrientation: true,
+    // Show the black modal
+    modal: true,
+    // Show the dashed lines for guiding
+    guides: true,
+    // Show the center indicator for guiding
+    center: true,
+    // Show the white modal to highlight the crop box
+    highlight: true,
+    // Show the grid background
+    background: true,
+    // Enable to crop the image automatically when initialize
+    autoCrop: true,
+    // Define the percentage of automatic cropping area when initializes
+    autoCropArea: 0.8,
+    // Enable to move the image
+    movable: true,
+    // Enable to rotate the image
+    rotatable: true,
+    // Enable to scale the image
+    scalable: true,
+    // Enable to zoom the image
+    zoomable: true,
+    // Enable to zoom the image by dragging touch
+    zoomOnTouch: true,
+    // Enable to zoom the image by wheeling mouse
+    zoomOnWheel: true,
+    // Define zoom ratio when zoom the image by wheeling mouse
+    wheelZoomRatio: 0.1,
+    // Enable to move the crop box
+    cropBoxMovable: true,
+    // Enable to resize the crop box
+    cropBoxResizable: true,
+    // Toggle drag mode between "crop" and "move" when click twice on the cropper
+    toggleDragModeOnDblclick: true,
+    // Size limitation
+    minCanvasWidth: 0,
+    minCanvasHeight: 0,
+    minCropBoxWidth: 0,
+    minCropBoxHeight: 0,
+    minContainerWidth: MIN_CONTAINER_WIDTH,
+    minContainerHeight: MIN_CONTAINER_HEIGHT,
+    // Shortcuts of events
+    ready: null,
+    cropstart: null,
+    cropmove: null,
+    cropend: null,
+    crop: null,
+    zoom: null
+  };
+  var TEMPLATE = '<div class="cropper-container" touch-action="none">' + '<div class="cropper-wrap-box">' + '<div class="cropper-canvas"></div>' + '</div>' + '<div class="cropper-drag-box"></div>' + '<div class="cropper-crop-box">' + '<span class="cropper-view-box"></span>' + '<span class="cropper-dashed dashed-h"></span>' + '<span class="cropper-dashed dashed-v"></span>' + '<span class="cropper-center"></span>' + '<span class="cropper-face"></span>' + '<span class="cropper-line line-e" data-cropper-action="e"></span>' + '<span class="cropper-line line-n" data-cropper-action="n"></span>' + '<span class="cropper-line line-w" data-cropper-action="w"></span>' + '<span class="cropper-line line-s" data-cropper-action="s"></span>' + '<span class="cropper-point point-e" data-cropper-action="e"></span>' + '<span class="cropper-point point-n" data-cropper-action="n"></span>' + '<span class="cropper-point point-w" data-cropper-action="w"></span>' + '<span class="cropper-point point-s" data-cropper-action="s"></span>' + '<span class="cropper-point point-ne" data-cropper-action="ne"></span>' + '<span class="cropper-point point-nw" data-cropper-action="nw"></span>' + '<span class="cropper-point point-sw" data-cropper-action="sw"></span>' + '<span class="cropper-point point-se" data-cropper-action="se"></span>' + '</div>' + '</div>';
+  /**
+   * Check if the given value is not a number.
+   */
+
+  var isNaN = Number.isNaN || WINDOW.isNaN;
+  /**
+   * Check if the given value is a number.
+   * @param {*} value - The value to check.
+   * @returns {boolean} Returns `true` if the given value is a number, else `false`.
+   */
+
+  function isNumber(value) {
+    return typeof value === 'number' && !isNaN(value);
+  }
+  /**
+   * Check if the given value is a positive number.
+   * @param {*} value - The value to check.
+   * @returns {boolean} Returns `true` if the given value is a positive number, else `false`.
+   */
+
+
+  var isPositiveNumber = function isPositiveNumber(value) {
+    return value > 0 && value < Infinity;
+  };
+  /**
+   * Check if the given value is undefined.
+   * @param {*} value - The value to check.
+   * @returns {boolean} Returns `true` if the given value is undefined, else `false`.
+   */
+
+
+  function isUndefined(value) {
+    return typeof value === 'undefined';
+  }
+  /**
+   * Check if the given value is an object.
+   * @param {*} value - The value to check.
+   * @returns {boolean} Returns `true` if the given value is an object, else `false`.
+   */
+
+
+  function isObject(value) {
+    return _typeof(value) === 'object' && value !== null;
+  }
+
+  var hasOwnProperty = Object.prototype.hasOwnProperty;
+  /**
+   * Check if the given value is a plain object.
+   * @param {*} value - The value to check.
+   * @returns {boolean} Returns `true` if the given value is a plain object, else `false`.
+   */
+
+  function isPlainObject(value) {
+    if (!isObject(value)) {
+      return false;
+    }
+
+    try {
+      var _constructor = value.constructor;
+      var prototype = _constructor.prototype;
+      return _constructor && prototype && hasOwnProperty.call(prototype, 'isPrototypeOf');
+    } catch (error) {
+      return false;
+    }
+  }
+  /**
+   * Check if the given value is a function.
+   * @param {*} value - The value to check.
+   * @returns {boolean} Returns `true` if the given value is a function, else `false`.
+   */
+
+
+  function isFunction(value) {
+    return typeof value === 'function';
+  }
+
+  var slice = Array.prototype.slice;
+  /**
+   * Convert array-like or iterable object to an array.
+   * @param {*} value - The value to convert.
+   * @returns {Array} Returns a new array.
+   */
+
+  function toArray(value) {
+    return Array.from ? Array.from(value) : slice.call(value);
+  }
+  /**
+   * Iterate the given data.
+   * @param {*} data - The data to iterate.
+   * @param {Function} callback - The process function for each element.
+   * @returns {*} The original data.
+   */
+
+
+  function forEach(data, callback) {
+    if (data && isFunction(callback)) {
+      if (Array.isArray(data) || isNumber(data.length)
+      /* array-like */
+      ) {
+        toArray(data).forEach(function (value, key) {
+          callback.call(data, value, key, data);
+        });
+      } else if (isObject(data)) {
+        Object.keys(data).forEach(function (key) {
+          callback.call(data, data[key], key, data);
+        });
+      }
+    }
+
+    return data;
+  }
+  /**
+   * Extend the given object.
+   * @param {*} target - The target object to extend.
+   * @param {*} args - The rest objects for merging to the target object.
+   * @returns {Object} The extended object.
+   */
+
+
+  var assign = Object.assign || function assign(target) {
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    if (isObject(target) && args.length > 0) {
+      args.forEach(function (arg) {
+        if (isObject(arg)) {
+          Object.keys(arg).forEach(function (key) {
+            target[key] = arg[key];
+          });
+        }
       });
     }
 
-    DOMContentLoadedCallbacks.push(callback);
-  } else {
-    callback();
-  }
-};
+    return target;
+  };
 
-var isRTL = function isRTL() {
-  return document.documentElement.dir === 'rtl';
-};
+  var REGEXP_DECIMALS = /\.\d*(?:0|9){12}\d*$/;
+  /**
+   * Normalize decimal number.
+   * Check out {@link https://0.30000000000000004.com/}
+   * @param {number} value - The value to normalize.
+   * @param {number} [times=100000000000] - The times for normalizing.
+   * @returns {number} Returns the normalized number.
+   */
 
-var defineJQueryPlugin = function defineJQueryPlugin(plugin) {
-  onDOMContentLoaded(function () {
-    var $ = getjQuery();
-    /* istanbul ignore if */
-
-    if ($) {
-      var name = plugin.NAME;
-      var JQUERY_NO_CONFLICT = $.fn[name];
-      $.fn[name] = plugin.jQueryInterface;
-      $.fn[name].Constructor = plugin;
-
-      $.fn[name].noConflict = function () {
-        $.fn[name] = JQUERY_NO_CONFLICT;
-        return plugin.jQueryInterface;
-      };
-    }
-  });
-};
-
-var execute = function execute(callback) {
-  if (typeof callback === 'function') {
-    callback();
-  }
-};
-
-var executeAfterTransition = function executeAfterTransition(callback, transitionElement) {
-  var waitForTransition = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
-  if (!waitForTransition) {
-    execute(callback);
-    return;
+  function normalizeDecimalNumber(value) {
+    var times = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100000000000;
+    return REGEXP_DECIMALS.test(value) ? Math.round(value * times) / times : value;
   }
 
-  var durationPadding = 5;
-  var emulatedDuration = getTransitionDurationFromElement(transitionElement) + durationPadding;
-  var called = false;
+  var REGEXP_SUFFIX = /^width|height|left|top|marginLeft|marginTop$/;
+  /**
+   * Apply styles to the given element.
+   * @param {Element} element - The target element.
+   * @param {Object} styles - The styles for applying.
+   */
 
-  var handler = function handler(_ref) {
-    var target = _ref.target;
+  function setStyle(element, styles) {
+    var style = element.style;
+    forEach(styles, function (value, property) {
+      if (REGEXP_SUFFIX.test(property) && isNumber(value)) {
+        value = "".concat(value, "px");
+      }
 
-    if (target !== transitionElement) {
+      style[property] = value;
+    });
+  }
+  /**
+   * Check if the given element has a special class.
+   * @param {Element} element - The element to check.
+   * @param {string} value - The class to search.
+   * @returns {boolean} Returns `true` if the special class was found.
+   */
+
+
+  function hasClass(element, value) {
+    return element.classList ? element.classList.contains(value) : element.className.indexOf(value) > -1;
+  }
+  /**
+   * Add classes to the given element.
+   * @param {Element} element - The target element.
+   * @param {string} value - The classes to be added.
+   */
+
+
+  function addClass(element, value) {
+    if (!value) {
       return;
     }
 
-    called = true;
-    transitionElement.removeEventListener(TRANSITION_END, handler);
-    execute(callback);
-  };
-
-  transitionElement.addEventListener(TRANSITION_END, handler);
-  setTimeout(function () {
-    if (!called) {
-      triggerTransitionEnd(transitionElement);
-    }
-  }, emulatedDuration);
-};
-/**
- * Return the previous/next element of a list.
- *
- * @param {array} list    The list of elements
- * @param activeElement   The active element
- * @param shouldGetNext   Choose to get next or previous element
- * @param isCycleAllowed
- * @return {Element|elem} The proper element
- */
-
-
-var getNextActiveElement = function getNextActiveElement(list, activeElement, shouldGetNext, isCycleAllowed) {
-  var index = list.indexOf(activeElement); // if the element does not exist in the list return an element depending on the direction and if cycle is allowed
-
-  if (index === -1) {
-    return list[!shouldGetNext && isCycleAllowed ? list.length - 1 : 0];
-  }
-
-  var listLength = list.length;
-  index += shouldGetNext ? 1 : -1;
-
-  if (isCycleAllowed) {
-    index = (index + listLength) % listLength;
-  }
-
-  return list[Math.max(0, Math.min(index, listLength - 1))];
-};
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): dom/event-handler.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-
-var namespaceRegex = /[^.]*(?=\..*)\.|.*/;
-var stripNameRegex = /\..*/;
-var stripUidRegex = /::\d+$/;
-var eventRegistry = {}; // Events storage
-
-var uidEvent = 1;
-var customEvents = {
-  mouseenter: 'mouseover',
-  mouseleave: 'mouseout'
-};
-var customEventsRegex = /^(mouseenter|mouseleave)/i;
-var nativeEvents = new Set(['click', 'dblclick', 'mouseup', 'mousedown', 'contextmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll']);
-/**
- * ------------------------------------------------------------------------
- * Private methods
- * ------------------------------------------------------------------------
- */
-
-function getUidEvent(element, uid) {
-  return uid && "".concat(uid, "::").concat(uidEvent++) || element.uidEvent || uidEvent++;
-}
-
-function getEvent(element) {
-  var uid = getUidEvent(element);
-  element.uidEvent = uid;
-  eventRegistry[uid] = eventRegistry[uid] || {};
-  return eventRegistry[uid];
-}
-
-function bootstrapHandler(element, fn) {
-  return function handler(event) {
-    event.delegateTarget = element;
-
-    if (handler.oneOff) {
-      EventHandler.off(element, event.type, fn);
+    if (isNumber(element.length)) {
+      forEach(element, function (elem) {
+        addClass(elem, value);
+      });
+      return;
     }
 
-    return fn.apply(element, [event]);
-  };
-}
+    if (element.classList) {
+      element.classList.add(value);
+      return;
+    }
 
-function bootstrapDelegationHandler(element, selector, fn) {
-  return function handler(event) {
-    var domElements = element.querySelectorAll(selector);
+    var className = element.className.trim();
 
-    for (var target = event.target; target && target !== this; target = target.parentNode) {
-      for (var i = domElements.length; i--;) {
-        if (domElements[i] === target) {
-          event.delegateTarget = target;
+    if (!className) {
+      element.className = value;
+    } else if (className.indexOf(value) < 0) {
+      element.className = "".concat(className, " ").concat(value);
+    }
+  }
+  /**
+   * Remove classes from the given element.
+   * @param {Element} element - The target element.
+   * @param {string} value - The classes to be removed.
+   */
 
-          if (handler.oneOff) {
-            EventHandler.off(element, event.type, selector, fn);
+
+  function removeClass(element, value) {
+    if (!value) {
+      return;
+    }
+
+    if (isNumber(element.length)) {
+      forEach(element, function (elem) {
+        removeClass(elem, value);
+      });
+      return;
+    }
+
+    if (element.classList) {
+      element.classList.remove(value);
+      return;
+    }
+
+    if (element.className.indexOf(value) >= 0) {
+      element.className = element.className.replace(value, '');
+    }
+  }
+  /**
+   * Add or remove classes from the given element.
+   * @param {Element} element - The target element.
+   * @param {string} value - The classes to be toggled.
+   * @param {boolean} added - Add only.
+   */
+
+
+  function toggleClass(element, value, added) {
+    if (!value) {
+      return;
+    }
+
+    if (isNumber(element.length)) {
+      forEach(element, function (elem) {
+        toggleClass(elem, value, added);
+      });
+      return;
+    } // IE10-11 doesn't support the second parameter of `classList.toggle`
+
+
+    if (added) {
+      addClass(element, value);
+    } else {
+      removeClass(element, value);
+    }
+  }
+
+  var REGEXP_CAMEL_CASE = /([a-z\d])([A-Z])/g;
+  /**
+   * Transform the given string from camelCase to kebab-case
+   * @param {string} value - The value to transform.
+   * @returns {string} The transformed value.
+   */
+
+  function toParamCase(value) {
+    return value.replace(REGEXP_CAMEL_CASE, '$1-$2').toLowerCase();
+  }
+  /**
+   * Get data from the given element.
+   * @param {Element} element - The target element.
+   * @param {string} name - The data key to get.
+   * @returns {string} The data value.
+   */
+
+
+  function getData(element, name) {
+    if (isObject(element[name])) {
+      return element[name];
+    }
+
+    if (element.dataset) {
+      return element.dataset[name];
+    }
+
+    return element.getAttribute("data-".concat(toParamCase(name)));
+  }
+  /**
+   * Set data to the given element.
+   * @param {Element} element - The target element.
+   * @param {string} name - The data key to set.
+   * @param {string} data - The data value.
+   */
+
+
+  function setData(element, name, data) {
+    if (isObject(data)) {
+      element[name] = data;
+    } else if (element.dataset) {
+      element.dataset[name] = data;
+    } else {
+      element.setAttribute("data-".concat(toParamCase(name)), data);
+    }
+  }
+  /**
+   * Remove data from the given element.
+   * @param {Element} element - The target element.
+   * @param {string} name - The data key to remove.
+   */
+
+
+  function removeData(element, name) {
+    if (isObject(element[name])) {
+      try {
+        delete element[name];
+      } catch (error) {
+        element[name] = undefined;
+      }
+    } else if (element.dataset) {
+      // #128 Safari not allows to delete dataset property
+      try {
+        delete element.dataset[name];
+      } catch (error) {
+        element.dataset[name] = undefined;
+      }
+    } else {
+      element.removeAttribute("data-".concat(toParamCase(name)));
+    }
+  }
+
+  var REGEXP_SPACES = /\s\s*/;
+
+  var onceSupported = function () {
+    var supported = false;
+
+    if (IS_BROWSER) {
+      var once = false;
+
+      var listener = function listener() {};
+
+      var options = Object.defineProperty({}, 'once', {
+        get: function get() {
+          supported = true;
+          return once;
+        },
+
+        /**
+         * This setter can fix a `TypeError` in strict mode
+         * {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Getter_only}
+         * @param {boolean} value - The value to set
+         */
+        set: function set(value) {
+          once = value;
+        }
+      });
+      WINDOW.addEventListener('test', listener, options);
+      WINDOW.removeEventListener('test', listener, options);
+    }
+
+    return supported;
+  }();
+  /**
+   * Remove event listener from the target element.
+   * @param {Element} element - The event target.
+   * @param {string} type - The event type(s).
+   * @param {Function} listener - The event listener.
+   * @param {Object} options - The event options.
+   */
+
+
+  function removeListener(element, type, listener) {
+    var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+    var handler = listener;
+    type.trim().split(REGEXP_SPACES).forEach(function (event) {
+      if (!onceSupported) {
+        var listeners = element.listeners;
+
+        if (listeners && listeners[event] && listeners[event][listener]) {
+          handler = listeners[event][listener];
+          delete listeners[event][listener];
+
+          if (Object.keys(listeners[event]).length === 0) {
+            delete listeners[event];
           }
 
-          return fn.apply(target, [event]);
+          if (Object.keys(listeners).length === 0) {
+            delete element.listeners;
+          }
         }
       }
-    } // To please ESLint
 
-
-    return null;
-  };
-}
-
-function findHandler(events, handler) {
-  var delegationSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var uidEventList = Object.keys(events);
-
-  for (var i = 0, len = uidEventList.length; i < len; i++) {
-    var event = events[uidEventList[i]];
-
-    if (event.originalHandler === handler && event.delegationSelector === delegationSelector) {
-      return event;
-    }
-  }
-
-  return null;
-}
-
-function normalizeParams(originalTypeEvent, handler, delegationFn) {
-  var delegation = typeof handler === 'string';
-  var originalHandler = delegation ? delegationFn : handler;
-  var typeEvent = getTypeEvent(originalTypeEvent);
-  var isNative = nativeEvents.has(typeEvent);
-
-  if (!isNative) {
-    typeEvent = originalTypeEvent;
-  }
-
-  return [delegation, originalHandler, typeEvent];
-}
-
-function addHandler(element, originalTypeEvent, handler, delegationFn, oneOff) {
-  if (typeof originalTypeEvent !== 'string' || !element) {
-    return;
-  }
-
-  if (!handler) {
-    handler = delegationFn;
-    delegationFn = null;
-  } // in case of mouseenter or mouseleave wrap the handler within a function that checks for its DOM position
-  // this prevents the handler from being dispatched the same way as mouseover or mouseout does
-
-
-  if (customEventsRegex.test(originalTypeEvent)) {
-    var wrapFn = function wrapFn(fn) {
-      return function (event) {
-        if (!event.relatedTarget || event.relatedTarget !== event.delegateTarget && !event.delegateTarget.contains(event.relatedTarget)) {
-          return fn.call(this, event);
-        }
-      };
-    };
-
-    if (delegationFn) {
-      delegationFn = wrapFn(delegationFn);
-    } else {
-      handler = wrapFn(handler);
-    }
-  }
-
-  var _normalizeParams = normalizeParams(originalTypeEvent, handler, delegationFn),
-      _normalizeParams2 = _slicedToArray(_normalizeParams, 3),
-      delegation = _normalizeParams2[0],
-      originalHandler = _normalizeParams2[1],
-      typeEvent = _normalizeParams2[2];
-
-  var events = getEvent(element);
-  var handlers = events[typeEvent] || (events[typeEvent] = {});
-  var previousFn = findHandler(handlers, originalHandler, delegation ? handler : null);
-
-  if (previousFn) {
-    previousFn.oneOff = previousFn.oneOff && oneOff;
-    return;
-  }
-
-  var uid = getUidEvent(originalHandler, originalTypeEvent.replace(namespaceRegex, ''));
-  var fn = delegation ? bootstrapDelegationHandler(element, handler, delegationFn) : bootstrapHandler(element, handler);
-  fn.delegationSelector = delegation ? handler : null;
-  fn.originalHandler = originalHandler;
-  fn.oneOff = oneOff;
-  fn.uidEvent = uid;
-  handlers[uid] = fn;
-  element.addEventListener(typeEvent, fn, delegation);
-}
-
-function removeHandler(element, events, typeEvent, handler, delegationSelector) {
-  var fn = findHandler(events[typeEvent], handler, delegationSelector);
-
-  if (!fn) {
-    return;
-  }
-
-  element.removeEventListener(typeEvent, fn, Boolean(delegationSelector));
-  delete events[typeEvent][fn.uidEvent];
-}
-
-function removeNamespacedHandlers(element, events, typeEvent, namespace) {
-  var storeElementEvent = events[typeEvent] || {};
-  Object.keys(storeElementEvent).forEach(function (handlerKey) {
-    if (handlerKey.includes(namespace)) {
-      var event = storeElementEvent[handlerKey];
-      removeHandler(element, events, typeEvent, event.originalHandler, event.delegationSelector);
-    }
-  });
-}
-
-function getTypeEvent(event) {
-  // allow to get the native events from namespaced events ('click.bs.button' --> 'click')
-  event = event.replace(stripNameRegex, '');
-  return customEvents[event] || event;
-}
-
-var EventHandler = {
-  on: function on(element, event, handler, delegationFn) {
-    addHandler(element, event, handler, delegationFn, false);
-  },
-  one: function one(element, event, handler, delegationFn) {
-    addHandler(element, event, handler, delegationFn, true);
-  },
-  off: function off(element, originalTypeEvent, handler, delegationFn) {
-    if (typeof originalTypeEvent !== 'string' || !element) {
-      return;
-    }
-
-    var _normalizeParams3 = normalizeParams(originalTypeEvent, handler, delegationFn),
-        _normalizeParams4 = _slicedToArray(_normalizeParams3, 3),
-        delegation = _normalizeParams4[0],
-        originalHandler = _normalizeParams4[1],
-        typeEvent = _normalizeParams4[2];
-
-    var inNamespace = typeEvent !== originalTypeEvent;
-    var events = getEvent(element);
-    var isNamespace = originalTypeEvent.startsWith('.');
-
-    if (typeof originalHandler !== 'undefined') {
-      // Simplest case: handler is passed, remove that listener ONLY.
-      if (!events || !events[typeEvent]) {
-        return;
-      }
-
-      removeHandler(element, events, typeEvent, originalHandler, delegation ? handler : null);
-      return;
-    }
-
-    if (isNamespace) {
-      Object.keys(events).forEach(function (elementEvent) {
-        removeNamespacedHandlers(element, events, elementEvent, originalTypeEvent.slice(1));
-      });
-    }
-
-    var storeElementEvent = events[typeEvent] || {};
-    Object.keys(storeElementEvent).forEach(function (keyHandlers) {
-      var handlerKey = keyHandlers.replace(stripUidRegex, '');
-
-      if (!inNamespace || originalTypeEvent.includes(handlerKey)) {
-        var event = storeElementEvent[keyHandlers];
-        removeHandler(element, events, typeEvent, event.originalHandler, event.delegationSelector);
-      }
+      element.removeEventListener(event, handler, options);
     });
-  },
-  trigger: function trigger(element, event, args) {
-    if (typeof event !== 'string' || !element) {
-      return null;
-    }
+  }
+  /**
+   * Add event listener to the target element.
+   * @param {Element} element - The event target.
+   * @param {string} type - The event type(s).
+   * @param {Function} listener - The event listener.
+   * @param {Object} options - The event options.
+   */
 
-    var $ = getjQuery();
-    var typeEvent = getTypeEvent(event);
-    var inNamespace = event !== typeEvent;
-    var isNative = nativeEvents.has(typeEvent);
-    var jQueryEvent;
-    var bubbles = true;
-    var nativeDispatch = true;
-    var defaultPrevented = false;
-    var evt = null;
 
-    if (inNamespace && $) {
-      jQueryEvent = $.Event(event, args);
-      $(element).trigger(jQueryEvent);
-      bubbles = !jQueryEvent.isPropagationStopped();
-      nativeDispatch = !jQueryEvent.isImmediatePropagationStopped();
-      defaultPrevented = jQueryEvent.isDefaultPrevented();
-    }
+  function addListener(element, type, listener) {
+    var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+    var _handler = listener;
+    type.trim().split(REGEXP_SPACES).forEach(function (event) {
+      if (options.once && !onceSupported) {
+        var _element$listeners = element.listeners,
+            listeners = _element$listeners === void 0 ? {} : _element$listeners;
 
-    if (isNative) {
-      evt = document.createEvent('HTMLEvents');
-      evt.initEvent(typeEvent, bubbles, true);
-    } else {
-      evt = new CustomEvent(event, {
-        bubbles: bubbles,
+        _handler = function handler() {
+          delete listeners[event][listener];
+          element.removeEventListener(event, _handler, options);
+
+          for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+            args[_key2] = arguments[_key2];
+          }
+
+          listener.apply(element, args);
+        };
+
+        if (!listeners[event]) {
+          listeners[event] = {};
+        }
+
+        if (listeners[event][listener]) {
+          element.removeEventListener(event, listeners[event][listener], options);
+        }
+
+        listeners[event][listener] = _handler;
+        element.listeners = listeners;
+      }
+
+      element.addEventListener(event, _handler, options);
+    });
+  }
+  /**
+   * Dispatch event on the target element.
+   * @param {Element} element - The event target.
+   * @param {string} type - The event type(s).
+   * @param {Object} data - The additional event data.
+   * @returns {boolean} Indicate if the event is default prevented or not.
+   */
+
+
+  function dispatchEvent(element, type, data) {
+    var event; // Event and CustomEvent on IE9-11 are global objects, not constructors
+
+    if (isFunction(Event) && isFunction(CustomEvent)) {
+      event = new CustomEvent(type, {
+        detail: data,
+        bubbles: true,
         cancelable: true
       });
-    } // merge custom information in our event
-
-
-    if (typeof args !== 'undefined') {
-      Object.keys(args).forEach(function (key) {
-        Object.defineProperty(evt, key, {
-          get: function get() {
-            return args[key];
-          }
-        });
-      });
+    } else {
+      event = document.createEvent('CustomEvent');
+      event.initCustomEvent(type, true, true, data);
     }
 
-    if (defaultPrevented) {
-      evt.preventDefault();
-    }
-
-    if (nativeDispatch) {
-      element.dispatchEvent(evt);
-    }
-
-    if (evt.defaultPrevented && typeof jQueryEvent !== 'undefined') {
-      jQueryEvent.preventDefault();
-    }
-
-    return evt;
+    return element.dispatchEvent(event);
   }
-};
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): dom/data.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-var elementMap = new Map();
-var Data = {
-  set: function set(element, key, instance) {
-    if (!elementMap.has(element)) {
-      elementMap.set(element, new Map());
-    }
-
-    var instanceMap = elementMap.get(element); // make it clear we only want one instance per element
-    // can be removed later when multiple key/instances are fine to be used
-
-    if (!instanceMap.has(key) && instanceMap.size !== 0) {
-      // eslint-disable-next-line no-console
-      console.error("Bootstrap doesn't allow more than one instance per element. Bound instance: ".concat(Array.from(instanceMap.keys())[0], "."));
-      return;
-    }
-
-    instanceMap.set(key, instance);
-  },
-  get: function get(element, key) {
-    if (elementMap.has(element)) {
-      return elementMap.get(element).get(key) || null;
-    }
-
-    return null;
-  },
-  remove: function remove(element, key) {
-    if (!elementMap.has(element)) {
-      return;
-    }
-
-    var instanceMap = elementMap.get(element);
-    instanceMap.delete(key); // free up element references if there are no instances left for an element
-
-    if (instanceMap.size === 0) {
-      elementMap.delete(element);
-    }
-  }
-};
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): base-component.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-var VERSION = '5.1.3';
-
-var BaseComponent = /*#__PURE__*/function () {
-  function BaseComponent(element) {
-    _classCallCheck(this, BaseComponent);
-
-    element = getElement(element);
-
-    if (!element) {
-      return;
-    }
-
-    this._element = element;
-    Data.set(this._element, this.constructor.DATA_KEY, this);
-  }
-
-  _createClass(BaseComponent, [{
-    key: "dispose",
-    value: function dispose() {
-      var _this = this;
-
-      Data.remove(this._element, this.constructor.DATA_KEY);
-      EventHandler.off(this._element, this.constructor.EVENT_KEY);
-      Object.getOwnPropertyNames(this).forEach(function (propertyName) {
-        _this[propertyName] = null;
-      });
-    }
-  }, {
-    key: "_queueCallback",
-    value: function _queueCallback(callback, element) {
-      var isAnimated = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-      executeAfterTransition(callback, element, isAnimated);
-    }
-    /** Static */
-
-  }], [{
-    key: "getInstance",
-    value: function getInstance(element) {
-      return Data.get(getElement(element), this.DATA_KEY);
-    }
-  }, {
-    key: "getOrCreateInstance",
-    value: function getOrCreateInstance(element) {
-      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      return this.getInstance(element) || new this(element, _typeof(config) === 'object' ? config : null);
-    }
-  }, {
-    key: "VERSION",
-    get: function get() {
-      return VERSION;
-    }
-  }, {
-    key: "NAME",
-    get: function get() {
-      throw new Error('You have to implement the static method "NAME", for each component!');
-    }
-  }, {
-    key: "DATA_KEY",
-    get: function get() {
-      return "bs.".concat(this.NAME);
-    }
-  }, {
-    key: "EVENT_KEY",
-    get: function get() {
-      return ".".concat(this.DATA_KEY);
-    }
-  }]);
-
-  return BaseComponent;
-}();
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): util/component-functions.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-
-var enableDismissTrigger = function enableDismissTrigger(component) {
-  var method = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'hide';
-  var clickEvent = "click.dismiss".concat(component.EVENT_KEY);
-  var name = component.NAME;
-  EventHandler.on(document, clickEvent, "[data-bs-dismiss=\"".concat(name, "\"]"), function (event) {
-    if (['A', 'AREA'].includes(this.tagName)) {
-      event.preventDefault();
-    }
-
-    if (isDisabled(this)) {
-      return;
-    }
-
-    var target = getElementFromSelector(this) || this.closest(".".concat(name));
-    var instance = component.getOrCreateInstance(target); // Method argument is left, for Alert and only, as it doesn't implement the 'hide' method
-
-    instance[method]();
-  });
-};
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): alert.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-
-var NAME$d = 'alert';
-var DATA_KEY$c = 'bs.alert';
-var EVENT_KEY$c = ".".concat(DATA_KEY$c);
-var EVENT_CLOSE = "close".concat(EVENT_KEY$c);
-var EVENT_CLOSED = "closed".concat(EVENT_KEY$c);
-var CLASS_NAME_FADE$5 = 'fade';
-var CLASS_NAME_SHOW$8 = 'show';
-/**
- * ------------------------------------------------------------------------
- * Class Definition
- * ------------------------------------------------------------------------
- */
-
-var Alert = /*#__PURE__*/function (_BaseComponent) {
-  _inherits(Alert, _BaseComponent);
-
-  var _super = _createSuper(Alert);
-
-  function Alert() {
-    _classCallCheck(this, Alert);
-
-    return _super.apply(this, arguments);
-  }
-
-  _createClass(Alert, [{
-    key: "close",
-    value: // Public
-    function close() {
-      var _this2 = this;
-
-      var closeEvent = EventHandler.trigger(this._element, EVENT_CLOSE);
-
-      if (closeEvent.defaultPrevented) {
-        return;
-      }
-
-      this._element.classList.remove(CLASS_NAME_SHOW$8);
-
-      var isAnimated = this._element.classList.contains(CLASS_NAME_FADE$5);
-
-      this._queueCallback(function () {
-        return _this2._destroyElement();
-      }, this._element, isAnimated);
-    } // Private
-
-  }, {
-    key: "_destroyElement",
-    value: function _destroyElement() {
-      this._element.remove();
-
-      EventHandler.trigger(this._element, EVENT_CLOSED);
-      this.dispose();
-    } // Static
-
-  }], [{
-    key: "NAME",
-    get: // Getters
-    function get() {
-      return NAME$d;
-    }
-  }, {
-    key: "jQueryInterface",
-    value: function jQueryInterface(config) {
-      return this.each(function () {
-        var data = Alert.getOrCreateInstance(this);
-
-        if (typeof config !== 'string') {
-          return;
-        }
-
-        if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
-          throw new TypeError("No method named \"".concat(config, "\""));
-        }
-
-        data[config](this);
-      });
-    }
-  }]);
-
-  return Alert;
-}(BaseComponent);
-/**
- * ------------------------------------------------------------------------
- * Data Api implementation
- * ------------------------------------------------------------------------
- */
-
-
-enableDismissTrigger(Alert, 'close');
-/**
- * ------------------------------------------------------------------------
- * jQuery
- * ------------------------------------------------------------------------
- * add .Alert to jQuery only if jQuery is present
- */
-
-defineJQueryPlugin(Alert);
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): button.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-var NAME$c = 'button';
-var DATA_KEY$b = 'bs.button';
-var EVENT_KEY$b = ".".concat(DATA_KEY$b);
-var DATA_API_KEY$7 = '.data-api';
-var CLASS_NAME_ACTIVE$3 = 'active';
-var SELECTOR_DATA_TOGGLE$5 = '[data-bs-toggle="button"]';
-var EVENT_CLICK_DATA_API$6 = "click".concat(EVENT_KEY$b).concat(DATA_API_KEY$7);
-/**
- * ------------------------------------------------------------------------
- * Class Definition
- * ------------------------------------------------------------------------
- */
-
-var Button = /*#__PURE__*/function (_BaseComponent2) {
-  _inherits(Button, _BaseComponent2);
-
-  var _super2 = _createSuper(Button);
-
-  function Button() {
-    _classCallCheck(this, Button);
-
-    return _super2.apply(this, arguments);
-  }
-
-  _createClass(Button, [{
-    key: "toggle",
-    value: // Public
-    function toggle() {
-      // Toggle class and sync the `aria-pressed` attribute with the return value of the `.toggle()` method
-      this._element.setAttribute('aria-pressed', this._element.classList.toggle(CLASS_NAME_ACTIVE$3));
-    } // Static
-
-  }], [{
-    key: "NAME",
-    get: // Getters
-    function get() {
-      return NAME$c;
-    }
-  }, {
-    key: "jQueryInterface",
-    value: function jQueryInterface(config) {
-      return this.each(function () {
-        var data = Button.getOrCreateInstance(this);
-
-        if (config === 'toggle') {
-          data[config]();
-        }
-      });
-    }
-  }]);
-
-  return Button;
-}(BaseComponent);
-/**
- * ------------------------------------------------------------------------
- * Data Api implementation
- * ------------------------------------------------------------------------
- */
-
-
-EventHandler.on(document, EVENT_CLICK_DATA_API$6, SELECTOR_DATA_TOGGLE$5, function (event) {
-  event.preventDefault();
-  var button = event.target.closest(SELECTOR_DATA_TOGGLE$5);
-  var data = Button.getOrCreateInstance(button);
-  data.toggle();
-});
-/**
- * ------------------------------------------------------------------------
- * jQuery
- * ------------------------------------------------------------------------
- * add .Button to jQuery only if jQuery is present
- */
-
-defineJQueryPlugin(Button);
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): dom/manipulator.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-function normalizeData(val) {
-  if (val === 'true') {
-    return true;
-  }
-
-  if (val === 'false') {
-    return false;
-  }
-
-  if (val === Number(val).toString()) {
-    return Number(val);
-  }
-
-  if (val === '' || val === 'null') {
-    return null;
-  }
-
-  return val;
-}
-
-function normalizeDataKey(key) {
-  return key.replace(/[A-Z]/g, function (chr) {
-    return "-".concat(chr.toLowerCase());
-  });
-}
-
-var Manipulator = {
-  setDataAttribute: function setDataAttribute(element, key, value) {
-    element.setAttribute("data-bs-".concat(normalizeDataKey(key)), value);
-  },
-  removeDataAttribute: function removeDataAttribute(element, key) {
-    element.removeAttribute("data-bs-".concat(normalizeDataKey(key)));
-  },
-  getDataAttributes: function getDataAttributes(element) {
-    if (!element) {
-      return {};
-    }
-
-    var attributes = {};
-    Object.keys(element.dataset).filter(function (key) {
-      return key.startsWith('bs');
-    }).forEach(function (key) {
-      var pureKey = key.replace(/^bs/, '');
-      pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1, pureKey.length);
-      attributes[pureKey] = normalizeData(element.dataset[key]);
-    });
-    return attributes;
-  },
-  getDataAttribute: function getDataAttribute(element, key) {
-    return normalizeData(element.getAttribute("data-bs-".concat(normalizeDataKey(key))));
-  },
-  offset: function offset(element) {
-    var rect = element.getBoundingClientRect();
+  /**
+   * Get the offset base on the document.
+   * @param {Element} element - The target element.
+   * @returns {Object} The offset data.
+   */
+
+
+  function getOffset(element) {
+    var box = element.getBoundingClientRect();
     return {
-      top: rect.top + window.pageYOffset,
-      left: rect.left + window.pageXOffset
-    };
-  },
-  position: function position(element) {
-    return {
-      top: element.offsetTop,
-      left: element.offsetLeft
+      left: box.left + (window.pageXOffset - document.documentElement.clientLeft),
+      top: box.top + (window.pageYOffset - document.documentElement.clientTop)
     };
   }
-};
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): dom/selector-engine.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
 
-var NODE_TEXT = 3;
-var SelectorEngine = {
-  find: function find(selector) {
-    var _ref2;
+  var location = WINDOW.location;
+  var REGEXP_ORIGINS = /^(\w+:)\/\/([^:/?#]*):?(\d*)/i;
+  /**
+   * Check if the given URL is a cross origin URL.
+   * @param {string} url - The target URL.
+   * @returns {boolean} Returns `true` if the given URL is a cross origin URL, else `false`.
+   */
 
-    var element = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document.documentElement;
-    return (_ref2 = []).concat.apply(_ref2, _toConsumableArray(Element.prototype.querySelectorAll.call(element, selector)));
-  },
-  findOne: function findOne(selector) {
-    var element = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document.documentElement;
-    return Element.prototype.querySelector.call(element, selector);
-  },
-  children: function children(element, selector) {
-    var _ref3;
-
-    return (_ref3 = []).concat.apply(_ref3, _toConsumableArray(element.children)).filter(function (child) {
-      return child.matches(selector);
-    });
-  },
-  parents: function parents(element, selector) {
-    var parents = [];
-    var ancestor = element.parentNode;
-
-    while (ancestor && ancestor.nodeType === Node.ELEMENT_NODE && ancestor.nodeType !== NODE_TEXT) {
-      if (ancestor.matches(selector)) {
-        parents.push(ancestor);
-      }
-
-      ancestor = ancestor.parentNode;
-    }
-
-    return parents;
-  },
-  prev: function prev(element, selector) {
-    var previous = element.previousElementSibling;
-
-    while (previous) {
-      if (previous.matches(selector)) {
-        return [previous];
-      }
-
-      previous = previous.previousElementSibling;
-    }
-
-    return [];
-  },
-  next: function next(element, selector) {
-    var next = element.nextElementSibling;
-
-    while (next) {
-      if (next.matches(selector)) {
-        return [next];
-      }
-
-      next = next.nextElementSibling;
-    }
-
-    return [];
-  },
-  focusableChildren: function focusableChildren(element) {
-    var focusables = ['a', 'button', 'input', 'textarea', 'select', 'details', '[tabindex]', '[contenteditable="true"]'].map(function (selector) {
-      return "".concat(selector, ":not([tabindex^=\"-\"])");
-    }).join(', ');
-    return this.find(focusables, element).filter(function (el) {
-      return !isDisabled(el) && isVisible(el);
-    });
+  function isCrossOriginURL(url) {
+    var parts = url.match(REGEXP_ORIGINS);
+    return parts !== null && (parts[1] !== location.protocol || parts[2] !== location.hostname || parts[3] !== location.port);
   }
-};
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): carousel.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-var NAME$b = 'carousel';
-var DATA_KEY$a = 'bs.carousel';
-var EVENT_KEY$a = ".".concat(DATA_KEY$a);
-var DATA_API_KEY$6 = '.data-api';
-var ARROW_LEFT_KEY = 'ArrowLeft';
-var ARROW_RIGHT_KEY = 'ArrowRight';
-var TOUCHEVENT_COMPAT_WAIT = 500; // Time for mouse compat events to fire after touch
-
-var SWIPE_THRESHOLD = 40;
-var Default$a = {
-  interval: 5000,
-  keyboard: true,
-  slide: false,
-  pause: 'hover',
-  wrap: true,
-  touch: true
-};
-var DefaultType$a = {
-  interval: '(number|boolean)',
-  keyboard: 'boolean',
-  slide: '(boolean|string)',
-  pause: '(string|boolean)',
-  wrap: 'boolean',
-  touch: 'boolean'
-};
-var ORDER_NEXT = 'next';
-var ORDER_PREV = 'prev';
-var DIRECTION_LEFT = 'left';
-var DIRECTION_RIGHT = 'right';
-var KEY_TO_DIRECTION = (_KEY_TO_DIRECTION = {}, _defineProperty(_KEY_TO_DIRECTION, ARROW_LEFT_KEY, DIRECTION_RIGHT), _defineProperty(_KEY_TO_DIRECTION, ARROW_RIGHT_KEY, DIRECTION_LEFT), _KEY_TO_DIRECTION);
-var EVENT_SLIDE = "slide".concat(EVENT_KEY$a);
-var EVENT_SLID = "slid".concat(EVENT_KEY$a);
-var EVENT_KEYDOWN = "keydown".concat(EVENT_KEY$a);
-var EVENT_MOUSEENTER = "mouseenter".concat(EVENT_KEY$a);
-var EVENT_MOUSELEAVE = "mouseleave".concat(EVENT_KEY$a);
-var EVENT_TOUCHSTART = "touchstart".concat(EVENT_KEY$a);
-var EVENT_TOUCHMOVE = "touchmove".concat(EVENT_KEY$a);
-var EVENT_TOUCHEND = "touchend".concat(EVENT_KEY$a);
-var EVENT_POINTERDOWN = "pointerdown".concat(EVENT_KEY$a);
-var EVENT_POINTERUP = "pointerup".concat(EVENT_KEY$a);
-var EVENT_DRAG_START = "dragstart".concat(EVENT_KEY$a);
-var EVENT_LOAD_DATA_API$2 = "load".concat(EVENT_KEY$a).concat(DATA_API_KEY$6);
-var EVENT_CLICK_DATA_API$5 = "click".concat(EVENT_KEY$a).concat(DATA_API_KEY$6);
-var CLASS_NAME_CAROUSEL = 'carousel';
-var CLASS_NAME_ACTIVE$2 = 'active';
-var CLASS_NAME_SLIDE = 'slide';
-var CLASS_NAME_END = 'carousel-item-end';
-var CLASS_NAME_START = 'carousel-item-start';
-var CLASS_NAME_NEXT = 'carousel-item-next';
-var CLASS_NAME_PREV = 'carousel-item-prev';
-var CLASS_NAME_POINTER_EVENT = 'pointer-event';
-var SELECTOR_ACTIVE$1 = '.active';
-var SELECTOR_ACTIVE_ITEM = '.active.carousel-item';
-var SELECTOR_ITEM = '.carousel-item';
-var SELECTOR_ITEM_IMG = '.carousel-item img';
-var SELECTOR_NEXT_PREV = '.carousel-item-next, .carousel-item-prev';
-var SELECTOR_INDICATORS = '.carousel-indicators';
-var SELECTOR_INDICATOR = '[data-bs-target]';
-var SELECTOR_DATA_SLIDE = '[data-bs-slide], [data-bs-slide-to]';
-var SELECTOR_DATA_RIDE = '[data-bs-ride="carousel"]';
-var POINTER_TYPE_TOUCH = 'touch';
-var POINTER_TYPE_PEN = 'pen';
-/**
- * ------------------------------------------------------------------------
- * Class Definition
- * ------------------------------------------------------------------------
- */
-
-var Carousel = /*#__PURE__*/function (_BaseComponent3) {
-  _inherits(Carousel, _BaseComponent3);
-
-  var _super3 = _createSuper(Carousel);
-
-  function Carousel(element, config) {
-    var _this3;
-
-    _classCallCheck(this, Carousel);
-
-    _this3 = _super3.call(this, element);
-    _this3._items = null;
-    _this3._interval = null;
-    _this3._activeElement = null;
-    _this3._isPaused = false;
-    _this3._isSliding = false;
-    _this3.touchTimeout = null;
-    _this3.touchStartX = 0;
-    _this3.touchDeltaX = 0;
-    _this3._config = _this3._getConfig(config);
-    _this3._indicatorsElement = SelectorEngine.findOne(SELECTOR_INDICATORS, _this3._element);
-    _this3._touchSupported = 'ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0;
-    _this3._pointerEvent = Boolean(window.PointerEvent);
-
-    _this3._addEventListeners();
-
-    return _this3;
-  } // Getters
+  /**
+   * Add timestamp to the given URL.
+   * @param {string} url - The target URL.
+   * @returns {string} The result URL.
+   */
 
 
-  _createClass(Carousel, [{
-    key: "next",
-    value: // Public
-    function next() {
-      this._slide(ORDER_NEXT);
+  function addTimestamp(url) {
+    var timestamp = "timestamp=".concat(new Date().getTime());
+    return url + (url.indexOf('?') === -1 ? '?' : '&') + timestamp;
+  }
+  /**
+   * Get transforms base on the given object.
+   * @param {Object} obj - The target object.
+   * @returns {string} A string contains transform values.
+   */
+
+
+  function getTransforms(_ref) {
+    var rotate = _ref.rotate,
+        scaleX = _ref.scaleX,
+        scaleY = _ref.scaleY,
+        translateX = _ref.translateX,
+        translateY = _ref.translateY;
+    var values = [];
+
+    if (isNumber(translateX) && translateX !== 0) {
+      values.push("translateX(".concat(translateX, "px)"));
     }
-  }, {
-    key: "nextWhenVisible",
-    value: function nextWhenVisible() {
-      // Don't call next when the page isn't visible
-      // or the carousel or its parent isn't visible
-      if (!document.hidden && isVisible(this._element)) {
-        this.next();
-      }
+
+    if (isNumber(translateY) && translateY !== 0) {
+      values.push("translateY(".concat(translateY, "px)"));
+    } // Rotate should come first before scale to match orientation transform
+
+
+    if (isNumber(rotate) && rotate !== 0) {
+      values.push("rotate(".concat(rotate, "deg)"));
     }
-  }, {
-    key: "prev",
-    value: function prev() {
-      this._slide(ORDER_PREV);
+
+    if (isNumber(scaleX) && scaleX !== 1) {
+      values.push("scaleX(".concat(scaleX, ")"));
     }
-  }, {
-    key: "pause",
-    value: function pause(event) {
-      if (!event) {
-        this._isPaused = true;
-      }
 
-      if (SelectorEngine.findOne(SELECTOR_NEXT_PREV, this._element)) {
-        triggerTransitionEnd(this._element);
-        this.cycle(true);
-      }
-
-      clearInterval(this._interval);
-      this._interval = null;
+    if (isNumber(scaleY) && scaleY !== 1) {
+      values.push("scaleY(".concat(scaleY, ")"));
     }
-  }, {
-    key: "cycle",
-    value: function cycle(event) {
-      if (!event) {
-        this._isPaused = false;
-      }
 
-      if (this._interval) {
-        clearInterval(this._interval);
-        this._interval = null;
-      }
+    var transform = values.length ? values.join(' ') : 'none';
+    return {
+      WebkitTransform: transform,
+      msTransform: transform,
+      transform: transform
+    };
+  }
+  /**
+   * Get the max ratio of a group of pointers.
+   * @param {string} pointers - The target pointers.
+   * @returns {number} The result ratio.
+   */
 
-      if (this._config && this._config.interval && !this._isPaused) {
-        this._updateInterval();
 
-        this._interval = setInterval((document.visibilityState ? this.nextWhenVisible : this.next).bind(this), this._config.interval);
-      }
-    }
-  }, {
-    key: "to",
-    value: function to(index) {
-      var _this4 = this;
+  function getMaxZoomRatio(pointers) {
+    var pointers2 = _objectSpread2({}, pointers);
 
-      this._activeElement = SelectorEngine.findOne(SELECTOR_ACTIVE_ITEM, this._element);
+    var maxRatio = 0;
+    forEach(pointers, function (pointer, pointerId) {
+      delete pointers2[pointerId];
+      forEach(pointers2, function (pointer2) {
+        var x1 = Math.abs(pointer.startX - pointer2.startX);
+        var y1 = Math.abs(pointer.startY - pointer2.startY);
+        var x2 = Math.abs(pointer.endX - pointer2.endX);
+        var y2 = Math.abs(pointer.endY - pointer2.endY);
+        var z1 = Math.sqrt(x1 * x1 + y1 * y1);
+        var z2 = Math.sqrt(x2 * x2 + y2 * y2);
+        var ratio = (z2 - z1) / z1;
 
-      var activeIndex = this._getItemIndex(this._activeElement);
-
-      if (index > this._items.length - 1 || index < 0) {
-        return;
-      }
-
-      if (this._isSliding) {
-        EventHandler.one(this._element, EVENT_SLID, function () {
-          return _this4.to(index);
-        });
-        return;
-      }
-
-      if (activeIndex === index) {
-        this.pause();
-        this.cycle();
-        return;
-      }
-
-      var order = index > activeIndex ? ORDER_NEXT : ORDER_PREV;
-
-      this._slide(order, this._items[index]);
-    } // Private
-
-  }, {
-    key: "_getConfig",
-    value: function _getConfig(config) {
-      config = _objectSpread(_objectSpread(_objectSpread({}, Default$a), Manipulator.getDataAttributes(this._element)), _typeof(config) === 'object' ? config : {});
-      typeCheckConfig(NAME$b, config, DefaultType$a);
-      return config;
-    }
-  }, {
-    key: "_handleSwipe",
-    value: function _handleSwipe() {
-      var absDeltax = Math.abs(this.touchDeltaX);
-
-      if (absDeltax <= SWIPE_THRESHOLD) {
-        return;
-      }
-
-      var direction = absDeltax / this.touchDeltaX;
-      this.touchDeltaX = 0;
-
-      if (!direction) {
-        return;
-      }
-
-      this._slide(direction > 0 ? DIRECTION_RIGHT : DIRECTION_LEFT);
-    }
-  }, {
-    key: "_addEventListeners",
-    value: function _addEventListeners() {
-      var _this5 = this;
-
-      if (this._config.keyboard) {
-        EventHandler.on(this._element, EVENT_KEYDOWN, function (event) {
-          return _this5._keydown(event);
-        });
-      }
-
-      if (this._config.pause === 'hover') {
-        EventHandler.on(this._element, EVENT_MOUSEENTER, function (event) {
-          return _this5.pause(event);
-        });
-        EventHandler.on(this._element, EVENT_MOUSELEAVE, function (event) {
-          return _this5.cycle(event);
-        });
-      }
-
-      if (this._config.touch && this._touchSupported) {
-        this._addTouchEventListeners();
-      }
-    }
-  }, {
-    key: "_addTouchEventListeners",
-    value: function _addTouchEventListeners() {
-      var _this6 = this;
-
-      var hasPointerPenTouch = function hasPointerPenTouch(event) {
-        return _this6._pointerEvent && (event.pointerType === POINTER_TYPE_PEN || event.pointerType === POINTER_TYPE_TOUCH);
-      };
-
-      var start = function start(event) {
-        if (hasPointerPenTouch(event)) {
-          _this6.touchStartX = event.clientX;
-        } else if (!_this6._pointerEvent) {
-          _this6.touchStartX = event.touches[0].clientX;
+        if (Math.abs(ratio) > Math.abs(maxRatio)) {
+          maxRatio = ratio;
         }
-      };
-
-      var move = function move(event) {
-        // ensure swiping with one touch and not pinching
-        _this6.touchDeltaX = event.touches && event.touches.length > 1 ? 0 : event.touches[0].clientX - _this6.touchStartX;
-      };
-
-      var end = function end(event) {
-        if (hasPointerPenTouch(event)) {
-          _this6.touchDeltaX = event.clientX - _this6.touchStartX;
-        }
-
-        _this6._handleSwipe();
-
-        if (_this6._config.pause === 'hover') {
-          // If it's a touch-enabled device, mouseenter/leave are fired as
-          // part of the mouse compatibility events on first tap - the carousel
-          // would stop cycling until user tapped out of it;
-          // here, we listen for touchend, explicitly pause the carousel
-          // (as if it's the second time we tap on it, mouseenter compat event
-          // is NOT fired) and after a timeout (to allow for mouse compatibility
-          // events to fire) we explicitly restart cycling
-          _this6.pause();
-
-          if (_this6.touchTimeout) {
-            clearTimeout(_this6.touchTimeout);
-          }
-
-          _this6.touchTimeout = setTimeout(function (event) {
-            return _this6.cycle(event);
-          }, TOUCHEVENT_COMPAT_WAIT + _this6._config.interval);
-        }
-      };
-
-      SelectorEngine.find(SELECTOR_ITEM_IMG, this._element).forEach(function (itemImg) {
-        EventHandler.on(itemImg, EVENT_DRAG_START, function (event) {
-          return event.preventDefault();
-        });
       });
+    });
+    return maxRatio;
+  }
+  /**
+   * Get a pointer from an event object.
+   * @param {Object} event - The target event object.
+   * @param {boolean} endOnly - Indicates if only returns the end point coordinate or not.
+   * @returns {Object} The result pointer contains start and/or end point coordinates.
+   */
 
-      if (this._pointerEvent) {
-        EventHandler.on(this._element, EVENT_POINTERDOWN, function (event) {
-          return start(event);
-        });
-        EventHandler.on(this._element, EVENT_POINTERUP, function (event) {
-          return end(event);
-        });
 
-        this._element.classList.add(CLASS_NAME_POINTER_EVENT);
+  function getPointer(_ref2, endOnly) {
+    var pageX = _ref2.pageX,
+        pageY = _ref2.pageY;
+    var end = {
+      endX: pageX,
+      endY: pageY
+    };
+    return endOnly ? end : _objectSpread2({
+      startX: pageX,
+      startY: pageY
+    }, end);
+  }
+  /**
+   * Get the center point coordinate of a group of pointers.
+   * @param {Object} pointers - The target pointers.
+   * @returns {Object} The center point coordinate.
+   */
+
+
+  function getPointersCenter(pointers) {
+    var pageX = 0;
+    var pageY = 0;
+    var count = 0;
+    forEach(pointers, function (_ref3) {
+      var startX = _ref3.startX,
+          startY = _ref3.startY;
+      pageX += startX;
+      pageY += startY;
+      count += 1;
+    });
+    pageX /= count;
+    pageY /= count;
+    return {
+      pageX: pageX,
+      pageY: pageY
+    };
+  }
+  /**
+   * Get the max sizes in a rectangle under the given aspect ratio.
+   * @param {Object} data - The original sizes.
+   * @param {string} [type='contain'] - The adjust type.
+   * @returns {Object} The result sizes.
+   */
+
+
+  function getAdjustedSizes(_ref4) // or 'cover'
+  {
+    var aspectRatio = _ref4.aspectRatio,
+        height = _ref4.height,
+        width = _ref4.width;
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'contain';
+    var isValidWidth = isPositiveNumber(width);
+    var isValidHeight = isPositiveNumber(height);
+
+    if (isValidWidth && isValidHeight) {
+      var adjustedWidth = height * aspectRatio;
+
+      if (type === 'contain' && adjustedWidth > width || type === 'cover' && adjustedWidth < width) {
+        height = width / aspectRatio;
       } else {
-        EventHandler.on(this._element, EVENT_TOUCHSTART, function (event) {
-          return start(event);
-        });
-        EventHandler.on(this._element, EVENT_TOUCHMOVE, function (event) {
-          return move(event);
-        });
-        EventHandler.on(this._element, EVENT_TOUCHEND, function (event) {
-          return end(event);
-        });
+        width = height * aspectRatio;
       }
+    } else if (isValidWidth) {
+      height = width / aspectRatio;
+    } else if (isValidHeight) {
+      width = height * aspectRatio;
     }
-  }, {
-    key: "_keydown",
-    value: function _keydown(event) {
-      if (/input|textarea/i.test(event.target.tagName)) {
-        return;
+
+    return {
+      width: width,
+      height: height
+    };
+  }
+  /**
+   * Get the new sizes of a rectangle after rotated.
+   * @param {Object} data - The original sizes.
+   * @returns {Object} The result sizes.
+   */
+
+
+  function getRotatedSizes(_ref5) {
+    var width = _ref5.width,
+        height = _ref5.height,
+        degree = _ref5.degree;
+    degree = Math.abs(degree) % 180;
+
+    if (degree === 90) {
+      return {
+        width: height,
+        height: width
+      };
+    }
+
+    var arc = degree % 90 * Math.PI / 180;
+    var sinArc = Math.sin(arc);
+    var cosArc = Math.cos(arc);
+    var newWidth = width * cosArc + height * sinArc;
+    var newHeight = width * sinArc + height * cosArc;
+    return degree > 90 ? {
+      width: newHeight,
+      height: newWidth
+    } : {
+      width: newWidth,
+      height: newHeight
+    };
+  }
+  /**
+   * Get a canvas which drew the given image.
+   * @param {HTMLImageElement} image - The image for drawing.
+   * @param {Object} imageData - The image data.
+   * @param {Object} canvasData - The canvas data.
+   * @param {Object} options - The options.
+   * @returns {HTMLCanvasElement} The result canvas.
+   */
+
+
+  function getSourceCanvas(image, _ref6, _ref7, _ref8) {
+    var imageAspectRatio = _ref6.aspectRatio,
+        imageNaturalWidth = _ref6.naturalWidth,
+        imageNaturalHeight = _ref6.naturalHeight,
+        _ref6$rotate = _ref6.rotate,
+        rotate = _ref6$rotate === void 0 ? 0 : _ref6$rotate,
+        _ref6$scaleX = _ref6.scaleX,
+        scaleX = _ref6$scaleX === void 0 ? 1 : _ref6$scaleX,
+        _ref6$scaleY = _ref6.scaleY,
+        scaleY = _ref6$scaleY === void 0 ? 1 : _ref6$scaleY;
+    var aspectRatio = _ref7.aspectRatio,
+        naturalWidth = _ref7.naturalWidth,
+        naturalHeight = _ref7.naturalHeight;
+    var _ref8$fillColor = _ref8.fillColor,
+        fillColor = _ref8$fillColor === void 0 ? 'transparent' : _ref8$fillColor,
+        _ref8$imageSmoothingE = _ref8.imageSmoothingEnabled,
+        imageSmoothingEnabled = _ref8$imageSmoothingE === void 0 ? true : _ref8$imageSmoothingE,
+        _ref8$imageSmoothingQ = _ref8.imageSmoothingQuality,
+        imageSmoothingQuality = _ref8$imageSmoothingQ === void 0 ? 'low' : _ref8$imageSmoothingQ,
+        _ref8$maxWidth = _ref8.maxWidth,
+        maxWidth = _ref8$maxWidth === void 0 ? Infinity : _ref8$maxWidth,
+        _ref8$maxHeight = _ref8.maxHeight,
+        maxHeight = _ref8$maxHeight === void 0 ? Infinity : _ref8$maxHeight,
+        _ref8$minWidth = _ref8.minWidth,
+        minWidth = _ref8$minWidth === void 0 ? 0 : _ref8$minWidth,
+        _ref8$minHeight = _ref8.minHeight,
+        minHeight = _ref8$minHeight === void 0 ? 0 : _ref8$minHeight;
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    var maxSizes = getAdjustedSizes({
+      aspectRatio: aspectRatio,
+      width: maxWidth,
+      height: maxHeight
+    });
+    var minSizes = getAdjustedSizes({
+      aspectRatio: aspectRatio,
+      width: minWidth,
+      height: minHeight
+    }, 'cover');
+    var width = Math.min(maxSizes.width, Math.max(minSizes.width, naturalWidth));
+    var height = Math.min(maxSizes.height, Math.max(minSizes.height, naturalHeight)); // Note: should always use image's natural sizes for drawing as
+    // imageData.naturalWidth === canvasData.naturalHeight when rotate % 180 === 90
+
+    var destMaxSizes = getAdjustedSizes({
+      aspectRatio: imageAspectRatio,
+      width: maxWidth,
+      height: maxHeight
+    });
+    var destMinSizes = getAdjustedSizes({
+      aspectRatio: imageAspectRatio,
+      width: minWidth,
+      height: minHeight
+    }, 'cover');
+    var destWidth = Math.min(destMaxSizes.width, Math.max(destMinSizes.width, imageNaturalWidth));
+    var destHeight = Math.min(destMaxSizes.height, Math.max(destMinSizes.height, imageNaturalHeight));
+    var params = [-destWidth / 2, -destHeight / 2, destWidth, destHeight];
+    canvas.width = normalizeDecimalNumber(width);
+    canvas.height = normalizeDecimalNumber(height);
+    context.fillStyle = fillColor;
+    context.fillRect(0, 0, width, height);
+    context.save();
+    context.translate(width / 2, height / 2);
+    context.rotate(rotate * Math.PI / 180);
+    context.scale(scaleX, scaleY);
+    context.imageSmoothingEnabled = imageSmoothingEnabled;
+    context.imageSmoothingQuality = imageSmoothingQuality;
+    context.drawImage.apply(context, [image].concat(_toConsumableArray(params.map(function (param) {
+      return Math.floor(normalizeDecimalNumber(param));
+    }))));
+    context.restore();
+    return canvas;
+  }
+
+  var fromCharCode = String.fromCharCode;
+  /**
+   * Get string from char code in data view.
+   * @param {DataView} dataView - The data view for read.
+   * @param {number} start - The start index.
+   * @param {number} length - The read length.
+   * @returns {string} The read result.
+   */
+
+  function getStringFromCharCode(dataView, start, length) {
+    var str = '';
+    length += start;
+
+    for (var i = start; i < length; i += 1) {
+      str += fromCharCode(dataView.getUint8(i));
+    }
+
+    return str;
+  }
+
+  var REGEXP_DATA_URL_HEAD = /^data:.*,/;
+  /**
+   * Transform Data URL to array buffer.
+   * @param {string} dataURL - The Data URL to transform.
+   * @returns {ArrayBuffer} The result array buffer.
+   */
+
+  function dataURLToArrayBuffer(dataURL) {
+    var base64 = dataURL.replace(REGEXP_DATA_URL_HEAD, '');
+    var binary = atob(base64);
+    var arrayBuffer = new ArrayBuffer(binary.length);
+    var uint8 = new Uint8Array(arrayBuffer);
+    forEach(uint8, function (value, i) {
+      uint8[i] = binary.charCodeAt(i);
+    });
+    return arrayBuffer;
+  }
+  /**
+   * Transform array buffer to Data URL.
+   * @param {ArrayBuffer} arrayBuffer - The array buffer to transform.
+   * @param {string} mimeType - The mime type of the Data URL.
+   * @returns {string} The result Data URL.
+   */
+
+
+  function arrayBufferToDataURL(arrayBuffer, mimeType) {
+    var chunks = []; // Chunk Typed Array for better performance (#435)
+
+    var chunkSize = 8192;
+    var uint8 = new Uint8Array(arrayBuffer);
+
+    while (uint8.length > 0) {
+      // XXX: Babel's `toConsumableArray` helper will throw error in IE or Safari 9
+      // eslint-disable-next-line prefer-spread
+      chunks.push(fromCharCode.apply(null, toArray(uint8.subarray(0, chunkSize))));
+      uint8 = uint8.subarray(chunkSize);
+    }
+
+    return "data:".concat(mimeType, ";base64,").concat(btoa(chunks.join('')));
+  }
+  /**
+   * Get orientation value from given array buffer.
+   * @param {ArrayBuffer} arrayBuffer - The array buffer to read.
+   * @returns {number} The read orientation value.
+   */
+
+
+  function resetAndGetOrientation(arrayBuffer) {
+    var dataView = new DataView(arrayBuffer);
+    var orientation; // Ignores range error when the image does not have correct Exif information
+
+    try {
+      var littleEndian;
+      var app1Start;
+      var ifdStart; // Only handle JPEG image (start by 0xFFD8)
+
+      if (dataView.getUint8(0) === 0xFF && dataView.getUint8(1) === 0xD8) {
+        var length = dataView.byteLength;
+        var offset = 2;
+
+        while (offset + 1 < length) {
+          if (dataView.getUint8(offset) === 0xFF && dataView.getUint8(offset + 1) === 0xE1) {
+            app1Start = offset;
+            break;
+          }
+
+          offset += 1;
+        }
       }
 
-      var direction = KEY_TO_DIRECTION[event.key];
+      if (app1Start) {
+        var exifIDCode = app1Start + 4;
+        var tiffOffset = app1Start + 10;
 
-      if (direction) {
-        event.preventDefault();
+        if (getStringFromCharCode(dataView, exifIDCode, 4) === 'Exif') {
+          var endianness = dataView.getUint16(tiffOffset);
+          littleEndian = endianness === 0x4949;
 
-        this._slide(direction);
+          if (littleEndian || endianness === 0x4D4D
+          /* bigEndian */
+          ) {
+            if (dataView.getUint16(tiffOffset + 2, littleEndian) === 0x002A) {
+              var firstIFDOffset = dataView.getUint32(tiffOffset + 4, littleEndian);
+
+              if (firstIFDOffset >= 0x00000008) {
+                ifdStart = tiffOffset + firstIFDOffset;
+              }
+            }
+          }
+        }
       }
-    }
-  }, {
-    key: "_getItemIndex",
-    value: function _getItemIndex(element) {
-      this._items = element && element.parentNode ? SelectorEngine.find(SELECTOR_ITEM, element.parentNode) : [];
-      return this._items.indexOf(element);
-    }
-  }, {
-    key: "_getItemByOrder",
-    value: function _getItemByOrder(order, activeElement) {
-      var isNext = order === ORDER_NEXT;
-      return getNextActiveElement(this._items, activeElement, isNext, this._config.wrap);
-    }
-  }, {
-    key: "_triggerSlideEvent",
-    value: function _triggerSlideEvent(relatedTarget, eventDirectionName) {
-      var targetIndex = this._getItemIndex(relatedTarget);
 
-      var fromIndex = this._getItemIndex(SelectorEngine.findOne(SELECTOR_ACTIVE_ITEM, this._element));
+      if (ifdStart) {
+        var _length = dataView.getUint16(ifdStart, littleEndian);
 
-      return EventHandler.trigger(this._element, EVENT_SLIDE, {
-        relatedTarget: relatedTarget,
-        direction: eventDirectionName,
-        from: fromIndex,
-        to: targetIndex
-      });
-    }
-  }, {
-    key: "_setActiveIndicatorElement",
-    value: function _setActiveIndicatorElement(element) {
-      if (this._indicatorsElement) {
-        var activeIndicator = SelectorEngine.findOne(SELECTOR_ACTIVE$1, this._indicatorsElement);
-        activeIndicator.classList.remove(CLASS_NAME_ACTIVE$2);
-        activeIndicator.removeAttribute('aria-current');
-        var indicators = SelectorEngine.find(SELECTOR_INDICATOR, this._indicatorsElement);
+        var _offset;
 
-        for (var i = 0; i < indicators.length; i++) {
-          if (Number.parseInt(indicators[i].getAttribute('data-bs-slide-to'), 10) === this._getItemIndex(element)) {
-            indicators[i].classList.add(CLASS_NAME_ACTIVE$2);
-            indicators[i].setAttribute('aria-current', 'true');
+        var i;
+
+        for (i = 0; i < _length; i += 1) {
+          _offset = ifdStart + i * 12 + 2;
+
+          if (dataView.getUint16(_offset, littleEndian) === 0x0112
+          /* Orientation */
+          ) {
+            // 8 is the offset of the current tag's value
+            _offset += 8; // Get the original orientation value
+
+            orientation = dataView.getUint16(_offset, littleEndian); // Override the orientation with its default value
+
+            dataView.setUint16(_offset, 1, littleEndian);
             break;
           }
         }
       }
+    } catch (error) {
+      orientation = 1;
     }
-  }, {
-    key: "_updateInterval",
-    value: function _updateInterval() {
-      var element = this._activeElement || SelectorEngine.findOne(SELECTOR_ACTIVE_ITEM, this._element);
 
-      if (!element) {
-        return;
-      }
+    return orientation;
+  }
+  /**
+   * Parse Exif Orientation value.
+   * @param {number} orientation - The orientation to parse.
+   * @returns {Object} The parsed result.
+   */
 
-      var elementInterval = Number.parseInt(element.getAttribute('data-bs-interval'), 10);
 
-      if (elementInterval) {
-        this._config.defaultInterval = this._config.defaultInterval || this._config.interval;
-        this._config.interval = elementInterval;
-      } else {
-        this._config.interval = this._config.defaultInterval || this._config.interval;
-      }
+  function parseOrientation(orientation) {
+    var rotate = 0;
+    var scaleX = 1;
+    var scaleY = 1;
+
+    switch (orientation) {
+      // Flip horizontal
+      case 2:
+        scaleX = -1;
+        break;
+      // Rotate left 180°
+
+      case 3:
+        rotate = -180;
+        break;
+      // Flip vertical
+
+      case 4:
+        scaleY = -1;
+        break;
+      // Flip vertical and rotate right 90°
+
+      case 5:
+        rotate = 90;
+        scaleY = -1;
+        break;
+      // Rotate right 90°
+
+      case 6:
+        rotate = 90;
+        break;
+      // Flip horizontal and rotate right 90°
+
+      case 7:
+        rotate = 90;
+        scaleX = -1;
+        break;
+      // Rotate left 90°
+
+      case 8:
+        rotate = -90;
+        break;
     }
-  }, {
-    key: "_slide",
-    value: function _slide(directionOrOrder, element) {
-      var _this7 = this;
 
-      var order = this._directionToOrder(directionOrOrder);
+    return {
+      rotate: rotate,
+      scaleX: scaleX,
+      scaleY: scaleY
+    };
+  }
 
-      var activeElement = SelectorEngine.findOne(SELECTOR_ACTIVE_ITEM, this._element);
+  var render = {
+    render: function render() {
+      this.initContainer();
+      this.initCanvas();
+      this.initCropBox();
+      this.renderCanvas();
 
-      var activeElementIndex = this._getItemIndex(activeElement);
-
-      var nextElement = element || this._getItemByOrder(order, activeElement);
-
-      var nextElementIndex = this._getItemIndex(nextElement);
-
-      var isCycling = Boolean(this._interval);
-      var isNext = order === ORDER_NEXT;
-      var directionalClassName = isNext ? CLASS_NAME_START : CLASS_NAME_END;
-      var orderClassName = isNext ? CLASS_NAME_NEXT : CLASS_NAME_PREV;
-
-      var eventDirectionName = this._orderToDirection(order);
-
-      if (nextElement && nextElement.classList.contains(CLASS_NAME_ACTIVE$2)) {
-        this._isSliding = false;
-        return;
+      if (this.cropped) {
+        this.renderCropBox();
       }
-
-      if (this._isSliding) {
-        return;
-      }
-
-      var slideEvent = this._triggerSlideEvent(nextElement, eventDirectionName);
-
-      if (slideEvent.defaultPrevented) {
-        return;
-      }
-
-      if (!activeElement || !nextElement) {
-        // Some weirdness is happening, so we bail
-        return;
-      }
-
-      this._isSliding = true;
-
-      if (isCycling) {
-        this.pause();
-      }
-
-      this._setActiveIndicatorElement(nextElement);
-
-      this._activeElement = nextElement;
-
-      var triggerSlidEvent = function triggerSlidEvent() {
-        EventHandler.trigger(_this7._element, EVENT_SLID, {
-          relatedTarget: nextElement,
-          direction: eventDirectionName,
-          from: activeElementIndex,
-          to: nextElementIndex
-        });
+    },
+    initContainer: function initContainer() {
+      var element = this.element,
+          options = this.options,
+          container = this.container,
+          cropper = this.cropper;
+      var minWidth = Number(options.minContainerWidth);
+      var minHeight = Number(options.minContainerHeight);
+      addClass(cropper, CLASS_HIDDEN);
+      removeClass(element, CLASS_HIDDEN);
+      var containerData = {
+        width: Math.max(container.offsetWidth, minWidth >= 0 ? minWidth : MIN_CONTAINER_WIDTH),
+        height: Math.max(container.offsetHeight, minHeight >= 0 ? minHeight : MIN_CONTAINER_HEIGHT)
       };
+      this.containerData = containerData;
+      setStyle(cropper, {
+        width: containerData.width,
+        height: containerData.height
+      });
+      addClass(element, CLASS_HIDDEN);
+      removeClass(cropper, CLASS_HIDDEN);
+    },
+    // Canvas (image wrapper)
+    initCanvas: function initCanvas() {
+      var containerData = this.containerData,
+          imageData = this.imageData;
+      var viewMode = this.options.viewMode;
+      var rotated = Math.abs(imageData.rotate) % 180 === 90;
+      var naturalWidth = rotated ? imageData.naturalHeight : imageData.naturalWidth;
+      var naturalHeight = rotated ? imageData.naturalWidth : imageData.naturalHeight;
+      var aspectRatio = naturalWidth / naturalHeight;
+      var canvasWidth = containerData.width;
+      var canvasHeight = containerData.height;
 
-      if (this._element.classList.contains(CLASS_NAME_SLIDE)) {
-        nextElement.classList.add(orderClassName);
-        reflow(nextElement);
-        activeElement.classList.add(directionalClassName);
-        nextElement.classList.add(directionalClassName);
-
-        var completeCallBack = function completeCallBack() {
-          nextElement.classList.remove(directionalClassName, orderClassName);
-          nextElement.classList.add(CLASS_NAME_ACTIVE$2);
-          activeElement.classList.remove(CLASS_NAME_ACTIVE$2, orderClassName, directionalClassName);
-          _this7._isSliding = false;
-          setTimeout(triggerSlidEvent, 0);
-        };
-
-        this._queueCallback(completeCallBack, activeElement, true);
+      if (containerData.height * aspectRatio > containerData.width) {
+        if (viewMode === 3) {
+          canvasWidth = containerData.height * aspectRatio;
+        } else {
+          canvasHeight = containerData.width / aspectRatio;
+        }
+      } else if (viewMode === 3) {
+        canvasHeight = containerData.width / aspectRatio;
       } else {
-        activeElement.classList.remove(CLASS_NAME_ACTIVE$2);
-        nextElement.classList.add(CLASS_NAME_ACTIVE$2);
-        this._isSliding = false;
-        triggerSlidEvent();
+        canvasWidth = containerData.height * aspectRatio;
       }
 
-      if (isCycling) {
-        this.cycle();
-      }
-    }
-  }, {
-    key: "_directionToOrder",
-    value: function _directionToOrder(direction) {
-      if (![DIRECTION_RIGHT, DIRECTION_LEFT].includes(direction)) {
-        return direction;
-      }
+      var canvasData = {
+        aspectRatio: aspectRatio,
+        naturalWidth: naturalWidth,
+        naturalHeight: naturalHeight,
+        width: canvasWidth,
+        height: canvasHeight
+      };
+      this.canvasData = canvasData;
+      this.limited = viewMode === 1 || viewMode === 2;
+      this.limitCanvas(true, true);
+      canvasData.width = Math.min(Math.max(canvasData.width, canvasData.minWidth), canvasData.maxWidth);
+      canvasData.height = Math.min(Math.max(canvasData.height, canvasData.minHeight), canvasData.maxHeight);
+      canvasData.left = (containerData.width - canvasData.width) / 2;
+      canvasData.top = (containerData.height - canvasData.height) / 2;
+      canvasData.oldLeft = canvasData.left;
+      canvasData.oldTop = canvasData.top;
+      this.initialCanvasData = assign({}, canvasData);
+    },
+    limitCanvas: function limitCanvas(sizeLimited, positionLimited) {
+      var options = this.options,
+          containerData = this.containerData,
+          canvasData = this.canvasData,
+          cropBoxData = this.cropBoxData;
+      var viewMode = options.viewMode;
+      var aspectRatio = canvasData.aspectRatio;
+      var cropped = this.cropped && cropBoxData;
 
-      if (isRTL()) {
-        return direction === DIRECTION_LEFT ? ORDER_PREV : ORDER_NEXT;
-      }
+      if (sizeLimited) {
+        var minCanvasWidth = Number(options.minCanvasWidth) || 0;
+        var minCanvasHeight = Number(options.minCanvasHeight) || 0;
 
-      return direction === DIRECTION_LEFT ? ORDER_NEXT : ORDER_PREV;
-    }
-  }, {
-    key: "_orderToDirection",
-    value: function _orderToDirection(order) {
-      if (![ORDER_NEXT, ORDER_PREV].includes(order)) {
-        return order;
-      }
+        if (viewMode > 1) {
+          minCanvasWidth = Math.max(minCanvasWidth, containerData.width);
+          minCanvasHeight = Math.max(minCanvasHeight, containerData.height);
 
-      if (isRTL()) {
-        return order === ORDER_PREV ? DIRECTION_LEFT : DIRECTION_RIGHT;
-      }
+          if (viewMode === 3) {
+            if (minCanvasHeight * aspectRatio > minCanvasWidth) {
+              minCanvasWidth = minCanvasHeight * aspectRatio;
+            } else {
+              minCanvasHeight = minCanvasWidth / aspectRatio;
+            }
+          }
+        } else if (viewMode > 0) {
+          if (minCanvasWidth) {
+            minCanvasWidth = Math.max(minCanvasWidth, cropped ? cropBoxData.width : 0);
+          } else if (minCanvasHeight) {
+            minCanvasHeight = Math.max(minCanvasHeight, cropped ? cropBoxData.height : 0);
+          } else if (cropped) {
+            minCanvasWidth = cropBoxData.width;
+            minCanvasHeight = cropBoxData.height;
 
-      return order === ORDER_PREV ? DIRECTION_RIGHT : DIRECTION_LEFT;
-    } // Static
-
-  }], [{
-    key: "Default",
-    get: function get() {
-      return Default$a;
-    }
-  }, {
-    key: "NAME",
-    get: function get() {
-      return NAME$b;
-    }
-  }, {
-    key: "carouselInterface",
-    value: function carouselInterface(element, config) {
-      var data = Carousel.getOrCreateInstance(element, config);
-      var _config = data._config;
-
-      if (_typeof(config) === 'object') {
-        _config = _objectSpread(_objectSpread({}, _config), config);
-      }
-
-      var action = typeof config === 'string' ? config : _config.slide;
-
-      if (typeof config === 'number') {
-        data.to(config);
-      } else if (typeof action === 'string') {
-        if (typeof data[action] === 'undefined') {
-          throw new TypeError("No method named \"".concat(action, "\""));
+            if (minCanvasHeight * aspectRatio > minCanvasWidth) {
+              minCanvasWidth = minCanvasHeight * aspectRatio;
+            } else {
+              minCanvasHeight = minCanvasWidth / aspectRatio;
+            }
+          }
         }
 
-        data[action]();
-      } else if (_config.interval && _config.ride) {
-        data.pause();
-        data.cycle();
-      }
-    }
-  }, {
-    key: "jQueryInterface",
-    value: function jQueryInterface(config) {
-      return this.each(function () {
-        Carousel.carouselInterface(this, config);
-      });
-    }
-  }, {
-    key: "dataApiClickHandler",
-    value: function dataApiClickHandler(event) {
-      var target = getElementFromSelector(this);
+        var _getAdjustedSizes = getAdjustedSizes({
+          aspectRatio: aspectRatio,
+          width: minCanvasWidth,
+          height: minCanvasHeight
+        });
 
-      if (!target || !target.classList.contains(CLASS_NAME_CAROUSEL)) {
+        minCanvasWidth = _getAdjustedSizes.width;
+        minCanvasHeight = _getAdjustedSizes.height;
+        canvasData.minWidth = minCanvasWidth;
+        canvasData.minHeight = minCanvasHeight;
+        canvasData.maxWidth = Infinity;
+        canvasData.maxHeight = Infinity;
+      }
+
+      if (positionLimited) {
+        if (viewMode > (cropped ? 0 : 1)) {
+          var newCanvasLeft = containerData.width - canvasData.width;
+          var newCanvasTop = containerData.height - canvasData.height;
+          canvasData.minLeft = Math.min(0, newCanvasLeft);
+          canvasData.minTop = Math.min(0, newCanvasTop);
+          canvasData.maxLeft = Math.max(0, newCanvasLeft);
+          canvasData.maxTop = Math.max(0, newCanvasTop);
+
+          if (cropped && this.limited) {
+            canvasData.minLeft = Math.min(cropBoxData.left, cropBoxData.left + (cropBoxData.width - canvasData.width));
+            canvasData.minTop = Math.min(cropBoxData.top, cropBoxData.top + (cropBoxData.height - canvasData.height));
+            canvasData.maxLeft = cropBoxData.left;
+            canvasData.maxTop = cropBoxData.top;
+
+            if (viewMode === 2) {
+              if (canvasData.width >= containerData.width) {
+                canvasData.minLeft = Math.min(0, newCanvasLeft);
+                canvasData.maxLeft = Math.max(0, newCanvasLeft);
+              }
+
+              if (canvasData.height >= containerData.height) {
+                canvasData.minTop = Math.min(0, newCanvasTop);
+                canvasData.maxTop = Math.max(0, newCanvasTop);
+              }
+            }
+          }
+        } else {
+          canvasData.minLeft = -canvasData.width;
+          canvasData.minTop = -canvasData.height;
+          canvasData.maxLeft = containerData.width;
+          canvasData.maxTop = containerData.height;
+        }
+      }
+    },
+    renderCanvas: function renderCanvas(changed, transformed) {
+      var canvasData = this.canvasData,
+          imageData = this.imageData;
+
+      if (transformed) {
+        var _getRotatedSizes = getRotatedSizes({
+          width: imageData.naturalWidth * Math.abs(imageData.scaleX || 1),
+          height: imageData.naturalHeight * Math.abs(imageData.scaleY || 1),
+          degree: imageData.rotate || 0
+        }),
+            naturalWidth = _getRotatedSizes.width,
+            naturalHeight = _getRotatedSizes.height;
+
+        var width = canvasData.width * (naturalWidth / canvasData.naturalWidth);
+        var height = canvasData.height * (naturalHeight / canvasData.naturalHeight);
+        canvasData.left -= (width - canvasData.width) / 2;
+        canvasData.top -= (height - canvasData.height) / 2;
+        canvasData.width = width;
+        canvasData.height = height;
+        canvasData.aspectRatio = naturalWidth / naturalHeight;
+        canvasData.naturalWidth = naturalWidth;
+        canvasData.naturalHeight = naturalHeight;
+        this.limitCanvas(true, false);
+      }
+
+      if (canvasData.width > canvasData.maxWidth || canvasData.width < canvasData.minWidth) {
+        canvasData.left = canvasData.oldLeft;
+      }
+
+      if (canvasData.height > canvasData.maxHeight || canvasData.height < canvasData.minHeight) {
+        canvasData.top = canvasData.oldTop;
+      }
+
+      canvasData.width = Math.min(Math.max(canvasData.width, canvasData.minWidth), canvasData.maxWidth);
+      canvasData.height = Math.min(Math.max(canvasData.height, canvasData.minHeight), canvasData.maxHeight);
+      this.limitCanvas(false, true);
+      canvasData.left = Math.min(Math.max(canvasData.left, canvasData.minLeft), canvasData.maxLeft);
+      canvasData.top = Math.min(Math.max(canvasData.top, canvasData.minTop), canvasData.maxTop);
+      canvasData.oldLeft = canvasData.left;
+      canvasData.oldTop = canvasData.top;
+      setStyle(this.canvas, assign({
+        width: canvasData.width,
+        height: canvasData.height
+      }, getTransforms({
+        translateX: canvasData.left,
+        translateY: canvasData.top
+      })));
+      this.renderImage(changed);
+
+      if (this.cropped && this.limited) {
+        this.limitCropBox(true, true);
+      }
+    },
+    renderImage: function renderImage(changed) {
+      var canvasData = this.canvasData,
+          imageData = this.imageData;
+      var width = imageData.naturalWidth * (canvasData.width / canvasData.naturalWidth);
+      var height = imageData.naturalHeight * (canvasData.height / canvasData.naturalHeight);
+      assign(imageData, {
+        width: width,
+        height: height,
+        left: (canvasData.width - width) / 2,
+        top: (canvasData.height - height) / 2
+      });
+      setStyle(this.image, assign({
+        width: imageData.width,
+        height: imageData.height
+      }, getTransforms(assign({
+        translateX: imageData.left,
+        translateY: imageData.top
+      }, imageData))));
+
+      if (changed) {
+        this.output();
+      }
+    },
+    initCropBox: function initCropBox() {
+      var options = this.options,
+          canvasData = this.canvasData;
+      var aspectRatio = options.aspectRatio || options.initialAspectRatio;
+      var autoCropArea = Number(options.autoCropArea) || 0.8;
+      var cropBoxData = {
+        width: canvasData.width,
+        height: canvasData.height
+      };
+
+      if (aspectRatio) {
+        if (canvasData.height * aspectRatio > canvasData.width) {
+          cropBoxData.height = cropBoxData.width / aspectRatio;
+        } else {
+          cropBoxData.width = cropBoxData.height * aspectRatio;
+        }
+      }
+
+      this.cropBoxData = cropBoxData;
+      this.limitCropBox(true, true); // Initialize auto crop area
+
+      cropBoxData.width = Math.min(Math.max(cropBoxData.width, cropBoxData.minWidth), cropBoxData.maxWidth);
+      cropBoxData.height = Math.min(Math.max(cropBoxData.height, cropBoxData.minHeight), cropBoxData.maxHeight); // The width/height of auto crop area must large than "minWidth/Height"
+
+      cropBoxData.width = Math.max(cropBoxData.minWidth, cropBoxData.width * autoCropArea);
+      cropBoxData.height = Math.max(cropBoxData.minHeight, cropBoxData.height * autoCropArea);
+      cropBoxData.left = canvasData.left + (canvasData.width - cropBoxData.width) / 2;
+      cropBoxData.top = canvasData.top + (canvasData.height - cropBoxData.height) / 2;
+      cropBoxData.oldLeft = cropBoxData.left;
+      cropBoxData.oldTop = cropBoxData.top;
+      this.initialCropBoxData = assign({}, cropBoxData);
+    },
+    limitCropBox: function limitCropBox(sizeLimited, positionLimited) {
+      var options = this.options,
+          containerData = this.containerData,
+          canvasData = this.canvasData,
+          cropBoxData = this.cropBoxData,
+          limited = this.limited;
+      var aspectRatio = options.aspectRatio;
+
+      if (sizeLimited) {
+        var minCropBoxWidth = Number(options.minCropBoxWidth) || 0;
+        var minCropBoxHeight = Number(options.minCropBoxHeight) || 0;
+        var maxCropBoxWidth = limited ? Math.min(containerData.width, canvasData.width, canvasData.width + canvasData.left, containerData.width - canvasData.left) : containerData.width;
+        var maxCropBoxHeight = limited ? Math.min(containerData.height, canvasData.height, canvasData.height + canvasData.top, containerData.height - canvasData.top) : containerData.height; // The min/maxCropBoxWidth/Height must be less than container's width/height
+
+        minCropBoxWidth = Math.min(minCropBoxWidth, containerData.width);
+        minCropBoxHeight = Math.min(minCropBoxHeight, containerData.height);
+
+        if (aspectRatio) {
+          if (minCropBoxWidth && minCropBoxHeight) {
+            if (minCropBoxHeight * aspectRatio > minCropBoxWidth) {
+              minCropBoxHeight = minCropBoxWidth / aspectRatio;
+            } else {
+              minCropBoxWidth = minCropBoxHeight * aspectRatio;
+            }
+          } else if (minCropBoxWidth) {
+            minCropBoxHeight = minCropBoxWidth / aspectRatio;
+          } else if (minCropBoxHeight) {
+            minCropBoxWidth = minCropBoxHeight * aspectRatio;
+          }
+
+          if (maxCropBoxHeight * aspectRatio > maxCropBoxWidth) {
+            maxCropBoxHeight = maxCropBoxWidth / aspectRatio;
+          } else {
+            maxCropBoxWidth = maxCropBoxHeight * aspectRatio;
+          }
+        } // The minWidth/Height must be less than maxWidth/Height
+
+
+        cropBoxData.minWidth = Math.min(minCropBoxWidth, maxCropBoxWidth);
+        cropBoxData.minHeight = Math.min(minCropBoxHeight, maxCropBoxHeight);
+        cropBoxData.maxWidth = maxCropBoxWidth;
+        cropBoxData.maxHeight = maxCropBoxHeight;
+      }
+
+      if (positionLimited) {
+        if (limited) {
+          cropBoxData.minLeft = Math.max(0, canvasData.left);
+          cropBoxData.minTop = Math.max(0, canvasData.top);
+          cropBoxData.maxLeft = Math.min(containerData.width, canvasData.left + canvasData.width) - cropBoxData.width;
+          cropBoxData.maxTop = Math.min(containerData.height, canvasData.top + canvasData.height) - cropBoxData.height;
+        } else {
+          cropBoxData.minLeft = 0;
+          cropBoxData.minTop = 0;
+          cropBoxData.maxLeft = containerData.width - cropBoxData.width;
+          cropBoxData.maxTop = containerData.height - cropBoxData.height;
+        }
+      }
+    },
+    renderCropBox: function renderCropBox() {
+      var options = this.options,
+          containerData = this.containerData,
+          cropBoxData = this.cropBoxData;
+
+      if (cropBoxData.width > cropBoxData.maxWidth || cropBoxData.width < cropBoxData.minWidth) {
+        cropBoxData.left = cropBoxData.oldLeft;
+      }
+
+      if (cropBoxData.height > cropBoxData.maxHeight || cropBoxData.height < cropBoxData.minHeight) {
+        cropBoxData.top = cropBoxData.oldTop;
+      }
+
+      cropBoxData.width = Math.min(Math.max(cropBoxData.width, cropBoxData.minWidth), cropBoxData.maxWidth);
+      cropBoxData.height = Math.min(Math.max(cropBoxData.height, cropBoxData.minHeight), cropBoxData.maxHeight);
+      this.limitCropBox(false, true);
+      cropBoxData.left = Math.min(Math.max(cropBoxData.left, cropBoxData.minLeft), cropBoxData.maxLeft);
+      cropBoxData.top = Math.min(Math.max(cropBoxData.top, cropBoxData.minTop), cropBoxData.maxTop);
+      cropBoxData.oldLeft = cropBoxData.left;
+      cropBoxData.oldTop = cropBoxData.top;
+
+      if (options.movable && options.cropBoxMovable) {
+        // Turn to move the canvas when the crop box is equal to the container
+        setData(this.face, DATA_ACTION, cropBoxData.width >= containerData.width && cropBoxData.height >= containerData.height ? ACTION_MOVE : ACTION_ALL);
+      }
+
+      setStyle(this.cropBox, assign({
+        width: cropBoxData.width,
+        height: cropBoxData.height
+      }, getTransforms({
+        translateX: cropBoxData.left,
+        translateY: cropBoxData.top
+      })));
+
+      if (this.cropped && this.limited) {
+        this.limitCanvas(true, true);
+      }
+
+      if (!this.disabled) {
+        this.output();
+      }
+    },
+    output: function output() {
+      this.preview();
+      dispatchEvent(this.element, EVENT_CROP, this.getData());
+    }
+  };
+  var preview = {
+    initPreview: function initPreview() {
+      var element = this.element,
+          crossOrigin = this.crossOrigin;
+      var preview = this.options.preview;
+      var url = crossOrigin ? this.crossOriginUrl : this.url;
+      var alt = element.alt || 'The image to preview';
+      var image = document.createElement('img');
+
+      if (crossOrigin) {
+        image.crossOrigin = crossOrigin;
+      }
+
+      image.src = url;
+      image.alt = alt;
+      this.viewBox.appendChild(image);
+      this.viewBoxImage = image;
+
+      if (!preview) {
         return;
       }
 
-      var config = _objectSpread(_objectSpread({}, Manipulator.getDataAttributes(target)), Manipulator.getDataAttributes(this));
+      var previews = preview;
 
-      var slideIndex = this.getAttribute('data-bs-slide-to');
-
-      if (slideIndex) {
-        config.interval = false;
+      if (typeof preview === 'string') {
+        previews = element.ownerDocument.querySelectorAll(preview);
+      } else if (preview.querySelector) {
+        previews = [preview];
       }
 
-      Carousel.carouselInterface(target, config);
+      this.previews = previews;
+      forEach(previews, function (el) {
+        var img = document.createElement('img'); // Save the original size for recover
 
-      if (slideIndex) {
-        Carousel.getInstance(target).to(slideIndex);
+        setData(el, DATA_PREVIEW, {
+          width: el.offsetWidth,
+          height: el.offsetHeight,
+          html: el.innerHTML
+        });
+
+        if (crossOrigin) {
+          img.crossOrigin = crossOrigin;
+        }
+
+        img.src = url;
+        img.alt = alt;
+        /**
+         * Override img element styles
+         * Add `display:block` to avoid margin top issue
+         * Add `height:auto` to override `height` attribute on IE8
+         * (Occur only when margin-top <= -height)
+         */
+
+        img.style.cssText = 'display:block;' + 'width:100%;' + 'height:auto;' + 'min-width:0!important;' + 'min-height:0!important;' + 'max-width:none!important;' + 'max-height:none!important;' + 'image-orientation:0deg!important;"';
+        el.innerHTML = '';
+        el.appendChild(img);
+      });
+    },
+    resetPreview: function resetPreview() {
+      forEach(this.previews, function (element) {
+        var data = getData(element, DATA_PREVIEW);
+        setStyle(element, {
+          width: data.width,
+          height: data.height
+        });
+        element.innerHTML = data.html;
+        removeData(element, DATA_PREVIEW);
+      });
+    },
+    preview: function preview() {
+      var imageData = this.imageData,
+          canvasData = this.canvasData,
+          cropBoxData = this.cropBoxData;
+      var cropBoxWidth = cropBoxData.width,
+          cropBoxHeight = cropBoxData.height;
+      var width = imageData.width,
+          height = imageData.height;
+      var left = cropBoxData.left - canvasData.left - imageData.left;
+      var top = cropBoxData.top - canvasData.top - imageData.top;
+
+      if (!this.cropped || this.disabled) {
+        return;
       }
+
+      setStyle(this.viewBoxImage, assign({
+        width: width,
+        height: height
+      }, getTransforms(assign({
+        translateX: -left,
+        translateY: -top
+      }, imageData))));
+      forEach(this.previews, function (element) {
+        var data = getData(element, DATA_PREVIEW);
+        var originalWidth = data.width;
+        var originalHeight = data.height;
+        var newWidth = originalWidth;
+        var newHeight = originalHeight;
+        var ratio = 1;
+
+        if (cropBoxWidth) {
+          ratio = originalWidth / cropBoxWidth;
+          newHeight = cropBoxHeight * ratio;
+        }
+
+        if (cropBoxHeight && newHeight > originalHeight) {
+          ratio = originalHeight / cropBoxHeight;
+          newWidth = cropBoxWidth * ratio;
+          newHeight = originalHeight;
+        }
+
+        setStyle(element, {
+          width: newWidth,
+          height: newHeight
+        });
+        setStyle(element.getElementsByTagName('img')[0], assign({
+          width: width * ratio,
+          height: height * ratio
+        }, getTransforms(assign({
+          translateX: -left * ratio,
+          translateY: -top * ratio
+        }, imageData))));
+      });
+    }
+  };
+  var events = {
+    bind: function bind() {
+      var element = this.element,
+          options = this.options,
+          cropper = this.cropper;
+
+      if (isFunction(options.cropstart)) {
+        addListener(element, EVENT_CROP_START, options.cropstart);
+      }
+
+      if (isFunction(options.cropmove)) {
+        addListener(element, EVENT_CROP_MOVE, options.cropmove);
+      }
+
+      if (isFunction(options.cropend)) {
+        addListener(element, EVENT_CROP_END, options.cropend);
+      }
+
+      if (isFunction(options.crop)) {
+        addListener(element, EVENT_CROP, options.crop);
+      }
+
+      if (isFunction(options.zoom)) {
+        addListener(element, EVENT_ZOOM, options.zoom);
+      }
+
+      addListener(cropper, EVENT_POINTER_DOWN, this.onCropStart = this.cropStart.bind(this));
+
+      if (options.zoomable && options.zoomOnWheel) {
+        addListener(cropper, EVENT_WHEEL, this.onWheel = this.wheel.bind(this), {
+          passive: false,
+          capture: true
+        });
+      }
+
+      if (options.toggleDragModeOnDblclick) {
+        addListener(cropper, EVENT_DBLCLICK, this.onDblclick = this.dblclick.bind(this));
+      }
+
+      addListener(element.ownerDocument, EVENT_POINTER_MOVE, this.onCropMove = this.cropMove.bind(this));
+      addListener(element.ownerDocument, EVENT_POINTER_UP, this.onCropEnd = this.cropEnd.bind(this));
+
+      if (options.responsive) {
+        addListener(window, EVENT_RESIZE, this.onResize = this.resize.bind(this));
+      }
+    },
+    unbind: function unbind() {
+      var element = this.element,
+          options = this.options,
+          cropper = this.cropper;
+
+      if (isFunction(options.cropstart)) {
+        removeListener(element, EVENT_CROP_START, options.cropstart);
+      }
+
+      if (isFunction(options.cropmove)) {
+        removeListener(element, EVENT_CROP_MOVE, options.cropmove);
+      }
+
+      if (isFunction(options.cropend)) {
+        removeListener(element, EVENT_CROP_END, options.cropend);
+      }
+
+      if (isFunction(options.crop)) {
+        removeListener(element, EVENT_CROP, options.crop);
+      }
+
+      if (isFunction(options.zoom)) {
+        removeListener(element, EVENT_ZOOM, options.zoom);
+      }
+
+      removeListener(cropper, EVENT_POINTER_DOWN, this.onCropStart);
+
+      if (options.zoomable && options.zoomOnWheel) {
+        removeListener(cropper, EVENT_WHEEL, this.onWheel, {
+          passive: false,
+          capture: true
+        });
+      }
+
+      if (options.toggleDragModeOnDblclick) {
+        removeListener(cropper, EVENT_DBLCLICK, this.onDblclick);
+      }
+
+      removeListener(element.ownerDocument, EVENT_POINTER_MOVE, this.onCropMove);
+      removeListener(element.ownerDocument, EVENT_POINTER_UP, this.onCropEnd);
+
+      if (options.responsive) {
+        removeListener(window, EVENT_RESIZE, this.onResize);
+      }
+    }
+  };
+  var handlers = {
+    resize: function resize() {
+      if (this.disabled) {
+        return;
+      }
+
+      var options = this.options,
+          container = this.container,
+          containerData = this.containerData;
+      var ratioX = container.offsetWidth / containerData.width;
+      var ratioY = container.offsetHeight / containerData.height;
+      var ratio = Math.abs(ratioX - 1) > Math.abs(ratioY - 1) ? ratioX : ratioY; // Resize when width changed or height changed
+
+      if (ratio !== 1) {
+        var canvasData;
+        var cropBoxData;
+
+        if (options.restore) {
+          canvasData = this.getCanvasData();
+          cropBoxData = this.getCropBoxData();
+        }
+
+        this.render();
+
+        if (options.restore) {
+          this.setCanvasData(forEach(canvasData, function (n, i) {
+            canvasData[i] = n * ratio;
+          }));
+          this.setCropBoxData(forEach(cropBoxData, function (n, i) {
+            cropBoxData[i] = n * ratio;
+          }));
+        }
+      }
+    },
+    dblclick: function dblclick() {
+      if (this.disabled || this.options.dragMode === DRAG_MODE_NONE) {
+        return;
+      }
+
+      this.setDragMode(hasClass(this.dragBox, CLASS_CROP) ? DRAG_MODE_MOVE : DRAG_MODE_CROP);
+    },
+    wheel: function wheel(event) {
+      var _this = this;
+
+      var ratio = Number(this.options.wheelZoomRatio) || 0.1;
+      var delta = 1;
+
+      if (this.disabled) {
+        return;
+      }
+
+      event.preventDefault(); // Limit wheel speed to prevent zoom too fast (#21)
+
+      if (this.wheeling) {
+        return;
+      }
+
+      this.wheeling = true;
+      setTimeout(function () {
+        _this.wheeling = false;
+      }, 50);
+
+      if (event.deltaY) {
+        delta = event.deltaY > 0 ? 1 : -1;
+      } else if (event.wheelDelta) {
+        delta = -event.wheelDelta / 120;
+      } else if (event.detail) {
+        delta = event.detail > 0 ? 1 : -1;
+      }
+
+      this.zoom(-delta * ratio, event);
+    },
+    cropStart: function cropStart(event) {
+      var buttons = event.buttons,
+          button = event.button;
+
+      if (this.disabled // Handle mouse event and pointer event and ignore touch event
+      || (event.type === 'mousedown' || event.type === 'pointerdown' && event.pointerType === 'mouse') && ( // No primary button (Usually the left button)
+      isNumber(buttons) && buttons !== 1 || isNumber(button) && button !== 0 // Open context menu
+      || event.ctrlKey)) {
+        return;
+      }
+
+      var options = this.options,
+          pointers = this.pointers;
+      var action;
+
+      if (event.changedTouches) {
+        // Handle touch event
+        forEach(event.changedTouches, function (touch) {
+          pointers[touch.identifier] = getPointer(touch);
+        });
+      } else {
+        // Handle mouse event and pointer event
+        pointers[event.pointerId || 0] = getPointer(event);
+      }
+
+      if (Object.keys(pointers).length > 1 && options.zoomable && options.zoomOnTouch) {
+        action = ACTION_ZOOM;
+      } else {
+        action = getData(event.target, DATA_ACTION);
+      }
+
+      if (!REGEXP_ACTIONS.test(action)) {
+        return;
+      }
+
+      if (dispatchEvent(this.element, EVENT_CROP_START, {
+        originalEvent: event,
+        action: action
+      }) === false) {
+        return;
+      } // This line is required for preventing page zooming in iOS browsers
+
 
       event.preventDefault();
-    }
-  }]);
+      this.action = action;
+      this.cropping = false;
 
-  return Carousel;
-}(BaseComponent);
-/**
- * ------------------------------------------------------------------------
- * Data Api implementation
- * ------------------------------------------------------------------------
- */
-
-
-EventHandler.on(document, EVENT_CLICK_DATA_API$5, SELECTOR_DATA_SLIDE, Carousel.dataApiClickHandler);
-EventHandler.on(window, EVENT_LOAD_DATA_API$2, function () {
-  var carousels = SelectorEngine.find(SELECTOR_DATA_RIDE);
-
-  for (var i = 0, len = carousels.length; i < len; i++) {
-    Carousel.carouselInterface(carousels[i], Carousel.getInstance(carousels[i]));
-  }
-});
-/**
- * ------------------------------------------------------------------------
- * jQuery
- * ------------------------------------------------------------------------
- * add .Carousel to jQuery only if jQuery is present
- */
-
-defineJQueryPlugin(Carousel);
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): collapse.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-var NAME$a = 'collapse';
-var DATA_KEY$9 = 'bs.collapse';
-var EVENT_KEY$9 = ".".concat(DATA_KEY$9);
-var DATA_API_KEY$5 = '.data-api';
-var Default$9 = {
-  toggle: true,
-  parent: null
-};
-var DefaultType$9 = {
-  toggle: 'boolean',
-  parent: '(null|element)'
-};
-var EVENT_SHOW$5 = "show".concat(EVENT_KEY$9);
-var EVENT_SHOWN$5 = "shown".concat(EVENT_KEY$9);
-var EVENT_HIDE$5 = "hide".concat(EVENT_KEY$9);
-var EVENT_HIDDEN$5 = "hidden".concat(EVENT_KEY$9);
-var EVENT_CLICK_DATA_API$4 = "click".concat(EVENT_KEY$9).concat(DATA_API_KEY$5);
-var CLASS_NAME_SHOW$7 = 'show';
-var CLASS_NAME_COLLAPSE = 'collapse';
-var CLASS_NAME_COLLAPSING = 'collapsing';
-var CLASS_NAME_COLLAPSED = 'collapsed';
-var CLASS_NAME_DEEPER_CHILDREN = ":scope .".concat(CLASS_NAME_COLLAPSE, " .").concat(CLASS_NAME_COLLAPSE);
-var CLASS_NAME_HORIZONTAL = 'collapse-horizontal';
-var WIDTH = 'width';
-var HEIGHT = 'height';
-var SELECTOR_ACTIVES = '.collapse.show, .collapse.collapsing';
-var SELECTOR_DATA_TOGGLE$4 = '[data-bs-toggle="collapse"]';
-/**
- * ------------------------------------------------------------------------
- * Class Definition
- * ------------------------------------------------------------------------
- */
-
-var Collapse = /*#__PURE__*/function (_BaseComponent4) {
-  _inherits(Collapse, _BaseComponent4);
-
-  var _super4 = _createSuper(Collapse);
-
-  function Collapse(element, config) {
-    var _this8;
-
-    _classCallCheck(this, Collapse);
-
-    _this8 = _super4.call(this, element);
-    _this8._isTransitioning = false;
-    _this8._config = _this8._getConfig(config);
-    _this8._triggerArray = [];
-    var toggleList = SelectorEngine.find(SELECTOR_DATA_TOGGLE$4);
-
-    for (var i = 0, len = toggleList.length; i < len; i++) {
-      var elem = toggleList[i];
-      var selector = getSelectorFromElement(elem);
-      var filterElement = SelectorEngine.find(selector).filter(function (foundElem) {
-        return foundElem === _this8._element;
-      });
-
-      if (selector !== null && filterElement.length) {
-        _this8._selector = selector;
-
-        _this8._triggerArray.push(elem);
+      if (action === ACTION_CROP) {
+        this.cropping = true;
+        addClass(this.dragBox, CLASS_MODAL);
       }
-    }
+    },
+    cropMove: function cropMove(event) {
+      var action = this.action;
 
-    _this8._initializeChildren();
+      if (this.disabled || !action) {
+        return;
+      }
 
-    if (!_this8._config.parent) {
-      _this8._addAriaAndCollapsedClass(_this8._triggerArray, _this8._isShown());
-    }
+      var pointers = this.pointers;
+      event.preventDefault();
 
-    if (_this8._config.toggle) {
-      _this8.toggle();
-    }
+      if (dispatchEvent(this.element, EVENT_CROP_MOVE, {
+        originalEvent: event,
+        action: action
+      }) === false) {
+        return;
+      }
 
-    return _this8;
-  } // Getters
-
-
-  _createClass(Collapse, [{
-    key: "toggle",
-    value: // Public
-    function toggle() {
-      if (this._isShown()) {
-        this.hide();
+      if (event.changedTouches) {
+        forEach(event.changedTouches, function (touch) {
+          // The first parameter should not be undefined (#432)
+          assign(pointers[touch.identifier] || {}, getPointer(touch, true));
+        });
       } else {
-        this.show();
+        assign(pointers[event.pointerId || 0] || {}, getPointer(event, true));
       }
-    }
-  }, {
-    key: "show",
-    value: function show() {
-      var _this9 = this;
 
-      if (this._isTransitioning || this._isShown()) {
+      this.change(event);
+    },
+    cropEnd: function cropEnd(event) {
+      if (this.disabled) {
         return;
       }
 
-      var actives = [];
-      var activesData;
+      var action = this.action,
+          pointers = this.pointers;
 
-      if (this._config.parent) {
-        var children = SelectorEngine.find(CLASS_NAME_DEEPER_CHILDREN, this._config.parent);
-        actives = SelectorEngine.find(SELECTOR_ACTIVES, this._config.parent).filter(function (elem) {
-          return !children.includes(elem);
-        }); // remove children if greater depth
-      }
-
-      var container = SelectorEngine.findOne(this._selector);
-
-      if (actives.length) {
-        var tempActiveData = actives.find(function (elem) {
-          return container !== elem;
+      if (event.changedTouches) {
+        forEach(event.changedTouches, function (touch) {
+          delete pointers[touch.identifier];
         });
-        activesData = tempActiveData ? Collapse.getInstance(tempActiveData) : null;
-
-        if (activesData && activesData._isTransitioning) {
-          return;
-        }
-      }
-
-      var startEvent = EventHandler.trigger(this._element, EVENT_SHOW$5);
-
-      if (startEvent.defaultPrevented) {
-        return;
-      }
-
-      actives.forEach(function (elemActive) {
-        if (container !== elemActive) {
-          Collapse.getOrCreateInstance(elemActive, {
-            toggle: false
-          }).hide();
-        }
-
-        if (!activesData) {
-          Data.set(elemActive, DATA_KEY$9, null);
-        }
-      });
-
-      var dimension = this._getDimension();
-
-      this._element.classList.remove(CLASS_NAME_COLLAPSE);
-
-      this._element.classList.add(CLASS_NAME_COLLAPSING);
-
-      this._element.style[dimension] = 0;
-
-      this._addAriaAndCollapsedClass(this._triggerArray, true);
-
-      this._isTransitioning = true;
-
-      var complete = function complete() {
-        _this9._isTransitioning = false;
-
-        _this9._element.classList.remove(CLASS_NAME_COLLAPSING);
-
-        _this9._element.classList.add(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW$7);
-
-        _this9._element.style[dimension] = '';
-        EventHandler.trigger(_this9._element, EVENT_SHOWN$5);
-      };
-
-      var capitalizedDimension = dimension[0].toUpperCase() + dimension.slice(1);
-      var scrollSize = "scroll".concat(capitalizedDimension);
-
-      this._queueCallback(complete, this._element, true);
-
-      this._element.style[dimension] = "".concat(this._element[scrollSize], "px");
-    }
-  }, {
-    key: "hide",
-    value: function hide() {
-      var _this10 = this;
-
-      if (this._isTransitioning || !this._isShown()) {
-        return;
-      }
-
-      var startEvent = EventHandler.trigger(this._element, EVENT_HIDE$5);
-
-      if (startEvent.defaultPrevented) {
-        return;
-      }
-
-      var dimension = this._getDimension();
-
-      this._element.style[dimension] = "".concat(this._element.getBoundingClientRect()[dimension], "px");
-      reflow(this._element);
-
-      this._element.classList.add(CLASS_NAME_COLLAPSING);
-
-      this._element.classList.remove(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW$7);
-
-      var triggerArrayLength = this._triggerArray.length;
-
-      for (var i = 0; i < triggerArrayLength; i++) {
-        var trigger = this._triggerArray[i];
-        var elem = getElementFromSelector(trigger);
-
-        if (elem && !this._isShown(elem)) {
-          this._addAriaAndCollapsedClass([trigger], false);
-        }
-      }
-
-      this._isTransitioning = true;
-
-      var complete = function complete() {
-        _this10._isTransitioning = false;
-
-        _this10._element.classList.remove(CLASS_NAME_COLLAPSING);
-
-        _this10._element.classList.add(CLASS_NAME_COLLAPSE);
-
-        EventHandler.trigger(_this10._element, EVENT_HIDDEN$5);
-      };
-
-      this._element.style[dimension] = '';
-
-      this._queueCallback(complete, this._element, true);
-    }
-  }, {
-    key: "_isShown",
-    value: function _isShown() {
-      var element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._element;
-      return element.classList.contains(CLASS_NAME_SHOW$7);
-    } // Private
-
-  }, {
-    key: "_getConfig",
-    value: function _getConfig(config) {
-      config = _objectSpread(_objectSpread(_objectSpread({}, Default$9), Manipulator.getDataAttributes(this._element)), config);
-      config.toggle = Boolean(config.toggle); // Coerce string values
-
-      config.parent = getElement(config.parent);
-      typeCheckConfig(NAME$a, config, DefaultType$9);
-      return config;
-    }
-  }, {
-    key: "_getDimension",
-    value: function _getDimension() {
-      return this._element.classList.contains(CLASS_NAME_HORIZONTAL) ? WIDTH : HEIGHT;
-    }
-  }, {
-    key: "_initializeChildren",
-    value: function _initializeChildren() {
-      var _this11 = this;
-
-      if (!this._config.parent) {
-        return;
-      }
-
-      var children = SelectorEngine.find(CLASS_NAME_DEEPER_CHILDREN, this._config.parent);
-      SelectorEngine.find(SELECTOR_DATA_TOGGLE$4, this._config.parent).filter(function (elem) {
-        return !children.includes(elem);
-      }).forEach(function (element) {
-        var selected = getElementFromSelector(element);
-
-        if (selected) {
-          _this11._addAriaAndCollapsedClass([element], _this11._isShown(selected));
-        }
-      });
-    }
-  }, {
-    key: "_addAriaAndCollapsedClass",
-    value: function _addAriaAndCollapsedClass(triggerArray, isOpen) {
-      if (!triggerArray.length) {
-        return;
-      }
-
-      triggerArray.forEach(function (elem) {
-        if (isOpen) {
-          elem.classList.remove(CLASS_NAME_COLLAPSED);
-        } else {
-          elem.classList.add(CLASS_NAME_COLLAPSED);
-        }
-
-        elem.setAttribute('aria-expanded', isOpen);
-      });
-    } // Static
-
-  }], [{
-    key: "Default",
-    get: function get() {
-      return Default$9;
-    }
-  }, {
-    key: "NAME",
-    get: function get() {
-      return NAME$a;
-    }
-  }, {
-    key: "jQueryInterface",
-    value: function jQueryInterface(config) {
-      return this.each(function () {
-        var _config = {};
-
-        if (typeof config === 'string' && /show|hide/.test(config)) {
-          _config.toggle = false;
-        }
-
-        var data = Collapse.getOrCreateInstance(this, _config);
-
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"".concat(config, "\""));
-          }
-
-          data[config]();
-        }
-      });
-    }
-  }]);
-
-  return Collapse;
-}(BaseComponent);
-/**
- * ------------------------------------------------------------------------
- * Data Api implementation
- * ------------------------------------------------------------------------
- */
-
-
-EventHandler.on(document, EVENT_CLICK_DATA_API$4, SELECTOR_DATA_TOGGLE$4, function (event) {
-  // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
-  if (event.target.tagName === 'A' || event.delegateTarget && event.delegateTarget.tagName === 'A') {
-    event.preventDefault();
-  }
-
-  var selector = getSelectorFromElement(this);
-  var selectorElements = SelectorEngine.find(selector);
-  selectorElements.forEach(function (element) {
-    Collapse.getOrCreateInstance(element, {
-      toggle: false
-    }).toggle();
-  });
-});
-/**
- * ------------------------------------------------------------------------
- * jQuery
- * ------------------------------------------------------------------------
- * add .Collapse to jQuery only if jQuery is present
- */
-
-defineJQueryPlugin(Collapse);
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): dropdown.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-var NAME$9 = 'dropdown';
-var DATA_KEY$8 = 'bs.dropdown';
-var EVENT_KEY$8 = ".".concat(DATA_KEY$8);
-var DATA_API_KEY$4 = '.data-api';
-var ESCAPE_KEY$2 = 'Escape';
-var SPACE_KEY = 'Space';
-var TAB_KEY$1 = 'Tab';
-var ARROW_UP_KEY = 'ArrowUp';
-var ARROW_DOWN_KEY = 'ArrowDown';
-var RIGHT_MOUSE_BUTTON = 2; // MouseEvent.button value for the secondary button, usually the right button
-
-var REGEXP_KEYDOWN = new RegExp("".concat(ARROW_UP_KEY, "|").concat(ARROW_DOWN_KEY, "|").concat(ESCAPE_KEY$2));
-var EVENT_HIDE$4 = "hide".concat(EVENT_KEY$8);
-var EVENT_HIDDEN$4 = "hidden".concat(EVENT_KEY$8);
-var EVENT_SHOW$4 = "show".concat(EVENT_KEY$8);
-var EVENT_SHOWN$4 = "shown".concat(EVENT_KEY$8);
-var EVENT_CLICK_DATA_API$3 = "click".concat(EVENT_KEY$8).concat(DATA_API_KEY$4);
-var EVENT_KEYDOWN_DATA_API = "keydown".concat(EVENT_KEY$8).concat(DATA_API_KEY$4);
-var EVENT_KEYUP_DATA_API = "keyup".concat(EVENT_KEY$8).concat(DATA_API_KEY$4);
-var CLASS_NAME_SHOW$6 = 'show';
-var CLASS_NAME_DROPUP = 'dropup';
-var CLASS_NAME_DROPEND = 'dropend';
-var CLASS_NAME_DROPSTART = 'dropstart';
-var CLASS_NAME_NAVBAR = 'navbar';
-var SELECTOR_DATA_TOGGLE$3 = '[data-bs-toggle="dropdown"]';
-var SELECTOR_MENU = '.dropdown-menu';
-var SELECTOR_NAVBAR_NAV = '.navbar-nav';
-var SELECTOR_VISIBLE_ITEMS = '.dropdown-menu .dropdown-item:not(.disabled):not(:disabled)';
-var PLACEMENT_TOP = isRTL() ? 'top-end' : 'top-start';
-var PLACEMENT_TOPEND = isRTL() ? 'top-start' : 'top-end';
-var PLACEMENT_BOTTOM = isRTL() ? 'bottom-end' : 'bottom-start';
-var PLACEMENT_BOTTOMEND = isRTL() ? 'bottom-start' : 'bottom-end';
-var PLACEMENT_RIGHT = isRTL() ? 'left-start' : 'right-start';
-var PLACEMENT_LEFT = isRTL() ? 'right-start' : 'left-start';
-var Default$8 = {
-  offset: [0, 2],
-  boundary: 'clippingParents',
-  reference: 'toggle',
-  display: 'dynamic',
-  popperConfig: null,
-  autoClose: true
-};
-var DefaultType$8 = {
-  offset: '(array|string|function)',
-  boundary: '(string|element)',
-  reference: '(string|element|object)',
-  display: 'string',
-  popperConfig: '(null|object|function)',
-  autoClose: '(boolean|string)'
-};
-/**
- * ------------------------------------------------------------------------
- * Class Definition
- * ------------------------------------------------------------------------
- */
-
-var Dropdown = /*#__PURE__*/function (_BaseComponent5) {
-  _inherits(Dropdown, _BaseComponent5);
-
-  var _super5 = _createSuper(Dropdown);
-
-  function Dropdown(element, config) {
-    var _this12;
-
-    _classCallCheck(this, Dropdown);
-
-    _this12 = _super5.call(this, element);
-    _this12._popper = null;
-    _this12._config = _this12._getConfig(config);
-    _this12._menu = _this12._getMenuElement();
-    _this12._inNavbar = _this12._detectNavbar();
-    return _this12;
-  } // Getters
-
-
-  _createClass(Dropdown, [{
-    key: "toggle",
-    value: // Public
-    function toggle() {
-      return this._isShown() ? this.hide() : this.show();
-    }
-  }, {
-    key: "show",
-    value: function show() {
-      if (isDisabled(this._element) || this._isShown(this._menu)) {
-        return;
-      }
-
-      var relatedTarget = {
-        relatedTarget: this._element
-      };
-      var showEvent = EventHandler.trigger(this._element, EVENT_SHOW$4, relatedTarget);
-
-      if (showEvent.defaultPrevented) {
-        return;
-      }
-
-      var parent = Dropdown.getParentFromElement(this._element); // Totally disable Popper for Dropdowns in Navbar
-
-      if (this._inNavbar) {
-        Manipulator.setDataAttribute(this._menu, 'popper', 'none');
       } else {
-        this._createPopper(parent);
-      } // If this is a touch-enabled device we add extra
-      // empty mouseover listeners to the body's immediate children;
-      // only needed because of broken event delegation on iOS
-      // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
-
-
-      if ('ontouchstart' in document.documentElement && !parent.closest(SELECTOR_NAVBAR_NAV)) {
-        var _ref4;
-
-        (_ref4 = []).concat.apply(_ref4, _toConsumableArray(document.body.children)).forEach(function (elem) {
-          return EventHandler.on(elem, 'mouseover', noop);
-        });
+        delete pointers[event.pointerId || 0];
       }
 
-      this._element.focus();
-
-      this._element.setAttribute('aria-expanded', true);
-
-      this._menu.classList.add(CLASS_NAME_SHOW$6);
-
-      this._element.classList.add(CLASS_NAME_SHOW$6);
-
-      EventHandler.trigger(this._element, EVENT_SHOWN$4, relatedTarget);
-    }
-  }, {
-    key: "hide",
-    value: function hide() {
-      if (isDisabled(this._element) || !this._isShown(this._menu)) {
-        return;
-      }
-
-      var relatedTarget = {
-        relatedTarget: this._element
-      };
-
-      this._completeHide(relatedTarget);
-    }
-  }, {
-    key: "dispose",
-    value: function dispose() {
-      if (this._popper) {
-        this._popper.destroy();
-      }
-
-      _get(_getPrototypeOf(Dropdown.prototype), "dispose", this).call(this);
-    }
-  }, {
-    key: "update",
-    value: function update() {
-      this._inNavbar = this._detectNavbar();
-
-      if (this._popper) {
-        this._popper.update();
-      }
-    } // Private
-
-  }, {
-    key: "_completeHide",
-    value: function _completeHide(relatedTarget) {
-      var hideEvent = EventHandler.trigger(this._element, EVENT_HIDE$4, relatedTarget);
-
-      if (hideEvent.defaultPrevented) {
-        return;
-      } // If this is a touch-enabled device we remove the extra
-      // empty mouseover listeners we added for iOS support
-
-
-      if ('ontouchstart' in document.documentElement) {
-        var _ref5;
-
-        (_ref5 = []).concat.apply(_ref5, _toConsumableArray(document.body.children)).forEach(function (elem) {
-          return EventHandler.off(elem, 'mouseover', noop);
-        });
-      }
-
-      if (this._popper) {
-        this._popper.destroy();
-      }
-
-      this._menu.classList.remove(CLASS_NAME_SHOW$6);
-
-      this._element.classList.remove(CLASS_NAME_SHOW$6);
-
-      this._element.setAttribute('aria-expanded', 'false');
-
-      Manipulator.removeDataAttribute(this._menu, 'popper');
-      EventHandler.trigger(this._element, EVENT_HIDDEN$4, relatedTarget);
-    }
-  }, {
-    key: "_getConfig",
-    value: function _getConfig(config) {
-      config = _objectSpread(_objectSpread(_objectSpread({}, this.constructor.Default), Manipulator.getDataAttributes(this._element)), config);
-      typeCheckConfig(NAME$9, config, this.constructor.DefaultType);
-
-      if (_typeof(config.reference) === 'object' && !isElement(config.reference) && typeof config.reference.getBoundingClientRect !== 'function') {
-        // Popper virtual elements require a getBoundingClientRect method
-        throw new TypeError("".concat(NAME$9.toUpperCase(), ": Option \"reference\" provided type \"object\" without a required \"getBoundingClientRect\" method."));
-      }
-
-      return config;
-    }
-  }, {
-    key: "_createPopper",
-    value: function _createPopper(parent) {
-      if (typeof _popperjs_core__WEBPACK_IMPORTED_MODULE_0__ === 'undefined') {
-        throw new TypeError('Bootstrap\'s dropdowns require Popper (https://popper.js.org)');
-      }
-
-      var referenceElement = this._element;
-
-      if (this._config.reference === 'parent') {
-        referenceElement = parent;
-      } else if (isElement(this._config.reference)) {
-        referenceElement = getElement(this._config.reference);
-      } else if (_typeof(this._config.reference) === 'object') {
-        referenceElement = this._config.reference;
-      }
-
-      var popperConfig = this._getPopperConfig();
-
-      var isDisplayStatic = popperConfig.modifiers.find(function (modifier) {
-        return modifier.name === 'applyStyles' && modifier.enabled === false;
-      });
-      this._popper = _popperjs_core__WEBPACK_IMPORTED_MODULE_0__["createPopper"](referenceElement, this._menu, popperConfig);
-
-      if (isDisplayStatic) {
-        Manipulator.setDataAttribute(this._menu, 'popper', 'static');
-      }
-    }
-  }, {
-    key: "_isShown",
-    value: function _isShown() {
-      var element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._element;
-      return element.classList.contains(CLASS_NAME_SHOW$6);
-    }
-  }, {
-    key: "_getMenuElement",
-    value: function _getMenuElement() {
-      return SelectorEngine.next(this._element, SELECTOR_MENU)[0];
-    }
-  }, {
-    key: "_getPlacement",
-    value: function _getPlacement() {
-      var parentDropdown = this._element.parentNode;
-
-      if (parentDropdown.classList.contains(CLASS_NAME_DROPEND)) {
-        return PLACEMENT_RIGHT;
-      }
-
-      if (parentDropdown.classList.contains(CLASS_NAME_DROPSTART)) {
-        return PLACEMENT_LEFT;
-      } // We need to trim the value because custom properties can also include spaces
-
-
-      var isEnd = getComputedStyle(this._menu).getPropertyValue('--bs-position').trim() === 'end';
-
-      if (parentDropdown.classList.contains(CLASS_NAME_DROPUP)) {
-        return isEnd ? PLACEMENT_TOPEND : PLACEMENT_TOP;
-      }
-
-      return isEnd ? PLACEMENT_BOTTOMEND : PLACEMENT_BOTTOM;
-    }
-  }, {
-    key: "_detectNavbar",
-    value: function _detectNavbar() {
-      return this._element.closest(".".concat(CLASS_NAME_NAVBAR)) !== null;
-    }
-  }, {
-    key: "_getOffset",
-    value: function _getOffset() {
-      var _this13 = this;
-
-      var offset = this._config.offset;
-
-      if (typeof offset === 'string') {
-        return offset.split(',').map(function (val) {
-          return Number.parseInt(val, 10);
-        });
-      }
-
-      if (typeof offset === 'function') {
-        return function (popperData) {
-          return offset(popperData, _this13._element);
-        };
-      }
-
-      return offset;
-    }
-  }, {
-    key: "_getPopperConfig",
-    value: function _getPopperConfig() {
-      var defaultBsPopperConfig = {
-        placement: this._getPlacement(),
-        modifiers: [{
-          name: 'preventOverflow',
-          options: {
-            boundary: this._config.boundary
-          }
-        }, {
-          name: 'offset',
-          options: {
-            offset: this._getOffset()
-          }
-        }]
-      }; // Disable Popper if we have a static display
-
-      if (this._config.display === 'static') {
-        defaultBsPopperConfig.modifiers = [{
-          name: 'applyStyles',
-          enabled: false
-        }];
-      }
-
-      return _objectSpread(_objectSpread({}, defaultBsPopperConfig), typeof this._config.popperConfig === 'function' ? this._config.popperConfig(defaultBsPopperConfig) : this._config.popperConfig);
-    }
-  }, {
-    key: "_selectMenuItem",
-    value: function _selectMenuItem(_ref6) {
-      var key = _ref6.key,
-          target = _ref6.target;
-      var items = SelectorEngine.find(SELECTOR_VISIBLE_ITEMS, this._menu).filter(isVisible);
-
-      if (!items.length) {
-        return;
-      } // if target isn't included in items (e.g. when expanding the dropdown)
-      // allow cycling to get the last item in case key equals ARROW_UP_KEY
-
-
-      getNextActiveElement(items, target, key === ARROW_DOWN_KEY, !items.includes(target)).focus();
-    } // Static
-
-  }], [{
-    key: "Default",
-    get: function get() {
-      return Default$8;
-    }
-  }, {
-    key: "DefaultType",
-    get: function get() {
-      return DefaultType$8;
-    }
-  }, {
-    key: "NAME",
-    get: function get() {
-      return NAME$9;
-    }
-  }, {
-    key: "jQueryInterface",
-    value: function jQueryInterface(config) {
-      return this.each(function () {
-        var data = Dropdown.getOrCreateInstance(this, config);
-
-        if (typeof config !== 'string') {
-          return;
-        }
-
-        if (typeof data[config] === 'undefined') {
-          throw new TypeError("No method named \"".concat(config, "\""));
-        }
-
-        data[config]();
-      });
-    }
-  }, {
-    key: "clearMenus",
-    value: function clearMenus(event) {
-      if (event && (event.button === RIGHT_MOUSE_BUTTON || event.type === 'keyup' && event.key !== TAB_KEY$1)) {
-        return;
-      }
-
-      var toggles = SelectorEngine.find(SELECTOR_DATA_TOGGLE$3);
-
-      for (var i = 0, len = toggles.length; i < len; i++) {
-        var context = Dropdown.getInstance(toggles[i]);
-
-        if (!context || context._config.autoClose === false) {
-          continue;
-        }
-
-        if (!context._isShown()) {
-          continue;
-        }
-
-        var relatedTarget = {
-          relatedTarget: context._element
-        };
-
-        if (event) {
-          var composedPath = event.composedPath();
-          var isMenuTarget = composedPath.includes(context._menu);
-
-          if (composedPath.includes(context._element) || context._config.autoClose === 'inside' && !isMenuTarget || context._config.autoClose === 'outside' && isMenuTarget) {
-            continue;
-          } // Tab navigation through the dropdown menu or events from contained inputs shouldn't close the menu
-
-
-          if (context._menu.contains(event.target) && (event.type === 'keyup' && event.key === TAB_KEY$1 || /input|select|option|textarea|form/i.test(event.target.tagName))) {
-            continue;
-          }
-
-          if (event.type === 'click') {
-            relatedTarget.clickEvent = event;
-          }
-        }
-
-        context._completeHide(relatedTarget);
-      }
-    }
-  }, {
-    key: "getParentFromElement",
-    value: function getParentFromElement(element) {
-      return getElementFromSelector(element) || element.parentNode;
-    }
-  }, {
-    key: "dataApiKeydownHandler",
-    value: function dataApiKeydownHandler(event) {
-      // If not input/textarea:
-      //  - And not a key in REGEXP_KEYDOWN => not a dropdown command
-      // If input/textarea:
-      //  - If space key => not a dropdown command
-      //  - If key is other than escape
-      //    - If key is not up or down => not a dropdown command
-      //    - If trigger inside the menu => not a dropdown command
-      if (/input|textarea/i.test(event.target.tagName) ? event.key === SPACE_KEY || event.key !== ESCAPE_KEY$2 && (event.key !== ARROW_DOWN_KEY && event.key !== ARROW_UP_KEY || event.target.closest(SELECTOR_MENU)) : !REGEXP_KEYDOWN.test(event.key)) {
-        return;
-      }
-
-      var isActive = this.classList.contains(CLASS_NAME_SHOW$6);
-
-      if (!isActive && event.key === ESCAPE_KEY$2) {
+      if (!action) {
         return;
       }
 
       event.preventDefault();
-      event.stopPropagation();
 
-      if (isDisabled(this)) {
-        return;
+      if (!Object.keys(pointers).length) {
+        this.action = '';
       }
 
-      var getToggleButton = this.matches(SELECTOR_DATA_TOGGLE$3) ? this : SelectorEngine.prev(this, SELECTOR_DATA_TOGGLE$3)[0];
-      var instance = Dropdown.getOrCreateInstance(getToggleButton);
-
-      if (event.key === ESCAPE_KEY$2) {
-        instance.hide();
-        return;
+      if (this.cropping) {
+        this.cropping = false;
+        toggleClass(this.dragBox, CLASS_MODAL, this.cropped && this.options.modal);
       }
 
-      if (event.key === ARROW_UP_KEY || event.key === ARROW_DOWN_KEY) {
-        if (!isActive) {
-          instance.show();
-        }
-
-        instance._selectMenuItem(event);
-
-        return;
-      }
-
-      if (!isActive || event.key === SPACE_KEY) {
-        Dropdown.clearMenus();
-      }
-    }
-  }]);
-
-  return Dropdown;
-}(BaseComponent);
-/**
- * ------------------------------------------------------------------------
- * Data Api implementation
- * ------------------------------------------------------------------------
- */
-
-
-EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_DATA_TOGGLE$3, Dropdown.dataApiKeydownHandler);
-EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_MENU, Dropdown.dataApiKeydownHandler);
-EventHandler.on(document, EVENT_CLICK_DATA_API$3, Dropdown.clearMenus);
-EventHandler.on(document, EVENT_KEYUP_DATA_API, Dropdown.clearMenus);
-EventHandler.on(document, EVENT_CLICK_DATA_API$3, SELECTOR_DATA_TOGGLE$3, function (event) {
-  event.preventDefault();
-  Dropdown.getOrCreateInstance(this).toggle();
-});
-/**
- * ------------------------------------------------------------------------
- * jQuery
- * ------------------------------------------------------------------------
- * add .Dropdown to jQuery only if jQuery is present
- */
-
-defineJQueryPlugin(Dropdown);
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): util/scrollBar.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-var SELECTOR_FIXED_CONTENT = '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top';
-var SELECTOR_STICKY_CONTENT = '.sticky-top';
-
-var ScrollBarHelper = /*#__PURE__*/function () {
-  function ScrollBarHelper() {
-    _classCallCheck(this, ScrollBarHelper);
-
-    this._element = document.body;
-  }
-
-  _createClass(ScrollBarHelper, [{
-    key: "getWidth",
-    value: function getWidth() {
-      // https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth#usage_notes
-      var documentWidth = document.documentElement.clientWidth;
-      return Math.abs(window.innerWidth - documentWidth);
-    }
-  }, {
-    key: "hide",
-    value: function hide() {
-      var width = this.getWidth();
-
-      this._disableOverFlow(); // give padding to element to balance the hidden scrollbar width
-
-
-      this._setElementAttributes(this._element, 'paddingRight', function (calculatedValue) {
-        return calculatedValue + width;
-      }); // trick: We adjust positive paddingRight and negative marginRight to sticky-top elements to keep showing fullwidth
-
-
-      this._setElementAttributes(SELECTOR_FIXED_CONTENT, 'paddingRight', function (calculatedValue) {
-        return calculatedValue + width;
-      });
-
-      this._setElementAttributes(SELECTOR_STICKY_CONTENT, 'marginRight', function (calculatedValue) {
-        return calculatedValue - width;
+      dispatchEvent(this.element, EVENT_CROP_END, {
+        originalEvent: event,
+        action: action
       });
     }
-  }, {
-    key: "_disableOverFlow",
-    value: function _disableOverFlow() {
-      this._saveInitialAttribute(this._element, 'overflow');
+  };
+  var change = {
+    change: function change(event) {
+      var options = this.options,
+          canvasData = this.canvasData,
+          containerData = this.containerData,
+          cropBoxData = this.cropBoxData,
+          pointers = this.pointers;
+      var action = this.action;
+      var aspectRatio = options.aspectRatio;
+      var left = cropBoxData.left,
+          top = cropBoxData.top,
+          width = cropBoxData.width,
+          height = cropBoxData.height;
+      var right = left + width;
+      var bottom = top + height;
+      var minLeft = 0;
+      var minTop = 0;
+      var maxWidth = containerData.width;
+      var maxHeight = containerData.height;
+      var renderable = true;
+      var offset; // Locking aspect ratio in "free mode" by holding shift key
 
-      this._element.style.overflow = 'hidden';
-    }
-  }, {
-    key: "_setElementAttributes",
-    value: function _setElementAttributes(selector, styleProp, callback) {
-      var _this14 = this;
+      if (!aspectRatio && event.shiftKey) {
+        aspectRatio = width && height ? width / height : 1;
+      }
 
-      var scrollbarWidth = this.getWidth();
+      if (this.limited) {
+        minLeft = cropBoxData.minLeft;
+        minTop = cropBoxData.minTop;
+        maxWidth = minLeft + Math.min(containerData.width, canvasData.width, canvasData.left + canvasData.width);
+        maxHeight = minTop + Math.min(containerData.height, canvasData.height, canvasData.top + canvasData.height);
+      }
 
-      var manipulationCallBack = function manipulationCallBack(element) {
-        if (element !== _this14._element && window.innerWidth > element.clientWidth + scrollbarWidth) {
-          return;
-        }
-
-        _this14._saveInitialAttribute(element, styleProp);
-
-        var calculatedValue = window.getComputedStyle(element)[styleProp];
-        element.style[styleProp] = "".concat(callback(Number.parseFloat(calculatedValue)), "px");
+      var pointer = pointers[Object.keys(pointers)[0]];
+      var range = {
+        x: pointer.endX - pointer.startX,
+        y: pointer.endY - pointer.startY
       };
 
-      this._applyManipulationCallback(selector, manipulationCallBack);
-    }
-  }, {
-    key: "reset",
-    value: function reset() {
-      this._resetElementAttributes(this._element, 'overflow');
+      var check = function check(side) {
+        switch (side) {
+          case ACTION_EAST:
+            if (right + range.x > maxWidth) {
+              range.x = maxWidth - right;
+            }
 
-      this._resetElementAttributes(this._element, 'paddingRight');
+            break;
 
-      this._resetElementAttributes(SELECTOR_FIXED_CONTENT, 'paddingRight');
+          case ACTION_WEST:
+            if (left + range.x < minLeft) {
+              range.x = minLeft - left;
+            }
 
-      this._resetElementAttributes(SELECTOR_STICKY_CONTENT, 'marginRight');
-    }
-  }, {
-    key: "_saveInitialAttribute",
-    value: function _saveInitialAttribute(element, styleProp) {
-      var actualValue = element.style[styleProp];
+            break;
 
-      if (actualValue) {
-        Manipulator.setDataAttribute(element, styleProp, actualValue);
+          case ACTION_NORTH:
+            if (top + range.y < minTop) {
+              range.y = minTop - top;
+            }
+
+            break;
+
+          case ACTION_SOUTH:
+            if (bottom + range.y > maxHeight) {
+              range.y = maxHeight - bottom;
+            }
+
+            break;
+        }
+      };
+
+      switch (action) {
+        // Move crop box
+        case ACTION_ALL:
+          left += range.x;
+          top += range.y;
+          break;
+        // Resize crop box
+
+        case ACTION_EAST:
+          if (range.x >= 0 && (right >= maxWidth || aspectRatio && (top <= minTop || bottom >= maxHeight))) {
+            renderable = false;
+            break;
+          }
+
+          check(ACTION_EAST);
+          width += range.x;
+
+          if (width < 0) {
+            action = ACTION_WEST;
+            width = -width;
+            left -= width;
+          }
+
+          if (aspectRatio) {
+            height = width / aspectRatio;
+            top += (cropBoxData.height - height) / 2;
+          }
+
+          break;
+
+        case ACTION_NORTH:
+          if (range.y <= 0 && (top <= minTop || aspectRatio && (left <= minLeft || right >= maxWidth))) {
+            renderable = false;
+            break;
+          }
+
+          check(ACTION_NORTH);
+          height -= range.y;
+          top += range.y;
+
+          if (height < 0) {
+            action = ACTION_SOUTH;
+            height = -height;
+            top -= height;
+          }
+
+          if (aspectRatio) {
+            width = height * aspectRatio;
+            left += (cropBoxData.width - width) / 2;
+          }
+
+          break;
+
+        case ACTION_WEST:
+          if (range.x <= 0 && (left <= minLeft || aspectRatio && (top <= minTop || bottom >= maxHeight))) {
+            renderable = false;
+            break;
+          }
+
+          check(ACTION_WEST);
+          width -= range.x;
+          left += range.x;
+
+          if (width < 0) {
+            action = ACTION_EAST;
+            width = -width;
+            left -= width;
+          }
+
+          if (aspectRatio) {
+            height = width / aspectRatio;
+            top += (cropBoxData.height - height) / 2;
+          }
+
+          break;
+
+        case ACTION_SOUTH:
+          if (range.y >= 0 && (bottom >= maxHeight || aspectRatio && (left <= minLeft || right >= maxWidth))) {
+            renderable = false;
+            break;
+          }
+
+          check(ACTION_SOUTH);
+          height += range.y;
+
+          if (height < 0) {
+            action = ACTION_NORTH;
+            height = -height;
+            top -= height;
+          }
+
+          if (aspectRatio) {
+            width = height * aspectRatio;
+            left += (cropBoxData.width - width) / 2;
+          }
+
+          break;
+
+        case ACTION_NORTH_EAST:
+          if (aspectRatio) {
+            if (range.y <= 0 && (top <= minTop || right >= maxWidth)) {
+              renderable = false;
+              break;
+            }
+
+            check(ACTION_NORTH);
+            height -= range.y;
+            top += range.y;
+            width = height * aspectRatio;
+          } else {
+            check(ACTION_NORTH);
+            check(ACTION_EAST);
+
+            if (range.x >= 0) {
+              if (right < maxWidth) {
+                width += range.x;
+              } else if (range.y <= 0 && top <= minTop) {
+                renderable = false;
+              }
+            } else {
+              width += range.x;
+            }
+
+            if (range.y <= 0) {
+              if (top > minTop) {
+                height -= range.y;
+                top += range.y;
+              }
+            } else {
+              height -= range.y;
+              top += range.y;
+            }
+          }
+
+          if (width < 0 && height < 0) {
+            action = ACTION_SOUTH_WEST;
+            height = -height;
+            width = -width;
+            top -= height;
+            left -= width;
+          } else if (width < 0) {
+            action = ACTION_NORTH_WEST;
+            width = -width;
+            left -= width;
+          } else if (height < 0) {
+            action = ACTION_SOUTH_EAST;
+            height = -height;
+            top -= height;
+          }
+
+          break;
+
+        case ACTION_NORTH_WEST:
+          if (aspectRatio) {
+            if (range.y <= 0 && (top <= minTop || left <= minLeft)) {
+              renderable = false;
+              break;
+            }
+
+            check(ACTION_NORTH);
+            height -= range.y;
+            top += range.y;
+            width = height * aspectRatio;
+            left += cropBoxData.width - width;
+          } else {
+            check(ACTION_NORTH);
+            check(ACTION_WEST);
+
+            if (range.x <= 0) {
+              if (left > minLeft) {
+                width -= range.x;
+                left += range.x;
+              } else if (range.y <= 0 && top <= minTop) {
+                renderable = false;
+              }
+            } else {
+              width -= range.x;
+              left += range.x;
+            }
+
+            if (range.y <= 0) {
+              if (top > minTop) {
+                height -= range.y;
+                top += range.y;
+              }
+            } else {
+              height -= range.y;
+              top += range.y;
+            }
+          }
+
+          if (width < 0 && height < 0) {
+            action = ACTION_SOUTH_EAST;
+            height = -height;
+            width = -width;
+            top -= height;
+            left -= width;
+          } else if (width < 0) {
+            action = ACTION_NORTH_EAST;
+            width = -width;
+            left -= width;
+          } else if (height < 0) {
+            action = ACTION_SOUTH_WEST;
+            height = -height;
+            top -= height;
+          }
+
+          break;
+
+        case ACTION_SOUTH_WEST:
+          if (aspectRatio) {
+            if (range.x <= 0 && (left <= minLeft || bottom >= maxHeight)) {
+              renderable = false;
+              break;
+            }
+
+            check(ACTION_WEST);
+            width -= range.x;
+            left += range.x;
+            height = width / aspectRatio;
+          } else {
+            check(ACTION_SOUTH);
+            check(ACTION_WEST);
+
+            if (range.x <= 0) {
+              if (left > minLeft) {
+                width -= range.x;
+                left += range.x;
+              } else if (range.y >= 0 && bottom >= maxHeight) {
+                renderable = false;
+              }
+            } else {
+              width -= range.x;
+              left += range.x;
+            }
+
+            if (range.y >= 0) {
+              if (bottom < maxHeight) {
+                height += range.y;
+              }
+            } else {
+              height += range.y;
+            }
+          }
+
+          if (width < 0 && height < 0) {
+            action = ACTION_NORTH_EAST;
+            height = -height;
+            width = -width;
+            top -= height;
+            left -= width;
+          } else if (width < 0) {
+            action = ACTION_SOUTH_EAST;
+            width = -width;
+            left -= width;
+          } else if (height < 0) {
+            action = ACTION_NORTH_WEST;
+            height = -height;
+            top -= height;
+          }
+
+          break;
+
+        case ACTION_SOUTH_EAST:
+          if (aspectRatio) {
+            if (range.x >= 0 && (right >= maxWidth || bottom >= maxHeight)) {
+              renderable = false;
+              break;
+            }
+
+            check(ACTION_EAST);
+            width += range.x;
+            height = width / aspectRatio;
+          } else {
+            check(ACTION_SOUTH);
+            check(ACTION_EAST);
+
+            if (range.x >= 0) {
+              if (right < maxWidth) {
+                width += range.x;
+              } else if (range.y >= 0 && bottom >= maxHeight) {
+                renderable = false;
+              }
+            } else {
+              width += range.x;
+            }
+
+            if (range.y >= 0) {
+              if (bottom < maxHeight) {
+                height += range.y;
+              }
+            } else {
+              height += range.y;
+            }
+          }
+
+          if (width < 0 && height < 0) {
+            action = ACTION_NORTH_WEST;
+            height = -height;
+            width = -width;
+            top -= height;
+            left -= width;
+          } else if (width < 0) {
+            action = ACTION_SOUTH_WEST;
+            width = -width;
+            left -= width;
+          } else if (height < 0) {
+            action = ACTION_NORTH_EAST;
+            height = -height;
+            top -= height;
+          }
+
+          break;
+        // Move canvas
+
+        case ACTION_MOVE:
+          this.move(range.x, range.y);
+          renderable = false;
+          break;
+        // Zoom canvas
+
+        case ACTION_ZOOM:
+          this.zoom(getMaxZoomRatio(pointers), event);
+          renderable = false;
+          break;
+        // Create crop box
+
+        case ACTION_CROP:
+          if (!range.x || !range.y) {
+            renderable = false;
+            break;
+          }
+
+          offset = getOffset(this.cropper);
+          left = pointer.startX - offset.left;
+          top = pointer.startY - offset.top;
+          width = cropBoxData.minWidth;
+          height = cropBoxData.minHeight;
+
+          if (range.x > 0) {
+            action = range.y > 0 ? ACTION_SOUTH_EAST : ACTION_NORTH_EAST;
+          } else if (range.x < 0) {
+            left -= width;
+            action = range.y > 0 ? ACTION_SOUTH_WEST : ACTION_NORTH_WEST;
+          }
+
+          if (range.y < 0) {
+            top -= height;
+          } // Show the crop box if is hidden
+
+
+          if (!this.cropped) {
+            removeClass(this.cropBox, CLASS_HIDDEN);
+            this.cropped = true;
+
+            if (this.limited) {
+              this.limitCropBox(true, true);
+            }
+          }
+
+          break;
       }
-    }
-  }, {
-    key: "_resetElementAttributes",
-    value: function _resetElementAttributes(selector, styleProp) {
-      var manipulationCallBack = function manipulationCallBack(element) {
-        var value = Manipulator.getDataAttribute(element, styleProp);
 
-        if (typeof value === 'undefined') {
-          element.style.removeProperty(styleProp);
+      if (renderable) {
+        cropBoxData.width = width;
+        cropBoxData.height = height;
+        cropBoxData.left = left;
+        cropBoxData.top = top;
+        this.action = action;
+        this.renderCropBox();
+      } // Override
+
+
+      forEach(pointers, function (p) {
+        p.startX = p.endX;
+        p.startY = p.endY;
+      });
+    }
+  };
+  var methods = {
+    // Show the crop box manually
+    crop: function crop() {
+      if (this.ready && !this.cropped && !this.disabled) {
+        this.cropped = true;
+        this.limitCropBox(true, true);
+
+        if (this.options.modal) {
+          addClass(this.dragBox, CLASS_MODAL);
+        }
+
+        removeClass(this.cropBox, CLASS_HIDDEN);
+        this.setCropBoxData(this.initialCropBoxData);
+      }
+
+      return this;
+    },
+    // Reset the image and crop box to their initial states
+    reset: function reset() {
+      if (this.ready && !this.disabled) {
+        this.imageData = assign({}, this.initialImageData);
+        this.canvasData = assign({}, this.initialCanvasData);
+        this.cropBoxData = assign({}, this.initialCropBoxData);
+        this.renderCanvas();
+
+        if (this.cropped) {
+          this.renderCropBox();
+        }
+      }
+
+      return this;
+    },
+    // Clear the crop box
+    clear: function clear() {
+      if (this.cropped && !this.disabled) {
+        assign(this.cropBoxData, {
+          left: 0,
+          top: 0,
+          width: 0,
+          height: 0
+        });
+        this.cropped = false;
+        this.renderCropBox();
+        this.limitCanvas(true, true); // Render canvas after crop box rendered
+
+        this.renderCanvas();
+        removeClass(this.dragBox, CLASS_MODAL);
+        addClass(this.cropBox, CLASS_HIDDEN);
+      }
+
+      return this;
+    },
+
+    /**
+     * Replace the image's src and rebuild the cropper
+     * @param {string} url - The new URL.
+     * @param {boolean} [hasSameSize] - Indicate if the new image has the same size as the old one.
+     * @returns {Cropper} this
+     */
+    replace: function replace(url) {
+      var hasSameSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      if (!this.disabled && url) {
+        if (this.isImg) {
+          this.element.src = url;
+        }
+
+        if (hasSameSize) {
+          this.url = url;
+          this.image.src = url;
+
+          if (this.ready) {
+            this.viewBoxImage.src = url;
+            forEach(this.previews, function (element) {
+              element.getElementsByTagName('img')[0].src = url;
+            });
+          }
         } else {
-          Manipulator.removeDataAttribute(element, styleProp);
-          element.style[styleProp] = value;
+          if (this.isImg) {
+            this.replaced = true;
+          }
+
+          this.options.data = null;
+          this.uncreate();
+          this.load(url);
         }
+      }
+
+      return this;
+    },
+    // Enable (unfreeze) the cropper
+    enable: function enable() {
+      if (this.ready && this.disabled) {
+        this.disabled = false;
+        removeClass(this.cropper, CLASS_DISABLED);
+      }
+
+      return this;
+    },
+    // Disable (freeze) the cropper
+    disable: function disable() {
+      if (this.ready && !this.disabled) {
+        this.disabled = true;
+        addClass(this.cropper, CLASS_DISABLED);
+      }
+
+      return this;
+    },
+
+    /**
+     * Destroy the cropper and remove the instance from the image
+     * @returns {Cropper} this
+     */
+    destroy: function destroy() {
+      var element = this.element;
+
+      if (!element[NAMESPACE]) {
+        return this;
+      }
+
+      element[NAMESPACE] = undefined;
+
+      if (this.isImg && this.replaced) {
+        element.src = this.originalUrl;
+      }
+
+      this.uncreate();
+      return this;
+    },
+
+    /**
+     * Move the canvas with relative offsets
+     * @param {number} offsetX - The relative offset distance on the x-axis.
+     * @param {number} [offsetY=offsetX] - The relative offset distance on the y-axis.
+     * @returns {Cropper} this
+     */
+    move: function move(offsetX) {
+      var offsetY = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : offsetX;
+      var _this$canvasData = this.canvasData,
+          left = _this$canvasData.left,
+          top = _this$canvasData.top;
+      return this.moveTo(isUndefined(offsetX) ? offsetX : left + Number(offsetX), isUndefined(offsetY) ? offsetY : top + Number(offsetY));
+    },
+
+    /**
+     * Move the canvas to an absolute point
+     * @param {number} x - The x-axis coordinate.
+     * @param {number} [y=x] - The y-axis coordinate.
+     * @returns {Cropper} this
+     */
+    moveTo: function moveTo(x) {
+      var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : x;
+      var canvasData = this.canvasData;
+      var changed = false;
+      x = Number(x);
+      y = Number(y);
+
+      if (this.ready && !this.disabled && this.options.movable) {
+        if (isNumber(x)) {
+          canvasData.left = x;
+          changed = true;
+        }
+
+        if (isNumber(y)) {
+          canvasData.top = y;
+          changed = true;
+        }
+
+        if (changed) {
+          this.renderCanvas(true);
+        }
+      }
+
+      return this;
+    },
+
+    /**
+     * Zoom the canvas with a relative ratio
+     * @param {number} ratio - The target ratio.
+     * @param {Event} _originalEvent - The original event if any.
+     * @returns {Cropper} this
+     */
+    zoom: function zoom(ratio, _originalEvent) {
+      var canvasData = this.canvasData;
+      ratio = Number(ratio);
+
+      if (ratio < 0) {
+        ratio = 1 / (1 - ratio);
+      } else {
+        ratio = 1 + ratio;
+      }
+
+      return this.zoomTo(canvasData.width * ratio / canvasData.naturalWidth, null, _originalEvent);
+    },
+
+    /**
+     * Zoom the canvas to an absolute ratio
+     * @param {number} ratio - The target ratio.
+     * @param {Object} pivot - The zoom pivot point coordinate.
+     * @param {Event} _originalEvent - The original event if any.
+     * @returns {Cropper} this
+     */
+    zoomTo: function zoomTo(ratio, pivot, _originalEvent) {
+      var options = this.options,
+          canvasData = this.canvasData;
+      var width = canvasData.width,
+          height = canvasData.height,
+          naturalWidth = canvasData.naturalWidth,
+          naturalHeight = canvasData.naturalHeight;
+      ratio = Number(ratio);
+
+      if (ratio >= 0 && this.ready && !this.disabled && options.zoomable) {
+        var newWidth = naturalWidth * ratio;
+        var newHeight = naturalHeight * ratio;
+
+        if (dispatchEvent(this.element, EVENT_ZOOM, {
+          ratio: ratio,
+          oldRatio: width / naturalWidth,
+          originalEvent: _originalEvent
+        }) === false) {
+          return this;
+        }
+
+        if (_originalEvent) {
+          var pointers = this.pointers;
+          var offset = getOffset(this.cropper);
+          var center = pointers && Object.keys(pointers).length ? getPointersCenter(pointers) : {
+            pageX: _originalEvent.pageX,
+            pageY: _originalEvent.pageY
+          }; // Zoom from the triggering point of the event
+
+          canvasData.left -= (newWidth - width) * ((center.pageX - offset.left - canvasData.left) / width);
+          canvasData.top -= (newHeight - height) * ((center.pageY - offset.top - canvasData.top) / height);
+        } else if (isPlainObject(pivot) && isNumber(pivot.x) && isNumber(pivot.y)) {
+          canvasData.left -= (newWidth - width) * ((pivot.x - canvasData.left) / width);
+          canvasData.top -= (newHeight - height) * ((pivot.y - canvasData.top) / height);
+        } else {
+          // Zoom from the center of the canvas
+          canvasData.left -= (newWidth - width) / 2;
+          canvasData.top -= (newHeight - height) / 2;
+        }
+
+        canvasData.width = newWidth;
+        canvasData.height = newHeight;
+        this.renderCanvas(true);
+      }
+
+      return this;
+    },
+
+    /**
+     * Rotate the canvas with a relative degree
+     * @param {number} degree - The rotate degree.
+     * @returns {Cropper} this
+     */
+    rotate: function rotate(degree) {
+      return this.rotateTo((this.imageData.rotate || 0) + Number(degree));
+    },
+
+    /**
+     * Rotate the canvas to an absolute degree
+     * @param {number} degree - The rotate degree.
+     * @returns {Cropper} this
+     */
+    rotateTo: function rotateTo(degree) {
+      degree = Number(degree);
+
+      if (isNumber(degree) && this.ready && !this.disabled && this.options.rotatable) {
+        this.imageData.rotate = degree % 360;
+        this.renderCanvas(true, true);
+      }
+
+      return this;
+    },
+
+    /**
+     * Scale the image on the x-axis.
+     * @param {number} scaleX - The scale ratio on the x-axis.
+     * @returns {Cropper} this
+     */
+    scaleX: function scaleX(_scaleX) {
+      var scaleY = this.imageData.scaleY;
+      return this.scale(_scaleX, isNumber(scaleY) ? scaleY : 1);
+    },
+
+    /**
+     * Scale the image on the y-axis.
+     * @param {number} scaleY - The scale ratio on the y-axis.
+     * @returns {Cropper} this
+     */
+    scaleY: function scaleY(_scaleY) {
+      var scaleX = this.imageData.scaleX;
+      return this.scale(isNumber(scaleX) ? scaleX : 1, _scaleY);
+    },
+
+    /**
+     * Scale the image
+     * @param {number} scaleX - The scale ratio on the x-axis.
+     * @param {number} [scaleY=scaleX] - The scale ratio on the y-axis.
+     * @returns {Cropper} this
+     */
+    scale: function scale(scaleX) {
+      var scaleY = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : scaleX;
+      var imageData = this.imageData;
+      var transformed = false;
+      scaleX = Number(scaleX);
+      scaleY = Number(scaleY);
+
+      if (this.ready && !this.disabled && this.options.scalable) {
+        if (isNumber(scaleX)) {
+          imageData.scaleX = scaleX;
+          transformed = true;
+        }
+
+        if (isNumber(scaleY)) {
+          imageData.scaleY = scaleY;
+          transformed = true;
+        }
+
+        if (transformed) {
+          this.renderCanvas(true, true);
+        }
+      }
+
+      return this;
+    },
+
+    /**
+     * Get the cropped area position and size data (base on the original image)
+     * @param {boolean} [rounded=false] - Indicate if round the data values or not.
+     * @returns {Object} The result cropped data.
+     */
+    getData: function getData() {
+      var rounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var options = this.options,
+          imageData = this.imageData,
+          canvasData = this.canvasData,
+          cropBoxData = this.cropBoxData;
+      var data;
+
+      if (this.ready && this.cropped) {
+        data = {
+          x: cropBoxData.left - canvasData.left,
+          y: cropBoxData.top - canvasData.top,
+          width: cropBoxData.width,
+          height: cropBoxData.height
+        };
+        var ratio = imageData.width / imageData.naturalWidth;
+        forEach(data, function (n, i) {
+          data[i] = n / ratio;
+        });
+
+        if (rounded) {
+          // In case rounding off leads to extra 1px in right or bottom border
+          // we should round the top-left corner and the dimension (#343).
+          var bottom = Math.round(data.y + data.height);
+          var right = Math.round(data.x + data.width);
+          data.x = Math.round(data.x);
+          data.y = Math.round(data.y);
+          data.width = right - data.x;
+          data.height = bottom - data.y;
+        }
+      } else {
+        data = {
+          x: 0,
+          y: 0,
+          width: 0,
+          height: 0
+        };
+      }
+
+      if (options.rotatable) {
+        data.rotate = imageData.rotate || 0;
+      }
+
+      if (options.scalable) {
+        data.scaleX = imageData.scaleX || 1;
+        data.scaleY = imageData.scaleY || 1;
+      }
+
+      return data;
+    },
+
+    /**
+     * Set the cropped area position and size with new data
+     * @param {Object} data - The new data.
+     * @returns {Cropper} this
+     */
+    setData: function setData(data) {
+      var options = this.options,
+          imageData = this.imageData,
+          canvasData = this.canvasData;
+      var cropBoxData = {};
+
+      if (this.ready && !this.disabled && isPlainObject(data)) {
+        var transformed = false;
+
+        if (options.rotatable) {
+          if (isNumber(data.rotate) && data.rotate !== imageData.rotate) {
+            imageData.rotate = data.rotate;
+            transformed = true;
+          }
+        }
+
+        if (options.scalable) {
+          if (isNumber(data.scaleX) && data.scaleX !== imageData.scaleX) {
+            imageData.scaleX = data.scaleX;
+            transformed = true;
+          }
+
+          if (isNumber(data.scaleY) && data.scaleY !== imageData.scaleY) {
+            imageData.scaleY = data.scaleY;
+            transformed = true;
+          }
+        }
+
+        if (transformed) {
+          this.renderCanvas(true, true);
+        }
+
+        var ratio = imageData.width / imageData.naturalWidth;
+
+        if (isNumber(data.x)) {
+          cropBoxData.left = data.x * ratio + canvasData.left;
+        }
+
+        if (isNumber(data.y)) {
+          cropBoxData.top = data.y * ratio + canvasData.top;
+        }
+
+        if (isNumber(data.width)) {
+          cropBoxData.width = data.width * ratio;
+        }
+
+        if (isNumber(data.height)) {
+          cropBoxData.height = data.height * ratio;
+        }
+
+        this.setCropBoxData(cropBoxData);
+      }
+
+      return this;
+    },
+
+    /**
+     * Get the container size data.
+     * @returns {Object} The result container data.
+     */
+    getContainerData: function getContainerData() {
+      return this.ready ? assign({}, this.containerData) : {};
+    },
+
+    /**
+     * Get the image position and size data.
+     * @returns {Object} The result image data.
+     */
+    getImageData: function getImageData() {
+      return this.sized ? assign({}, this.imageData) : {};
+    },
+
+    /**
+     * Get the canvas position and size data.
+     * @returns {Object} The result canvas data.
+     */
+    getCanvasData: function getCanvasData() {
+      var canvasData = this.canvasData;
+      var data = {};
+
+      if (this.ready) {
+        forEach(['left', 'top', 'width', 'height', 'naturalWidth', 'naturalHeight'], function (n) {
+          data[n] = canvasData[n];
+        });
+      }
+
+      return data;
+    },
+
+    /**
+     * Set the canvas position and size with new data.
+     * @param {Object} data - The new canvas data.
+     * @returns {Cropper} this
+     */
+    setCanvasData: function setCanvasData(data) {
+      var canvasData = this.canvasData;
+      var aspectRatio = canvasData.aspectRatio;
+
+      if (this.ready && !this.disabled && isPlainObject(data)) {
+        if (isNumber(data.left)) {
+          canvasData.left = data.left;
+        }
+
+        if (isNumber(data.top)) {
+          canvasData.top = data.top;
+        }
+
+        if (isNumber(data.width)) {
+          canvasData.width = data.width;
+          canvasData.height = data.width / aspectRatio;
+        } else if (isNumber(data.height)) {
+          canvasData.height = data.height;
+          canvasData.width = data.height * aspectRatio;
+        }
+
+        this.renderCanvas(true);
+      }
+
+      return this;
+    },
+
+    /**
+     * Get the crop box position and size data.
+     * @returns {Object} The result crop box data.
+     */
+    getCropBoxData: function getCropBoxData() {
+      var cropBoxData = this.cropBoxData;
+      var data;
+
+      if (this.ready && this.cropped) {
+        data = {
+          left: cropBoxData.left,
+          top: cropBoxData.top,
+          width: cropBoxData.width,
+          height: cropBoxData.height
+        };
+      }
+
+      return data || {};
+    },
+
+    /**
+     * Set the crop box position and size with new data.
+     * @param {Object} data - The new crop box data.
+     * @returns {Cropper} this
+     */
+    setCropBoxData: function setCropBoxData(data) {
+      var cropBoxData = this.cropBoxData;
+      var aspectRatio = this.options.aspectRatio;
+      var widthChanged;
+      var heightChanged;
+
+      if (this.ready && this.cropped && !this.disabled && isPlainObject(data)) {
+        if (isNumber(data.left)) {
+          cropBoxData.left = data.left;
+        }
+
+        if (isNumber(data.top)) {
+          cropBoxData.top = data.top;
+        }
+
+        if (isNumber(data.width) && data.width !== cropBoxData.width) {
+          widthChanged = true;
+          cropBoxData.width = data.width;
+        }
+
+        if (isNumber(data.height) && data.height !== cropBoxData.height) {
+          heightChanged = true;
+          cropBoxData.height = data.height;
+        }
+
+        if (aspectRatio) {
+          if (widthChanged) {
+            cropBoxData.height = cropBoxData.width / aspectRatio;
+          } else if (heightChanged) {
+            cropBoxData.width = cropBoxData.height * aspectRatio;
+          }
+        }
+
+        this.renderCropBox();
+      }
+
+      return this;
+    },
+
+    /**
+     * Get a canvas drawn the cropped image.
+     * @param {Object} [options={}] - The config options.
+     * @returns {HTMLCanvasElement} - The result canvas.
+     */
+    getCroppedCanvas: function getCroppedCanvas() {
+      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      if (!this.ready || !window.HTMLCanvasElement) {
+        return null;
+      }
+
+      var canvasData = this.canvasData;
+      var source = getSourceCanvas(this.image, this.imageData, canvasData, options); // Returns the source canvas if it is not cropped.
+
+      if (!this.cropped) {
+        return source;
+      }
+
+      var _this$getData = this.getData(),
+          initialX = _this$getData.x,
+          initialY = _this$getData.y,
+          initialWidth = _this$getData.width,
+          initialHeight = _this$getData.height;
+
+      var ratio = source.width / Math.floor(canvasData.naturalWidth);
+
+      if (ratio !== 1) {
+        initialX *= ratio;
+        initialY *= ratio;
+        initialWidth *= ratio;
+        initialHeight *= ratio;
+      }
+
+      var aspectRatio = initialWidth / initialHeight;
+      var maxSizes = getAdjustedSizes({
+        aspectRatio: aspectRatio,
+        width: options.maxWidth || Infinity,
+        height: options.maxHeight || Infinity
+      });
+      var minSizes = getAdjustedSizes({
+        aspectRatio: aspectRatio,
+        width: options.minWidth || 0,
+        height: options.minHeight || 0
+      }, 'cover');
+
+      var _getAdjustedSizes = getAdjustedSizes({
+        aspectRatio: aspectRatio,
+        width: options.width || (ratio !== 1 ? source.width : initialWidth),
+        height: options.height || (ratio !== 1 ? source.height : initialHeight)
+      }),
+          width = _getAdjustedSizes.width,
+          height = _getAdjustedSizes.height;
+
+      width = Math.min(maxSizes.width, Math.max(minSizes.width, width));
+      height = Math.min(maxSizes.height, Math.max(minSizes.height, height));
+      var canvas = document.createElement('canvas');
+      var context = canvas.getContext('2d');
+      canvas.width = normalizeDecimalNumber(width);
+      canvas.height = normalizeDecimalNumber(height);
+      context.fillStyle = options.fillColor || 'transparent';
+      context.fillRect(0, 0, width, height);
+      var _options$imageSmoothi = options.imageSmoothingEnabled,
+          imageSmoothingEnabled = _options$imageSmoothi === void 0 ? true : _options$imageSmoothi,
+          imageSmoothingQuality = options.imageSmoothingQuality;
+      context.imageSmoothingEnabled = imageSmoothingEnabled;
+
+      if (imageSmoothingQuality) {
+        context.imageSmoothingQuality = imageSmoothingQuality;
+      } // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D.drawImage
+
+
+      var sourceWidth = source.width;
+      var sourceHeight = source.height; // Source canvas parameters
+
+      var srcX = initialX;
+      var srcY = initialY;
+      var srcWidth;
+      var srcHeight; // Destination canvas parameters
+
+      var dstX;
+      var dstY;
+      var dstWidth;
+      var dstHeight;
+
+      if (srcX <= -initialWidth || srcX > sourceWidth) {
+        srcX = 0;
+        srcWidth = 0;
+        dstX = 0;
+        dstWidth = 0;
+      } else if (srcX <= 0) {
+        dstX = -srcX;
+        srcX = 0;
+        srcWidth = Math.min(sourceWidth, initialWidth + srcX);
+        dstWidth = srcWidth;
+      } else if (srcX <= sourceWidth) {
+        dstX = 0;
+        srcWidth = Math.min(initialWidth, sourceWidth - srcX);
+        dstWidth = srcWidth;
+      }
+
+      if (srcWidth <= 0 || srcY <= -initialHeight || srcY > sourceHeight) {
+        srcY = 0;
+        srcHeight = 0;
+        dstY = 0;
+        dstHeight = 0;
+      } else if (srcY <= 0) {
+        dstY = -srcY;
+        srcY = 0;
+        srcHeight = Math.min(sourceHeight, initialHeight + srcY);
+        dstHeight = srcHeight;
+      } else if (srcY <= sourceHeight) {
+        dstY = 0;
+        srcHeight = Math.min(initialHeight, sourceHeight - srcY);
+        dstHeight = srcHeight;
+      }
+
+      var params = [srcX, srcY, srcWidth, srcHeight]; // Avoid "IndexSizeError"
+
+      if (dstWidth > 0 && dstHeight > 0) {
+        var scale = width / initialWidth;
+        params.push(dstX * scale, dstY * scale, dstWidth * scale, dstHeight * scale);
+      } // All the numerical parameters should be integer for `drawImage`
+      // https://github.com/fengyuanchen/cropper/issues/476
+
+
+      context.drawImage.apply(context, [source].concat(_toConsumableArray(params.map(function (param) {
+        return Math.floor(normalizeDecimalNumber(param));
+      }))));
+      return canvas;
+    },
+
+    /**
+     * Change the aspect ratio of the crop box.
+     * @param {number} aspectRatio - The new aspect ratio.
+     * @returns {Cropper} this
+     */
+    setAspectRatio: function setAspectRatio(aspectRatio) {
+      var options = this.options;
+
+      if (!this.disabled && !isUndefined(aspectRatio)) {
+        // 0 -> NaN
+        options.aspectRatio = Math.max(0, aspectRatio) || NaN;
+
+        if (this.ready) {
+          this.initCropBox();
+
+          if (this.cropped) {
+            this.renderCropBox();
+          }
+        }
+      }
+
+      return this;
+    },
+
+    /**
+     * Change the drag mode.
+     * @param {string} mode - The new drag mode.
+     * @returns {Cropper} this
+     */
+    setDragMode: function setDragMode(mode) {
+      var options = this.options,
+          dragBox = this.dragBox,
+          face = this.face;
+
+      if (this.ready && !this.disabled) {
+        var croppable = mode === DRAG_MODE_CROP;
+        var movable = options.movable && mode === DRAG_MODE_MOVE;
+        mode = croppable || movable ? mode : DRAG_MODE_NONE;
+        options.dragMode = mode;
+        setData(dragBox, DATA_ACTION, mode);
+        toggleClass(dragBox, CLASS_CROP, croppable);
+        toggleClass(dragBox, CLASS_MOVE, movable);
+
+        if (!options.cropBoxMovable) {
+          // Sync drag mode to crop box when it is not movable
+          setData(face, DATA_ACTION, mode);
+          toggleClass(face, CLASS_CROP, croppable);
+          toggleClass(face, CLASS_MOVE, movable);
+        }
+      }
+
+      return this;
+    }
+  };
+  var AnotherCropper = WINDOW.Cropper;
+
+  var Cropper = /*#__PURE__*/function () {
+    /**
+     * Create a new Cropper.
+     * @param {Element} element - The target element for cropping.
+     * @param {Object} [options={}] - The configuration options.
+     */
+    function Cropper(element) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      _classCallCheck(this, Cropper);
+
+      if (!element || !REGEXP_TAG_NAME.test(element.tagName)) {
+        throw new Error('The first argument is required and must be an <img> or <canvas> element.');
+      }
+
+      this.element = element;
+      this.options = assign({}, DEFAULTS, isPlainObject(options) && options);
+      this.cropped = false;
+      this.disabled = false;
+      this.pointers = {};
+      this.ready = false;
+      this.reloading = false;
+      this.replaced = false;
+      this.sized = false;
+      this.sizing = false;
+      this.init();
+    }
+
+    _createClass(Cropper, [{
+      key: "init",
+      value: function init() {
+        var element = this.element;
+        var tagName = element.tagName.toLowerCase();
+        var url;
+
+        if (element[NAMESPACE]) {
+          return;
+        }
+
+        element[NAMESPACE] = this;
+
+        if (tagName === 'img') {
+          this.isImg = true; // e.g.: "img/picture.jpg"
+
+          url = element.getAttribute('src') || '';
+          this.originalUrl = url; // Stop when it's a blank image
+
+          if (!url) {
+            return;
+          } // e.g.: "https://example.com/img/picture.jpg"
+
+
+          url = element.src;
+        } else if (tagName === 'canvas' && window.HTMLCanvasElement) {
+          url = element.toDataURL();
+        }
+
+        this.load(url);
+      }
+    }, {
+      key: "load",
+      value: function load(url) {
+        var _this = this;
+
+        if (!url) {
+          return;
+        }
+
+        this.url = url;
+        this.imageData = {};
+        var element = this.element,
+            options = this.options;
+
+        if (!options.rotatable && !options.scalable) {
+          options.checkOrientation = false;
+        } // Only IE10+ supports Typed Arrays
+
+
+        if (!options.checkOrientation || !window.ArrayBuffer) {
+          this.clone();
+          return;
+        } // Detect the mime type of the image directly if it is a Data URL
+
+
+        if (REGEXP_DATA_URL.test(url)) {
+          // Read ArrayBuffer from Data URL of JPEG images directly for better performance
+          if (REGEXP_DATA_URL_JPEG.test(url)) {
+            this.read(dataURLToArrayBuffer(url));
+          } else {
+            // Only a JPEG image may contains Exif Orientation information,
+            // the rest types of Data URLs are not necessary to check orientation at all.
+            this.clone();
+          }
+
+          return;
+        } // 1. Detect the mime type of the image by a XMLHttpRequest.
+        // 2. Load the image as ArrayBuffer for reading orientation if its a JPEG image.
+
+
+        var xhr = new XMLHttpRequest();
+        var clone = this.clone.bind(this);
+        this.reloading = true;
+        this.xhr = xhr; // 1. Cross origin requests are only supported for protocol schemes:
+        // http, https, data, chrome, chrome-extension.
+        // 2. Access to XMLHttpRequest from a Data URL will be blocked by CORS policy
+        // in some browsers as IE11 and Safari.
+
+        xhr.onabort = clone;
+        xhr.onerror = clone;
+        xhr.ontimeout = clone;
+
+        xhr.onprogress = function () {
+          // Abort the request directly if it not a JPEG image for better performance
+          if (xhr.getResponseHeader('content-type') !== MIME_TYPE_JPEG) {
+            xhr.abort();
+          }
+        };
+
+        xhr.onload = function () {
+          _this.read(xhr.response);
+        };
+
+        xhr.onloadend = function () {
+          _this.reloading = false;
+          _this.xhr = null;
+        }; // Bust cache when there is a "crossOrigin" property to avoid browser cache error
+
+
+        if (options.checkCrossOrigin && isCrossOriginURL(url) && element.crossOrigin) {
+          url = addTimestamp(url);
+        } // The third parameter is required for avoiding side-effect (#682)
+
+
+        xhr.open('GET', url, true);
+        xhr.responseType = 'arraybuffer';
+        xhr.withCredentials = element.crossOrigin === 'use-credentials';
+        xhr.send();
+      }
+    }, {
+      key: "read",
+      value: function read(arrayBuffer) {
+        var options = this.options,
+            imageData = this.imageData; // Reset the orientation value to its default value 1
+        // as some iOS browsers will render image with its orientation
+
+        var orientation = resetAndGetOrientation(arrayBuffer);
+        var rotate = 0;
+        var scaleX = 1;
+        var scaleY = 1;
+
+        if (orientation > 1) {
+          // Generate a new URL which has the default orientation value
+          this.url = arrayBufferToDataURL(arrayBuffer, MIME_TYPE_JPEG);
+
+          var _parseOrientation = parseOrientation(orientation);
+
+          rotate = _parseOrientation.rotate;
+          scaleX = _parseOrientation.scaleX;
+          scaleY = _parseOrientation.scaleY;
+        }
+
+        if (options.rotatable) {
+          imageData.rotate = rotate;
+        }
+
+        if (options.scalable) {
+          imageData.scaleX = scaleX;
+          imageData.scaleY = scaleY;
+        }
+
+        this.clone();
+      }
+    }, {
+      key: "clone",
+      value: function clone() {
+        var element = this.element,
+            url = this.url;
+        var crossOrigin = element.crossOrigin;
+        var crossOriginUrl = url;
+
+        if (this.options.checkCrossOrigin && isCrossOriginURL(url)) {
+          if (!crossOrigin) {
+            crossOrigin = 'anonymous';
+          } // Bust cache when there is not a "crossOrigin" property (#519)
+
+
+          crossOriginUrl = addTimestamp(url);
+        }
+
+        this.crossOrigin = crossOrigin;
+        this.crossOriginUrl = crossOriginUrl;
+        var image = document.createElement('img');
+
+        if (crossOrigin) {
+          image.crossOrigin = crossOrigin;
+        }
+
+        image.src = crossOriginUrl || url;
+        image.alt = element.alt || 'The image to crop';
+        this.image = image;
+        image.onload = this.start.bind(this);
+        image.onerror = this.stop.bind(this);
+        addClass(image, CLASS_HIDE);
+        element.parentNode.insertBefore(image, element.nextSibling);
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        var _this2 = this;
+
+        var image = this.image;
+        image.onload = null;
+        image.onerror = null;
+        this.sizing = true; // Match all browsers that use WebKit as the layout engine in iOS devices,
+        // such as Safari for iOS, Chrome for iOS, and in-app browsers.
+
+        var isIOSWebKit = WINDOW.navigator && /(?:iPad|iPhone|iPod).*?AppleWebKit/i.test(WINDOW.navigator.userAgent);
+
+        var done = function done(naturalWidth, naturalHeight) {
+          assign(_this2.imageData, {
+            naturalWidth: naturalWidth,
+            naturalHeight: naturalHeight,
+            aspectRatio: naturalWidth / naturalHeight
+          });
+          _this2.initialImageData = assign({}, _this2.imageData);
+          _this2.sizing = false;
+          _this2.sized = true;
+
+          _this2.build();
+        }; // Most modern browsers (excepts iOS WebKit)
+
+
+        if (image.naturalWidth && !isIOSWebKit) {
+          done(image.naturalWidth, image.naturalHeight);
+          return;
+        }
+
+        var sizingImage = document.createElement('img');
+        var body = document.body || document.documentElement;
+        this.sizingImage = sizingImage;
+
+        sizingImage.onload = function () {
+          done(sizingImage.width, sizingImage.height);
+
+          if (!isIOSWebKit) {
+            body.removeChild(sizingImage);
+          }
+        };
+
+        sizingImage.src = image.src; // iOS WebKit will convert the image automatically
+        // with its orientation once append it into DOM (#279)
+
+        if (!isIOSWebKit) {
+          sizingImage.style.cssText = 'left:0;' + 'max-height:none!important;' + 'max-width:none!important;' + 'min-height:0!important;' + 'min-width:0!important;' + 'opacity:0;' + 'position:absolute;' + 'top:0;' + 'z-index:-1;';
+          body.appendChild(sizingImage);
+        }
+      }
+    }, {
+      key: "stop",
+      value: function stop() {
+        var image = this.image;
+        image.onload = null;
+        image.onerror = null;
+        image.parentNode.removeChild(image);
+        this.image = null;
+      }
+    }, {
+      key: "build",
+      value: function build() {
+        if (!this.sized || this.ready) {
+          return;
+        }
+
+        var element = this.element,
+            options = this.options,
+            image = this.image; // Create cropper elements
+
+        var container = element.parentNode;
+        var template = document.createElement('div');
+        template.innerHTML = TEMPLATE;
+        var cropper = template.querySelector(".".concat(NAMESPACE, "-container"));
+        var canvas = cropper.querySelector(".".concat(NAMESPACE, "-canvas"));
+        var dragBox = cropper.querySelector(".".concat(NAMESPACE, "-drag-box"));
+        var cropBox = cropper.querySelector(".".concat(NAMESPACE, "-crop-box"));
+        var face = cropBox.querySelector(".".concat(NAMESPACE, "-face"));
+        this.container = container;
+        this.cropper = cropper;
+        this.canvas = canvas;
+        this.dragBox = dragBox;
+        this.cropBox = cropBox;
+        this.viewBox = cropper.querySelector(".".concat(NAMESPACE, "-view-box"));
+        this.face = face;
+        canvas.appendChild(image); // Hide the original image
+
+        addClass(element, CLASS_HIDDEN); // Inserts the cropper after to the current image
+
+        container.insertBefore(cropper, element.nextSibling); // Show the image if is hidden
+
+        if (!this.isImg) {
+          removeClass(image, CLASS_HIDE);
+        }
+
+        this.initPreview();
+        this.bind();
+        options.initialAspectRatio = Math.max(0, options.initialAspectRatio) || NaN;
+        options.aspectRatio = Math.max(0, options.aspectRatio) || NaN;
+        options.viewMode = Math.max(0, Math.min(3, Math.round(options.viewMode))) || 0;
+        addClass(cropBox, CLASS_HIDDEN);
+
+        if (!options.guides) {
+          addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-dashed")), CLASS_HIDDEN);
+        }
+
+        if (!options.center) {
+          addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-center")), CLASS_HIDDEN);
+        }
+
+        if (options.background) {
+          addClass(cropper, "".concat(NAMESPACE, "-bg"));
+        }
+
+        if (!options.highlight) {
+          addClass(face, CLASS_INVISIBLE);
+        }
+
+        if (options.cropBoxMovable) {
+          addClass(face, CLASS_MOVE);
+          setData(face, DATA_ACTION, ACTION_ALL);
+        }
+
+        if (!options.cropBoxResizable) {
+          addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-line")), CLASS_HIDDEN);
+          addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-point")), CLASS_HIDDEN);
+        }
+
+        this.render();
+        this.ready = true;
+        this.setDragMode(options.dragMode);
+
+        if (options.autoCrop) {
+          this.crop();
+        }
+
+        this.setData(options.data);
+
+        if (isFunction(options.ready)) {
+          addListener(element, EVENT_READY, options.ready, {
+            once: true
+          });
+        }
+
+        dispatchEvent(element, EVENT_READY);
+      }
+    }, {
+      key: "unbuild",
+      value: function unbuild() {
+        if (!this.ready) {
+          return;
+        }
+
+        this.ready = false;
+        this.unbind();
+        this.resetPreview();
+        this.cropper.parentNode.removeChild(this.cropper);
+        removeClass(this.element, CLASS_HIDDEN);
+      }
+    }, {
+      key: "uncreate",
+      value: function uncreate() {
+        if (this.ready) {
+          this.unbuild();
+          this.ready = false;
+          this.cropped = false;
+        } else if (this.sizing) {
+          this.sizingImage.onload = null;
+          this.sizing = false;
+          this.sized = false;
+        } else if (this.reloading) {
+          this.xhr.onabort = null;
+          this.xhr.abort();
+        } else if (this.image) {
+          this.stop();
+        }
+      }
+      /**
+       * Get the no conflict cropper class.
+       * @returns {Cropper} The cropper class.
+       */
+
+    }], [{
+      key: "noConflict",
+      value: function noConflict() {
+        window.Cropper = AnotherCropper;
+        return Cropper;
+      }
+      /**
+       * Change the default options.
+       * @param {Object} options - The new default options.
+       */
+
+    }, {
+      key: "setDefaults",
+      value: function setDefaults(options) {
+        assign(DEFAULTS, isPlainObject(options) && options);
+      }
+    }]);
+
+    return Cropper;
+  }();
+
+  assign(Cropper.prototype, render, preview, events, handlers, change, methods);
+  return Cropper;
+});
+
+/***/ }),
+
+/***/ "./node_modules/jquery-ui/ui/keycode.js":
+/*!**********************************************!*\
+  !*** ./node_modules/jquery-ui/ui/keycode.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * jQuery UI Keycode 1.13.0
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+//>>label: Keycode
+//>>group: Core
+//>>description: Provide keycodes as keynames
+//>>docs: http://api.jqueryui.com/jQuery.ui.keyCode/
+(function (factory) {
+  "use strict";
+
+  if (true) {
+    // AMD. Register as an anonymous module.
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/src/jquery.js"), __webpack_require__(/*! ./version */ "./node_modules/jquery-ui/ui/version.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+})(function ($) {
+  "use strict";
+
+  return $.ui.keyCode = {
+    BACKSPACE: 8,
+    COMMA: 188,
+    DELETE: 46,
+    DOWN: 40,
+    END: 35,
+    ENTER: 13,
+    ESCAPE: 27,
+    HOME: 36,
+    LEFT: 37,
+    PAGE_DOWN: 34,
+    PAGE_UP: 33,
+    PERIOD: 190,
+    RIGHT: 39,
+    SPACE: 32,
+    TAB: 9,
+    UP: 38
+  };
+});
+
+/***/ }),
+
+/***/ "./node_modules/jquery-ui/ui/position.js":
+/*!***********************************************!*\
+  !*** ./node_modules/jquery-ui/ui/position.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * jQuery UI Position 1.13.0
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ *
+ * http://api.jqueryui.com/position/
+ */
+//>>label: Position
+//>>group: Core
+//>>description: Positions elements relative to other elements.
+//>>docs: http://api.jqueryui.com/position/
+//>>demos: http://jqueryui.com/position/
+(function (factory) {
+  "use strict";
+
+  if (true) {
+    // AMD. Register as an anonymous module.
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/src/jquery.js"), __webpack_require__(/*! ./version */ "./node_modules/jquery-ui/ui/version.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+})(function ($) {
+  "use strict";
+
+  (function () {
+    var cachedScrollbarWidth,
+        max = Math.max,
+        abs = Math.abs,
+        rhorizontal = /left|center|right/,
+        rvertical = /top|center|bottom/,
+        roffset = /[\+\-]\d+(\.[\d]+)?%?/,
+        rposition = /^\w+/,
+        rpercent = /%$/,
+        _position = $.fn.position;
+
+    function getOffsets(offsets, width, height) {
+      return [parseFloat(offsets[0]) * (rpercent.test(offsets[0]) ? width / 100 : 1), parseFloat(offsets[1]) * (rpercent.test(offsets[1]) ? height / 100 : 1)];
+    }
+
+    function parseCss(element, property) {
+      return parseInt($.css(element, property), 10) || 0;
+    }
+
+    function isWindow(obj) {
+      return obj != null && obj === obj.window;
+    }
+
+    function getDimensions(elem) {
+      var raw = elem[0];
+
+      if (raw.nodeType === 9) {
+        return {
+          width: elem.width(),
+          height: elem.height(),
+          offset: {
+            top: 0,
+            left: 0
+          }
+        };
+      }
+
+      if (isWindow(raw)) {
+        return {
+          width: elem.width(),
+          height: elem.height(),
+          offset: {
+            top: elem.scrollTop(),
+            left: elem.scrollLeft()
+          }
+        };
+      }
+
+      if (raw.preventDefault) {
+        return {
+          width: 0,
+          height: 0,
+          offset: {
+            top: raw.pageY,
+            left: raw.pageX
+          }
+        };
+      }
+
+      return {
+        width: elem.outerWidth(),
+        height: elem.outerHeight(),
+        offset: elem.offset()
       };
-
-      this._applyManipulationCallback(selector, manipulationCallBack);
     }
-  }, {
-    key: "_applyManipulationCallback",
-    value: function _applyManipulationCallback(selector, callBack) {
-      if (isElement(selector)) {
-        callBack(selector);
-      } else {
-        SelectorEngine.find(selector, this._element).forEach(callBack);
-      }
-    }
-  }, {
-    key: "isOverflowing",
-    value: function isOverflowing() {
-      return this.getWidth() > 0;
-    }
-  }]);
 
-  return ScrollBarHelper;
-}();
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): util/backdrop.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-
-var Default$7 = {
-  className: 'modal-backdrop',
-  isVisible: true,
-  // if false, we use the backdrop helper without adding any element to the dom
-  isAnimated: false,
-  rootElement: 'body',
-  // give the choice to place backdrop under different elements
-  clickCallback: null
-};
-var DefaultType$7 = {
-  className: 'string',
-  isVisible: 'boolean',
-  isAnimated: 'boolean',
-  rootElement: '(element|string)',
-  clickCallback: '(function|null)'
-};
-var NAME$8 = 'backdrop';
-var CLASS_NAME_FADE$4 = 'fade';
-var CLASS_NAME_SHOW$5 = 'show';
-var EVENT_MOUSEDOWN = "mousedown.bs.".concat(NAME$8);
-
-var Backdrop = /*#__PURE__*/function () {
-  function Backdrop(config) {
-    _classCallCheck(this, Backdrop);
-
-    this._config = this._getConfig(config);
-    this._isAppended = false;
-    this._element = null;
-  }
-
-  _createClass(Backdrop, [{
-    key: "show",
-    value: function show(callback) {
-      if (!this._config.isVisible) {
-        execute(callback);
-        return;
-      }
-
-      this._append();
-
-      if (this._config.isAnimated) {
-        reflow(this._getElement());
-      }
-
-      this._getElement().classList.add(CLASS_NAME_SHOW$5);
-
-      this._emulateAnimation(function () {
-        execute(callback);
-      });
-    }
-  }, {
-    key: "hide",
-    value: function hide(callback) {
-      var _this15 = this;
-
-      if (!this._config.isVisible) {
-        execute(callback);
-        return;
-      }
-
-      this._getElement().classList.remove(CLASS_NAME_SHOW$5);
-
-      this._emulateAnimation(function () {
-        _this15.dispose();
-
-        execute(callback);
-      });
-    } // Private
-
-  }, {
-    key: "_getElement",
-    value: function _getElement() {
-      if (!this._element) {
-        var backdrop = document.createElement('div');
-        backdrop.className = this._config.className;
-
-        if (this._config.isAnimated) {
-          backdrop.classList.add(CLASS_NAME_FADE$4);
+    $.position = {
+      scrollbarWidth: function scrollbarWidth() {
+        if (cachedScrollbarWidth !== undefined) {
+          return cachedScrollbarWidth;
         }
 
-        this._element = backdrop;
+        var w1,
+            w2,
+            div = $("<div style=" + "'display:block;position:absolute;width:200px;height:200px;overflow:hidden;'>" + "<div style='height:300px;width:auto;'></div></div>"),
+            innerDiv = div.children()[0];
+        $("body").append(div);
+        w1 = innerDiv.offsetWidth;
+        div.css("overflow", "scroll");
+        w2 = innerDiv.offsetWidth;
+
+        if (w1 === w2) {
+          w2 = div[0].clientWidth;
+        }
+
+        div.remove();
+        return cachedScrollbarWidth = w1 - w2;
+      },
+      getScrollInfo: function getScrollInfo(within) {
+        var overflowX = within.isWindow || within.isDocument ? "" : within.element.css("overflow-x"),
+            overflowY = within.isWindow || within.isDocument ? "" : within.element.css("overflow-y"),
+            hasOverflowX = overflowX === "scroll" || overflowX === "auto" && within.width < within.element[0].scrollWidth,
+            hasOverflowY = overflowY === "scroll" || overflowY === "auto" && within.height < within.element[0].scrollHeight;
+        return {
+          width: hasOverflowY ? $.position.scrollbarWidth() : 0,
+          height: hasOverflowX ? $.position.scrollbarWidth() : 0
+        };
+      },
+      getWithinInfo: function getWithinInfo(element) {
+        var withinElement = $(element || window),
+            isElemWindow = isWindow(withinElement[0]),
+            isDocument = !!withinElement[0] && withinElement[0].nodeType === 9,
+            hasOffset = !isElemWindow && !isDocument;
+        return {
+          element: withinElement,
+          isWindow: isElemWindow,
+          isDocument: isDocument,
+          offset: hasOffset ? $(element).offset() : {
+            left: 0,
+            top: 0
+          },
+          scrollLeft: withinElement.scrollLeft(),
+          scrollTop: withinElement.scrollTop(),
+          width: withinElement.outerWidth(),
+          height: withinElement.outerHeight()
+        };
+      }
+    };
+
+    $.fn.position = function (options) {
+      if (!options || !options.of) {
+        return _position.apply(this, arguments);
+      } // Make a copy, we don't want to modify arguments
+
+
+      options = $.extend({}, options);
+      var atOffset,
+          targetWidth,
+          targetHeight,
+          targetOffset,
+          basePosition,
+          dimensions,
+          // Make sure string options are treated as CSS selectors
+      target = typeof options.of === "string" ? $(document).find(options.of) : $(options.of),
+          within = $.position.getWithinInfo(options.within),
+          scrollInfo = $.position.getScrollInfo(within),
+          collision = (options.collision || "flip").split(" "),
+          offsets = {};
+      dimensions = getDimensions(target);
+
+      if (target[0].preventDefault) {
+        // Force left top to allow flipping
+        options.at = "left top";
       }
 
-      return this._element;
-    }
-  }, {
-    key: "_getConfig",
-    value: function _getConfig(config) {
-      config = _objectSpread(_objectSpread({}, Default$7), _typeof(config) === 'object' ? config : {}); // use getElement() with the default "body" to get a fresh Element on each instantiation
+      targetWidth = dimensions.width;
+      targetHeight = dimensions.height;
+      targetOffset = dimensions.offset; // Clone to reuse original targetOffset later
 
-      config.rootElement = getElement(config.rootElement);
-      typeCheckConfig(NAME$8, config, DefaultType$7);
-      return config;
-    }
-  }, {
-    key: "_append",
-    value: function _append() {
-      var _this16 = this;
+      basePosition = $.extend({}, targetOffset); // Force my and at to have valid horizontal and vertical positions
+      // if a value is missing or invalid, it will be converted to center
 
-      if (this._isAppended) {
-        return;
+      $.each(["my", "at"], function () {
+        var pos = (options[this] || "").split(" "),
+            horizontalOffset,
+            verticalOffset;
+
+        if (pos.length === 1) {
+          pos = rhorizontal.test(pos[0]) ? pos.concat(["center"]) : rvertical.test(pos[0]) ? ["center"].concat(pos) : ["center", "center"];
+        }
+
+        pos[0] = rhorizontal.test(pos[0]) ? pos[0] : "center";
+        pos[1] = rvertical.test(pos[1]) ? pos[1] : "center"; // Calculate offsets
+
+        horizontalOffset = roffset.exec(pos[0]);
+        verticalOffset = roffset.exec(pos[1]);
+        offsets[this] = [horizontalOffset ? horizontalOffset[0] : 0, verticalOffset ? verticalOffset[0] : 0]; // Reduce to just the positions without the offsets
+
+        options[this] = [rposition.exec(pos[0])[0], rposition.exec(pos[1])[0]];
+      }); // Normalize collision option
+
+      if (collision.length === 1) {
+        collision[1] = collision[0];
       }
 
-      this._config.rootElement.append(this._getElement());
-
-      EventHandler.on(this._getElement(), EVENT_MOUSEDOWN, function () {
-        execute(_this16._config.clickCallback);
-      });
-      this._isAppended = true;
-    }
-  }, {
-    key: "dispose",
-    value: function dispose() {
-      if (!this._isAppended) {
-        return;
+      if (options.at[0] === "right") {
+        basePosition.left += targetWidth;
+      } else if (options.at[0] === "center") {
+        basePosition.left += targetWidth / 2;
       }
 
-      EventHandler.off(this._element, EVENT_MOUSEDOWN);
-
-      this._element.remove();
-
-      this._isAppended = false;
-    }
-  }, {
-    key: "_emulateAnimation",
-    value: function _emulateAnimation(callback) {
-      executeAfterTransition(callback, this._getElement(), this._config.isAnimated);
-    }
-  }]);
-
-  return Backdrop;
-}();
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): util/focustrap.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-
-var Default$6 = {
-  trapElement: null,
-  // The element to trap focus inside of
-  autofocus: true
-};
-var DefaultType$6 = {
-  trapElement: 'element',
-  autofocus: 'boolean'
-};
-var NAME$7 = 'focustrap';
-var DATA_KEY$7 = 'bs.focustrap';
-var EVENT_KEY$7 = ".".concat(DATA_KEY$7);
-var EVENT_FOCUSIN$1 = "focusin".concat(EVENT_KEY$7);
-var EVENT_KEYDOWN_TAB = "keydown.tab".concat(EVENT_KEY$7);
-var TAB_KEY = 'Tab';
-var TAB_NAV_FORWARD = 'forward';
-var TAB_NAV_BACKWARD = 'backward';
-
-var FocusTrap = /*#__PURE__*/function () {
-  function FocusTrap(config) {
-    _classCallCheck(this, FocusTrap);
-
-    this._config = this._getConfig(config);
-    this._isActive = false;
-    this._lastTabNavDirection = null;
-  }
-
-  _createClass(FocusTrap, [{
-    key: "activate",
-    value: function activate() {
-      var _this17 = this;
-
-      var _this$_config = this._config,
-          trapElement = _this$_config.trapElement,
-          autofocus = _this$_config.autofocus;
-
-      if (this._isActive) {
-        return;
+      if (options.at[1] === "bottom") {
+        basePosition.top += targetHeight;
+      } else if (options.at[1] === "center") {
+        basePosition.top += targetHeight / 2;
       }
 
-      if (autofocus) {
-        trapElement.focus();
-      }
+      atOffset = getOffsets(offsets.at, targetWidth, targetHeight);
+      basePosition.left += atOffset[0];
+      basePosition.top += atOffset[1];
+      return this.each(function () {
+        var collisionPosition,
+            using,
+            elem = $(this),
+            elemWidth = elem.outerWidth(),
+            elemHeight = elem.outerHeight(),
+            marginLeft = parseCss(this, "marginLeft"),
+            marginTop = parseCss(this, "marginTop"),
+            collisionWidth = elemWidth + marginLeft + parseCss(this, "marginRight") + scrollInfo.width,
+            collisionHeight = elemHeight + marginTop + parseCss(this, "marginBottom") + scrollInfo.height,
+            position = $.extend({}, basePosition),
+            myOffset = getOffsets(offsets.my, elem.outerWidth(), elem.outerHeight());
 
-      EventHandler.off(document, EVENT_KEY$7); // guard against infinite focus loop
+        if (options.my[0] === "right") {
+          position.left -= elemWidth;
+        } else if (options.my[0] === "center") {
+          position.left -= elemWidth / 2;
+        }
 
-      EventHandler.on(document, EVENT_FOCUSIN$1, function (event) {
-        return _this17._handleFocusin(event);
-      });
-      EventHandler.on(document, EVENT_KEYDOWN_TAB, function (event) {
-        return _this17._handleKeydown(event);
-      });
-      this._isActive = true;
-    }
-  }, {
-    key: "deactivate",
-    value: function deactivate() {
-      if (!this._isActive) {
-        return;
-      }
+        if (options.my[1] === "bottom") {
+          position.top -= elemHeight;
+        } else if (options.my[1] === "center") {
+          position.top -= elemHeight / 2;
+        }
 
-      this._isActive = false;
-      EventHandler.off(document, EVENT_KEY$7);
-    } // Private
-
-  }, {
-    key: "_handleFocusin",
-    value: function _handleFocusin(event) {
-      var target = event.target;
-      var trapElement = this._config.trapElement;
-
-      if (target === document || target === trapElement || trapElement.contains(target)) {
-        return;
-      }
-
-      var elements = SelectorEngine.focusableChildren(trapElement);
-
-      if (elements.length === 0) {
-        trapElement.focus();
-      } else if (this._lastTabNavDirection === TAB_NAV_BACKWARD) {
-        elements[elements.length - 1].focus();
-      } else {
-        elements[0].focus();
-      }
-    }
-  }, {
-    key: "_handleKeydown",
-    value: function _handleKeydown(event) {
-      if (event.key !== TAB_KEY) {
-        return;
-      }
-
-      this._lastTabNavDirection = event.shiftKey ? TAB_NAV_BACKWARD : TAB_NAV_FORWARD;
-    }
-  }, {
-    key: "_getConfig",
-    value: function _getConfig(config) {
-      config = _objectSpread(_objectSpread({}, Default$6), _typeof(config) === 'object' ? config : {});
-      typeCheckConfig(NAME$7, config, DefaultType$6);
-      return config;
-    }
-  }]);
-
-  return FocusTrap;
-}();
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): modal.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-
-var NAME$6 = 'modal';
-var DATA_KEY$6 = 'bs.modal';
-var EVENT_KEY$6 = ".".concat(DATA_KEY$6);
-var DATA_API_KEY$3 = '.data-api';
-var ESCAPE_KEY$1 = 'Escape';
-var Default$5 = {
-  backdrop: true,
-  keyboard: true,
-  focus: true
-};
-var DefaultType$5 = {
-  backdrop: '(boolean|string)',
-  keyboard: 'boolean',
-  focus: 'boolean'
-};
-var EVENT_HIDE$3 = "hide".concat(EVENT_KEY$6);
-var EVENT_HIDE_PREVENTED = "hidePrevented".concat(EVENT_KEY$6);
-var EVENT_HIDDEN$3 = "hidden".concat(EVENT_KEY$6);
-var EVENT_SHOW$3 = "show".concat(EVENT_KEY$6);
-var EVENT_SHOWN$3 = "shown".concat(EVENT_KEY$6);
-var EVENT_RESIZE = "resize".concat(EVENT_KEY$6);
-var EVENT_CLICK_DISMISS = "click.dismiss".concat(EVENT_KEY$6);
-var EVENT_KEYDOWN_DISMISS$1 = "keydown.dismiss".concat(EVENT_KEY$6);
-var EVENT_MOUSEUP_DISMISS = "mouseup.dismiss".concat(EVENT_KEY$6);
-var EVENT_MOUSEDOWN_DISMISS = "mousedown.dismiss".concat(EVENT_KEY$6);
-var EVENT_CLICK_DATA_API$2 = "click".concat(EVENT_KEY$6).concat(DATA_API_KEY$3);
-var CLASS_NAME_OPEN = 'modal-open';
-var CLASS_NAME_FADE$3 = 'fade';
-var CLASS_NAME_SHOW$4 = 'show';
-var CLASS_NAME_STATIC = 'modal-static';
-var OPEN_SELECTOR$1 = '.modal.show';
-var SELECTOR_DIALOG = '.modal-dialog';
-var SELECTOR_MODAL_BODY = '.modal-body';
-var SELECTOR_DATA_TOGGLE$2 = '[data-bs-toggle="modal"]';
-/**
- * ------------------------------------------------------------------------
- * Class Definition
- * ------------------------------------------------------------------------
- */
-
-var Modal = /*#__PURE__*/function (_BaseComponent6) {
-  _inherits(Modal, _BaseComponent6);
-
-  var _super6 = _createSuper(Modal);
-
-  function Modal(element, config) {
-    var _this18;
-
-    _classCallCheck(this, Modal);
-
-    _this18 = _super6.call(this, element);
-    _this18._config = _this18._getConfig(config);
-    _this18._dialog = SelectorEngine.findOne(SELECTOR_DIALOG, _this18._element);
-    _this18._backdrop = _this18._initializeBackDrop();
-    _this18._focustrap = _this18._initializeFocusTrap();
-    _this18._isShown = false;
-    _this18._ignoreBackdropClick = false;
-    _this18._isTransitioning = false;
-    _this18._scrollBar = new ScrollBarHelper();
-    return _this18;
-  } // Getters
-
-
-  _createClass(Modal, [{
-    key: "toggle",
-    value: // Public
-    function toggle(relatedTarget) {
-      return this._isShown ? this.hide() : this.show(relatedTarget);
-    }
-  }, {
-    key: "show",
-    value: function show(relatedTarget) {
-      var _this19 = this;
-
-      if (this._isShown || this._isTransitioning) {
-        return;
-      }
-
-      var showEvent = EventHandler.trigger(this._element, EVENT_SHOW$3, {
-        relatedTarget: relatedTarget
-      });
-
-      if (showEvent.defaultPrevented) {
-        return;
-      }
-
-      this._isShown = true;
-
-      if (this._isAnimated()) {
-        this._isTransitioning = true;
-      }
-
-      this._scrollBar.hide();
-
-      document.body.classList.add(CLASS_NAME_OPEN);
-
-      this._adjustDialog();
-
-      this._setEscapeEvent();
-
-      this._setResizeEvent();
-
-      EventHandler.on(this._dialog, EVENT_MOUSEDOWN_DISMISS, function () {
-        EventHandler.one(_this19._element, EVENT_MOUSEUP_DISMISS, function (event) {
-          if (event.target === _this19._element) {
-            _this19._ignoreBackdropClick = true;
+        position.left += myOffset[0];
+        position.top += myOffset[1];
+        collisionPosition = {
+          marginLeft: marginLeft,
+          marginTop: marginTop
+        };
+        $.each(["left", "top"], function (i, dir) {
+          if ($.ui.position[collision[i]]) {
+            $.ui.position[collision[i]][dir](position, {
+              targetWidth: targetWidth,
+              targetHeight: targetHeight,
+              elemWidth: elemWidth,
+              elemHeight: elemHeight,
+              collisionPosition: collisionPosition,
+              collisionWidth: collisionWidth,
+              collisionHeight: collisionHeight,
+              offset: [atOffset[0] + myOffset[0], atOffset[1] + myOffset[1]],
+              my: options.my,
+              at: options.at,
+              within: within,
+              elem: elem
+            });
           }
         });
-      });
 
-      this._showBackdrop(function () {
-        return _this19._showElement(relatedTarget);
-      });
-    }
-  }, {
-    key: "hide",
-    value: function hide() {
-      var _this20 = this;
+        if (options.using) {
+          // Adds feedback as second argument to using callback, if present
+          using = function using(props) {
+            var left = targetOffset.left - position.left,
+                right = left + targetWidth - elemWidth,
+                top = targetOffset.top - position.top,
+                bottom = top + targetHeight - elemHeight,
+                feedback = {
+              target: {
+                element: target,
+                left: targetOffset.left,
+                top: targetOffset.top,
+                width: targetWidth,
+                height: targetHeight
+              },
+              element: {
+                element: elem,
+                left: position.left,
+                top: position.top,
+                width: elemWidth,
+                height: elemHeight
+              },
+              horizontal: right < 0 ? "left" : left > 0 ? "right" : "center",
+              vertical: bottom < 0 ? "top" : top > 0 ? "bottom" : "middle"
+            };
 
-      if (!this._isShown || this._isTransitioning) {
-        return;
-      }
+            if (targetWidth < elemWidth && abs(left + right) < targetWidth) {
+              feedback.horizontal = "center";
+            }
 
-      var hideEvent = EventHandler.trigger(this._element, EVENT_HIDE$3);
+            if (targetHeight < elemHeight && abs(top + bottom) < targetHeight) {
+              feedback.vertical = "middle";
+            }
 
-      if (hideEvent.defaultPrevented) {
-        return;
-      }
+            if (max(abs(left), abs(right)) > max(abs(top), abs(bottom))) {
+              feedback.important = "horizontal";
+            } else {
+              feedback.important = "vertical";
+            }
 
-      this._isShown = false;
-
-      var isAnimated = this._isAnimated();
-
-      if (isAnimated) {
-        this._isTransitioning = true;
-      }
-
-      this._setEscapeEvent();
-
-      this._setResizeEvent();
-
-      this._focustrap.deactivate();
-
-      this._element.classList.remove(CLASS_NAME_SHOW$4);
-
-      EventHandler.off(this._element, EVENT_CLICK_DISMISS);
-      EventHandler.off(this._dialog, EVENT_MOUSEDOWN_DISMISS);
-
-      this._queueCallback(function () {
-        return _this20._hideModal();
-      }, this._element, isAnimated);
-    }
-  }, {
-    key: "dispose",
-    value: function dispose() {
-      [window, this._dialog].forEach(function (htmlElement) {
-        return EventHandler.off(htmlElement, EVENT_KEY$6);
-      });
-
-      this._backdrop.dispose();
-
-      this._focustrap.deactivate();
-
-      _get(_getPrototypeOf(Modal.prototype), "dispose", this).call(this);
-    }
-  }, {
-    key: "handleUpdate",
-    value: function handleUpdate() {
-      this._adjustDialog();
-    } // Private
-
-  }, {
-    key: "_initializeBackDrop",
-    value: function _initializeBackDrop() {
-      return new Backdrop({
-        isVisible: Boolean(this._config.backdrop),
-        // 'static' option will be translated to true, and booleans will keep their value
-        isAnimated: this._isAnimated()
-      });
-    }
-  }, {
-    key: "_initializeFocusTrap",
-    value: function _initializeFocusTrap() {
-      return new FocusTrap({
-        trapElement: this._element
-      });
-    }
-  }, {
-    key: "_getConfig",
-    value: function _getConfig(config) {
-      config = _objectSpread(_objectSpread(_objectSpread({}, Default$5), Manipulator.getDataAttributes(this._element)), _typeof(config) === 'object' ? config : {});
-      typeCheckConfig(NAME$6, config, DefaultType$5);
-      return config;
-    }
-  }, {
-    key: "_showElement",
-    value: function _showElement(relatedTarget) {
-      var _this21 = this;
-
-      var isAnimated = this._isAnimated();
-
-      var modalBody = SelectorEngine.findOne(SELECTOR_MODAL_BODY, this._dialog);
-
-      if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
-        // Don't move modal's DOM position
-        document.body.append(this._element);
-      }
-
-      this._element.style.display = 'block';
-
-      this._element.removeAttribute('aria-hidden');
-
-      this._element.setAttribute('aria-modal', true);
-
-      this._element.setAttribute('role', 'dialog');
-
-      this._element.scrollTop = 0;
-
-      if (modalBody) {
-        modalBody.scrollTop = 0;
-      }
-
-      if (isAnimated) {
-        reflow(this._element);
-      }
-
-      this._element.classList.add(CLASS_NAME_SHOW$4);
-
-      var transitionComplete = function transitionComplete() {
-        if (_this21._config.focus) {
-          _this21._focustrap.activate();
+            options.using.call(this, props, feedback);
+          };
         }
 
-        _this21._isTransitioning = false;
-        EventHandler.trigger(_this21._element, EVENT_SHOWN$3, {
-          relatedTarget: relatedTarget
-        });
-      };
+        elem.offset($.extend(position, {
+          using: using
+        }));
+      });
+    };
 
-      this._queueCallback(transitionComplete, this._dialog, isAnimated);
+    $.ui.position = {
+      fit: {
+        left: function left(position, data) {
+          var within = data.within,
+              withinOffset = within.isWindow ? within.scrollLeft : within.offset.left,
+              outerWidth = within.width,
+              collisionPosLeft = position.left - data.collisionPosition.marginLeft,
+              overLeft = withinOffset - collisionPosLeft,
+              overRight = collisionPosLeft + data.collisionWidth - outerWidth - withinOffset,
+              newOverRight; // Element is wider than within
+
+          if (data.collisionWidth > outerWidth) {
+            // Element is initially over the left side of within
+            if (overLeft > 0 && overRight <= 0) {
+              newOverRight = position.left + overLeft + data.collisionWidth - outerWidth - withinOffset;
+              position.left += overLeft - newOverRight; // Element is initially over right side of within
+            } else if (overRight > 0 && overLeft <= 0) {
+              position.left = withinOffset; // Element is initially over both left and right sides of within
+            } else {
+              if (overLeft > overRight) {
+                position.left = withinOffset + outerWidth - data.collisionWidth;
+              } else {
+                position.left = withinOffset;
+              }
+            } // Too far left -> align with left edge
+
+          } else if (overLeft > 0) {
+            position.left += overLeft; // Too far right -> align with right edge
+          } else if (overRight > 0) {
+            position.left -= overRight; // Adjust based on position and margin
+          } else {
+            position.left = max(position.left - collisionPosLeft, position.left);
+          }
+        },
+        top: function top(position, data) {
+          var within = data.within,
+              withinOffset = within.isWindow ? within.scrollTop : within.offset.top,
+              outerHeight = data.within.height,
+              collisionPosTop = position.top - data.collisionPosition.marginTop,
+              overTop = withinOffset - collisionPosTop,
+              overBottom = collisionPosTop + data.collisionHeight - outerHeight - withinOffset,
+              newOverBottom; // Element is taller than within
+
+          if (data.collisionHeight > outerHeight) {
+            // Element is initially over the top of within
+            if (overTop > 0 && overBottom <= 0) {
+              newOverBottom = position.top + overTop + data.collisionHeight - outerHeight - withinOffset;
+              position.top += overTop - newOverBottom; // Element is initially over bottom of within
+            } else if (overBottom > 0 && overTop <= 0) {
+              position.top = withinOffset; // Element is initially over both top and bottom of within
+            } else {
+              if (overTop > overBottom) {
+                position.top = withinOffset + outerHeight - data.collisionHeight;
+              } else {
+                position.top = withinOffset;
+              }
+            } // Too far up -> align with top
+
+          } else if (overTop > 0) {
+            position.top += overTop; // Too far down -> align with bottom edge
+          } else if (overBottom > 0) {
+            position.top -= overBottom; // Adjust based on position and margin
+          } else {
+            position.top = max(position.top - collisionPosTop, position.top);
+          }
+        }
+      },
+      flip: {
+        left: function left(position, data) {
+          var within = data.within,
+              withinOffset = within.offset.left + within.scrollLeft,
+              outerWidth = within.width,
+              offsetLeft = within.isWindow ? within.scrollLeft : within.offset.left,
+              collisionPosLeft = position.left - data.collisionPosition.marginLeft,
+              overLeft = collisionPosLeft - offsetLeft,
+              overRight = collisionPosLeft + data.collisionWidth - outerWidth - offsetLeft,
+              myOffset = data.my[0] === "left" ? -data.elemWidth : data.my[0] === "right" ? data.elemWidth : 0,
+              atOffset = data.at[0] === "left" ? data.targetWidth : data.at[0] === "right" ? -data.targetWidth : 0,
+              offset = -2 * data.offset[0],
+              newOverRight,
+              newOverLeft;
+
+          if (overLeft < 0) {
+            newOverRight = position.left + myOffset + atOffset + offset + data.collisionWidth - outerWidth - withinOffset;
+
+            if (newOverRight < 0 || newOverRight < abs(overLeft)) {
+              position.left += myOffset + atOffset + offset;
+            }
+          } else if (overRight > 0) {
+            newOverLeft = position.left - data.collisionPosition.marginLeft + myOffset + atOffset + offset - offsetLeft;
+
+            if (newOverLeft > 0 || abs(newOverLeft) < overRight) {
+              position.left += myOffset + atOffset + offset;
+            }
+          }
+        },
+        top: function top(position, data) {
+          var within = data.within,
+              withinOffset = within.offset.top + within.scrollTop,
+              outerHeight = within.height,
+              offsetTop = within.isWindow ? within.scrollTop : within.offset.top,
+              collisionPosTop = position.top - data.collisionPosition.marginTop,
+              overTop = collisionPosTop - offsetTop,
+              overBottom = collisionPosTop + data.collisionHeight - outerHeight - offsetTop,
+              top = data.my[1] === "top",
+              myOffset = top ? -data.elemHeight : data.my[1] === "bottom" ? data.elemHeight : 0,
+              atOffset = data.at[1] === "top" ? data.targetHeight : data.at[1] === "bottom" ? -data.targetHeight : 0,
+              offset = -2 * data.offset[1],
+              newOverTop,
+              newOverBottom;
+
+          if (overTop < 0) {
+            newOverBottom = position.top + myOffset + atOffset + offset + data.collisionHeight - outerHeight - withinOffset;
+
+            if (newOverBottom < 0 || newOverBottom < abs(overTop)) {
+              position.top += myOffset + atOffset + offset;
+            }
+          } else if (overBottom > 0) {
+            newOverTop = position.top - data.collisionPosition.marginTop + myOffset + atOffset + offset - offsetTop;
+
+            if (newOverTop > 0 || abs(newOverTop) < overBottom) {
+              position.top += myOffset + atOffset + offset;
+            }
+          }
+        }
+      },
+      flipfit: {
+        left: function left() {
+          $.ui.position.flip.left.apply(this, arguments);
+          $.ui.position.fit.left.apply(this, arguments);
+        },
+        top: function top() {
+          $.ui.position.flip.top.apply(this, arguments);
+          $.ui.position.fit.top.apply(this, arguments);
+        }
+      }
+    };
+  })();
+
+  return $.ui.position;
+});
+
+/***/ }),
+
+/***/ "./node_modules/jquery-ui/ui/safe-active-element.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/jquery-ui/ui/safe-active-element.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (factory) {
+  "use strict";
+
+  if (true) {
+    // AMD. Register as an anonymous module.
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/src/jquery.js"), __webpack_require__(/*! ./version */ "./node_modules/jquery-ui/ui/version.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+})(function ($) {
+  "use strict";
+
+  return $.ui.safeActiveElement = function (document) {
+    var activeElement; // Support: IE 9 only
+    // IE9 throws an "Unspecified error" accessing document.activeElement from an <iframe>
+
+    try {
+      activeElement = document.activeElement;
+    } catch (error) {
+      activeElement = document.body;
+    } // Support: IE 9 - 11 only
+    // IE may return null instead of an element
+    // Interestingly, this only seems to occur when NOT in an iframe
+
+
+    if (!activeElement) {
+      activeElement = document.body;
+    } // Support: IE 11 only
+    // IE11 returns a seemingly empty object in some cases when accessing
+    // document.activeElement from an <iframe>
+
+
+    if (!activeElement.nodeName) {
+      activeElement = document.body;
     }
-  }, {
-    key: "_setEscapeEvent",
-    value: function _setEscapeEvent() {
-      var _this22 = this;
 
-      if (this._isShown) {
-        EventHandler.on(this._element, EVENT_KEYDOWN_DISMISS$1, function (event) {
-          if (_this22._config.keyboard && event.key === ESCAPE_KEY$1) {
-            event.preventDefault();
+    return activeElement;
+  };
+});
 
-            _this22.hide();
-          } else if (!_this22._config.keyboard && event.key === ESCAPE_KEY$1) {
-            _this22._triggerBackdropTransition();
+/***/ }),
+
+/***/ "./node_modules/jquery-ui/ui/unique-id.js":
+/*!************************************************!*\
+  !*** ./node_modules/jquery-ui/ui/unique-id.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * jQuery UI Unique ID 1.13.0
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+//>>label: uniqueId
+//>>group: Core
+//>>description: Functions to generate and remove uniqueId's
+//>>docs: http://api.jqueryui.com/uniqueId/
+(function (factory) {
+  "use strict";
+
+  if (true) {
+    // AMD. Register as an anonymous module.
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/src/jquery.js"), __webpack_require__(/*! ./version */ "./node_modules/jquery-ui/ui/version.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+})(function ($) {
+  "use strict";
+
+  return $.fn.extend({
+    uniqueId: function () {
+      var uuid = 0;
+      return function () {
+        return this.each(function () {
+          if (!this.id) {
+            this.id = "ui-id-" + ++uuid;
           }
         });
-      } else {
-        EventHandler.off(this._element, EVENT_KEYDOWN_DISMISS$1);
-      }
-    }
-  }, {
-    key: "_setResizeEvent",
-    value: function _setResizeEvent() {
-      var _this23 = this;
-
-      if (this._isShown) {
-        EventHandler.on(window, EVENT_RESIZE, function () {
-          return _this23._adjustDialog();
-        });
-      } else {
-        EventHandler.off(window, EVENT_RESIZE);
-      }
-    }
-  }, {
-    key: "_hideModal",
-    value: function _hideModal() {
-      var _this24 = this;
-
-      this._element.style.display = 'none';
-
-      this._element.setAttribute('aria-hidden', true);
-
-      this._element.removeAttribute('aria-modal');
-
-      this._element.removeAttribute('role');
-
-      this._isTransitioning = false;
-
-      this._backdrop.hide(function () {
-        document.body.classList.remove(CLASS_NAME_OPEN);
-
-        _this24._resetAdjustments();
-
-        _this24._scrollBar.reset();
-
-        EventHandler.trigger(_this24._element, EVENT_HIDDEN$3);
-      });
-    }
-  }, {
-    key: "_showBackdrop",
-    value: function _showBackdrop(callback) {
-      var _this25 = this;
-
-      EventHandler.on(this._element, EVENT_CLICK_DISMISS, function (event) {
-        if (_this25._ignoreBackdropClick) {
-          _this25._ignoreBackdropClick = false;
-          return;
-        }
-
-        if (event.target !== event.currentTarget) {
-          return;
-        }
-
-        if (_this25._config.backdrop === true) {
-          _this25.hide();
-        } else if (_this25._config.backdrop === 'static') {
-          _this25._triggerBackdropTransition();
-        }
-      });
-
-      this._backdrop.show(callback);
-    }
-  }, {
-    key: "_isAnimated",
-    value: function _isAnimated() {
-      return this._element.classList.contains(CLASS_NAME_FADE$3);
-    }
-  }, {
-    key: "_triggerBackdropTransition",
-    value: function _triggerBackdropTransition() {
-      var _this26 = this;
-
-      var hideEvent = EventHandler.trigger(this._element, EVENT_HIDE_PREVENTED);
-
-      if (hideEvent.defaultPrevented) {
-        return;
-      }
-
-      var _this$_element = this._element,
-          classList = _this$_element.classList,
-          scrollHeight = _this$_element.scrollHeight,
-          style = _this$_element.style;
-      var isModalOverflowing = scrollHeight > document.documentElement.clientHeight; // return if the following background transition hasn't yet completed
-
-      if (!isModalOverflowing && style.overflowY === 'hidden' || classList.contains(CLASS_NAME_STATIC)) {
-        return;
-      }
-
-      if (!isModalOverflowing) {
-        style.overflowY = 'hidden';
-      }
-
-      classList.add(CLASS_NAME_STATIC);
-
-      this._queueCallback(function () {
-        classList.remove(CLASS_NAME_STATIC);
-
-        if (!isModalOverflowing) {
-          _this26._queueCallback(function () {
-            style.overflowY = '';
-          }, _this26._dialog);
-        }
-      }, this._dialog);
-
-      this._element.focus();
-    } // ----------------------------------------------------------------------
-    // the following methods are used to handle overflowing modals
-    // ----------------------------------------------------------------------
-
-  }, {
-    key: "_adjustDialog",
-    value: function _adjustDialog() {
-      var isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
-
-      var scrollbarWidth = this._scrollBar.getWidth();
-
-      var isBodyOverflowing = scrollbarWidth > 0;
-
-      if (!isBodyOverflowing && isModalOverflowing && !isRTL() || isBodyOverflowing && !isModalOverflowing && isRTL()) {
-        this._element.style.paddingLeft = "".concat(scrollbarWidth, "px");
-      }
-
-      if (isBodyOverflowing && !isModalOverflowing && !isRTL() || !isBodyOverflowing && isModalOverflowing && isRTL()) {
-        this._element.style.paddingRight = "".concat(scrollbarWidth, "px");
-      }
-    }
-  }, {
-    key: "_resetAdjustments",
-    value: function _resetAdjustments() {
-      this._element.style.paddingLeft = '';
-      this._element.style.paddingRight = '';
-    } // Static
-
-  }], [{
-    key: "Default",
-    get: function get() {
-      return Default$5;
-    }
-  }, {
-    key: "NAME",
-    get: function get() {
-      return NAME$6;
-    }
-  }, {
-    key: "jQueryInterface",
-    value: function jQueryInterface(config, relatedTarget) {
-      return this.each(function () {
-        var data = Modal.getOrCreateInstance(this, config);
-
-        if (typeof config !== 'string') {
-          return;
-        }
-
-        if (typeof data[config] === 'undefined') {
-          throw new TypeError("No method named \"".concat(config, "\""));
-        }
-
-        data[config](relatedTarget);
-      });
-    }
-  }]);
-
-  return Modal;
-}(BaseComponent);
-/**
- * ------------------------------------------------------------------------
- * Data Api implementation
- * ------------------------------------------------------------------------
- */
-
-
-EventHandler.on(document, EVENT_CLICK_DATA_API$2, SELECTOR_DATA_TOGGLE$2, function (event) {
-  var _this27 = this;
-
-  var target = getElementFromSelector(this);
-
-  if (['A', 'AREA'].includes(this.tagName)) {
-    event.preventDefault();
-  }
-
-  EventHandler.one(target, EVENT_SHOW$3, function (showEvent) {
-    if (showEvent.defaultPrevented) {
-      // only register focus restorer if modal will actually get shown
-      return;
-    }
-
-    EventHandler.one(target, EVENT_HIDDEN$3, function () {
-      if (isVisible(_this27)) {
-        _this27.focus();
-      }
-    });
-  }); // avoid conflict when clicking moddal toggler while another one is open
-
-  var allReadyOpen = SelectorEngine.findOne(OPEN_SELECTOR$1);
-
-  if (allReadyOpen) {
-    Modal.getInstance(allReadyOpen).hide();
-  }
-
-  var data = Modal.getOrCreateInstance(target);
-  data.toggle(this);
-});
-enableDismissTrigger(Modal);
-/**
- * ------------------------------------------------------------------------
- * jQuery
- * ------------------------------------------------------------------------
- * add .Modal to jQuery only if jQuery is present
- */
-
-defineJQueryPlugin(Modal);
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): offcanvas.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-var NAME$5 = 'offcanvas';
-var DATA_KEY$5 = 'bs.offcanvas';
-var EVENT_KEY$5 = ".".concat(DATA_KEY$5);
-var DATA_API_KEY$2 = '.data-api';
-var EVENT_LOAD_DATA_API$1 = "load".concat(EVENT_KEY$5).concat(DATA_API_KEY$2);
-var ESCAPE_KEY = 'Escape';
-var Default$4 = {
-  backdrop: true,
-  keyboard: true,
-  scroll: false
-};
-var DefaultType$4 = {
-  backdrop: 'boolean',
-  keyboard: 'boolean',
-  scroll: 'boolean'
-};
-var CLASS_NAME_SHOW$3 = 'show';
-var CLASS_NAME_BACKDROP = 'offcanvas-backdrop';
-var OPEN_SELECTOR = '.offcanvas.show';
-var EVENT_SHOW$2 = "show".concat(EVENT_KEY$5);
-var EVENT_SHOWN$2 = "shown".concat(EVENT_KEY$5);
-var EVENT_HIDE$2 = "hide".concat(EVENT_KEY$5);
-var EVENT_HIDDEN$2 = "hidden".concat(EVENT_KEY$5);
-var EVENT_CLICK_DATA_API$1 = "click".concat(EVENT_KEY$5).concat(DATA_API_KEY$2);
-var EVENT_KEYDOWN_DISMISS = "keydown.dismiss".concat(EVENT_KEY$5);
-var SELECTOR_DATA_TOGGLE$1 = '[data-bs-toggle="offcanvas"]';
-/**
- * ------------------------------------------------------------------------
- * Class Definition
- * ------------------------------------------------------------------------
- */
-
-var Offcanvas = /*#__PURE__*/function (_BaseComponent7) {
-  _inherits(Offcanvas, _BaseComponent7);
-
-  var _super7 = _createSuper(Offcanvas);
-
-  function Offcanvas(element, config) {
-    var _this28;
-
-    _classCallCheck(this, Offcanvas);
-
-    _this28 = _super7.call(this, element);
-    _this28._config = _this28._getConfig(config);
-    _this28._isShown = false;
-    _this28._backdrop = _this28._initializeBackDrop();
-    _this28._focustrap = _this28._initializeFocusTrap();
-
-    _this28._addEventListeners();
-
-    return _this28;
-  } // Getters
-
-
-  _createClass(Offcanvas, [{
-    key: "toggle",
-    value: // Public
-    function toggle(relatedTarget) {
-      return this._isShown ? this.hide() : this.show(relatedTarget);
-    }
-  }, {
-    key: "show",
-    value: function show(relatedTarget) {
-      var _this29 = this;
-
-      if (this._isShown) {
-        return;
-      }
-
-      var showEvent = EventHandler.trigger(this._element, EVENT_SHOW$2, {
-        relatedTarget: relatedTarget
-      });
-
-      if (showEvent.defaultPrevented) {
-        return;
-      }
-
-      this._isShown = true;
-      this._element.style.visibility = 'visible';
-
-      this._backdrop.show();
-
-      if (!this._config.scroll) {
-        new ScrollBarHelper().hide();
-      }
-
-      this._element.removeAttribute('aria-hidden');
-
-      this._element.setAttribute('aria-modal', true);
-
-      this._element.setAttribute('role', 'dialog');
-
-      this._element.classList.add(CLASS_NAME_SHOW$3);
-
-      var completeCallBack = function completeCallBack() {
-        if (!_this29._config.scroll) {
-          _this29._focustrap.activate();
-        }
-
-        EventHandler.trigger(_this29._element, EVENT_SHOWN$2, {
-          relatedTarget: relatedTarget
-        });
       };
-
-      this._queueCallback(completeCallBack, this._element, true);
-    }
-  }, {
-    key: "hide",
-    value: function hide() {
-      var _this30 = this;
-
-      if (!this._isShown) {
-        return;
-      }
-
-      var hideEvent = EventHandler.trigger(this._element, EVENT_HIDE$2);
-
-      if (hideEvent.defaultPrevented) {
-        return;
-      }
-
-      this._focustrap.deactivate();
-
-      this._element.blur();
-
-      this._isShown = false;
-
-      this._element.classList.remove(CLASS_NAME_SHOW$3);
-
-      this._backdrop.hide();
-
-      var completeCallback = function completeCallback() {
-        _this30._element.setAttribute('aria-hidden', true);
-
-        _this30._element.removeAttribute('aria-modal');
-
-        _this30._element.removeAttribute('role');
-
-        _this30._element.style.visibility = 'hidden';
-
-        if (!_this30._config.scroll) {
-          new ScrollBarHelper().reset();
-        }
-
-        EventHandler.trigger(_this30._element, EVENT_HIDDEN$2);
-      };
-
-      this._queueCallback(completeCallback, this._element, true);
-    }
-  }, {
-    key: "dispose",
-    value: function dispose() {
-      this._backdrop.dispose();
-
-      this._focustrap.deactivate();
-
-      _get(_getPrototypeOf(Offcanvas.prototype), "dispose", this).call(this);
-    } // Private
-
-  }, {
-    key: "_getConfig",
-    value: function _getConfig(config) {
-      config = _objectSpread(_objectSpread(_objectSpread({}, Default$4), Manipulator.getDataAttributes(this._element)), _typeof(config) === 'object' ? config : {});
-      typeCheckConfig(NAME$5, config, DefaultType$4);
-      return config;
-    }
-  }, {
-    key: "_initializeBackDrop",
-    value: function _initializeBackDrop() {
-      var _this31 = this;
-
-      return new Backdrop({
-        className: CLASS_NAME_BACKDROP,
-        isVisible: this._config.backdrop,
-        isAnimated: true,
-        rootElement: this._element.parentNode,
-        clickCallback: function clickCallback() {
-          return _this31.hide();
-        }
-      });
-    }
-  }, {
-    key: "_initializeFocusTrap",
-    value: function _initializeFocusTrap() {
-      return new FocusTrap({
-        trapElement: this._element
-      });
-    }
-  }, {
-    key: "_addEventListeners",
-    value: function _addEventListeners() {
-      var _this32 = this;
-
-      EventHandler.on(this._element, EVENT_KEYDOWN_DISMISS, function (event) {
-        if (_this32._config.keyboard && event.key === ESCAPE_KEY) {
-          _this32.hide();
-        }
-      });
-    } // Static
-
-  }], [{
-    key: "NAME",
-    get: function get() {
-      return NAME$5;
-    }
-  }, {
-    key: "Default",
-    get: function get() {
-      return Default$4;
-    }
-  }, {
-    key: "jQueryInterface",
-    value: function jQueryInterface(config) {
+    }(),
+    removeUniqueId: function removeUniqueId() {
       return this.each(function () {
-        var data = Offcanvas.getOrCreateInstance(this, config);
-
-        if (typeof config !== 'string') {
-          return;
+        if (/^ui-id-\d+$/.test(this.id)) {
+          $(this).removeAttr("id");
         }
-
-        if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
-          throw new TypeError("No method named \"".concat(config, "\""));
-        }
-
-        data[config](this);
       });
     }
-  }]);
-
-  return Offcanvas;
-}(BaseComponent);
-/**
- * ------------------------------------------------------------------------
- * Data Api implementation
- * ------------------------------------------------------------------------
- */
-
-
-EventHandler.on(document, EVENT_CLICK_DATA_API$1, SELECTOR_DATA_TOGGLE$1, function (event) {
-  var _this33 = this;
-
-  var target = getElementFromSelector(this);
-
-  if (['A', 'AREA'].includes(this.tagName)) {
-    event.preventDefault();
-  }
-
-  if (isDisabled(this)) {
-    return;
-  }
-
-  EventHandler.one(target, EVENT_HIDDEN$2, function () {
-    // focus on trigger when it is closed
-    if (isVisible(_this33)) {
-      _this33.focus();
-    }
-  }); // avoid conflict when clicking a toggler of an offcanvas, while another is open
-
-  var allReadyOpen = SelectorEngine.findOne(OPEN_SELECTOR);
-
-  if (allReadyOpen && allReadyOpen !== target) {
-    Offcanvas.getInstance(allReadyOpen).hide();
-  }
-
-  var data = Offcanvas.getOrCreateInstance(target);
-  data.toggle(this);
-});
-EventHandler.on(window, EVENT_LOAD_DATA_API$1, function () {
-  return SelectorEngine.find(OPEN_SELECTOR).forEach(function (el) {
-    return Offcanvas.getOrCreateInstance(el).show();
   });
 });
-enableDismissTrigger(Offcanvas);
-/**
- * ------------------------------------------------------------------------
- * jQuery
- * ------------------------------------------------------------------------
- */
 
-defineJQueryPlugin(Offcanvas);
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): util/sanitizer.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
+/***/ }),
 
-var uriAttributes = new Set(['background', 'cite', 'href', 'itemtype', 'longdesc', 'poster', 'src', 'xlink:href']);
-var ARIA_ATTRIBUTE_PATTERN = /^aria-[\w-]*$/i;
-/**
- * A pattern that recognizes a commonly useful subset of URLs that are safe.
+/***/ "./node_modules/jquery-ui/ui/version.js":
+/*!**********************************************!*\
+  !*** ./node_modules/jquery-ui/ui/version.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (factory) {
+  "use strict";
+
+  if (true) {
+    // AMD. Register as an anonymous module.
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/src/jquery.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+})(function ($) {
+  "use strict";
+
+  $.ui = $.ui || {};
+  return $.ui.version = "1.13.0";
+});
+
+/***/ }),
+
+/***/ "./node_modules/jquery-ui/ui/widget.js":
+/*!*********************************************!*\
+  !*** ./node_modules/jquery-ui/ui/widget.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * jQuery UI Widget 1.13.0
+ * http://jqueryui.com
  *
- * Shoutout to Angular https://github.com/angular/angular/blob/12.2.x/packages/core/src/sanitization/url_sanitizer.ts
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
  */
+//>>label: Widget
+//>>group: Core
+//>>description: Provides a factory for creating stateful widgets with a common API.
+//>>docs: http://api.jqueryui.com/jQuery.widget/
+//>>demos: http://jqueryui.com/widget/
+(function (factory) {
+  "use strict";
 
-var SAFE_URL_PATTERN = /^(?:(?:https?|mailto|ftp|tel|file|sms):|[^#&/:?]*(?:[#/?]|$))/i;
-/**
- * A pattern that matches safe data URLs. Only matches image, video and audio types.
- *
- * Shoutout to Angular https://github.com/angular/angular/blob/12.2.x/packages/core/src/sanitization/url_sanitizer.ts
- */
+  if (true) {
+    // AMD. Register as an anonymous module.
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/src/jquery.js"), __webpack_require__(/*! ./version */ "./node_modules/jquery-ui/ui/version.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+})(function ($) {
+  "use strict";
 
-var DATA_URL_PATTERN = /^data:(?:image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[\d+/a-z]+=*$/i;
+  var widgetUuid = 0;
+  var widgetHasOwnProperty = Array.prototype.hasOwnProperty;
+  var widgetSlice = Array.prototype.slice;
 
-var allowedAttribute = function allowedAttribute(attribute, allowedAttributeList) {
-  var attributeName = attribute.nodeName.toLowerCase();
+  $.cleanData = function (orig) {
+    return function (elems) {
+      var events, elem, i;
 
-  if (allowedAttributeList.includes(attributeName)) {
-    if (uriAttributes.has(attributeName)) {
-      return Boolean(SAFE_URL_PATTERN.test(attribute.nodeValue) || DATA_URL_PATTERN.test(attribute.nodeValue));
-    }
+      for (i = 0; (elem = elems[i]) != null; i++) {
+        // Only trigger remove when necessary to save time
+        events = $._data(elem, "events");
 
-    return true;
-  }
-
-  var regExp = allowedAttributeList.filter(function (attributeRegex) {
-    return attributeRegex instanceof RegExp;
-  }); // Check if a regular expression validates the attribute.
-
-  for (var i = 0, len = regExp.length; i < len; i++) {
-    if (regExp[i].test(attributeName)) {
-      return true;
-    }
-  }
-
-  return false;
-};
-
-var DefaultAllowlist = {
-  // Global attributes allowed on any supplied element below.
-  '*': ['class', 'dir', 'id', 'lang', 'role', ARIA_ATTRIBUTE_PATTERN],
-  a: ['target', 'href', 'title', 'rel'],
-  area: [],
-  b: [],
-  br: [],
-  col: [],
-  code: [],
-  div: [],
-  em: [],
-  hr: [],
-  h1: [],
-  h2: [],
-  h3: [],
-  h4: [],
-  h5: [],
-  h6: [],
-  i: [],
-  img: ['src', 'srcset', 'alt', 'title', 'width', 'height'],
-  li: [],
-  ol: [],
-  p: [],
-  pre: [],
-  s: [],
-  small: [],
-  span: [],
-  sub: [],
-  sup: [],
-  strong: [],
-  u: [],
-  ul: []
-};
-
-function sanitizeHtml(unsafeHtml, allowList, sanitizeFn) {
-  var _ref7;
-
-  if (!unsafeHtml.length) {
-    return unsafeHtml;
-  }
-
-  if (sanitizeFn && typeof sanitizeFn === 'function') {
-    return sanitizeFn(unsafeHtml);
-  }
-
-  var domParser = new window.DOMParser();
-  var createdDocument = domParser.parseFromString(unsafeHtml, 'text/html');
-
-  var elements = (_ref7 = []).concat.apply(_ref7, _toConsumableArray(createdDocument.body.querySelectorAll('*')));
-
-  var _loop = function _loop(i, len) {
-    var _ref8;
-
-    var element = elements[i];
-    var elementName = element.nodeName.toLowerCase();
-
-    if (!Object.keys(allowList).includes(elementName)) {
-      element.remove();
-      return "continue";
-    }
-
-    var attributeList = (_ref8 = []).concat.apply(_ref8, _toConsumableArray(element.attributes));
-
-    var allowedAttributes = [].concat(allowList['*'] || [], allowList[elementName] || []);
-    attributeList.forEach(function (attribute) {
-      if (!allowedAttribute(attribute, allowedAttributes)) {
-        element.removeAttribute(attribute.nodeName);
+        if (events && events.remove) {
+          $(elem).triggerHandler("remove");
+        }
       }
+
+      orig(elems);
+    };
+  }($.cleanData);
+
+  $.widget = function (name, base, prototype) {
+    var existingConstructor, constructor, basePrototype; // ProxiedPrototype allows the provided prototype to remain unmodified
+    // so that it can be used as a mixin for multiple widgets (#8876)
+
+    var proxiedPrototype = {};
+    var namespace = name.split(".")[0];
+    name = name.split(".")[1];
+    var fullName = namespace + "-" + name;
+
+    if (!prototype) {
+      prototype = base;
+      base = $.Widget;
+    }
+
+    if (Array.isArray(prototype)) {
+      prototype = $.extend.apply(null, [{}].concat(prototype));
+    } // Create selector for plugin
+
+
+    $.expr.pseudos[fullName.toLowerCase()] = function (elem) {
+      return !!$.data(elem, fullName);
+    };
+
+    $[namespace] = $[namespace] || {};
+    existingConstructor = $[namespace][name];
+
+    constructor = $[namespace][name] = function (options, element) {
+      // Allow instantiation without "new" keyword
+      if (!this._createWidget) {
+        return new constructor(options, element);
+      } // Allow instantiation without initializing for simple inheritance
+      // must use "new" keyword (the code above always passes args)
+
+
+      if (arguments.length) {
+        this._createWidget(options, element);
+      }
+    }; // Extend with the existing constructor to carry over any static properties
+
+
+    $.extend(constructor, existingConstructor, {
+      version: prototype.version,
+      // Copy the object used to create the prototype in case we need to
+      // redefine the widget later
+      _proto: $.extend({}, prototype),
+      // Track widgets that inherit from this widget in case this widget is
+      // redefined after a widget inherits from it
+      _childConstructors: []
     });
+    basePrototype = new base(); // We need to make the options hash a property directly on the new instance
+    // otherwise we'll modify the options hash on the prototype that we're
+    // inheriting from
+
+    basePrototype.options = $.widget.extend({}, basePrototype.options);
+    $.each(prototype, function (prop, value) {
+      if (typeof value !== "function") {
+        proxiedPrototype[prop] = value;
+        return;
+      }
+
+      proxiedPrototype[prop] = function () {
+        function _super() {
+          return base.prototype[prop].apply(this, arguments);
+        }
+
+        function _superApply(args) {
+          return base.prototype[prop].apply(this, args);
+        }
+
+        return function () {
+          var __super = this._super;
+          var __superApply = this._superApply;
+          var returnValue;
+          this._super = _super;
+          this._superApply = _superApply;
+          returnValue = value.apply(this, arguments);
+          this._super = __super;
+          this._superApply = __superApply;
+          return returnValue;
+        };
+      }();
+    });
+    constructor.prototype = $.widget.extend(basePrototype, {
+      // TODO: remove support for widgetEventPrefix
+      // always use the name + a colon as the prefix, e.g., draggable:start
+      // don't prefix for widgets that aren't DOM-based
+      widgetEventPrefix: existingConstructor ? basePrototype.widgetEventPrefix || name : name
+    }, proxiedPrototype, {
+      constructor: constructor,
+      namespace: namespace,
+      widgetName: name,
+      widgetFullName: fullName
+    }); // If this widget is being redefined then we need to find all widgets that
+    // are inheriting from it and redefine all of them so that they inherit from
+    // the new version of this widget. We're essentially trying to replace one
+    // level in the prototype chain.
+
+    if (existingConstructor) {
+      $.each(existingConstructor._childConstructors, function (i, child) {
+        var childPrototype = child.prototype; // Redefine the child widget using the same prototype that was
+        // originally used, but inherit from the new version of the base
+
+        $.widget(childPrototype.namespace + "." + childPrototype.widgetName, constructor, child._proto);
+      }); // Remove the list of existing child constructors from the old constructor
+      // so the old child constructors can be garbage collected
+
+      delete existingConstructor._childConstructors;
+    } else {
+      base._childConstructors.push(constructor);
+    }
+
+    $.widget.bridge(name, constructor);
+    return constructor;
   };
 
-  for (var i = 0, len = elements.length; i < len; i++) {
-    var _ret = _loop(i, len);
+  $.widget.extend = function (target) {
+    var input = widgetSlice.call(arguments, 1);
+    var inputIndex = 0;
+    var inputLength = input.length;
+    var key;
+    var value;
 
-    if (_ret === "continue") continue;
-  }
+    for (; inputIndex < inputLength; inputIndex++) {
+      for (key in input[inputIndex]) {
+        value = input[inputIndex][key];
 
-  return createdDocument.body.innerHTML;
-}
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): tooltip.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-
-var NAME$4 = 'tooltip';
-var DATA_KEY$4 = 'bs.tooltip';
-var EVENT_KEY$4 = ".".concat(DATA_KEY$4);
-var CLASS_PREFIX$1 = 'bs-tooltip';
-var DISALLOWED_ATTRIBUTES = new Set(['sanitize', 'allowList', 'sanitizeFn']);
-var DefaultType$3 = {
-  animation: 'boolean',
-  template: 'string',
-  title: '(string|element|function)',
-  trigger: 'string',
-  delay: '(number|object)',
-  html: 'boolean',
-  selector: '(string|boolean)',
-  placement: '(string|function)',
-  offset: '(array|string|function)',
-  container: '(string|element|boolean)',
-  fallbackPlacements: 'array',
-  boundary: '(string|element)',
-  customClass: '(string|function)',
-  sanitize: 'boolean',
-  sanitizeFn: '(null|function)',
-  allowList: 'object',
-  popperConfig: '(null|object|function)'
-};
-var AttachmentMap = {
-  AUTO: 'auto',
-  TOP: 'top',
-  RIGHT: isRTL() ? 'left' : 'right',
-  BOTTOM: 'bottom',
-  LEFT: isRTL() ? 'right' : 'left'
-};
-var Default$3 = {
-  animation: true,
-  template: '<div class="tooltip" role="tooltip">' + '<div class="tooltip-arrow"></div>' + '<div class="tooltip-inner"></div>' + '</div>',
-  trigger: 'hover focus',
-  title: '',
-  delay: 0,
-  html: false,
-  selector: false,
-  placement: 'top',
-  offset: [0, 0],
-  container: false,
-  fallbackPlacements: ['top', 'right', 'bottom', 'left'],
-  boundary: 'clippingParents',
-  customClass: '',
-  sanitize: true,
-  sanitizeFn: null,
-  allowList: DefaultAllowlist,
-  popperConfig: null
-};
-var Event$2 = {
-  HIDE: "hide".concat(EVENT_KEY$4),
-  HIDDEN: "hidden".concat(EVENT_KEY$4),
-  SHOW: "show".concat(EVENT_KEY$4),
-  SHOWN: "shown".concat(EVENT_KEY$4),
-  INSERTED: "inserted".concat(EVENT_KEY$4),
-  CLICK: "click".concat(EVENT_KEY$4),
-  FOCUSIN: "focusin".concat(EVENT_KEY$4),
-  FOCUSOUT: "focusout".concat(EVENT_KEY$4),
-  MOUSEENTER: "mouseenter".concat(EVENT_KEY$4),
-  MOUSELEAVE: "mouseleave".concat(EVENT_KEY$4)
-};
-var CLASS_NAME_FADE$2 = 'fade';
-var CLASS_NAME_MODAL = 'modal';
-var CLASS_NAME_SHOW$2 = 'show';
-var HOVER_STATE_SHOW = 'show';
-var HOVER_STATE_OUT = 'out';
-var SELECTOR_TOOLTIP_INNER = '.tooltip-inner';
-var SELECTOR_MODAL = ".".concat(CLASS_NAME_MODAL);
-var EVENT_MODAL_HIDE = 'hide.bs.modal';
-var TRIGGER_HOVER = 'hover';
-var TRIGGER_FOCUS = 'focus';
-var TRIGGER_CLICK = 'click';
-var TRIGGER_MANUAL = 'manual';
-/**
- * ------------------------------------------------------------------------
- * Class Definition
- * ------------------------------------------------------------------------
- */
-
-var Tooltip = /*#__PURE__*/function (_BaseComponent8) {
-  _inherits(Tooltip, _BaseComponent8);
-
-  var _super8 = _createSuper(Tooltip);
-
-  function Tooltip(element, config) {
-    var _this34;
-
-    _classCallCheck(this, Tooltip);
-
-    if (typeof _popperjs_core__WEBPACK_IMPORTED_MODULE_0__ === 'undefined') {
-      throw new TypeError('Bootstrap\'s tooltips require Popper (https://popper.js.org)');
-    }
-
-    _this34 = _super8.call(this, element); // private
-
-    _this34._isEnabled = true;
-    _this34._timeout = 0;
-    _this34._hoverState = '';
-    _this34._activeTrigger = {};
-    _this34._popper = null; // Protected
-
-    _this34._config = _this34._getConfig(config);
-    _this34.tip = null;
-
-    _this34._setListeners();
-
-    return _this34;
-  } // Getters
-
-
-  _createClass(Tooltip, [{
-    key: "enable",
-    value: // Public
-    function enable() {
-      this._isEnabled = true;
-    }
-  }, {
-    key: "disable",
-    value: function disable() {
-      this._isEnabled = false;
-    }
-  }, {
-    key: "toggleEnabled",
-    value: function toggleEnabled() {
-      this._isEnabled = !this._isEnabled;
-    }
-  }, {
-    key: "toggle",
-    value: function toggle(event) {
-      if (!this._isEnabled) {
-        return;
+        if (widgetHasOwnProperty.call(input[inputIndex], key) && value !== undefined) {
+          // Clone objects
+          if ($.isPlainObject(value)) {
+            target[key] = $.isPlainObject(target[key]) ? $.widget.extend({}, target[key], value) : // Don't extend strings, arrays, etc. with objects
+            $.widget.extend({}, value); // Copy everything else by reference
+          } else {
+            target[key] = value;
+          }
+        }
       }
+    }
 
-      if (event) {
-        var context = this._initializeOnDelegatedTarget(event);
+    return target;
+  };
 
-        context._activeTrigger.click = !context._activeTrigger.click;
+  $.widget.bridge = function (name, object) {
+    var fullName = object.prototype.widgetFullName || name;
 
-        if (context._isWithActiveTrigger()) {
-          context._enter(null, context);
+    $.fn[name] = function (options) {
+      var isMethodCall = typeof options === "string";
+      var args = widgetSlice.call(arguments, 1);
+      var returnValue = this;
+
+      if (isMethodCall) {
+        // If this is an empty collection, we need to have the instance method
+        // return undefined instead of the jQuery instance
+        if (!this.length && options === "instance") {
+          returnValue = undefined;
         } else {
-          context._leave(null, context);
+          this.each(function () {
+            var methodValue;
+            var instance = $.data(this, fullName);
+
+            if (options === "instance") {
+              returnValue = instance;
+              return false;
+            }
+
+            if (!instance) {
+              return $.error("cannot call methods on " + name + " prior to initialization; " + "attempted to call method '" + options + "'");
+            }
+
+            if (typeof instance[options] !== "function" || options.charAt(0) === "_") {
+              return $.error("no such method '" + options + "' for " + name + " widget instance");
+            }
+
+            methodValue = instance[options].apply(instance, args);
+
+            if (methodValue !== instance && methodValue !== undefined) {
+              returnValue = methodValue && methodValue.jquery ? returnValue.pushStack(methodValue.get()) : methodValue;
+              return false;
+            }
+          });
         }
       } else {
-        if (this.getTipElement().classList.contains(CLASS_NAME_SHOW$2)) {
-          this._leave(null, this);
-
-          return;
+        // Allow multiple hashes to be passed on init
+        if (args.length) {
+          options = $.widget.extend.apply(null, [options].concat(args));
         }
 
-        this._enter(null, this);
-      }
-    }
-  }, {
-    key: "dispose",
-    value: function dispose() {
-      clearTimeout(this._timeout);
-      EventHandler.off(this._element.closest(SELECTOR_MODAL), EVENT_MODAL_HIDE, this._hideModalHandler);
+        this.each(function () {
+          var instance = $.data(this, fullName);
 
-      if (this.tip) {
-        this.tip.remove();
-      }
+          if (instance) {
+            instance.option(options || {});
 
-      this._disposePopper();
-
-      _get(_getPrototypeOf(Tooltip.prototype), "dispose", this).call(this);
-    }
-  }, {
-    key: "show",
-    value: function show() {
-      var _this35 = this;
-
-      if (this._element.style.display === 'none') {
-        throw new Error('Please use show on visible elements');
-      }
-
-      if (!(this.isWithContent() && this._isEnabled)) {
-        return;
-      }
-
-      var showEvent = EventHandler.trigger(this._element, this.constructor.Event.SHOW);
-      var shadowRoot = findShadowRoot(this._element);
-      var isInTheDom = shadowRoot === null ? this._element.ownerDocument.documentElement.contains(this._element) : shadowRoot.contains(this._element);
-
-      if (showEvent.defaultPrevented || !isInTheDom) {
-        return;
-      } // A trick to recreate a tooltip in case a new title is given by using the NOT documented `data-bs-original-title`
-      // This will be removed later in favor of a `setContent` method
-
-
-      if (this.constructor.NAME === 'tooltip' && this.tip && this.getTitle() !== this.tip.querySelector(SELECTOR_TOOLTIP_INNER).innerHTML) {
-        this._disposePopper();
-
-        this.tip.remove();
-        this.tip = null;
-      }
-
-      var tip = this.getTipElement();
-      var tipId = getUID(this.constructor.NAME);
-      tip.setAttribute('id', tipId);
-
-      this._element.setAttribute('aria-describedby', tipId);
-
-      if (this._config.animation) {
-        tip.classList.add(CLASS_NAME_FADE$2);
-      }
-
-      var placement = typeof this._config.placement === 'function' ? this._config.placement.call(this, tip, this._element) : this._config.placement;
-
-      var attachment = this._getAttachment(placement);
-
-      this._addAttachmentClass(attachment);
-
-      var container = this._config.container;
-      Data.set(tip, this.constructor.DATA_KEY, this);
-
-      if (!this._element.ownerDocument.documentElement.contains(this.tip)) {
-        container.append(tip);
-        EventHandler.trigger(this._element, this.constructor.Event.INSERTED);
-      }
-
-      if (this._popper) {
-        this._popper.update();
-      } else {
-        this._popper = _popperjs_core__WEBPACK_IMPORTED_MODULE_0__["createPopper"](this._element, tip, this._getPopperConfig(attachment));
-      }
-
-      tip.classList.add(CLASS_NAME_SHOW$2);
-
-      var customClass = this._resolvePossibleFunction(this._config.customClass);
-
-      if (customClass) {
-        var _tip$classList;
-
-        (_tip$classList = tip.classList).add.apply(_tip$classList, _toConsumableArray(customClass.split(' ')));
-      } // If this is a touch-enabled device we add extra
-      // empty mouseover listeners to the body's immediate children;
-      // only needed because of broken event delegation on iOS
-      // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
-
-
-      if ('ontouchstart' in document.documentElement) {
-        var _ref9;
-
-        (_ref9 = []).concat.apply(_ref9, _toConsumableArray(document.body.children)).forEach(function (element) {
-          EventHandler.on(element, 'mouseover', noop);
-        });
-      }
-
-      var complete = function complete() {
-        var prevHoverState = _this35._hoverState;
-        _this35._hoverState = null;
-        EventHandler.trigger(_this35._element, _this35.constructor.Event.SHOWN);
-
-        if (prevHoverState === HOVER_STATE_OUT) {
-          _this35._leave(null, _this35);
-        }
-      };
-
-      var isAnimated = this.tip.classList.contains(CLASS_NAME_FADE$2);
-
-      this._queueCallback(complete, this.tip, isAnimated);
-    }
-  }, {
-    key: "hide",
-    value: function hide() {
-      var _this36 = this;
-
-      if (!this._popper) {
-        return;
-      }
-
-      var tip = this.getTipElement();
-
-      var complete = function complete() {
-        if (_this36._isWithActiveTrigger()) {
-          return;
-        }
-
-        if (_this36._hoverState !== HOVER_STATE_SHOW) {
-          tip.remove();
-        }
-
-        _this36._cleanTipClass();
-
-        _this36._element.removeAttribute('aria-describedby');
-
-        EventHandler.trigger(_this36._element, _this36.constructor.Event.HIDDEN);
-
-        _this36._disposePopper();
-      };
-
-      var hideEvent = EventHandler.trigger(this._element, this.constructor.Event.HIDE);
-
-      if (hideEvent.defaultPrevented) {
-        return;
-      }
-
-      tip.classList.remove(CLASS_NAME_SHOW$2); // If this is a touch-enabled device we remove the extra
-      // empty mouseover listeners we added for iOS support
-
-      if ('ontouchstart' in document.documentElement) {
-        var _ref10;
-
-        (_ref10 = []).concat.apply(_ref10, _toConsumableArray(document.body.children)).forEach(function (element) {
-          return EventHandler.off(element, 'mouseover', noop);
-        });
-      }
-
-      this._activeTrigger[TRIGGER_CLICK] = false;
-      this._activeTrigger[TRIGGER_FOCUS] = false;
-      this._activeTrigger[TRIGGER_HOVER] = false;
-      var isAnimated = this.tip.classList.contains(CLASS_NAME_FADE$2);
-
-      this._queueCallback(complete, this.tip, isAnimated);
-
-      this._hoverState = '';
-    }
-  }, {
-    key: "update",
-    value: function update() {
-      if (this._popper !== null) {
-        this._popper.update();
-      }
-    } // Protected
-
-  }, {
-    key: "isWithContent",
-    value: function isWithContent() {
-      return Boolean(this.getTitle());
-    }
-  }, {
-    key: "getTipElement",
-    value: function getTipElement() {
-      if (this.tip) {
-        return this.tip;
-      }
-
-      var element = document.createElement('div');
-      element.innerHTML = this._config.template;
-      var tip = element.children[0];
-      this.setContent(tip);
-      tip.classList.remove(CLASS_NAME_FADE$2, CLASS_NAME_SHOW$2);
-      this.tip = tip;
-      return this.tip;
-    }
-  }, {
-    key: "setContent",
-    value: function setContent(tip) {
-      this._sanitizeAndSetContent(tip, this.getTitle(), SELECTOR_TOOLTIP_INNER);
-    }
-  }, {
-    key: "_sanitizeAndSetContent",
-    value: function _sanitizeAndSetContent(template, content, selector) {
-      var templateElement = SelectorEngine.findOne(selector, template);
-
-      if (!content && templateElement) {
-        templateElement.remove();
-        return;
-      } // we use append for html objects to maintain js events
-
-
-      this.setElementContent(templateElement, content);
-    }
-  }, {
-    key: "setElementContent",
-    value: function setElementContent(element, content) {
-      if (element === null) {
-        return;
-      }
-
-      if (isElement(content)) {
-        content = getElement(content); // content is a DOM node or a jQuery
-
-        if (this._config.html) {
-          if (content.parentNode !== element) {
-            element.innerHTML = '';
-            element.append(content);
+            if (instance._init) {
+              instance._init();
+            }
+          } else {
+            $.data(this, fullName, new object(options, this));
           }
+        });
+      }
+
+      return returnValue;
+    };
+  };
+
+  $.Widget = function
+    /* options, element */
+  () {};
+
+  $.Widget._childConstructors = [];
+  $.Widget.prototype = {
+    widgetName: "widget",
+    widgetEventPrefix: "",
+    defaultElement: "<div>",
+    options: {
+      classes: {},
+      disabled: false,
+      // Callbacks
+      create: null
+    },
+    _createWidget: function _createWidget(options, element) {
+      element = $(element || this.defaultElement || this)[0];
+      this.element = $(element);
+      this.uuid = widgetUuid++;
+      this.eventNamespace = "." + this.widgetName + this.uuid;
+      this.bindings = $();
+      this.hoverable = $();
+      this.focusable = $();
+      this.classesElementLookup = {};
+
+      if (element !== this) {
+        $.data(element, this.widgetFullName, this);
+
+        this._on(true, this.element, {
+          remove: function remove(event) {
+            if (event.target === element) {
+              this.destroy();
+            }
+          }
+        });
+
+        this.document = $(element.style ? // Element within the document
+        element.ownerDocument : // Element is window or document
+        element.document || element);
+        this.window = $(this.document[0].defaultView || this.document[0].parentWindow);
+      }
+
+      this.options = $.widget.extend({}, this.options, this._getCreateOptions(), options);
+
+      this._create();
+
+      if (this.options.disabled) {
+        this._setOptionDisabled(this.options.disabled);
+      }
+
+      this._trigger("create", null, this._getCreateEventData());
+
+      this._init();
+    },
+    _getCreateOptions: function _getCreateOptions() {
+      return {};
+    },
+    _getCreateEventData: $.noop,
+    _create: $.noop,
+    _init: $.noop,
+    destroy: function destroy() {
+      var that = this;
+
+      this._destroy();
+
+      $.each(this.classesElementLookup, function (key, value) {
+        that._removeClass(value, key);
+      }); // We can probably remove the unbind calls in 2.0
+      // all event bindings should go through this._on()
+
+      this.element.off(this.eventNamespace).removeData(this.widgetFullName);
+      this.widget().off(this.eventNamespace).removeAttr("aria-disabled"); // Clean up events and states
+
+      this.bindings.off(this.eventNamespace);
+    },
+    _destroy: $.noop,
+    widget: function widget() {
+      return this.element;
+    },
+    option: function option(key, value) {
+      var options = key;
+      var parts;
+      var curOption;
+      var i;
+
+      if (arguments.length === 0) {
+        // Don't return a reference to the internal hash
+        return $.widget.extend({}, this.options);
+      }
+
+      if (typeof key === "string") {
+        // Handle nested keys, e.g., "foo.bar" => { foo: { bar: ___ } }
+        options = {};
+        parts = key.split(".");
+        key = parts.shift();
+
+        if (parts.length) {
+          curOption = options[key] = $.widget.extend({}, this.options[key]);
+
+          for (i = 0; i < parts.length - 1; i++) {
+            curOption[parts[i]] = curOption[parts[i]] || {};
+            curOption = curOption[parts[i]];
+          }
+
+          key = parts.pop();
+
+          if (arguments.length === 1) {
+            return curOption[key] === undefined ? null : curOption[key];
+          }
+
+          curOption[key] = value;
         } else {
-          element.textContent = content.textContent;
+          if (arguments.length === 1) {
+            return this.options[key] === undefined ? null : this.options[key];
+          }
+
+          options[key] = value;
         }
-
-        return;
       }
 
-      if (this._config.html) {
-        if (this._config.sanitize) {
-          content = sanitizeHtml(content, this._config.allowList, this._config.sanitizeFn);
-        }
+      this._setOptions(options);
 
-        element.innerHTML = content;
-      } else {
-        element.textContent = content;
-      }
-    }
-  }, {
-    key: "getTitle",
-    value: function getTitle() {
-      var title = this._element.getAttribute('data-bs-original-title') || this._config.title;
+      return this;
+    },
+    _setOptions: function _setOptions(options) {
+      var key;
 
-      return this._resolvePossibleFunction(title);
-    }
-  }, {
-    key: "updateAttachment",
-    value: function updateAttachment(attachment) {
-      if (attachment === 'right') {
-        return 'end';
+      for (key in options) {
+        this._setOption(key, options[key]);
       }
 
-      if (attachment === 'left') {
-        return 'start';
+      return this;
+    },
+    _setOption: function _setOption(key, value) {
+      if (key === "classes") {
+        this._setOptionClasses(value);
       }
 
-      return attachment;
-    } // Private
+      this.options[key] = value;
 
-  }, {
-    key: "_initializeOnDelegatedTarget",
-    value: function _initializeOnDelegatedTarget(event, context) {
-      return context || this.constructor.getOrCreateInstance(event.delegateTarget, this._getDelegateConfig());
-    }
-  }, {
-    key: "_getOffset",
-    value: function _getOffset() {
-      var _this37 = this;
-
-      var offset = this._config.offset;
-
-      if (typeof offset === 'string') {
-        return offset.split(',').map(function (val) {
-          return Number.parseInt(val, 10);
-        });
+      if (key === "disabled") {
+        this._setOptionDisabled(value);
       }
 
-      if (typeof offset === 'function') {
-        return function (popperData) {
-          return offset(popperData, _this37._element);
-        };
+      return this;
+    },
+    _setOptionClasses: function _setOptionClasses(value) {
+      var classKey, elements, currentElements;
+
+      for (classKey in value) {
+        currentElements = this.classesElementLookup[classKey];
+
+        if (value[classKey] === this.options.classes[classKey] || !currentElements || !currentElements.length) {
+          continue;
+        } // We are doing this to create a new jQuery object because the _removeClass() call
+        // on the next line is going to destroy the reference to the current elements being
+        // tracked. We need to save a copy of this collection so that we can add the new classes
+        // below.
+
+
+        elements = $(currentElements.get());
+
+        this._removeClass(currentElements, classKey); // We don't use _addClass() here, because that uses this.options.classes
+        // for generating the string of classes. We want to use the value passed in from
+        // _setOption(), this is the new value of the classes option which was passed to
+        // _setOption(). We pass this value directly to _classes().
+
+
+        elements.addClass(this._classes({
+          element: elements,
+          keys: classKey,
+          classes: value,
+          add: true
+        }));
       }
+    },
+    _setOptionDisabled: function _setOptionDisabled(value) {
+      this._toggleClass(this.widget(), this.widgetFullName + "-disabled", null, !!value); // If the widget is becoming disabled, then nothing is interactive
 
-      return offset;
-    }
-  }, {
-    key: "_resolvePossibleFunction",
-    value: function _resolvePossibleFunction(content) {
-      return typeof content === 'function' ? content.call(this._element) : content;
-    }
-  }, {
-    key: "_getPopperConfig",
-    value: function _getPopperConfig(attachment) {
-      var _this38 = this;
 
-      var defaultBsPopperConfig = {
-        placement: attachment,
-        modifiers: [{
-          name: 'flip',
-          options: {
-            fallbackPlacements: this._config.fallbackPlacements
-          }
-        }, {
-          name: 'offset',
-          options: {
-            offset: this._getOffset()
-          }
-        }, {
-          name: 'preventOverflow',
-          options: {
-            boundary: this._config.boundary
-          }
-        }, {
-          name: 'arrow',
-          options: {
-            element: ".".concat(this.constructor.NAME, "-arrow")
-          }
-        }, {
-          name: 'onChange',
-          enabled: true,
-          phase: 'afterWrite',
-          fn: function fn(data) {
-            return _this38._handlePopperPlacementChange(data);
-          }
-        }],
-        onFirstUpdate: function onFirstUpdate(data) {
-          if (data.options.placement !== data.placement) {
-            _this38._handlePopperPlacementChange(data);
-          }
-        }
-      };
-      return _objectSpread(_objectSpread({}, defaultBsPopperConfig), typeof this._config.popperConfig === 'function' ? this._config.popperConfig(defaultBsPopperConfig) : this._config.popperConfig);
-    }
-  }, {
-    key: "_addAttachmentClass",
-    value: function _addAttachmentClass(attachment) {
-      this.getTipElement().classList.add("".concat(this._getBasicClassPrefix(), "-").concat(this.updateAttachment(attachment)));
-    }
-  }, {
-    key: "_getAttachment",
-    value: function _getAttachment(placement) {
-      return AttachmentMap[placement.toUpperCase()];
-    }
-  }, {
-    key: "_setListeners",
-    value: function _setListeners() {
-      var _this39 = this;
+      if (value) {
+        this._removeClass(this.hoverable, null, "ui-state-hover");
 
-      var triggers = this._config.trigger.split(' ');
+        this._removeClass(this.focusable, null, "ui-state-focus");
+      }
+    },
+    enable: function enable() {
+      return this._setOptions({
+        disabled: false
+      });
+    },
+    disable: function disable() {
+      return this._setOptions({
+        disabled: true
+      });
+    },
+    _classes: function _classes(options) {
+      var full = [];
+      var that = this;
+      options = $.extend({
+        element: this.element,
+        classes: this.options.classes || {}
+      }, options);
 
-      triggers.forEach(function (trigger) {
-        if (trigger === 'click') {
-          EventHandler.on(_this39._element, _this39.constructor.Event.CLICK, _this39._config.selector, function (event) {
-            return _this39.toggle(event);
+      function bindRemoveEvent() {
+        options.element.each(function (_, element) {
+          var isTracked = $.map(that.classesElementLookup, function (elements) {
+            return elements;
+          }).some(function (elements) {
+            return elements.is(element);
           });
-        } else if (trigger !== TRIGGER_MANUAL) {
-          var eventIn = trigger === TRIGGER_HOVER ? _this39.constructor.Event.MOUSEENTER : _this39.constructor.Event.FOCUSIN;
-          var eventOut = trigger === TRIGGER_HOVER ? _this39.constructor.Event.MOUSELEAVE : _this39.constructor.Event.FOCUSOUT;
-          EventHandler.on(_this39._element, eventIn, _this39._config.selector, function (event) {
-            return _this39._enter(event);
-          });
-          EventHandler.on(_this39._element, eventOut, _this39._config.selector, function (event) {
-            return _this39._leave(event);
-          });
-        }
-      });
 
-      this._hideModalHandler = function () {
-        if (_this39._element) {
-          _this39.hide();
-        }
-      };
-
-      EventHandler.on(this._element.closest(SELECTOR_MODAL), EVENT_MODAL_HIDE, this._hideModalHandler);
-
-      if (this._config.selector) {
-        this._config = _objectSpread(_objectSpread({}, this._config), {}, {
-          trigger: 'manual',
-          selector: ''
-        });
-      } else {
-        this._fixTitle();
-      }
-    }
-  }, {
-    key: "_fixTitle",
-    value: function _fixTitle() {
-      var title = this._element.getAttribute('title');
-
-      var originalTitleType = _typeof(this._element.getAttribute('data-bs-original-title'));
-
-      if (title || originalTitleType !== 'string') {
-        this._element.setAttribute('data-bs-original-title', title || '');
-
-        if (title && !this._element.getAttribute('aria-label') && !this._element.textContent) {
-          this._element.setAttribute('aria-label', title);
-        }
-
-        this._element.setAttribute('title', '');
-      }
-    }
-  }, {
-    key: "_enter",
-    value: function _enter(event, context) {
-      context = this._initializeOnDelegatedTarget(event, context);
-
-      if (event) {
-        context._activeTrigger[event.type === 'focusin' ? TRIGGER_FOCUS : TRIGGER_HOVER] = true;
-      }
-
-      if (context.getTipElement().classList.contains(CLASS_NAME_SHOW$2) || context._hoverState === HOVER_STATE_SHOW) {
-        context._hoverState = HOVER_STATE_SHOW;
-        return;
-      }
-
-      clearTimeout(context._timeout);
-      context._hoverState = HOVER_STATE_SHOW;
-
-      if (!context._config.delay || !context._config.delay.show) {
-        context.show();
-        return;
-      }
-
-      context._timeout = setTimeout(function () {
-        if (context._hoverState === HOVER_STATE_SHOW) {
-          context.show();
-        }
-      }, context._config.delay.show);
-    }
-  }, {
-    key: "_leave",
-    value: function _leave(event, context) {
-      context = this._initializeOnDelegatedTarget(event, context);
-
-      if (event) {
-        context._activeTrigger[event.type === 'focusout' ? TRIGGER_FOCUS : TRIGGER_HOVER] = context._element.contains(event.relatedTarget);
-      }
-
-      if (context._isWithActiveTrigger()) {
-        return;
-      }
-
-      clearTimeout(context._timeout);
-      context._hoverState = HOVER_STATE_OUT;
-
-      if (!context._config.delay || !context._config.delay.hide) {
-        context.hide();
-        return;
-      }
-
-      context._timeout = setTimeout(function () {
-        if (context._hoverState === HOVER_STATE_OUT) {
-          context.hide();
-        }
-      }, context._config.delay.hide);
-    }
-  }, {
-    key: "_isWithActiveTrigger",
-    value: function _isWithActiveTrigger() {
-      for (var trigger in this._activeTrigger) {
-        if (this._activeTrigger[trigger]) {
-          return true;
-        }
-      }
-
-      return false;
-    }
-  }, {
-    key: "_getConfig",
-    value: function _getConfig(config) {
-      var dataAttributes = Manipulator.getDataAttributes(this._element);
-      Object.keys(dataAttributes).forEach(function (dataAttr) {
-        if (DISALLOWED_ATTRIBUTES.has(dataAttr)) {
-          delete dataAttributes[dataAttr];
-        }
-      });
-      config = _objectSpread(_objectSpread(_objectSpread({}, this.constructor.Default), dataAttributes), _typeof(config) === 'object' && config ? config : {});
-      config.container = config.container === false ? document.body : getElement(config.container);
-
-      if (typeof config.delay === 'number') {
-        config.delay = {
-          show: config.delay,
-          hide: config.delay
-        };
-      }
-
-      if (typeof config.title === 'number') {
-        config.title = config.title.toString();
-      }
-
-      if (typeof config.content === 'number') {
-        config.content = config.content.toString();
-      }
-
-      typeCheckConfig(NAME$4, config, this.constructor.DefaultType);
-
-      if (config.sanitize) {
-        config.template = sanitizeHtml(config.template, config.allowList, config.sanitizeFn);
-      }
-
-      return config;
-    }
-  }, {
-    key: "_getDelegateConfig",
-    value: function _getDelegateConfig() {
-      var config = {};
-
-      for (var key in this._config) {
-        if (this.constructor.Default[key] !== this._config[key]) {
-          config[key] = this._config[key];
-        }
-      } // In the future can be replaced with:
-      // const keysWithDifferentValues = Object.entries(this._config).filter(entry => this.constructor.Default[entry[0]] !== this._config[entry[0]])
-      // `Object.fromEntries(keysWithDifferentValues)`
-
-
-      return config;
-    }
-  }, {
-    key: "_cleanTipClass",
-    value: function _cleanTipClass() {
-      var tip = this.getTipElement();
-      var basicClassPrefixRegex = new RegExp("(^|\\s)".concat(this._getBasicClassPrefix(), "\\S+"), 'g');
-      var tabClass = tip.getAttribute('class').match(basicClassPrefixRegex);
-
-      if (tabClass !== null && tabClass.length > 0) {
-        tabClass.map(function (token) {
-          return token.trim();
-        }).forEach(function (tClass) {
-          return tip.classList.remove(tClass);
-        });
-      }
-    }
-  }, {
-    key: "_getBasicClassPrefix",
-    value: function _getBasicClassPrefix() {
-      return CLASS_PREFIX$1;
-    }
-  }, {
-    key: "_handlePopperPlacementChange",
-    value: function _handlePopperPlacementChange(popperData) {
-      var state = popperData.state;
-
-      if (!state) {
-        return;
-      }
-
-      this.tip = state.elements.popper;
-
-      this._cleanTipClass();
-
-      this._addAttachmentClass(this._getAttachment(state.placement));
-    }
-  }, {
-    key: "_disposePopper",
-    value: function _disposePopper() {
-      if (this._popper) {
-        this._popper.destroy();
-
-        this._popper = null;
-      }
-    } // Static
-
-  }], [{
-    key: "Default",
-    get: function get() {
-      return Default$3;
-    }
-  }, {
-    key: "NAME",
-    get: function get() {
-      return NAME$4;
-    }
-  }, {
-    key: "Event",
-    get: function get() {
-      return Event$2;
-    }
-  }, {
-    key: "DefaultType",
-    get: function get() {
-      return DefaultType$3;
-    }
-  }, {
-    key: "jQueryInterface",
-    value: function jQueryInterface(config) {
-      return this.each(function () {
-        var data = Tooltip.getOrCreateInstance(this, config);
-
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"".concat(config, "\""));
-          }
-
-          data[config]();
-        }
-      });
-    }
-  }]);
-
-  return Tooltip;
-}(BaseComponent);
-/**
- * ------------------------------------------------------------------------
- * jQuery
- * ------------------------------------------------------------------------
- * add .Tooltip to jQuery only if jQuery is present
- */
-
-
-defineJQueryPlugin(Tooltip);
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): popover.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-var NAME$3 = 'popover';
-var DATA_KEY$3 = 'bs.popover';
-var EVENT_KEY$3 = ".".concat(DATA_KEY$3);
-var CLASS_PREFIX = 'bs-popover';
-
-var Default$2 = _objectSpread(_objectSpread({}, Tooltip.Default), {}, {
-  placement: 'right',
-  offset: [0, 8],
-  trigger: 'click',
-  content: '',
-  template: '<div class="popover" role="tooltip">' + '<div class="popover-arrow"></div>' + '<h3 class="popover-header"></h3>' + '<div class="popover-body"></div>' + '</div>'
-});
-
-var DefaultType$2 = _objectSpread(_objectSpread({}, Tooltip.DefaultType), {}, {
-  content: '(string|element|function)'
-});
-
-var Event$1 = {
-  HIDE: "hide".concat(EVENT_KEY$3),
-  HIDDEN: "hidden".concat(EVENT_KEY$3),
-  SHOW: "show".concat(EVENT_KEY$3),
-  SHOWN: "shown".concat(EVENT_KEY$3),
-  INSERTED: "inserted".concat(EVENT_KEY$3),
-  CLICK: "click".concat(EVENT_KEY$3),
-  FOCUSIN: "focusin".concat(EVENT_KEY$3),
-  FOCUSOUT: "focusout".concat(EVENT_KEY$3),
-  MOUSEENTER: "mouseenter".concat(EVENT_KEY$3),
-  MOUSELEAVE: "mouseleave".concat(EVENT_KEY$3)
-};
-var SELECTOR_TITLE = '.popover-header';
-var SELECTOR_CONTENT = '.popover-body';
-/**
- * ------------------------------------------------------------------------
- * Class Definition
- * ------------------------------------------------------------------------
- */
-
-var Popover = /*#__PURE__*/function (_Tooltip) {
-  _inherits(Popover, _Tooltip);
-
-  var _super9 = _createSuper(Popover);
-
-  function Popover() {
-    _classCallCheck(this, Popover);
-
-    return _super9.apply(this, arguments);
-  }
-
-  _createClass(Popover, [{
-    key: "isWithContent",
-    value: // Overrides
-    function isWithContent() {
-      return this.getTitle() || this._getContent();
-    }
-  }, {
-    key: "setContent",
-    value: function setContent(tip) {
-      this._sanitizeAndSetContent(tip, this.getTitle(), SELECTOR_TITLE);
-
-      this._sanitizeAndSetContent(tip, this._getContent(), SELECTOR_CONTENT);
-    } // Private
-
-  }, {
-    key: "_getContent",
-    value: function _getContent() {
-      return this._resolvePossibleFunction(this._config.content);
-    }
-  }, {
-    key: "_getBasicClassPrefix",
-    value: function _getBasicClassPrefix() {
-      return CLASS_PREFIX;
-    } // Static
-
-  }], [{
-    key: "Default",
-    get: // Getters
-    function get() {
-      return Default$2;
-    }
-  }, {
-    key: "NAME",
-    get: function get() {
-      return NAME$3;
-    }
-  }, {
-    key: "Event",
-    get: function get() {
-      return Event$1;
-    }
-  }, {
-    key: "DefaultType",
-    get: function get() {
-      return DefaultType$2;
-    }
-  }, {
-    key: "jQueryInterface",
-    value: function jQueryInterface(config) {
-      return this.each(function () {
-        var data = Popover.getOrCreateInstance(this, config);
-
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"".concat(config, "\""));
-          }
-
-          data[config]();
-        }
-      });
-    }
-  }]);
-
-  return Popover;
-}(Tooltip);
-/**
- * ------------------------------------------------------------------------
- * jQuery
- * ------------------------------------------------------------------------
- * add .Popover to jQuery only if jQuery is present
- */
-
-
-defineJQueryPlugin(Popover);
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): scrollspy.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-var NAME$2 = 'scrollspy';
-var DATA_KEY$2 = 'bs.scrollspy';
-var EVENT_KEY$2 = ".".concat(DATA_KEY$2);
-var DATA_API_KEY$1 = '.data-api';
-var Default$1 = {
-  offset: 10,
-  method: 'auto',
-  target: ''
-};
-var DefaultType$1 = {
-  offset: 'number',
-  method: 'string',
-  target: '(string|element)'
-};
-var EVENT_ACTIVATE = "activate".concat(EVENT_KEY$2);
-var EVENT_SCROLL = "scroll".concat(EVENT_KEY$2);
-var EVENT_LOAD_DATA_API = "load".concat(EVENT_KEY$2).concat(DATA_API_KEY$1);
-var CLASS_NAME_DROPDOWN_ITEM = 'dropdown-item';
-var CLASS_NAME_ACTIVE$1 = 'active';
-var SELECTOR_DATA_SPY = '[data-bs-spy="scroll"]';
-var SELECTOR_NAV_LIST_GROUP$1 = '.nav, .list-group';
-var SELECTOR_NAV_LINKS = '.nav-link';
-var SELECTOR_NAV_ITEMS = '.nav-item';
-var SELECTOR_LIST_ITEMS = '.list-group-item';
-var SELECTOR_LINK_ITEMS = "".concat(SELECTOR_NAV_LINKS, ", ").concat(SELECTOR_LIST_ITEMS, ", .").concat(CLASS_NAME_DROPDOWN_ITEM);
-var SELECTOR_DROPDOWN$1 = '.dropdown';
-var SELECTOR_DROPDOWN_TOGGLE$1 = '.dropdown-toggle';
-var METHOD_OFFSET = 'offset';
-var METHOD_POSITION = 'position';
-/**
- * ------------------------------------------------------------------------
- * Class Definition
- * ------------------------------------------------------------------------
- */
-
-var ScrollSpy = /*#__PURE__*/function (_BaseComponent9) {
-  _inherits(ScrollSpy, _BaseComponent9);
-
-  var _super10 = _createSuper(ScrollSpy);
-
-  function ScrollSpy(element, config) {
-    var _this40;
-
-    _classCallCheck(this, ScrollSpy);
-
-    _this40 = _super10.call(this, element);
-    _this40._scrollElement = _this40._element.tagName === 'BODY' ? window : _this40._element;
-    _this40._config = _this40._getConfig(config);
-    _this40._offsets = [];
-    _this40._targets = [];
-    _this40._activeTarget = null;
-    _this40._scrollHeight = 0;
-    EventHandler.on(_this40._scrollElement, EVENT_SCROLL, function () {
-      return _this40._process();
-    });
-
-    _this40.refresh();
-
-    _this40._process();
-
-    return _this40;
-  } // Getters
-
-
-  _createClass(ScrollSpy, [{
-    key: "refresh",
-    value: // Public
-    function refresh() {
-      var _this41 = this;
-
-      var autoMethod = this._scrollElement === this._scrollElement.window ? METHOD_OFFSET : METHOD_POSITION;
-      var offsetMethod = this._config.method === 'auto' ? autoMethod : this._config.method;
-      var offsetBase = offsetMethod === METHOD_POSITION ? this._getScrollTop() : 0;
-      this._offsets = [];
-      this._targets = [];
-      this._scrollHeight = this._getScrollHeight();
-      var targets = SelectorEngine.find(SELECTOR_LINK_ITEMS, this._config.target);
-      targets.map(function (element) {
-        var targetSelector = getSelectorFromElement(element);
-        var target = targetSelector ? SelectorEngine.findOne(targetSelector) : null;
-
-        if (target) {
-          var targetBCR = target.getBoundingClientRect();
-
-          if (targetBCR.width || targetBCR.height) {
-            return [Manipulator[offsetMethod](target).top + offsetBase, targetSelector];
-          }
-        }
-
-        return null;
-      }).filter(function (item) {
-        return item;
-      }).sort(function (a, b) {
-        return a[0] - b[0];
-      }).forEach(function (item) {
-        _this41._offsets.push(item[0]);
-
-        _this41._targets.push(item[1]);
-      });
-    }
-  }, {
-    key: "dispose",
-    value: function dispose() {
-      EventHandler.off(this._scrollElement, EVENT_KEY$2);
-
-      _get(_getPrototypeOf(ScrollSpy.prototype), "dispose", this).call(this);
-    } // Private
-
-  }, {
-    key: "_getConfig",
-    value: function _getConfig(config) {
-      config = _objectSpread(_objectSpread(_objectSpread({}, Default$1), Manipulator.getDataAttributes(this._element)), _typeof(config) === 'object' && config ? config : {});
-      config.target = getElement(config.target) || document.documentElement;
-      typeCheckConfig(NAME$2, config, DefaultType$1);
-      return config;
-    }
-  }, {
-    key: "_getScrollTop",
-    value: function _getScrollTop() {
-      return this._scrollElement === window ? this._scrollElement.pageYOffset : this._scrollElement.scrollTop;
-    }
-  }, {
-    key: "_getScrollHeight",
-    value: function _getScrollHeight() {
-      return this._scrollElement.scrollHeight || Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-    }
-  }, {
-    key: "_getOffsetHeight",
-    value: function _getOffsetHeight() {
-      return this._scrollElement === window ? window.innerHeight : this._scrollElement.getBoundingClientRect().height;
-    }
-  }, {
-    key: "_process",
-    value: function _process() {
-      var scrollTop = this._getScrollTop() + this._config.offset;
-
-      var scrollHeight = this._getScrollHeight();
-
-      var maxScroll = this._config.offset + scrollHeight - this._getOffsetHeight();
-
-      if (this._scrollHeight !== scrollHeight) {
-        this.refresh();
-      }
-
-      if (scrollTop >= maxScroll) {
-        var target = this._targets[this._targets.length - 1];
-
-        if (this._activeTarget !== target) {
-          this._activate(target);
-        }
-
-        return;
-      }
-
-      if (this._activeTarget && scrollTop < this._offsets[0] && this._offsets[0] > 0) {
-        this._activeTarget = null;
-
-        this._clear();
-
-        return;
-      }
-
-      for (var i = this._offsets.length; i--;) {
-        var isActiveTarget = this._activeTarget !== this._targets[i] && scrollTop >= this._offsets[i] && (typeof this._offsets[i + 1] === 'undefined' || scrollTop < this._offsets[i + 1]);
-
-        if (isActiveTarget) {
-          this._activate(this._targets[i]);
-        }
-      }
-    }
-  }, {
-    key: "_activate",
-    value: function _activate(target) {
-      this._activeTarget = target;
-
-      this._clear();
-
-      var queries = SELECTOR_LINK_ITEMS.split(',').map(function (selector) {
-        return "".concat(selector, "[data-bs-target=\"").concat(target, "\"],").concat(selector, "[href=\"").concat(target, "\"]");
-      });
-      var link = SelectorEngine.findOne(queries.join(','), this._config.target);
-      link.classList.add(CLASS_NAME_ACTIVE$1);
-
-      if (link.classList.contains(CLASS_NAME_DROPDOWN_ITEM)) {
-        SelectorEngine.findOne(SELECTOR_DROPDOWN_TOGGLE$1, link.closest(SELECTOR_DROPDOWN$1)).classList.add(CLASS_NAME_ACTIVE$1);
-      } else {
-        SelectorEngine.parents(link, SELECTOR_NAV_LIST_GROUP$1).forEach(function (listGroup) {
-          // Set triggered links parents as active
-          // With both <ul> and <nav> markup a parent is the previous sibling of any nav ancestor
-          SelectorEngine.prev(listGroup, "".concat(SELECTOR_NAV_LINKS, ", ").concat(SELECTOR_LIST_ITEMS)).forEach(function (item) {
-            return item.classList.add(CLASS_NAME_ACTIVE$1);
-          }); // Handle special case when .nav-link is inside .nav-item
-
-          SelectorEngine.prev(listGroup, SELECTOR_NAV_ITEMS).forEach(function (navItem) {
-            SelectorEngine.children(navItem, SELECTOR_NAV_LINKS).forEach(function (item) {
-              return item.classList.add(CLASS_NAME_ACTIVE$1);
+          if (!isTracked) {
+            that._on($(element), {
+              remove: "_untrackClassesElement"
             });
-          });
+          }
         });
       }
 
-      EventHandler.trigger(this._scrollElement, EVENT_ACTIVATE, {
-        relatedTarget: target
-      });
-    }
-  }, {
-    key: "_clear",
-    value: function _clear() {
-      SelectorEngine.find(SELECTOR_LINK_ITEMS, this._config.target).filter(function (node) {
-        return node.classList.contains(CLASS_NAME_ACTIVE$1);
-      }).forEach(function (node) {
-        return node.classList.remove(CLASS_NAME_ACTIVE$1);
-      });
-    } // Static
+      function processClassString(classes, checkOption) {
+        var current, i;
 
-  }], [{
-    key: "Default",
-    get: function get() {
-      return Default$1;
-    }
-  }, {
-    key: "NAME",
-    get: function get() {
-      return NAME$2;
-    }
-  }, {
-    key: "jQueryInterface",
-    value: function jQueryInterface(config) {
-      return this.each(function () {
-        var data = ScrollSpy.getOrCreateInstance(this, config);
+        for (i = 0; i < classes.length; i++) {
+          current = that.classesElementLookup[classes[i]] || $();
 
-        if (typeof config !== 'string') {
-          return;
+          if (options.add) {
+            bindRemoveEvent();
+            current = $($.uniqueSort(current.get().concat(options.element.get())));
+          } else {
+            current = $(current.not(options.element).get());
+          }
+
+          that.classesElementLookup[classes[i]] = current;
+          full.push(classes[i]);
+
+          if (checkOption && options.classes[classes[i]]) {
+            full.push(options.classes[classes[i]]);
+          }
+        }
+      }
+
+      if (options.keys) {
+        processClassString(options.keys.match(/\S+/g) || [], true);
+      }
+
+      if (options.extra) {
+        processClassString(options.extra.match(/\S+/g) || []);
+      }
+
+      return full.join(" ");
+    },
+    _untrackClassesElement: function _untrackClassesElement(event) {
+      var that = this;
+      $.each(that.classesElementLookup, function (key, value) {
+        if ($.inArray(event.target, value) !== -1) {
+          that.classesElementLookup[key] = $(value.not(event.target).get());
+        }
+      });
+
+      this._off($(event.target));
+    },
+    _removeClass: function _removeClass(element, keys, extra) {
+      return this._toggleClass(element, keys, extra, false);
+    },
+    _addClass: function _addClass(element, keys, extra) {
+      return this._toggleClass(element, keys, extra, true);
+    },
+    _toggleClass: function _toggleClass(element, keys, extra, add) {
+      add = typeof add === "boolean" ? add : extra;
+      var shift = typeof element === "string" || element === null,
+          options = {
+        extra: shift ? keys : extra,
+        keys: shift ? element : keys,
+        element: shift ? this.element : element,
+        add: add
+      };
+      options.element.toggleClass(this._classes(options), add);
+      return this;
+    },
+    _on: function _on(suppressDisabledCheck, element, handlers) {
+      var delegateElement;
+      var instance = this; // No suppressDisabledCheck flag, shuffle arguments
+
+      if (typeof suppressDisabledCheck !== "boolean") {
+        handlers = element;
+        element = suppressDisabledCheck;
+        suppressDisabledCheck = false;
+      } // No element argument, shuffle and use this.element
+
+
+      if (!handlers) {
+        handlers = element;
+        element = this.element;
+        delegateElement = this.widget();
+      } else {
+        element = delegateElement = $(element);
+        this.bindings = this.bindings.add(element);
+      }
+
+      $.each(handlers, function (event, handler) {
+        function handlerProxy() {
+          // Allow widgets to customize the disabled handling
+          // - disabled as an array instead of boolean
+          // - disabled class as method for disabling individual parts
+          if (!suppressDisabledCheck && (instance.options.disabled === true || $(this).hasClass("ui-state-disabled"))) {
+            return;
+          }
+
+          return (typeof handler === "string" ? instance[handler] : handler).apply(instance, arguments);
+        } // Copy the guid so direct unbinding works
+
+
+        if (typeof handler !== "string") {
+          handlerProxy.guid = handler.guid = handler.guid || handlerProxy.guid || $.guid++;
         }
 
-        if (typeof data[config] === 'undefined') {
-          throw new TypeError("No method named \"".concat(config, "\""));
+        var match = event.match(/^([\w:-]*)\s*(.*)$/);
+        var eventName = match[1] + instance.eventNamespace;
+        var selector = match[2];
+
+        if (selector) {
+          delegateElement.on(eventName, selector, handlerProxy);
+        } else {
+          element.on(eventName, handlerProxy);
         }
-
-        data[config]();
       });
-    }
-  }]);
+    },
+    _off: function _off(element, eventName) {
+      eventName = (eventName || "").split(" ").join(this.eventNamespace + " ") + this.eventNamespace;
+      element.off(eventName); // Clear the stack to avoid memory leaks (#10056)
 
-  return ScrollSpy;
-}(BaseComponent);
-/**
- * ------------------------------------------------------------------------
- * Data Api implementation
- * ------------------------------------------------------------------------
+      this.bindings = $(this.bindings.not(element).get());
+      this.focusable = $(this.focusable.not(element).get());
+      this.hoverable = $(this.hoverable.not(element).get());
+    },
+    _delay: function _delay(handler, delay) {
+      function handlerProxy() {
+        return (typeof handler === "string" ? instance[handler] : handler).apply(instance, arguments);
+      }
+
+      var instance = this;
+      return setTimeout(handlerProxy, delay || 0);
+    },
+    _hoverable: function _hoverable(element) {
+      this.hoverable = this.hoverable.add(element);
+
+      this._on(element, {
+        mouseenter: function mouseenter(event) {
+          this._addClass($(event.currentTarget), null, "ui-state-hover");
+        },
+        mouseleave: function mouseleave(event) {
+          this._removeClass($(event.currentTarget), null, "ui-state-hover");
+        }
+      });
+    },
+    _focusable: function _focusable(element) {
+      this.focusable = this.focusable.add(element);
+
+      this._on(element, {
+        focusin: function focusin(event) {
+          this._addClass($(event.currentTarget), null, "ui-state-focus");
+        },
+        focusout: function focusout(event) {
+          this._removeClass($(event.currentTarget), null, "ui-state-focus");
+        }
+      });
+    },
+    _trigger: function _trigger(type, event, data) {
+      var prop, orig;
+      var callback = this.options[type];
+      data = data || {};
+      event = $.Event(event);
+      event.type = (type === this.widgetEventPrefix ? type : this.widgetEventPrefix + type).toLowerCase(); // The original event may come from any element
+      // so we need to reset the target on the new event
+
+      event.target = this.element[0]; // Copy original event properties over to the new event
+
+      orig = event.originalEvent;
+
+      if (orig) {
+        for (prop in orig) {
+          if (!(prop in event)) {
+            event[prop] = orig[prop];
+          }
+        }
+      }
+
+      this.element.trigger(event, data);
+      return !(typeof callback === "function" && callback.apply(this.element[0], [event].concat(data)) === false || event.isDefaultPrevented());
+    }
+  };
+  $.each({
+    show: "fadeIn",
+    hide: "fadeOut"
+  }, function (method, defaultEffect) {
+    $.Widget.prototype["_" + method] = function (element, options, callback) {
+      if (typeof options === "string") {
+        options = {
+          effect: options
+        };
+      }
+
+      var hasOptions;
+      var effectName = !options ? method : options === true || typeof options === "number" ? defaultEffect : options.effect || defaultEffect;
+      options = options || {};
+
+      if (typeof options === "number") {
+        options = {
+          duration: options
+        };
+      } else if (options === true) {
+        options = {};
+      }
+
+      hasOptions = !$.isEmptyObject(options);
+      options.complete = callback;
+
+      if (options.delay) {
+        element.delay(options.delay);
+      }
+
+      if (hasOptions && $.effects && $.effects.effect[effectName]) {
+        element[method](options);
+      } else if (effectName !== method && element[effectName]) {
+        element[effectName](options.duration, options.easing, callback);
+      } else {
+        element.queue(function (next) {
+          $(this)[method]();
+
+          if (callback) {
+            callback.call(element[0]);
+          }
+
+          next();
+        });
+      }
+    };
+  });
+  return $.widget;
+});
+
+/***/ }),
+
+/***/ "./node_modules/jquery-ui/ui/widgets/autocomplete.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/jquery-ui/ui/widgets/autocomplete.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * jQuery UI Autocomplete 1.13.0
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
  */
+//>>label: Autocomplete
+//>>group: Widgets
+//>>description: Lists suggested words as the user is typing.
+//>>docs: http://api.jqueryui.com/autocomplete/
+//>>demos: http://jqueryui.com/autocomplete/
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/autocomplete.css
+//>>css.theme: ../../themes/base/theme.css
+(function (factory) {
+  "use strict";
+
+  if (true) {
+    // AMD. Register as an anonymous module.
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/src/jquery.js"), __webpack_require__(/*! ./menu */ "./node_modules/jquery-ui/ui/widgets/menu.js"), __webpack_require__(/*! ../keycode */ "./node_modules/jquery-ui/ui/keycode.js"), __webpack_require__(/*! ../position */ "./node_modules/jquery-ui/ui/position.js"), __webpack_require__(/*! ../safe-active-element */ "./node_modules/jquery-ui/ui/safe-active-element.js"), __webpack_require__(/*! ../version */ "./node_modules/jquery-ui/ui/version.js"), __webpack_require__(/*! ../widget */ "./node_modules/jquery-ui/ui/widget.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+})(function ($) {
+  "use strict";
+
+  $.widget("ui.autocomplete", {
+    version: "1.13.0",
+    defaultElement: "<input>",
+    options: {
+      appendTo: null,
+      autoFocus: false,
+      delay: 300,
+      minLength: 1,
+      position: {
+        my: "left top",
+        at: "left bottom",
+        collision: "none"
+      },
+      source: null,
+      // Callbacks
+      change: null,
+      close: null,
+      focus: null,
+      open: null,
+      response: null,
+      search: null,
+      select: null
+    },
+    requestIndex: 0,
+    pending: 0,
+    _create: function _create() {
+      // Some browsers only repeat keydown events, not keypress events,
+      // so we use the suppressKeyPress flag to determine if we've already
+      // handled the keydown event. #7269
+      // Unfortunately the code for & in keypress is the same as the up arrow,
+      // so we use the suppressKeyPressRepeat flag to avoid handling keypress
+      // events when we know the keydown event was used to modify the
+      // search term. #7799
+      var suppressKeyPress,
+          suppressKeyPressRepeat,
+          suppressInput,
+          nodeName = this.element[0].nodeName.toLowerCase(),
+          isTextarea = nodeName === "textarea",
+          isInput = nodeName === "input"; // Textareas are always multi-line
+      // Inputs are always single-line, even if inside a contentEditable element
+      // IE also treats inputs as contentEditable
+      // All other element types are determined by whether or not they're contentEditable
+
+      this.isMultiLine = isTextarea || !isInput && this._isContentEditable(this.element);
+      this.valueMethod = this.element[isTextarea || isInput ? "val" : "text"];
+      this.isNewMenu = true;
+
+      this._addClass("ui-autocomplete-input");
+
+      this.element.attr("autocomplete", "off");
+
+      this._on(this.element, {
+        keydown: function keydown(event) {
+          if (this.element.prop("readOnly")) {
+            suppressKeyPress = true;
+            suppressInput = true;
+            suppressKeyPressRepeat = true;
+            return;
+          }
+
+          suppressKeyPress = false;
+          suppressInput = false;
+          suppressKeyPressRepeat = false;
+          var keyCode = $.ui.keyCode;
+
+          switch (event.keyCode) {
+            case keyCode.PAGE_UP:
+              suppressKeyPress = true;
+
+              this._move("previousPage", event);
+
+              break;
+
+            case keyCode.PAGE_DOWN:
+              suppressKeyPress = true;
+
+              this._move("nextPage", event);
+
+              break;
+
+            case keyCode.UP:
+              suppressKeyPress = true;
+
+              this._keyEvent("previous", event);
+
+              break;
+
+            case keyCode.DOWN:
+              suppressKeyPress = true;
+
+              this._keyEvent("next", event);
+
+              break;
+
+            case keyCode.ENTER:
+              // when menu is open and has focus
+              if (this.menu.active) {
+                // #6055 - Opera still allows the keypress to occur
+                // which causes forms to submit
+                suppressKeyPress = true;
+                event.preventDefault();
+                this.menu.select(event);
+              }
+
+              break;
+
+            case keyCode.TAB:
+              if (this.menu.active) {
+                this.menu.select(event);
+              }
+
+              break;
+
+            case keyCode.ESCAPE:
+              if (this.menu.element.is(":visible")) {
+                if (!this.isMultiLine) {
+                  this._value(this.term);
+                }
+
+                this.close(event); // Different browsers have different default behavior for escape
+                // Single press can mean undo or clear
+                // Double press in IE means clear the whole form
+
+                event.preventDefault();
+              }
+
+              break;
+
+            default:
+              suppressKeyPressRepeat = true; // search timeout should be triggered before the input value is changed
+
+              this._searchTimeout(event);
+
+              break;
+          }
+        },
+        keypress: function keypress(event) {
+          if (suppressKeyPress) {
+            suppressKeyPress = false;
+
+            if (!this.isMultiLine || this.menu.element.is(":visible")) {
+              event.preventDefault();
+            }
+
+            return;
+          }
+
+          if (suppressKeyPressRepeat) {
+            return;
+          } // Replicate some key handlers to allow them to repeat in Firefox and Opera
 
 
-EventHandler.on(window, EVENT_LOAD_DATA_API, function () {
-  SelectorEngine.find(SELECTOR_DATA_SPY).forEach(function (spy) {
-    return new ScrollSpy(spy);
+          var keyCode = $.ui.keyCode;
+
+          switch (event.keyCode) {
+            case keyCode.PAGE_UP:
+              this._move("previousPage", event);
+
+              break;
+
+            case keyCode.PAGE_DOWN:
+              this._move("nextPage", event);
+
+              break;
+
+            case keyCode.UP:
+              this._keyEvent("previous", event);
+
+              break;
+
+            case keyCode.DOWN:
+              this._keyEvent("next", event);
+
+              break;
+          }
+        },
+        input: function input(event) {
+          if (suppressInput) {
+            suppressInput = false;
+            event.preventDefault();
+            return;
+          }
+
+          this._searchTimeout(event);
+        },
+        focus: function focus() {
+          this.selectedItem = null;
+          this.previous = this._value();
+        },
+        blur: function blur(event) {
+          clearTimeout(this.searching);
+          this.close(event);
+
+          this._change(event);
+        }
+      });
+
+      this._initSource();
+
+      this.menu = $("<ul>").appendTo(this._appendTo()).menu({
+        // disable ARIA support, the live region takes care of that
+        role: null
+      }).hide() // Support: IE 11 only, Edge <= 14
+      // For other browsers, we preventDefault() on the mousedown event
+      // to keep the dropdown from taking focus from the input. This doesn't
+      // work for IE/Edge, causing problems with selection and scrolling (#9638)
+      // Happily, IE and Edge support an "unselectable" attribute that
+      // prevents an element from receiving focus, exactly what we want here.
+      .attr({
+        "unselectable": "on"
+      }).menu("instance");
+
+      this._addClass(this.menu.element, "ui-autocomplete", "ui-front");
+
+      this._on(this.menu.element, {
+        mousedown: function mousedown(event) {
+          // Prevent moving focus out of the text field
+          event.preventDefault();
+        },
+        menufocus: function menufocus(event, ui) {
+          var label, item; // support: Firefox
+          // Prevent accidental activation of menu items in Firefox (#7024 #9118)
+
+          if (this.isNewMenu) {
+            this.isNewMenu = false;
+
+            if (event.originalEvent && /^mouse/.test(event.originalEvent.type)) {
+              this.menu.blur();
+              this.document.one("mousemove", function () {
+                $(event.target).trigger(event.originalEvent);
+              });
+              return;
+            }
+          }
+
+          item = ui.item.data("ui-autocomplete-item");
+
+          if (false !== this._trigger("focus", event, {
+            item: item
+          })) {
+            // use value to match what will end up in the input, if it was a key event
+            if (event.originalEvent && /^key/.test(event.originalEvent.type)) {
+              this._value(item.value);
+            }
+          } // Announce the value in the liveRegion
+
+
+          label = ui.item.attr("aria-label") || item.value;
+
+          if (label && String.prototype.trim.call(label).length) {
+            this.liveRegion.children().hide();
+            $("<div>").text(label).appendTo(this.liveRegion);
+          }
+        },
+        menuselect: function menuselect(event, ui) {
+          var item = ui.item.data("ui-autocomplete-item"),
+              previous = this.previous; // Only trigger when focus was lost (click on menu)
+
+          if (this.element[0] !== $.ui.safeActiveElement(this.document[0])) {
+            this.element.trigger("focus");
+            this.previous = previous; // #6109 - IE triggers two focus events and the second
+            // is asynchronous, so we need to reset the previous
+            // term synchronously and asynchronously :-(
+
+            this._delay(function () {
+              this.previous = previous;
+              this.selectedItem = item;
+            });
+          }
+
+          if (false !== this._trigger("select", event, {
+            item: item
+          })) {
+            this._value(item.value);
+          } // reset the term after the select event
+          // this allows custom select handling to work properly
+
+
+          this.term = this._value();
+          this.close(event);
+          this.selectedItem = item;
+        }
+      });
+
+      this.liveRegion = $("<div>", {
+        role: "status",
+        "aria-live": "assertive",
+        "aria-relevant": "additions"
+      }).appendTo(this.document[0].body);
+
+      this._addClass(this.liveRegion, null, "ui-helper-hidden-accessible"); // Turning off autocomplete prevents the browser from remembering the
+      // value when navigating through history, so we re-enable autocomplete
+      // if the page is unloaded before the widget is destroyed. #7790
+
+
+      this._on(this.window, {
+        beforeunload: function beforeunload() {
+          this.element.removeAttr("autocomplete");
+        }
+      });
+    },
+    _destroy: function _destroy() {
+      clearTimeout(this.searching);
+      this.element.removeAttr("autocomplete");
+      this.menu.element.remove();
+      this.liveRegion.remove();
+    },
+    _setOption: function _setOption(key, value) {
+      this._super(key, value);
+
+      if (key === "source") {
+        this._initSource();
+      }
+
+      if (key === "appendTo") {
+        this.menu.element.appendTo(this._appendTo());
+      }
+
+      if (key === "disabled" && value && this.xhr) {
+        this.xhr.abort();
+      }
+    },
+    _isEventTargetInWidget: function _isEventTargetInWidget(event) {
+      var menuElement = this.menu.element[0];
+      return event.target === this.element[0] || event.target === menuElement || $.contains(menuElement, event.target);
+    },
+    _closeOnClickOutside: function _closeOnClickOutside(event) {
+      if (!this._isEventTargetInWidget(event)) {
+        this.close();
+      }
+    },
+    _appendTo: function _appendTo() {
+      var element = this.options.appendTo;
+
+      if (element) {
+        element = element.jquery || element.nodeType ? $(element) : this.document.find(element).eq(0);
+      }
+
+      if (!element || !element[0]) {
+        element = this.element.closest(".ui-front, dialog");
+      }
+
+      if (!element.length) {
+        element = this.document[0].body;
+      }
+
+      return element;
+    },
+    _initSource: function _initSource() {
+      var array,
+          url,
+          that = this;
+
+      if (Array.isArray(this.options.source)) {
+        array = this.options.source;
+
+        this.source = function (request, response) {
+          response($.ui.autocomplete.filter(array, request.term));
+        };
+      } else if (typeof this.options.source === "string") {
+        url = this.options.source;
+
+        this.source = function (request, response) {
+          if (that.xhr) {
+            that.xhr.abort();
+          }
+
+          that.xhr = $.ajax({
+            url: url,
+            data: request,
+            dataType: "json",
+            success: function success(data) {
+              response(data);
+            },
+            error: function error() {
+              response([]);
+            }
+          });
+        };
+      } else {
+        this.source = this.options.source;
+      }
+    },
+    _searchTimeout: function _searchTimeout(event) {
+      clearTimeout(this.searching);
+      this.searching = this._delay(function () {
+        // Search if the value has changed, or if the user retypes the same value (see #7434)
+        var equalValues = this.term === this._value(),
+            menuVisible = this.menu.element.is(":visible"),
+            modifierKey = event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
+
+        if (!equalValues || equalValues && !menuVisible && !modifierKey) {
+          this.selectedItem = null;
+          this.search(null, event);
+        }
+      }, this.options.delay);
+    },
+    search: function search(value, event) {
+      value = value != null ? value : this._value(); // Always save the actual value, not the one passed as an argument
+
+      this.term = this._value();
+
+      if (value.length < this.options.minLength) {
+        return this.close(event);
+      }
+
+      if (this._trigger("search", event) === false) {
+        return;
+      }
+
+      return this._search(value);
+    },
+    _search: function _search(value) {
+      this.pending++;
+
+      this._addClass("ui-autocomplete-loading");
+
+      this.cancelSearch = false;
+      this.source({
+        term: value
+      }, this._response());
+    },
+    _response: function _response() {
+      var index = ++this.requestIndex;
+      return function (content) {
+        if (index === this.requestIndex) {
+          this.__response(content);
+        }
+
+        this.pending--;
+
+        if (!this.pending) {
+          this._removeClass("ui-autocomplete-loading");
+        }
+      }.bind(this);
+    },
+    __response: function __response(content) {
+      if (content) {
+        content = this._normalize(content);
+      }
+
+      this._trigger("response", null, {
+        content: content
+      });
+
+      if (!this.options.disabled && content && content.length && !this.cancelSearch) {
+        this._suggest(content);
+
+        this._trigger("open");
+      } else {
+        // use ._close() instead of .close() so we don't cancel future searches
+        this._close();
+      }
+    },
+    close: function close(event) {
+      this.cancelSearch = true;
+
+      this._close(event);
+    },
+    _close: function _close(event) {
+      // Remove the handler that closes the menu on outside clicks
+      this._off(this.document, "mousedown");
+
+      if (this.menu.element.is(":visible")) {
+        this.menu.element.hide();
+        this.menu.blur();
+        this.isNewMenu = true;
+
+        this._trigger("close", event);
+      }
+    },
+    _change: function _change(event) {
+      if (this.previous !== this._value()) {
+        this._trigger("change", event, {
+          item: this.selectedItem
+        });
+      }
+    },
+    _normalize: function _normalize(items) {
+      // assume all items have the right format when the first item is complete
+      if (items.length && items[0].label && items[0].value) {
+        return items;
+      }
+
+      return $.map(items, function (item) {
+        if (typeof item === "string") {
+          return {
+            label: item,
+            value: item
+          };
+        }
+
+        return $.extend({}, item, {
+          label: item.label || item.value,
+          value: item.value || item.label
+        });
+      });
+    },
+    _suggest: function _suggest(items) {
+      var ul = this.menu.element.empty();
+
+      this._renderMenu(ul, items);
+
+      this.isNewMenu = true;
+      this.menu.refresh(); // Size and position menu
+
+      ul.show();
+
+      this._resizeMenu();
+
+      ul.position($.extend({
+        of: this.element
+      }, this.options.position));
+
+      if (this.options.autoFocus) {
+        this.menu.next();
+      } // Listen for interactions outside of the widget (#6642)
+
+
+      this._on(this.document, {
+        mousedown: "_closeOnClickOutside"
+      });
+    },
+    _resizeMenu: function _resizeMenu() {
+      var ul = this.menu.element;
+      ul.outerWidth(Math.max( // Firefox wraps long text (possibly a rounding bug)
+      // so we add 1px to avoid the wrapping (#7513)
+      ul.width("").outerWidth() + 1, this.element.outerWidth()));
+    },
+    _renderMenu: function _renderMenu(ul, items) {
+      var that = this;
+      $.each(items, function (index, item) {
+        that._renderItemData(ul, item);
+      });
+    },
+    _renderItemData: function _renderItemData(ul, item) {
+      return this._renderItem(ul, item).data("ui-autocomplete-item", item);
+    },
+    _renderItem: function _renderItem(ul, item) {
+      return $("<li>").append($("<div>").text(item.label)).appendTo(ul);
+    },
+    _move: function _move(direction, event) {
+      if (!this.menu.element.is(":visible")) {
+        this.search(null, event);
+        return;
+      }
+
+      if (this.menu.isFirstItem() && /^previous/.test(direction) || this.menu.isLastItem() && /^next/.test(direction)) {
+        if (!this.isMultiLine) {
+          this._value(this.term);
+        }
+
+        this.menu.blur();
+        return;
+      }
+
+      this.menu[direction](event);
+    },
+    widget: function widget() {
+      return this.menu.element;
+    },
+    _value: function _value() {
+      return this.valueMethod.apply(this.element, arguments);
+    },
+    _keyEvent: function _keyEvent(keyEvent, event) {
+      if (!this.isMultiLine || this.menu.element.is(":visible")) {
+        this._move(keyEvent, event); // Prevents moving cursor to beginning/end of the text field in some browsers
+
+
+        event.preventDefault();
+      }
+    },
+    // Support: Chrome <=50
+    // We should be able to just use this.element.prop( "isContentEditable" )
+    // but hidden elements always report false in Chrome.
+    // https://code.google.com/p/chromium/issues/detail?id=313082
+    _isContentEditable: function _isContentEditable(element) {
+      if (!element.length) {
+        return false;
+      }
+
+      var editable = element.prop("contentEditable");
+
+      if (editable === "inherit") {
+        return this._isContentEditable(element.parent());
+      }
+
+      return editable === "true";
+    }
+  });
+  $.extend($.ui.autocomplete, {
+    escapeRegex: function escapeRegex(value) {
+      return value.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
+    },
+    filter: function filter(array, term) {
+      var matcher = new RegExp($.ui.autocomplete.escapeRegex(term), "i");
+      return $.grep(array, function (value) {
+        return matcher.test(value.label || value.value || value);
+      });
+    }
+  }); // Live region extension, adding a `messages` option
+  // NOTE: This is an experimental API. We are still investigating
+  // a full solution for string manipulation and internationalization.
+
+  $.widget("ui.autocomplete", $.ui.autocomplete, {
+    options: {
+      messages: {
+        noResults: "No search results.",
+        results: function results(amount) {
+          return amount + (amount > 1 ? " results are" : " result is") + " available, use up and down arrow keys to navigate.";
+        }
+      }
+    },
+    __response: function __response(content) {
+      var message;
+
+      this._superApply(arguments);
+
+      if (this.options.disabled || this.cancelSearch) {
+        return;
+      }
+
+      if (content && content.length) {
+        message = this.options.messages.results(content.length);
+      } else {
+        message = this.options.messages.noResults;
+      }
+
+      this.liveRegion.children().hide();
+      $("<div>").text(message).appendTo(this.liveRegion);
+    }
+  });
+  return $.ui.autocomplete;
+});
+
+/***/ }),
+
+/***/ "./node_modules/jquery-ui/ui/widgets/menu.js":
+/*!***************************************************!*\
+  !*** ./node_modules/jquery-ui/ui/widgets/menu.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * jQuery UI Menu 1.13.0
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+//>>label: Menu
+//>>group: Widgets
+//>>description: Creates nestable menus.
+//>>docs: http://api.jqueryui.com/menu/
+//>>demos: http://jqueryui.com/menu/
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/menu.css
+//>>css.theme: ../../themes/base/theme.css
+(function (factory) {
+  "use strict";
+
+  if (true) {
+    // AMD. Register as an anonymous module.
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/src/jquery.js"), __webpack_require__(/*! ../keycode */ "./node_modules/jquery-ui/ui/keycode.js"), __webpack_require__(/*! ../position */ "./node_modules/jquery-ui/ui/position.js"), __webpack_require__(/*! ../safe-active-element */ "./node_modules/jquery-ui/ui/safe-active-element.js"), __webpack_require__(/*! ../unique-id */ "./node_modules/jquery-ui/ui/unique-id.js"), __webpack_require__(/*! ../version */ "./node_modules/jquery-ui/ui/version.js"), __webpack_require__(/*! ../widget */ "./node_modules/jquery-ui/ui/widget.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+})(function ($) {
+  "use strict";
+
+  return $.widget("ui.menu", {
+    version: "1.13.0",
+    defaultElement: "<ul>",
+    delay: 300,
+    options: {
+      icons: {
+        submenu: "ui-icon-caret-1-e"
+      },
+      items: "> *",
+      menus: "ul",
+      position: {
+        my: "left top",
+        at: "right top"
+      },
+      role: "menu",
+      // Callbacks
+      blur: null,
+      focus: null,
+      select: null
+    },
+    _create: function _create() {
+      this.activeMenu = this.element; // Flag used to prevent firing of the click handler
+      // as the event bubbles up through nested menus
+
+      this.mouseHandled = false;
+      this.lastMousePosition = {
+        x: null,
+        y: null
+      };
+      this.element.uniqueId().attr({
+        role: this.options.role,
+        tabIndex: 0
+      });
+
+      this._addClass("ui-menu", "ui-widget ui-widget-content");
+
+      this._on({
+        // Prevent focus from sticking to links inside menu after clicking
+        // them (focus should always stay on UL during navigation).
+        "mousedown .ui-menu-item": function mousedownUiMenuItem(event) {
+          event.preventDefault();
+
+          this._activateItem(event);
+        },
+        "click .ui-menu-item": function clickUiMenuItem(event) {
+          var target = $(event.target);
+          var active = $($.ui.safeActiveElement(this.document[0]));
+
+          if (!this.mouseHandled && target.not(".ui-state-disabled").length) {
+            this.select(event); // Only set the mouseHandled flag if the event will bubble, see #9469.
+
+            if (!event.isPropagationStopped()) {
+              this.mouseHandled = true;
+            } // Open submenu on click
+
+
+            if (target.has(".ui-menu").length) {
+              this.expand(event);
+            } else if (!this.element.is(":focus") && active.closest(".ui-menu").length) {
+              // Redirect focus to the menu
+              this.element.trigger("focus", [true]); // If the active item is on the top level, let it stay active.
+              // Otherwise, blur the active item since it is no longer visible.
+
+              if (this.active && this.active.parents(".ui-menu").length === 1) {
+                clearTimeout(this.timer);
+              }
+            }
+          }
+        },
+        "mouseenter .ui-menu-item": "_activateItem",
+        "mousemove .ui-menu-item": "_activateItem",
+        mouseleave: "collapseAll",
+        "mouseleave .ui-menu": "collapseAll",
+        focus: function focus(event, keepActiveItem) {
+          // If there's already an active item, keep it active
+          // If not, activate the first item
+          var item = this.active || this._menuItems().first();
+
+          if (!keepActiveItem) {
+            this.focus(event, item);
+          }
+        },
+        blur: function blur(event) {
+          this._delay(function () {
+            var notContained = !$.contains(this.element[0], $.ui.safeActiveElement(this.document[0]));
+
+            if (notContained) {
+              this.collapseAll(event);
+            }
+          });
+        },
+        keydown: "_keydown"
+      });
+
+      this.refresh(); // Clicks outside of a menu collapse any open menus
+
+      this._on(this.document, {
+        click: function click(event) {
+          if (this._closeOnDocumentClick(event)) {
+            this.collapseAll(event, true);
+          } // Reset the mouseHandled flag
+
+
+          this.mouseHandled = false;
+        }
+      });
+    },
+    _activateItem: function _activateItem(event) {
+      // Ignore mouse events while typeahead is active, see #10458.
+      // Prevents focusing the wrong item when typeahead causes a scroll while the mouse
+      // is over an item in the menu
+      if (this.previousFilter) {
+        return;
+      } // If the mouse didn't actually move, but the page was scrolled, ignore the event (#9356)
+
+
+      if (event.clientX === this.lastMousePosition.x && event.clientY === this.lastMousePosition.y) {
+        return;
+      }
+
+      this.lastMousePosition = {
+        x: event.clientX,
+        y: event.clientY
+      };
+      var actualTarget = $(event.target).closest(".ui-menu-item"),
+          target = $(event.currentTarget); // Ignore bubbled events on parent items, see #11641
+
+      if (actualTarget[0] !== target[0]) {
+        return;
+      } // If the item is already active, there's nothing to do
+
+
+      if (target.is(".ui-state-active")) {
+        return;
+      } // Remove ui-state-active class from siblings of the newly focused menu item
+      // to avoid a jump caused by adjacent elements both having a class with a border
+
+
+      this._removeClass(target.siblings().children(".ui-state-active"), null, "ui-state-active");
+
+      this.focus(event, target);
+    },
+    _destroy: function _destroy() {
+      var items = this.element.find(".ui-menu-item").removeAttr("role aria-disabled"),
+          submenus = items.children(".ui-menu-item-wrapper").removeUniqueId().removeAttr("tabIndex role aria-haspopup"); // Destroy (sub)menus
+
+      this.element.removeAttr("aria-activedescendant").find(".ui-menu").addBack().removeAttr("role aria-labelledby aria-expanded aria-hidden aria-disabled " + "tabIndex").removeUniqueId().show();
+      submenus.children().each(function () {
+        var elem = $(this);
+
+        if (elem.data("ui-menu-submenu-caret")) {
+          elem.remove();
+        }
+      });
+    },
+    _keydown: function _keydown(event) {
+      var match,
+          prev,
+          character,
+          skip,
+          preventDefault = true;
+
+      switch (event.keyCode) {
+        case $.ui.keyCode.PAGE_UP:
+          this.previousPage(event);
+          break;
+
+        case $.ui.keyCode.PAGE_DOWN:
+          this.nextPage(event);
+          break;
+
+        case $.ui.keyCode.HOME:
+          this._move("first", "first", event);
+
+          break;
+
+        case $.ui.keyCode.END:
+          this._move("last", "last", event);
+
+          break;
+
+        case $.ui.keyCode.UP:
+          this.previous(event);
+          break;
+
+        case $.ui.keyCode.DOWN:
+          this.next(event);
+          break;
+
+        case $.ui.keyCode.LEFT:
+          this.collapse(event);
+          break;
+
+        case $.ui.keyCode.RIGHT:
+          if (this.active && !this.active.is(".ui-state-disabled")) {
+            this.expand(event);
+          }
+
+          break;
+
+        case $.ui.keyCode.ENTER:
+        case $.ui.keyCode.SPACE:
+          this._activate(event);
+
+          break;
+
+        case $.ui.keyCode.ESCAPE:
+          this.collapse(event);
+          break;
+
+        default:
+          preventDefault = false;
+          prev = this.previousFilter || "";
+          skip = false; // Support number pad values
+
+          character = event.keyCode >= 96 && event.keyCode <= 105 ? (event.keyCode - 96).toString() : String.fromCharCode(event.keyCode);
+          clearTimeout(this.filterTimer);
+
+          if (character === prev) {
+            skip = true;
+          } else {
+            character = prev + character;
+          }
+
+          match = this._filterMenuItems(character);
+          match = skip && match.index(this.active.next()) !== -1 ? this.active.nextAll(".ui-menu-item") : match; // If no matches on the current filter, reset to the last character pressed
+          // to move down the menu to the first item that starts with that character
+
+          if (!match.length) {
+            character = String.fromCharCode(event.keyCode);
+            match = this._filterMenuItems(character);
+          }
+
+          if (match.length) {
+            this.focus(event, match);
+            this.previousFilter = character;
+            this.filterTimer = this._delay(function () {
+              delete this.previousFilter;
+            }, 1000);
+          } else {
+            delete this.previousFilter;
+          }
+
+      }
+
+      if (preventDefault) {
+        event.preventDefault();
+      }
+    },
+    _activate: function _activate(event) {
+      if (this.active && !this.active.is(".ui-state-disabled")) {
+        if (this.active.children("[aria-haspopup='true']").length) {
+          this.expand(event);
+        } else {
+          this.select(event);
+        }
+      }
+    },
+    refresh: function refresh() {
+      var menus,
+          items,
+          newSubmenus,
+          newItems,
+          newWrappers,
+          that = this,
+          icon = this.options.icons.submenu,
+          submenus = this.element.find(this.options.menus);
+
+      this._toggleClass("ui-menu-icons", null, !!this.element.find(".ui-icon").length); // Initialize nested menus
+
+
+      newSubmenus = submenus.filter(":not(.ui-menu)").hide().attr({
+        role: this.options.role,
+        "aria-hidden": "true",
+        "aria-expanded": "false"
+      }).each(function () {
+        var menu = $(this),
+            item = menu.prev(),
+            submenuCaret = $("<span>").data("ui-menu-submenu-caret", true);
+
+        that._addClass(submenuCaret, "ui-menu-icon", "ui-icon " + icon);
+
+        item.attr("aria-haspopup", "true").prepend(submenuCaret);
+        menu.attr("aria-labelledby", item.attr("id"));
+      });
+
+      this._addClass(newSubmenus, "ui-menu", "ui-widget ui-widget-content ui-front");
+
+      menus = submenus.add(this.element);
+      items = menus.find(this.options.items); // Initialize menu-items containing spaces and/or dashes only as dividers
+
+      items.not(".ui-menu-item").each(function () {
+        var item = $(this);
+
+        if (that._isDivider(item)) {
+          that._addClass(item, "ui-menu-divider", "ui-widget-content");
+        }
+      }); // Don't refresh list items that are already adapted
+
+      newItems = items.not(".ui-menu-item, .ui-menu-divider");
+      newWrappers = newItems.children().not(".ui-menu").uniqueId().attr({
+        tabIndex: -1,
+        role: this._itemRole()
+      });
+
+      this._addClass(newItems, "ui-menu-item")._addClass(newWrappers, "ui-menu-item-wrapper"); // Add aria-disabled attribute to any disabled menu item
+
+
+      items.filter(".ui-state-disabled").attr("aria-disabled", "true"); // If the active item has been removed, blur the menu
+
+      if (this.active && !$.contains(this.element[0], this.active[0])) {
+        this.blur();
+      }
+    },
+    _itemRole: function _itemRole() {
+      return {
+        menu: "menuitem",
+        listbox: "option"
+      }[this.options.role];
+    },
+    _setOption: function _setOption(key, value) {
+      if (key === "icons") {
+        var icons = this.element.find(".ui-menu-icon");
+
+        this._removeClass(icons, null, this.options.icons.submenu)._addClass(icons, null, value.submenu);
+      }
+
+      this._super(key, value);
+    },
+    _setOptionDisabled: function _setOptionDisabled(value) {
+      this._super(value);
+
+      this.element.attr("aria-disabled", String(value));
+
+      this._toggleClass(null, "ui-state-disabled", !!value);
+    },
+    focus: function focus(event, item) {
+      var nested, focused, activeParent;
+      this.blur(event, event && event.type === "focus");
+
+      this._scrollIntoView(item);
+
+      this.active = item.first();
+      focused = this.active.children(".ui-menu-item-wrapper");
+
+      this._addClass(focused, null, "ui-state-active"); // Only update aria-activedescendant if there's a role
+      // otherwise we assume focus is managed elsewhere
+
+
+      if (this.options.role) {
+        this.element.attr("aria-activedescendant", focused.attr("id"));
+      } // Highlight active parent menu item, if any
+
+
+      activeParent = this.active.parent().closest(".ui-menu-item").children(".ui-menu-item-wrapper");
+
+      this._addClass(activeParent, null, "ui-state-active");
+
+      if (event && event.type === "keydown") {
+        this._close();
+      } else {
+        this.timer = this._delay(function () {
+          this._close();
+        }, this.delay);
+      }
+
+      nested = item.children(".ui-menu");
+
+      if (nested.length && event && /^mouse/.test(event.type)) {
+        this._startOpening(nested);
+      }
+
+      this.activeMenu = item.parent();
+
+      this._trigger("focus", event, {
+        item: item
+      });
+    },
+    _scrollIntoView: function _scrollIntoView(item) {
+      var borderTop, paddingTop, offset, scroll, elementHeight, itemHeight;
+
+      if (this._hasScroll()) {
+        borderTop = parseFloat($.css(this.activeMenu[0], "borderTopWidth")) || 0;
+        paddingTop = parseFloat($.css(this.activeMenu[0], "paddingTop")) || 0;
+        offset = item.offset().top - this.activeMenu.offset().top - borderTop - paddingTop;
+        scroll = this.activeMenu.scrollTop();
+        elementHeight = this.activeMenu.height();
+        itemHeight = item.outerHeight();
+
+        if (offset < 0) {
+          this.activeMenu.scrollTop(scroll + offset);
+        } else if (offset + itemHeight > elementHeight) {
+          this.activeMenu.scrollTop(scroll + offset - elementHeight + itemHeight);
+        }
+      }
+    },
+    blur: function blur(event, fromFocus) {
+      if (!fromFocus) {
+        clearTimeout(this.timer);
+      }
+
+      if (!this.active) {
+        return;
+      }
+
+      this._removeClass(this.active.children(".ui-menu-item-wrapper"), null, "ui-state-active");
+
+      this._trigger("blur", event, {
+        item: this.active
+      });
+
+      this.active = null;
+    },
+    _startOpening: function _startOpening(submenu) {
+      clearTimeout(this.timer); // Don't open if already open fixes a Firefox bug that caused a .5 pixel
+      // shift in the submenu position when mousing over the caret icon
+
+      if (submenu.attr("aria-hidden") !== "true") {
+        return;
+      }
+
+      this.timer = this._delay(function () {
+        this._close();
+
+        this._open(submenu);
+      }, this.delay);
+    },
+    _open: function _open(submenu) {
+      var position = $.extend({
+        of: this.active
+      }, this.options.position);
+      clearTimeout(this.timer);
+      this.element.find(".ui-menu").not(submenu.parents(".ui-menu")).hide().attr("aria-hidden", "true");
+      submenu.show().removeAttr("aria-hidden").attr("aria-expanded", "true").position(position);
+    },
+    collapseAll: function collapseAll(event, all) {
+      clearTimeout(this.timer);
+      this.timer = this._delay(function () {
+        // If we were passed an event, look for the submenu that contains the event
+        var currentMenu = all ? this.element : $(event && event.target).closest(this.element.find(".ui-menu")); // If we found no valid submenu ancestor, use the main menu to close all
+        // sub menus anyway
+
+        if (!currentMenu.length) {
+          currentMenu = this.element;
+        }
+
+        this._close(currentMenu);
+
+        this.blur(event); // Work around active item staying active after menu is blurred
+
+        this._removeClass(currentMenu.find(".ui-state-active"), null, "ui-state-active");
+
+        this.activeMenu = currentMenu;
+      }, all ? 0 : this.delay);
+    },
+    // With no arguments, closes the currently active menu - if nothing is active
+    // it closes all menus.  If passed an argument, it will search for menus BELOW
+    _close: function _close(startMenu) {
+      if (!startMenu) {
+        startMenu = this.active ? this.active.parent() : this.element;
+      }
+
+      startMenu.find(".ui-menu").hide().attr("aria-hidden", "true").attr("aria-expanded", "false");
+    },
+    _closeOnDocumentClick: function _closeOnDocumentClick(event) {
+      return !$(event.target).closest(".ui-menu").length;
+    },
+    _isDivider: function _isDivider(item) {
+      // Match hyphen, em dash, en dash
+      return !/[^\-\u2014\u2013\s]/.test(item.text());
+    },
+    collapse: function collapse(event) {
+      var newItem = this.active && this.active.parent().closest(".ui-menu-item", this.element);
+
+      if (newItem && newItem.length) {
+        this._close();
+
+        this.focus(event, newItem);
+      }
+    },
+    expand: function expand(event) {
+      var newItem = this.active && this._menuItems(this.active.children(".ui-menu")).first();
+
+      if (newItem && newItem.length) {
+        this._open(newItem.parent()); // Delay so Firefox will not hide activedescendant change in expanding submenu from AT
+
+
+        this._delay(function () {
+          this.focus(event, newItem);
+        });
+      }
+    },
+    next: function next(event) {
+      this._move("next", "first", event);
+    },
+    previous: function previous(event) {
+      this._move("prev", "last", event);
+    },
+    isFirstItem: function isFirstItem() {
+      return this.active && !this.active.prevAll(".ui-menu-item").length;
+    },
+    isLastItem: function isLastItem() {
+      return this.active && !this.active.nextAll(".ui-menu-item").length;
+    },
+    _menuItems: function _menuItems(menu) {
+      return (menu || this.element).find(this.options.items).filter(".ui-menu-item");
+    },
+    _move: function _move(direction, filter, event) {
+      var next;
+
+      if (this.active) {
+        if (direction === "first" || direction === "last") {
+          next = this.active[direction === "first" ? "prevAll" : "nextAll"](".ui-menu-item").last();
+        } else {
+          next = this.active[direction + "All"](".ui-menu-item").first();
+        }
+      }
+
+      if (!next || !next.length || !this.active) {
+        next = this._menuItems(this.activeMenu)[filter]();
+      }
+
+      this.focus(event, next);
+    },
+    nextPage: function nextPage(event) {
+      var item, base, height;
+
+      if (!this.active) {
+        this.next(event);
+        return;
+      }
+
+      if (this.isLastItem()) {
+        return;
+      }
+
+      if (this._hasScroll()) {
+        base = this.active.offset().top;
+        height = this.element.innerHeight(); // jQuery 3.2 doesn't include scrollbars in innerHeight, add it back.
+
+        if ($.fn.jquery.indexOf("3.2.") === 0) {
+          height += this.element[0].offsetHeight - this.element.outerHeight();
+        }
+
+        this.active.nextAll(".ui-menu-item").each(function () {
+          item = $(this);
+          return item.offset().top - base - height < 0;
+        });
+        this.focus(event, item);
+      } else {
+        this.focus(event, this._menuItems(this.activeMenu)[!this.active ? "first" : "last"]());
+      }
+    },
+    previousPage: function previousPage(event) {
+      var item, base, height;
+
+      if (!this.active) {
+        this.next(event);
+        return;
+      }
+
+      if (this.isFirstItem()) {
+        return;
+      }
+
+      if (this._hasScroll()) {
+        base = this.active.offset().top;
+        height = this.element.innerHeight(); // jQuery 3.2 doesn't include scrollbars in innerHeight, add it back.
+
+        if ($.fn.jquery.indexOf("3.2.") === 0) {
+          height += this.element[0].offsetHeight - this.element.outerHeight();
+        }
+
+        this.active.prevAll(".ui-menu-item").each(function () {
+          item = $(this);
+          return item.offset().top - base + height > 0;
+        });
+        this.focus(event, item);
+      } else {
+        this.focus(event, this._menuItems(this.activeMenu).first());
+      }
+    },
+    _hasScroll: function _hasScroll() {
+      return this.element.outerHeight() < this.element.prop("scrollHeight");
+    },
+    select: function select(event) {
+      // TODO: It should never be possible to not have an active item at this
+      // point, but the tests don't trigger mouseenter before click.
+      this.active = this.active || $(event.target).closest(".ui-menu-item");
+      var ui = {
+        item: this.active
+      };
+
+      if (!this.active.has(".ui-menu").length) {
+        this.collapseAll(event, true);
+      }
+
+      this._trigger("select", event, ui);
+    },
+    _filterMenuItems: function _filterMenuItems(character) {
+      var escapedCharacter = character.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&"),
+          regex = new RegExp("^" + escapedCharacter, "i");
+      return this.activeMenu.find(this.options.items) // Only match on items, not dividers or other content (#10571)
+      .filter(".ui-menu-item").filter(function () {
+        return regex.test(String.prototype.trim.call($(this).children(".ui-menu-item-wrapper").text()));
+      });
+    }
   });
 });
-/**
- * ------------------------------------------------------------------------
- * jQuery
- * ------------------------------------------------------------------------
- * add .ScrollSpy to jQuery only if jQuery is present
- */
-
-defineJQueryPlugin(ScrollSpy);
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): tab.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-var NAME$1 = 'tab';
-var DATA_KEY$1 = 'bs.tab';
-var EVENT_KEY$1 = ".".concat(DATA_KEY$1);
-var DATA_API_KEY = '.data-api';
-var EVENT_HIDE$1 = "hide".concat(EVENT_KEY$1);
-var EVENT_HIDDEN$1 = "hidden".concat(EVENT_KEY$1);
-var EVENT_SHOW$1 = "show".concat(EVENT_KEY$1);
-var EVENT_SHOWN$1 = "shown".concat(EVENT_KEY$1);
-var EVENT_CLICK_DATA_API = "click".concat(EVENT_KEY$1).concat(DATA_API_KEY);
-var CLASS_NAME_DROPDOWN_MENU = 'dropdown-menu';
-var CLASS_NAME_ACTIVE = 'active';
-var CLASS_NAME_FADE$1 = 'fade';
-var CLASS_NAME_SHOW$1 = 'show';
-var SELECTOR_DROPDOWN = '.dropdown';
-var SELECTOR_NAV_LIST_GROUP = '.nav, .list-group';
-var SELECTOR_ACTIVE = '.active';
-var SELECTOR_ACTIVE_UL = ':scope > li > .active';
-var SELECTOR_DATA_TOGGLE = '[data-bs-toggle="tab"], [data-bs-toggle="pill"], [data-bs-toggle="list"]';
-var SELECTOR_DROPDOWN_TOGGLE = '.dropdown-toggle';
-var SELECTOR_DROPDOWN_ACTIVE_CHILD = ':scope > .dropdown-menu .active';
-/**
- * ------------------------------------------------------------------------
- * Class Definition
- * ------------------------------------------------------------------------
- */
-
-var Tab = /*#__PURE__*/function (_BaseComponent10) {
-  _inherits(Tab, _BaseComponent10);
-
-  var _super11 = _createSuper(Tab);
-
-  function Tab() {
-    _classCallCheck(this, Tab);
-
-    return _super11.apply(this, arguments);
-  }
-
-  _createClass(Tab, [{
-    key: "show",
-    value: // Public
-    function show() {
-      var _this42 = this;
-
-      if (this._element.parentNode && this._element.parentNode.nodeType === Node.ELEMENT_NODE && this._element.classList.contains(CLASS_NAME_ACTIVE)) {
-        return;
-      }
-
-      var previous;
-      var target = getElementFromSelector(this._element);
-
-      var listElement = this._element.closest(SELECTOR_NAV_LIST_GROUP);
-
-      if (listElement) {
-        var itemSelector = listElement.nodeName === 'UL' || listElement.nodeName === 'OL' ? SELECTOR_ACTIVE_UL : SELECTOR_ACTIVE;
-        previous = SelectorEngine.find(itemSelector, listElement);
-        previous = previous[previous.length - 1];
-      }
-
-      var hideEvent = previous ? EventHandler.trigger(previous, EVENT_HIDE$1, {
-        relatedTarget: this._element
-      }) : null;
-      var showEvent = EventHandler.trigger(this._element, EVENT_SHOW$1, {
-        relatedTarget: previous
-      });
-
-      if (showEvent.defaultPrevented || hideEvent !== null && hideEvent.defaultPrevented) {
-        return;
-      }
-
-      this._activate(this._element, listElement);
-
-      var complete = function complete() {
-        EventHandler.trigger(previous, EVENT_HIDDEN$1, {
-          relatedTarget: _this42._element
-        });
-        EventHandler.trigger(_this42._element, EVENT_SHOWN$1, {
-          relatedTarget: previous
-        });
-      };
-
-      if (target) {
-        this._activate(target, target.parentNode, complete);
-      } else {
-        complete();
-      }
-    } // Private
-
-  }, {
-    key: "_activate",
-    value: function _activate(element, container, callback) {
-      var _this43 = this;
-
-      var activeElements = container && (container.nodeName === 'UL' || container.nodeName === 'OL') ? SelectorEngine.find(SELECTOR_ACTIVE_UL, container) : SelectorEngine.children(container, SELECTOR_ACTIVE);
-      var active = activeElements[0];
-      var isTransitioning = callback && active && active.classList.contains(CLASS_NAME_FADE$1);
-
-      var complete = function complete() {
-        return _this43._transitionComplete(element, active, callback);
-      };
-
-      if (active && isTransitioning) {
-        active.classList.remove(CLASS_NAME_SHOW$1);
-
-        this._queueCallback(complete, element, true);
-      } else {
-        complete();
-      }
-    }
-  }, {
-    key: "_transitionComplete",
-    value: function _transitionComplete(element, active, callback) {
-      if (active) {
-        active.classList.remove(CLASS_NAME_ACTIVE);
-        var dropdownChild = SelectorEngine.findOne(SELECTOR_DROPDOWN_ACTIVE_CHILD, active.parentNode);
-
-        if (dropdownChild) {
-          dropdownChild.classList.remove(CLASS_NAME_ACTIVE);
-        }
-
-        if (active.getAttribute('role') === 'tab') {
-          active.setAttribute('aria-selected', false);
-        }
-      }
-
-      element.classList.add(CLASS_NAME_ACTIVE);
-
-      if (element.getAttribute('role') === 'tab') {
-        element.setAttribute('aria-selected', true);
-      }
-
-      reflow(element);
-
-      if (element.classList.contains(CLASS_NAME_FADE$1)) {
-        element.classList.add(CLASS_NAME_SHOW$1);
-      }
-
-      var parent = element.parentNode;
-
-      if (parent && parent.nodeName === 'LI') {
-        parent = parent.parentNode;
-      }
-
-      if (parent && parent.classList.contains(CLASS_NAME_DROPDOWN_MENU)) {
-        var dropdownElement = element.closest(SELECTOR_DROPDOWN);
-
-        if (dropdownElement) {
-          SelectorEngine.find(SELECTOR_DROPDOWN_TOGGLE, dropdownElement).forEach(function (dropdown) {
-            return dropdown.classList.add(CLASS_NAME_ACTIVE);
-          });
-        }
-
-        element.setAttribute('aria-expanded', true);
-      }
-
-      if (callback) {
-        callback();
-      }
-    } // Static
-
-  }], [{
-    key: "NAME",
-    get: // Getters
-    function get() {
-      return NAME$1;
-    }
-  }, {
-    key: "jQueryInterface",
-    value: function jQueryInterface(config) {
-      return this.each(function () {
-        var data = Tab.getOrCreateInstance(this);
-
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"".concat(config, "\""));
-          }
-
-          data[config]();
-        }
-      });
-    }
-  }]);
-
-  return Tab;
-}(BaseComponent);
-/**
- * ------------------------------------------------------------------------
- * Data Api implementation
- * ------------------------------------------------------------------------
- */
-
-
-EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (event) {
-  if (['A', 'AREA'].includes(this.tagName)) {
-    event.preventDefault();
-  }
-
-  if (isDisabled(this)) {
-    return;
-  }
-
-  var data = Tab.getOrCreateInstance(this);
-  data.show();
-});
-/**
- * ------------------------------------------------------------------------
- * jQuery
- * ------------------------------------------------------------------------
- * add .Tab to jQuery only if jQuery is present
- */
-
-defineJQueryPlugin(Tab);
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): toast.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-var NAME = 'toast';
-var DATA_KEY = 'bs.toast';
-var EVENT_KEY = ".".concat(DATA_KEY);
-var EVENT_MOUSEOVER = "mouseover".concat(EVENT_KEY);
-var EVENT_MOUSEOUT = "mouseout".concat(EVENT_KEY);
-var EVENT_FOCUSIN = "focusin".concat(EVENT_KEY);
-var EVENT_FOCUSOUT = "focusout".concat(EVENT_KEY);
-var EVENT_HIDE = "hide".concat(EVENT_KEY);
-var EVENT_HIDDEN = "hidden".concat(EVENT_KEY);
-var EVENT_SHOW = "show".concat(EVENT_KEY);
-var EVENT_SHOWN = "shown".concat(EVENT_KEY);
-var CLASS_NAME_FADE = 'fade';
-var CLASS_NAME_HIDE = 'hide'; // @deprecated - kept here only for backwards compatibility
-
-var CLASS_NAME_SHOW = 'show';
-var CLASS_NAME_SHOWING = 'showing';
-var DefaultType = {
-  animation: 'boolean',
-  autohide: 'boolean',
-  delay: 'number'
-};
-var Default = {
-  animation: true,
-  autohide: true,
-  delay: 5000
-};
-/**
- * ------------------------------------------------------------------------
- * Class Definition
- * ------------------------------------------------------------------------
- */
-
-var Toast = /*#__PURE__*/function (_BaseComponent11) {
-  _inherits(Toast, _BaseComponent11);
-
-  var _super12 = _createSuper(Toast);
-
-  function Toast(element, config) {
-    var _this44;
-
-    _classCallCheck(this, Toast);
-
-    _this44 = _super12.call(this, element);
-    _this44._config = _this44._getConfig(config);
-    _this44._timeout = null;
-    _this44._hasMouseInteraction = false;
-    _this44._hasKeyboardInteraction = false;
-
-    _this44._setListeners();
-
-    return _this44;
-  } // Getters
-
-
-  _createClass(Toast, [{
-    key: "show",
-    value: // Public
-    function show() {
-      var _this45 = this;
-
-      var showEvent = EventHandler.trigger(this._element, EVENT_SHOW);
-
-      if (showEvent.defaultPrevented) {
-        return;
-      }
-
-      this._clearTimeout();
-
-      if (this._config.animation) {
-        this._element.classList.add(CLASS_NAME_FADE);
-      }
-
-      var complete = function complete() {
-        _this45._element.classList.remove(CLASS_NAME_SHOWING);
-
-        EventHandler.trigger(_this45._element, EVENT_SHOWN);
-
-        _this45._maybeScheduleHide();
-      };
-
-      this._element.classList.remove(CLASS_NAME_HIDE); // @deprecated
-
-
-      reflow(this._element);
-
-      this._element.classList.add(CLASS_NAME_SHOW);
-
-      this._element.classList.add(CLASS_NAME_SHOWING);
-
-      this._queueCallback(complete, this._element, this._config.animation);
-    }
-  }, {
-    key: "hide",
-    value: function hide() {
-      var _this46 = this;
-
-      if (!this._element.classList.contains(CLASS_NAME_SHOW)) {
-        return;
-      }
-
-      var hideEvent = EventHandler.trigger(this._element, EVENT_HIDE);
-
-      if (hideEvent.defaultPrevented) {
-        return;
-      }
-
-      var complete = function complete() {
-        _this46._element.classList.add(CLASS_NAME_HIDE); // @deprecated
-
-
-        _this46._element.classList.remove(CLASS_NAME_SHOWING);
-
-        _this46._element.classList.remove(CLASS_NAME_SHOW);
-
-        EventHandler.trigger(_this46._element, EVENT_HIDDEN);
-      };
-
-      this._element.classList.add(CLASS_NAME_SHOWING);
-
-      this._queueCallback(complete, this._element, this._config.animation);
-    }
-  }, {
-    key: "dispose",
-    value: function dispose() {
-      this._clearTimeout();
-
-      if (this._element.classList.contains(CLASS_NAME_SHOW)) {
-        this._element.classList.remove(CLASS_NAME_SHOW);
-      }
-
-      _get(_getPrototypeOf(Toast.prototype), "dispose", this).call(this);
-    } // Private
-
-  }, {
-    key: "_getConfig",
-    value: function _getConfig(config) {
-      config = _objectSpread(_objectSpread(_objectSpread({}, Default), Manipulator.getDataAttributes(this._element)), _typeof(config) === 'object' && config ? config : {});
-      typeCheckConfig(NAME, config, this.constructor.DefaultType);
-      return config;
-    }
-  }, {
-    key: "_maybeScheduleHide",
-    value: function _maybeScheduleHide() {
-      var _this47 = this;
-
-      if (!this._config.autohide) {
-        return;
-      }
-
-      if (this._hasMouseInteraction || this._hasKeyboardInteraction) {
-        return;
-      }
-
-      this._timeout = setTimeout(function () {
-        _this47.hide();
-      }, this._config.delay);
-    }
-  }, {
-    key: "_onInteraction",
-    value: function _onInteraction(event, isInteracting) {
-      switch (event.type) {
-        case 'mouseover':
-        case 'mouseout':
-          this._hasMouseInteraction = isInteracting;
-          break;
-
-        case 'focusin':
-        case 'focusout':
-          this._hasKeyboardInteraction = isInteracting;
-          break;
-      }
-
-      if (isInteracting) {
-        this._clearTimeout();
-
-        return;
-      }
-
-      var nextElement = event.relatedTarget;
-
-      if (this._element === nextElement || this._element.contains(nextElement)) {
-        return;
-      }
-
-      this._maybeScheduleHide();
-    }
-  }, {
-    key: "_setListeners",
-    value: function _setListeners() {
-      var _this48 = this;
-
-      EventHandler.on(this._element, EVENT_MOUSEOVER, function (event) {
-        return _this48._onInteraction(event, true);
-      });
-      EventHandler.on(this._element, EVENT_MOUSEOUT, function (event) {
-        return _this48._onInteraction(event, false);
-      });
-      EventHandler.on(this._element, EVENT_FOCUSIN, function (event) {
-        return _this48._onInteraction(event, true);
-      });
-      EventHandler.on(this._element, EVENT_FOCUSOUT, function (event) {
-        return _this48._onInteraction(event, false);
-      });
-    }
-  }, {
-    key: "_clearTimeout",
-    value: function _clearTimeout() {
-      clearTimeout(this._timeout);
-      this._timeout = null;
-    } // Static
-
-  }], [{
-    key: "DefaultType",
-    get: function get() {
-      return DefaultType;
-    }
-  }, {
-    key: "Default",
-    get: function get() {
-      return Default;
-    }
-  }, {
-    key: "NAME",
-    get: function get() {
-      return NAME;
-    }
-  }, {
-    key: "jQueryInterface",
-    value: function jQueryInterface(config) {
-      return this.each(function () {
-        var data = Toast.getOrCreateInstance(this, config);
-
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"".concat(config, "\""));
-          }
-
-          data[config](this);
-        }
-      });
-    }
-  }]);
-
-  return Toast;
-}(BaseComponent);
-
-enableDismissTrigger(Toast);
-/**
- * ------------------------------------------------------------------------
- * jQuery
- * ------------------------------------------------------------------------
- * add .Toast to jQuery only if jQuery is present
- */
-
-defineJQueryPlugin(Toast);
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/src/jquery.js")))
 
 /***/ }),
 
@@ -19998,7 +17625,258 @@ __webpack_require__(/*! ./traversing */ "./node_modules/jquery/src/traversing.js
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
+/***/ }),
+
+/***/ "./node_modules/tag-it/js/tag-it.min.js":
+/*!**********************************************!*\
+  !*** ./node_modules/tag-it/js/tag-it.min.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(jQuery) {(function (b) {
+  b.widget("ui.tagit", {
+    options: {
+      allowDuplicates: !1,
+      caseSensitive: !0,
+      fieldName: "tags",
+      placeholderText: null,
+      readOnly: !1,
+      removeConfirmation: !1,
+      tagLimit: null,
+      availableTags: [],
+      autocomplete: {},
+      showAutocompleteOnFocus: !1,
+      allowSpaces: !1,
+      singleField: !1,
+      singleFieldDelimiter: ",",
+      singleFieldNode: null,
+      animate: !0,
+      tabIndex: null,
+      beforeTagAdded: null,
+      afterTagAdded: null,
+      beforeTagRemoved: null,
+      afterTagRemoved: null,
+      onTagClicked: null,
+      onTagLimitExceeded: null,
+      onTagAdded: null,
+      onTagRemoved: null,
+      tagSource: null
+    },
+    _create: function _create() {
+      var a = this;
+      this.element.is("input") ? (this.tagList = b("<ul></ul>").insertAfter(this.element), this.options.singleField = !0, this.options.singleFieldNode = this.element, this.element.addClass("tagit-hidden-field")) : this.tagList = this.element.find("ul, ol").andSelf().last();
+      this.tagInput = b('<input type="text" />').addClass("ui-widget-content");
+      this.options.readOnly && this.tagInput.attr("disabled", "disabled");
+      this.options.tabIndex && this.tagInput.attr("tabindex", this.options.tabIndex);
+      this.options.placeholderText && this.tagInput.attr("placeholder", this.options.placeholderText);
+      this.options.autocomplete.source || (this.options.autocomplete.source = function (a, e) {
+        var d = a.term.toLowerCase(),
+            c = b.grep(this.options.availableTags, function (a) {
+          return 0 === a.toLowerCase().indexOf(d);
+        });
+        this.options.allowDuplicates || (c = this._subtractArray(c, this.assignedTags()));
+        e(c);
+      });
+      this.options.showAutocompleteOnFocus && (this.tagInput.focus(function (b, d) {
+        a._showAutocomplete();
+      }), "undefined" === typeof this.options.autocomplete.minLength && (this.options.autocomplete.minLength = 0));
+      b.isFunction(this.options.autocomplete.source) && (this.options.autocomplete.source = b.proxy(this.options.autocomplete.source, this));
+      b.isFunction(this.options.tagSource) && (this.options.tagSource = b.proxy(this.options.tagSource, this));
+      this.tagList.addClass("tagit").addClass("ui-widget ui-widget-content ui-corner-all").append(b('<li class="tagit-new"></li>').append(this.tagInput)).click(function (d) {
+        var c = b(d.target);
+        c.hasClass("tagit-label") ? (c = c.closest(".tagit-choice"), c.hasClass("removed") || a._trigger("onTagClicked", d, {
+          tag: c,
+          tagLabel: a.tagLabel(c)
+        })) : a.tagInput.focus();
+      });
+      var c = !1;
+      if (this.options.singleField) if (this.options.singleFieldNode) {
+        var d = b(this.options.singleFieldNode),
+            f = d.val().split(this.options.singleFieldDelimiter);
+        d.val("");
+        b.each(f, function (b, d) {
+          a.createTag(d, null, !0);
+          c = !0;
+        });
+      } else this.options.singleFieldNode = b('<input type="hidden" style="display:none;" value="" name="' + this.options.fieldName + '" />'), this.tagList.after(this.options.singleFieldNode);
+      c || this.tagList.children("li").each(function () {
+        b(this).hasClass("tagit-new") || (a.createTag(b(this).text(), b(this).attr("class"), !0), b(this).remove());
+      });
+      this.tagInput.keydown(function (c) {
+        if (c.which == b.ui.keyCode.BACKSPACE && "" === a.tagInput.val()) {
+          var d = a._lastTag();
+
+          !a.options.removeConfirmation || d.hasClass("remove") ? a.removeTag(d) : a.options.removeConfirmation && d.addClass("remove ui-state-highlight");
+        } else a.options.removeConfirmation && a._lastTag().removeClass("remove ui-state-highlight");
+
+        if (c.which === b.ui.keyCode.COMMA && !1 === c.shiftKey || c.which === b.ui.keyCode.ENTER || c.which == b.ui.keyCode.TAB && "" !== a.tagInput.val() || c.which == b.ui.keyCode.SPACE && !0 !== a.options.allowSpaces && ('"' != b.trim(a.tagInput.val()).replace(/^s*/, "").charAt(0) || '"' == b.trim(a.tagInput.val()).charAt(0) && '"' == b.trim(a.tagInput.val()).charAt(b.trim(a.tagInput.val()).length - 1) && 0 !== b.trim(a.tagInput.val()).length - 1)) c.which === b.ui.keyCode.ENTER && "" === a.tagInput.val() || c.preventDefault(), a.options.autocomplete.autoFocus && a.tagInput.data("autocomplete-open") || (a.tagInput.autocomplete("close"), a.createTag(a._cleanedInput()));
+      }).blur(function (b) {
+        a.tagInput.data("autocomplete-open") || a.createTag(a._cleanedInput());
+      });
+      if (this.options.availableTags || this.options.tagSource || this.options.autocomplete.source) d = {
+        select: function select(b, c) {
+          a.createTag(c.item.value);
+          return !1;
+        }
+      }, b.extend(d, this.options.autocomplete), d.source = this.options.tagSource || d.source, this.tagInput.autocomplete(d).bind("autocompleteopen.tagit", function (b, c) {
+        a.tagInput.data("autocomplete-open", !0);
+      }).bind("autocompleteclose.tagit", function (b, c) {
+        a.tagInput.data("autocomplete-open", !1);
+      }), this.tagInput.autocomplete("widget").addClass("tagit-autocomplete");
+    },
+    destroy: function destroy() {
+      b.Widget.prototype.destroy.call(this);
+      this.element.unbind(".tagit");
+      this.tagList.unbind(".tagit");
+      this.tagInput.removeData("autocomplete-open");
+      this.tagList.removeClass("tagit ui-widget ui-widget-content ui-corner-all tagit-hidden-field");
+      this.element.is("input") ? (this.element.removeClass("tagit-hidden-field"), this.tagList.remove()) : (this.element.children("li").each(function () {
+        b(this).hasClass("tagit-new") ? b(this).remove() : (b(this).removeClass("tagit-choice ui-widget-content ui-state-default ui-state-highlight ui-corner-all remove tagit-choice-editable tagit-choice-read-only"), b(this).text(b(this).children(".tagit-label").text()));
+      }), this.singleFieldNode && this.singleFieldNode.remove());
+      return this;
+    },
+    _cleanedInput: function _cleanedInput() {
+      return b.trim(this.tagInput.val().replace(/^"(.*)"$/, "$1"));
+    },
+    _lastTag: function _lastTag() {
+      return this.tagList.find(".tagit-choice:last:not(.removed)");
+    },
+    _tags: function _tags() {
+      return this.tagList.find(".tagit-choice:not(.removed)");
+    },
+    assignedTags: function assignedTags() {
+      var a = this,
+          c = [];
+      this.options.singleField ? (c = b(this.options.singleFieldNode).val().split(this.options.singleFieldDelimiter), "" === c[0] && (c = [])) : this._tags().each(function () {
+        c.push(a.tagLabel(this));
+      });
+      return c;
+    },
+    _updateSingleTagsField: function _updateSingleTagsField(a) {
+      b(this.options.singleFieldNode).val(a.join(this.options.singleFieldDelimiter)).trigger("change");
+    },
+    _subtractArray: function _subtractArray(a, c) {
+      for (var d = [], f = 0; f < a.length; f++) {
+        -1 == b.inArray(a[f], c) && d.push(a[f]);
+      }
+
+      return d;
+    },
+    tagLabel: function tagLabel(a) {
+      return this.options.singleField ? b(a).find(".tagit-label:first").text() : b(a).find("input:first").val();
+    },
+    _showAutocomplete: function _showAutocomplete() {
+      this.tagInput.autocomplete("search", "");
+    },
+    _findTagByLabel: function _findTagByLabel(a) {
+      var c = this,
+          d = null;
+
+      this._tags().each(function (f) {
+        if (c._formatStr(a) == c._formatStr(c.tagLabel(this))) return d = b(this), !1;
+      });
+
+      return d;
+    },
+    _isNew: function _isNew(a) {
+      return !this._findTagByLabel(a);
+    },
+    _formatStr: function _formatStr(a) {
+      return this.options.caseSensitive ? a : b.trim(a.toLowerCase());
+    },
+    _effectExists: function _effectExists(a) {
+      return Boolean(b.effects && (b.effects[a] || b.effects.effect && b.effects.effect[a]));
+    },
+    createTag: function createTag(a, c, d) {
+      var f = this;
+      a = b.trim(a);
+      this.options.preprocessTag && (a = this.options.preprocessTag(a));
+      if ("" === a) return !1;
+      if (!this.options.allowDuplicates && !this._isNew(a)) return a = this._findTagByLabel(a), !1 !== this._trigger("onTagExists", null, {
+        existingTag: a,
+        duringInitialization: d
+      }) && this._effectExists("highlight") && a.effect("highlight"), !1;
+      if (this.options.tagLimit && this._tags().length >= this.options.tagLimit) return this._trigger("onTagLimitExceeded", null, {
+        duringInitialization: d
+      }), !1;
+      var g = b(this.options.onTagClicked ? '<a class="tagit-label"></a>' : '<span class="tagit-label"></span>').text(a),
+          e = b("<li></li>").addClass("tagit-choice ui-widget-content ui-state-default ui-corner-all").addClass(c).append(g);
+      this.options.readOnly ? e.addClass("tagit-choice-read-only") : (e.addClass("tagit-choice-editable"), c = b("<span></span>").addClass("ui-icon ui-icon-close"), c = b("<a><span class=\"text-icon\">\xD7</span></a>").addClass("tagit-close").append(c).click(function (a) {
+        f.removeTag(e);
+      }), e.append(c));
+      this.options.singleField || (g = g.html(), e.append('<input type="hidden" value="' + g + '" name="' + this.options.fieldName + '" class="tagit-hidden-field" />'));
+      !1 !== this._trigger("beforeTagAdded", null, {
+        tag: e,
+        tagLabel: this.tagLabel(e),
+        duringInitialization: d
+      }) && (this.options.singleField && (g = this.assignedTags(), g.push(a), this._updateSingleTagsField(g)), this._trigger("onTagAdded", null, e), this.tagInput.val(""), this.tagInput.parent().before(e), this._trigger("afterTagAdded", null, {
+        tag: e,
+        tagLabel: this.tagLabel(e),
+        duringInitialization: d
+      }), this.options.showAutocompleteOnFocus && !d && setTimeout(function () {
+        f._showAutocomplete();
+      }, 0));
+    },
+    removeTag: function removeTag(a, c) {
+      c = "undefined" === typeof c ? this.options.animate : c;
+      a = b(a);
+
+      this._trigger("onTagRemoved", null, a);
+
+      if (!1 !== this._trigger("beforeTagRemoved", null, {
+        tag: a,
+        tagLabel: this.tagLabel(a)
+      })) {
+        if (this.options.singleField) {
+          var d = this.assignedTags(),
+              f = this.tagLabel(a),
+              d = b.grep(d, function (a) {
+            return a != f;
+          });
+
+          this._updateSingleTagsField(d);
+        }
+
+        if (c) {
+          a.addClass("removed");
+          var d = this._effectExists("blind") ? ["blind", {
+            direction: "horizontal"
+          }, "fast"] : ["fast"],
+              g = this;
+          d.push(function () {
+            a.remove();
+
+            g._trigger("afterTagRemoved", null, {
+              tag: a,
+              tagLabel: g.tagLabel(a)
+            });
+          });
+          a.fadeOut("fast").hide.apply(a, d).dequeue();
+        } else a.remove(), this._trigger("afterTagRemoved", null, {
+          tag: a,
+          tagLabel: this.tagLabel(a)
+        });
+      }
+    },
+    removeTagByLabel: function removeTagByLabel(a, b) {
+      var d = this._findTagByLabel(a);
+
+      if (!d) throw "No such tag exists with the name '" + a + "'";
+      this.removeTag(d, b);
+    },
+    removeAll: function removeAll() {
+      var a = this;
+
+      this._tags().each(function (b, d) {
+        a.removeTag(d, !1);
+      });
+    }
+  });
+})(jQuery);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery/src/jquery */ "./node_modules/jquery/src/jquery.js")))
+
 /***/ })
 
 /******/ });
-//# sourceMappingURL=badge-89f2cb6b290532dce419.js.map
+//# sourceMappingURL=edit-055908e2daeae2c8ecc9.js.map
