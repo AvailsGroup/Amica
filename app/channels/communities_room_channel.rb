@@ -33,6 +33,17 @@ class CommunitiesRoomChannel < ApplicationCable::Channel
       save_file(data)
     end
 
+    community = Community.find(data['community_id'])
+    member = community.community_members
+    member.each do |m|
+      next if(m.user == current_user)
+
+      unless Notification.exists?(community_id: data['community_id'], visited_id: m.id, action: 'community_chat', checked: false)
+        Notification.create(community_id: data['community_id'], visitor_id: current_user.id, visited_id: m.id, action: 'community_chat')
+      end
+    end
+
+
     CommunityMessageBroadcastJob.perform_later @community
   end
 
