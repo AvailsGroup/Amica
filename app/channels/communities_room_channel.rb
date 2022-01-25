@@ -35,11 +35,10 @@ class CommunitiesRoomChannel < ApplicationCable::Channel
 
     community = Community.find(data['community_id'])
     member = community.community_members
+    member = member.reject { |m| m.user_id == current_user.id }
     member.each do |m|
-      next if(m.user == current_user)
-
-      unless Notification.exists?(community_id: data['community_id'], visited_id: m.id, action: 'community_chat', checked: false)
-        Notification.create(community_id: data['community_id'], visitor_id: current_user.id, visited_id: m.id, action: 'community_chat')
+      unless Notification.exists?(community_id: data['community_id'], visited_id: m.user_id, action: 'community_chat', checked: false)
+        Notification.create(community_id: data['community_id'], visitor_id: current_user.id, visited_id: m.user_id, action: 'community_chat')
       end
     end
 
