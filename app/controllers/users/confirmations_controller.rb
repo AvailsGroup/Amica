@@ -23,7 +23,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     if params[:user][:password] != params[:user][:password_confirmation]
       flash[:notice] = 'パスワードが一致しません'
       self.resource = User.new(confirm_params)
-      render action: "confirm?confirmation_token=#{params[resource_name][:confirmation_token]}"
+      render action: :show
       return
     end
     if resource.update(confirm_params)
@@ -33,7 +33,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
       set_flash_message :notice, :confirmed
       sign_in_and_redirect(resource_name, resource)
     else
-      render action: "confirm?confirmation_token=#{params[resource_name][:confirmation_token]}"
+      render action: :show
     end
   end
 
