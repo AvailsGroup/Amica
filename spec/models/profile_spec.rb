@@ -91,10 +91,18 @@ RSpec.describe Profile, type: :model do
   end
 
   describe '#enrolled_year' do
+    context '0000の場合' do
+      it '正常に保存される' do
+        profile = build(:profile)
+        profile.enrolled_year = '0000'
+        expect(profile).to be_valid
+      end
+    end
+
     context '規定の年未満の場合' do
       it 'エラーを出す' do
         profile = build(:profile)
-        profile.enrolled_year = 1999
+        profile.enrolled_year = '1999'
         expect(profile).not_to be_valid
       end
     end
@@ -102,7 +110,23 @@ RSpec.describe Profile, type: :model do
     context '規定の年を超える場合' do
       it 'エラーを出す' do
         profile = build(:profile)
-        profile.enrolled_year = DateTime.now.strftime('%Y').to_i + 1
+        profile.enrolled_year = (DateTime.now.strftime('%Y').to_i + 1).to_s
+        expect(profile).not_to be_valid
+      end
+    end
+
+    context '文字列の場合' do
+      it 'エラーを出す' do
+        profile = build(:profile)
+        profile.enrolled_year = 'test'
+        expect(profile).not_to be_valid
+      end
+    end
+
+    context '文字列が含まれている場合' do
+      it 'エラーを出す' do
+        profile = build(:profile)
+        profile.enrolled_year = '200t'
         expect(profile).not_to be_valid
       end
     end
