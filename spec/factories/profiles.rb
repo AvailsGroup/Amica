@@ -4,7 +4,7 @@ FactoryBot.define do
     grade { 'テスト学科' }
     school_class { 1 }
     number { 10 }
-    enrolled_year { DateTime.now.strftime('%Y').to_i }
+    enrolled_year { DateTime.now.strftime('%Y').to_s }
     student_id { '1234567' }
     intro { 'よろしくおねがいします' }
     twitter_id { 'test' }

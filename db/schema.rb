@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_24_053405) do
+ActiveRecord::Schema.define(version: 2022_01_25_004028) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -206,7 +206,7 @@ ActiveRecord::Schema.define(version: 2022_01_24_053405) do
     t.datetime "updated_at", precision: 6, null: false
     t.date "birthday"
     t.text "twitter_id"
-    t.integer "enrolled_year"
+    t.string "enrolled_year"
     t.text "intro"
     t.string "instagram_id"
     t.string "discord_name"
