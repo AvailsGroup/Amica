@@ -10,7 +10,7 @@
 
 <div class="my-3 p-3 bg-white rounded shadow-sm">
   <div class="d-flex text-muted">
-    <%= link_to profile_path(comment.user), style: "color:black" do %>
+    <%= link_to profile_path(comment.user.userid), style: "color:black" do %>
       <%= image_tag comment.user.decorate.image, class: "icon bd-placeholder-img flex-shrink-0 me-2 rounded", width: "40px", height: "40px" %>
     <% end %>
     <p class="pb-3 mb-0 lh-sm w-100">
@@ -19,7 +19,7 @@
       <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(comment.created_at) %></span>
       <br/>
       <br/>
-      <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= comment.comment %></span>
+      <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= link(h(comment.comment).html_safe).gsub(/\r\n|\r|\n/, '<br />').html_safe %></span>
     </p>
   </div>
   <div class="text-end">
