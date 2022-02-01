@@ -19,7 +19,7 @@
       <span class="text-gray small"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(comment.created_at) %></span>
       <br/>
       <br/>
-      <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= comment.comment %></span>
+      <span class="spans text-dark" style="font-size:18px; margin: 0;"><%= link(h(comment.comment).html_safe).gsub(/\r\n|\r|\n/, '<br />').html_safe %></span>
     </p>
   </div>
   <div class="text-end">
