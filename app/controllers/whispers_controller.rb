@@ -11,14 +11,16 @@ class WhispersController < ApplicationController
       @new_content.push(n.id)
       n.update!(checked: true)
     end
-
     @pagenate = @content.page(params[:page]).per(20)
     @comments = Comment.includes(:user)
     @notification_count = user.passive_notifications.where(checked: false).size
+    @notification_count = '99+' if @notification_count > 99
     informations = InformationShow.includes(:information, :user)
     information = informations.select { |i| i.user_id == user.id }
     @info_show_count = Information.all.size - information.size
+    @info_show_count = '99+' if @info_show_count > 99
     @whispers = @content.where(checked: false).size
+    @whispers = '99+' if @whispers > 99
     @page = 'whisper'
     @path = 'notifications/whisper'
 
