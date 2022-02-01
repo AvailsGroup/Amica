@@ -5,6 +5,8 @@
 <img src="https://github.com/AvailsGroup/Amica/blob/master/app/assets/images/top_icon.png" width="200" alt="アイコン">
 
 ### 令和3年度 卒業制作作品
+
+### 情報処理科 代表班
   
 #### GROUP1 AVAILS
 </div>
