@@ -41,7 +41,9 @@ module ApplicationHelper
     information_count = Information.all.size - information.size
     notification = current_user.passive_notifications.where(checked: false).size
     whispers = current_user.whispers.where(checked: false).size
-    notification + whispers + information_count
+    count = notification + whispers + information_count
+    count = '99+' if count > 99
+    count
   end
 
 end
