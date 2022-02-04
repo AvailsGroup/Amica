@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_25_004028) do
+ActiveRecord::Schema.define(version: 2022_02_04_000343) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -198,7 +198,7 @@ ActiveRecord::Schema.define(version: 2022_01_25_004028) do
 
   create_table "profiles", force: :cascade do |t|
     t.text "grade", default: "学科"
-    t.integer "school_class", default: 0
+    t.string "school_class", default: "0"
     t.integer "number", default: 0
     t.text "student_id", default: "0000000"
     t.integer "user_id", null: false
