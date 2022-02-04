@@ -60,7 +60,6 @@
               <%= render "profiles/presentation", title: "学科", value: @profile.grade %>
               <%= render "profiles/presentation", title: "クラス", value: @profile.school_class %>
               <%= render "profiles/presentation", title: "出席番号", value: @profile.number %>
-              <%= render "profiles/presentation", title: "クラス", value: @profile.school_class %>
               <%= render "profiles/presentation", title: "学籍番号", value: @profile.student_id if @user.setting.visible_student_id %>
             </ul>
 
