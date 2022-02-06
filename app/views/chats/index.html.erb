@@ -4,7 +4,7 @@
 </div>
 <div class="m-3">
   <% @chat.each.with_index(params[:page] == nil ? 0 : params[:page].to_i * 10 -10) do |r, i| %>
-    <div class="container">
+    <div class="container" style="  word-break: break-all;">
       <%= link_to chat_path(r.userid), style: " text-decoration:none;" do %>
         <div class="my-3 p-1 px-3 bg-white rounded shadow-sm">
           <div class="d-flex pt-3">
