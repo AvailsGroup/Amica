@@ -70,6 +70,7 @@ class RankingController < ApplicationController
     @users = User.includes(:posts, :comments, :communities, :community_member, :followers, :followings, :tags)
     @users &&= User.kept
     @users = @users.reject { |u| u.userid.nil? }
+    @users = @users.reject { |u| u.admin }
     @user = User.find(current_user.id)
     @page = params[:page].nil? ? 1 : params[:page]
   end
