@@ -89,8 +89,6 @@ gem 'activeadmin'
 
 gem 'acts-as-taggable-on'
 
-gem 'rack-attack'
-
 gem 'cropper_rails'
 
 gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
