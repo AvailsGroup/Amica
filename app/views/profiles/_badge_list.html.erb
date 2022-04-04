@@ -39,5 +39,7 @@
 
 <%= render "badge", icon: "fas fa-bug", title: "バグを報告してくれた人に与えられるバッジ", rare: "high" if @achievement.debugger %>
 
+<%= render "badge", icon: "fas fa-chess-knight", title: "特待生", rare: "very_high" if @achievement.scholarship %>
+<%= render "badge", icon: "fas fa-chess-king", title: "教員", rare: "very_high" if @achievement.teacher %>
 <%= render "badge", icon: "fas fa-crown", title: "Amica運営", rare: "very_high" if @user.admin %>
 
