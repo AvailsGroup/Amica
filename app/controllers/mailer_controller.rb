@@ -1,11 +1,18 @@
 class MailerController < ApplicationController
+  layout 'home'
+
   def new
+    pp params
     @inquiry = Inquiry.new
-    render layout: 'home'
-    flash.now[:notice] = 'test'
   end
 
   def create
+    unless verify_recaptcha(message: '')
+      @inquiry = Inquiry.new(inquiry_params)
+      flash.now[:notice] = "reCAPTCHAにチェックを入れてください"
+      render :new
+      return
+    end
     @name = params[:name]
     @email = params[:email]
     @content = params[:content]
@@ -22,4 +29,5 @@ class MailerController < ApplicationController
   def inquiry_params
     params.require(:inquiry).permit(:name, :message, :email)
   end
+
 end

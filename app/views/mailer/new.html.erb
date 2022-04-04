@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag 'contacts', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 <style>
     body {
         background: none;
@@ -7,7 +8,6 @@
         box-shadow: none;
     }
 </style>
-<h4><%= flash.now[:notice] %></h4>
 
 <div class="container">
   <h2>お問い合わせ</h2>
@@ -19,6 +19,7 @@
       <%= f.email_field :email, autofocus: true, autocomplete: "email" , id: "inputEmail", class: "form-control",style: "height: 25px",  required: true%><br />
       <%= f.label "お問い合わせ内容" %><br />
       <%= f.text_area :message , id: "inputEmail", class: "form-control", required: true%><br>
+      <%= recaptcha_tags %>
       <%= f.submit "送信", class:"btn btn-lg btn-secondary fw-bold border-white bg-blue" ,style: "margin-right: 10px; width: 150px;color:#FFF", data: { disable_with: "送信中..." }%>
       <%= f.submit "クリア" ,type: :reset , class:"btn btn-lg btn-secondary fw-bold border-white bg-blue",style: "margin-right: 10px; width: 150px;color:#FFF"%>
     <% end %>

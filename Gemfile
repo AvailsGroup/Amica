@@ -104,3 +104,5 @@ gem 'draper'
 gem 'bundler-audit'
 
 gem 'discard'
+
+gem 'recaptcha'

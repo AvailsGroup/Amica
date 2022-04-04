@@ -209,3 +209,6 @@ ja:
     name: コミュニティ名
     content: 概要
     tag_list: タグ
+  recaptcha:
+    errors:
+    verification_failed: 'reCAPTCHA認証に失敗しました。'
