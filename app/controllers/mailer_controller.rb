@@ -2,7 +2,6 @@ class MailerController < ApplicationController
   layout 'home'
 
   def new
-    pp params
     @inquiry = Inquiry.new
   end
 
