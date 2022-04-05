@@ -61,3 +61,15 @@ OS:Windows10, 11, Ubuntu 20.04 LTS(docker)
 本プログラムはGNU General Public License v3.0に基づき配布されています。 
 
 ライセンスの規定を守れば、誰でも自由に複製、改変、配布することができます。
+
+## Develop
+
+このアプリケーションを使用して開発する際はconfig内にあるmaster.keyとcredentials.yml.encを再生成してください。
+
+credentials.yml.encのフォーマットはcredentials.yml.templateに書いてあります。
+
+productionブランチは実際にherokuにデプロイしているブランチです。
+
+productionブランチではrails assets:precompileをしてpushしてください。
+
+masterブランチでprecompileしてしまうとファイル構成が崩壊する可能性がありますので気をつけてください。
