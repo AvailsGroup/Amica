@@ -10,9 +10,12 @@
   
 #### GROUP1 AVAILS
   
+<img alt="GitHub" src="https://img.shields.io/badge/ruby-3.0.1-brightgreen">
+<img alt="GitHub" src="https://img.shields.io/badge/rails-6.1.x-brightgreen">
+<img alt="GitHub" src="https://img.shields.io/github/license/AvailsGroup/Amica">
+<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/AvailsGroup/Amica">
   
 [![CodeQL](https://github.com/AvailsGroup/Amica/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/AvailsGroup/Amica/actions/workflows/codeql-analysis.yml)
-
 </div>
 
 ## 概要
