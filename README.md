@@ -2,13 +2,17 @@
   
 # Amica
 
-<img src="https://github.com/AvailsGroup/Amica/blob/master/app/assets/images/top_icon.png" width="200" alt="アイコン">
+<img src="https://raw.githubusercontent.com/AvailsGroup/Amica/master/app/assets/images/top_icon.png" width="200" alt="アイコン">
 
 ### 令和3年度 卒業制作作品
 
 ### 情報処理科 代表班
   
 #### GROUP1 AVAILS
+  
+  
+[![CodeQL](https://github.com/AvailsGroup/Amica/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/AvailsGroup/Amica/actions/workflows/codeql-analysis.yml)
+
 </div>
 
 ## 概要
