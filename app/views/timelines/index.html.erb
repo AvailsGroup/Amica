@@ -6,5 +6,5 @@
 <div class="container">
   <%= render "timelines/form", create:@create %>
   <%= render partial:"timelines/post", collection:@posts , as: :post, locals: { post_model: @post } %>
-  <%= render "layouts/pagenate", pagenate: @posts %>
+  <%= render "layouts/paginate", pagenate: @posts %>
 </div>

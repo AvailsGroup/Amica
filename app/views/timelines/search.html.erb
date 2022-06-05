@@ -10,6 +10,6 @@
 
     <%= render partial:"timelines/post", collection:@posts , as: :post,locals: { post_model: @post_m } %>
 
-    <%= render "layouts/pagenate", pagenate:@posts %>
+    <%= render "layouts/paginate", pagenate:@posts %>
 
   </div>
