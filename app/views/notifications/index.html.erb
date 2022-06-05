@@ -9,7 +9,7 @@
 <div class="container">
   <% if @content.exists? %>
     <%= render partial: @path, collection: @pagenate, as: :value, locals: { new_value: @new_content } %>
-    <%= render "layouts/pagenate", pagenate: @pagenate %>
+    <%= render "layouts/paginate", pagenate: @pagenate %>
   <% else %>
     <p class="text-center my-4">通知はありません</p>
   <% end %>

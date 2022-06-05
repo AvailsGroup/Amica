@@ -7,5 +7,5 @@
   <% else %>
     <%= render partial: 'ranking/community', collection: @pagenate, as: :community, locals: { title: @title, page: @page } %>
   <% end %>
-  <%= render 'layouts/pagenate', pagenate: @pagenate %>
+  <%= render 'layouts/paginate', pagenate: @pagenate %>
 </div>
