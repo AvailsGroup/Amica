@@ -1,4 +1,5 @@
 # See https://git-scm.com/docs/gitattributes for more about git attribute files.
+*.erb linguist-language=Ruby
 
 # Mark the database schema as having been generated.
 db/schema.rb linguist-generated
