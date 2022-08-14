@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   before_action :authenticate_user!
+  before_action :login_limit
   before_action :banned
   helper_method :is_user_favorite?
   helper_method :is_community_favorite?

@@ -1,5 +1,6 @@
 class FavoriteController < ApplicationController
   before_action :authenticate_user!
+  before_action :login_limit
   before_action :banned
 
   def user_create
