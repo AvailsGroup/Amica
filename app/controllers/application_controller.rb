@@ -13,6 +13,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def login_limit
+    unless current_user.admin
+      sign_out current_user
+      flash.alert = 'Amicaはサービスを終了しました。今までのご利用ありがとうございました。'
+      redirect_to '/'
+    end
+  end
+
   def after_sign_in_path_for(resource)
     return tutorial_pages_path if resource.sign_in_count == 1
 

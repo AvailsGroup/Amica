@@ -1,6 +1,7 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
+  before_action :login_limit
   helper_method :blocked?
 
   def index

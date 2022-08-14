@@ -1,6 +1,7 @@
 class CommunitiesController < ApplicationController
   before_action :authenticate_user!
   before_action :banned
+  before_action :login_limit
   helper_method :community_ban?
   helper_method :is_community_favorite?
 
