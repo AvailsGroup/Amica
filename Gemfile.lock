@@ -227,9 +227,9 @@ GEM
     minitest (5.16.2)
     msgpack (1.5.3)
     nio4r (2.5.8)
-    nokogiri (1.13.7-x64-mingw32)
+    nokogiri (1.13.9-x64-mingw32)
       racc (~> 1.4)
-    nokogiri (1.13.7-x86_64-linux)
+    nokogiri (1.13.9-x86_64-linux)
       racc (~> 1.4)
     omniauth (2.1.0)
       hashie (>= 3.4.6)
@@ -408,7 +408,7 @@ DEPENDENCIES
   kaminari!
   letter_opener_web
   mini_magick
-  nokogiri (~> 1.13.6)
+  nokogiri (~> 1.13.9)
   omniauth
   pg (~> 1.1)
   puma (>= 5.6.4)
@@ -426,7 +426,7 @@ DEPENDENCIES
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
-  webpacker (~> 5.0)
+  webpacker (~> 5.4.3)
 
 RUBY VERSION
    ruby 3.0.1p64
