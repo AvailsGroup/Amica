@@ -20,6 +20,8 @@
 
 ## 概要
 
+開発終了
+
 AmicaはISC学生専用の友達作りサイトです。 
 
 Ruby on Railsで作成されており、AvailsGroupが制作、管理しています。 
